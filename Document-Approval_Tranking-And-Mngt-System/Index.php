@@ -1,1 +1,3 @@
-my personal index
+<?php
+    header("location:NiceAdmin/pages-login.html");
+?>
