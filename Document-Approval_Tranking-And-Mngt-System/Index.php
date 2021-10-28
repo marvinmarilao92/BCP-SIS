@@ -1,1 +1,3 @@
-my personal index
+<?php
+    header("location:Niceadmin/index.php");
+?>
