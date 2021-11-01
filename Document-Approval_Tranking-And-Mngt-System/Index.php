@@ -1,3 +1,3 @@
 <?php
-    header("location:NiceAdmin/pages-login.html");
+    header("location:Template/pages-login.html");
 ?>
