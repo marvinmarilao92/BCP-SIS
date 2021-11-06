@@ -1,3 +1,3 @@
 <?php
-    header("location:Template/pages-login.html");
+    header("location:DATMS/dashboard.php");
 ?>
