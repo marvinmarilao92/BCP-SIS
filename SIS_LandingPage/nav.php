@@ -12,7 +12,8 @@
                     <li class="<?php if($page=='home'){echo 'active';}?>"><a href="index.php">Home</a></li>
                     <li class="<?php if($page=='modules'){echo 'active';}?>"><a href="modules.php">Modules</a></li>
                     <li class="<?php if($page=='about'){echo 'active';}?>"><a href="about.php">About</a></li>
-                </ul>
+							<li class="btn-cta"><a href="../Template/pages-login.html"><span>Access Module</span></a></li>
+						</ul>
             </div>
         </div>
         
