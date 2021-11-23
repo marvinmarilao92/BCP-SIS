@@ -224,15 +224,6 @@
 				</div>
 				<div class="col-md-3 animate-box text-center">
 					<div class="staff">
-						<div class="staff-img" style="background-image: url(images/director.png);">
-						</div>
-						<span>DIRECTOR FOR QUALITY ASSURANCE</span>
-						<h3><a href="#">DR. LUCIA M. NARAG</a></h3>
-						<p>Educational Attainment: Doctor of Philosophy major in Administration and Supervision, MAED major in Administration and Supervision</p>
-					</div>
-				</div>
-				<div class="col-md-3 animate-box text-center">
-					<div class="staff">
 						<div class="staff-img" style="background-image: url(images/DeanBSIT_img.png);">
 						</div>
 						<span>DEAN, BS in INFORMATION TECHNOLOGY</span>
@@ -251,11 +242,20 @@
 				</div>
 				<div class="col-md-3 animate-box text-center">
 					<div class="staff">
-						<div class="staff-img" style="background-image: url(images/deanBSED.png);">
+						<div class="staff-img" style="background-image: url(images/DHTour.png);">
 						</div>
-						<span>DEAN, COLLEGE OF TEACHER EDUCATION</span>
-						<h3><a href="https://www.facebook.com/amelia.ablen.148">DR. AMELIA S. ABLEN </a></h3>
-						<p>Educational Attainment: Doctor of Philosophy, MAED, Bachelor in Secondary Education major in English</p>
+						<span>PROGRAM HEAD, BSTM</span>
+						<h3><a href="https://www.facebook.com/ruby.odulio1">DR. RUBY D. ODULIO</a></h3>
+						<p>Doctor of Philosophy major in Development Education, Master of Arts in Educational Management, Master in Business Administration</p>
+					</div>
+				</div>
+				<div class="col-md-3 animate-box text-center">
+					<div class="staff">
+						<div class="staff-img" style="background-image: url(images/PSPcher.png);">
+						</div>
+						<span>SPS/ OSA CHAIRMAN</span>
+						<h3><a href="#">MS. MA. AMABLE B. BETIS</a></h3>
+						<p>Master of Arts in Public Administration, AB major in Psychology minor in English</p>
 					</div>
 				</div>
 				<div class="col-md-3 animate-box text-center">
