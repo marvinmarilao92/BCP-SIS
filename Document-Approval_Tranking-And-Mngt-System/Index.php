@@ -1,5 +1,4 @@
 <?php
 
-    // header("location:DATMS/dashboard.php");
-    echo "This is not the index!!!";
+    header("location:SIS_LandingPage");
 ?>

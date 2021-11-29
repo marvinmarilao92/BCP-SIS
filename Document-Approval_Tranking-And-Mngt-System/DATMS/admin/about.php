@@ -2,16 +2,16 @@
 <html lang="en">
 
 <head>
-  <?php include ('css-links.php');//css connection?>
+  <?php include ('core/css-links.php');//css connection?>
 </head>
 
 <body>
 <!-- Header -->
-<?php include ('header.php');//Design for  Header?>
+<?php include ('core/header.php');//Design for  Header?>
 <!-- end of header -->
 
 <!-- Side navbar -->
-<?php $page = 'about'; include ('side-nav.php');//Design for sidebar?>
+<?php $page = 'about'; include ('core/side-nav.php');//Design for sidebar?>
 <!-- end of side navbar -->
 
 <!-- Main -->
@@ -80,13 +80,13 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <?php include ('footer.php');//css connection?>
+  <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files/ Template main js file -->
-  <?php include ('js.php');//css connection?>
+  <?php include ('core/js.php');//css connection?>
 
 </body>
 

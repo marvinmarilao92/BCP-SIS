@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-<?php include ('css-links.php');//css connection?>
+<?php include ('core/css-links.php');//css connection?>
 </head>
 
 <body>
-<?php include ('header.php');//Design for  Header?>
-<?php $page = 'dashboard';include ('side-nav.php');//Design for sidebar?>
+<?php include ('core/header.php');//Design for  Header?>
+<?php $page = 'dashboard';include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
@@ -44,11 +44,11 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Administration <span>| Accounts</span></h5>
+                  <h5 class="card-title">Office <span>| Count</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-person-lines-fill"></i>
+                      <i class="bi bi-house-door"></i>
                     </div>
                     <div class="ps-3">
                       <h6>8</h6>
@@ -76,11 +76,11 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Supervisor <span>| Accounts</span></h5>
+                  <h5 class="card-title">Users <span>| Accounts</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-briefcase-fill"></i>
+                      <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
                       <h6>12</h6>
@@ -93,7 +93,7 @@
               </div>
             </div><!-- End Revenue Card -->
 
-            <!-- Customers Card -->
+            <!-- teacher account -->
             <div class="col-xxl-4 col-xl-12">
 
               <div class="card info-card customers-card">
@@ -109,11 +109,11 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Department Head <span>| Accounts</span></h5>
+                  <h5 class="card-title">Types of Documents</h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
+                      <i class="bi bi-journal"></i>
                     </div>
                     <div class="ps-3">
                       <h6>12</h6>
@@ -145,7 +145,7 @@
                 <div class="card-body">
                   <h5 class="card-title">File Count <span>Per Departments</span></h5>
           <!-- Bar Chart -->
-          <canvas id="barChart" style="max-height: 450px;"></canvas>
+          <canvas id="barChart" style="max-height: 400px;"></canvas>
                  <?php
                        require_once("include/connection.php");
 
@@ -170,12 +170,13 @@
 
         <!-- Right side columns -->
         <div class="col-lg-4">
+
           <!-- Website Traffic -->
           <div class="card">
             <div class="card-body pb-0">
               <h5 class="card-title">User Accounts <span>| Graph</span></h5>
 
-              <div id="trafficChart" style="min-height: 500px;" class="echart"></div>
+              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
 
               <script>
                 document.addEventListener("DOMContentLoaded", () => {
@@ -184,13 +185,13 @@
                       trigger: 'item'
                     },
                     legend: {
-                      top: '2%',
+                      top: '1%',
                       left: 'center'
                     },
                     series: [{
                       name: 'Number of User',
                       type: 'pie',
-                      radius: ['45%', '85%'],
+                      radius: ['45%', '75%'],
                       avoidLabelOverlap: false,
                       label: {
                         show: false,
@@ -208,15 +209,15 @@
                       },
                       data: [{
                           value: 8,
-                          name: 'Administration'
+                          name: 'Office'
                         },
                         {
                           value: 12,
-                          name: 'Supervisor'
+                          name: 'Users'
                         },
                         {
                           value: 12,
-                          name: 'Department Head'
+                          name: 'Types Documents'
                         },
                       ]
                     }]
@@ -234,13 +235,13 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <?php include ('footer.php');//css connection?>
+  <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files/ Template main js file -->
-  <?php include ('js.php');//css connection?>
+  <?php include ('core/js.php');//css connection?>
 <!-- Charts -->
 <script>
     // Line
@@ -290,7 +291,7 @@
 
 
     //pie
-    var ctxP = document.getElementById("pie").getContext('2d');
+    var ctxP = document.getElementById("pieChart").getContext('2d');
     var myPieChart = new Chart(ctxP, {
       type: 'pie',
       data: {

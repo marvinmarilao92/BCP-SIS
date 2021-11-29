@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-<?php include ('css-links.php');//css connection?>
+<?php include ('core/css-links.php');//css connection?>
 </head>
 <body>
 
-<?php include ('header.php');//Design for  Header?>
-<?php $page = 'AL'; $col = 'logs'; include ('side-nav.php');//Design for sidebar?>
+<?php include ('core/header.php');//Design for  Header?>
+<?php $page = 'AL'; $col = 'logs'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
@@ -95,13 +95,13 @@
 
  
   <!-- ======= Footer ======= -->
-  <?php include ('footer.php');//css connection?>
+  <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files/ Template main js file -->
-  <?php include ('js.php');//css connection?>
+  <?php include ('core/js.php');//css connection?>
 
 </body>
 
