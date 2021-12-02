@@ -1,5 +1,3 @@
-
-   
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Help Desk System</title>
+  <title>Contact Us</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/logo1.png" rel="icon">
+  <link href="assets/img/logo2.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -32,12 +30,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.1.0
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  
 </head>
 
 <body>
@@ -47,8 +40,8 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo1.png" alt="">
-        <span class="d-none d-lg-block">HelpDesk</span>
+        <img src="assets/img/logo2.png" alt="">
+        <span class="d-none d-lg-block">Contact Us</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -144,7 +137,7 @@
 
         </li><!-- End Notification Nav -->
 
-      
+       
 
         <li class="nav-item dropdown pe-3">
 
@@ -156,7 +149,7 @@
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <span>Student</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -213,74 +206,48 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.php">
+        <a class="nav-link collapsed" href="index.php">
           <i class="bi bi-grid"></i>
           <span>Home</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
-
+      
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-faq.php">
           <i class="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
+          <span>F.A.Q.S</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.php">
+        <a class="nav-link " href="pages-contact.php">
           <i class="bi bi-envelope"></i>
           <span>Contact</span>
         </a>
       </li><!-- End Contact Page Nav -->
-      
-      
+
+     
     </ul>
 
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-
-  
-    
-  <div class = "s-body">
-                    
-                    <div class = "item"><a href = "Guidance.php">GUIDANCE</a></div>
-           
-                    <div class = "item"><a href = "#">CASHEIR</a></div>
-               
-                    <div class = "item"><a href = "#">REGISTRAR</a></div>
-                
-                    <div class = "item"><a href = "https://admission.bcp.edu.ph/college">ADMISSION</a></div>
-                    <div class = "item"><a href = "#">OJT</a></div>
-                    <div class = "item"><a href = "#">LMS</a></div>
-
-            </div>
-            <section>
-                <p>What is Lorem Ipsum?
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                including versions of Lorem Ipsum.</p>
-                <p>What is Lorem Ipsum?
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                including versions of Lorem Ipsum.</p>
-            </section>
-          
-
-   
-    </body>
-</html>
-               
-
-
+  <div class = "container">
+        <div class = "border"></div>
+        <h1>Message Us</h1>
+        <form action= "contactform.php" method = "POST" class = "contact">
+            <input type = "text" name = "fname" placeholder = "Enter fullname" id = "text-from">
+            <input type = "text" name = "schoolid" placeholder = "Enter Student Id" id = "text-from">
+            <input type = "text" name = "course" placeholder = "Enter your course" id = "text-from">
+            <input type = "text" name = "phone" placeholder = "Enter phone number" id = "text-from">
+            <input type = "text" name = "mail" placeholder = "Enter email" id = "text-from">
+            <textarea name = "mesage" placeholder = "Message" id = "text-from"></textarea>
+            <button type = "submit" name = "submit" id = "cont-btn">Submit</button>
+        </form>
+    </div>
+     
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -312,4 +279,3 @@
 </body>
 
 </html>
-
