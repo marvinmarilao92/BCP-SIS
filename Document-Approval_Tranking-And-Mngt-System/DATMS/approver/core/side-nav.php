@@ -10,7 +10,7 @@
       <span>Documents &nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-secondary">4</span>
     </a>
-  </li><!-- All docs Nav -->
+  </li><!-- End All docs Nav -->
 
   <li class="nav-item">
     <a href="incoming_docs.php" class="<?php if($page=='incoming'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
@@ -18,7 +18,7 @@
       <span>Incoming &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-warning text-dark">2</span>
     </a>
-  </li><!-- Incoming item Nav -->
+  </li><!-- End Dashboard Nav -->
 
   <li class="nav-item">
     <a href="recieved_docs.php" class="<?php if($page=='recieved'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
@@ -26,7 +26,7 @@
       <span>Received &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-success">5</span>
     </a>
-  </li><!-- recieved item Nav -->
+  </li><!-- End Dashboard Nav -->
 
   <li class="nav-item">
     <a href="outgoing_docs.php" class="<?php if($page=='outgoing'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
@@ -34,7 +34,7 @@
       <span>Outgoing &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-danger">2</span>
     </a>
-  </li><!-- outgoing item Nav -->
+  </li><!-- End Dashboard Nav -->
 
   <li class="nav-item">
     <a href="pending_docs.php" class="<?php if($page=='pending'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
@@ -42,14 +42,14 @@
       <span>Hold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-primary">4</span>
     </a>
-  </li><!-- hold item Nav -->
+  </li><!-- End Dashboard Nav -->
   
   <li class="nav-item">
   <a href="tracking.php" class="<?php if($page=='track'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-geo"></i>
       <span>Track Douments</span>
     </a>
-  </li><!-- tracking item Nav -->
+  </li><!-- End All docs Nav -->
   <br>
  
   <li class="nav-heading">Settings</li>
@@ -59,14 +59,14 @@
       <i class="bi bi-person"></i>
       <span>Profile</span>
     </a>
-  </li><!--  Profile Page Nav -->
+  </li><!-- End Profile Page Nav -->
 
   <li class="nav-item">
     <a href="FAQ.php" class="<?php if($page=='FAQ'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-question-circle"></i>
       <span>F.A.Q</span>
     </a>
-  </li><!--  F.A.Q. Page Nav -->
+  </li><!-- End Contact Page Nav -->
 
   
   <li class="nav-item">
@@ -74,7 +74,7 @@
       <i class="bi bi-envelope"></i>
       <span>Contact</span>
     </a>
-  </li><!--  Contact Page Nav -->
+  </li><!-- End Contact Page Nav -->
 
 </ul>
 

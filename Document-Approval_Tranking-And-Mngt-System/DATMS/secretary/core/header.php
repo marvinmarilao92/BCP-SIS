@@ -2,7 +2,7 @@
  <header id="header" class="header fixed-top d-flex align-items-center">
 
 <div class="d-flex align-items-center justify-content-between">
-  <a href="dashboard.php" class="logo d-flex align-items-center">
+  <a href="documents_list.php" class="logo d-flex align-items-center">
     <img src="../assets/img/DATMS_logo.png" alt="">
     <span class="d-none d-lg-block">Document Appoval</span>
   </a>

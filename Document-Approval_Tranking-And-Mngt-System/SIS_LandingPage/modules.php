@@ -51,7 +51,7 @@
 						<div class="desc">
 							<h3><a href="#">Help Desk System</a></h3>
 							<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Get Access!</a></span>
+							<span><a href="#" class="btn btn-primary btn-sm btn-course">Learn More!</a></span>
 						</div>
 					</div>
 				</div>
@@ -62,7 +62,7 @@
 						<div class="desc">
 							<h3><a href="#">Internship System</a></h3>
 							<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Get Access!</a></span>
+							<span><a href="#" class="btn btn-primary btn-sm btn-course">Learn More!</a></span>
 						</div>
 					</div>
 				</div>
@@ -73,7 +73,7 @@
 						<div class="desc">
 							<h3><a href="#">LMS EDMODO</a></h3>
 							<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Get Access!</a></span>
+							<span><a href="#" class="btn btn-primary btn-sm btn-course">Learn More!</a></span>
 						</div>
 					</div>
 				</div>
@@ -84,7 +84,7 @@
 						<div class="desc">
 							<h3><a href="#">BCP Clearance</a></h3>
 							<p>BCP Clearance helps students and faculty staffs request clearance through online system, also to save time and efforts instead of physically requesting it over the counter. BCP Clearance is in need due to the pandemic, it is a big help to maximize social distancing while effectively doing work loads.</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Get Access!</a></span>
+							<span><a href="#" class="btn btn-primary btn-sm btn-course">Learn More!</a></span>
 						</div>
 					</div>
 				</div>
@@ -95,7 +95,7 @@
 						<div class="desc">
 							<h3><a href="#">Guidance and Counselling</a></h3>
 							<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Get Access!</a></span>
+							<span><a href="#" class="btn btn-primary btn-sm btn-course">Learn More!</a></span>
 						</div>
 					</div>
 				</div>
@@ -106,7 +106,7 @@
 						<div class="desc">
 							<h3><a href="#">Document Approval, Tracking and Mgmt System</a></h3>
 							<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Get Access!</a></span>
+							<span><a href="#" class="btn btn-primary btn-sm btn-course">Learn More!</a></span>
 						</div>
 					</div>
 				</div>
@@ -117,7 +117,7 @@
 						<div class="desc">
 							<h3><a href="#">Health Check Monitoring</a></h3>
 							<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Get Access!</a></span>
+							<span><a href="#" class="btn btn-primary btn-sm btn-course">Learn More!</a></span>
 						</div>
 					</div>
 				</div>
@@ -128,7 +128,7 @@
 						<div class="desc">
 							<h3><a href="#">Student Services (Grievances/Discipline)</a></h3>
 							<p>Moodle LMS is an open source secure, feature-rich software platform that runs on any computer server and all common devices to create a web-based online learning space containing “courses” full of resources and activities.</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Get Access!</a></span>
+							<span><a href="#" class="btn btn-primary btn-sm btn-course">Learn More!</a></span>
 						</div>
 					</div>
 				</div>
@@ -139,7 +139,7 @@
 						<div class="desc">
 							<h3><a href="#">LMS MOODLE</a></h3>
 							<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Get Access!</a></span>
+							<span><a href="#" class="btn btn-primary btn-sm btn-course">Learn More!</a></span>
 						</div>
 					</div>
 				</div>
@@ -150,7 +150,7 @@
 						<div class="desc">
 							<h3><a href="#">Medical System</a></h3>
 							<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Get Access!</a></span>
+							<span><a href="#" class="btn btn-primary btn-sm btn-course">Learn More!</a></span>
 						</div>
 					</div>
 				</div>
@@ -161,7 +161,7 @@
 						<div class="desc">
 							<h3><a href="#">Scholarship System</a></h3>
 							<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Get Access!</a></span>
+							<span><a href="#" class="btn btn-primary btn-sm btn-course">Learn More!</a></span>
 						</div>
 					</div>
 				</div>
@@ -172,7 +172,7 @@
 						<div class="desc">
 							<h3><a href="#">User Management System</a></h3>
 							<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-							<span><a href="#" class="btn btn-primary btn-sm btn-course">Get Access!</a></span>
+							<span><a href="#" class="btn btn-primary btn-sm btn-course">Learn More!</a></span>
 						</div>
 					</div>
 			</div>

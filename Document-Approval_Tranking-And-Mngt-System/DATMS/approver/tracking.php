@@ -2,22 +2,22 @@
 <html lang="en">
 
 <head>
-<?php include ('css-links.php');//css connection?>
+<?php include ('core/css-links.php');//css connection?>
 </head>
 <body>
 
-<?php include ('header.php');//Design for  Header?>
-<?php include ('side-nav.php');//Design for sidebar?>
+<?php include ('core/header.php');//Design for  Header?>
+<?php $page = 'track';  include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Data Tables</h1>
+      <h1>Track Documents</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">Data</li>
+          <li class="breadcrumb-item">Module</li>
+          <li class="breadcrumb-item active">Track Document</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -25,21 +25,27 @@
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
-
+            <center>
+            <div class="col-md-11">
+              <br>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
+                    <label for="floatingName">Enter Code</label>
+                  </div>
+              <br>
+            </div>  
+            </center>
               <!-- Table with stripped rows -->
-              <table class="table datatable">
+              <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Position</th>
                     <th scope="col">Age</th>
-                    <th scope="col">Start Date</th>
+                    <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -48,35 +54,35 @@
                     <td>Brandon Jacob</td>
                     <td>Designer</td>
                     <td>28</td>
-                    <td>2016-05-25</td>
+                    <td><span class="badge bg-success">Approved</span></td>
                   </tr>
                   <tr>
                     <th scope="row">2</th>
                     <td>Bridie Kessler</td>
                     <td>Developer</td>
                     <td>35</td>
-                    <td>2014-12-05</td>
+                    <td><span class="badge bg-warning">Pending</span></td>
                   </tr>
                   <tr>
                     <th scope="row">3</th>
                     <td>Ashleigh Langosh</td>
                     <td>Finance</td>
                     <td>45</td>
-                    <td>2011-08-12</td>
+                    <td><span class="badge bg-success">Approved</span></td>
                   </tr>
                   <tr>
                     <th scope="row">4</th>
                     <td>Angus Grady</td>
                     <td>HR</td>
                     <td>34</td>
-                    <td>2012-06-11</td>
+                    <td><span class="badge bg-danger">Holds</span></td>
                   </tr>
                   <tr>
                     <th scope="row">5</th>
                     <td>Raheem Lehner</td>
                     <td>Dynamic Division Officer</td>
                     <td>47</td>
-                    <td>2011-04-19</td>
+                    <td><span class="badge bg-success">Approved</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -93,13 +99,13 @@
 
  
   <!-- ======= Footer ======= -->
-  <?php include ('footer.php');//css connection?>
+  <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files/ Template main js file -->
-  <?php include ('js.php');//css connection?>
+  <?php include ('core/js.php');//css connection?>
 
 </body>
 

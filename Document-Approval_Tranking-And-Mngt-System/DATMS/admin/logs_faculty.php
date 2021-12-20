@@ -7,7 +7,7 @@
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'DHL'; $col = 'logs';  include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'FL'; $col = 'logs';  include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 

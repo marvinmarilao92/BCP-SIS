@@ -141,11 +141,10 @@
                     <li><a class="dropdown-item" href="#">Show</a></li>
                   </ul>
                 </div>
-
+                <!-- Bar Chart -->
                 <div class="card-body">
-                  <h5 class="card-title">File Count <span>Per Departments</span></h5>
-          <!-- Bar Chart -->
-          <canvas id="barChart" style="max-height: 400px;"></canvas>
+                  <h5 class="card-title">Document Tracked <span>Per Office</span></h5>
+                <canvas id="barChart" style="max-height: 400px;"></canvas>
                  <?php
                        require_once("include/connection.php");
 
@@ -159,9 +158,9 @@
                             }
                      
                     ?>
-              <!-- End Bar CHart -->
+             
                 </div>
-
+              <!-- End Bar CHart -->
               </div>
             </div><!-- End Reports -->
 
