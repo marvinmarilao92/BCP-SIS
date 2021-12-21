@@ -29,7 +29,7 @@
 
           <div class="card">
             <div class="card-body">           
-              <div class="form-group col-md-1 btn-lg"   data-bs-toggle="modal" data-bs-target="#verticalycentered"style="float: right;">
+              <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#verticalycentered"style="float: right;">
               <br>
                   <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#Department" >
                    Add DocType

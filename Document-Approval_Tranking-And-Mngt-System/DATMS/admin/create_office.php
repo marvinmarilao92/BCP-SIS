@@ -24,25 +24,22 @@
     <div class="">
   
     <section class="section">
-      <div class="row">
+      <div class="row">        
         <div class="col-lg-12">
-
           <div class="card">
-            <div class="card-body">           
-              <div class="form-group col-md-1 btn-lg"   data-bs-toggle="modal" data-bs-target="#addoffice"style="float: right;">
-              <br>
+            <div class="col-lg-12">
+              <div class="form-group col-md-2 btn-lg"  style="float: left; padding:20px;">
+                  <h2>Records</h2>
+              </div>
+              <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#addoffice"style="float: right; padding:20px;">
                   <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#Department" >
                    Add Office
                   </button>
-                  
               </div> 
-              <div class="form-group col-md-2 btn-lg"   data-bs-toggle="modal" style="float: left;">
-                  <h5 class="card-title">Records</h5>
-                
-              </div>
-
-              <!-- Table with stripped rows -->
-              <table class="table table-striped">
+            </div>
+            <div class="card-body">           
+              <!-- Table for Office records -->
+              <table class="table table-hover datatable">
                 <thead>
                   <tr>
                     <th scope="col" WIDTH="85%">OFFICE</th>
@@ -50,40 +47,26 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php
+                    require_once("include/conn.php");
+                    $query="SELECT * FROM datms_office ORDER BY off_date DESC ";
+                    $result=mysqli_query($conn,$query);
+                    while($rs=mysqli_fetch_array($result)){
+                      $offName=$rs['off_name'];
+                  ?>
                   <tr>
-                    <td WIDTH="85%">Brandon Jacob</td>
+                    <td WIDTH="85%"><?php echo $offName; ?></td>
                     <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
+                      <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
+                      <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                    </td>
                   </tr>
-                  <tr>
-                    <td WIDTH="85%">Brandon Jacob</td>
-                    <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td WIDTH="85%">Brandon Jacob</td>
-                    <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td WIDTH="85%">Brandon Jacob</td>
-                    <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td WIDTH="85%">Brandon Jacob</td>
-                    <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
-                  </tr>
+
+                  <?php }?>
                   
                 </tbody>
               </table>
-              <!-- End Table with stripped rows -->
+              <!-- End of office table record -->
 
             </div>
           </div>
@@ -95,10 +78,10 @@
 
   </main><!-- End #main -->
 
-   <!-- Create Document Modal -->
+   <!-- Create Office Modal -->
    <div class="modal fade" id="addoffice" tabindex="-1">
         <div>
-             <div class="modal-dialog modal-dialog-centered modal-lg">
+             <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">OFFICE CREDENTIALS</h5>
@@ -108,29 +91,32 @@
                         <div class="card-body">
                           <h2 class="card-title">Fill all neccessary info</h2>
                             <!-- Fill out Form -->
-                            <form class="row g-3" action="add_office.php" method="POST">
-                               <div class="col-md-3">
-                                  <input type="text" class="form-control" placeholder="Office Code" name="offcode" required>
+                            <div class="row g-3" >
+                              <div class="col-md-4">
+                                  <input type="text" class="form-control" placeholder="Office Code" id="offcode" required>
                                </div>
                                <br>
-                               <div class="col-md-9">
-                                  <input type="text" class="form-control" placeholder="Name" name="offtitle" required>
+                               <div class="col-md-8">
+                                  <input type="text" class="form-control" placeholder="Name" id="offtitle" required>
                                </div>
                                <br>
                                <div class="col-12">
-                                  <textarea class="form-control" style="height: 100px" placeholder="Location" name="offloc" required></textarea>
-                               </div>                 
+                                  <textarea class="form-control" style="height: 80px" placeholder="Location" id="offloc" required></textarea>
+                               </div>        
+                            </div>
+                                        
                         </div>
                       </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button class="btn btn-primary" name="save">Save changes</button>
+                          <button class="btn btn-primary" name="save" id="save" >Save changes</button>
                         </div>
-                    </form><!-- End Form -->
+                    <!-- End Form -->
                 </div>
             </div>
         </div> 
-     </div><!-- End Create Document Modal-->
+     </div>
+     <!-- End Create Office Modal-->
 
   <!-- ======= Footer ======= -->
   <?php include ('core/footer.php');//css connection?>
@@ -141,6 +127,55 @@
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
 
+  <!-- modal office save ajax -->
+  <script>
+        $('#save').click(function(e){ 
+          e.preventDefault();
+            if($('#offcode').val()!="" && $('#offtitle').val()!="" && $('#offloc').val()!=""){
+              $.post("add_office.php", {
+                offcode:$('#offcode').val(),
+                offname:$('#offtitle').val(),
+                offloc:$('#offloc').val()
+                },function(data){
+                if (data.trim() == "failed"){
+                  $('#addoffice').modal('hide');
+                  Swal.fire("Office is already in server","","error");//response message
+                  // Empty test field
+                  $('#offcode').val("")
+                  $('#offtitle').val("")
+                  $('#offloc').val("")
+                }else if(data.trim() == "success"){
+                  $('#addoffice').modal('hide');
+                  //success message
+                  const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                  document.location.reload(true)//refresh pages
+                  }
+                  })
+                  Toast.fire({
+                  icon: 'success',
+                  title: 'Office successfully Saved'
+                  })
+                  $('#offcode').val("")
+                  $('#offtitle').val("")
+                  $('#offloc').val("")
+                   }else{
+                  console.log(data);
+                }
+              })
+            }else{
+              Swal.fire("You must fill out every field","","warning");
+            }
+        })
+    </script>
+    
 </body>
 
 </html>

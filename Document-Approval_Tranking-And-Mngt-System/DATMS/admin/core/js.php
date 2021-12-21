@@ -8,7 +8,8 @@
   <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="../assets/vendor/echarts/echarts.min.js"></script>
 
-  <script src="../assets/vendor/bootstrap/js/sweetalert2.all.min.js"></script>
+  <script src="../assets/vendor/bootstrap/js/sweetalert2.min.js"></script>
+  <script src="../assets/vendor/bootstrap/js/jquery-3.6.0.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
