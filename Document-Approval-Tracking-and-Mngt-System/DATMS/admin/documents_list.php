@@ -7,17 +7,17 @@
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'doctT'; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'docs'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Document Types</h1>
+      <h1>Document Records</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Settings</li>
-          <li class="breadcrumb-item active">Document types</li>
+          <li class="breadcrumb-item">Module</li>
+          <li class="breadcrumb-item active">Document Records</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -28,56 +28,63 @@
         <div class="col-lg-12">
 
           <div class="card">
-            <div class="card-body">           
+            <div class="card-body">
               <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#verticalycentered"style="float: right;">
               <br>
                   <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#Department" >
-                   Add DocType
+                   Create Document
                   </button>
               </div> 
               <div class="form-group col-md-2 btn-lg"   data-bs-toggle="modal" data-bs-target="#verticalycentered"style="float: left;">
-                  <h5 class="card-title">Records</h5>
-
+                  <h5 class="card-title">List of Documents</h5>
               </div>
 
               <!-- Table with stripped rows -->
-              <table class="table table-striped">
+              <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col" WIDTH="85%">CATEGORY</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Start Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td WIDTH="85%">Brandon Jacob</td>
-                    <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
+                    <th scope="row">1</th>
+                    <td>Brandon Jacob</td>
+                    <td>Designer</td>
+                    <td>28</td>
+                    <td>2016-05-25</td>
                   </tr>
                   <tr>
-                    <td WIDTH="85%">Brandon Jacob</td>
-                    <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
+                    <th scope="row">2</th>
+                    <td>Bridie Kessler</td>
+                    <td>Developer</td>
+                    <td>35</td>
+                    <td>2014-12-05</td>
                   </tr>
                   <tr>
-                    <td WIDTH="85%">Brandon Jacob</td>
-                    <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
+                    <th scope="row">3</th>
+                    <td>Ashleigh Langosh</td>
+                    <td>Finance</td>
+                    <td>45</td>
+                    <td>2011-08-12</td>
                   </tr>
                   <tr>
-                    <td WIDTH="85%">Brandon Jacob</td>
-                    <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
+                    <th scope="row">4</th>
+                    <td>Angus Grady</td>
+                    <td>HR</td>
+                    <td>34</td>
+                    <td>2012-06-11</td>
                   </tr>
                   <tr>
-                    <td WIDTH="85%">Brandon Jacob</td>
-                    <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>
-                    <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
+                    <th scope="row">5</th>
+                    <td>Raheem Lehner</td>
+                    <td>Dynamic Division Officer</td>
+                    <td>47</td>
+                    <td>2011-04-19</td>
                   </tr>
                   
                 </tbody>
@@ -126,9 +133,12 @@
                                 </select>
                                </div>
                                <div class="col-md-6">
-                                <select id="inputState" class="form-select">
+                                <select multiple id="inputState" class="form-select">
                                   <option selected>Staff...</option>
-                                  <option>...</option>
+                                  <option>Staff1</option>
+                                  <option>Staff1</option>
+                                  <option>Staff1</option>
+                                  <option>Staff1</option>
                                 </select>
                                </div>
                                <div class="col-md-12">

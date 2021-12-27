@@ -23,6 +23,7 @@
         <li class="dropdown-header">
           You have 4 new notifications
           <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+          <span class="status actiuve"></span>
         </li>
         <li>
           <hr class="dropdown-divider">
