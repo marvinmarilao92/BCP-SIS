@@ -32,7 +32,7 @@
                   <h2>Records</h2>
               </div>
               <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#addoffice"style="float: right; padding:20px;">
-                  <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#Department" >
+                  <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#addoffice" >
                    Add Office
                   </button>
               </div> 
@@ -42,8 +42,10 @@
               <table class="table table-hover datatable">
                 <thead>
                   <tr>
-                    <th scope="col" WIDTH="85%">OFFICE</th>
+                  <th style="visibility: collapse;" WIDTH="1%"></th>
+                    <th scope="col" WIDTH="85%">Office</th>
                     <th scope="col">Action</th>
+                  <th style="visibility: collapse;" WIDTH="1%"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -52,17 +54,23 @@
                     $query="SELECT * FROM datms_office ORDER BY off_date DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
-                      $offName=$rs['off_name'];
+                      $offid =$rs['off_id'];
+                      $offName = $rs['off_name'];
                   ?>
                   <tr>
+                   <td style="visibility: collapse;" WIDTH="1%"><?php echo $offid; ?></td>
                     <td WIDTH="85%"><?php echo $offName; ?></td>
-                    <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button>
-                      <button type="button" class="btn btn-primary"><i class="bi bi-eye"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                    <td>
+                      <button class="btn btn-success"><i class="bi bi-pencil-square"></i></button>
+                      <button class="btn btn-primary"><i class="bi bi-eye"></i></button>
+                      <button class="btn btn-danger" id="delete"><i class="bi bi-trash" ></i></button>
                     </td>
+                  
                   </tr>
 
-                  <?php }?>
+                  <?php }
+                  
+                  ?>
                   
                 </tbody>
               </table>
@@ -117,6 +125,37 @@
         </div> 
      </div>
      <!-- End Create Office Modal-->
+
+     <!-- Delete Office Modal -->
+     <div class="modal fade" id="deletemodal" tabindex="-1">
+        <div>
+             <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">DELETE OFFICE</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                      <div class="card" style="margin: 10px;">
+                        <div class="card-body">
+                        <form action="delete_office.php" method="POST">
+                          <br>
+                          <input type="hidden" name="delete_id" id="delete_id">
+                          <h5>Are you sure you want to delete these Office?</h5>
+						              <p class="text-danger" style="float: right;"><small>This action cannot be undone.</small></p>                      
+                        </div>
+                      </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary" name="deletedata" id="save" >Delete Office</button>
+                        </div>
+                        <form>
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div> 
+     </div>
+     
+     <!-- End delete Office Modal -->
 
   <!-- ======= Footer ======= -->
   <?php include ('core/footer.php');//css connection?>
@@ -175,7 +214,28 @@
             }
         })
     </script>
-    
+
+    <script>
+        $(document).ready(function () {
+
+            $('#delete').on('click', function () {
+
+                $('#deletemodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#delete_id').val(data[0]);
+
+            });
+        });
+    </script>
+  
 </body>
 
 </html>
