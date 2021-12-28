@@ -268,9 +268,10 @@ include('session.php');
                   },function(response){
                     // alert ("deleted");
                     if(response.trim() == "OfficeDeleted"){
-                      Swal.fire ("Office Successfully Deleted","","success");
                       $('#DeleteModal').modal('hide');
-                      document.location.reload(true)//refresh pages
+                      Swal.fire ("Office Successfully Deleted","","success").then(function(){
+                                document.location.reload(true)//refresh pages
+                              });                      
                     }else{
                       $('#DeleteModal').modal('hide');
                       Swal.fire (response);
@@ -302,18 +303,20 @@ include('session.php');
                                 toast: true,
                                 position: 'top-end',
                                 showConfirmButton: false,
-                                timer: 3000,
+                                timer: 1100,
                                 timerProsressBar: true,
                                 didOpen: (toast) => {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)
                                 toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                document.location.reload(true)//refresh pages
+                                
                                 }
                                 })
                               Toast.fire({
                               icon: 'success',
                               title:'Office successfully Saved'
-                              })
+                              }).then(function(){
+                                document.location.reload(true)//refresh pages
+                              });
                                 $('#offcode').val("")
                                 $('#offtitle').val("")
                                 $('#offloc').val("")
@@ -367,18 +370,19 @@ include('session.php');
                                     toast: true,
                                     position: 'top-end',
                                     showConfirmButton: false,
-                                    timer: 3000,
+                                    timer: 1100,
                                     timerProsressBar: true,
                                     didOpen: (toast) => {
                                     toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                    document.location.reload(true)//refresh pages
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                        
                                   }
                                   })
                                     Toast.fire({
                                     icon: 'Success',
                                     title:'Changes Successfully Saved'
-                                })
+                                }).then(function(){
+                                  document.location.reload(true)//refresh pages
+                                });
                                     $('#off_codeE').val("")
                                     $('#off_nameE').val("")
                                     $('#off_locE').val("")

@@ -269,9 +269,10 @@ include('session.php');
                   },function(response){
                     // alert ("deleted");
                     if(response.trim() == "DoctypeDeleted"){
-                      Swal.fire ("DocType Successfully Deleted","","success");
                       $('#DeleteModal').modal('hide');
+                      Swal.fire ("DocType Successfully Deleted","","success").then(function(){
                       document.location.reload(true)//refresh pages
+                      });
                     }else{
                       $('#DeleteModal').modal('hide');
                       Swal.fire (response);
@@ -291,7 +292,9 @@ include('session.php');
                         },function(data){
                         if (data.trim() == "failed"){
                           $('#AddModal').modal('hide');
-                          Swal.fire("Office is already in server","","error");//response message
+                          //response message
+                          Swal.fire("Office is already in server","","error");
+                          
                           // Empty test field
                           $('#dtcode').val("")
                           $('#dtname').val("")
@@ -303,18 +306,19 @@ include('session.php');
                                 toast: true,
                                 position: 'top-end',
                                 showConfirmButton: false,
-                                timer: 3000,
+                                timer: 1100,
                                 timerProsressBar: true,
                                 didOpen: (toast) => {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                document.location.reload(true)//refresh pages
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)                  
                                 }
                                 })
                               Toast.fire({
                               icon: 'success',
                               title:'Office successfully Saved'
-                              })
+                              }).then(function(){
+                                document.location.reload(true)//refresh pages
+                              });
                                 $('#dtcode').val("")
                                 $('#dtname').val("")
                                 $('#dtdesc').val("")
@@ -371,18 +375,19 @@ include('session.php');
                                     toast: true,
                                     position: 'top-end',
                                     showConfirmButton: false,
-                                    timer: 3000,
+                                    timer: 1100,
                                     timerProsressBar: true,
                                     didOpen: (toast) => {
                                     toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                    document.location.reload(true)//refresh pages
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
                                   }
                                   })
                                     Toast.fire({
                                     icon: 'Success',
                                     title:'Changes Successfully Saved'
-                                })
+                                }).then(function(){
+                                  document.location.reload(true)//refresh pages
+                                });
                                     $('#dt_codeE').val("")
                                     $('#dt_nameE').val("")
                                     $('#dt_descE').val("")

@@ -42,7 +42,7 @@ include('session.php');
                       <h6>Reports</h6>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Show</a></li>
+                    <li><a class="dropdown-item" href="create_office.php">Show</a></li>
                   </ul>
                 </div>
 
@@ -54,8 +54,15 @@ include('session.php');
                       <i class="bi bi-house-door"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>8</h6>
-                      <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">Number of account</span>
+                      <?php 
+                        require_once("include/conn.php");
+                        $query="SELECT * FROM datms_office";
+                        $result=mysqli_query($conn,$query);
+                        if($result){
+                          echo "<h6>". mysqli_num_rows($result)."</h6>";
+                        }
+                      ?> 
+                      <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">Number of Office</span>
 
                     </div>
                   </div>
@@ -68,16 +75,6 @@ include('session.php');
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Reports</h6>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Show</a></li>
-                  </ul>
-                </div>
-
                 <div class="card-body">
                   <h5 class="card-title">Users <span>| Accounts</span></h5>
 
@@ -86,8 +83,15 @@ include('session.php');
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>12</h6>
-                      <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">Number of account</span>
+                      <?php 
+                        require_once("include/conn.php");
+                        $query="SELECT * FROM user_information WHERE `department` = 'DATMS'";
+                        $result=mysqli_query($conn,$query);
+                        if($result){
+                          echo "<h6>". mysqli_num_rows($result)."</h6>";
+                        }
+                      ?> 
+                      <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">Number of Accounts</span>
 
                     </div>
                   </div>
@@ -107,7 +111,7 @@ include('session.php');
                     <li class="dropdown-header text-start">
                     <h6>Reports</h6>
                     </li>
-                    <li><a class="dropdown-item" href="#">Show</a></li>
+                    <li><a class="dropdown-item" href="create_doctype.php">Show</a></li>
                   </ul>
                 </div>
 
@@ -119,8 +123,15 @@ include('session.php');
                       <i class="bi bi-journal"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>12</h6>
-                      <span class="text-danger small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">Number of account</span>
+                    <?php 
+                        require_once("include/conn.php");
+                        $query="SELECT * FROM datms_doctype";
+                        $result=mysqli_query($conn,$query);
+                        if($result){
+                          echo "<h6>". mysqli_num_rows($result)."</h6>";
+                        }
+                      ?> 
+                      <span class="text-danger small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">Number of DocType</span>
 
                     </div>
                   </div>
@@ -210,15 +221,15 @@ include('session.php');
                         show: false
                       },
                       data: [{
-                          value: 8,
+                          value: 6,
                           name: 'Office'
                         },
                         {
-                          value: 12,
+                          value: 3,
                           name: 'Users'
                         },
                         {
-                          value: 12,
+                          value: 11,
                           name: 'Types Documents'
                         },
                       ]
