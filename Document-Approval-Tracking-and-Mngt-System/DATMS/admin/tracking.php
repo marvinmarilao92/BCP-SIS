@@ -1,8 +1,12 @@
+<?php
+include('session.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <?php include ('core/css-links.php');//css connection?>
+
 </head>
 <body>
 
@@ -23,79 +27,90 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section">
+    <section class="section dashboard">
       <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-            <center>
-            <div class="col-md-11">
-              <br>
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
-                    <label for="floatingName">Enter Code</label>
-                  </div>
-              <br>
-            </div>  
-            </center>
-              <!-- Table with stripped rows -->
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td><span class="badge bg-success">Approved</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Bridie Kessler</td>
-                    <td>Developer</td>
-                    <td>35</td>
-                    <td><span class="badge bg-warning">Pending</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Ashleigh Langosh</td>
-                    <td>Finance</td>
-                    <td>45</td>
-                    <td><span class="badge bg-success">Approved</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Angus Grady</td>
-                    <td>HR</td>
-                    <td>34</td>
-                    <td><span class="badge bg-danger">Holds</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Raheem Lehner</td>
-                    <td>Dynamic Division Officer</td>
-                    <td>47</td>
-                    <td><span class="badge bg-success">Approved</span></td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
+        <!-- Left side columns -->
+          <div class="row">
 
+            <!-- Reports -->
+          
+              <div class="card">
+                <!-- Activity Body -->
+                <div class="card-body">
+                  <!-- Search Bar -->
+                  <center>
+                    <div class="col-md-11">
+                      <br>
+                          <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
+                            <label for="floatingName">Enter Code</label>
+                          </div>
+                      <br>
+                    </div>  
+                  </center>
+                  <!-- End of search Bar -->
+                    <!-- Tracking Activity module -->
+                    <div class="activity" style="margin-left:100px; ">
+
+                        <div class="activity-item d-flex">
+                          <div class="activite-label card-title">32 min</div>
+                          <i class='bi bi-circle-fill activity-badge text-info align-self-start' style="padding-top: 25px;"></i>
+                          <div class="activity-content card-title" style="margin-left:20px ;">
+                            Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+                          </div>
+                        </div><!-- End activity item-->
+
+                        <div class="activity-item d-flex">
+                          <div class="activite-label card-title">20 min</div>
+                          <i class='bi bi-circle-fill activity-badge text-danger align-self-start' style="padding-top: 25px;"></i>
+                          <div class="activity-content card-title" style="margin-left:20px;">
+                            Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+                          </div>
+                        </div><!-- End activity item-->
+
+                        <div class="activity-item d-flex">
+                          <div class="activite-label card-title">10 min</div>
+                          <i class='bi bi-circle-fill activity-badge text-primary align-self-start' style="padding-top: 25px;"></i>
+                          <div class="activity-content card-title" style="margin-left:20px ;">
+                            Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+                          </div>
+                        </div><!-- End activity item-->
+
+                        <div class="activity-item d-flex">
+                          <div class="activite-label card-title">15 min</div>
+                          <i class='bi bi-circle-fill activity-badge text-warning align-self-start' style="padding-top: 25px;"></i>
+                          <div class="activity-content card-title" style="margin-left:20px;">
+                            Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+                          </div>
+                        </div><!-- End activity item-->
+
+                        <div class="activity-item d-flex">
+                          <div class="activite-label card-title">20 min</div>
+                          <i class='bi bi-circle-fill activity-badge text-success align-self-start' style="padding-top: 25px;"></i>
+                          <div class="activity-content card-title" style="margin-left:20px ;">
+                            Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+                          </div>
+                        </div><!-- End activity item-->
+
+                        <div class="activity-item d-flex">
+                          <div class="activite-label card-title">90 min</div>
+                          <i class='bi bi-circle-fill activity-badge text-muted align-self-start' style="padding-top: 25px;"></i>
+                          <div class="activity-content card-title" style="margin-left:20px;">
+                            Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+                          </div>
+                        </div><!-- End activity item-->
+
+                    </div>
+                    <!-- End Tracking Activity module -->
+                </div>
+              <!-- End Activity Body -->
+              </div>
             </div>
+
           </div>
 
-        </div>
-      </div>
+      
     </section>
-
   </main><!-- End #main -->
 
  

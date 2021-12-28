@@ -6,7 +6,7 @@
 <li class="nav-heading">Module</li>
 
   <li class="nav-item">
-    <a href="dashboard.php" class="<?php if($page=='dashboard'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="index.php" class="<?php if($page=='dashboard'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-bar-chart-line"></i>
       <span>Dashboard</span>
     </a>

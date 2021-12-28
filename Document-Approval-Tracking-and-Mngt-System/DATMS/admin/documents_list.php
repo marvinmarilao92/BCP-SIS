@@ -1,3 +1,6 @@
+<?php
+include('session.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,17 +131,26 @@
                                </div>
                                <div class="col-md-6">
                                 <select id="inputState" class="form-select">
-                                  <option selected>Office...</option>
-                                  <option>...</option>
+                                  <?php
+                                   require_once("include/conn.php");
+                                   $query="SELECT * FROM datms_office ORDER BY off_date DESC ";
+                                   $result=mysqli_query($conn,$query);
+                                   while($rs=mysqli_fetch_array($result)){
+                                     $offid =$rs['off_id'];                                    
+                                     $offName = $rs['off_name'];       
+                                  ?>
+                                  <option><?php echo $offName;?></option>
+                                  <?php }?>
                                 </select>
+                                
                                </div>
                                <div class="col-md-6">
-                                <select multiple id="inputState" class="form-select">
+                                <select id="inputState" class="form-select">
                                   <option selected>Staff...</option>
-                                  <option>Staff1</option>
-                                  <option>Staff1</option>
-                                  <option>Staff1</option>
-                                  <option>Staff1</option>
+                                  <option>aStaff1</option>
+                                  <option>bStaff1</option>
+                                  <option>cStaff1</option>
+                                  <option>dStaff1</option>
                                 </select>
                                </div>
                                <div class="col-md-12">

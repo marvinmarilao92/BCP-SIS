@@ -1,3 +1,6 @@
+<?php
+include('session.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,138 +95,139 @@
 
   </main><!-- End #main -->
 
-   <!-- Create Office Modal -->
-   <div class="modal fade" id="AddModal" tabindex="-1">
-             <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">OFFICE CREDENTIALS</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                      <div class="card" style="margin: 10px;">
-                        <div class="card-body">
-                          <h2 class="card-title">Fill all neccessary info</h2>
-                            <!-- Fill out Form -->
-                            <div class="row g-3" >
-                              <div class="col-md-4">
-                                  <input type="text" class="form-control" placeholder="Office Code" id="offcode" required>
-                               </div>
-                               <br>
-                               <div class="col-md-8">
-                                  <input type="text" class="form-control" placeholder="Name" id="offtitle" required>
-                               </div>
-                               <br>
-                               <div class="col-12">
-                                  <textarea class="form-control" style="height: 80px" placeholder="Location" id="offloc" required></textarea>
-                               </div>        
+  <!-- Office Modals -->
+      <!-- Create Office Modal -->
+      <div class="modal fade" id="AddModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">OFFICE CREDENTIALS</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                          <div class="card" style="margin: 10px;">
+                            <div class="card-body">
+                              <h2 class="card-title">Fill all neccessary info</h2>
+                                <!-- Fill out Form -->
+                                <div class="row g-3" >
+                                  <div class="col-md-4">
+                                      <input type="text" class="form-control" placeholder="Office Code" id="offcode" required>
+                                  </div>
+                                  <br>
+                                  <div class="col-md-8">
+                                      <input type="text" class="form-control" placeholder="Name" id="offtitle" required>
+                                  </div>
+                                  <br>
+                                  <div class="col-12">
+                                      <textarea class="form-control" style="height: 80px" placeholder="Location" id="offloc" required></textarea>
+                                  </div>        
+                                </div>
+                                            
                             </div>
-                                        
-                        </div>
-                      </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button class="btn btn-primary" name="save" id="save" >Save changes</button>
-                        </div>
-                    <!-- End Form -->
-                </div>
-            </div>     
-     </div>
-     
-     <!-- End Create Office Modal-->
-
-     <!-- View Office modal -->
-     <div class="modal fade" id="ViewModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-l">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Office Information</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    <div class="card" style="margin: 10px;">
-                          <div class="card-body">
-                            <h5 class="card-title">Office Details</h5>
-                              Office Code: <h6 id="view_code" style="margin-left: 60px;"></h6>
-                              Office Name: <h6 id="view_name" style="margin-left: 60px;"></h6>
-                              Location: <h6 id="view_loc" style="margin-left: 60px;"></h6>
-                              Date Created: <h6 id="view_date" style="margin-left: 60px;"></h6>                
                           </div>
-                        </div>   
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button class="btn btn-primary" name="save" id="save" >Save Office</button>
+                            </div>
+                        <!-- End Form -->
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>     
+        </div>
+      <!-- End Create Office Modal-->
+
+      <!-- View Office modal -->
+      <div class="modal fade" id="ViewModal" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered modal-l">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Office Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                      <div class="card" style="margin: 10px;">
+                            <div class="card-body">
+                              <h5 class="card-title">Office Details</h5>
+                                Office Code: <h6 id="view_code" style="margin-left: 60px;"></h6>
+                                Office Name: <h6 id="view_name" style="margin-left: 60px;"></h6>
+                                Location: <h6 id="view_loc" style="margin-left: 60px;"></h6>
+                                Date Created: <h6 id="view_date" style="margin-left: 60px;"></h6>                
+                            </div>
+                          </div>   
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-       </div>
-     <!-- End View office Modal-->
+        </div>
+      <!-- End View office Modal-->
 
-     <!-- Edit Office Modal -->
+      <!-- Edit Office Modal -->
       <div class="modal fade" id="EditModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">EDIT OFFICE</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                          <div class="card" style="margin: 10px;">
+                            <div class="card-body">
+                              <h2 class="card-title">Change information</h2>
+                                <!-- Fill out Form -->
+                                <div class="row g-3" >
+                                  <input type="hidden" class="form-control" id="off_idE" readonly>
+                                  <div class="col-md-4">
+                                      Code: <input type="text" class="form-control" id="off_codeE" readonly>
+                                  </div>
+                                  <br>
+                                  <div class="col-md-8">
+                                      Name: <input type="text" class="form-control" id="off_nameE">
+                                  </div>
+                                  <br>
+                                  <div class="col-12">
+                                      Location: <textarea  style="height: 80px" class="form-control" id="off_locE"></textarea>
+                                  </div>        
+                                </div>
+                              
+                            </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button class="btn btn-primary" name="save" id="edit" >Save changes</button>
+                            </div>
+                        <!-- End Form -->
+                    </div>
+                </div>
+        </div>
+      <!-- End Edit Office Modal-->
+
+      <!-- Delete Office Modal -->
+      <div class="modal fade" id="DeleteModal" tabindex="-1">
               <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">EDIT OFFICE</h5>
+                        <h5 class="modal-title">DELETE OFFICE</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                         <div class="card" style="margin: 10px;">
-                          <div class="card-body">
-                            <h2 class="card-title">Change information</h2>
-                              <!-- Fill out Form -->
-                              <div class="row g-3" >
-                                <input type="hidden" class="form-control" id="off_idE" readonly>
-                                <div class="col-md-4">
-                                    Code: <input type="text" class="form-control" id="off_codeE" readonly>
-                                </div>
-                                <br>
-                                <div class="col-md-8">
-                                    Name: <input type="text" class="form-control" id="off_nameE">
-                                </div>
-                                <br>
-                                <div class="col-12">
-                                    Location: <textarea  style="height: 80px" class="form-control" id="off_locE"></textarea>
-                                </div>        
-                              </div>
-                            
+                          <div class="card-body">                
+                            <br>
+                            <input type="hidden"  name="delete_id" id="delete_id" readonly>
+                            <center>
+                              <h5>Are you sure you want to delete these Office?</h5>
+                              <h5 class="text-danger">This action cannot be undone.</h5>   
+                            </center>                
                           </div>
                         </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button class="btn btn-primary" name="save" id="edit" >Save changes</button>
-                          </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary" name="deletedata" id="offdel" >Delete Office</button>
+                        </div>
                       <!-- End Form -->
                   </div>
               </div>
-      </div>
-    <!-- End Edit Office Modal-->
-
-     <!-- Delete Office Modal -->
-     <div class="modal fade" id="DeleteModal" tabindex="-1">
-             <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">DELETE OFFICE</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                      <div class="card" style="margin: 10px;">
-                        <div class="card-body">                
-                          <br>
-                          <input type="hidden"  name="delete_id" id="delete_id" readonly>
-                          <center>
-                            <h5>Are you sure you want to delete these Office?</h5>
-						                <h5 class="text-danger">This action cannot be undone.</h5>   
-                          </center>                
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" name="deletedata" id="offdel" >Delete Office</button>
-                      </div>
-                    <!-- End Form -->
-                </div>
-            </div>
-     </div>
-     <!-- End delete Office Modal -->
+        </div>
+      <!-- End delete Office Modal -->
+  <!-- End of Office Modals -->
 
   <!-- ======= Footer ======= -->
   <?php include ('core/footer.php');//css connection?>
@@ -234,27 +238,29 @@
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
 
-  <!-- JS Script -->
+  <!-- JS Scripts -->
     <script>
+
         $(document).ready(function () {
-          // Opening modal for delete
-              $('.deletebtn').on('click', function () {
- 
-                  $('#DeleteModal').modal('show');
 
-                  $tr = $(this).closest('tr');
+              // Opening modal for delete
+                $('.deletebtn').on('click', function () {
+  
+                    $('#DeleteModal').modal('show');
 
-                  var data = $tr.children("td").map(function () {
-                      return $(this).text();
-                  }).get();
+                    $tr = $(this).closest('tr');
 
-                  console.log(data);
+                    var data = $tr.children("td").map(function () {
+                        return $(this).text();
+                    }).get();
 
-                $('#delete_id').val(data[0]);
-              });
-            // end of function
+                    console.log(data);
+
+                  $('#delete_id').val(data[0]);
+                  });
+              // end of function
             
-            // Delete Office function
+              // Delete Office function
               $("#offdel").click(function(b){
                 b.preventDefault();
                 $.post("delete_office.php",{
@@ -318,95 +324,93 @@
                     }else{
                       Swal.fire("You must fill out every field","","warning");
                     }
-                })
+                  })
               // End Save Office function
 
-            // Edit Office modal calling
-              $('.editbtn').on('click', function () {
+              // Edit Office modal calling
+                $('.editbtn').on('click', function () {
 
-                  $('#EditModal').modal('show');
+                    $('#EditModal').modal('show');
 
-                  $tr = $(this).closest('tr');
+                    $tr = $(this).closest('tr');
 
-                  var data = $tr.children("td").map(function () {
-                      return $(this).text();
-                  }).get();
+                    var data = $tr.children("td").map(function () {
+                        return $(this).text();
+                    }).get();
 
-                  console.log(data);        
-                      $('#off_idE').val(data[0]);
-                      $('#off_codeE').val(data[1]);
-                      document.getElementById("off_nameE").placeholder = data[2];
-                      document.getElementById("off_locE").placeholder = data[3];  
-              });
-            // End of edit modal calling 
+                    console.log(data);        
+                        $('#off_idE').val(data[0]);
+                        $('#off_codeE').val(data[1]);
+                        document.getElementById("off_nameE").placeholder = data[2];
+                        document.getElementById("off_locE").placeholder = data[3];  
+                  });
+              // End of edit modal calling 
 
-            // Edit Office function
-            $('#edit').click(function(d){ 
-                  d.preventDefault();
-                    if($('#off_idE').val()!="" && $('#off_codeE').val()!="" && $('#off_nameE').val()!="" && $('#off_locE').val()!=""){
-                      $.post("update_office.php", {
-                        offid:$('#off_idE').val(),
-                        offcode:$('#off_codeE').val(),
-                        offname:$('#off_nameE').val(),
-                        offloc:$('#off_locE').val()
-                        },function(data){
-                          if (data.trim() == "failed"){
-                          $('#EditModal').modal('hide');
-                          Swal.fire("Office Title is currently in use","","error");//response message
-                          // Empty test field
-                          $('#off_codeE').val("")
-                          $('#off_nameE').val("")
-                          $('#off_locE').val("")
-                        }else if(data.trim() == "success"){
-                          $('#EditModal').modal('hide');
-                                //success message
-                                  const Toast = Swal.mixin({
-                                  toast: true,
-                                  position: 'top-end',
-                                  showConfirmButton: false,
-                                  timer: 3000,
-                                  timerProsressBar: true,
-                                  didOpen: (toast) => {
-                                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                  document.location.reload(true)//refresh pages
-                                }
+              // Edit Office function
+              $('#edit').click(function(d){ 
+                    d.preventDefault();
+                      if($('#off_idE').val()!="" && $('#off_codeE').val()!="" && $('#off_nameE').val()!="" && $('#off_locE').val()!=""){
+                        $.post("update_office.php", {
+                          offid:$('#off_idE').val(),
+                          offcode:$('#off_codeE').val(),
+                          offname:$('#off_nameE').val(),
+                          offloc:$('#off_locE').val()
+                          },function(data){
+                            if (data.trim() == "failed"){
+                            Swal.fire("Office Title is currently in use","","error");//response message
+                            // Empty test field
+                            $('#off_nameE').val("")
+                          }else if(data.trim() == "success"){
+                            $('#EditModal').modal('hide');
+                                  //success message
+                                    const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProsressBar: true,
+                                    didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    document.location.reload(true)//refresh pages
+                                  }
+                                  })
+                                    Toast.fire({
+                                    icon: 'Success',
+                                    title:'Changes Successfully Saved'
                                 })
-                                  Toast.fire({
-                                  icon: 'Success',
-                                  title:'Changes Successfully Saved'
-                              })
-                                  $('#off_codeE').val("")
-                                  $('#off_nameE').val("")
-                                  $('#off_locE').val("")
-                          }else{
-                            Swal.fire("There is somthing wrong","","error");
-                        }
-                      })
-                    }else{
-                      Swal.fire("You must fill out every field","","warning");
-                    }
-                })
+                                    $('#off_codeE').val("")
+                                    $('#off_nameE').val("")
+                                    $('#off_locE').val("")
+                            }else{
+                              Swal.fire("There is somthing wrong","","error");
+                          }
+                        })
+                      }else{
+                        Swal.fire("You must fill out every field","","warning");
+                      }
+                  })
               // End Edit Office function
 
-            // View Office Function
-              $('.viewbtn').on('click', function () {
+              // View Office Function
+                $('.viewbtn').on('click', function () {
 
-                  $('#ViewModal').modal('show');
+                    $('#ViewModal').modal('show');
 
-                  $tr = $(this).closest('tr');
+                    $tr = $(this).closest('tr');
 
-                  var data = $tr.children("td").map(function () {
-                      return $(this).text();
-                  }).get();
+                    var data = $tr.children("td").map(function () {
+                        return $(this).text();
+                    }).get();
 
-                  console.log(data);        
-                  $('#view_code').text(data[1]);
-                  $('#view_name').text(data[2]);
-                  $('#view_loc').text(data[3]);
-                  $('#view_date').text(data[4]);
-              });
-            // End of View function 
+                    console.log(data);        
+                    $('#view_code').text(data[1]);
+                    $('#view_name').text(data[2]);
+                    $('#view_loc').text(data[3]);
+                    $('#view_date').text(data[4]);
+                  });
+              // End of View function 
+
            });
 
     </script>
