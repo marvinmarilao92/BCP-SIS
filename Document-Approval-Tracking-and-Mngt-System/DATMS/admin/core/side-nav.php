@@ -14,10 +14,19 @@
 
 
   <li class="nav-item">
-  <a href="documents_list.php" class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+  <a href="documents.php" class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-book-2-line"></i>
       <span>Documents &nbsp;&nbsp;&nbsp;</span>
-      <span class="badge bg-secondary">4</span>
+      <span class="badge bg-secondary">
+         <?php 
+            require_once("include/conn.php");
+            $query="SELECT * FROM datms_documents";
+            $result=mysqli_query($conn,$query);
+            if($result){
+               echo mysqli_num_rows($result);
+              }
+        ?> 
+      </span>
     </a>
   </li><!-- All docs Nav -->
 
@@ -25,7 +34,7 @@
     <a href="incoming_docs.php" class="<?php if($page=='incoming'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-file-download-line"></i>
       <span>Incoming &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="badge bg-warning text-dark">2</span>
+      <span class="badge bg-warning text-dark">0</span>
     </a>
   </li><!-- Incoming item Nav -->
 
@@ -33,7 +42,7 @@
     <a href="recieved_docs.php" class="<?php if($page=='recieved'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-mail-check-line"></i>
       <span>Received &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="badge bg-success">5</span>
+      <span class="badge bg-success">0</span>
     </a>
   </li><!-- recieved item Nav -->
 
@@ -41,15 +50,15 @@
     <a href="outgoing_docs.php" class="<?php if($page=='outgoing'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-send-plane-line"></i>
       <span>Outgoing &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="badge bg-danger">2</span>
+      <span class="badge bg-danger">0</span>
     </a>
   </li><!-- outgoing item Nav -->
 
   <li class="nav-item">
     <a href="pending_docs.php" class="<?php if($page=='hold'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-question-mark"></i>
-      <span>Hold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="badge bg-primary">4</span>
+      <span>Hold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="badge bg-primary">0</span>
     </a>
   </li> <!-- hold item Nav -->
 

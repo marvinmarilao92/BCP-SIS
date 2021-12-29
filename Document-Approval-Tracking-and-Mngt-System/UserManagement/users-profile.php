@@ -5,14 +5,14 @@ include('session.php');
 <html lang="en">
 
 <head>
-<?php include ('core/css-links.php');//css connection?>
+ <!-- Link conncetions -->
+ <?php include ("includes/head.php");?> 
 </head>
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <?php include ('core/header.php');//Design for  Header?>
-  <?php $page = 'PRO'; include ('core/side-nav.php');//Design for sidebar?>
+    <!-- Top and side navigation menu -->
+    <?php include ("includes/nav.php"); include ("includes/sidebar.php");?>
 
   <main id="main" class="main">
 
@@ -78,7 +78,7 @@ include('session.php');
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_firstname . " " . $verified_session_lastname ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_firstname . ", " . $verified_session_lastname ?></div>
                   </div>
 
                   <div class="row">
@@ -271,14 +271,11 @@ include('session.php');
 
   </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-  <?php include ('core/footer.php');//css connection?>
-  <!-- End Footer -->
+  <!-- Footer -->
+  <?php include ("includes/footer.php");?>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files/ Template main js file -->
-  <?php include ('core/js.php');//css connection?>
 </body>
 
 </html>

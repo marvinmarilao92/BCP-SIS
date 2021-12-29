@@ -142,7 +142,7 @@ include('session.php');
                                   <option><?php echo $offName;?></option>
                                   <?php }?>
                                 </select>
-                                
+
                                </div>
                                <div class="col-md-6">
                                 <select id="inputState" class="form-select">

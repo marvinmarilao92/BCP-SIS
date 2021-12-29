@@ -179,7 +179,7 @@ include ("includes/sidebar.php");
           </select>
         </div>
         <div class="col-md-4">
-        <select id="office" class="form-select" Required>
+        <select id="office" name="office" class="form-select" Required>
             <?php
               require_once("includes/conn.php");
               $query="SELECT * FROM datms_office ORDER BY off_date DESC ";

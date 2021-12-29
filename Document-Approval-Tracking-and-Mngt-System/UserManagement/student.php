@@ -35,10 +35,16 @@ include ("includes/sidebar.php");
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-
           <div class="card">
+            <div class="col-lg-12">
+                <div class="form-group col-md-2 btn-lg"  style="float: left; padding:20px;">
+                    <h4>List of Students</h4>
+                </div>
+                <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
+                   <a href="student-create.php" class="btn btn-success pull-right">Add New Student</a>
+                </div> 
+              </div>
             <div class="card-body">
-              <h5 class="card-title">List of Students</h5>
               <?php
                     // Include config file
                     require_once "config.php";
@@ -104,9 +110,6 @@ include ("includes/sidebar.php");
             <div class="container-fluid">
               <div class="row mb-4">
                 <div class="col-md-10">
-                </div>
-                <div class="col-md-2">
-                  <a href="student-create.php" class="btn btn-success pull-right">Add New Student</a>
                 </div>
               </div>
             </div>

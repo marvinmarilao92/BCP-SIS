@@ -24,15 +24,25 @@ include('session.php');
         </ol>
       </nav>
     </div><!-- End Page Title -->
+    <!-- Disclamer -->
+    <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+      <h4 class="alert-heading">READ CAREFULLY</h4>
+      <p>
+        You may use the service and the contents contained in the Services solely for your own individual non-commercial and informational purpose
+        only. Any other use, including for any commercial purposes, is strictly prohibited without our express prior witten or verbal consent.
+      </p>
+      <hr>
+      <p class="mb-0">© Copyright Bestlink College of the Philippines. All Rights Reserved.</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="">
-  
     <section class="section">
       <div class="row">        
         <div class="col-lg-12">
           <div class="card">
             <div class="col-lg-12">
               <div class="form-group col-md-2 btn-lg"  style="float: left; padding:20px;">
-                  <h2>Records</h2>
+                  <h4>Records</h4>
               </div>
               <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
                   <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
@@ -257,6 +267,7 @@ include('session.php');
                     console.log(data);
 
                   $('#delete_id').val(data[0]);
+                  
                   });
               // end of function
             

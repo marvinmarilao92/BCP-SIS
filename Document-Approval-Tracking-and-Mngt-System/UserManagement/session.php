@@ -11,6 +11,10 @@
                   $verified_session_username = $row5['id_number'];
                   $verified_session_firstname = $row5['firstname'];
                   $verified_session_lastname = $row5['lastname'];
+                  $verified_session_email = $row5['email'];
+                  $verified_session_contact = $row5['contact'];
+                  $verified_session_address = $row5['address'];
+                  $verified_session_office = $row5['office'];
                   $verified_session_department = $row5['department'];
                   $verified_session_role = $row5['role'];
                 }
