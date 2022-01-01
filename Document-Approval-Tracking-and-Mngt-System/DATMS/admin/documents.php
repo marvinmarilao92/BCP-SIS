@@ -93,7 +93,7 @@ include('session.php');
                     <td style="display:none"><?php echo $docAct2?></td>
                     <td style="display:none"><?php echo $docOff2?></td>
                     <td style="display:none"><?php echo $docDate2?></td>
-              
+
                   </td>
                     <td>                      
                       <a class="btn btn-primary "><i class="ri-barcode-fill"></i></a>
@@ -128,7 +128,7 @@ include('session.php');
                           <h5 class="modal-title">CREATE DOCUMENT</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="fileprocess.php" method="post" enctype="multipart/form-data" >
+                        <form method="post" enctype="multipart/form-data" >
                           <div class="card" style="margin: 10px;">
                             <div class="card-body">
                               <h2 class="card-title">Fill all neccessary info</h2>
@@ -142,8 +142,8 @@ include('session.php');
                                   </div>
                                   <br>
                                   <div class="col-md-6">
-                                    <select class="form-select" id="doctype" name="doctype" required>
-                                    <option selected="selected" disabled="disabled"></option>
+                                    <select class="form-select" id="doctype" name="doctype">
+                                    <option selected="selected" disabled="disabled">Document Type</option>
                                       <?php
                                         require_once("include/conn.php");
                                         $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC ";
@@ -281,8 +281,134 @@ include('session.php');
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files/ Template main js file -->
-    <?php include ('core/js.php');//css connection?>
+  <?php include ('core/js.php');//css connection?>
 
+  <?php
+      // connect to the database
+      require_once("include/conn.php");
+
+
+      // Uploads files
+      if (isset($_POST['save'])) { // if save button on the form is clicked
+            // name of the uploaded file
+            date_default_timezone_set("asia/manila");
+            $time = date("M-d-Y h:i A",strtotime("+0 HOURS"));
+            // $doc_user = $_POST['doccreator'];
+            // $doc_office = $_POST['docoffice'];
+            // $doc_title = $_POST['docname'];
+            // $doc_type = $_POST['doctype'];
+            // $doc_desc = $_POST['docdesc'];
+            $doc_user = mysqli_real_escape_string($conn,$_POST['doccreator']);
+            $doc_office = mysqli_real_escape_string($conn,$_POST['docoffice']);
+            $doc_title = mysqli_real_escape_string($conn,$_POST['docname']);
+            $doc_type = mysqli_real_escape_string($conn,$_POST['doctype']);
+            $doc_desc = mysqli_real_escape_string($conn,$_POST['docdesc']);
+            
+            $filename = $_FILES['docfile']['name'];
+
+            // $Admin = $_FILES['admin']['name'];
+            // destination of the file on the server
+            $destination = '../uploads/' . $filename;
+
+            // get the file extension
+            $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+            // the physical file on a temporary uploads directory on the server
+            $file = $_FILES['docfile']['tmp_name'];
+            $size = $_FILES['docfile']['size'];
+
+            $isExist = true;
+            //checking if there's a duplicate number because we use random number for id numbers to prevent errors (NOTE PARTILLY TESTED)
+            $doc_code = rand(10000000,99999999);
+
+          if (!in_array($extension, ['pdf'])) {
+                  echo'<script type = "text/javascript">
+                        //success message
+                        const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProsressBar: true,
+                        didOpen: (toast) => {
+                        toast.addEventListener("mouseenter", Swal.stopTimer)
+                        toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                        }
+                        })
+                        Toast.fire({
+                        icon: "error",
+                        title:"File extension must be: .pdf"
+                        }).then(function(){
+                          window.location = "documents.php";//refresh pages
+                        });
+                     </script>
+                ';
+                                
+          } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
+                      echo "File too large!";
+          } else{
+            $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
+            $counter=mysqli_num_rows($query);
+            
+            if ($counter == 1) 
+              { 
+                echo'<script type = "text/javascript">
+                        //success message
+                        const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProsressBar: true,
+                        didOpen: (toast) => {
+                        toast.addEventListener("mouseenter", Swal.stopTimer)
+                        toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                        }
+                        })
+                        Toast.fire({
+                        icon: "warning",
+                        title:"Files already taken"
+                        }).then(function(){
+                          window.location = "documents.php";//refresh pages
+                        });
+                    </script>
+               ';
+              }else{
+            // move the uploaded (temporary) file to the specified destination
+              if (move_uploaded_file($file, $destination)) {
+                  $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2)
+                  VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$time','','','')";
+                  if (mysqli_query($conn, $sql)) {
+                    echo'<script type = "text/javascript">
+                        //success message
+                        const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProsressBar: true,
+                        didOpen: (toast) => {
+                        toast.addEventListener("mouseenter", Swal.stopTimer)
+                        toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                        }
+                        })
+                        Toast.fire({
+                        icon: "succ ess",
+                        title:"Document to track Successfully created"
+                        }).then(function(){
+                          window.location = "documents.php";//refresh pages
+                        });
+                    </script>
+                    ';
+                       
+                  }
+              } else {
+                  echo "Failed Upload files!";
+              }
+              }         
+        }
+      }
+  ?>
   <!-- JS Scripts -->
     <script>
         // this script will execute as soon a the website runs
@@ -326,57 +452,57 @@ include('session.php');
               // // End Delete function
                 
               // Save function
-                // $('#save').click(function(a){ 
-                //   a.preventDefault();
-                //     if($('#doccreator').val()!="" && $('#docoffice').val()!="" && $('#doctitle').val()!=""
-                //     &&$('#doctype').val()!="" && $('#docfile').val()!="" && $('#docdesc').val()!=""){
-                //       $.post("fileprocess.php", {
-                //         doccreator:$('#doccreator').val(),
-                //         docoffice:$('#docoffice').val(),
-                //         doctitle:$('#doctitle').val(),
-                //         doctype:$('#doctype').val(),
-                //         docfile:$('#docfile').val(),
-                //         docdesc:$('#docdesc').val()
-                //         },function(data){
-                //         if (data.trim() == "failed"){
+              //   $('#save').click(function(a){ 
+              //     a.preventDefault();
+              //       if($('#doccreator').val()!="" && $('#docoffice').val()!="" && $('#doctitle').val()!=""
+              //       &&$('#doctype').val()!="" && $('#docfile').val()!="" && $('#docdesc').val()!=""){
+              //         $.post("fileprocess.php", {
+              //           doccreator:$('#doccreator').val(),
+              //           docoffice:$('#docoffice').val(),
+              //           doctitle:$('#doctitle').val(),
+              //           doctype:$('#doctype').val(),
+              //           docfile:$('#docfile').val(),
+              //           docdesc:$('#docdesc').val()
+              //           },function(data){
+              //           if (data.trim() == "failed"){
 
-                //           //response message
-                //           Swal.fire("Document is already in server","","error");
-                //           // Empty test field
-                //            $('#docfile').val("")
+              //             //response message
+              //             Swal.fire("Document is already in server","","error");
+              //             // Empty test field
+              //              $('#docfile').val("")
                          
-                //         }else if(data.trim() == "success"){
-                //           $('#AddModal').modal('hide');
-                //                 //success message
-                //                 const Toast = Swal.mixin({
-                //                 toast: true,
-                //                 position: 'top-end',
-                //                 showConfirmButton: false,
-                //                 timer: 1100,
-                //                 timerProsressBar: true,
-                //                 didOpen: (toast) => {
-                //                 toast.addEventListener('mouseenter', Swal.stopTimer)
-                //                 toast.addEventListener('mouseleave', Swal.resumeTimer)                  
-                //                 }
-                //                 })
-                //               Toast.fire({
-                //               icon: 'success',
-                //               title:'Office successfully Saved'
-                //               }).then(function(){
-                //                 document.location.reload(true)//refresh pages
-                //               });
-                //                 // $('#dtcode').val("")
-                //                 // $('#dtname').val("")
-                //                 // $('#dtdesc').val("")
-                //           }else{
-                //             Swal.fire("there is something wrong");
+              //           }else if(data.trim() == "success"){
+              //             $('#AddModal').modal('hide');
+              //                   //success message
+              //                   const Toast = Swal.mixin({
+              //                   toast: true,
+              //                   position: 'top-end',
+              //                   showConfirmButton: false,
+              //                   timer: 1100,
+              //                   timerProsressBar: true,
+              //                   didOpen: (toast) => {
+              //                   toast.addEventListener('mouseenter', Swal.stopTimer)
+              //                   toast.addEventListener('mouseleave', Swal.resumeTimer)                  
+              //                   }
+              //                   })
+              //                 Toast.fire({
+              //                 icon: 'success',
+              //                 title:'Office successfully Saved'
+              //                 }).then(function(){
+              //                   document.location.reload(true)//refresh pages
+              //                 });
+              //                   // $('#dtcode').val("")
+              //                   // $('#dtname').val("")
+              //                   // $('#dtdesc').val("")
+              //             }else{
+              //               Swal.fire("there is something wrong");
                             
-                //         }
-                //       })
-                //     }else{
-                //       Swal.fire("You must fill out every field","","warning");
-                //     }
-                //   })
+              //           }
+              //         })
+              //       }else{
+              //         Swal.fire("You must fill out every field","","warning");
+              //       }
+              //     })
               // End Save function
 
               // // Edit modal calling

@@ -34,7 +34,16 @@
     <a href="incoming_docs.php" class="<?php if($page=='incoming'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-file-download-line"></i>
       <span>Incoming &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="badge bg-warning text-dark">0</span>
+      <span class="badge bg-warning text-dark">
+      <?php 
+            require_once("include/conn.php");
+            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Incoming' AND (`doc_actor1`='$verified_session_firstname' ' $verified_session_lastname ' OR `doc_actor2` = '$verified_session_firstname' '$verified_session_lastname ') AND (`doc_off1` = 'CCS Office' OR `doc_off2` = 'CCS Office');";
+            $result=mysqli_query($conn,$query);
+            if($result){
+               echo mysqli_num_rows($result);
+              }
+        ?> 
+      </span>
     </a>
   </li><!-- Incoming item Nav -->
 

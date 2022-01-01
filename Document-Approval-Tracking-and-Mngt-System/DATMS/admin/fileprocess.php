@@ -1,6 +1,8 @@
+
 <?php
     // connect to the database
     require_once("include/conn.php");
+
 
     // Uploads files
     if (isset($_POST['save'])) { // if save button on the form is clicked
@@ -37,9 +39,10 @@
 
         if (!in_array($extension, ['pdf'])) {
                     echo '<script type = "text/javascript">
-                                alert("You file extension must be: .pdf");
-                                window.location = "documents.php";
-                          </script>
+                          swal.fire("You file extension must be: .pdf", "", "error").then(function(){
+                            window.location = "documents.php";
+                          })
+                        </script>
                         ';
         } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
                     echo "File too large!";
@@ -49,12 +52,12 @@
            
            if ($counter == 1) 
              { 
-                echo '
-               <script type = "text/javascript">
-                   alert("Files already taken");
-                   window.location = "documents.php";
-               </script>
-              ';
+               echo '<script type = "text/javascript">
+                          swal.fire("Files already taken", "", "error").then(function(){
+                            window.location = "documents.php";
+                          })
+                        </script>
+                        ';
              }else{
           // move the uploaded (temporary) file to the specified destination
             if (move_uploaded_file($file, $destination)) {
