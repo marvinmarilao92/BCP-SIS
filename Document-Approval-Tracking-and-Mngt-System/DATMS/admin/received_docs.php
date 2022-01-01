@@ -10,7 +10,7 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'outgoing'; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'recieved'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing'  AND (`doc_actor1`='$verified_session_firstname' ' $verified_session_lastname ' OR `doc_actor2` = '$verified_session_firstname' '$verified_session_lastname ') AND (`doc_off1` = '$verified_session_office' OR `doc_off2` = '$verified_session_office');";
+                    $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Received') AND (`doc_actor1`='$verified_session_firstname' ' $verified_session_lastname ' OR `doc_actor2` = '$verified_session_firstname' '$verified_session_lastname ') AND (`doc_off1` = '$verified_session_office' OR `doc_off2` = '$verified_session_office');";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -93,8 +93,9 @@ include('session.php');
 
                   </td>
                     <td>                      
-                     <a class="btn btn-danger "><i class="bi bi-x-lg"></i></a>
-                      <a class="btn btn-primary " href='view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
+                      <a class="btn btn-success "><i class="bi bi-cursor-fill"></i></a>
+                      <a class="btn btn-danger " ><i class="bi bi-question-lg" ></i></a>
+                      <a class="btn btn-primary " href='view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>                
                     </td>
                   </tr>
 

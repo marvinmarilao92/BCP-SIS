@@ -48,10 +48,19 @@
   </li><!-- Incoming item Nav -->
 
   <li class="nav-item">
-    <a href="recieved_docs.php" class="<?php if($page=='recieved'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="received_docs.php" class="<?php if($page=='recieved'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-mail-check-line"></i>
       <span>Received &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="badge bg-success">0</span>
+      <span class="badge bg-success">
+        <?php 
+            require_once("include/conn.php");
+            $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Received') AND (`doc_actor1`='$verified_session_firstname' ' $verified_session_lastname ' OR `doc_actor2` = '$verified_session_firstname' '$verified_session_lastname ') AND (`doc_off1` = '$verified_session_office' OR `doc_off2` = '$verified_session_office');";
+            $result=mysqli_query($conn,$query);
+            if($result){
+               echo mysqli_num_rows($result);
+              }
+        ?> 
+      </span>
     </a>
   </li><!-- recieved item Nav -->
 
@@ -59,15 +68,31 @@
     <a href="outgoing_docs.php" class="<?php if($page=='outgoing'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-send-plane-line"></i>
       <span>Outgoing &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="badge bg-danger">0</span>
+      <span class="badge bg-danger">
+      <?php 
+            require_once("include/conn.php");
+            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing'  AND (`doc_actor1`='$verified_session_firstname' ' $verified_session_lastname ' OR `doc_actor2` = '$verified_session_firstname' '$verified_session_lastname ') AND (`doc_off1` = '$verified_session_office' OR `doc_off2` = '$verified_session_office');";
+            $result=mysqli_query($conn,$query);
+            if($result){
+               echo mysqli_num_rows($result);
+              }
+        ?> 
+      </span>
     </a>
   </li><!-- outgoing item Nav -->
 
   <li class="nav-item">
-    <a href="pending_docs.php" class="<?php if($page=='hold'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="hold_docs.php" class="<?php if($page=='hold'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-question-mark"></i>
       <span>Hold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="badge bg-primary">0</span>
+      <span class="badge bg-primary"> <?php 
+            require_once("include/conn.php");
+            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing'  AND (`doc_actor1`='$verified_session_firstname' ' $verified_session_lastname ' OR `doc_actor2` = '$verified_session_firstname' '$verified_session_lastname ') AND (`doc_off1` = '$verified_session_office' OR `doc_off2` = '$verified_session_office');";
+            $result=mysqli_query($conn,$query);
+            if($result){
+               echo mysqli_num_rows($result);
+              }
+        ?> </span>
     </a>
   </li> <!-- hold item Nav -->
 

@@ -10,7 +10,7 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'incoming'; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'hold';  include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Incoming' AND (`doc_actor1`='$verified_session_firstname' ' $verified_session_lastname ' OR `doc_actor2` = '$verified_session_firstname' '$verified_session_lastname ') AND (`doc_off1` = '$verified_session_office' OR `doc_off2` = '$verified_session_office');";
+                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Hold'  AND (`doc_actor1`='$verified_session_firstname' ' $verified_session_lastname ' OR `doc_actor2` = '$verified_session_firstname' '$verified_session_lastname ') AND (`doc_off1` = '$verified_session_office' OR `doc_off2` = '$verified_session_office');";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -93,8 +93,7 @@ include('session.php');
 
                   </td>
                     <td>                      
-                      <a class="btn btn-success receivedbtn"><i class="bi bi-check-lg"></i></a>
-                      <!-- <a class="btn btn-danger "><i class="bi bi-x-lg"></i></a> -->
+                      <a class="btn btn-success "><i class="bi bi-cursor-fill"></i></a>
                       <a class="btn btn-primary " href='view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
                     </td>
                   </tr>
@@ -114,65 +113,6 @@ include('session.php');
     </section>
 
   </main><!-- End #main -->
-
-  <!-- Office Modals -->
-      <!-- Create Document Modal -->
-      <div class="modal fade" id="AddModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">CREATE DOCUMENT</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form method="post" enctype="multipart/form-data" >
-                          <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h2 class="card-title">Fill all neccessary info</h2>
-                                <!-- Fill out Form -->
-                                
-                                <div class="row g-3" >
-                                <input type="hidden" id="doccreator" name="doccreator" class="form-control"  value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
-                                <input type="hidden" id="docoffice" name="docoffice" class="form-control"  value="<?php echo $verified_session_office?>" readonly>
-                                  <div class="col-md-6">
-                                      <input type="text" id="docname" name="docname" class="form-control" placeholder="Title" required>
-                                  </div>
-                                  <br>
-                                  <div class="col-md-6">
-                                    <select class="form-select" id="doctype" name="doctype">
-                                    <option selected="selected" disabled="disabled">Document Type</option>
-                                      <?php
-                                        require_once("include/conn.php");
-                                        $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC ";
-                                        $result=mysqli_query($conn,$query);
-                                        while($rs=mysqli_fetch_array($result)){
-                                          $dtid =$rs['dt_id'];                                    
-                                          $dtName = $rs['dt_name'];       
-                                      ?>
-                                        <option><?php echo $dtName;?></option>
-                                    <?php }?>
-                                    </select>
-                                  </div>
-                                  <div class="col-md-12">
-                                    <input class="form-control" type="file" id="docfile" name="docfile">
-                                  </div>
-                                  <br>
-                                  <div class="col-12">
-                                      <textarea class="form-control" style="height: 80px" placeholder="Description" name="docdesc" id="docdesc" required></textarea>
-                                  </div>        
-                                </div>
-                                            
-                            </div>
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button class="btn btn-primary" name="save">Create Document</button>
-                            </div>
-                        </form>
-                        <!-- End Form -->
-                    </div>
-                </div>     
-        </div>
-      <!-- End Create Document Modal-->
 
       <!-- View Document modal -->
       <div class="modal fade" id="ViewModal" tabindex="-1">
@@ -201,31 +141,38 @@ include('session.php');
         </div>
       <!-- End View office Modal-->
 
-      <!-- Received Office Modal -->
-      <div class="modal fade" id="ReceivedModal" tabindex="-1">
+      <!-- Edit Office Modal -->
+      <div class="modal fade" id="EditModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">Document Received</h5>
+                          <h5 class="modal-title">EDIT OFFICE</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           <div class="card" style="margin: 10px;">
                             <div class="card-body">
-                              <h2 class="card-title">Received this document?</h2>
+                              <h2 class="card-title">Change information</h2>
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
-                                  <input type="hidden" class="form-control" id="doc_id" readonly>
-                                      <input type="hidden" class="form-control" id="doc_code" readonly>                  
-                                      <input type="hidden" class="form-control" id="doc_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
-                                      <input type="hidden" class="form-control" id="doc_off2" value="<?php echo $verified_session_office?>" readonly> 
-                                      <h5 id="doc_fileN" style="text-align: end; color:black"></h5>   
+                                  <input type="hidden" class="form-control" id="dt_idE" readonly>
+                                  <div class="col-md-4">
+                                      Code: <input type="text" class="form-control" id="dt_codeE" readonly>
+                                  </div>
+                                  <br>
+                                  <div class="col-md-8">
+                                      Name: <input type="text" class="form-control" id="dt_nameE">
+                                  </div>
+                                  <br>
+                                  <div class="col-12">
+                                      Location: <textarea  style="height: 80px" class="form-control" id="dt_descE"></textarea>
+                                  </div>        
                                 </div>
                               
                             </div>
                           </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                              <button class="btn btn-success" name="save" id="received" >Received</button>
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button class="btn btn-primary" name="save" id="edit" >Save changes</button>
                             </div>
                         <!-- End Form -->
                     </div>
@@ -277,69 +224,165 @@ include('session.php');
         // this script will execute as soon a the website runs
         $(document).ready(function () {
 
-              // Received modal calling
-                $('.receivedbtn').on('click', function () {
+            // // Delete modal calling
+              // $('.deletebtn').on('click', function () {
 
-                    $('#ReceivedModal').modal('show');
+              //       $('#DeleteModal').modal('show');
 
-                    $tr = $(this).closest('tr');
+              //       $tr = $(this).closest('tr');
 
-                    var data = $tr.children("td").map(function () {
-                        return $(this).text();
-                    }).get();
+              //       var data = $tr.children("td").map(function () {
+              //           return $(this).text();
+              //       }).get();
 
-                    console.log(data);      
-                        $('#doc_fileN').text(data[2]);  
-                        $('#doc_id').val(data[0]);
-                        $('#doc_code').val(data[1]); 
-                  });
-              // End of Received modal calling 
+              //       console.log(data);
 
-              // Received function
-              $('#received').click(function(d){ 
-                    d.preventDefault();
-                      if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
-                        $.post("received_func.php", {
-                          docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
-                          docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
-                          },function(data){
-                            if (data.trim() == "Val30"){
-                            $('#EditModal').modal('hide');
-                            Swal.fire("No data stored in our database","","error");//response message
-                            // Empty test field
-                          }else if(data.trim() == "success"){
-                            $('#ReceivedModal').modal('hide');
-                                  //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
-                                  }
-                                  })
-                                    Toast.fire({
-                                    icon: 'Success',
-                                    title:'Document Successfully Received'
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
-                                    $('#doc_code').val("")
-                                    $('#doc_act2').val("")
-                                    $('#doc_off2').val("")
-                            }else{
-                              Swal.fire("There is somthing wrong","","error");
-                              // Swal.fire(data);
-                          }
-                        })
-                      }else{
-                        Swal.fire("You must fill out every field","","warning");
-                      }
-                  })
-              // End Received function
+              //     $('#delete_id').val(data[0]);
+              //     });
+              // // end of function
+            
+              // // Delete function
+              // $("#dtdel").click(function(b){
+              //   b.preventDefault();
+              //   $.post("delete_doctype.php",{
+              //       dtid:$('#delete_id').val()
+              //     },function(response){
+              //       // alert ("deleted");
+              //       if(response.trim() == "DoctypeDeleted"){
+              //         $('#DeleteModal').modal('hide');
+              //         Swal.fire ("DocType Successfully Deleted","","success").then(function(){
+              //         document.location.reload(true)//refresh pages
+              //         });
+              //       }else{
+              //         $('#DeleteModal').modal('hide');
+              //         Swal.fire (response);
+              //       }
+              //     })
+              //   })
+              // // End Delete function
+                
+              // Save function
+              //   $('#save').click(function(a){ 
+              //     a.preventDefault();
+              //       if($('#doccreator').val()!="" && $('#docoffice').val()!="" && $('#doctitle').val()!=""
+              //       &&$('#doctype').val()!="" && $('#docfile').val()!="" && $('#docdesc').val()!=""){
+              //         $.post("fileprocess.php", {
+              //           doccreator:$('#doccreator').val(),
+              //           docoffice:$('#docoffice').val(),
+              //           doctitle:$('#doctitle').val(),
+              //           doctype:$('#doctype').val(),
+              //           docfile:$('#docfile').val(),
+              //           docdesc:$('#docdesc').val()
+              //           },function(data){
+              //           if (data.trim() == "failed"){
+
+              //             //response message
+              //             Swal.fire("Document is already in server","","error");
+              //             // Empty test field
+              //              $('#docfile').val("")
+                         
+              //           }else if(data.trim() == "success"){
+              //             $('#AddModal').modal('hide');
+              //                   //success message
+              //                   const Toast = Swal.mixin({
+              //                   toast: true,
+              //                   position: 'top-end',
+              //                   showConfirmButton: false,
+              //                   timer: 1100,
+              //                   timerProsressBar: true,
+              //                   didOpen: (toast) => {
+              //                   toast.addEventListener('mouseenter', Swal.stopTimer)
+              //                   toast.addEventListener('mouseleave', Swal.resumeTimer)                  
+              //                   }
+              //                   })
+              //                 Toast.fire({
+              //                 icon: 'success',
+              //                 title:'Office successfully Saved'
+              //                 }).then(function(){
+              //                   document.location.reload(true)//refresh pages
+              //                 });
+              //                   // $('#dtcode').val("")
+              //                   // $('#dtname').val("")
+              //                   // $('#dtdesc').val("")
+              //             }else{
+              //               Swal.fire("there is something wrong");
+                            
+              //           }
+              //         })
+              //       }else{
+              //         Swal.fire("You must fill out every field","","warning");
+              //       }
+              //     })
+              // End Save function
+
+              // // Edit modal calling
+              //   $('.editbtn').on('click', function () {
+
+              //       $('#EditModal').modal('show');
+
+              //       $tr = $(this).closest('tr');
+
+              //       var data = $tr.children("td").map(function () {
+              //           return $(this).text();
+              //       }).get();
+
+              //       console.log(data);        
+              //           $('#dt_idE').val(data[0]);
+              //           $('#dt_codeE').val(data[1]);
+              //           document.getElementById("dt_nameE").placeholder = data[2];
+              //           document.getElementById("dt_descE").placeholder = data[3];  
+              //     });
+              // // End of edit modal calling 
+
+              // // Edit function
+              // $('#edit').click(function(d){ 
+              //       d.preventDefault();
+              //         if($('#dt_idE').val()!="" && $('#dt_codeE').val()!="" && $('#dt_nameE').val()!="" && $('#dt_descE').val()!=""){
+              //           $.post("update_doctype.php", {
+              //             dtid:$('#dt_idE').val(),
+              //             dtcode:$('#dt_codeE').val(),
+              //             dtname:$('#dt_nameE').val(),
+              //             dtdesc:$('#dt_descE').val()
+              //             },function(data){
+              //               if (data.trim() == "failed"){
+              //               $('#EditModal').modal('hide');
+              //               Swal.fire("Office Title is currently in use","","error");//response message
+              //               // Empty test field
+              //               $('#dt_codeE').val("")
+              //               $('#dt_nameE').val("")
+              //               $('#dt_descE').val("")
+              //             }else if(data.trim() == "success"){
+              //               $('#EditModal').modal('hide');
+              //                     //success message
+              //                       const Toast = Swal.mixin({
+              //                       toast: true,
+              //                       position: 'top-end',
+              //                       showConfirmButton: false,
+              //                       timer: 1100,
+              //                       timerProsressBar: true,
+              //                       didOpen: (toast) => {
+              //                       toast.addEventListener('mouseenter', Swal.stopTimer)
+              //                       toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
+              //                     }
+              //                     })
+              //                       Toast.fire({
+              //                       icon: 'Success',
+              //                       title:'Changes Successfully Saved'
+              //                   }).then(function(){
+              //                     document.location.reload(true)//refresh pages
+              //                   });
+              //                       $('#dt_codeE').val("")
+              //                       $('#dt_nameE').val("")
+              //                       $('#dt_descE').val("")
+              //               }else{
+              //                 Swal.fire("There is somthing wrong","","error");
+              //             }
+              //           })
+              //         }else{
+              //           Swal.fire("You must fill out every field","","warning");
+              //         }
+              //     })
+              // // End Edit function
 
               // // View Function
               //   $('.viewbtn').on('click', function () {

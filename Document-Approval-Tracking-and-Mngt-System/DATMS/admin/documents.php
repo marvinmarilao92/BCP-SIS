@@ -96,10 +96,10 @@ include('session.php');
 
                   </td>
                     <td>                      
-                      <a class="btn btn-primary "><i class="ri-barcode-fill"></i></a>
-                      <a class="btn btn-secondary " href='view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye"></i></a>
-                      <a class="btn btn-success " href='downloads.php?file_id=<?php echo $docId; ?>' ><i class="bi bi-cloud-download" ></i></a>
-                      <a class="btn btn-danger " ><i class="bi bi-clock-history" ></i></a>
+                      <a class="btn btn-secondary "><i class="ri ri-barcode-line"></i></a>
+                      <a class="btn btn-primary " href='view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye"></i></a>
+                      <a class="btn btn-warning " href='downloads.php?file_id=<?php echo $docId; ?>' ><i class="bi bi-download" ></i></a>
+                      <a class="btn btn-dark " ><i class="bi bi-clock-history" ></i></a>
                     </td>
                   </tr>
 
