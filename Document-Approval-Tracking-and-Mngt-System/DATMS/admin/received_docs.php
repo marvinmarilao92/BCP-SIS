@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Received') AND (`doc_actor2`='$verified_session_firstname' ' $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office')
+                    $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Received') AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname' OR  `doc_off2` = '$verified_session_office')
                     ORDER BY doc_date2 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
@@ -72,7 +72,8 @@ include('session.php');
                       $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
                       $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
                       $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                      $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_off2'];  
+                      $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
+                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
   
                   ?>
                   <tr>
@@ -91,6 +92,9 @@ include('session.php');
                     <td style="display:none"><?php echo $docAct2?></td>
                     <td style="display:none"><?php echo $docOff2?></td>
                     <td style="display:none"><?php echo $docDate2?></td>
+                    <td style="display:none"><?php echo $docAct3?></td>
+                    <td style="display:none"><?php echo $docOff3?></td>
+                    <td style="display:none"><?php echo $docDate3?></td>
 
                   </td>
                     <td>                      
@@ -189,7 +193,10 @@ include('session.php');
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
                                       <input type="hidden" class="form-control" id="send_id" readonly>
-                                      <input type="hidden" class="form-control" id="send_code" readonly>                  
+                                      <input type="hidden" class="form-control" id="send_code" readonly>   
+                                      <input type="text" class="form-control" id="send_act1" readonly>   
+                                      <input type="hidden" class="form-control" id="send_off1" readonly>   
+                                      <input type="hidden" class="form-control" id="send_date1" readonly>                  
                                       <div class="col-md-12">
                                         <select class="form-select" id="send_act2" name="send_act2" onChange="fetchOffice(this.value);">
                                         <option selected="selected" disabled="disabled">Recipient</option>
@@ -349,6 +356,10 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
+                      $('#send_act1').val(data[12]);  
+                      $('#send_off1').val(data[13]);
+                      $('#send_date1').val(data[14]); 
+
                       $('#doc_fileN1').text(data[2]);  
                       $('#send_id').val(data[0]);
                       $('#send_code').val(data[1]); 
@@ -358,10 +369,13 @@ include('session.php');
               // Hold function
               $('#send').click(function(d){ 
                     d.preventDefault();
-                      if($('#send_id').val()!="" && $('#send_code').val()!="" && $('#send_act2').val()!="" && $('#send_off2').val()!="" ){
+                      if($('#send_id').val()!="" && $('#send_code').val()!="" && $('#send_act2').val()!="" && $('#send_off2').val()!=""
+                      && $('#send_act1').val()!="" && $('#send_off1').val()!="" && $('#send_date1').val()!="" ){
                         $.post("function/send_func.php", {
                           docs_id:$('#send_id').val(), docs_code:$('#send_code').val(),
-                          docs_act2:$('#send_act2').val(), docs_off2:$('#send_off2').val()
+                          docs_act2:$('#send_act2').val(), docs_off2:$('#send_off2').val(),
+                          docs_act1:$('#send_act1').val(), docs_off1:$('#send_off1').val(),
+                          docs_date1:$('#send_date1').val()
                           },function(data){
                             if (data.trim() == "Val30"){
                             $('#SendModal').modal('hide');
@@ -383,7 +397,7 @@ include('session.php');
                                   })
                                     Toast.fire({
                                     icon: 'Success',
-                                    title:'Document is now on hold'
+                                    title:'Document is Successfully Submitted'
                                 }).then(function(){
                                   document.location.reload(true)//refresh pages
                                 });

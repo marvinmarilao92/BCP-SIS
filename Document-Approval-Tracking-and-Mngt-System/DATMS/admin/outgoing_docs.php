@@ -64,14 +64,15 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing'  AND(`doc_actor2`='$verified_session_firstname' ' $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office') ORDER BY doc_date2 DESC ";
+                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing'  AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname' OR  `doc_off2` = '$verified_session_office') ORDER BY doc_date2 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
                       $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
                       $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
                       $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                      $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_off2'];  
+                      $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
+                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
   
                   ?>
                   <tr>
@@ -90,7 +91,9 @@ include('session.php');
                     <td style="display:none"><?php echo $docAct2?></td>
                     <td style="display:none"><?php echo $docOff2?></td>
                     <td style="display:none"><?php echo $docDate2?></td>
-
+                    <td style="display:none"><?php echo $docAct3?></td>
+                    <td style="display:none"><?php echo $docOff3?></td>
+                    <td style="display:none"><?php echo $docDate3?></td>
                   </td>
                     <td>                      
                      <a class="btn btn-danger cancelbtn"><i class="bi bi-x-lg"></i></a>
@@ -209,7 +212,7 @@ include('session.php');
                                   })
                                     Toast.fire({
                                     icon: 'Success',
-                                    title:'Document ReturnedSuccessfully '
+                                    title:'Document Returned Successfully '
                                 }).then(function(){
                                   document.location.reload(true)//refresh pages
                                 });
