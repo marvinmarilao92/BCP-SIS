@@ -254,7 +254,7 @@ include('session.php');
         $(document).ready(function () {
 
               // Opening modal for delete
-                $('.deletebtn').on('click', function () {
+              $('.deletebtn').on('click', function () {
   
                     $('#DeleteModal').modal('show');
 
@@ -274,7 +274,7 @@ include('session.php');
               // Delete Office function
               $("#offdel").click(function(b){
                 b.preventDefault();
-                $.post("delete_office.php",{
+                $.post("function/delete_office.php",{
                     offid:$('#delete_id').val()
                   },function(response){
                     // alert ("deleted");
@@ -292,10 +292,10 @@ include('session.php');
               // End Delete Office function
                 
               // Save Office function
-                $('#save').click(function(a){ 
+              $('#save').click(function(a){ 
                   a.preventDefault();
                     if($('#offcode').val()!="" && $('#offtitle').val()!="" && $('#offloc').val()!=""){
-                      $.post("add_office.php", {
+                      $.post("function/add_office.php", {
                         offcode:$('#offcode').val(),
                         offname:$('#offtitle').val(),
                         offloc:$('#offloc').val()
@@ -342,7 +342,7 @@ include('session.php');
               // End Save Office function
 
               // Edit Office modal calling
-                $('.editbtn').on('click', function () {
+              $('.editbtn').on('click', function () {
 
                     $('#EditModal').modal('show');
 
@@ -364,7 +364,7 @@ include('session.php');
               $('#edit').click(function(d){ 
                     d.preventDefault();
                       if($('#off_idE').val()!="" && $('#off_codeE').val()!="" && $('#off_nameE').val()!="" && $('#off_locE').val()!=""){
-                        $.post("update_office.php", {
+                        $.post("function/update_office.php", {
                           offid:$('#off_idE').val(),
                           offcode:$('#off_codeE').val(),
                           offname:$('#off_nameE').val(),
@@ -408,7 +408,7 @@ include('session.php');
               // End Edit Office function
 
               // View Office Function
-                $('.viewbtn').on('click', function () {
+              $('.viewbtn').on('click', function () {
 
                     $('#ViewModal').modal('show');
 

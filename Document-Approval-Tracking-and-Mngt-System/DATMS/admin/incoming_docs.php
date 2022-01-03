@@ -54,8 +54,8 @@ include('session.php');
                     <th scope="col">DocCode</th>
                     <th scope="col" >Filename</th>
                     <!-- <th scope="col">Filesize</th>    -->
-                    <th scope="col">Uploader</th>   
-                    <th scope="col">Date/Time Upload</th>       
+                    <th scope="col">Actor</th>   
+                    <th scope="col">Date/Time</th>       
                     <th scope="col">Status</th>  
                     <!-- <th scope="col">Downloads</th>    -->
                     <th scope="col">Action</th>          
@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Incoming' AND (`doc_actor1`='$verified_session_firstname' ' $verified_session_lastname ' OR `doc_actor2` = '$verified_session_firstname' '$verified_session_lastname ') AND (`doc_off1` = '$verified_session_office' OR `doc_off2` = '$verified_session_office');";
+                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing' AND (`doc_actor2`='$verified_session_firstname' ' $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office') ORDER BY doc_date1 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -95,7 +95,7 @@ include('session.php');
                     <td>                      
                       <a class="btn btn-success receivedbtn"><i class="bi bi-check-lg"></i></a>
                       <!-- <a class="btn btn-danger "><i class="bi bi-x-lg"></i></a> -->
-                      <a class="btn btn-primary " href='view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
+                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
                     </td>
                   </tr>
 
@@ -231,7 +231,7 @@ include('session.php');
                     </div>
                 </div>
         </div>
-      <!-- End Edit Office Modal-->
+      <!-- End Received Office Modal-->
 
       <!-- Delete Office Modal -->
       <div class="modal fade" id="DeleteModal" tabindex="-1">
@@ -299,7 +299,7 @@ include('session.php');
               $('#received').click(function(d){ 
                     d.preventDefault();
                       if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
-                        $.post("received_func.php", {
+                        $.post("function/received_func.php", {
                           docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
                           docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
                           },function(data){

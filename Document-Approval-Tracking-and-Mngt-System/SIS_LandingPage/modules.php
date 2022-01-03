@@ -39,8 +39,8 @@
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-					<h2>School Modules</h2>
-					<p>The following are the modules that the Bestlink College of the Philippines Offer </p>
+					<h2>School Information System Subsystems</h2>
+					<p>The following are the subsystems that the Bestlink College of the Philippines Offer </p>
 				</div>
 			</div>
 			<div class="row">

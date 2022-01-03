@@ -15,12 +15,12 @@ include('session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Data Tables</h1>
+      <h1>Approver Account Logs</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Account Management</li>
-          <li class="breadcrumb-item active">Admin Logged</li>
+          <li class="breadcrumb-item active">Approver Logged</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -32,7 +32,7 @@ include('session.php');
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Administation Logs</h5>
+              <h5 class="card-title">Approver Logs</h5>
               <!-- <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p> -->
 
               <!-- Table with stripped rows -->

@@ -276,7 +276,7 @@ include('session.php');
               // Delete function
               $("#dtdel").click(function(b){
                 b.preventDefault();
-                $.post("delete_doctype.php",{
+                $.post("function/delete_doctype.php",{
                     dtid:$('#delete_id').val()
                   },function(response){
                     // alert ("deleted");
@@ -297,7 +297,7 @@ include('session.php');
                 $('#save').click(function(a){ 
                   a.preventDefault();
                     if($('#dtcode').val()!="" && $('#dtname').val()!="" && $('#dtdesc').val()!=""){
-                      $.post("add_doctype.php", {
+                      $.post("function/add_doctype.php", {
                         dtcode:$('#dtcode').val(),
                         dtname:$('#dtname').val(),
                         dtdesc:$('#dtdesc').val()
@@ -318,7 +318,7 @@ include('session.php');
                                 toast: true,
                                 position: 'top-end',
                                 showConfirmButton: false,
-                                timer: 1100,
+                                timer: 1500,
                                 timerProsressBar: true,
                                 didOpen: (toast) => {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -367,7 +367,7 @@ include('session.php');
               $('#edit').click(function(d){ 
                     d.preventDefault();
                       if($('#dt_idE').val()!="" && $('#dt_codeE').val()!="" && $('#dt_nameE').val()!="" && $('#dt_descE').val()!=""){
-                        $.post("update_doctype.php", {
+                        $.post("function/update_doctype.php", {
                           dtid:$('#dt_idE').val(),
                           dtcode:$('#dt_codeE').val(),
                           dtname:$('#dt_nameE').val(),
@@ -382,24 +382,24 @@ include('session.php');
                             $('#dt_descE').val("")
                           }else if(data.trim() == "success"){
                             $('#EditModal').modal('hide');
-                                  //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
-                                  }
-                                  })
+                                  //success message                                    
+                                      const Toast = Swal.mixin({
+                                      toast: true,
+                                      position: 'top-end',
+                                      showConfirmButton: false,
+                                      timer: 1500,
+                                      timerProsressBar: true,
+                                      didOpen: (toast) => {
+                                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                                      toast.addEventListener('mouseleave', Swal.resumeTimer)                  
+                                      }
+                                      })
                                     Toast.fire({
-                                    icon: 'Success',
-                                    title:'Changes Successfully Saved'
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
+                                    icon: 'success',
+                                    title:'Changes Save Successfully'
+                                    }).then(function(){
+                                      document.location.reload(true)//refresh pages
+                                    }); 
                                     $('#dt_codeE').val("")
                                     $('#dt_nameE').val("")
                                     $('#dt_descE').val("")

@@ -6,7 +6,8 @@
   if($_SERVER["REQUEST_METHOD"] == "POST") {
     // username and password sent from form 
     $myusername = mysqli_real_escape_string($link,$_POST['username']);
-    $mypassword = mysqli_real_escape_string($link,$_POST['password']); 
+    $mypassword = mysqli_real_escape_string($link,$_POST['password']);  
+
     $sql = "SELECT * FROM users WHERE id_number = '$myusername' and password = '$mypassword'";
       $result = mysqli_query($link,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -79,17 +80,17 @@
                     case "DATMS Approver":
                       //statement
                       $_SESSION['session_username'] = $myusername;
-                      header("location: DocumentApproval/DATMS-administrator/index.php");
+                      header("location: ../DATMS/approver/index.php");
                       break;
                     case "DATMS Secretary":
                        //statement
                        $_SESSION['session_username'] = $myusername;
-                       header("location: DocumentApproval/DATMS-administrator/index.php");
+                       header("location: ../DATMS/secretary/index.php");
                        break;
                     case "DATMS Faculty":
                        //statement
                        $_SESSION['session_username'] = $myusername;
-                       header("location: DocumentApproval/DATMS-administrator/index.php");
+                       header("location: ../DATMS/faculty/index.php");
                        break;
                   }
                   break;

@@ -15,12 +15,12 @@ include('session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Incoming Documents</h1>
+      <h1>Hold Documents</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Module</li>
-          <li class="breadcrumb-item active">Incoming Documents</li>
+          <li class="breadcrumb-item active">Hold Documents</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -54,8 +54,8 @@ include('session.php');
                     <th scope="col">DocCode</th>
                     <th scope="col" >Filename</th>
                     <!-- <th scope="col">Filesize</th>    -->
-                    <th scope="col">Uploader</th>   
-                    <th scope="col">Date/Time Upload</th>       
+                    <th scope="col">Actor</th>   
+                    <th scope="col">Date/Time</th>       
                     <th scope="col">Status</th>  
                     <!-- <th scope="col">Downloads</th>    -->
                     <th scope="col">Action</th>          
@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Hold'  AND (`doc_actor1`='$verified_session_firstname' ' $verified_session_lastname ' OR `doc_actor2` = '$verified_session_firstname' '$verified_session_lastname ') AND (`doc_off1` = '$verified_session_office' OR `doc_off2` = '$verified_session_office');";
+                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Hold'  AND (`doc_actor2`='$verified_session_firstname' ' $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office') ORDER BY doc_date2 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -92,9 +92,17 @@ include('session.php');
                     <td style="display:none"><?php echo $docDate2?></td>
 
                   </td>
-                    <td>                      
+                    <td>       
+                      <!-- <div class="dropdown">
+                        <button class="dropbtn">Dropdown</button>
+                        <div class="dropdown-content">
+                          <a href="#">Link 1</a>
+                          <a href="#">Link 2</a>
+                          <a href="#">Link 3</a>
+                        </div>
+                      </div>                -->
                       <a class="btn btn-success "><i class="bi bi-cursor-fill"></i></a>
-                      <a class="btn btn-primary " href='view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
+                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
                     </td>
                   </tr>
 

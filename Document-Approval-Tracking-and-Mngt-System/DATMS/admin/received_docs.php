@@ -15,12 +15,12 @@ include('session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Incoming Documents</h1>
+      <h1>Received Documents</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Module</li>
-          <li class="breadcrumb-item active">Incoming Documents</li>
+          <li class="breadcrumb-item active">Received Documents</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -54,8 +54,8 @@ include('session.php');
                     <th scope="col">DocCode</th>
                     <th scope="col" >Filename</th>
                     <!-- <th scope="col">Filesize</th>    -->
-                    <th scope="col">Uploader</th>   
-                    <th scope="col">Date/Time Upload</th>       
+                    <th scope="col">Actor</th>   
+                    <th scope="col">Date/Time</th>       
                     <th scope="col">Status</th>  
                     <!-- <th scope="col">Downloads</th>    -->
                     <th scope="col">Action</th>          
@@ -64,7 +64,8 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Received') AND (`doc_actor1`='$verified_session_firstname' ' $verified_session_lastname ' OR `doc_actor2` = '$verified_session_firstname' '$verified_session_lastname ') AND (`doc_off1` = '$verified_session_office' OR `doc_off2` = '$verified_session_office');";
+                    $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Received') AND (`doc_actor2`='$verified_session_firstname' ' $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office')
+                    ORDER BY doc_date2 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -93,9 +94,9 @@ include('session.php');
 
                   </td>
                     <td>                      
-                      <a class="btn btn-success "><i class="bi bi-cursor-fill"></i></a>
-                      <a class="btn btn-danger " ><i class="bi bi-question-lg" ></i></a>
-                      <a class="btn btn-primary " href='view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>                
+                      <a class="btn btn-success sendbtn"><i class="bi bi-cursor-fill"></i></a>
+                      <a class="btn btn-danger holdbtn" ><i class="bi bi-question-lg" ></i></a>
+                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>                
                     </td>
                   </tr>
 
@@ -114,7 +115,7 @@ include('session.php');
     </section>
 
   </main><!-- End #main -->
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
       <!-- View Document modal -->
       <div class="modal fade" id="ViewModal" tabindex="-1">
                   <div class="modal-dialog modal-dialog-centered modal-l">
@@ -142,44 +143,90 @@ include('session.php');
         </div>
       <!-- End View office Modal-->
 
-      <!-- Edit Office Modal -->
-      <div class="modal fade" id="EditModal" tabindex="-1">
+      <!-- Hold Docs Modal -->
+      <div class="modal fade" id="HoldModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">EDIT OFFICE</h5>
+                          <h5 class="modal-title">Document Hold</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           <div class="card" style="margin: 10px;">
                             <div class="card-body">
-                              <h2 class="card-title">Change information</h2>
+                              <h2 class="card-title">Hold this document?</h2>
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
-                                  <input type="hidden" class="form-control" id="dt_idE" readonly>
-                                  <div class="col-md-4">
-                                      Code: <input type="text" class="form-control" id="dt_codeE" readonly>
-                                  </div>
-                                  <br>
-                                  <div class="col-md-8">
-                                      Name: <input type="text" class="form-control" id="dt_nameE">
-                                  </div>
-                                  <br>
-                                  <div class="col-12">
-                                      Location: <textarea  style="height: 80px" class="form-control" id="dt_descE"></textarea>
-                                  </div>        
+                                      <input type="text" class="form-control" id="doc_id" readonly>
+                                      <input type="text" class="form-control" id="doc_code" readonly>                  
+                                      <input type="text" class="form-control" id="doc_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
+                                      <input type="text" class="form-control" id="doc_off2" value="<?php echo $verified_session_office?>" readonly> 
+                                      <h5 id="doc_fileN" style="text-align: end; color:black"></h5>   
                                 </div>
                               
                             </div>
                           </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button class="btn btn-primary" name="save" id="edit" >Save changes</button>
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                              <button class="btn btn-success" name="save" id="hold" >Hold</button>
                             </div>
                         <!-- End Form -->
                     </div>
                 </div>
-        </div>
-      <!-- End Edit Office Modal-->
+          </div>
+      <!-- End Hold Docs Modal-->
+
+       <!-- Send Docs Modal -->
+       <div class="modal fade" id="SendModal1" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Document Submission</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                          <div class="card" style="margin: 10px;">
+                            <div class="card-body">
+                              <h2 class="card-title">Submit Document</h2>
+                                <!-- Fill out Form -->
+                                <div class="row g-3" >
+                                      <input type="text" class="form-control" id="doc_id1" readonly>
+                                      <input type="text" class="form-control" id="doc_code1" readonly>                  
+                                      <div class="col-md-12">
+                                        <select class="form-select" id="doc_act2" name="doc_act2" onChange="fetchOffice(this.value);">
+                                        <option selected="selected" disabled="disabled">Recipient</option>
+                                          <?php
+                                            require_once("include/conn.php");
+                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' ORDER BY firstname DESC ";
+                                            $result=mysqli_query($conn,$query);
+                                            while($rs=mysqli_fetch_array($result)){
+                                              $dtid =$rs['id'];    
+                                              $dtno =$rs['id_number'];                                  
+                                              $dtFName = $rs['firstname'];    
+                                              $dtLName = $rs['lastname'];    
+                                            
+                                              echo '<option value = "' . $dtno . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
+                                            }
+                                        ?>
+                                        </select>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <select class="form-select" id="doc_off2" name="doc_off2">
+                                          <option selected="selected" disabled="disabled">Select Office</option>
+                                        </select>
+                                      </div>
+                                      <h5 id="doc_fileN1" style="text-align: end; color:black"></h5>   
+                                </div>
+                              
+                            </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                              <button class="btn btn-success" name="send" id="send" >Submit</button>
+                            </div>
+                        <!-- End Form -->
+                    </div>
+                </div>
+          </div>
+      <!-- End Send Docs Modal-->
 
       <!-- Delete Office Modal -->
       <div class="modal fade" id="DeleteModal" tabindex="-1">
@@ -222,190 +269,156 @@ include('session.php');
 
   <!-- JS Scripts -->
     <script>
-        // this script will execute as soon a the website runs
+      // this script will execute as soon a the website runs
         $(document).ready(function () {
 
-            // // Delete modal calling
-              // $('.deletebtn').on('click', function () {
+          
+            // Hold modal calling
+              $('.holdbtn').on('click', function () {
 
-              //       $('#DeleteModal').modal('show');
+                  $('#HoldModal').modal('show');
 
-              //       $tr = $(this).closest('tr');
+                  $tr = $(this).closest('tr');
 
-              //       var data = $tr.children("td").map(function () {
-              //           return $(this).text();
-              //       }).get();
+                  var data = $tr.children("td").map(function () {
+                      return $(this).text();
+                  }).get();
 
-              //       console.log(data);
+                  console.log(data);      
+                      $('#doc_fileN').text(data[2]);  
+                      $('#doc_id').val(data[0]);
+                      $('#doc_code').val(data[1]); 
+                });
+              // End of Hold modal calling 
 
-              //     $('#delete_id').val(data[0]);
-              //     });
-              // // end of function
-            
-              // // Delete function
-              // $("#dtdel").click(function(b){
-              //   b.preventDefault();
-              //   $.post("delete_doctype.php",{
-              //       dtid:$('#delete_id').val()
-              //     },function(response){
-              //       // alert ("deleted");
-              //       if(response.trim() == "DoctypeDeleted"){
-              //         $('#DeleteModal').modal('hide');
-              //         Swal.fire ("DocType Successfully Deleted","","success").then(function(){
-              //         document.location.reload(true)//refresh pages
-              //         });
-              //       }else{
-              //         $('#DeleteModal').modal('hide');
-              //         Swal.fire (response);
-              //       }
-              //     })
-              //   })
-              // // End Delete function
-                
-              // Save function
-              //   $('#save').click(function(a){ 
-              //     a.preventDefault();
-              //       if($('#doccreator').val()!="" && $('#docoffice').val()!="" && $('#doctitle').val()!=""
-              //       &&$('#doctype').val()!="" && $('#docfile').val()!="" && $('#docdesc').val()!=""){
-              //         $.post("fileprocess.php", {
-              //           doccreator:$('#doccreator').val(),
-              //           docoffice:$('#docoffice').val(),
-              //           doctitle:$('#doctitle').val(),
-              //           doctype:$('#doctype').val(),
-              //           docfile:$('#docfile').val(),
-              //           docdesc:$('#docdesc').val()
-              //           },function(data){
-              //           if (data.trim() == "failed"){
+              // Hold function
+              $('#hold').click(function(d){ 
+                    d.preventDefault();
+                      if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
+                        $.post("function/hold_func.php", {
+                          docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
+                          docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
+                          },function(data){
+                            if (data.trim() == "Val30"){
+                            $('#EditModal').modal('hide');
+                            Swal.fire("No data stored in our database","","error");//response message
+                            // Empty test field
+                          }else if(data.trim() == "success"){
+                            $('#ReceivedModal').modal('hide');
+                                  //success message
+                                    const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 1100,
+                                    timerProsressBar: true,
+                                    didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
+                                  }
+                                  })
+                                    Toast.fire({
+                                    icon: 'Success',
+                                    title:'Document is now on hold'
+                                }).then(function(){
+                                  document.location.reload(true)//refresh pages
+                                });
+                                    $('#doc_code').val("")
+                                    $('#doc_act2').val("")
+                                    $('#doc_off2').val("")
+                            }else{
+                              Swal.fire("There is somthing wrong","","error");
+                              // Swal.fire(data);
+                          }
+                        })
+                      }else{
+                        Swal.fire("You must fill out every field","","warning");
+                      }
+                  })
+              // End Hold function
 
-              //             //response message
-              //             Swal.fire("Document is already in server","","error");
-              //             // Empty test field
-              //              $('#docfile').val("")
-                         
-              //           }else if(data.trim() == "success"){
-              //             $('#AddModal').modal('hide');
-              //                   //success message
-              //                   const Toast = Swal.mixin({
-              //                   toast: true,
-              //                   position: 'top-end',
-              //                   showConfirmButton: false,
-              //                   timer: 1100,
-              //                   timerProsressBar: true,
-              //                   didOpen: (toast) => {
-              //                   toast.addEventListener('mouseenter', Swal.stopTimer)
-              //                   toast.addEventListener('mouseleave', Swal.resumeTimer)                  
-              //                   }
-              //                   })
-              //                 Toast.fire({
-              //                 icon: 'success',
-              //                 title:'Office successfully Saved'
-              //                 }).then(function(){
-              //                   document.location.reload(true)//refresh pages
-              //                 });
-              //                   // $('#dtcode').val("")
-              //                   // $('#dtname').val("")
-              //                   // $('#dtdesc').val("")
-              //             }else{
-              //               Swal.fire("there is something wrong");
-                            
-              //           }
-              //         })
-              //       }else{
-              //         Swal.fire("You must fill out every field","","warning");
-              //       }
-              //     })
-              // End Save function
+               // Hold modal calling
+              $('.sendbtn').on('click', function () {
 
-              // // Edit modal calling
-              //   $('.editbtn').on('click', function () {
+                  $('#SendModal1').modal('show');
 
-              //       $('#EditModal').modal('show');
+                  $tr = $(this).closest('tr');
 
-              //       $tr = $(this).closest('tr');
+                  var data = $tr.children("td").map(function () {
+                      return $(this).text();
+                  }).get();
 
-              //       var data = $tr.children("td").map(function () {
-              //           return $(this).text();
-              //       }).get();
+                  console.log(data);      
+                      $('#doc_fileN1').text(data[2]);  
+                      $('#doc_id1').val(data[0]);
+                      $('#doc_code1').val(data[1]); 
+                });
+              // End of Hold modal calling 
 
-              //       console.log(data);        
-              //           $('#dt_idE').val(data[0]);
-              //           $('#dt_codeE').val(data[1]);
-              //           document.getElementById("dt_nameE").placeholder = data[2];
-              //           document.getElementById("dt_descE").placeholder = data[3];  
-              //     });
-              // // End of edit modal calling 
-
-              // // Edit function
-              // $('#edit').click(function(d){ 
-              //       d.preventDefault();
-              //         if($('#dt_idE').val()!="" && $('#dt_codeE').val()!="" && $('#dt_nameE').val()!="" && $('#dt_descE').val()!=""){
-              //           $.post("update_doctype.php", {
-              //             dtid:$('#dt_idE').val(),
-              //             dtcode:$('#dt_codeE').val(),
-              //             dtname:$('#dt_nameE').val(),
-              //             dtdesc:$('#dt_descE').val()
-              //             },function(data){
-              //               if (data.trim() == "failed"){
-              //               $('#EditModal').modal('hide');
-              //               Swal.fire("Office Title is currently in use","","error");//response message
-              //               // Empty test field
-              //               $('#dt_codeE').val("")
-              //               $('#dt_nameE').val("")
-              //               $('#dt_descE').val("")
-              //             }else if(data.trim() == "success"){
-              //               $('#EditModal').modal('hide');
-              //                     //success message
-              //                       const Toast = Swal.mixin({
-              //                       toast: true,
-              //                       position: 'top-end',
-              //                       showConfirmButton: false,
-              //                       timer: 1100,
-              //                       timerProsressBar: true,
-              //                       didOpen: (toast) => {
-              //                       toast.addEventListener('mouseenter', Swal.stopTimer)
-              //                       toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
-              //                     }
-              //                     })
-              //                       Toast.fire({
-              //                       icon: 'Success',
-              //                       title:'Changes Successfully Saved'
-              //                   }).then(function(){
-              //                     document.location.reload(true)//refresh pages
-              //                   });
-              //                       $('#dt_codeE').val("")
-              //                       $('#dt_nameE').val("")
-              //                       $('#dt_descE').val("")
-              //               }else{
-              //                 Swal.fire("There is somthing wrong","","error");
-              //             }
-              //           })
-              //         }else{
-              //           Swal.fire("You must fill out every field","","warning");
-              //         }
-              //     })
-              // // End Edit function
-
-              // // View Function
-              //   $('.viewbtn').on('click', function () {
-
-              //       $('#ViewModal').modal('show');
-
-              //       $tr = $(this).closest('tr');
-
-              //       var data = $tr.children("td").map(function () {
-              //           return $(this).text();
-              //       }).get();
-
-              //       console.log(data);        
-              //       $('#view_code').text(data[1]);
-              //       $('#view_name').text(data[2]);
-              //       $('#view_loc').text(data[3]);
-              //       $('#view_date').text(data[4]);
-              //     });
-            // // End of View function 
+              // Hold function
+              $('#send').click(function(d){ 
+                    d.preventDefault();
+                      if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
+                        $.post("function/send_func.php", {
+                          docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
+                          docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
+                          },function(data){
+                            if (data.trim() == "Val30"){
+                            $('#EditModal').modal('hide');
+                            Swal.fire("No data stored in our database","","error");//response message
+                            // Empty test field
+                          }else if(data.trim() == "success"){
+                            $('#ReceivedModal').modal('hide');
+                                  //success message
+                                    const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 1100,
+                                    timerProsressBar: true,
+                                    didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
+                                  }
+                                  })
+                                    Toast.fire({
+                                    icon: 'Success',
+                                    title:'Document is now on hold'
+                                }).then(function(){
+                                  document.location.reload(true)//refresh pages
+                                });
+                                    $('#doc_code').val("")
+                                    $('#doc_act2').val("")
+                                    $('#doc_off2').val("")
+                            }else{
+                              Swal.fire("There is somthing wrong","","error");
+                              // Swal.fire(data);
+                          }
+                        })
+                      }else{
+                        Swal.fire("You must fill out every field","","warning");
+                      }
+                  })
+              // End Hold function
 
           });
 
+    </script>
+    <script type="text/javascript">
+        // Ajax for office picker
+        function fetchOffice(id){
+                $('#doc_off2').html('');
+                $.ajax({
+                  type:'post',
+                  url:'function/ajaxdata.php',
+                  data : 'off_id='+id,
+                  success: function(data){
+                    $('#doc_off2').html(data);
+                    // console.log("success");
+                  }
+                })
+              }
+        // End of Ajax for office picker
     </script>
   
 </body>
