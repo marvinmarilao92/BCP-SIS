@@ -6,14 +6,6 @@
 <li class="nav-heading">Module</li>
 
   <li class="nav-item">
-    <a href="index.php" class="<?php if($page=='dashboard'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-      <i class="bi bi-bar-chart-line"></i>
-      <span>Dashboard</span>
-    </a>
-  </li><!-- End Dashboard Nav -->
-
-
-  <li class="nav-item">
   <a href="documents_list.php" class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-book-2-line"></i>
       <span>Documents &nbsp;&nbsp;&nbsp;</span>
@@ -54,7 +46,7 @@
       <span class="badge bg-success">
         <?php 
             require_once("include/conn.php");
-            $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Received') AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office');";
+            $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Pending') AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office');";
             $result=mysqli_query($conn,$query);
             if($result){
                echo mysqli_num_rows($result);
@@ -97,8 +89,25 @@
   </li> <!-- hold item Nav -->
 
   <li class="nav-item">
+    <a href="approved_docs.php" class="<?php if($page=='approved'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+      <i class="ri-file-mark-line"></i>
+      <span>Approved &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="badge bg-info">
+        <?php 
+            require_once("include/conn.php");
+            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Approved' AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office');";
+            $result=mysqli_query($conn,$query);
+            if($result){
+               echo mysqli_num_rows($result);
+              }
+        ?> 
+      </span>
+    </a>
+  </li><!-- Approved item Nav -->
+
+  <li class="nav-item">
     <a href="reject_docs.php" class="<?php if($page=='reject'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-      <i class="ri-delete-bin-2-line"></i>
+      <i class="ri-file-shred-line"></i>
       <span>Rejected &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-dark"> <?php 
             require_once("include/conn.php");

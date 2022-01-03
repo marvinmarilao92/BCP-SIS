@@ -98,7 +98,7 @@
 
   <li class="nav-item">
     <a href="reject_docs.php" class="<?php if($page=='reject'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-      <i class="ri-delete-bin-2-line"></i>
+      <i class="ri-question-mark"></i>
       <span>Rejected &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-dark"> <?php 
             require_once("include/conn.php");

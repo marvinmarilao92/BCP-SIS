@@ -126,8 +126,8 @@ include('session.php');
 
   </main><!-- End #main -->
 
-    <!-- Send Docs Modal -->
-    <div class="modal fade" id="SendModal" tabindex="-1">
+     <!-- Send Docs Modal -->
+     <div class="modal fade" id="SendModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -136,10 +136,9 @@ include('session.php');
                         </div>
                           <div class="card" style="margin: 10px;">
                             <div class="card-body">
-                              <h2 class="card-title">Submit this document?<h5 id="doc_fileN1" style="text-align: end; color:black;"></h5></h2>
-                              
+                              <h2 class="card-title">Submit Document</h2>
                                 <!-- Fill out Form -->
-                                <div class="row g-3" style="margin-top: 10px;">
+                                <div class="row g-3" >
                                       <input type="hidden" class="form-control" id="send_id" readonly>
                                       <input type="hidden" class="form-control" id="send_code" readonly>   
                                       <input type="hidden" class="form-control" id="send_act1" readonly>   
@@ -168,10 +167,7 @@ include('session.php');
                                           <option selected="selected" disabled="disabled">Select Office</option>
                                         </select>
                                       </div>
-                                      <div class="col-12">
-                                          <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="docremarks" id="docremarks" id="docdesc" required></textarea>
-                                      </div> 
-                                     
+                                      <h5 id="doc_fileN1" style="text-align: end; color:black"></h5>   
                                 </div>
                               
                             </div>
@@ -186,6 +182,8 @@ include('session.php');
           </div>
       <!-- End Send Docs Modal-->
 
+   
+    <!-- End of Office Modals -->
 
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
@@ -203,7 +201,7 @@ include('session.php');
         $(document).ready(function () {
 
            
-              // Hold modal calling
+               // Hold modal calling
               $('.sendbtn').on('click', function () {
 
                   $('#SendModal').modal('show');
@@ -234,7 +232,7 @@ include('session.php');
                           docs_id:$('#send_id').val(), docs_code:$('#send_code').val(),
                           docs_act2:$('#send_act2').val(), docs_off2:$('#send_off2').val(),
                           docs_act1:$('#send_act1').val(), docs_off1:$('#send_off1').val(),
-                          docs_date1:$('#send_date1').val(), docs_remarks:$('#docremarks').val()
+                          docs_date1:$('#send_date1').val()
                           },function(data){
                             if (data.trim() == "Val30"){
                             $('#SendModal').modal('hide');
@@ -273,6 +271,8 @@ include('session.php');
                       }
                   })
               // End Hold function
+
+
           });
 
     </script>
