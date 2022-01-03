@@ -115,7 +115,7 @@ include('session.php');
     </section>
 
   </main><!-- End #main -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  
       <!-- View Document modal -->
       <div class="modal fade" id="ViewModal" tabindex="-1">
                   <div class="modal-dialog modal-dialog-centered modal-l">
@@ -156,10 +156,10 @@ include('session.php');
                               <h2 class="card-title">Hold this document?</h2>
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
-                                      <input type="text" class="form-control" id="doc_id" readonly>
-                                      <input type="text" class="form-control" id="doc_code" readonly>                  
-                                      <input type="text" class="form-control" id="doc_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
-                                      <input type="text" class="form-control" id="doc_off2" value="<?php echo $verified_session_office?>" readonly> 
+                                      <input type="hidden" class="form-control" id="doc_id" readonly>
+                                      <input type="hidden" class="form-control" id="doc_code" readonly>                  
+                                      <input type="hidden" class="form-control" id="doc_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
+                                      <input type="hidden" class="form-control" id="doc_off2" value="<?php echo $verified_session_office?>" readonly> 
                                       <h5 id="doc_fileN" style="text-align: end; color:black"></h5>   
                                 </div>
                               
@@ -176,7 +176,7 @@ include('session.php');
       <!-- End Hold Docs Modal-->
 
        <!-- Send Docs Modal -->
-       <div class="modal fade" id="SendModal1" tabindex="-1">
+       <div class="modal fade" id="SendModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -188,10 +188,10 @@ include('session.php');
                               <h2 class="card-title">Submit Document</h2>
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
-                                      <input type="text" class="form-control" id="doc_id1" readonly>
-                                      <input type="text" class="form-control" id="doc_code1" readonly>                  
+                                      <input type="hidden" class="form-control" id="send_id" readonly>
+                                      <input type="hidden" class="form-control" id="send_code" readonly>                  
                                       <div class="col-md-12">
-                                        <select class="form-select" id="doc_act2" name="doc_act2" onChange="fetchOffice(this.value);">
+                                        <select class="form-select" id="send_act2" name="send_act2" onChange="fetchOffice(this.value);">
                                         <option selected="selected" disabled="disabled">Recipient</option>
                                           <?php
                                             require_once("include/conn.php");
@@ -209,7 +209,7 @@ include('session.php');
                                         </select>
                                       </div>
                                       <div class="col-md-12">
-                                        <select class="form-select" id="doc_off2" name="doc_off2">
+                                        <select class="form-select" id="send_off2" name="send_off2">
                                           <option selected="selected" disabled="disabled">Select Office</option>
                                         </select>
                                       </div>
@@ -340,7 +340,7 @@ include('session.php');
                // Hold modal calling
               $('.sendbtn').on('click', function () {
 
-                  $('#SendModal1').modal('show');
+                  $('#SendModal').modal('show');
 
                   $tr = $(this).closest('tr');
 
@@ -350,21 +350,21 @@ include('session.php');
 
                   console.log(data);      
                       $('#doc_fileN1').text(data[2]);  
-                      $('#doc_id1').val(data[0]);
-                      $('#doc_code1').val(data[1]); 
+                      $('#send_id').val(data[0]);
+                      $('#send_code').val(data[1]); 
                 });
               // End of Hold modal calling 
 
               // Hold function
               $('#send').click(function(d){ 
                     d.preventDefault();
-                      if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
+                      if($('#send_id').val()!="" && $('#send_code').val()!="" && $('#send_act2').val()!="" && $('#send_off2').val()!="" ){
                         $.post("function/send_func.php", {
-                          docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
-                          docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
+                          docs_id:$('#send_id').val(), docs_code:$('#send_code').val(),
+                          docs_act2:$('#send_act2').val(), docs_off2:$('#send_off2').val()
                           },function(data){
                             if (data.trim() == "Val30"){
-                            $('#EditModal').modal('hide');
+                            $('#SendModal').modal('hide');
                             Swal.fire("No data stored in our database","","error");//response message
                             // Empty test field
                           }else if(data.trim() == "success"){
@@ -404,23 +404,22 @@ include('session.php');
           });
 
     </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript">
         // Ajax for office picker
         function fetchOffice(id){
-                $('#doc_off2').html('');
+                $('#send_off2').html('');
                 $.ajax({
                   type:'post',
                   url:'function/ajaxdata.php',
                   data : 'off_id='+id,
                   success: function(data){
-                    $('#doc_off2').html(data);
+                    $('#send_off2').html(data);
                     // console.log("success");
                   }
                 })
               }
-        // End of Ajax for office picker
+              // End of Ajax for office picker
     </script>
-  
 </body>
-
 </html>
