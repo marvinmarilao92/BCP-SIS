@@ -97,6 +97,21 @@
   </li> <!-- hold item Nav -->
 
   <li class="nav-item">
+    <a href="reject_docs.php" class="<?php if($page=='reject'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+      <i class="ri-delete-bin-2-line"></i>
+      <span>Rejected &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="badge bg-dark"> <?php 
+            require_once("include/conn.php");
+            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Rejected'  AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off1` = '$verified_session_office')";
+            $result=mysqli_query($conn,$query);
+            if($result){
+               echo mysqli_num_rows($result);
+              }
+        ?> </span>
+    </a>
+  </li> <!-- hold item Nav -->
+
+  <li class="nav-item">
     <a href="tracking_docs.php" class="<?php if($page=='track'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-geo"></i>
       <span>Track Douments</span>

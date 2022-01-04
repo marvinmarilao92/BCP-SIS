@@ -79,8 +79,8 @@ include('session.php');
                     <td style="display:none"><?php echo $docId?></td>
                     <td><?php echo $docCode; ?>
                     <td><?php echo $docName; ?>
-                    <td><?php echo $docAct1; ?>
-                    <td><?php echo $docDate1; ?>
+                    <td><?php echo $docAct2; ?>
+                    <td><?php echo $docDate2; ?>
                     <td><?php echo $docStat; ?>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
@@ -88,9 +88,9 @@ include('session.php');
                     <td style="display:none"><?php echo $docType?></td>
                     <td style="display:none"><?php echo $docDesc?></td>
                     <td style="display:none"><?php echo $docOff1?></td>
-                    <td style="display:none"><?php echo $docAct2?></td>
+                    <td style="display:none"><?php echo $docAct1?></td>
                     <td style="display:none"><?php echo $docOff2?></td>
-                    <td style="display:none"><?php echo $docDate2?></td>
+                    <td style="display:none"><?php echo $docDate1?></td>
                     <td style="display:none"><?php echo $docAct3?></td>
                     <td style="display:none"><?php echo $docOff3?></td>
                     <td style="display:none"><?php echo $docDate3?></td>
