@@ -225,11 +225,11 @@ include('session.php');
                           name: 'Office'
                         },
                         {
-                          value: 3,
+                          value: 5,
                           name: 'Users'
                         },
                         {
-                          value: 11,
+                          value: 3,
                           name: 'Types Documents'
                         },
                       ]

@@ -72,7 +72,8 @@ include('session.php');
                       $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
                       $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
                       $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];   
+                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3']; 
+                      $docRemarks = $rs['doc_remarks'];     
   
                   ?>
                   <tr>
@@ -81,7 +82,7 @@ include('session.php');
                     <td><?php echo $docName; ?>
                     <td><?php echo $docAct1; ?>
                     <td><?php echo $docDate1; ?>
-                    <td><?php echo $docStat; ?>
+                    <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
                     <td style="display:none"><?php echo $docTitle?></td>
@@ -94,6 +95,7 @@ include('session.php');
                     <td style="display:none"><?php echo $docAct3?></td>
                     <td style="display:none"><?php echo $docOff3?></td>
                     <td style="display:none"><?php echo $docDate3?></td>
+                    <td style="display:none"><?php echo $docRemarks?></td>
 
                   </td>
                     <td>                      
@@ -120,6 +122,33 @@ include('session.php');
   </main><!-- End #main -->
 
   <!-- Office Modals -->
+
+   <!-- Desc Document modal -->
+       <div class="modal fade" id="RemarksModal" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered modal-l">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">DOCUMENT DESCRIPTION</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="card" style="margin: 10px;">
+                          <form method="post">
+                            <div class="card-body">
+                               <h5 id="remarks" style="margin-top: 10px;"></h5>                                          
+                                <div class="col-12" style="text-align: center;">
+                                </div>
+                            </div>
+                            </form>
+                          </div>   
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+        </div>
+      <!-- End Desc office Modal-->
       <!-- Create Document Modal -->
       <div class="modal fade" id="AddModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
@@ -280,6 +309,21 @@ include('session.php');
     <script>
         // this script will execute as soon a the website runs
         $(document).ready(function () {
+              // View Function
+                  $('.remarksbtn').on('click', function () {
+
+                      $('#RemarksModal').modal('show');
+
+                      $tr = $(this).closest('tr');
+
+                      var data = $tr.children("td").map(function () {
+                          return $(this).text();
+                      }).get();
+
+                      console.log(data); 
+                      $('#remarks').text(data[18]);
+                    });
+              // End of View function 
 
               // Received modal calling
                 $('.receivedbtn').on('click', function () {

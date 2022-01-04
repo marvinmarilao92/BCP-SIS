@@ -10,17 +10,17 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'outgoing'; include ('core/side-nav.php');//Design for sidebar?>
+<?php include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Outgoing Documents</h1>
+      <h1>Archive Documents</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Module</li>
-          <li class="breadcrumb-item active">Outgoing Documents</li>
+          <li class="breadcrumb-item active">Archive Documents</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing'  AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname' OR  `doc_off2` = '$verified_session_office') ORDER BY doc_date2 DESC ";
+                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Deleted'  AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off1` = '$verified_session_office') ORDER BY doc_date2 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -72,8 +72,7 @@ include('session.php');
                       $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
                       $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
                       $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
-                      $docRemarks = $rs['doc_remarks'];  
+                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];   
   
                   ?>
                   <tr>
@@ -82,7 +81,7 @@ include('session.php');
                     <td><?php echo $docName; ?>
                     <td><?php echo $docAct1; ?>
                     <td><?php echo $docDate1; ?>
-                    <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
+                    <td><?php echo $docStat; ?>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
                     <td style="display:none"><?php echo $docTitle?></td>
@@ -95,10 +94,18 @@ include('session.php');
                     <td style="display:none"><?php echo $docAct3?></td>
                     <td style="display:none"><?php echo $docOff3?></td>
                     <td style="display:none"><?php echo $docDate3?></td>
-                    <td style="display:none"><?php echo $docRemarks?></td>
+
                   </td>
-                    <td>                      
-                     <a class="btn btn-danger cancelbtn"><i class="bi bi-x-lg"></i></a>
+                    <td>       
+                      <!-- <div class="dropdown">
+                        <button class="dropbtn">Dropdown</button>
+                        <div class="dropdown-content">
+                          <a href="#">Link 1</a>
+                          <a href="#">Link 2</a>
+                          <a href="#">Link 3</a>
+                        </div>
+                      </div>                -->
+                      <a class="btn btn-secondary cancelbtn"><i class="bi bi-reply-fill"></i></a>
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
                     </td>
                   </tr>
@@ -119,34 +126,69 @@ include('session.php');
 
   </main><!-- End #main -->
 
-  <!-- Desc Document modal -->
-       <div class="modal fade" id="RemarksModal" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered modal-l">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">DOCUMENT DESCRIPTION</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="card" style="margin: 10px;">
-                          <form method="post">
+    <!-- Send Docs Modal -->
+    <div class="modal fade" id="SendModal" tabindex="-1">
+
+                <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Document Submission</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                          <div class="card" style="margin: 10px;">
                             <div class="card-body">
-                               <h5 id="remarks" style="margin-top: 10px;"></h5>                                          
-                                <div class="col-12" style="text-align: center;">
+                              <h2 class="card-title">Submit this document?<h5 id="doc_fileN1" style="text-align: end; color:black;"></h5></h2>
+                              
+                                <!-- Fill out Form -->
+                                <div class="row g-3" style="margin-top: 10px;">
+                                      <input type="hidden" class="form-control" id="send_id" readonly>
+                                      <input type="hidden" class="form-control" id="send_code" readonly>   
+                                      <input type="hidden" class="form-control" id="send_act1" readonly>   
+                                      <input type="hidden" class="form-control" id="send_off1" readonly>   
+                                      <input type="hidden" class="form-control" id="send_date1" readonly>                  
+                                      <div class="col-md-12">
+                                        <select class="form-select" id="send_act2" name="send_act2" onChange="fetchOffice(this.value);">
+                                        <option selected="selected" disabled="disabled">Recipient</option>
+                                          <?php
+                                            require_once("include/conn.php");
+                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' ORDER BY firstname DESC ";
+                                            $result=mysqli_query($conn,$query);
+                                            while($rs=mysqli_fetch_array($result)){
+                                              $dtid =$rs['id'];    
+                                              $dtno =$rs['id_number'];                                  
+                                              $dtFName = $rs['firstname'];    
+                                              $dtLName = $rs['lastname'];    
+                                            
+                                              echo '<option value = "' . $dtno . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
+                                            }
+                                        ?>
+                                        </select>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <select class="form-select" id="send_off2" name="send_off2">
+                                          <option selected="selected" disabled="disabled">Select Office</option>
+                                        </select>
+                                      </div>
+                                      <div class="col-12">
+                                          <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="docremarks" id="docremarks" id="docdesc" required></textarea>
+                                      </div> 
+                                     
                                 </div>
+                              
                             </div>
-                            </form>
-                          </div>   
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                              <button class="btn btn-success" name="send" id="send" >Submit</button>
+                            </div>
+                        <!-- End Form -->
                     </div>
-                  </div>
-        </div>
-      <!-- End Desc office Modal-->
+                </div>
+          </div>
+     <!-- End Send Docs Modal-->
+
       <!-- CancelModal Docs Modal -->
-      <div class="modal fade" id="CancelModal" tabindex="-1">
+          <div class="modal fade" id="CancelModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -155,7 +197,7 @@ include('session.php');
                         </div>
                           <div class="card" style="margin: 10px;">
                             <div class="card-body">
-                              <h2 class="card-title">Return this document?</h2>
+                              <h2 class="card-title">Retrieved this document?</h2>
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
                                   <input type="hidden" class="form-control" id="doc_id" readonly>
@@ -177,7 +219,6 @@ include('session.php');
           </div>
       <!-- End CancelModal Docs Modal-->
 
-  <!-- End of Office Modals -->
 
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
@@ -190,27 +231,11 @@ include('session.php');
   <?php include ('core/js.php');//css connection?>
 
   <!-- JS Scripts -->
-  <script>
-      // this script will execute as soon a the website runs
+    <script>
+        // this script will execute as soon a the website runs
         $(document).ready(function () {
-            
-              // View Function
-                  $('.remarksbtn').on('click', function () {
 
-                      $('#RemarksModal').modal('show');
-
-                      $tr = $(this).closest('tr');
-
-                      var data = $tr.children("td").map(function () {
-                          return $(this).text();
-                      }).get();
-
-                      console.log(data); 
-                      $('#remarks').text(data[18]);
-                    });
-              // End of View function 
-
-            // Received modal calling
+         // Cancel modal calling
               $('.cancelbtn').on('click', function () {
 
                   $('#CancelModal').modal('show');
@@ -226,13 +251,13 @@ include('session.php');
                       $('#doc_id').val(data[0]);
                       $('#doc_code').val(data[1]); 
                 });
-              // End of Received modal calling 
+              // End of Cancel modal calling 
 
-              // Received function
+              // Cancel function
               $('#cancel').click(function(d){ 
                     d.preventDefault();
                       if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
-                        $.post("function/cancel_hold_func.php", {
+                        $.post("function/getback_reject_func.php", {
                           docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
                           docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
                           },function(data){
@@ -256,7 +281,7 @@ include('session.php');
                                   })
                                     Toast.fire({
                                     icon: 'Success',
-                                    title:'Document Returned Successfully '
+                                    title:'Document Successfully Returned'
                                 }).then(function(){
                                   document.location.reload(true)//refresh pages
                                 });
@@ -272,11 +297,28 @@ include('session.php');
                         Swal.fire("You must fill out every field","","warning");
                       }
                   })
-              // End Received function
+              // End Cancel function
+
           });
 
     </script>
-  
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        // Ajax for office picker
+        function fetchOffice(id){
+                $('#send_off2').html('');
+                $.ajax({
+                  type:'post',
+                  url:'function/ajaxdata.php',
+                  data : 'off_id='+id,
+                  success: function(data){
+                    $('#send_off2').html(data);
+                    // console.log("success");
+                  }
+                })
+              }
+              // End of Ajax for office picker
+    </script>
 </body>
 
 </html>

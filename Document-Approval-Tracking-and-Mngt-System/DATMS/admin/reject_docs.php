@@ -73,6 +73,7 @@ include('session.php');
                       $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
                       $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
                       $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];   
+                      $docRemarks = $rs['doc_remarks'];   
   
                   ?>
                   <tr>
@@ -81,7 +82,7 @@ include('session.php');
                     <td><?php echo $docName; ?>
                     <td><?php echo $docAct2; ?>
                     <td><?php echo $docDate2; ?>
-                    <td><?php echo $docStat; ?>
+                    <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
                     <td style="display:none"><?php echo $docTitle?></td>
@@ -94,6 +95,7 @@ include('session.php');
                     <td style="display:none"><?php echo $docAct3?></td>
                     <td style="display:none"><?php echo $docOff3?></td>
                     <td style="display:none"><?php echo $docDate3?></td>
+                    <td style="display:none"><?php echo $docRemarks?></td>
 
                   </td>
                     <td>       
@@ -127,6 +129,32 @@ include('session.php');
 
   </main><!-- End #main -->
 
+   <!-- Desc Document modal -->
+       <div class="modal fade" id="RemarksModal" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered modal-l">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">DOCUMENT DESCRIPTION</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="card" style="margin: 10px;">
+                          <form method="post">
+                            <div class="card-body">
+                               <h5 id="remarks" style="margin-top: 10px;"></h5>                                          
+                                <div class="col-12" style="text-align: center;">
+                                </div>
+                            </div>
+                            </form>
+                          </div>   
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+        </div>
+      <!-- End Desc office Modal-->
      <!-- Send Docs Modal -->
      <div class="modal fade" id="SendModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
@@ -184,7 +212,37 @@ include('session.php');
       <!-- End Send Docs Modal-->
 
    
-    <!-- End of Office Modals -->
+    <!-- End of Docs Modal -->
+
+     <!-- Delete Docs Modal -->
+     <div class="modal fade" id="DeleteModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Document Delete</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                          <div class="card" style="margin: 10px;">
+                            <div class="card-body">
+                              <h2 class="card-title">Delete this document?</h2>
+                                <!-- Fill out Form -->
+                                <div class="row g-3" >
+                                      <input type="hidden" class="form-control" id="delete_id" readonly>
+                                      <input type="hidden" class="form-control" id="delete_code" readonly>                  
+                                      <h5 id="delete_fileN" style="text-align: end; color:black"></h5>   
+                                </div>
+                              
+                            </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                              <button class="btn btn-success" name="save" id="delete" >Delete</button>
+                            </div>
+                        <!-- End Form -->
+                    </div>
+                </div>
+          </div>
+      <!-- End Delete Docs Modal-->
 
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
@@ -201,8 +259,23 @@ include('session.php');
         // this script will execute as soon a the website runs
         $(document).ready(function () {
 
+            // View Function
+                  $('.remarksbtn').on('click', function () {
+
+                      $('#RemarksModal').modal('show');
+
+                      $tr = $(this).closest('tr');
+
+                      var data = $tr.children("td").map(function () {
+                          return $(this).text();
+                      }).get();
+
+                      console.log(data); 
+                      $('#remarks').text(data[18]);
+                    });
+              // End of View function 
            
-               // Hold modal calling
+               // Delete modal calling
               $('.sendbtn').on('click', function () {
 
                   $('#SendModal').modal('show');
@@ -222,9 +295,9 @@ include('session.php');
                       $('#send_id').val(data[0]);
                       $('#send_code').val(data[1]); 
                 });
-              // End of Hold modal calling 
+              // End of Delete modal calling 
 
-              // Hold function
+              // Delete function
               $('#send').click(function(d){ 
                     d.preventDefault();
                       if($('#send_id').val()!="" && $('#send_code').val()!="" && $('#send_act2').val()!="" && $('#send_off2').val()!=""
@@ -259,7 +332,7 @@ include('session.php');
                                 }).then(function(){
                                   document.location.reload(true)//refresh pages
                                 });
-                                    $('#doc_code').val("")
+                                    $('#delete_code').val("")
                                     $('#doc_act2').val("")
                                     $('#doc_off2').val("")
                             }else{
@@ -271,9 +344,72 @@ include('session.php');
                         Swal.fire("You must fill out every field","","warning");
                       }
                   })
-              // End Hold function
+              // End Delete function
 
 
+                 // Delete modal calling
+              $('.deletebtn').on('click', function () {
+
+                  $('#DeleteModal').modal('show');
+
+                  $tr = $(this).closest('tr');
+
+                  var data = $tr.children("td").map(function () {
+                      return $(this).text();
+                  }).get();
+
+                  console.log(data);      
+                      $('#delete_fileN').text(data[2]);  
+                      $('#delete_id').val(data[0]);
+                      $('#delete_code').val(data[1]); 
+                });
+              // End of Delete modal calling 
+
+              // Delete function
+              $('#delete').click(function(d){ 
+                    d.preventDefault();
+                      if($('#delete_id').val()!="" && $('#delete_code').val()!="" ){
+                        $.post("function/delete_func.php", {
+                          docs_id:$('#delete_id').val(), docs_code:$('#delete_code').val()
+                         
+                          },function(data){
+                            if (data.trim() == "Val30"){
+                            $('#DeleteModal').modal('hide');
+                            Swal.fire("No data stored in our database","","error");//response message
+                            // Empty test field
+                          }else if(data.trim() == "success"){
+                            $('#ReceivedModal').modal('hide');
+                                  //success message
+                                    const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 1100,
+                                    timerProsressBar: true,
+                                    didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
+                                  }
+                                  })
+                                    Toast.fire({
+                                    icon: 'Success',
+                                    title:'Document Successfully Deleted'
+                                }).then(function(){
+                                  document.location.reload(true)//refresh pages
+                                });
+                                    $('#delete_code').val("")
+                                    $('#doc_act2').val("")
+                                    $('#doc_off2').val("")
+                            }else{
+                              // Swal.fire("There is somthing wrong","","error");
+                              Swal.fire(data);
+                          }
+                        })
+                      }else{
+                        Swal.fire("You must fill out every field","","warning");
+                      }
+                  })
+              // End Delete function
           });
 
     </script>

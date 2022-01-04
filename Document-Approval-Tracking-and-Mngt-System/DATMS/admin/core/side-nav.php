@@ -20,7 +20,7 @@
       <span class="badge bg-secondary">
          <?php 
             require_once("include/conn.php");
-            $query="SELECT * FROM datms_documents WHERE (`doc_actor1`='$verified_session_firstname $verified_session_lastname' OR `doc_off1` = '$verified_session_office')";
+            $query="SELECT * FROM datms_documents WHERE (`doc_actor1`='$verified_session_firstname $verified_session_lastname' OR `doc_off1` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted')";
             $result=mysqli_query($conn,$query);
             if($result){
                echo mysqli_num_rows($result);

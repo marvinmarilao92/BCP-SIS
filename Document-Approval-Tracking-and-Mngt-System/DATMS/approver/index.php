@@ -68,7 +68,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE (`doc_actor1`='$verified_session_firstname $verified_session_lastname' OR  `doc_off1` = '$verified_session_office') ORDER BY doc_date1 DESC ";
+                    $query="SELECT * FROM datms_documents WHERE (`doc_actor1`='$verified_session_firstname $verified_session_lastname' OR  `doc_off1` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted') ORDER BY doc_date1 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -80,13 +80,13 @@ include('session.php');
                   ?>
                   <tr>
                   <td style="display:none"><?php echo $docId?></td>
-                    <td><?php echo $docCode; ?>
-                    <td><?php echo $docName; ?>
-                    <td><?php echo $docAct2; ?>
-                    <td><?php echo $docDate2; ?>
-                    <td><?php echo $docStat; ?>
-                    <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
-                    <td style="display:none"><?php echo $docDl; ?>
+                    <td><?php echo $docCode; ?></td>
+                    <td><?php echo $docName; ?></td>
+                    <td><?php echo $docAct2; ?></td>
+                    <td><?php echo $docDate2; ?></td>
+                    <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
+                    <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
+                    <td style="display:none"><?php echo $docDl; ?></td>
                     <td style="display:none"><?php echo $docTitle?></td>
                     <td style="display:none"><?php echo $docType?></td>
                     <td style="display:none"><?php echo $docDesc?></td>
@@ -97,8 +97,8 @@ include('session.php');
                     <td style="display:none"><?php echo $docAct3?></td>
                     <td style="display:none"><?php echo $docOff3?></td>
                     <td style="display:none"><?php echo $docDate3?></td>
+                    <td style="display:none"><?php echo $docRemarks?></td>
 
-                  </td>
                     <td>                      
                       <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye"></i></a>
@@ -211,12 +211,40 @@ include('session.php');
                           </div>   
                       </div>
                       <div class="modal-footer">
+                        <button class="btn btn-primary" name="print" id="print" >Print</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                       </div>
                     </div>
                   </div>
         </div>
       <!-- End View office Modal-->
+
+       <!-- Desc Document modal -->
+       <div class="modal fade" id="RemarksModal" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered modal-l">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">DOCUMENT DESCRIPTION</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="card" style="margin: 10px;">
+                          <form method="post">
+                            <div class="card-body">
+                               <h5 id="remarks" style="margin-top: 10px;"></h5>                                          
+                                <div class="col-12" style="text-align: center;">
+                                </div>
+                            </div>
+                            </form>
+                          </div>   
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+        </div>
+      <!-- End Desc office Modal-->
 
       <!-- Edit Office Modal -->
       <div class="modal fade" id="EditModal" tabindex="-1">
@@ -363,10 +391,10 @@ include('session.php');
           } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
                       echo "File too large!";
           } else{
-            $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
+            $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_title` = '$filename'")or die(mysqli_error($conn));
             $counter=mysqli_num_rows($query);
             
-            if ($counter != 1) 
+            if ($counter == 1) 
               { 
                 echo'<script type = "text/javascript">
                         //success message
@@ -612,11 +640,27 @@ include('session.php');
                     JsBarcode("#barcode", data[1], {
                       format: "CODE128",
                       lineColor: "#000",
-                      width: 1,
+                      width: 3,
                       height: 120,
                       textAlign: "center",
                       displayValue: true
                     });
+                  });
+            // End of View function 
+
+             // View Function
+                $('.remarksbtn').on('click', function () {
+
+                    $('#RemarksModal').modal('show');
+
+                    $tr = $(this).closest('tr');
+
+                    var data = $tr.children("td").map(function () {
+                        return $(this).text();
+                    }).get();
+
+                    console.log(data); 
+                    $('#remarks').text(data[10]);
                   });
             // End of View function 
 

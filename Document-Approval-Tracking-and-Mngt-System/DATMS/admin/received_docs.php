@@ -74,6 +74,8 @@ include('session.php');
                       $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
                       $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
                       $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
+                      $docRemarks = $rs['doc_remarks'];   
+  
   
                   ?>
                   <tr>
@@ -82,7 +84,7 @@ include('session.php');
                     <td><?php echo $docName; ?>
                     <td><?php echo $docAct2; ?>
                     <td><?php echo $docDate2; ?>
-                    <td><?php echo $docStat; ?>
+                    <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
                     <td style="display:none"><?php echo $docTitle?></td>
@@ -95,6 +97,7 @@ include('session.php');
                     <td style="display:none"><?php echo $docAct3?></td>
                     <td style="display:none"><?php echo $docOff3?></td>
                     <td style="display:none"><?php echo $docDate3?></td>
+                    <td style="display:none"><?php echo $docRemarks?></td>
 
                   </td>
                     <td>                    
@@ -119,6 +122,34 @@ include('session.php');
     </section>
 
   </main><!-- End #main -->
+  
+
+      <!-- Desc Document modal -->
+       <div class="modal fade" id="RemarksModal" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered modal-l">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">DOCUMENT DESCRIPTION</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="card" style="margin: 10px;">
+                          <form method="post">
+                            <div class="card-body">
+                               <h5 id="remarks" style="margin-top: 10px;"></h5>                                          
+                                <div class="col-12" style="text-align: center;">
+                                </div>
+                            </div>
+                            </form>
+                          </div>   
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+        </div>
+      <!-- End Desc office Modal-->
   
       <!-- View Document modal -->
       <div class="modal fade" id="ViewModal" tabindex="-1">
@@ -203,7 +234,7 @@ include('session.php');
                                         <option selected="selected" disabled="disabled">Recipient</option>
                                           <?php
                                             require_once("include/conn.php");
-                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' ORDER BY firstname DESC ";
+                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' AND `id_number` NOT IN ('$verified_session_username') ORDER BY firstname DESC ";
                                             $result=mysqli_query($conn,$query);
                                             while($rs=mysqli_fetch_array($result)){
                                               $dtid =$rs['id'];    
@@ -284,7 +315,28 @@ include('session.php');
         $(document).ready(function () {
 
           
-            // Hold modal calling
+            // View Function
+                  $('.remarksbtn').on('click', function () {
+
+                      $('#RemarksModal').modal('show');
+
+                      $tr = $(this).closest('tr');
+
+                      var data = $tr.children("td").map(function () {
+                          return $(this).text();
+                      }).get();
+
+                      console.log(data); 
+                      if(data[18]==""){
+                        $('#remarks').text("This is create Status if you want to see your description go to documents module");
+                      }else{
+                         $('#remarks').text(data[18]);
+                      }
+                     
+                    });
+              // End of View function 
+
+              // Hold modal calling
               $('.holdbtn').on('click', function () {
 
                   $('#HoldModal').modal('show');

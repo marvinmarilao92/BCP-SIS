@@ -150,7 +150,7 @@ include('session.php');
                                         <option selected="selected" disabled="disabled">Recipient</option>
                                           <?php
                                             require_once("include/conn.php");
-                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' ORDER BY firstname DESC ";
+                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' AND `id_number` NOT IN ('$verified_session_username') ORDER BY firstname DESC ";
                                             $result=mysqli_query($conn,$query);
                                             while($rs=mysqli_fetch_array($result)){
                                               $dtid =$rs['id'];    
