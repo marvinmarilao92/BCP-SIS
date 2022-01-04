@@ -106,6 +106,7 @@ include('session.php');
                         </div>
                       </div>                -->
                       <a class="btn btn-success sendbtn"><i class="bi bi-cursor-fill"></i></a>
+                      <a class="btn btn-danger deletebtn"><i class="bi bi-trash"></i></a>
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
                     </td>
                   </tr>
