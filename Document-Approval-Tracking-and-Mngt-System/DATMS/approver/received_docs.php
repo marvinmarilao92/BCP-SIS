@@ -54,7 +54,7 @@ include('session.php');
                     <th scope="col">DocCode</th>
                     <th scope="col" >Filename</th>
                     <!-- <th scope="col">Filesize</th>    -->
-                    <th scope="col">Actor</th>   
+                    <th scope="col">Sender</th>   
                     <th scope="col">Date/Time</th>       
                     <th scope="col">Status</th>  
                     <!-- <th scope="col">Downloads</th>    -->
@@ -79,7 +79,7 @@ include('session.php');
                   <tr>
                     <td style="display:none"><?php echo $docId?></td>
                     <td><?php echo $docCode; ?>
-                    <td><?php echo $docName; ?>
+                    <td class="viewbtn"><?php echo $docName; ?>
                     <td><?php echo $docAct1; ?>
                     <td><?php echo $docDate1; ?>
                     <td><?php echo $docStat; ?>
@@ -97,11 +97,12 @@ include('session.php');
                     <td style="display:none"><?php echo $docDate3?></td>
 
                   </td>
-                    <td>                      
-                      <a class="btn btn-secondary sendbtn"><i class="bi bi-cursor-fill"></i></a>
+                    <td>                                           
                       <a class="btn btn-success approvedbtn"><i class="bi bi-check-lg"></i></a>
-                      <a class="btn btn-danger holdbtn" ><i class="bi bi-folder-symlink" ></i></a>
+                      <a class="btn btn-danger rejectbtn" ><i class="bi bi-x-lg" ></i></a>      
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>                
+                      <a class="btn btn-secondary sendbtn"><i class="bi bi-cursor-fill"></i></a>
+                      <a class="btn btn-dark holdbtn" ><i class="bi bi-question-lg" ></i></a>              
                     </td>
                   </tr>
 
@@ -179,6 +180,70 @@ include('session.php');
                 </div>
           </div>
       <!-- End Hold Docs Modal-->
+
+       <!-- Approved Docs Modal -->
+       <div class="modal fade" id="ApprovedModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Document Approved</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                          <div class="card" style="margin: 10px;">
+                            <div class="card-body">
+                              <h2 class="card-title">Are you sure you signed this document?</h2>
+                                <!-- Fill out Form -->
+                                <div class="row g-3" >
+                                      <input type="hidden" class="form-control" id="signed_id" readonly>
+                                      <input type="hidden" class="form-control" id="signed_code" readonly>                  
+                                      <input type="hidden" class="form-control" id="signed_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
+                                      <input type="hidden" class="form-control" id="signed_off2" value="<?php echo $verified_session_office?>" readonly> 
+                                      <h5 id="signed_fileN" style="text-align: end; color:black"></h5>   
+                                </div>
+                              
+                            </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                              <button class="btn btn-success" name="save" id="approved" >Approve</button>
+                            </div>
+                        <!-- End Form -->
+                    </div>
+                </div>
+          </div>
+      <!-- End Approved Docs Modal-->
+
+       <!-- Rejected Docs Modal -->
+       <div class="modal fade" id="RejectedModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Document Reject</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                          <div class="card" style="margin: 10px;">
+                            <div class="card-body">
+                              <h2 class="card-title">Reject this document?</h2>
+                                <!-- Fill out Form -->
+                                <div class="row g-3" >
+                                      <input type="hidden" class="form-control" id="reject_id" readonly>
+                                      <input type="hidden" class="form-control" id="reject_code" readonly>                  
+                                      <input type="hidden" class="form-control" id="signed_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
+                                      <input type="hidden" class="form-control" id="reject_off2" value="<?php echo $verified_session_office?>" readonly> 
+                                      <h5 id="reject_fileN" style="text-align: end; color:black"></h5>   
+                                </div>
+                              
+                            </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                              <button class="btn btn-danger" name="save" id="reject" >Reject</button>
+                            </div>
+                        <!-- End Form -->
+                    </div>
+                </div>
+          </div>
+      <!-- End Rejected Docs Modal-->
 
        <!-- Send Docs Modal -->
        <div class="modal fade" id="SendModal" tabindex="-1">
@@ -284,8 +349,134 @@ include('session.php');
       // this script will execute as soon a the website runs
         $(document).ready(function () {
 
+          // Approved modal calling
+              $('.rejectbtn').on('click', function () {
+
+                  $('#RejectedModal').modal('show');
+
+                  $tr = $(this).closest('tr');
+
+                  var data = $tr.children("td").map(function () {
+                      return $(this).text();
+                  }).get();
+
+                  console.log(data);      
+                      $('#reject_fileN').text(data[2]);  
+                      $('#reject_id').val(data[0]);
+                      $('#reject_code').val(data[1]); 
+                });
+              // End of Approved modal calling 
+
+              // Approved function
+              $('#reject').click(function(d){ 
+                    d.preventDefault();
+                      if($('#reject_id').val()!="" && $('#reject_code').val()!="" && $('#reject_act2').val()!="" && $('#reject_off2').val()!="" ){
+                        $.post("function/reject_func.php", {
+                          docs_id:$('#signed_id').val(), docs_code:$('#reject_code').val(),
+                          docs_act2:$('#signed_act2').val(), docs_off2:$('#reject_off2').val()
+                          },function(data){
+                            if (data.trim() == "Val30"){
+                            $('#RejectedModal').modal('hide');
+                            Swal.fire("No data stored in our database","","error");//response message
+                            // Empty test field
+                          }else if(data.trim() == "success"){
+                            $('#RejectedModal').modal('hide');
+                                 //success message
+                                  const Toast = Swal.mixin({
+                                  toast: true,
+                                  position: "top-end",
+                                  showConfirmButton: false,
+                                  timer: 2000,
+                                  timerProsressBar: true,
+                                  didOpen: (toast) => {
+                                  toast.addEventListener("mouseenter", Swal.stopTimer)
+                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                  }
+                                  })
+                                  Toast.fire({
+                                  icon: "success",
+                                  title:"You Successfully Approved this Document"
+                                  }).then(function(){
+                                    window.location = "received_docs.php";//refresh pages
+                                  });
+                                    $('#reject_code').val("")
+                                    $('#rejec_act2').val("")
+                                    $('#rejec_off2').val("")
+                            }else{
+                              Swal.fire("There is somthing wrong","","error");
+                              // Swal.fire(data);
+                          }
+                        })
+                      }else{
+                        Swal.fire("You must fill out every field","","warning");
+                      }
+                  })
+              // End Approved function
+              // Approved modal calling
+              $('.approvedbtn').on('click', function () {
+
+                  $('#ApprovedModal').modal('show');
+
+                  $tr = $(this).closest('tr');
+
+                  var data = $tr.children("td").map(function () {
+                      return $(this).text();
+                  }).get();
+
+                  console.log(data);      
+                      $('#signed_fileN').text(data[2]);  
+                      $('#signed_id').val(data[0]);
+                      $('#signed_code').val(data[1]); 
+                });
+              // End of Approved modal calling 
+
+              // Approved function
+              $('#approved').click(function(d){ 
+                    d.preventDefault();
+                      if($('#signed_id').val()!="" && $('#signed_code').val()!="" && $('#signed_act2').val()!="" && $('#signed_off2').val()!="" ){
+                        $.post("function/approved_func.php", {
+                          docs_id:$('#signed_id').val(), docs_code:$('#signed_code').val(),
+                          docs_act2:$('#signed_act2').val(), docs_off2:$('#signed_off2').val()
+                          },function(data){
+                            if (data.trim() == "Val30"){
+                            $('#ApprovedModal').modal('hide');
+                            Swal.fire("No data stored in our database","","error");//response message
+                            // Empty test field
+                          }else if(data.trim() == "success"){
+                            $('#ReceivedModal').modal('hide');
+                                 //success message
+                                  const Toast = Swal.mixin({
+                                  toast: true,
+                                  position: "top-end",
+                                  showConfirmButton: false,
+                                  timer: 2000,
+                                  timerProsressBar: true,
+                                  didOpen: (toast) => {
+                                  toast.addEventListener("mouseenter", Swal.stopTimer)
+                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                  }
+                                  })
+                                  Toast.fire({
+                                  icon: "success",
+                                  title:"You Successfully Approved this Document"
+                                  }).then(function(){
+                                    window.location = "received_docs.php";//refresh pages
+                                  });
+                                    $('#doc_code').val("")
+                                    $('#doc_act2').val("")
+                                    $('#doc_off2').val("")
+                            }else{
+                              Swal.fire("There is somthing wrong","","error");
+                              // Swal.fire(data);
+                          }
+                        })
+                      }else{
+                        Swal.fire("You must fill out every field","","warning");
+                      }
+                  })
+              // End Approved function
           
-            // Hold modal calling
+              // Hold modal calling
               $('.holdbtn').on('click', function () {
 
                   $('#HoldModal').modal('show');
@@ -312,7 +503,7 @@ include('session.php');
                           docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
                           },function(data){
                             if (data.trim() == "Val30"){
-                            $('#EditModal').modal('hide');
+                            $('#HoldModal').modal('hide');
                             Swal.fire("No data stored in our database","","error");//response message
                             // Empty test field
                           }else if(data.trim() == "success"){
@@ -349,7 +540,7 @@ include('session.php');
                   })
               // End Hold function
 
-               // Hold modal calling
+               // Send modal calling
               $('.sendbtn').on('click', function () {
 
                   $('#SendModal').modal('show');
@@ -369,9 +560,9 @@ include('session.php');
                       $('#send_id').val(data[0]);
                       $('#send_code').val(data[1]); 
                 });
-              // End of Hold modal calling 
+              // End of Send modal calling 
 
-              // Hold function
+              // Send function
               $('#send').click(function(d){ 
                     d.preventDefault();
                       if($('#send_id').val()!="" && $('#send_code').val()!="" && $('#send_act2').val()!="" && $('#send_off2').val()!=""
@@ -418,7 +609,7 @@ include('session.php');
                         Swal.fire("You must fill out every field","","warning");
                       }
                   })
-              // End Hold function
+              // End Send function
 
           });
 

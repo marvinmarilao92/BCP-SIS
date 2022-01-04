@@ -54,7 +54,7 @@ include('session.php');
                     <th scope="col">DocCode</th>
                     <th scope="col" >Filename</th>
                     <!-- <th scope="col">Filesize</th>    -->
-                    <th scope="col">Actor</th>   
+                    <th scope="col">Sender</th>   
                     <th scope="col">Date/Time</th>       
                     <th scope="col">Status</th>  
                     <!-- <th scope="col">Downloads</th>    -->

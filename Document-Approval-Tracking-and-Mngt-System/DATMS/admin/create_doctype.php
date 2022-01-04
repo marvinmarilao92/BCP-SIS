@@ -122,10 +122,10 @@ include('session.php');
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
                                   <div class="col-md-4">
-                                      <input type="text" class="form-control" placeholder="DocType Code" id="dtcode" required>
+                                      <!-- <input type="text" class="form-control" placeholder="DocType Code" id="dtcode" required> -->
                                   </div>
                                   <br>
-                                  <div class="col-md-8">
+                                  <div class="col-md-12">
                                       <input type="text" class="form-control" placeholder="Name" id="dtname" required>
                                   </div>
                                   <br>
@@ -158,7 +158,7 @@ include('session.php');
                       <div class="card" style="margin: 10px;">
                             <div class="card-body">
                               <h5 class="card-title">Office Details</h5>
-                                Office Code: <h5 id="view_code" style="margin-left: 60px;"></h5>
+                                
                                 Office Name: <h5 id="view_name" style="margin-left: 60px;"></h5>
                                 Location: <h5 id="view_loc" style="margin-left: 60px;"></h5>
                                 Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
@@ -188,10 +188,10 @@ include('session.php');
                                 <div class="row g-3" >
                                   <input type="hidden" class="form-control" id="dt_idE" readonly>
                                   <div class="col-md-4">
-                                      Code: <input type="text" class="form-control" id="dt_codeE" readonly>
+                                       <input type="hidden" class="form-control" id="dt_codeE" readonly>
                                   </div>
                                   <br>
-                                  <div class="col-md-8">
+                                  <div class="col-md-12">
                                       Name: <input type="text" class="form-control" id="dt_nameE">
                                   </div>
                                   <br>
@@ -296,9 +296,8 @@ include('session.php');
               // Save function
                 $('#save').click(function(a){ 
                   a.preventDefault();
-                    if($('#dtcode').val()!="" && $('#dtname').val()!="" && $('#dtdesc').val()!=""){
+                    if($('#dtname').val()!="" && $('#dtdesc').val()!=""){
                       $.post("function/add_doctype.php", {
-                        dtcode:$('#dtcode').val(),
                         dtname:$('#dtname').val(),
                         dtdesc:$('#dtdesc').val()
                         },function(data){
@@ -425,7 +424,6 @@ include('session.php');
                     }).get();
 
                     console.log(data);        
-                    $('#view_code').text(data[1]);
                     $('#view_name').text(data[2]);
                     $('#view_loc').text(data[3]);
                     $('#view_date').text(data[4]);

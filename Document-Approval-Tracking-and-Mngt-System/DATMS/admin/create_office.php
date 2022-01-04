@@ -120,10 +120,10 @@ include('session.php');
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
                                   <div class="col-md-4">
-                                      <input type="text" class="form-control" placeholder="Office Code" id="offcode" required>
+                                      <!-- <input type="text" class="form-control" placeholder="Office Code" id="offcode" required> -->
                                   </div>
                                   <br>
-                                  <div class="col-md-8">
+                                  <div class="col-md-12">
                                       <input type="text" class="form-control" placeholder="Name" id="offtitle" required>
                                   </div>
                                   <br>
@@ -156,7 +156,6 @@ include('session.php');
                       <div class="card" style="margin: 10px;">
                             <div class="card-body">
                               <h5 class="card-title">Office Details</h5>
-                                Office Code: <h6 id="view_code" style="margin-left: 60px;"></h6>
                                 Office Name: <h6 id="view_name" style="margin-left: 60px;"></h6>
                                 Location: <h6 id="view_loc" style="margin-left: 60px;"></h6>
                                 Date Created: <h6 id="view_date" style="margin-left: 60px;"></h6>                
@@ -186,10 +185,10 @@ include('session.php');
                                 <div class="row g-3" >
                                   <input type="hidden" class="form-control" id="off_idE" readonly>
                                   <div class="col-md-4">
-                                      Code: <input type="text" class="form-control" id="off_codeE" readonly>
+                                      <input type="hidden" class="form-control" id="off_codeE" readonly>
                                   </div>
                                   <br>
-                                  <div class="col-md-8">
+                                  <div class="col-md-12">
                                       Name: <input type="text" class="form-control" id="off_nameE">
                                   </div>
                                   <br>
@@ -294,9 +293,8 @@ include('session.php');
               // Save Office function
               $('#save').click(function(a){ 
                   a.preventDefault();
-                    if($('#offcode').val()!="" && $('#offtitle').val()!="" && $('#offloc').val()!=""){
+                    if($('#offtitle').val()!="" && $('#offloc').val()!=""){
                       $.post("function/add_office.php", {
-                        offcode:$('#offcode').val(),
                         offname:$('#offtitle').val(),
                         offloc:$('#offloc').val()
                         },function(data){
@@ -304,7 +302,6 @@ include('session.php');
                           $('#AddModal').modal('hide');
                           Swal.fire("Office is already in server","","error");//response message
                           // Empty test field
-                          $('#offcode').val("")
                           $('#offtitle').val("")
                           $('#offloc').val("")
                         }else if(data.trim() == "success"){
@@ -328,7 +325,6 @@ include('session.php');
                               }).then(function(){
                                 document.location.reload(true)//refresh pages
                               });
-                                $('#offcode').val("")
                                 $('#offtitle').val("")
                                 $('#offloc').val("")
                           }else{
@@ -419,7 +415,6 @@ include('session.php');
                     }).get();
 
                     console.log(data);        
-                    $('#view_code').text(data[1]);
                     $('#view_name').text(data[2]);
                     $('#view_loc').text(data[3]);
                     $('#view_date').text(data[4]);

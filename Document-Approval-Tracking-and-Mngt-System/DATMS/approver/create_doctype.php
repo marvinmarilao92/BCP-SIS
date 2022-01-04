@@ -122,7 +122,7 @@ include('session.php');
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
                                   <div class="col-md-4">
-                                      <input type="text" class="form-control" placeholder="DocType Code" id="dtcode" required>
+                                      <!-- <input type="text" class="form-control" placeholder="DocType Code" id="dtcode" required> -->
                                   </div>
                                   <br>
                                   <div class="col-md-8">
@@ -188,7 +188,7 @@ include('session.php');
                                 <div class="row g-3" >
                                   <input type="hidden" class="form-control" id="dt_idE" readonly>
                                   <div class="col-md-4">
-                                      Code: <input type="text" class="form-control" id="dt_codeE" readonly>
+                                       <input type="hidden" class="form-control" id="dt_codeE" readonly>
                                   </div>
                                   <br>
                                   <div class="col-md-8">
@@ -296,9 +296,8 @@ include('session.php');
               // Save function
                 $('#save').click(function(a){ 
                   a.preventDefault();
-                    if($('#dtcode').val()!="" && $('#dtname').val()!="" && $('#dtdesc').val()!=""){
+                    if($('#dtname').val()!="" && $('#dtdesc').val()!=""){
                       $.post("function/add_doctype.php", {
-                        dtcode:$('#dtcode').val(),
                         dtname:$('#dtname').val(),
                         dtdesc:$('#dtdesc').val()
                         },function(data){

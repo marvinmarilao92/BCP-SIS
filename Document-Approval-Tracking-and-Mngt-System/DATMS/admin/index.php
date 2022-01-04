@@ -160,14 +160,14 @@ include('session.php');
                   <h5 class="card-title">Document Tracked <span>Per Office</span></h5>
                 <canvas id="barChart" style="max-height: 400px;"></canvas>
                  <?php
-                       require_once("include/connection.php");
+                       require_once("include/conn.php");
 
-                             $sql ="SELECT *,count(EMAIL) as count FROM upload_files group by EMAIL;";
+                             $sql ="SELECT *,count(doc_off1) as count FROM datms_documents group by doc_off1;";
                              $result = mysqli_query($conn,$sql);
                              $chart_data="";
                              while ($row = mysqli_fetch_array($result)) { 
                      
-                                $name[]  = $row['EMAIL']  ;
+                                $name[]  = $row['doc_off1']  ;
                                 $counts[] = $row['count'];
                             }
                      

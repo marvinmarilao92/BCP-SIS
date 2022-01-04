@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Rejected'  AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office') ORDER BY doc_date2 DESC ";
+                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Rejected'  AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off1` = '$verified_session_office') ORDER BY doc_date2 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
