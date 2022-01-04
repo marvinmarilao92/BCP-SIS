@@ -51,7 +51,8 @@ include('session.php');
             </div>
             <div class="card-body" >           
               <!-- Table for Office records -->
-              <table class="table table-hover datatable" >
+              <form method="POST">
+                 <table class="table table-hover datatable" >
                 <thead>
                   <tr>
                     <th scope="col">DocCode</th>
@@ -99,7 +100,7 @@ include('session.php');
 
                   </td>
                     <td>                      
-                      <a class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>
+                      <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye"></i></a>
                       <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' ><i class="bi bi-download" ></i></a>
                       <a class="btn btn-dark " ><i class="bi bi-clock-history" ></i></a>
@@ -111,7 +112,7 @@ include('session.php');
                 </tbody>
               </table>
               <!-- End of office table record -->
-
+              </form>
             </div>
           </div>
 
@@ -194,25 +195,17 @@ include('session.php');
                         <div class="card" style="margin: 10px;">
                           <form method="post">
                             <div class="card-body">
-                             
                                 <h5 class="card-title">Document Information</h5>
+                                Filename: <h5 id="view_filename" style="margin-left: 60px;"></h5>
+                                Creator: <h5 id="view_creator" style="margin-left: 60px;"></h5>
+                                Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
                                 <input type="hidden" id="view_code" name="view_code" class="form-control" placeholder="Title" readonly>
                                 <input type="hidden" id="view_title" name="view_title" class="form-control" placeholder="Title" readonly>
                                 <input type="hidden" id="view_filename" name="view_filename" class="form-control" placeholder="Title" readonly>
-                                                           
-                              <?php
-                                  // include 'barcode128.php';
-                                  // $code = $_POST['view_code'];
-                                  // $title= $_POST['view_title'];
-                                  // $filename= $_POST['view_filename'];
-                                  
-                                  // echo "<p class='inline'><span ><b>Title: $view_title</b></span>".bar128(stripcslashes($code))."<span ><b>FileName: ".$filename." </b><span></p>&nbsp&nbsp&nbsp&nbsp";
-                              ?>  
-                              <h6 id="view_code1">
-                                <!-- Office Code: <h5 id="view_code" style="margin-left: 60px;"></h5>
-                                Office Name: <h5 id="view_name" style="margin-left: 60px;"></h5>
-                                Location: <h5 id="view_loc" style="margin-left: 60px;"></h5>
-                                Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                 -->
+                                
+                                <div class="col-12" style="text-align: center;">
+                                  <svg id="barcode"></svg>
+                                </div>
                             </div>
                             </form>
                           </div>   
@@ -339,7 +332,10 @@ include('session.php');
 
             $isExist = true;
             //checking if there's a duplicate number because we use random number for id numbers to prevent errors (NOTE PARTILLY TESTED)
-            $doc_code = rand(10000000,99999999);
+            date_default_timezone_set("asia/manila");
+            $year = date("Y",strtotime("+0 HOURS"));
+            $random_num= rand(1000,9999);
+            $doc_code =  "doc".$year.$random_num;
 
           if (!in_array($extension, ['pdf'])) {
                   echo'<script type = "text/javascript">
@@ -370,7 +366,7 @@ include('session.php');
             $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
             $counter=mysqli_num_rows($query);
             
-            if ($counter == 1) 
+            if ($counter != 1) 
               { 
                 echo'<script type = "text/javascript">
                         //success message
@@ -609,10 +605,18 @@ include('session.php');
                     document.getElementById("view_code").placeholder = data[1];      
                     document.getElementById("view_title").placeholder = data[8];   
                     document.getElementById("view_filename").placeholder = data[2];   
-                    $('#view_code1').text(data[1]);
-                    $('#view_name').text(data[2]);
-                    $('#view_loc').text(data[3]);
+                    $('#view_filename').text(data[2]);
+                    $('#view_creator').text(data[3]);
                     $('#view_date').text(data[4]);
+                    // JsBarcode("#barcode", data[1]);
+                    JsBarcode("#barcode", data[1], {
+                      format: "CODE128",
+                      lineColor: "#000",
+                      width: 1,
+                      height: 120,
+                      textAlign: "center",
+                      displayValue: true
+                    });
                   });
             // End of View function 
 

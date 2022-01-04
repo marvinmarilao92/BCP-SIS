@@ -10,7 +10,7 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'reject';  include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'reject'; $col = 'records'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
@@ -97,15 +97,7 @@ include('session.php');
 
                   </td>
                     <td>       
-                      <!-- <div class="dropdown">
-                        <button class="dropbtn">Dropdown</button>
-                        <div class="dropdown-content">
-                          <a href="#">Link 1</a>
-                          <a href="#">Link 2</a>
-                          <a href="#">Link 3</a>
-                        </div>
-                      </div>                -->
-                      <a class="btn btn-success sendbtn"><i class="bi bi-cursor-fill"></i></a>
+                      <a class="btn btn-secondary cancelbtn"><i class="bi bi-reply-fill"></i></a>
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
                     </td>
                   </tr>
@@ -126,64 +118,37 @@ include('session.php');
 
   </main><!-- End #main -->
 
-     <!-- Send Docs Modal -->
-     <div class="modal fade" id="SendModal" tabindex="-1">
+    <!-- CancelModal Docs Modal -->
+      <div class="modal fade" id="CancelModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">Document Submission</h5>
+                          <h5 class="modal-title">Cancel Submission</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           <div class="card" style="margin: 10px;">
                             <div class="card-body">
-                              <h2 class="card-title">Submit Document</h2>
+                              <h2 class="card-title">Return this document?</h2>
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
-                                      <input type="hidden" class="form-control" id="send_id" readonly>
-                                      <input type="hidden" class="form-control" id="send_code" readonly>   
-                                      <input type="hidden" class="form-control" id="send_act1" readonly>   
-                                      <input type="hidden" class="form-control" id="send_off1" readonly>   
-                                      <input type="hidden" class="form-control" id="send_date1" readonly>                  
-                                      <div class="col-md-12">
-                                        <select class="form-select" id="send_act2" name="send_act2" onChange="fetchOffice(this.value);">
-                                        <option selected="selected" disabled="disabled">Recipient</option>
-                                          <?php
-                                            require_once("include/conn.php");
-                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' ORDER BY firstname DESC ";
-                                            $result=mysqli_query($conn,$query);
-                                            while($rs=mysqli_fetch_array($result)){
-                                              $dtid =$rs['id'];    
-                                              $dtno =$rs['id_number'];                                  
-                                              $dtFName = $rs['firstname'];    
-                                              $dtLName = $rs['lastname'];    
-                                            
-                                              echo '<option value = "' . $dtno . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
-                                            }
-                                        ?>
-                                        </select>
-                                      </div>
-                                      <div class="col-md-12">
-                                        <select class="form-select" id="send_off2" name="send_off2">
-                                          <option selected="selected" disabled="disabled">Select Office</option>
-                                        </select>
-                                      </div>
-                                      <h5 id="doc_fileN1" style="text-align: end; color:black"></h5>   
+                                  <input type="hidden" class="form-control" id="doc_id" readonly>
+                                      <input type="hidden" class="form-control" id="doc_code" readonly>                  
+                                      <input type="hidden" class="form-control" id="doc_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
+                                      <input type="hidden" class="form-control" id="doc_off2" value="<?php echo $verified_session_office?>" readonly> 
+                                      <h5 id="doc_fileN" style="text-align: end; color:black"></h5>   
                                 </div>
                               
                             </div>
                           </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                              <button class="btn btn-success" name="send" id="send" >Submit</button>
+                              <button class="btn btn-success" name="save" id="cancel" >Return Document</button>
                             </div>
                         <!-- End Form -->
                     </div>
                 </div>
           </div>
-      <!-- End Send Docs Modal-->
-
-   
-    <!-- End of Office Modals -->
+    <!-- End CancelModal Docs Modal-->
 
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
@@ -201,10 +166,10 @@ include('session.php');
         $(document).ready(function () {
 
            
-               // Hold modal calling
-              $('.sendbtn').on('click', function () {
+              // Cancel modal calling
+              $('.cancelbtn').on('click', function () {
 
-                  $('#SendModal').modal('show');
+                  $('#CancelModal').modal('show');
 
                   $tr = $(this).closest('tr');
 
@@ -213,29 +178,22 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#send_act1').val(data[12]);  
-                      $('#send_off1').val(data[13]);
-                      $('#send_date1').val(data[14]); 
-
-                      $('#doc_fileN1').text(data[2]);  
-                      $('#send_id').val(data[0]);
-                      $('#send_code').val(data[1]); 
+                      $('#doc_fileN').text(data[2]);  
+                      $('#doc_id').val(data[0]);
+                      $('#doc_code').val(data[1]); 
                 });
-              // End of Hold modal calling 
+              // End of Cancel modal calling 
 
-              // Hold function
-              $('#send').click(function(d){ 
+              // Cancel function
+              $('#cancel').click(function(d){ 
                     d.preventDefault();
-                      if($('#send_id').val()!="" && $('#send_code').val()!="" && $('#send_act2').val()!="" && $('#send_off2').val()!=""
-                      && $('#send_act1').val()!="" && $('#send_off1').val()!="" && $('#send_date1').val()!="" ){
-                        $.post("function/send_func.php", {
-                          docs_id:$('#send_id').val(), docs_code:$('#send_code').val(),
-                          docs_act2:$('#send_act2').val(), docs_off2:$('#send_off2').val(),
-                          docs_act1:$('#send_act1').val(), docs_off1:$('#send_off1').val(),
-                          docs_date1:$('#send_date1').val()
+                      if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
+                        $.post("function/cancel_reject_func.php", {
+                          docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
+                          docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
                           },function(data){
                             if (data.trim() == "Val30"){
-                            $('#SendModal').modal('hide');
+                            $('#EditModal').modal('hide');
                             Swal.fire("No data stored in our database","","error");//response message
                             // Empty test field
                           }else if(data.trim() == "success"){
@@ -254,7 +212,7 @@ include('session.php');
                                   })
                                     Toast.fire({
                                     icon: 'Success',
-                                    title:'Document is Successfully Submitted'
+                                    title:'Document Cancel Reject'
                                 }).then(function(){
                                   document.location.reload(true)//refresh pages
                                 });
@@ -270,28 +228,10 @@ include('session.php');
                         Swal.fire("You must fill out every field","","warning");
                       }
                   })
-              // End Hold function
-
+              // End Cancel function
 
           });
 
-    </script>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript">
-        // Ajax for office picker
-        function fetchOffice(id){
-                $('#send_off2').html('');
-                $.ajax({
-                  type:'post',
-                  url:'function/ajaxdata.php',
-                  data : 'off_id='+id,
-                  success: function(data){
-                    $('#send_off2').html(data);
-                    // console.log("success");
-                  }
-                })
-              }
-              // End of Ajax for office picker
     </script>
 </body>
 

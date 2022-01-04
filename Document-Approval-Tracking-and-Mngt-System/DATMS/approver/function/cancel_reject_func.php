@@ -11,14 +11,13 @@ $db = mysqli_select_db($conn, 'sis_db');
              $doc_code = mysqli_real_escape_string($conn,$_POST['docs_code']);
              $d_act2 = mysqli_real_escape_string($conn,$_POST['docs_act2']);
              $d_off2 = mysqli_real_escape_string($conn,$_POST['docs_off2']);
-             $d_remarks = mysqli_real_escape_string($conn,$_POST['docs_remarks']);
              
         $q_checkcode = $conn->query("SELECT * FROM `datms_documents` WHERE `doc_code` = '$doc_code'") or die(mysqli_error($conn));
             $v_checkcode = $q_checkcode->num_rows;
             if($v_checkcode < 1){
                 echo ('Val30');
             }else {
-                $conn->query("UPDATE datms_documents SET doc_status = 'Approved', doc_actor2 ='$d_act2', doc_off2='$d_off2', doc_date2 ='$date' , doc_remarks ='$d_remarks' WHERE doc_id='$id'") or die(mysqli_error($conn));
+                $conn->query("UPDATE datms_documents SET doc_status = 'Pending', doc_actor2 ='$d_act2', doc_off2='$d_off2', doc_date2 ='$date' , doc_actor3 ='', doc_off3 ='', doc_date3 ='', doc_remarks ='' WHERE doc_id='$id'") or die(mysqli_error($conn));
                 echo ('success');
             }
         }else{

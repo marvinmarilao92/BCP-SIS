@@ -53,7 +53,7 @@ include('session.php');
               </div> 
             </div>
             <div class="card-body" >           
-              <!-- Table for Office records -->
+              <!-- Table for DocType records -->
               <table class="table table-hover datatable" >
                 <thead>
                   <tr>
@@ -95,7 +95,7 @@ include('session.php');
                   
                 </tbody>
               </table>
-              <!-- End of office table record -->
+              <!-- End of DocType table record -->
 
             </div>
           </div>
@@ -107,8 +107,8 @@ include('session.php');
 
   </main><!-- End #main -->
 
-  <!-- Office Modals -->
-      <!-- Create Office Modal -->
+  <!-- DocType Modals -->
+      <!-- Create DocType Modal -->
       <div class="modal fade" id="AddModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
@@ -144,23 +144,23 @@ include('session.php');
                     </div>
                 </div>     
         </div>
-      <!-- End Create Office Modal-->
+      <!-- End Create DocType Modal-->
 
-      <!-- View Office modal -->
+      <!-- View DocType modal -->
       <div class="modal fade" id="ViewModal" tabindex="-1">
                   <div class="modal-dialog modal-dialog-centered modal-l">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">Office Information</h5>
+                        <h5 class="modal-title">DOCTYPE INFORMATION</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                       <div class="card" style="margin: 10px;">
                             <div class="card-body">
-                              <h5 class="card-title">Office Details</h5>
-                                
-                                Office Name: <h5 id="view_name" style="margin-left: 60px;"></h5>
-                                Location: <h5 id="view_loc" style="margin-left: 60px;"></h5>
+                              <h5 class="card-title">DocType Details</h5>
+                                DocType Code: <h5 id="view_code" style="margin-left: 60px;"></h5>
+                                DocType Name: <h5 id="view_name" style="margin-left: 60px;"></h5>
+                                Description: <h5 id="view_loc" style="margin-left: 60px;"></h5>
                                 Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
                             </div>
                           </div>   
@@ -171,14 +171,14 @@ include('session.php');
                     </div>
                   </div>
         </div>
-      <!-- End View office Modal-->
+      <!-- End View DocType Modal-->
 
-      <!-- Edit Office Modal -->
+      <!-- Edit DocType Modal -->
       <div class="modal fade" id="EditModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">EDIT OFFICE</h5>
+                          <h5 class="modal-title">EDIT DOCTYPE</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           <div class="card" style="margin: 10px;">
@@ -210,14 +210,14 @@ include('session.php');
                     </div>
                 </div>
         </div>
-      <!-- End Edit Office Modal-->
+      <!-- End Edit DocType Modal-->
 
-      <!-- Delete Office Modal -->
+      <!-- Delete DocType Modal -->
       <div class="modal fade" id="DeleteModal" tabindex="-1">
               <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">DELETE OFFICE</h5>
+                        <h5 class="modal-title">DELETE DOCTYPE</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                         <div class="card" style="margin: 10px;">
@@ -225,21 +225,21 @@ include('session.php');
                             <br>
                             <input type="hidden"  name="delete_id" id="delete_id" readonly>
                             <center>
-                              <h5>Are you sure you want to delete these Office?</h5>
+                              <h5>Are you sure you want to delete these DocType?</h5>
                               <h5 class="text-danger">This action cannot be undone.</h5>   
                             </center>                
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Office</button>
+                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete DocType</button>
                         </div>
                       <!-- End Form -->
                   </div>
               </div>
         </div>
-      <!-- End delete Office Modal -->
-  <!-- End of Office Modals -->
+      <!-- End delete DocType Modal -->
+  <!-- End of DocType Modals -->
 
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
@@ -304,7 +304,7 @@ include('session.php');
                         if (data.trim() == "failed"){
                           $('#AddModal').modal('hide');
                           //response message
-                          Swal.fire("Office is already in server","","error");
+                          Swal.fire("DocType is already in server","","error");
                           
                           // Empty test field
                           $('#dtcode').val("")
@@ -326,7 +326,7 @@ include('session.php');
                                 })
                               Toast.fire({
                               icon: 'success',
-                              title:'Office successfully Saved'
+                              title:'DocType successfully Saved'
                               }).then(function(){
                                 document.location.reload(true)//refresh pages
                               });
@@ -374,7 +374,7 @@ include('session.php');
                           },function(data){
                             if (data.trim() == "failed"){
                             $('#EditModal').modal('hide');
-                            Swal.fire("Office Title is currently in use","","error");//response message
+                            Swal.fire("DocType Title is currently in use","","error");//response message
                             // Empty test field
                             $('#dt_codeE').val("")
                             $('#dt_nameE').val("")
@@ -424,6 +424,7 @@ include('session.php');
                     }).get();
 
                     console.log(data);        
+                    $('#view_code').text(data[1]);
                     $('#view_name').text(data[2]);
                     $('#view_loc').text(data[3]);
                     $('#view_date').text(data[4]);

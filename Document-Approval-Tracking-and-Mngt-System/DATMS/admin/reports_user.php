@@ -71,18 +71,18 @@ include('session.php');
                             </div> 
                           </div>
                           <div class="card-body" >           
-                            <!-- Table for Office records -->
+                            <!-- Table for Role records -->
                             <table class="table table-hover datatable" >
                               <thead>
                                 <tr>
-                                  <th scope="col">DocCode</th>
-                                  <th scope="col" >Filename</th>
+                                  <th scope="col">Full Name</th>
+                                  <th scope="col" >Department</th>
                                   <!-- <th scope="col">Filesize</th>    -->
-                                  <th scope="col">Actor</th>   
-                                  <th scope="col">Date/Time</th>       
-                                  <th scope="col">Status</th>  
+                                  <th scope="col">Role</th>   
+                                  <th scope="col">Office</th>       
+                                  <th scope="col">Contact</th>  
                                   <!-- <th scope="col">Downloads</th>    -->
-                                  <th scope="col">Action</th>          
+                                  <th scope="col">Account Status</th>          
                                 </tr>
                               </thead>
                               <tbody>
@@ -120,18 +120,18 @@ include('session.php');
                             </div> 
                           </div>
                           <div class="card-body" >           
-                            <!-- Table for Office records -->
+                            <!-- Table for Role records -->
                             <table class="table table-hover datatable" >
                               <thead>
                                 <tr>
-                                  <th scope="col">DocCode</th>
-                                  <th scope="col" >Filename</th>
+                                  <th scope="col">Full Name</th>
+                                  <th scope="col" >Department</th>
                                   <!-- <th scope="col">Filesize</th>    -->
-                                  <th scope="col">Actor</th>   
-                                  <th scope="col">Date/Time</th>       
-                                  <th scope="col">Status</th>  
+                                  <th scope="col">Role</th>   
+                                  <th scope="col">Office</th>       
+                                  <th scope="col">Contact</th>  
                                   <!-- <th scope="col">Downloads</th>    -->
-                                  <th scope="col">Action</th>          
+                                  <th scope="col">Account Status</th>          
                                 </tr>
                               </thead>
                               <tbody>
@@ -168,18 +168,18 @@ include('session.php');
                             </div> 
                           </div>
                           <div class="card-body" >           
-                            <!-- Table for Office records -->
+                            <!-- Table for Role records -->
                             <table class="table table-hover datatable" >
                               <thead>
                                 <tr>
-                                  <th scope="col">DocCode</th>
-                                  <th scope="col" >Filename</th>
+                                  <th scope="col">Full Name</th>
+                                  <th scope="col" >Department</th>
                                   <!-- <th scope="col">Filesize</th>    -->
-                                  <th scope="col">Actor</th>   
-                                  <th scope="col">Date/Time</th>       
-                                  <th scope="col">Status</th>  
+                                  <th scope="col">Role</th>   
+                                  <th scope="col">Office</th>       
+                                  <th scope="col">Contact</th>  
                                   <!-- <th scope="col">Downloads</th>    -->
-                                  <th scope="col">Action</th>          
+                                  <th scope="col">Account Status</th>          
                                 </tr>
                               </thead>
                               <tbody>
@@ -217,18 +217,18 @@ include('session.php');
                             </div> 
                           </div>
                           <div class="card-body" >           
-                            <!-- Table for Office records -->
+                            <!-- Table for Role records -->
                             <table class="table table-hover datatable" >
                               <thead>
                                 <tr>
-                                  <th scope="col">DocCode</th>
-                                  <th scope="col" >Filename</th>
+                                  <th scope="col">Full Name</th>
+                                  <th scope="col" >Department</th>
                                   <!-- <th scope="col">Filesize</th>    -->
-                                  <th scope="col">Actor</th>   
-                                  <th scope="col">Date/Time</th>       
-                                  <th scope="col">Status</th>  
+                                  <th scope="col">Role</th>   
+                                  <th scope="col">Office</th>       
+                                  <th scope="col">Contact</th>  
                                   <!-- <th scope="col">Downloads</th>    -->
-                                  <th scope="col">Action</th>          
+                                  <th scope="col">Account Status</th>          
                                 </tr>
                               </thead>
                               <tbody>
@@ -266,18 +266,18 @@ include('session.php');
                             </div> 
                           </div>
                           <div class="card-body" >           
-                            <!-- Table for Office records -->
+                            <!-- Table for Role records -->
                             <table class="table table-hover datatable" >
                               <thead>
                                 <tr>
-                                  <th scope="col">DocCode</th>
-                                  <th scope="col" >Filename</th>
+                                  <th scope="col">Full Name</th>
+                                  <th scope="col" >Department</th>
                                   <!-- <th scope="col">Filesize</th>    -->
-                                  <th scope="col">Actor</th>   
-                                  <th scope="col">Date/Time</th>       
-                                  <th scope="col">Status</th>  
+                                  <th scope="col">Role</th>   
+                                  <th scope="col">Office</th>       
+                                  <th scope="col">Contact</th>  
                                   <!-- <th scope="col">Downloads</th>    -->
-                                  <th scope="col">Action</th>          
+                                  <th scope="col">Account Status</th>          
                                 </tr>
                               </thead>
                               <tbody>

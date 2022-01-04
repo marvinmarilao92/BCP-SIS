@@ -10,7 +10,7 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'approved'; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'approved'; $col = 'records';include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
@@ -98,8 +98,7 @@ include('session.php');
 
                   </td>
                     <td>                      
-                      <a class="btn btn-success sendbtn"><i class="bi bi-cursor-fill"></i></a>
-                      <a class="btn btn-danger holdbtn" ><i class="bi bi-question-lg" ></i></a>
+                      <a class="btn btn-secondary cancelbtn"><i class="bi bi-reply-fill"></i></a>
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>                
                     </td>
                   </tr>
@@ -120,47 +119,22 @@ include('session.php');
 
   </main><!-- End #main -->
   
-      <!-- View Document modal -->
-      <div class="modal fade" id="ViewModal" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered modal-l">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Office Information</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                      <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h5 class="card-title">Office Details</h5>
-                                Office Code: <h5 id="view_code" style="margin-left: 60px;"></h5>
-                                Office Name: <h5 id="view_name" style="margin-left: 60px;"></h5>
-                                Location: <h5 id="view_loc" style="margin-left: 60px;"></h5>
-                                Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
-                            </div>
-                          </div>   
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-        </div>
-      <!-- End View office Modal-->
+  <!-- Document Modals -->
 
-      <!-- Hold Docs Modal -->
-      <div class="modal fade" id="HoldModal" tabindex="-1">
+      <!-- CancelModal Docs Modal -->
+       <div class="modal fade" id="CancelModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">Document Hold</h5>
+                          <h5 class="modal-title">Cancel Submission</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           <div class="card" style="margin: 10px;">
                             <div class="card-body">
-                              <h2 class="card-title">Hold this document?</h2>
+                              <h2 class="card-title">Return this document?</h2>
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
-                                      <input type="hidden" class="form-control" id="doc_id" readonly>
+                                  <input type="hidden" class="form-control" id="doc_id" readonly>
                                       <input type="hidden" class="form-control" id="doc_code" readonly>                  
                                       <input type="hidden" class="form-control" id="doc_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
                                       <input type="hidden" class="form-control" id="doc_off2" value="<?php echo $verified_session_office?>" readonly> 
@@ -171,102 +145,15 @@ include('session.php');
                           </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                              <button class="btn btn-success" name="save" id="hold" >Hold</button>
+                              <button class="btn btn-success" name="save" id="cancel" >Return Document</button>
                             </div>
                         <!-- End Form -->
                     </div>
                 </div>
           </div>
-      <!-- End Hold Docs Modal-->
+      <!-- End CancelModal Docs Modal-->
 
-       <!-- Send Docs Modal -->
-       <div class="modal fade" id="SendModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Document Submission</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                          <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h2 class="card-title">Submit this document?<h5 id="doc_fileN1" style="text-align: end; color:black;"></h5></h2>
-                              
-                                <!-- Fill out Form -->
-                                <div class="row g-3" style="margin-top: 10px;">
-                                      <input type="hidden" class="form-control" id="send_id" readonly>
-                                      <input type="hidden" class="form-control" id="send_code" readonly>   
-                                      <input type="hidden" class="form-control" id="send_act1" readonly>   
-                                      <input type="hidden" class="form-control" id="send_off1" readonly>   
-                                      <input type="hidden" class="form-control" id="send_date1" readonly>                  
-                                      <div class="col-md-12">
-                                        <select class="form-select" id="send_act2" name="send_act2" onChange="fetchOffice(this.value);">
-                                        <option selected="selected" disabled="disabled">Recipient</option>
-                                          <?php
-                                            require_once("include/conn.php");
-                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' ORDER BY firstname DESC ";
-                                            $result=mysqli_query($conn,$query);
-                                            while($rs=mysqli_fetch_array($result)){
-                                              $dtid =$rs['id'];    
-                                              $dtno =$rs['id_number'];                                  
-                                              $dtFName = $rs['firstname'];    
-                                              $dtLName = $rs['lastname'];    
-                                            
-                                              echo '<option value = "' . $dtno . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
-                                            }
-                                        ?>
-                                        </select>
-                                      </div>
-                                      <div class="col-md-12">
-                                        <select class="form-select" id="send_off2" name="send_off2">
-                                          <option selected="selected" disabled="disabled">Select Office</option>
-                                        </select>
-                                      </div>
-                                      <div class="col-12">
-                                          <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="docremarks" id="docremarks" id="docdesc" required></textarea>
-                                      </div> 
-                                     
-                                </div>
-                              
-                            </div>
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                              <button class="btn btn-success" name="send" id="send" >Submit</button>
-                            </div>
-                        <!-- End Form -->
-                    </div>
-                </div>
-          </div>
-      <!-- End Send Docs Modal-->
-
-      <!-- Delete Office Modal -->
-      <div class="modal fade" id="DeleteModal" tabindex="-1">
-              <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">DELETE OFFICE</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                        <div class="card" style="margin: 10px;">
-                          <div class="card-body">                
-                            <br>
-                            <input type="hidden"  name="delete_id" id="delete_id" readonly>
-                            <center>
-                              <h5>Are you sure you want to delete these Office?</h5>
-                              <h5 class="text-danger">This action cannot be undone.</h5>   
-                            </center>                
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Office</button>
-                        </div>
-                      <!-- End Form -->
-                  </div>
-              </div>
-        </div>
-      <!-- End delete Office Modal -->
-  <!-- End of Office Modals -->
+  <!-- End of Document Modals -->
 
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
@@ -284,10 +171,10 @@ include('session.php');
         $(document).ready(function () {
 
           
-            // Hold modal calling
-              $('.holdbtn').on('click', function () {
+              // Cancel modal calling
+              $('.cancelbtn').on('click', function () {
 
-                  $('#HoldModal').modal('show');
+                  $('#CancelModal').modal('show');
 
                   $tr = $(this).closest('tr');
 
@@ -300,13 +187,13 @@ include('session.php');
                       $('#doc_id').val(data[0]);
                       $('#doc_code').val(data[1]); 
                 });
-              // End of Hold modal calling 
+              // End of Cancel modal calling 
 
-              // Hold function
-              $('#hold').click(function(d){ 
+              // Cancel function
+              $('#cancel').click(function(d){ 
                     d.preventDefault();
                       if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
-                        $.post("function/hold_func.php", {
+                        $.post("function/cancel_reject_func.php", {
                           docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
                           docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
                           },function(data){
@@ -330,7 +217,7 @@ include('session.php');
                                   })
                                     Toast.fire({
                                     icon: 'Success',
-                                    title:'Document is now on hold'
+                                    title:'Document Cancel the Approval Successfully '
                                 }).then(function(){
                                   document.location.reload(true)//refresh pages
                                 });
@@ -346,98 +233,10 @@ include('session.php');
                         Swal.fire("You must fill out every field","","warning");
                       }
                   })
-              // End Hold function
-
-               // Hold modal calling
-              $('.sendbtn').on('click', function () {
-
-                  $('#SendModal').modal('show');
-
-                  $tr = $(this).closest('tr');
-
-                  var data = $tr.children("td").map(function () {
-                      return $(this).text();
-                  }).get();
-
-                  console.log(data);      
-                      $('#send_act1').val(data[12]);  
-                      $('#send_off1').val(data[13]);
-                      $('#send_date1').val(data[14]); 
-
-                      $('#doc_fileN1').text(data[2]);  
-                      $('#send_id').val(data[0]);
-                      $('#send_code').val(data[1]); 
-                });
-              // End of Hold modal calling 
-
-              // Hold function
-              $('#send').click(function(d){ 
-                    d.preventDefault();
-                      if($('#send_id').val()!="" && $('#send_code').val()!="" && $('#send_act2').val()!="" && $('#send_off2').val()!=""
-                      && $('#send_act1').val()!="" && $('#send_off1').val()!="" && $('#send_date1').val()!="" ){
-                        $.post("function/send_func.php", {
-                          docs_id:$('#send_id').val(), docs_code:$('#send_code').val(),
-                          docs_act2:$('#send_act2').val(), docs_off2:$('#send_off2').val(),
-                          docs_act1:$('#send_act1').val(), docs_off1:$('#send_off1').val(),
-                          docs_date1:$('#send_date1').val(), docs_remarks:$('#docremarks').val()
-                          },function(data){
-                            if (data.trim() == "Val30"){
-                            $('#SendModal').modal('hide');
-                            Swal.fire("No data stored in our database","","error");//response message
-                            // Empty test field
-                          }else if(data.trim() == "success"){
-                            $('#ReceivedModal').modal('hide');
-                                  //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
-                                  }
-                                  })
-                                    Toast.fire({
-                                    icon: 'Success',
-                                    title:'Document is Successfully Submitted'
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
-                                    $('#doc_code').val("")
-                                    $('#doc_act2').val("")
-                                    $('#doc_off2').val("")
-                            }else{
-                              Swal.fire("There is somthing wrong","","error");
-                              // Swal.fire(data);
-                          }
-                        })
-                      }else{
-                        Swal.fire("You must fill out every field","","warning");
-                      }
-                  })
-              // End Hold function
+              // End Cancel function
 
           });
 
-    </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript">
-        // Ajax for office picker
-        function fetchOffice(id){
-                $('#send_off2').html('');
-                $.ajax({
-                  type:'post',
-                  url:'function/ajaxdata.php',
-                  data : 'off_id='+id,
-                  success: function(data){
-                    $('#send_off2').html(data);
-                    // console.log("success");
-                  }
-                })
-              }
-              // End of Ajax for office picker
     </script>
 </body>
 </html>

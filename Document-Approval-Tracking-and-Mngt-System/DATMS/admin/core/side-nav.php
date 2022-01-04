@@ -123,9 +123,14 @@
 
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-people"></i><span>Account Management</span><i class="bi bi-chevron-down ms-auto"></i>
+      <i class="bi bi-people"></i><span>User Monitoring</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="components-nav" class="<?php if($col=='logs'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
+     <li>
+        <a href="logs_admin.php" class="<?php if($page=='AdL'){echo 'active';}?>">
+          <i class="bi bi-circle"></i><span>Admin Logged</span>
+        </a>
+      </li>
       <li>
         <a href="logs_approver.php" class="<?php if($page=='AL'){echo 'active';}?>">
           <i class="bi bi-circle"></i><span>Approver Logged</span>

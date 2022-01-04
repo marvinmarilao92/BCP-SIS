@@ -9,14 +9,17 @@
         //  $Dt_code = mysqli_real_escape_string($conn,$_POST['dtcode']);
          $Dt_name = mysqli_real_escape_string($conn,$_POST['dtname']);
          $Dt_desc = mysqli_real_escape_string($conn,$_POST['dtdesc']);
-         $doc_code = rand(10000000,99999999);
+				 		date_default_timezone_set("asia/manila");
+            $year = date("Y",strtotime("+0 HOURS"));
+            $random_num= rand(10000000,99999999);
+            $dt_code =  "doc".$year.$random_num;
 
 	$q_checkcode = $conn->query("SELECT * FROM `datms_doctype` WHERE `dt_name` = '$Dt_name'") or die(mysqli_error($conn));
 		$v_checkcode = $q_checkcode->num_rows;
 		if($v_checkcode == 1){
 			echo ('failed');
 		}else {
-			$conn->query("INSERT INTO `datms_doctype` VALUES('','$doc_code', '$Dt_name', '$Dt_desc','$date')") or die(mysqli_error($conn));
+			$conn->query("INSERT INTO `datms_doctype` VALUES('','$dt_code', '$Dt_name', '$Dt_desc','$date')") or die(mysqli_error($conn));
 			echo ('success');
 		}
 	}

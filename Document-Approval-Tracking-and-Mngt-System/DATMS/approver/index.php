@@ -51,7 +51,8 @@ include('session.php');
             </div>
             <div class="card-body" >           
               <!-- Table for Office records -->
-              <table class="table table-hover datatable" >
+              <form method="POST">
+                 <table class="table table-hover datatable" >
                 <thead>
                   <tr>
                     <th scope="col">DocCode</th>
@@ -79,10 +80,10 @@ include('session.php');
                   ?>
                   <tr>
                   <td style="display:none"><?php echo $docId?></td>
-                  <td><?php echo $docCode; ?>
+                    <td><?php echo $docCode; ?>
                     <td><?php echo $docName; ?>
-                    <td><?php echo $docAct1; ?>
-                    <td><?php echo $docDate1; ?>
+                    <td><?php echo $docAct2; ?>
+                    <td><?php echo $docDate2; ?>
                     <td><?php echo $docStat; ?>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
@@ -90,8 +91,8 @@ include('session.php');
                     <td style="display:none"><?php echo $docType?></td>
                     <td style="display:none"><?php echo $docDesc?></td>
                     <td style="display:none"><?php echo $docOff1?></td>
-                    <td style="display:none"><?php echo $docAct2?></td>
-                    <td style="display:none"><?php echo $docOff2?></td>
+                    <td style="display:none"><?php echo $docAct1?></td>
+                    <td style="display:none"><?php echo $docOff1?></td>
                     <td style="display:none"><?php echo $docDate2?></td>
                     <td style="display:none"><?php echo $docAct3?></td>
                     <td style="display:none"><?php echo $docOff3?></td>
@@ -99,7 +100,7 @@ include('session.php');
 
                   </td>
                     <td>                      
-                      <a class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>
+                      <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye"></i></a>
                       <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' ><i class="bi bi-download" ></i></a>
                       <a class="btn btn-dark " ><i class="bi bi-clock-history" ></i></a>
@@ -111,7 +112,7 @@ include('session.php');
                 </tbody>
               </table>
               <!-- End of office table record -->
-
+              </form>
             </div>
           </div>
 
@@ -194,25 +195,17 @@ include('session.php');
                         <div class="card" style="margin: 10px;">
                           <form method="post">
                             <div class="card-body">
-                             
                                 <h5 class="card-title">Document Information</h5>
+                                Filename: <h5 id="view_filename" style="margin-left: 60px;"></h5>
+                                Creator: <h5 id="view_creator" style="margin-left: 60px;"></h5>
+                                Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
                                 <input type="hidden" id="view_code" name="view_code" class="form-control" placeholder="Title" readonly>
                                 <input type="hidden" id="view_title" name="view_title" class="form-control" placeholder="Title" readonly>
                                 <input type="hidden" id="view_filename" name="view_filename" class="form-control" placeholder="Title" readonly>
-                                                           
-                              <?php
-                                  // include 'barcode128.php';
-                                  // $code = $_POST['view_code'];
-                                  // $title= $_POST['view_title'];
-                                  // $filename= $_POST['view_filename'];
-                                  
-                                  // echo "<p class='inline'><span ><b>Title: $view_title</b></span>".bar128(stripcslashes($code))."<span ><b>FileName: ".$filename." </b><span></p>&nbsp&nbsp&nbsp&nbsp";
-                              ?>  
-                              <h6 id="view_code1">
-                                <!-- Office Code: <h5 id="view_code" style="margin-left: 60px;"></h5>
-                                Office Name: <h5 id="view_name" style="margin-left: 60px;"></h5>
-                                Location: <h5 id="view_loc" style="margin-left: 60px;"></h5>
-                                Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                 -->
+                                
+                                <div class="col-12" style="text-align: center;">
+                                  <svg id="barcode"></svg>
+                                </div>
                             </div>
                             </form>
                           </div>   
@@ -339,7 +332,10 @@ include('session.php');
 
             $isExist = true;
             //checking if there's a duplicate number because we use random number for id numbers to prevent errors (NOTE PARTILLY TESTED)
-            $doc_code = rand(10000000,99999999);
+            date_default_timezone_set("asia/manila");
+            $year = date("Y",strtotime("+0 HOURS"));
+            $random_num= rand(1000,9999);
+            $doc_code =  "doc".$year.$random_num;
 
           if (!in_array($extension, ['pdf'])) {
                   echo'<script type = "text/javascript">
@@ -359,7 +355,7 @@ include('session.php');
                         icon: "error",
                         title:"File extension must be: .pdf"
                         }).then(function(){
-                          window.location = "index.php";//refresh pages
+                          window.location = "documents_list.php";//refresh pages
                         });
                      </script>
                 ';
@@ -370,7 +366,7 @@ include('session.php');
             $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
             $counter=mysqli_num_rows($query);
             
-            if ($counter == 1) 
+            if ($counter != 1) 
               { 
                 echo'<script type = "text/javascript">
                         //success message
@@ -389,7 +385,7 @@ include('session.php');
                         icon: "warning",
                         title:"Files already taken"
                         }).then(function(){
-                          window.location = "index.php";//refresh pages
+                          window.location = "documents_list.php";//refresh pages
                         });
                     </script>
                ';
@@ -416,7 +412,7 @@ include('session.php');
                         icon: "success",
                         title:"Document to track Successfully Created"
                         }).then(function(){
-                          window.location = "index.php";//refresh pages
+                          window.location = "documents_list.php";//refresh pages
                         });
                     </script>
                ';
@@ -428,296 +424,206 @@ include('session.php');
               }         
         }
       }
-    ?>
- <!-- JS Scripts -->
- <script>
-      // this script will execute as soon a the website runs
+  ?>
+  <!-- JS Scripts -->
+    <script>
+        // this script will execute as soon a the website runs
         $(document).ready(function () {
 
-          // Approved modal calling
-              $('.rejectbtn').on('click', function () {
+            // // Delete modal calling
+              // $('.deletebtn').on('click', function () {
 
-                  $('#RejectedModal').modal('show');
+              //       $('#DeleteModal').modal('show');
 
-                  $tr = $(this).closest('tr');
+              //       $tr = $(this).closest('tr');
 
-                  var data = $tr.children("td").map(function () {
-                      return $(this).text();
-                  }).get();
+              //       var data = $tr.children("td").map(function () {
+              //           return $(this).text();
+              //       }).get();
 
-                  console.log(data);      
-                      $('#reject_fileN').text(data[2]);  
-                      $('#reject_id').val(data[0]);
-                      $('#reject_code').val(data[1]); 
-                });
-              // End of Approved modal calling 
+              //       console.log(data);
 
-              // Approved function
-              $('#reject').click(function(d){ 
-                    d.preventDefault();
-                      if($('#reject_id').val()!="" && $('#reject_code').val()!="" && $('#reject_act2').val()!="" && $('#reject_off2').val()!="" ){
-                        $.post("function/reject_func.php", {
-                          docs_id:$('#signed_id').val(), docs_code:$('#reject_code').val(),
-                          docs_act2:$('#signed_act2').val(), docs_off2:$('#reject_off2').val()
-                          },function(data){
-                            if (data.trim() == "Val30"){
-                            $('#RejectedModal').modal('hide');
-                            Swal.fire("No data stored in our database","","error");//response message
-                            // Empty test field
-                          }else if(data.trim() == "success"){
-                            $('#RejectedModal').modal('hide');
-                                 //success message
-                                  const Toast = Swal.mixin({
-                                  toast: true,
-                                  position: "top-end",
-                                  showConfirmButton: false,
-                                  timer: 2000,
-                                  timerProsressBar: true,
-                                  didOpen: (toast) => {
-                                  toast.addEventListener("mouseenter", Swal.stopTimer)
-                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                  }
-                                  })
-                                  Toast.fire({
-                                  icon: "success",
-                                  title:"You Successfully Approved this Document"
-                                  }).then(function(){
-                                    window.location = "received_docs.php";//refresh pages
-                                  });
-                                    $('#reject_code').val("")
-                                    $('#rejec_act2').val("")
-                                    $('#rejec_off2').val("")
-                            }else{
-                              Swal.fire("There is somthing wrong","","error");
-                              // Swal.fire(data);
-                          }
-                        })
-                      }else{
-                        Swal.fire("You must fill out every field","","warning");
-                      }
-                  })
-              // End Approved function
-              // Approved modal calling
-              $('.approvedbtn').on('click', function () {
+              //     $('#delete_id').val(data[0]);
+              //     });
+              // // end of function
+            
+              // // Delete function
+              // $("#dtdel").click(function(b){
+              //   b.preventDefault();
+              //   $.post("delete_doctype.php",{
+              //       dtid:$('#delete_id').val()
+              //     },function(response){
+              //       // alert ("deleted");
+              //       if(response.trim() == "DoctypeDeleted"){
+              //         $('#DeleteModal').modal('hide');
+              //         Swal.fire ("DocType Successfully Deleted","","success").then(function(){
+              //         document.location.reload(true)//refresh pages
+              //         });
+              //       }else{
+              //         $('#DeleteModal').modal('hide');
+              //         Swal.fire (response);
+              //       }
+              //     })
+              //   })
+              // // End Delete function
+                
+              // Save function
+              //   $('#save').click(function(a){ 
+              //     a.preventDefault();
+              //       if($('#doccreator').val()!="" && $('#docoffice').val()!="" && $('#doctitle').val()!=""
+              //       &&$('#doctype').val()!="" && $('#docfile').val()!="" && $('#docdesc').val()!=""){
+              //         $.post("fileprocess.php", {
+              //           doccreator:$('#doccreator').val(),
+              //           docoffice:$('#docoffice').val(),
+              //           doctitle:$('#doctitle').val(),
+              //           doctype:$('#doctype').val(),
+              //           docfile:$('#docfile').val(),
+              //           docdesc:$('#docdesc').val()
+              //           },function(data){
+              //           if (data.trim() == "failed"){
 
-                  $('#ApprovedModal').modal('show');
+              //             //response message
+              //             Swal.fire("Document is already in server","","error");
+              //             // Empty test field
+              //              $('#docfile').val("")
+                         
+              //           }else if(data.trim() == "success"){
+              //             $('#AddModal').modal('hide');
+              //                   //success message
+              //                   const Toast = Swal.mixin({
+              //                   toast: true,
+              //                   position: 'top-end',
+              //                   showConfirmButton: false,
+              //                   timer: 1100,
+              //                   timerProsressBar: true,
+              //                   didOpen: (toast) => {
+              //                   toast.addEventListener('mouseenter', Swal.stopTimer)
+              //                   toast.addEventListener('mouseleave', Swal.resumeTimer)                  
+              //                   }
+              //                   })
+              //                 Toast.fire({
+              //                 icon: 'success',
+              //                 title:'Office successfully Saved'
+              //                 }).then(function(){
+              //                   document.location.reload(true)//refresh pages
+              //                 });
+              //                   // $('#dtcode').val("")
+              //                   // $('#dtname').val("")
+              //                   // $('#dtdesc').val("")
+              //             }else{
+              //               Swal.fire("there is something wrong");
+                            
+              //           }
+              //         })
+              //       }else{
+              //         Swal.fire("You must fill out every field","","warning");
+              //       }
+              //     })
+              // End Save function
 
-                  $tr = $(this).closest('tr');
+              // // Edit modal calling
+              //   $('.editbtn').on('click', function () {
 
-                  var data = $tr.children("td").map(function () {
-                      return $(this).text();
-                  }).get();
+              //       $('#EditModal').modal('show');
 
-                  console.log(data);      
-                      $('#signed_fileN').text(data[2]);  
-                      $('#signed_id').val(data[0]);
-                      $('#signed_code').val(data[1]); 
-                });
-              // End of Approved modal calling 
+              //       $tr = $(this).closest('tr');
 
-              // Approved function
-              $('#approved').click(function(d){ 
-                    d.preventDefault();
-                      if($('#signed_id').val()!="" && $('#signed_code').val()!="" && $('#signed_act2').val()!="" && $('#signed_off2').val()!="" ){
-                        $.post("function/approved_func.php", {
-                          docs_id:$('#signed_id').val(), docs_code:$('#signed_code').val(),
-                          docs_act2:$('#signed_act2').val(), docs_off2:$('#signed_off2').val()
-                          },function(data){
-                            if (data.trim() == "Val30"){
-                            $('#ApprovedModal').modal('hide');
-                            Swal.fire("No data stored in our database","","error");//response message
-                            // Empty test field
-                          }else if(data.trim() == "success"){
-                            $('#ReceivedModal').modal('hide');
-                                 //success message
-                                  const Toast = Swal.mixin({
-                                  toast: true,
-                                  position: "top-end",
-                                  showConfirmButton: false,
-                                  timer: 2000,
-                                  timerProsressBar: true,
-                                  didOpen: (toast) => {
-                                  toast.addEventListener("mouseenter", Swal.stopTimer)
-                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                  }
-                                  })
-                                  Toast.fire({
-                                  icon: "success",
-                                  title:"You Successfully Approved this Document"
-                                  }).then(function(){
-                                    window.location = "received_docs.php";//refresh pages
-                                  });
-                                    $('#doc_code').val("")
-                                    $('#doc_act2').val("")
-                                    $('#doc_off2').val("")
-                            }else{
-                              Swal.fire("There is somthing wrong","","error");
-                              // Swal.fire(data);
-                          }
-                        })
-                      }else{
-                        Swal.fire("You must fill out every field","","warning");
-                      }
-                  })
-              // End Approved function
-          
-              // Hold modal calling
-              $('.holdbtn').on('click', function () {
+              //       var data = $tr.children("td").map(function () {
+              //           return $(this).text();
+              //       }).get();
 
-                  $('#HoldModal').modal('show');
+              //       console.log(data);        
+              //           $('#dt_idE').val(data[0]);
+              //           $('#dt_codeE').val(data[1]);
+              //           document.getElementById("dt_nameE").placeholder = data[2];
+              //           document.getElementById("dt_descE").placeholder = data[3];  
+              //     });
+              // // End of edit modal calling 
 
-                  $tr = $(this).closest('tr');
+              // // Edit function
+              // $('#edit').click(function(d){ 
+              //       d.preventDefault();
+              //         if($('#dt_idE').val()!="" && $('#dt_codeE').val()!="" && $('#dt_nameE').val()!="" && $('#dt_descE').val()!=""){
+              //           $.post("update_doctype.php", {
+              //             dtid:$('#dt_idE').val(),
+              //             dtcode:$('#dt_codeE').val(),
+              //             dtname:$('#dt_nameE').val(),
+              //             dtdesc:$('#dt_descE').val()
+              //             },function(data){
+              //               if (data.trim() == "failed"){
+              //               $('#EditModal').modal('hide');
+              //               Swal.fire("Office Title is currently in use","","error");//response message
+              //               // Empty test field
+              //               $('#dt_codeE').val("")
+              //               $('#dt_nameE').val("")
+              //               $('#dt_descE').val("")
+              //             }else if(data.trim() == "success"){
+              //               $('#EditModal').modal('hide');
+              //                     //success message
+              //                       const Toast = Swal.mixin({
+              //                       toast: true,
+              //                       position: 'top-end',
+              //                       showConfirmButton: false,
+              //                       timer: 1100,
+              //                       timerProsressBar: true,
+              //                       didOpen: (toast) => {
+              //                       toast.addEventListener('mouseenter', Swal.stopTimer)
+              //                       toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
+              //                     }
+              //                     })
+              //                       Toast.fire({
+              //                       icon: 'Success',
+              //                       title:'Changes Successfully Saved'
+              //                   }).then(function(){
+              //                     document.location.reload(true)//refresh pages
+              //                   });
+              //                       $('#dt_codeE').val("")
+              //                       $('#dt_nameE').val("")
+              //                       $('#dt_descE').val("")
+              //               }else{
+              //                 Swal.fire("There is somthing wrong","","error");
+              //             }
+              //           })
+              //         }else{
+              //           Swal.fire("You must fill out every field","","warning");
+              //         }
+              //     })
+            // // End Edit function
 
-                  var data = $tr.children("td").map(function () {
-                      return $(this).text();
-                  }).get();
+              // View Function
+                $('.viewbtn').on('click', function () {
 
-                  console.log(data);      
-                      $('#doc_fileN').text(data[2]);  
-                      $('#doc_id').val(data[0]);
-                      $('#doc_code').val(data[1]); 
-                });
-              // End of Hold modal calling 
+                    $('#ViewModal').modal('show');
 
-              // Hold function
-              $('#hold').click(function(d){ 
-                    d.preventDefault();
-                      if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
-                        $.post("function/hold_func.php", {
-                          docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
-                          docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
-                          },function(data){
-                            if (data.trim() == "Val30"){
-                            $('#HoldModal').modal('hide');
-                            Swal.fire("No data stored in our database","","error");//response message
-                            // Empty test field
-                          }else if(data.trim() == "success"){
-                            $('#ReceivedModal').modal('hide');
-                                  //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
-                                  }
-                                  })
-                                    Toast.fire({
-                                    icon: 'Success',
-                                    title:'Document is now on hold'
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
-                                    $('#doc_code').val("")
-                                    $('#doc_act2').val("")
-                                    $('#doc_off2').val("")
-                            }else{
-                              Swal.fire("There is somthing wrong","","error");
-                              // Swal.fire(data);
-                          }
-                        })
-                      }else{
-                        Swal.fire("You must fill out every field","","warning");
-                      }
-                  })
-              // End Hold function
+                    $tr = $(this).closest('tr');
 
-               // Send modal calling
-              $('.sendbtn').on('click', function () {
+                    var data = $tr.children("td").map(function () {
+                        return $(this).text();
+                    }).get();
 
-                  $('#SendModal').modal('show');
-
-                  $tr = $(this).closest('tr');
-
-                  var data = $tr.children("td").map(function () {
-                      return $(this).text();
-                  }).get();
-
-                  console.log(data);      
-                      $('#send_act1').val(data[12]);  
-                      $('#send_off1').val(data[13]);
-                      $('#send_date1').val(data[14]); 
-
-                      $('#doc_fileN1').text(data[2]);  
-                      $('#send_id').val(data[0]);
-                      $('#send_code').val(data[1]); 
-                });
-              // End of Send modal calling 
-
-              // Send function
-              $('#send').click(function(d){ 
-                    d.preventDefault();
-                      if($('#send_id').val()!="" && $('#send_code').val()!="" && $('#send_act2').val()!="" && $('#send_off2').val()!=""
-                      && $('#send_act1').val()!="" && $('#send_off1').val()!="" && $('#send_date1').val()!="" ){
-                        $.post("function/send_func.php", {
-                          docs_id:$('#send_id').val(), docs_code:$('#send_code').val(),
-                          docs_act2:$('#send_act2').val(), docs_off2:$('#send_off2').val(),
-                          docs_act1:$('#send_act1').val(), docs_off1:$('#send_off1').val(),
-                          docs_date1:$('#send_date1').val(), docs_remarks:$('#docremarks').val()
-                          },function(data){
-                            if (data.trim() == "Val30"){
-                            $('#SendModal').modal('hide');
-                            Swal.fire("No data stored in our database","","error");//response message
-                            // Empty test field
-                          }else if(data.trim() == "success"){
-                            $('#ReceivedModal').modal('hide');
-                                  //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
-                                  }
-                                  })
-                                    Toast.fire({
-                                    icon: 'Success',
-                                    title:'Document is Successfully Submitted'
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
-                                    $('#doc_code').val("")
-                                    $('#doc_act2').val("")
-                                    $('#doc_off2').val("")
-                            }else{
-                              Swal.fire("There is somthing wrong","","error");
-                              // Swal.fire(data);
-                          }
-                        })
-                      }else{
-                        Swal.fire("You must fill out every field","","warning");
-                      }
-                  })
-              // End Send function
+                    console.log(data); 
+                    document.getElementById("view_code").placeholder = data[1];      
+                    document.getElementById("view_title").placeholder = data[8];   
+                    document.getElementById("view_filename").placeholder = data[2];   
+                    $('#view_filename').text(data[2]);
+                    $('#view_creator').text(data[3]);
+                    $('#view_date').text(data[4]);
+                    // JsBarcode("#barcode", data[1]);
+                    JsBarcode("#barcode", data[1], {
+                      format: "CODE128",
+                      lineColor: "#000",
+                      width: 1,
+                      height: 120,
+                      textAlign: "center",
+                      displayValue: true
+                    });
+                  });
+            // End of View function 
 
           });
 
     </script>
-    <!-- Ajax Script for picking office -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript">
-        // Ajax for office picker
-        function fetchOffice(id){
-                $('#send_off2').html('');
-                $.ajax({
-                  type:'post',
-                  url:'function/ajaxdata.php',
-                  data : 'off_id='+id,
-                  success: function(data){
-                    $('#send_off2').html(data);
-                    // console.log("success");
-                  }
-                })
-              }
-              // End of Ajax for office picker
-    </script>
-
+  
 </body>
 
 </html>

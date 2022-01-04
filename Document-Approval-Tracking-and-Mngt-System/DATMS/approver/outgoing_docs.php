@@ -141,7 +141,7 @@ include('session.php');
                           </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                              <button class="btn btn-success" name="save" id="hold" >Return Document</button>
+                              <button class="btn btn-success" name="save" id="cancel" >Return Document</button>
                             </div>
                         <!-- End Form -->
                     </div>
@@ -185,7 +185,7 @@ include('session.php');
               // End of Received modal calling 
 
               // Received function
-              $('#hold').click(function(d){ 
+              $('#cancel').click(function(d){ 
                     d.preventDefault();
                       if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
                         $.post("function/cancel_hold_func.php", {

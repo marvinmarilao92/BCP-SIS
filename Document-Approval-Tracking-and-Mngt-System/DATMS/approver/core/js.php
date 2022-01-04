@@ -1,5 +1,5 @@
 <!-- Vendor JS Files -->
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="../assets/vendor/php-email-form/validate.js"></script>
   <script src="../assets/vendor/quill/quill.min.js"></script>
   <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
@@ -10,6 +10,8 @@
 
   <script src="../assets/vendor/bootstrap/js/sweetalert2.min.js"></script>
   <script src="../assets/vendor/bootstrap/js/jquery-3.6.0.min.js"></script>
+
+  <script src="../assets/vendor/bootstrap/js/JsBarcode.all.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>

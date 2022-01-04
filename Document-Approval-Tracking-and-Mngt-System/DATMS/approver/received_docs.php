@@ -198,7 +198,10 @@ include('session.php');
                                       <input type="hidden" class="form-control" id="signed_code" readonly>                  
                                       <input type="hidden" class="form-control" id="signed_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
                                       <input type="hidden" class="form-control" id="signed_off2" value="<?php echo $verified_session_office?>" readonly> 
-                                      <h5 id="signed_fileN" style="text-align: end; color:black"></h5>   
+                                      <h5 id="signed_fileN" style="text-align: end; color:black"></h5>  
+                                      <div class="col-12">
+                                          <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="docremarks" id="signed_remarks" required></textarea>
+                                      </div>  
                                 </div>
                               
                             </div>
@@ -228,9 +231,12 @@ include('session.php');
                                 <div class="row g-3" >
                                       <input type="hidden" class="form-control" id="reject_id" readonly>
                                       <input type="hidden" class="form-control" id="reject_code" readonly>                  
-                                      <input type="hidden" class="form-control" id="signed_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
+                                      <input type="hidden" class="form-control" id="reject_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
                                       <input type="hidden" class="form-control" id="reject_off2" value="<?php echo $verified_session_office?>" readonly> 
                                       <h5 id="reject_fileN" style="text-align: end; color:black"></h5>   
+                                      <div class="col-12">
+                                          <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="docremarks" id="reject_remarks" required></textarea>
+                                      </div>                                     
                                 </div>
                               
                             </div>
@@ -288,7 +294,7 @@ include('session.php');
                                         </select>
                                       </div>
                                       <div class="col-12">
-                                          <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="docremarks" id="docremarks" id="docdesc" required></textarea>
+                                          <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="docremarks" id="docremarks" required></textarea>
                                       </div> 
                                      
                                 </div>
@@ -370,10 +376,11 @@ include('session.php');
               // Approved function
               $('#reject').click(function(d){ 
                     d.preventDefault();
-                      if($('#reject_id').val()!="" && $('#reject_code').val()!="" && $('#reject_act2').val()!="" && $('#reject_off2').val()!="" ){
+                      if($('#reject_id').val()!="" && $('#reject_code').val()!="" && $('#reject_act2').val()!="" && $('#reject_off2').val()!=""&& $('#reject_remarks').val()!="" ){
                         $.post("function/reject_func.php", {
-                          docs_id:$('#signed_id').val(), docs_code:$('#reject_code').val(),
-                          docs_act2:$('#signed_act2').val(), docs_off2:$('#reject_off2').val()
+                          docs_id:$('#reject_id').val(), docs_code:$('#reject_code').val(),
+                          docs_act2:$('#reject_act2').val(), docs_off2:$('#reject_off2').val(),
+                          docs_remarks:$('#reject_remarks').val()
                           },function(data){
                             if (data.trim() == "Val30"){
                             $('#RejectedModal').modal('hide');
@@ -433,10 +440,11 @@ include('session.php');
               // Approved function
               $('#approved').click(function(d){ 
                     d.preventDefault();
-                      if($('#signed_id').val()!="" && $('#signed_code').val()!="" && $('#signed_act2').val()!="" && $('#signed_off2').val()!="" ){
+                      if($('#signed_id').val()!="" && $('#signed_code').val()!="" && $('#signed_act2').val()!="" && $('#signed_off2').val()!=""&& $('#signed_remarks').val()!="" ){
                         $.post("function/approved_func.php", {
                           docs_id:$('#signed_id').val(), docs_code:$('#signed_code').val(),
-                          docs_act2:$('#signed_act2').val(), docs_off2:$('#signed_off2').val()
+                          docs_act2:$('#signed_act2').val(), docs_off2:$('#signed_off2').val(),
+                          docs_remarks:$('#signed_remarks').val()
                           },function(data){
                             if (data.trim() == "Val30"){
                             $('#ApprovedModal').modal('hide');

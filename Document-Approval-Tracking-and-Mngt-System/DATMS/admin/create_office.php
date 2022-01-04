@@ -149,13 +149,14 @@ include('session.php');
                   <div class="modal-dialog modal-dialog-centered modal-l">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">Office Information</h5>
+                        <h5 class="modal-title">OFFICE INFORMATION</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                       <div class="card" style="margin: 10px;">
                             <div class="card-body">
                               <h5 class="card-title">Office Details</h5>
+                                Office Code: <h6 id="view_code" style="margin-left: 60px;"></h6>
                                 Office Name: <h6 id="view_name" style="margin-left: 60px;"></h6>
                                 Location: <h6 id="view_loc" style="margin-left: 60px;"></h6>
                                 Date Created: <h6 id="view_date" style="margin-left: 60px;"></h6>                
@@ -415,6 +416,7 @@ include('session.php');
                     }).get();
 
                     console.log(data);        
+                    $('#view_code').text(data[1]);
                     $('#view_name').text(data[2]);
                     $('#view_loc').text(data[3]);
                     $('#view_date').text(data[4]);

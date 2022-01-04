@@ -89,43 +89,51 @@
   </li> <!-- hold item Nav -->
 
   <li class="nav-item">
-    <a href="approved_docs.php" class="<?php if($page=='approved'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-      <i class="ri-file-mark-line"></i>
-      <span>Approved &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="badge bg-info">
-        <?php 
-            require_once("include/conn.php");
-            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Approved' AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office');";
-            $result=mysqli_query($conn,$query);
-            if($result){
-               echo mysqli_num_rows($result);
-              }
-        ?> 
-      </span>
-    </a>
-  </li><!-- Approved item Nav -->
-
-  <li class="nav-item">
-    <a href="reject_docs.php" class="<?php if($page=='reject'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-      <i class="ri-file-shred-line"></i>
-      <span>Rejected &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <span class="badge bg-dark"> <?php 
-            require_once("include/conn.php");
-            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Rejected'  AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office')";
-            $result=mysqli_query($conn,$query);
-            if($result){
-               echo mysqli_num_rows($result);
-              }
-        ?> </span>
-    </a>
-  </li> <!-- hold item Nav -->
-
-  <li class="nav-item">
     <a href="tracking_docs.php" class="<?php if($page=='track'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-geo"></i>
       <span>Track Douments</span>
     </a>
   </li><!-- tracking item Nav -->
+
+
+  <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Document Records</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="icons-nav" class="<?php if($col=='records'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
+          <li>
+          <a href="approved_docs.php" class="<?php if($page=='approved'){echo 'active';}?>">
+            <i class="bi bi-circle"></i>
+            <span>Approved &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <span class="badge bg-info">
+                <?php 
+                    require_once("include/conn.php");
+                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Approved' AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office');";
+                    $result=mysqli_query($conn,$query);
+                    if($result){
+                      echo mysqli_num_rows($result);
+                      }
+                ?> 
+              </span>
+            </a>
+          </li>
+          <li>
+          <a href="reject_docs.php" class="<?php if($page=='reject'){echo 'active';}?>">
+            <i class="bi bi-circle"></i>
+            <span>Rejected &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+             <span class="badge bg-dark"> <?php 
+                  require_once("include/conn.php");
+                  $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Rejected'  AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office')";
+                  $result=mysqli_query($conn,$query);
+                  if($result){
+                    echo mysqli_num_rows($result);
+                    }
+              ?> 
+              </span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Reports Nav -->
 
   <li class="nav-heading">Settings</li>
 
