@@ -14,6 +14,7 @@ include('session.php');
       </script>
     <!-- Top and side navigation menu -->
     <?php include ("includes/nav.php"); include ("includes/sidebar.php");?>
+    <?php $page = 'EI'; include ('includes/sidebar.php');//Design for sidebar?>
 
     <main id="main" class="main">
             <div class="pagetitle">
@@ -77,9 +78,9 @@ include('session.php');
                                                 }
                                               }
                                               echo "<td>";
-                                                  echo '<a href="admin-read.php?id='. $row['id_number'] .'" class="m-1 btn btn-info" title="View Record" data-toggle="tooltip"><span class="bi bi-eye-fill"></span></a>';
-                                                  echo '<a href="admin-update.php?id='. $row['id_number'] .'" class="m-1 btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="bi bi-pencil-fill"></span></a>';
-                                                  echo '<a href="admin-archive.php?id='. $row['id_number'] .'" class="m-1 btn btn-danger" title="Archive Record" data-toggle="tooltip"><span class="bi bi-archive-fill"></span></a>';
+                                                  echo '<button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button> ';
+                                                  echo '<button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button> ';
+                                                  echo '<button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>';
                                               echo "</td>";
                                           echo "</tr>";
                                       }

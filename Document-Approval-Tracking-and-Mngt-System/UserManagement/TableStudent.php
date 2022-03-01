@@ -1,51 +1,5 @@
-<?php
-include('session.php');
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-<?php
-include ("includes/head.php");
-?>
-
-<body>
-<script>
-    $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip();   
-    });
-</script>
-
-<?php
-include ("includes/nav.php");
-include ("includes/sidebar.php");
-?>
-
-
-  <main id="main" class="main">
-
-    <div class="pagetitle">
-      <h1>Students</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Students</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="col-lg-12">
-                <div class="form-group col-md-2 btn-lg"  style="float: left; padding:20px;">
-                    <h4>List of Students</h4>
-                </div>
-                <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                   <a href="student-create.php" class="btn btn-success pull-right">Add New Student</a>
-                </div> 
-              </div>
-            <div class="card-body">
-              <?php
+ <!-- End of office table record -->
+ <?php
                     // Include config file
                     require_once "config.php";
                     
@@ -104,28 +58,4 @@ include ("includes/sidebar.php");
                     }
                     // Close connection
                     mysqli_close($link);
-                    ?>
-
-            </div>
-            <div class="container-fluid">
-              <div class="row mb-4">
-                <div class="col-md-10">
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-  </main><!-- End #main -->
-
-<?php
-include ("includes/footer.php");
-?>
-
-</body>
-
-</html>
+                  ?>
