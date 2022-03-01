@@ -1,100 +1,100 @@
 <?php
-include('session.php');
+    include('session.php');
 
 
-// Define variables and initialize with empty values
-$student_number = "";
-$first_name = "";
-$last_name = "";
-$middle_name = "";
-$course = "";
-$year_level = "";
-$section = "";
-$school_year = "";
-$address = "";
-$email = "";
-$contact = "";
-$gender = "";
-$birthday = "";
-$nationality = "";
-$religion = "";
-$civil_status = "";
+    // Define variables and initialize with empty values
+    $student_number = "";
+    $first_name = "";
+    $last_name = "";
+    $middle_name = "";
+    $course = "";
+    $year_level = "";
+    $section = "";
+    $school_year = "";
+    $address = "";
+    $email = "";
+    $contact = "";
+    $gender = "";
+    $birthday = "";
+    $nationality = "";
+    $religion = "";
+    $civil_status = "";
 
-// Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-  
-  $student_number = mysqli_real_escape_string($link,trim($_POST["student_number"]));
-  $first_name = mysqli_real_escape_string($link,trim($_POST["first_name"]));
-  $last_name = mysqli_real_escape_string($link,trim($_POST["last_name"]));
-  $middle_name = mysqli_real_escape_string($link,trim($_POST["middle_name"]));
-  $course = mysqli_real_escape_string($link,trim($_POST["course"]));
-  $year_level = mysqli_real_escape_string($link,trim($_POST["year_level"]));
-  $section = mysqli_real_escape_string($link,trim($_POST["section"]));
-  $school_year = mysqli_real_escape_string($link,trim($_POST["school_year"]));
-  $address = mysqli_real_escape_string($link,trim($_POST["address"]));
-  $email = mysqli_real_escape_string($link,trim($_POST["email"]));
-  $contact = mysqli_real_escape_string($link,trim($_POST["contact"]));
-  $gender = mysqli_real_escape_string($link,trim($_POST["gender"]));
-  $birthday = date('Y-m-d', strtotime(mysqli_real_escape_string($link,trim($_POST["birthdate"]))));
-  $nationality = mysqli_real_escape_string($link,trim($_POST["nationality"]));
-  $religion = mysqli_real_escape_string($link,trim($_POST["religion"]));
-  $civil_status = mysqli_real_escape_string($link,trim($_POST["civil_status"]));
-  $account_status = "Active";
-  $password = "#ChangeMe01!";
-  //Check if the student number is not existing in the database
-  $sql1 = "SELECT id FROM student_information WHERE id_number = '$student_number'";
-  $result = mysqli_query($link,$sql1);
-  $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-  $count = mysqli_num_rows($result);
-  
-  //Check if the student number is not existing in the database
-  $sql2 = "SELECT id FROM users WHERE id_number = '$student_number'";
-  $result2 = mysqli_query($link,$sql2);
-  $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-  $count2 = mysqli_num_rows($result2);
-  
-  // If the student number is not existing in the database, count must be 0
-  if($count == 0 && $count2 == 0) {
-    // Prepare an insert statement
-    $sql = "INSERT INTO student_information (id_number, firstname, lastname, middlename, email, contact, address, course, year_level, section, school_year, gender, birthday, nationality, religion, civil_status, account_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // Processing form data when form is submitted
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+      
+      $student_number = mysqli_real_escape_string($link,trim($_POST["student_number"]));
+      $first_name = mysqli_real_escape_string($link,trim($_POST["first_name"]));
+      $last_name = mysqli_real_escape_string($link,trim($_POST["last_name"]));
+      $middle_name = mysqli_real_escape_string($link,trim($_POST["middle_name"]));
+      $course = mysqli_real_escape_string($link,trim($_POST["course"]));
+      $year_level = mysqli_real_escape_string($link,trim($_POST["year_level"]));
+      $section = mysqli_real_escape_string($link,trim($_POST["section"]));
+      $school_year = mysqli_real_escape_string($link,trim($_POST["school_year"]));
+      $address = mysqli_real_escape_string($link,trim($_POST["address"]));
+      $email = mysqli_real_escape_string($link,trim($_POST["email"]));
+      $contact = mysqli_real_escape_string($link,trim($_POST["contact"]));
+      $gender = mysqli_real_escape_string($link,trim($_POST["gender"]));
+      $birthday = date('Y-m-d', strtotime(mysqli_real_escape_string($link,trim($_POST["birthdate"]))));
+      $nationality = mysqli_real_escape_string($link,trim($_POST["nationality"]));
+      $religion = mysqli_real_escape_string($link,trim($_POST["religion"]));
+      $civil_status = mysqli_real_escape_string($link,trim($_POST["civil_status"]));
+      $account_status = "Active";
+      $password = "#ChangeMe01!";
+      //Check if the student number is not existing in the database
+      $sql1 = "SELECT id FROM student_information WHERE id_number = '$student_number'";
+      $result = mysqli_query($link,$sql1);
+      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      $count = mysqli_num_rows($result);
+      
+      //Check if the student number is not existing in the database
+      $sql2 = "SELECT id FROM users WHERE id_number = '$student_number'";
+      $result2 = mysqli_query($link,$sql2);
+      $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+      $count2 = mysqli_num_rows($result2);
+      
+      // If the student number is not existing in the database, count must be 0
+      if($count == 0 && $count2 == 0) {
+        // Prepare an insert statement
+        $sql = "INSERT INTO student_information (id_number, firstname, lastname, middlename, email, contact, address, course, year_level, section, school_year, gender, birthday, nationality, religion, civil_status, account_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    if($stmt = mysqli_prepare($link, $sql)){
-      // Bind variables to the prepared statement as parameters
-      mysqli_stmt_bind_param($stmt, "issssisssssssssss", $student_number, $first_name, $last_name, $middle_name, $email, $contact, $address, $course, $year_level, $section, $school_year, $gender, $birthday, $nationality, $religion, $civil_status, $account_status);
-
-      // Attempt to execute the prepared statement
-      if(mysqli_stmt_execute($stmt)){
-        //Create user account
-        $sql = "INSERT INTO users (id_number, password) VALUES (?, ?)";
-
-        if($stmt1 = mysqli_prepare($link, $sql)){
+        if($stmt = mysqli_prepare($link, $sql)){
           // Bind variables to the prepared statement as parameters
-          mysqli_stmt_bind_param($stmt1, "ss", $student_number, $password);
+          mysqli_stmt_bind_param($stmt, "issssisssssssssss", $student_number, $first_name, $last_name, $middle_name, $email, $contact, $address, $course, $year_level, $section, $school_year, $gender, $birthday, $nationality, $religion, $civil_status, $account_status);
 
           // Attempt to execute the prepared statement
-          if(mysqli_stmt_execute($stmt1)){
-              // Records created successfully. Redirect to landing page
-              header("location: student.php");
-              exit();
+          if(mysqli_stmt_execute($stmt)){
+            //Create user account
+            $sql = "INSERT INTO users (id_number, password) VALUES (?, ?)";
+
+            if($stmt1 = mysqli_prepare($link, $sql)){
+              // Bind variables to the prepared statement as parameters
+              mysqli_stmt_bind_param($stmt1, "ss", $student_number, $password);
+
+              // Attempt to execute the prepared statement
+              if(mysqli_stmt_execute($stmt1)){
+                  // Records created successfully. Redirect to landing page
+                  header("location: student.php");
+                  exit();
+              } else{
+                  echo "Oops! Something went wrong. Please try again later.";
+              }
+            }
           } else{
               echo "Oops! Something went wrong. Please try again later.";
           }
         }
-      } else{
-          echo "Oops! Something went wrong. Please try again later.";
+
+        // Close statement
+        mysqli_stmt_close($stmt);
+
+        // Close connection
+        mysqli_close($link);
+
+      }else {
+        $student_number_err = "Student Number is already existing";
       }
     }
-
-    // Close statement
-    mysqli_stmt_close($stmt);
-
-    // Close connection
-    mysqli_close($link);
-
-  }else {
-    $student_number_err = "Student Number is already existing";
-  }
-}
 
 ?>
 <!DOCTYPE html>
@@ -352,6 +352,7 @@ include ("includes/sidebar.php");
               <option value="papua new guinean">Papua New Guinean</option>
               <option value="paraguayan">Paraguayan</option>
               <option value="peruvian">Peruvian</option>
+              <option value="philippines">Philippines</option>
               <option value="polish">Polish</option>
               <option value="portuguese">Portuguese</option>
               <option value="qatari">Qatari</option>

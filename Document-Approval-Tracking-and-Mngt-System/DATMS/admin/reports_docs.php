@@ -29,15 +29,16 @@ include('session.php');
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-
           <div class="card">
             <div class="card-body">
                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: left; padding: 10px">
-                  <a type="button" href="archive_docs.php" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal">
-                  Archive &nbsp;
-                  <i class="bi bi-archive me-1"></i>
-                  </a>
                 </div> 
+                    <div class="form-group col-md-2 btn-lg"  style="padding:10px;">
+                      <a type="button" href="archive_docs.php" class="btn btn-primary form-control">
+                          Archive &nbsp;
+                        <i class="bi bi-archive me-1"></i>
+                      </a>
+                    </div>
               <!-- Report Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="myTabjustified" role="tablist" style="margin-top: 10px;">
                 <li class="nav-item flex-fill" role="presentation">
@@ -300,8 +301,9 @@ include('session.php');
                       </section>
                   <!-- End Table with stripped rows -->
                 </div>
+                    
               </div><!-- End Default Tabs -->
-           
+
             </div>
           </div>
 

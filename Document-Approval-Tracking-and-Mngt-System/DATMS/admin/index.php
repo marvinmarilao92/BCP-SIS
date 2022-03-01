@@ -189,54 +189,18 @@ include('session.php');
             <div class="card-body pb-0">
               <h5 class="card-title">User Accounts <span>| Graph</span></h5>
 
-              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '1%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: 'Number of User',
-                      type: 'pie',
-                      radius: ['45%', '75%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: 6,
-                          name: 'Office'
-                        },
-                        {
-                          value: 5,
-                          name: 'Users'
-                        },
-                        {
-                          value: 3,
-                          name: 'Types Documents'
-                        },
-                      ]
-                    }]
-                  });
-                });
-              </script>
+              <canvas id="accountChart" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
+                  <?php
+                       require_once("include/conn.php");
+                             $sql1 ="SELECT *,count(office) as count FROM user_information WHERE department='DATMS' group by office;";
+                             $result1 = mysqli_query($conn,$sql1);
+                             $chart_data="";
+                             while ($row1 = mysqli_fetch_array($result1)) { 
+                     
+                                $name1[]  = $row1['office']  ;
+                                $counts1[] = $row1['count'];
+                            }
+                    ?>
 
             </div>
           </div><!-- End Website Traffic -->
@@ -266,13 +230,13 @@ include('session.php');
             datasets: [{
                  label: 'Bar Chart',
                   backgroundColor: [
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(255, 159, 64, 0.2)',
-                          'rgba(255, 205, 86, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(153, 102, 255, 0.2)',
-                          'rgba(201, 203, 207, 0.2)'
+                          'rgb(255, 99, 132, 0.2)',
+                          'rgb(255, 159, 64, 0.2)',
+                          'rgb(255, 205, 86, 0.2)',
+                          'rgb(75, 192, 192, 0.2)',
+                          'rgb(54, 162, 235, 0.2)',
+                          'rgb(153, 102, 255, 0.2)',
+                          'rgb(201, 203, 207, 0.2)'
                         ],
                         borderColor: [
                           'rgb(255, 99, 132)',
@@ -304,21 +268,44 @@ include('session.php');
 
 
     //pie
-    var ctxP = document.getElementById("pieChart").getContext('2d');
+    var ctxP = document.getElementById("accountChart").getContext('2d');
     var myPieChart = new Chart(ctxP, {
-      type: 'pie',
+      type: 'doughnut',      
       data: {
-        labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
-        datasets: [{
-          data: [300, 50, 100, 40, 120],
-          backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
-          hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
-        }]
+        labels:<?php echo json_encode($name1); ?>,
+            datasets: [{
+                 label: 'Pie Chart',
+                  backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(255, 159, 64, 0.2)',
+                          'rgba(255, 205, 86, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(153, 102, 255, 0.2)',
+                          'rgba(201, 203, 207, 0.2)'
+                        ],
+                        borderColor: [
+                          'rgb(255, 99, 132)',
+                          'rgb(255, 159, 64)',
+                          'rgb(255, 205, 86)',
+                          'rgb(75, 192, 192)',
+                          'rgb(54, 162, 235)',
+                          'rgb(153, 102, 255)',
+                          'rgb(201, 203, 207)'
+                        ],
+                        
+                        borderWidth: 1,
+                data:<?php echo json_encode($counts1); ?>,
+            }]
       },
       options: {
         responsive: true,
         legend: false
-      }
+      }, 
+      labelLine: {
+        show: false
+      },
+      
     });
 
   </script>

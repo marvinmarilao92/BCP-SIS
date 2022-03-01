@@ -76,7 +76,8 @@ include('session.php');
                       $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
                       $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
                       $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
+                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3']; 
+                      $docRemarks = $rs['doc_remarks'];   
                   ?>
                   <tr>
                   <td style="display:none"><?php echo $docId?></td>
@@ -383,7 +384,7 @@ include('session.php');
                         icon: "error",
                         title:"File extension must be: .pdf"
                         }).then(function(){
-                          window.location = "documents_list.php";//refresh pages
+                          window.location = "index.php";//refresh pages
                         });
                      </script>
                 ';
@@ -413,7 +414,7 @@ include('session.php');
                         icon: "warning",
                         title:"Files already taken"
                         }).then(function(){
-                          window.location = "documents_list.php";//refresh pages
+                          window.location = "index.php";//refresh pages
                         });
                     </script>
                ';
@@ -440,7 +441,7 @@ include('session.php');
                         icon: "success",
                         title:"Document to track Successfully Created"
                         }).then(function(){
-                          window.location = "documents_list.php";//refresh pages
+                          window.location = "index.php";//refresh pages
                         });
                     </script>
                ';
@@ -660,7 +661,11 @@ include('session.php');
                     }).get();
 
                     console.log(data); 
-                    $('#remarks').text(data[10]);
+                    if(data[18] ==""){
+                      $('#remarks').text(data[10]);
+                    }else{
+                       $('#remarks').text(data[18]);
+                    }
                   });
             // End of View function 
 

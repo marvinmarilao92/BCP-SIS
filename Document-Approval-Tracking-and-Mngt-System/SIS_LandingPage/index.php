@@ -22,7 +22,7 @@
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
 			   					<h1>The Roots of Education are Bitter, But the Fruit is Sweet</h1>
-									<p><a class="btn btn-primary btn-lg" href="https://bcp.edu.ph/home" target="_blank">Start Learning Now!</a></p>
+									<p><a class="btn btn-primary btn-lg" href="../UserManagement/online-enrollment.php" target="_blank">Start Learning Now!</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
@@ -35,7 +35,7 @@
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
 			   					<h1>The Great Aim of Education is not Knowledge, But Action</h1>
-									<p><a class="btn btn-primary btn-lg" href="https://bcp.edu.ph/home" target="_blank">Start Learning Now!</a></p>
+									<p><a class="btn btn-primary btn-lg" href="../UserManagement/online-enrollment.php" target="_blank">Start Learning Now!</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
@@ -48,7 +48,7 @@
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
 			   					<h1>We Help You to Learn New Things</h1>
-									<p><a class="btn btn-primary btn-lg" href="https://bcp.edu.ph/home" target="_blank">Start Learning Now!</a></p>
+									<p><a class="btn btn-primary btn-lg" href="../UserManagement/online-enrollment.php" target="_blank">Start Learning Now!</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
@@ -172,12 +172,12 @@
 						</div>
 						<div class="col-md-3 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-study"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="18500" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter js-counter" data-from="0" data-to="22851" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="fh5co-counter-label">Students Enrolled</span>
 						</div>
 						<div class="col-md-3 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-bulb"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="18" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter js-counter" data-from="0" data-to="15" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="fh5co-counter-label">Course available</span>
 						</div>
 						<div class="col-md-3 col-sm-6 text-center animate-box">
@@ -343,9 +343,9 @@
 				</div>
 				<div class="col-lg-4 col-md-4">
 					<div class="fh5co-blog animate-box">
-						<a href="#" class="blog-img-holder" style="background-image: url(images/mvcampus2.jpg);"></a>
+						<a href="https://www.google.com/maps/place/Bestlink+College+of+the+Philippines/@14.7259172,121.0376605,17.25z/data=!4m5!3m4!1s0x3397b0ff7eb3d621:0x437d85420878d598!8m2!3d14.726688!4d121.0372158" class="blog-img-holder" style="background-image: url(images/mvcampus2.jpg);" target="_blank"></a>
 						<div class="blog-text">
-							<h3><a href="#">Millionaire’s Village Campus</a></h3>
+							<h3><a href="https://www.google.com/maps/place/Bestlink+College+of+the+Philippines/@14.7259172,121.0376605,17.25z/data=!4m5!3m4!1s0x3397b0ff7eb3d621:0x437d85420878d598!8m2!3d14.726688!4d121.0372158" target="_blank">Millionaire’s Village Campus</a></h3>
 							<p>Lot 762 cor. Topaz St. and Sapphire St., Millionaire’s Village, Novaliches Quezon City, Philippines
 							<br><br><b>Contact #: 463-8787, 799-6617</b></p>
 						</div> 

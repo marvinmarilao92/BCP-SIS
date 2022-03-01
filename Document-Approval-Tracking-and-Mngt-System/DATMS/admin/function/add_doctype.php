@@ -9,7 +9,7 @@
         //  $Dt_code = mysqli_real_escape_string($conn,$_POST['dtcode']);
          $Dt_name = mysqli_real_escape_string($conn,$_POST['dtname']);
          $Dt_desc = mysqli_real_escape_string($conn,$_POST['dtdesc']);
-				 		date_default_timezone_set("asia/manila");
+
             $year = date("Y",strtotime("+0 HOURS"));
             $random_num= rand(10000000,99999999);
             $dt_code =  "doc".$year.$random_num;

@@ -77,6 +77,7 @@ include('session.php');
                       $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
                       $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
                       $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
+                      $docRemarks = $rs['doc_remarks'];  
                   ?>
                   <tr>
                   <td style="display:none"><?php echo $docId?></td>
@@ -660,7 +661,12 @@ include('session.php');
                     }).get();
 
                     console.log(data); 
-                    $('#remarks').text(data[10]);
+                    if(data[18] ==""){
+                      $('#remarks').text(data[10]);
+                    }else{
+                       $('#remarks').text(data[18]);
+                    }
+                   
                   });
             // End of View function 
 

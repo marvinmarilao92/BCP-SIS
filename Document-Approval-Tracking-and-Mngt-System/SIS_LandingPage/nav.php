@@ -4,15 +4,17 @@
 <div class="top-menu">
     <div class="container">
         <div class="row">
-            <div class="col-xs-2">
-            <div id="fh5co-logo"><a href="index.html"><i></i>Bestlink</a></div>
+            <div class="col-xs-6">
+            
+            <div id="fh5co-logo"><img src="../assets/img/logo300.png" width="50px" height="50px"><a href="index.php" style="color: rgb(29, 70, 146);"><i></i>Bestlink College of the Philippines</a></div>
             </div>
-            <div class="col-xs-10 text-right menu-1">
+            <div class="col-xs-6 text-right menu-1">
                 <ul>
                     <li class="<?php if($page=='home'){echo 'active';}?>"><a href="index.php">Home</a></li>
                     <li class="<?php if($page=='modules'){echo 'active';}?>"><a href="modules.php">Modules</a></li>
+                    <li class=""><a href="dynamic-login.php">Login</a></li>
                     <!-- <li class="<?php if($page=='about'){echo 'active';}?>"><a href="about.php">About</a></li> -->
-					<li class="btn-cta"><a href="dynamic-login.php"><span>Access Module</span></a></li>
+					<li class="btn-cta"><a href="../UserManagement/online-enrollment.php" target="_blank"><span>APPLY ONLINE</span></a></li>
 				</ul>
             </div>
         </div>
