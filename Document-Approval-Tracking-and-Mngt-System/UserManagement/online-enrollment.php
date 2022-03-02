@@ -2,28 +2,26 @@
   include 'config.php';
     // Define variables and initialize with empty values
     $student_number = "";
+    // personal information 
     $first_name = "";
     $last_name = "";
     $middle_name = "";
     $course = "";
-    $year_level = "";
-    $section = "";
-    $school_year = "";
- 
-    $street1 = "";
-    $street2 = "";
-    $city = "";
-    $zipcode = "";
- 
-    $address = "";
-    $email = "";
-    $contact = "";
     $gender = "";
     $birthday = "";
     $nationality = "";
     $religion = "";
     $civil_status = "";
-
+    //address
+    $street1 = "";
+    $street2 = "";
+    $city = "";
+    $zipcode = "";
+    $address = "";
+    //contact number
+    $email = "";
+    $contact = "";
+    
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -31,75 +29,57 @@
       $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
       $year = date("Y",strtotime("+0 HOURS"));
       $random_num= rand(10000000,99999999);
-      $student_number =  $year.$random_num;
+      $student_number =  $random_num;
+      $account_status = "Active";
 
       $first_name = mysqli_real_escape_string($link,trim($_POST["first_name"]));
       $last_name = mysqli_real_escape_string($link,trim($_POST["last_name"]));
       $middle_name = mysqli_real_escape_string($link,trim($_POST["middle_name"]));
       $course = mysqli_real_escape_string($link,trim($_POST["course"]));
-      
-      $street1 = mysqli_real_escape_string($link,trim($_POST["add_st1"]));
-      $street2 = mysqli_real_escape_string($link,trim($_POST["add_st2"]));
-      $city = mysqli_real_escape_string($link,trim($_POST["city"]));
-      $zipcode = mysqli_real_escape_string($link,trim($_POST["zip_code"]));
-
-      $address = $street1." ".$street2." ".$city." ".$zipcode;
-      $email = mysqli_real_escape_string($link,trim($_POST["email"]));
-      $contact = mysqli_real_escape_string($link,trim($_POST["contact"]));
       $gender = mysqli_real_escape_string($link,trim($_POST["gender"]));
       $birthday = date('Y-m-d', strtotime(mysqli_real_escape_string($link,trim($_POST["birthdate"]))));
       $nationality = mysqli_real_escape_string($link,trim($_POST["nationality"]));
       $religion = mysqli_real_escape_string($link,trim($_POST["religion"]));
       $civil_status = mysqli_real_escape_string($link,trim($_POST["civil_status"]));
-      $account_status = "Active";
-      $password = "#ChangeMe01!";
+      
+      
+      $street1 = mysqli_real_escape_string($link,trim($_POST["add_st1"]));
+      $street2 = mysqli_real_escape_string($link,trim($_POST["add_st2"]));
+      $city = mysqli_real_escape_string($link,trim($_POST["city"]));
+      $zipcode = mysqli_real_escape_string($link,trim($_POST["zip_code"]));
+      $address = $street1." ".$street2." ".$city." ".$zipcode;
 
+      $email = mysqli_real_escape_string($link,trim($_POST["email"]));
+      $contact = mysqli_real_escape_string($link,trim($_POST["contact"]));
+      
       //Check if the student number is not existing in the database
-      $sql1 = "SELECT id FROM student_information WHERE id_number = '$student_number'";
+      $sql1 = "SELECT id FROM student_application WHERE id_number = '$student_number'";
       $result = mysqli_query($link,$sql1);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $count = mysqli_num_rows($result);
       
-      //Check if the student number is not existing in the database
-      $sql2 = "SELECT id FROM users WHERE id_number = '$student_number'";
-      $result2 = mysqli_query($link,$sql2);
-      $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-      $count2 = mysqli_num_rows($result2);
-      
       // If the student number is not existing in the database, count must be 0
-      if($count == 0 && $count2 == 0) {
+      if($count == 0) {
         // Prepare an insert statement
-        $sql = "INSERT INTO student_information (id_number, firstname, lastname, middlename, email, contact, address, course, year_level,section,school_year, gender, birthday, nationality, religion, civil_status, account_status,stud_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO student_application (id_number, firstname, lastname, middlename, email, contact, address, course, gender, birthday, nationality, religion, civil_status, account_status,stud_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         if($stmt = mysqli_prepare($link, $sql)){
           // Bind variables to the prepared statement as parameters
-          mysqli_stmt_bind_param($stmt, "issssissssssssssss", $student_number, $first_name, $last_name, $middle_name, $email, $contact, $address, $course,$year_level, $section, $school_year, $gender, $birthday, $nationality, $religion, $civil_status, $account_status, $date);
+          mysqli_stmt_bind_param($stmt, "issssisssssssss", $student_number, $first_name, $last_name, $middle_name, $email, $contact, $address, $course, $gender, $birthday, $nationality, $religion, $civil_status, $account_status, $date);
 
           // Attempt to execute the prepared statement
           if(mysqli_stmt_execute($stmt)){
-            //Create user account
-            $sql = "INSERT INTO users (id_number, password) VALUES (?, ?)";
+            // Records created successfully. Redirect to landing page
+            header("location: online-enrollment.php");
+            echo '<script type = "text/javascript">
+            alert("Application Successfully Sublitted");
+            window.location = "online-enrollment.php";
+            </script>';
 
-            if($stmt1 = mysqli_prepare($link, $sql)){
-              // Bind variables to the prepared statement as parameters
-              mysqli_stmt_bind_param($stmt1, "ss", $student_number, $password);
-
-              // Attempt to execute the prepared statement
-              if(mysqli_stmt_execute($stmt1)){
-                  // Records created successfully. Redirect to landing page
-                  header("location: online-enrollment.php");
-                  echo '<script type = "text/javascript">
-                  alert("Application Successfully Sublitted");
-                  window.location = "online-enrollment.php";
-                  </script>';
-                  exit();
-              } else{
-                  echo "Oops! Something went wrong. Please try again later.";
-              }
-            }
           } else{
               echo "Oops! Something went wrong. Please try again later.";
           }
+           
         }
 
         // Close statement
@@ -154,10 +134,10 @@
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
                           <!-- first accordion button  -->
-                          <a class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"  aria-expanded="true" aria-controls="collapseOne" style="pointer-events: none;">
-                            <div class="icon">
-                              <i class="bi bi-person-lines-fill me-1"></i>
-                              Personal Information
+                          <a class="accordion-button" id="accordion1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"  aria-expanded="true" aria-controls="collapseOne" style="pointer-events: none;">
+                            <div class="icon" id="text1" style="color: red;">
+                              <i class="bi bi-exclamation-triangle-fill me-1" id="icon1" style="color: red;"></i>
+                              Personal Information&nbsp;  
                             </div>
                           </a>
                           <!-- End of button -->
@@ -474,12 +454,17 @@
                                     </select>
                                     <label for="floatingSelect">Civil Status</label>
                                   </div>
-                                </div>                         
-                                <div class="text-right">                            
-                                  <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" >NEXT</button>
-                                  <a class="btn btn-light" href="../SIS_LandingPage/index.php">CANCEL</a>
-                                </div>
-                            </button>
+                                </div>   
+                                <div class="text-right">                          
+                                  <a class="btn btn-primary collapsed" type="button" id="next" onclick="nextFunction()" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="margin-top: 10px;">DONE</a>
+                                    <a class="btn btn-light" href="../SIS_LandingPage/index.php " style="margin-top: 10px;">CANCEL</a>
+                                    <!-- Success message -->
+                                      <div class="alert alert-success alert-dismissible fade show col-md-3 " role="alert" id="message1" style="float: right; visibility:hidden;">
+                                      <i class="bi bi-check-circle-fill me-1" style="color: green;"></i>
+                                        Click the next button !
+                                      </div>
+                                  </div>
+                                </button>
                             </div>
                           </div>            
                         <!-- end of first part  -->
@@ -488,15 +473,15 @@
                         <h2 class="accordion-header" id="headingTwo">
                           <!-- second accordion button  -->
                           <a class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="pointer-events: none;">
-                            <div class="icon">
-                              <i class="bi bi-geo-alt-fill me-1"></i>
+                            <div class="icon" id="text2" style="color: red;">
+                            <i class="bi bi-exclamation-triangle-fill me-1" id="icon2" style="color: red;"></i>
                               Address
                             </div>
                           </a>
                           <!-- End of button -->
                         </h2>
                         <!-- second part of fill out form -->                      
-                          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                          <div id="collapseTwo" class="accordion-collapse collapse " aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                             <div class="col-12">
                             <!-- Multi Columns Address Form -->
@@ -523,12 +508,18 @@
                                   <div class="form-floating">
                                     <input type="text" class="form-control" name="zip_code" id="zip_code" placeholder="Your Name">
                                     <label for="floatingName">Zip code</label>
-                                  </div>
-                                  <a class="btn btn-light rounded-pill" href="https://zip-codes.philsite.net/" style="float: right; color:blue; margin-top:5px;" target="_blank">List of Zip Code</a>
+                                  </div>                            
                                 </div>                          
                                 <div class="text-right">                            
-                                  <a type="reset" class="btn btn-primary collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">NEXT</a>
+                                  <a type="reset" class="btn btn-primary collapsed" id="next2" onclick="next2Function()" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">DONE</a>
                                   <a class="btn btn-light collapsed" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">PREVIOUS</a>
+                                  <a class="btn btn-light rounded-pill" href="https://zip-codes.philsite.net/" style="float: right; color:blue;" target="_blank">List of Zip Code</a>
+                                  <!-- Success message -->
+                                  <div class="alert alert-success alert-dismissible fade show col-md-3 " role="alert" id="message2" style="float: right; visibility:hidden;">
+                                      <i class="bi bi-check-circle-fill me-1" style="color: green;"></i>
+                                        Click the next button !
+                                  </div>
+                                  
                                 </div>
                               </div><!-- End Multi Columns Form -->
                             </div>
@@ -539,8 +530,8 @@
                         <h2 class="accordion-header" id="headingThree">
                           <!-- third accordion button  -->
                           <a class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="pointer-events: none;"> 
-                            <div class="icon">
-                              <i class="bi bi-telephone-fill me-1"></i>
+                            <div class="icon" id="text3" style="color: red;">
+                            <i class="bi bi-exclamation-triangle-fill me-1" id="icon3" style="color: red;"></i>
                               Contact Information
                             </div>                   
                           </a>
@@ -556,20 +547,24 @@
                               </div>
                               <div class="col-md-12">
                               <div class="form-floating">
-                                    <input type="text" class="form-control" name="contact" id="floatingName" placeholder="number">
+                                    <input type="text" class="form-control" name="contact" id="contact" placeholder="number">
                                     <label for="floatingName">Contact Number</label>
                                   </div>
                                 </div>
                                 <div class="col-md-12">
                                   <div class="form-floating">
-                                    <input type="email" class="form-control" name="email" id="floatingName" placeholder="Email">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" onChange="next3Function()">
                                     <label for="floatingName">Email Address (It should be active)</label>
                                   </div>
                                 </div>
                               <div class="text-right">                            
-                                  <button type="submit" class="btn btn-primary">Submit</button>
+                                  <button type="submit" class="btn btn-primary" onclick="next3Function()">Submit</button>
                                   <!-- <a type="submit" class="btn btn-primary collapsed">Submit</a> -->
                                   <a class="btn btn-light collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">PREVIOUS</a>
+                                  <div class="alert alert-success alert-dismissible fade show col-md-3 " role="alert" id="message3" style="float: right; visibility:hidden;">
+                                      <i class="bi bi-check-circle-fill me-1" style="color: green;"></i>
+                                        Click Sumbit
+                                  </div>
                                 </div>
                             </div>
                           </div>                
@@ -597,10 +592,85 @@
   <script src="assets/vendor/chart.js/chart.min.js"></script>
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script>
+    //input text field
+      const fname   =  document.querySelector("#first_name");
+      const lname   =  document.querySelector("#last_name");
+      const course   =  document.querySelector("#course");
+      const agender   =  document.querySelector("#gender");
+      const abirthdate   =  document.querySelector("#birthdate");
+      const anationality   =  document.querySelector("#nationality");
+      const areligion   =  document.querySelector("#religion");
+      const acivil_status   =  document.querySelector("#civil_status");
 
+      const astrt1   =  document.querySelector("#add_st1");
+      const astrt2   =  document.querySelector("#add_st2");
+      const acity   =  document.querySelector("#city");
+      const azip  =  document.querySelector("#zip_code");
+
+      const acpno   =  document.querySelector("#contact");
+      const aemail   =  document.querySelector("#email");
+
+    //first accordion button function 
+    function nextFunction() {
+      let fname = first_name.value;
+      let lname = last_name.value;
+      let agender = gender.value;
+      let abirthdate = birthdate.value;
+      let anationality = nationality.value;
+      let areligion = religion.value;
+      let acivil_status = civil_status.value;
+      let acourse = course.value;
+      if(fname =="" || lname =="" || agender =="" || abirthdate =="" || anationality =="" || areligion =="" || acivil_status =="" || acourse ==""){
+        Swal.fire("You must fill out every field","","warning");
+      }else{
+      // commands
+      document.getElementById("next").innerText = "NEXT";
+      document.getElementById("next").setAttribute("data-bs-toggle","collapse");
+      document.getElementById("icon1").setAttribute("class","bi bi-check-circle-fill me-1");
+      document.getElementById("icon1").style.color = "green";
+      document.getElementById("text1").style.color = "green";
+      document.getElementById("message1").style.visibility = "visible";
+      }
+    }
+    //second accordion button function 
+    function next2Function() {
+      let add1 = add_st1.value;
+      let add2 = add_st2.value;
+      let act = city.value;
+      let azp = zip_code.value;
+
+      if(add1 =="" || add2 =="" || act =="" || azp =="" ){
+        Swal.fire("You must fill out every field","","warning");
+      }else{
+      // commands
+      document.getElementById("next2").innerText = "NEXT";
+      document.getElementById("next2").setAttribute("data-bs-toggle","collapse");
+      document.getElementById("icon2").setAttribute("class","bi bi-check-circle-fill me-1");
+      document.getElementById("icon2").style.color = "green";
+      document.getElementById("text2").style.color = "green";
+      document.getElementById("message2").style.visibility = "visible";
+      }
+    }
+    //third accordion button function 
+    function next3Function() {
+      let acpno = contact.value;
+      let aemail = email.value;
+
+      if(acpno =="" || acpno =="" ){
+        Swal.fire("You must fill out every field","","warning");
+      }else{
+      // commands
+      document.getElementById("icon3").setAttribute("class","bi bi-check-circle-fill me-1");
+      document.getElementById("icon3").style.color = "green";
+      document.getElementById("text3").style.color = "green";
+      document.getElementById("message3").style.visibility = "visible";
+      }
+    }
+  </script>
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
- 
+  <?php include ("includes/footer.php");?>
 </body>
 
 </html>
