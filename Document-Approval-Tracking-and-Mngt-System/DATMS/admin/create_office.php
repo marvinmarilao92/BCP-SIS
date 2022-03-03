@@ -3,24 +3,24 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<title>DATMS | Department</title>
 <head>
   <?php include ('core/css-links.php');//css connection?>
 </head>
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'office'; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'department'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Office List</h1>
+      <h1>Department List</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Settings</li>
-          <li class="breadcrumb-item active">Office List</li>
+          <li class="breadcrumb-item active">Department List</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -46,17 +46,17 @@ include('session.php');
               </div>
               <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
                   <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
-                   Add Office
+                   Add Department
                   </button>
               </div> 
             </div>
             <div class="card-body" >           
-              <table class="table table-striped table-borderedless" id="officeTable">
+              <table class="table table-striped table-borderedless" id="DepartmentTable">
                 <thead>
                   <tr>
                     <th style="display:none"></th>
                     <th style="display:none"></th>
-                    <th scope="col" WIDTH="85%">Office</th>                    
+                    <th scope="col" WIDTH="85%">Department</th>                    
                     <th style="display:none"></th>
                     <th style="display:none"></th>
                     <th scope="col">Action</th>
@@ -91,16 +91,16 @@ include('session.php');
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th style="display:none"></th>
-                    <th style="display:none"></th>
-                    <th scope="col" WIDTH="85%">Office</th>                    
-                    <th style="display:none"></th>
-                    <th style="display:none"></th>
+                    <th style="display:none">ID</th>
+                    <th style="display:none">Code</th>
+                    <th scope="col" WIDTH="85%">Department</th>                    
+                    <th style="display:none">Details</th>
+                    <th style="display:none">Date Created</th>
                     <th scope="col">Action</th>
                   </tr>
                 </tfoot>
               </table>
-              <!-- End of office table record -->
+              <!-- End of department table record -->
 
             </div>
           </div>
@@ -112,13 +112,13 @@ include('session.php');
 
   </main><!-- End #main -->
 
-  <!-- Office Modals -->
-      <!-- Create Office Modal -->
+  <!-- Department Modals -->
+      <!-- Create Department Modal -->
       <div class="modal fade" id="AddModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">OFFICE CREDENTIALS</h5>
+                          <h5 class="modal-title">DEPARTMENT CREDENTIALS</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           <div class="card" style="margin: 10px;">
@@ -127,7 +127,7 @@ include('session.php');
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
                                   <div class="col-md-4">
-                                      <!-- <input type="text" class="form-control" placeholder="Office Code" id="offcode" required> -->
+                                      <!-- <input type="text" class="form-control" placeholder="Department Code" id="offcode" required> -->
                                   </div>
                                   <br>
                                   <div class="col-md-12">
@@ -135,7 +135,7 @@ include('session.php');
                                   </div>
                                   <br>
                                   <div class="col-12">
-                                      <textarea class="form-control" style="height: 80px" placeholder="Location" id="offloc" required></textarea>
+                                      <textarea class="form-control" style="height: 80px" placeholder="Details" id="offloc" required></textarea>
                                   </div>        
                                 </div>
                                             
@@ -143,29 +143,29 @@ include('session.php');
                           </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button class="btn btn-primary" name="save" id="save" >Save Office</button>
+                              <button class="btn btn-primary" name="save" id="save" >Save Department</button>
                             </div>
                         <!-- End Form -->
                     </div>
                 </div>     
         </div>
-      <!-- End Create Office Modal-->
+      <!-- End Create Department Modal-->
 
-      <!-- View Office modal -->
+      <!-- View Department modal -->
       <div class="modal fade" id="ViewModal" tabindex="-1">
                   <div class="modal-dialog modal-dialog-centered modal-l">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">OFFICE INFORMATION</h5>
+                        <h5 class="modal-title">DEPARTMENT INFORMATION</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                       <div class="card" style="margin: 10px;">
                             <div class="card-body">
-                              <h5 class="card-title">Office Details</h5>
-                                Office Code: <h6 id="view_code" style="margin-left: 60px;"></h6>
-                                Office Name: <h6 id="view_name" style="margin-left: 60px;"></h6>
-                                Location: <h6 id="view_loc" style="margin-left: 60px;"></h6>
+                              <h5 class="card-title">Department Details</h5>
+                                Department Code: <h6 id="view_code" style="margin-left: 60px;"></h6>
+                                Department Name: <h6 id="view_name" style="margin-left: 60px;"></h6>
+                                Details: <h6 id="view_loc" style="margin-left: 60px;"></h6>
                                 Date Created: <h6 id="view_date" style="margin-left: 60px;"></h6>                
                             </div>
                           </div>   
@@ -176,14 +176,14 @@ include('session.php');
                     </div>
                   </div>
         </div>
-      <!-- End View office Modal-->
+      <!-- End View department Modal-->
 
-      <!-- Edit Office Modal -->
+      <!-- Edit Department Modal -->
       <div class="modal fade" id="EditModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">EDIT OFFICE</h5>
+                          <h5 class="modal-title">EDIT DEPARTMENT</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           <div class="card" style="margin: 10px;">
@@ -201,7 +201,7 @@ include('session.php');
                                   </div>
                                   <br>
                                   <div class="col-12">
-                                      Location: <textarea  style="height: 80px" class="form-control" id="off_locE"></textarea>
+                                      Details: <textarea  style="height: 80px" class="form-control" id="off_locE"></textarea>
                                   </div>        
                                 </div>
                               
@@ -215,14 +215,14 @@ include('session.php');
                     </div>
                 </div>
         </div>
-      <!-- End Edit Office Modal-->
+      <!-- End Edit Department Modal-->
 
-      <!-- Delete Office Modal -->
+      <!-- Delete Department Modal -->
       <div class="modal fade" id="DeleteModal" tabindex="-1">
               <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">DELETE OFFICE</h5>
+                        <h5 class="modal-title">DELETE DEPARTMENT</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                         <div class="card" style="margin: 10px;">
@@ -230,21 +230,21 @@ include('session.php');
                             <br>
                             <input type="hidden"  name="delete_id" id="delete_id" readonly>
                             <center>
-                              <h5>Are you sure you want to delete these Office?</h5>
+                              <h5>Are you sure you want to delete these Department?</h5>
                               <h5 class="text-danger">This action cannot be undone.</h5>   
                             </center>                
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name="deletedata" id="offdel" >Delete Office</button>
+                          <button type="submit" class="btn btn-primary" name="deletedata" id="offdel" >Delete Department</button>
                         </div>
                       <!-- End Form -->
                   </div>
               </div>
         </div>
-      <!-- End delete Office Modal -->
-  <!-- End of Office Modals -->
+      <!-- End delete Department Modal -->
+  <!-- End of Department Modals -->
 
   <!-- ======= Footer ======= -->
   <?php include ('core/footer.php');//css connection?>
@@ -257,21 +257,23 @@ include('session.php');
 
   <!-- JS Scripts -->
     <script>
+
       // Buttons for datatable
           $(document).ready(function() {
 
-              $('#officeTable').DataTable( {
+              $('#DepartmentTable').DataTable( {
                   dom: 'Bfrtip',
                   lengthMenu: [
                             [ 5, 10, 25, 50, -1 ],
-                            [ '5','10', '25', '50', 'Show all' ]
+                            [ '5 rows','10 rows', '25 rows', '50 rows', 'Show all' ]
                         ],
                   buttons: ['pageLength', 
                       {
                           extend: 'collection',
                           className: 'custom-html-collection',
+                          autoClose: true,
                           buttons: [
-                              '<center><h5>Export Tools</h5></center>',
+                              '<center><h5 style="padding: 5px;">Export</h5></center>',
                                 'csv',  {
                                   extend: 'excelHtml5',
                                   autoFilter: true,
@@ -281,12 +283,19 @@ include('session.php');
                                   title: 'Department Reports',
                                   footer: true,
                               }, {
-                                  extend: 'print',
-                                  messageTop: 'Bestlink college of the philippines Department Report'
-                              }
+                                extend: 'print',
+                                messageTop: 'Bestlink college of the philippines Department Report',
+                             
+                        }
+                              
+                              // {
+                              //     extend: 'print',
+                              //     messageTop: 'Bestlink college of the philippines Department Report'
+                              // }
                           ]
                       }, {
                           extend:    'copyHtml5',
+                          header: false,                       
                           text:      '<i class="bi bi-clipboard"></i>',
                           titleAttr: 'Copy'
                       }
@@ -314,16 +323,16 @@ include('session.php');
                   });
               // end of function
             
-              // Delete Office function
+              // Delete Department function
               $("#offdel").click(function(b){
                 b.preventDefault();
                 $.post("function/delete_office.php",{
                     offid:$('#delete_id').val()
                   },function(response){
                     // alert ("deleted");
-                    if(response.trim() == "OfficeDeleted"){
+                    if(response.trim() == "DepartmentDeleted"){
                       $('#DeleteModal').modal('hide');
-                      Swal.fire ("Office Successfully Deleted","","success").then(function(){
+                      Swal.fire ("Department Successfully Deleted","","success").then(function(){
                                 document.location.reload(true)//refresh pages
                               });                      
                     }else{
@@ -332,9 +341,9 @@ include('session.php');
                     }
                   })
                 })
-              // End Delete Office function
+              // End Delete Department function
                 
-              // Save Office function
+              // Save Department function
               $('#save').click(function(a){ 
                   a.preventDefault();
                     if($('#offtitle').val()!="" && $('#offloc').val()!=""){
@@ -344,7 +353,7 @@ include('session.php');
                         },function(data){
                         if (data.trim() == "failed"){
                           $('#AddModal').modal('hide');
-                          Swal.fire("Office is already in server","","error");//response message
+                          Swal.fire("Department is already in server","","error");//response message
                           // Empty test field
                           $('#offtitle').val("")
                           $('#offloc').val("")
@@ -365,7 +374,7 @@ include('session.php');
                                 })
                               Toast.fire({
                               icon: 'success',
-                              title:'Office successfully Saved'
+                              title:'Department successfully Saved'
                               }).then(function(){
                                 document.location.reload(true)//refresh pages
                               });
@@ -379,9 +388,9 @@ include('session.php');
                       Swal.fire("You must fill out every field","","warning");
                     }
                   })
-              // End Save Office function
+              // End Save Department function
 
-              // Edit Office modal calling
+              // Edit Department modal calling
               $('.editbtn').on('click', function () {
 
                     $('#EditModal').modal('show');
@@ -403,7 +412,7 @@ include('session.php');
                   searching: false,
                   ordering:  false
               } );
-              // Edit Office function
+              // Edit Department function
               $('#edit').click(function(d){ 
                     d.preventDefault();
                       if($('#off_idE').val()!="" && $('#off_codeE').val()!="" && $('#off_nameE').val()!="" && $('#off_locE').val()!=""){
@@ -414,7 +423,7 @@ include('session.php');
                           offloc:$('#off_locE').val()
                           },function(data){
                             if (data.trim() == "failed"){
-                            Swal.fire("Office Title is currently in use","","error");//response message
+                            Swal.fire("Department Title is currently in use","","error");//response message
                             // Empty test field
                             $('#off_nameE').val("")
                           }else if(data.trim() == "success"){
@@ -448,9 +457,9 @@ include('session.php');
                         Swal.fire("You must fill out every field","","warning");
                       }
                   })
-              // End Edit Office function
+              // End Edit Department function
 
-              // View Office Function
+              // View Department Function
               $('.viewbtn').on('click', function () {
 
                     $('#ViewModal').modal('show');

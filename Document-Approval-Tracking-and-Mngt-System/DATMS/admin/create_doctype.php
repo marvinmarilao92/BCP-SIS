@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<title>DATMS | Document Type</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 </head>
@@ -54,7 +54,7 @@ include('session.php');
             </div>
             <div class="card-body" >           
               <!-- Table for DocType records -->
-              <table class="table table-hover datatable" >
+              <table class="table table-striped table-borderedless" id="DocTypeTable">
                 <thead>
                   <tr>
                     <th style="display:none"></th>
@@ -252,7 +252,45 @@ include('session.php');
     <?php include ('core/js.php');//css connection?>
 
   <!-- JS Scripts -->
-    <script>
+    <script> 
+      // Buttons for datatable
+          $(document).ready(function() {
+
+              $('#DocTypeTable').DataTable( {
+                  dom: 'Bfrtip',
+                  lengthMenu: [
+                            [ 5, 10, 25, 50, -1 ],
+                            [ '5 rows','10 rows', '25 rows', '50 rows', 'Show all' ]
+                        ],
+                  buttons: ['pageLength', 
+                      {
+                          extend: 'collection',
+                          className: 'custom-html-collection',
+                          autoClose: true,
+                          buttons: [
+                              '<center><h5 style="padding: 5px;">Export</h5></center>',
+                                'csv',  {
+                                  extend: 'excelHtml5',
+                                  autoFilter: true,
+                                  title: 'Department Reports'
+                              }, {
+                                  extend: 'pdfHtml5',
+                                  title: 'Department Reports',
+                                  footer: true,
+                              }, {
+                                  extend: 'print',
+                                  messageTop: 'Bestlink college of the philippines Department Report'
+                              }
+                          ]
+                      }, {
+                          extend:    'copyHtml5',
+                          header: false,                       
+                          text:      '<i class="bi bi-clipboard"></i>',
+                          titleAttr: 'Copy'
+                      }
+                  ]
+              } );
+            } );
         // this script will execute as soon a the website runs
         $(document).ready(function () {
 

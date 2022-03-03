@@ -17,6 +17,7 @@
                   $verified_session_office = $row5['office'];
                   $verified_session_department = $row5['department'];
                   $verified_session_role = $row5['role'];
+                  $verified_session_about = $row5['about'];
                 }
                 // Free result set
                 mysqli_free_result($result5);

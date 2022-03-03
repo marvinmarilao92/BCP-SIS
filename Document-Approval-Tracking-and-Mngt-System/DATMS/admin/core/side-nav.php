@@ -143,22 +143,22 @@
     <ul id="components-nav" class="<?php if($col=='logs'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
      <li>
         <a href="logs_admin.php" class="<?php if($page=='AdL'){echo 'active';}?>">
-          <i class="bi bi-circle"></i><span>Admin Logged</span>
+          <i class="bi bi-circle"></i><span>Admin Logs</span>
         </a>
       </li>
       <li>
         <a href="logs_approver.php" class="<?php if($page=='AL'){echo 'active';}?>">
-          <i class="bi bi-circle"></i><span>Approver Logged</span>
+          <i class="bi bi-circle"></i><span>Approver Logs</span>
         </a>
       </li>
       <li>
         <a href="logs_sec.php" class="<?php if($page=='SL'){echo 'active';}?>">
-          <i class="bi bi-circle"></i><span>Secretary Logged</span>
+          <i class="bi bi-circle"></i><span>Assistan Logs</span>
         </a>
       </li>
       <li>
         <a href="logs_faculty.php" class="<?php if($page=='FL'){echo 'active';}?>">
-          <i class="bi bi-circle"></i><span>Faculty Logged</span>
+          <i class="bi bi-circle"></i><span>Faculty Logs</span>
         </a>
       </li>
     </ul>
@@ -175,9 +175,9 @@
   </li><!-- End Profile Page Nav -->
 
   <li class="nav-item">
-  <a href="create_office.php" class="<?php if($page=='office'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-      <i class="bi bi-house-door"></i>
-      <span>Office</span>
+  <a href="create_office.php" class="<?php if($page=='department'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+      <i class="bi bi-book"></i>
+      <span>Department</span>
     </a>
   </li><!-- End Add office Page Nav -->
 

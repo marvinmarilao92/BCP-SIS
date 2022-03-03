@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<title>DATMS | Document Reports</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 </head>
@@ -32,13 +32,7 @@ include('session.php');
           <div class="card">
             <div class="card-body">
                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: left; padding: 10px">
-                </div> 
-                    <div class="form-group col-md-2 btn-lg"  style="padding:10px;">
-                      <a type="button" href="archive_docs.php" class="btn btn-primary form-control">
-                          Archive &nbsp;
-                        <i class="bi bi-archive me-1"></i>
-                      </a>
-                    </div>
+                </div>                   
               <!-- Report Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="myTabjustified" role="tablist" style="margin-top: 10px;">
                 <li class="nav-item flex-fill" role="presentation">
@@ -70,10 +64,10 @@ include('session.php');
                                     <h4>Incoming Document Reports</h4>
                                 </div>
                                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                    <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#AddModal">
-                                    Print&nbsp;
-                                    <i class="bi bi-printer me-1"></i>
-                                    </button>
+                                    <a type="button" href="archive_docs.php" class="btn btn-primary form-control">
+                                        Archive &nbsp;
+                                      <i class="bi bi-archive me-1"></i>
+                                    </a>
                                 </div> 
                               </div>
                               <div class="card-body" >           
@@ -119,10 +113,10 @@ include('session.php');
                                     <h4>Received Document Reports</h4>
                                 </div>
                                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                    <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#AddModal">
-                                    Print&nbsp;
-                                    <i class="bi bi-printer me-1"></i>
-                                    </button>
+                                    <a type="button" href="archive_docs.php" class="btn btn-primary form-control">
+                                        Archive &nbsp;
+                                      <i class="bi bi-archive me-1"></i>
+                                    </a>
                                 </div> 
                               </div>
                               <div class="card-body" >           
@@ -167,10 +161,10 @@ include('session.php');
                                     <h4>Approved Document Reports</h4>
                                 </div>
                                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                    <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#AddModal">
-                                    Print&nbsp;
-                                    <i class="bi bi-printer me-1"></i>
-                                    </button>
+                                    <a type="button" href="archive_docs.php" class="btn btn-primary form-control">
+                                        Archive &nbsp;
+                                      <i class="bi bi-archive me-1"></i>
+                                    </a>
                                 </div> 
                               </div>
                               <div class="card-body" >           
@@ -216,10 +210,10 @@ include('session.php');
                                     <h4>Outgoing Document Reports</h4>
                                 </div>
                                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                    <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#AddModal">
-                                    Print&nbsp;
-                                    <i class="bi bi-printer me-1"></i>
-                                    </button>
+                                    <a type="button" href="archive_docs.php" class="btn btn-primary form-control">
+                                        Archive &nbsp;
+                                      <i class="bi bi-archive me-1"></i>
+                                    </a>
                                 </div> 
                               </div>
                               <div class="card-body" >           
@@ -265,10 +259,10 @@ include('session.php');
                                     <h4>Hold Document Reports</h4>
                                 </div>
                                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                    <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#AddModal">
-                                    Print&nbsp;
-                                    <i class="bi bi-printer me-1"></i>
-                                    </button>
+                                    <a type="button" href="archive_docs.php" class="btn btn-primary form-control">
+                                        Archive &nbsp;
+                                      <i class="bi bi-archive me-1"></i>
+                                    </a>
                                 </div> 
                               </div>
                               <div class="card-body" >           
