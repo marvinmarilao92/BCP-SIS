@@ -75,22 +75,22 @@
                     case "DATMS Administrator":
                       //statement
                       $_SESSION['session_username'] = $myusername;
-                      header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index.php");
+                      header("location: ../DATMS/admin/index.php");
                       break;
                     case "DATMS Approver":
                       //statement
                       $_SESSION['session_username'] = $myusername;
-                      header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index.php");
+                      header("location: ../DATMS/approver/index.php");
                       break;
                     case "DATMS Secretary":
                        //statement
                        $_SESSION['session_username'] = $myusername;
-                       header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index.php");
+                       header("location: ../DATMS/secretary/index.php");
                        break;
                     case "DATMS Faculty":
                        //statement
                        $_SESSION['session_username'] = $myusername;
-                       header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index.php");
+                       header("location: ../DATMS/faculty/index.php");
                        break;
                   }
                   break;
