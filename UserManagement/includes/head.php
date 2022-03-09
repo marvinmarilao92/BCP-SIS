@@ -23,6 +23,9 @@
   <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
+   <!-- For barcode -->
+   <script src="../assets/vendor/bootstrap/js/JsBarcode.all.min.js"></script>
+
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
 

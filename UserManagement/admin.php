@@ -35,7 +35,7 @@ include('session.php');
                           <h4>List of Employee</h4>
                       </div>
                       <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                        <a href="admin-create.php" class="btn btn-success pull-right">Add New User</a>
+                        <a href="admin-create.php" class="btn btn-primary pull-right">Add New User</a>
                       </div> 
                     </div>
                   <div class="card-body">
@@ -50,9 +50,8 @@ include('session.php');
                                   echo '<table class="table datatable">';
                                       echo "<thead>";
                                           echo "<tr>";
-                                              echo "<th scope='col'>Employee ID</th>";
-                                              echo "<th scope='col'>First Name</th>";
-                                              echo "<th scope='col'>Last Name</th>";
+                                              echo "<th scope='col'>Employee No.</th>";
+                                              echo "<th scope='col'>Full Name</th>";
                                               echo "<th scope='col'>Department</th>";
                                               echo "<th scope='col'>Position</th>";
                                               echo "<th scope='col'>Last Access</th>";
@@ -63,8 +62,7 @@ include('session.php');
                                       while($row = mysqli_fetch_array($result)){
                                           echo "<tr>";
                                               echo "<td>" . $row['id_number'] . "</td>";
-                                              echo "<td>" . $row['firstname'] . "</td>";
-                                              echo "<td>" . $row['lastname'] . "</td>";
+                                              echo "<td>" . $row['firstname'] .' '.$row['middlename'].' '. $row['lastname']. "</td>";
                                               echo "<td>" . $row['department'] . "</td>";
                                               echo "<td>" . $row['role'] . "</td>";
                                               $sql1 = "SELECT * FROM users WHERE id_number = " . $row['id_number'] . " ";

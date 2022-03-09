@@ -63,12 +63,6 @@ include('session.php');
                             <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
                                 <h4>System Admin Reports</h4>
                             </div>
-                            <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#AddModal">
-                                Print&nbsp;
-                                <i class="bi bi-printer me-1"></i>
-                                </button>
-                            </div> 
                           </div>
                           <div class="card-body" >           
                             <!-- Table for Role records -->
@@ -112,12 +106,6 @@ include('session.php');
                             <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
                                 <h4>Approver Reports</h4>
                             </div>
-                            <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#AddModal">
-                                Print&nbsp;
-                                <i class="bi bi-printer me-1"></i>
-                                </button>
-                            </div> 
                           </div>
                           <div class="card-body" >           
                             <!-- Table for Role records -->
@@ -160,12 +148,6 @@ include('session.php');
                             <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
                                 <h4>Department Admin Reports</h4>
                             </div>
-                            <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#AddModal">
-                                Print&nbsp;
-                                <i class="bi bi-printer me-1"></i>
-                                </button>
-                            </div> 
                           </div>
                           <div class="card-body" >           
                             <!-- Table for Role records -->
@@ -209,12 +191,6 @@ include('session.php');
                             <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
                                 <h4>Department Secretary Reports</h4>
                             </div>
-                            <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#AddModal">
-                                Print&nbsp;
-                                <i class="bi bi-printer me-1"></i>
-                                </button>
-                            </div> 
                           </div>
                           <div class="card-body" >           
                             <!-- Table for Role records -->
@@ -258,12 +234,6 @@ include('session.php');
                             <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
                                 <h4>Faculty Reports</h4>
                             </div>
-                            <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#AddModal">
-                                Print&nbsp;
-                                <i class="bi bi-printer me-1"></i>
-                                </button>
-                            </div> 
                           </div>
                           <div class="card-body" >           
                             <!-- Table for Role records -->

@@ -41,7 +41,7 @@ include('session.php');
                     <h4>List of Students</h4>
                 </div>
                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                   <a href="student-create.php" class="btn btn-success pull-right">Add New Student</a>
+                   <a href="student-create.php" class="btn btn-primary pull-right">Add New Student</a>
                 </div> 
               </div>
             <div class="card-body">
@@ -50,12 +50,8 @@ include('session.php');
                 <thead>
                   <tr>
                     <th style="display:none"></th>
-                    <th style="display:none"></th>
-                    <th scope="col" WIDTH="60%">Student Name</th>  
-                    <th style="display:none"></th>
-                    <th style="display:none"></th>                  
-                    <th style="display:none"></th>
-                    <th style="display:none"></th>
+                    <th >Student No.</th>
+                    <th scope="col">Full Name</th>  
                     <th style="display:none"></th>
                     <th style="display:none"></th>                  
                     <th style="display:none"></th>
@@ -65,6 +61,11 @@ include('session.php');
                     <th style="display:none"></th>
                     <th style="display:none"></th>
                     <th style="display:none"></th>
+                    <th style="display:none"></th>                  
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th scope='col'>Course</th>
                     <th>Last Access</th>
                     <th>Account Status</th>
                     <th scope="col">Action</th>
@@ -98,12 +99,12 @@ include('session.php');
                   ?>
                   <tr>
                     <td style="display:none"><?php echo $studid; ?></td>
-                    <td style="display:none"><?php echo $studno; ?></td>
+                    <td ><?php echo $studno; ?></td>
                     <td><?php echo $fname.' '.$mname.' '.$lname; ?>
                     <td style="display:none"><?php echo $email?></td>
                     <td style="display:none"><?php echo $contact?></td>
                     <td style="display:none"><?php echo $address?></td>
-                    <td style="display:none"><?php echo $course?></td>
+                    <td ><?php echo $course?></td>
                     <td style="display:none"><?php echo $yl?></td>
                     <td style="display:none"><?php echo $section?></td>
                     <td style="display:none"><?php echo $sy?></td>

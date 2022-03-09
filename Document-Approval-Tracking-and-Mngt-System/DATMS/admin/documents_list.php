@@ -62,7 +62,7 @@ include('session.php');
                     <th scope="col">Date/Time</th>       
                     <th scope="col">Status</th>  
                     <!-- <th scope="col">Downloads</th>    -->
-                    <th scope="col">Action</th>          
+                    <th scope="col" WIDTH="15%">Action</th>          
                   </tr>
                 </thead>
                 <tbody>
@@ -100,11 +100,13 @@ include('session.php');
                     <td style="display:none"><?php echo $docDate3?></td>
                     <td style="display:none"><?php echo $docRemarks?></td>
 
-                    <td>                      
+                    <td>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
                       <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>
-                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye"></i></a>
-                      <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' ><i class="bi bi-download" ></i></a>
-                      <a class="btn btn-dark " ><i class="bi bi-clock-history" ></i></a>
+                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="ri ri-eye-line"></i></a>
+                      <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' ><i class="ri ri-download-2-fill" ></i></a>
+                      <a class="btn btn-dark " ><i class="ri ri-history-line" ></i></a>
+                    </div>
                     </td>
                   </tr>
 

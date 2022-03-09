@@ -54,21 +54,21 @@ include('session.php');
             </div>
             <div class="card-body" >           
               <!-- Table for DocType records -->
-              <table class="table table-striped table-borderedless" id="DocTypeTable">
+              <table class="row-border hover datatable" id="DocTypeTable">
                 <thead>
                   <tr>
                     <th style="display:none"></th>
                     <th style="display:none"></th>
-                    <th scope="col" WIDTH="85%">Document Type</th>                    
+                    <th scope="col" WIDTH="70%">Document Type</th>                    
                     <th style="display:none"></th>
-                    <th style="display:none"></th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Date Created</th>
+                    <th scope="col" WIDTH="10%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC ";
+                    $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $dtid =$rs['dt_id'];
@@ -82,18 +82,30 @@ include('session.php');
                     <td style="display:none"><?php echo $dtCode; ?></td>
                     <td><?php echo $dtName; ?>
                     <td style="display:none"><?php echo $dtDesc?></td>
-                    <td style="display:none"><?php echo $dtDate?></td>
+                    <td ><?php echo $dtDate?></td>
                   </td>
-                    <td>                      
-                      <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>
-                      <button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button>
-                      <button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>
+                    <td>      
+                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
+                        <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>
+                        <button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button>
+                        <button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>
+                      </div>
                     </td>
                   </tr>
 
                   <?php } ?>
                   
                 </tbody>
+                <tfoot>
+                  <tr>
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th scope="col" WIDTH="70%">Document Type</th>                    
+                    <th style="display:none"></th>
+                    <th scope="col">Date Created</th>
+                    <th scope="col" WIDTH="10%">Action</th>
+                  </tr>
+                </tfoot>
               </table>
               <!-- End of DocType table record -->
 
@@ -253,41 +265,60 @@ include('session.php');
 
   <!-- JS Scripts -->
     <script> 
+    
       // Buttons for datatable
           $(document).ready(function() {
 
-              $('#DocTypeTable').DataTable( {
+                  $('#DocTypeTable').DataTable( {
+
+                  // ajax:'ajaxtables/department_tbl.php',
+                  paging: false,
+                  "bInfo" : false,
+                  searching: false,
                   dom: 'Bfrtip',
-                  lengthMenu: [
-                            [ 5, 10, 25, 50, -1 ],
-                            [ '5 rows','10 rows', '25 rows', '50 rows', 'Show all' ]
-                        ],
-                  buttons: ['pageLength', 
+                  buttons: [ 
                       {
                           extend: 'collection',
+                          text:      'Export',
                           className: 'custom-html-collection',
                           autoClose: true,
                           buttons: [
-                              '<center><h5 style="padding: 5px;">Export</h5></center>',
+                              '<center style="size:20px">Files</center>',
                                 'csv',  {
                                   extend: 'excelHtml5',
                                   autoFilter: true,
-                                  title: 'Department Reports'
+                                  title: 'Department Reports',
+                                  exportOptions: {
+                                      columns: ':visible'
+                                  }
                               }, {
                                   extend: 'pdfHtml5',
                                   title: 'Department Reports',
                                   footer: true,
-                              }, {
-                                  extend: 'print',
-                                  messageTop: 'Bestlink college of the philippines Department Report'
+                                  exportOptions: {
+                                      columns: ':visible'
+                                  }
                               }
                           ]
-                      }, {
+                      },  {
+                      extend: 'colvis',
+                      text:'View'
+                      },{
                           extend:    'copyHtml5',
                           header: false,                       
                           text:      '<i class="bi bi-clipboard"></i>',
-                          titleAttr: 'Copy'
-                      }
+                          titleAttr: 'Copy',
+                          exportOptions: {
+                              columns: ':visible'
+                          }
+                      },{
+                          text:'<i class="bi bi-printer"></i>',
+                          extend: 'print',
+                          messageTop: 'Bestlink college of the philippines Department Report',
+                          exportOptions: {
+                              columns: ':visible'
+                          }
+                        }
                   ]
               } );
             } );
