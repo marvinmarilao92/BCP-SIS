@@ -6,6 +6,43 @@ include('session.php');
 <title>DATMS | Document List</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
+<style>
+         /*responsive*/
+        @media(max-width: 500px){
+          .table thead{
+            display: none;
+          }
+
+          .table, .table tbody, .table tr, .table td{
+            display: block;
+            width: 100%;
+          }
+          .table tr{
+            background: #ffffff;
+            box-shadow: 0 8px 8px -4px lightblue;
+            border-radius: 5%;
+            margin-bottom:13px;
+            margin-top: 13px;
+          }
+          .table td{
+            /* max-width: 20px; */
+            padding-left: 50%;
+            text-align: right;
+            position: relative;
+          }
+          .table td::before{      
+            margin-top: 10px;      
+            content: attr(data-label);
+            position: absolute;
+            left:0;
+            width: 50%;
+            padding-left:15px;
+            font-size:15px;
+            font-weight: bold;
+            text-align: left;
+          }
+        }
+</style>
 </head>
 <body>
 
@@ -50,7 +87,7 @@ include('session.php');
               </div> 
             </div>
             <div class="card-body" >           
-              <!-- Table for Office records -->
+              <!-- Table for Document List records -->
               <form method="POST">
                  <table class="table table-hover datatable" >
                 <thead>
@@ -80,12 +117,12 @@ include('session.php');
                       $docRemarks = $rs['doc_remarks'];  
                   ?>
                   <tr>
-                  <td style="display:none"><?php echo $docId?></td>
-                    <td><?php echo $docCode; ?></td>
-                    <td><?php echo $docName; ?></td>
-                    <td><?php echo $docAct2; ?></td>
-                    <td><?php echo $docDate2; ?></td>
-                    <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
+                    <td style="display:none"><?php echo $docId?></td>
+                    <td data-label="Code:"><?php echo $docCode; ?></td>
+                    <td data-label="File Name:" ><?php echo $docName; ?></td>
+                    <td data-label="Title:"><?php echo $docAct2; ?></td>
+                    <td data-label="Date:"><?php echo $docDate2; ?></td>
+                    <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
                     <td style="display:none"><?php echo $docDl; ?></td>
                     <td style="display:none"><?php echo $docTitle?></td>
@@ -113,9 +150,10 @@ include('session.php');
                   <?php } ?>
                   
                 </tbody>
-              </table>
-              <!-- End of office table record -->
+                </table>
+              
               </form>
+              <!-- End of Document table record -->
             </div>
           </div>
 
@@ -126,7 +164,7 @@ include('session.php');
 
   </main><!-- End #main -->
 
-  <!-- Office Modals -->
+  <!-- Document List Modals -->
       <!-- Create Document Modal -->
       <div class="modal fade" id="AddModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
@@ -249,7 +287,7 @@ include('session.php');
         </div>
       <!-- End Desc office Modal-->
 
-      <!-- Edit Office Modal -->
+      <!-- Edit Document List Modal -->
       <div class="modal fade" id="EditModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
@@ -286,9 +324,9 @@ include('session.php');
                     </div>
                 </div>
         </div>
-      <!-- End Edit Office Modal-->
+      <!-- End Edit Document List Modal-->
 
-      <!-- Delete Office Modal -->
+      <!-- Delete Document List Modal -->
       <div class="modal fade" id="DeleteModal" tabindex="-1">
               <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -301,21 +339,21 @@ include('session.php');
                             <br>
                             <input type="hidden"  name="delete_id" id="delete_id" readonly>
                             <center>
-                              <h5>Are you sure you want to delete these Office?</h5>
+                              <h5>Are you sure you want to delete these Document List?</h5>
                               <h5 class="text-danger">This action cannot be undone.</h5>   
                             </center>                
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Office</button>
+                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Document List</button>
                         </div>
                       <!-- End Form -->
                   </div>
               </div>
         </div>
-      <!-- End delete Office Modal -->
-  <!-- End of Office Modals -->
+      <!-- End delete Document List Modal -->
+  <!-- End of Document List Modals -->
 
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
@@ -534,7 +572,7 @@ include('session.php');
               //                   })
               //                 Toast.fire({
               //                 icon: 'success',
-              //                 title:'Office successfully Saved'
+              //                 title:'Document List successfully Saved'
               //                 }).then(function(){
               //                   document.location.reload(true)//refresh pages
               //                 });
@@ -583,7 +621,7 @@ include('session.php');
               //             },function(data){
               //               if (data.trim() == "failed"){
               //               $('#EditModal').modal('hide');
-              //               Swal.fire("Office Title is currently in use","","error");//response message
+              //               Swal.fire("Document List Title is currently in use","","error");//response message
               //               // Empty test field
               //               $('#dt_codeE').val("")
               //               $('#dt_nameE').val("")

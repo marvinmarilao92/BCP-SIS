@@ -6,6 +6,43 @@ include('session.php');
 <title>DATMS | Document Type</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
+<style>
+         /*responsive*/
+        @media(max-width: 500px){
+          .table thead{
+            display: none;
+          }
+
+          .table, .table tbody, .table tr, .table td{
+            display: block;
+            width: 100%;
+          }
+          .table tr{
+            background: #ffffff;
+            box-shadow: 0 8px 8px -4px lightblue;
+            border-radius: 5%;
+            margin-bottom:13px;
+            margin-top: 13px;
+          }
+          .table td{
+            text-align: right;
+            padding-left: 50%;
+            text-align: right;
+            position: relative;
+          }
+          .table td::before{      
+            margin-top: 10px;      
+            content: attr(data-label);
+            position: absolute;
+            left:0;
+            width: 50%;
+            padding-left:15px;
+            font-size:15px;
+            font-weight: bold;
+            text-align: left;
+          }
+        }
+</style>
 </head>
 <body>
 
@@ -44,7 +81,13 @@ include('session.php');
           <div class="card">
             <div class="col-lg-12">
               <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                  <h4>Types of Documents</h4>
+                  <h5>
+                     <!-- extract Buttons -->
+                      <div style="align-self: center;" class="btn-group" role="group" aria-label="Basic mixed styles example" style=" padding:20px;"> 
+                        <button class="btn btn-outline-dark " onclick="ExportToExcel('xlsx')">Excel</button>
+                        <input class="btn btn-outline-dark " id="copy_btn" type="button" value="copy">
+                      </div>
+                  </h5>  
               </div>
               <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
                   <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
@@ -54,7 +97,7 @@ include('session.php');
             </div>
             <div class="card-body" >           
               <!-- Table for DocType records -->
-              <table class="row-border hover datatable" id="DocTypeTable">
+              <table class="row-border hover datatable table" id="DocTypeTable">
                 <thead>
                   <tr>
                     <th style="display:none"></th>
@@ -80,10 +123,10 @@ include('session.php');
                   <tr>
                     <td style="display:none"><?php echo $dtid; ?></td>
                     <td style="display:none"><?php echo $dtCode; ?></td>
-                    <td><?php echo $dtName; ?>
+                    <td data-label="DocType"><?php echo $dtName; ?></td>
                     <td style="display:none"><?php echo $dtDesc?></td>
-                    <td ><?php echo $dtDate?></td>
-                  </td>
+                    <td data-label="Date"><?php echo $dtDate?></td>
+                  
                     <td>      
                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
                         <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>
@@ -265,63 +308,31 @@ include('session.php');
 
   <!-- JS Scripts -->
     <script> 
-    
-      // Buttons for datatable
-          $(document).ready(function() {
-
-                  $('#DocTypeTable').DataTable( {
-
-                  // ajax:'ajaxtables/department_tbl.php',
-                  paging: false,
-                  "bInfo" : false,
-                  searching: false,
-                  dom: 'Bfrtip',
-                  buttons: [ 
-                      {
-                          extend: 'collection',
-                          text:      'Export',
-                          className: 'custom-html-collection',
-                          autoClose: true,
-                          buttons: [
-                              '<center style="size:20px">Files</center>',
-                                'csv',  {
-                                  extend: 'excelHtml5',
-                                  autoFilter: true,
-                                  title: 'Department Reports',
-                                  exportOptions: {
-                                      columns: ':visible'
-                                  }
-                              }, {
-                                  extend: 'pdfHtml5',
-                                  title: 'Department Reports',
-                                  footer: true,
-                                  exportOptions: {
-                                      columns: ':visible'
-                                  }
-                              }
-                          ]
-                      },  {
-                      extend: 'colvis',
-                      text:'View'
-                      },{
-                          extend:    'copyHtml5',
-                          header: false,                       
-                          text:      '<i class="bi bi-clipboard"></i>',
-                          titleAttr: 'Copy',
-                          exportOptions: {
-                              columns: ':visible'
-                          }
-                      },{
-                          text:'<i class="bi bi-printer"></i>',
-                          extend: 'print',
-                          messageTop: 'Bestlink college of the philippines Department Report',
-                          exportOptions: {
-                              columns: ':visible'
-                          }
-                        }
-                  ]
-              } );
-            } );
+     //export functions
+        //excel
+        function ExportToExcel(type, fn, dl) {
+        var elt = document.getElementById('DocTypeTable');
+        var wb = XLSX.utils.table_to_book(elt, { sheet: "DocTypes" });
+        return dl ?
+            XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+            XLSX.writeFile(wb, fn || ('DocType_Records.' + (type || 'xlsx')));
+        }
+        //clipboard
+          var copyBtn = document.querySelector('#copy_btn');
+            copyBtn.addEventListener('click', function () {
+              var urlField = document.querySelector('table');
+              
+              // create a Range object
+              var range = document.createRange();  
+              // set the Node to select the "range"
+              range.selectNode(urlField);
+              // add the Range to the set of window selections
+              window.getSelection().addRange(range);
+              
+              // execute 'copy', can't 'cut' in this case
+              document.execCommand('copy');
+            }, false);
+      // end of export
         // this script will execute as soon a the website runs
         $(document).ready(function () {
 

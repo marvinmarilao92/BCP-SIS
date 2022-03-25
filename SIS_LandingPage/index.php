@@ -7,6 +7,7 @@
 	<body>
 	<div class="fh5co-loader"></div>
 	<div id="page">
+		
 	<?php
 		// Navigation bar
 		$page = 'home';
@@ -193,7 +194,7 @@
 	</div>	
 	<div id="fh5co-staff">
 		<div class="container">
-			<center><h1 class="heading-section">Our Faculty</h1></center>
+			<h1 class="heading-section">Our Faculty</h1>
 			<div class="row">
 				<div class="col-md-3 text-center">
 					<div class="staff">

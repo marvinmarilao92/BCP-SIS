@@ -42,9 +42,8 @@ include('session.php');
                     <?php
                           // Include config file
                           require_once "config.php";
-                          
                           // Attempt select query execution
-                          $sql = "SELECT * FROM user_information where account_status = 'Active' ORDER BY id_number";
+                          $sql = "SELECT * FROM user_information WHERE `admin` NOT IN ('1') ORDER BY id_number asc ";
                           if($result = mysqli_query($link, $sql)){
                               if(mysqli_num_rows($result) > 0){
                                   echo '<table class="table datatable">';

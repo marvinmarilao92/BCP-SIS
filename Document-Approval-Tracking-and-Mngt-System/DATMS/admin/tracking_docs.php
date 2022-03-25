@@ -50,12 +50,12 @@ include('session.php');
                   </center>
                   <!-- End of search Bar -->
                     <!-- Tracking Activity module -->
-                    <div class="activity" style="margin-left:100px; ">
+                    <div class="activity">
 
                         <div class="activity-item d-flex">
                           <div class="activite-label card-title">32 min</div>
                           <i class='bi bi-circle-fill activity-badge text-info align-self-start' style="padding-top: 25px;"></i>
-                          <div class="activity-content card-title" style="margin-left:20px ;">
+                          <div class="activity-content card-title" >
                             Document set Created by <a href="#" class="fw-bold text-dark">Juvell Alquero</a> at<a href="#" class="fw-bold text-dark"> Accounting Office</a> 
                           </div>
                         </div><!-- End activity item-->
@@ -63,7 +63,7 @@ include('session.php');
                         <div class="activity-item d-flex">
                           <div class="activite-label card-title">20 min</div>
                           <i class='bi bi-circle-fill activity-badge text-danger align-self-start' style="padding-top: 25px;"></i>
-                          <div class="activity-content card-title" style="margin-left:20px;">
+                          <div class="activity-content card-title" >
                              Document set Outgoing by <a href="#" class="fw-bold text-dark">Juvell Alquero</a> at <a href="#" class="fw-bold text-dark">Accounting Office</a> 
                           </div>
                         </div><!-- End activity item-->
@@ -71,7 +71,7 @@ include('session.php');
                         <div class="activity-item d-flex">
                           <div class="activite-label card-title">10 min</div>
                           <i class='bi bi-circle-fill activity-badge text-warning align-self-start' style="padding-top: 25px;"></i>
-                          <div class="activity-content card-title" style="margin-left:20px ;">
+                          <div class="activity-content card-title" >
                               Document set Incoming by <a href="#" class="fw-bold text-dark">Marvin Marilao</a> at <a href="#" class="fw-bold text-dark">CCS Office</a> 
                           </div>
                         </div><!-- End activity item-->
@@ -79,7 +79,7 @@ include('session.php');
                         <div class="activity-item d-flex">
                           <div class="activite-label card-title">15 min</div>
                           <i class='bi bi-circle-fill activity-badge text-info align-self-start' style="padding-top: 25px;"></i>
-                          <div class="activity-content card-title" style="margin-left:20px;">
+                          <div class="activity-content card-title" >
                             Document set Approved by <a href="#" class="fw-bold text-dark">Rogel Quintero</a> at <a href="#" class="fw-bold text-dark">VP Office</a> 
                           </div>
                         </div><!-- End activity item-->
@@ -87,7 +87,7 @@ include('session.php');
                         <div class="activity-item d-flex">
                           <div class="activite-label card-title">20 min</div>
                           <i class='bi bi-circle-fill activity-badge text-success align-self-start' style="padding-top: 25px;"></i>
-                          <div class="activity-content card-title" style="margin-left:20px ;">
+                          <div class="activity-content card-title" >
                             Document set Received by <a href="#" class="fw-bold text-dark">Rogel Quintero</a> at <a href="#" class="fw-bold text-dark">VP Office</a> 
                           </div>
                         </div><!-- End activity item-->
@@ -95,7 +95,7 @@ include('session.php');
                         <div class="activity-item d-flex">
                           <div class="activite-label card-title">90 min</div>
                           <i class='bi bi-circle-fill activity-badge text-muted align-self-start' style="padding-top: 25px;"></i>
-                          <div class="activity-content card-title" style="margin-left:20px;">
+                          <div class="activity-content card-title" >
                             Document set Rejected by <a href="#" class="fw-bold text-dark">Rogel Quintero</a> at <a href="#" class="fw-bold text-dark">VP Office</a> 
                           </div>
                         </div><!-- End activity item-->

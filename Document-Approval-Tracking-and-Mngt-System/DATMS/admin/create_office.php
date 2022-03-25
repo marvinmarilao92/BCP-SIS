@@ -5,6 +5,43 @@ include('session.php');
 <html lang="en">
 <title>DATMS | Department</title>
 <head>
+<style>
+         /*responsive*/
+        @media(max-width: 550px){
+          .table thead{
+            display: none;
+          }
+
+          .table, .table tbody, .table tr, .table td{
+            display: block;
+            width: 100%;
+          }
+          .table tr{
+            background: #ffffff;
+            box-shadow: 0 8px 8px -4px lightblue;
+            border-radius: 5%;
+            margin-bottom:13px;
+            margin-top: 13px;
+          }
+          .table td{
+            text-align: right;
+            padding-left: 50%;
+            text-align: right;
+            position: relative;
+          }
+          .table td::before{      
+            margin-top: 10px;      
+            content: attr(data-label);
+            position: absolute;
+            left:0;
+            width: 50%;
+            padding-left:15px;
+            font-size:15px;
+            font-weight: bold;
+            text-align: left;
+          }
+        }
+</style>
   <?php include ('core/css-links.php');//css connection?>
 </head>
 <body>
@@ -42,7 +79,13 @@ include('session.php');
           <div class="card">
             <div class="col-lg-12">
               <div class="form-group col-md-2 btn-lg"  style="float: left; padding:20px;">
-                  <h4>Records</h4>
+                  <h5>
+                     <!-- extract Buttons -->
+                      <div style="align-self: center;" class="btn-group" role="group" aria-label="Basic mixed styles example" style=" padding:20px;"> 
+                        <button class="btn btn-outline-dark " onclick="ExportToExcel('xlsx')">Excel</button>
+                        <input class="btn btn-outline-dark " id="copy_btn" type="button" value="copy">
+                      </div>
+                  </h5>                 
               </div>
               <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
                   <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
@@ -50,60 +93,49 @@ include('session.php');
                   </button>
               </div> 
             </div>
-            <div class="card-body" >           
-              <table class="row-border hover datatable" id="DepartmentTable">
-              <thead>
-                  <tr>
-                    <th style="display:none"></th>
-                    <th style="display:none"></th>
-                    <th scope="col" WIDTH="70%">Department</th>                    
-                    <th style="display:none"></th>
-                    <th >Date Created</th>
-                    <th scope="col" WIDTH="10%">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                    require_once("include/conn.php");
-                    $query="SELECT * FROM datms_office ORDER BY off_name ASC ";
-                    $result=mysqli_query($conn,$query);
-                    while($rs=mysqli_fetch_array($result)){
-                      $offid =$rs['off_id'];
-                      $offCode = $rs['off_code'];
-                      $offName = $rs['off_name'];        
-                      $offLoc = $rs['off_location'];
-                      $offDate = $rs['off_date'];
-                  ?>
-                  <tr>
-                    <td style="display:none"><?php echo $offid; ?></td>
-                    <td style="display:none"><?php echo $offCode; ?></td>
-                    <td ><?php echo $offName; ?>
-                    <td style="display:none"><?php echo $offLoc?></td>
-                    <td ><?php echo $offDate?></td>
-                  </td>
-                    <td style="align-self: center;">  
-                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">                     
-                        <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>
-                        <button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button>
-                        <button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>
-                      </div>
-                    </td>
-                  </tr>
-                  <?php } ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <th style="display:none">ID</th>
-                    <th style="display:none">Code</th>
-                    <th scope="col" WIDTH="85%">Department</th>                    
-                    <th style="display:none">Details</th>
-                    <th style="display:none">Date Created</th>
-                    <th scope="col" WIDTH="10%">Action</th>
-                  </tr>
-                </tfoot>
-              </table>
-              <!-- End of department table record -->
-
+            <div class="card-body" >               
+                <!-- Table for Document List records -->
+                <table class="table table-hover datatable" id="DepartmentTable">
+                  <thead>
+                    <tr>
+                      <th style="display:none"></th>
+                      <th style="display:none"></th>
+                      <th scope="col">Department</th>                    
+                      <th style="display:none"></th>
+                      <th >Date Created</th>
+                      <th scope="col" WIDTH="10%">Action</th>      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      require_once("include/conn.php");
+                      $query="SELECT * FROM datms_office ORDER BY off_name ASC ";
+                      $result=mysqli_query($conn,$query);
+                      while($rs=mysqli_fetch_array($result)){
+                        $offid =$rs['off_id'];
+                        $offCode = $rs['off_code'];
+                        $offName = $rs['off_name'];        
+                        $offLoc = $rs['off_location'];
+                        $offDate = $rs['off_date'];
+                    ?>
+                    <tr>
+                      <td style="display:none" ><?php echo $offid; ?></td>
+                      <td style="display:none"><?php echo $offCode; ?></td>
+                      <td data-label="Department"><?php echo $offName; ?></td>
+                      <td style="display:none"><?php echo $offLoc?></td>
+                      <td data-label="Date"><?php echo $offDate?></td>
+                      <td data-label="">
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">                     
+                          <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>
+                          <button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button>
+                          <button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>
+                        </div>
+                      </td>
+                    </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+                <!-- End of Document table record -->
             </div>
           </div>
 
@@ -259,64 +291,32 @@ include('session.php');
 
   <!-- JS Scripts -->
     <script>
+      //export functions
+        //excel
+        function ExportToExcel(type, fn, dl) {
+        var elt = document.getElementById('DepartmentTable');
+        var wb = XLSX.utils.table_to_book(elt, { sheet: "Department" });
+        return dl ?
+            XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+            XLSX.writeFile(wb, fn || ('Department_records.' + (type || 'xlsx')));
+        }
+        //clipboard
+          var copyBtn = document.querySelector('#copy_btn');
+            copyBtn.addEventListener('click', function () {
+              var urlField = document.querySelector('table');
+              
+              // create a Range object
+              var range = document.createRange();  
+              // set the Node to select the "range"
+              range.selectNode(urlField);
+              // add the Range to the set of window selections
+              window.getSelection().addRange(range);
+              
+              // execute 'copy', can't 'cut' in this case
+              document.execCommand('copy');
+            }, false);
+      // end of export
 
-      // Buttons for datatable
-          $(document).ready(function() {
-
-            $('#DepartmentTable').DataTable( {
-
-                  // ajax:'ajaxtables/department_tbl.php',
-                  paging: false,
-                  "bInfo" : false,
-                  searching: false,
-                  stateSave: true,
-                  dom: 'Bfrtip',
-                  buttons: [ 
-                      {
-                          extend: 'collection',
-                          text:      'Export',
-                          className: 'custom-html-collection',
-                          autoClose: true,
-                          buttons: [
-                            '<center style="size:20px">Files</center>',
-                                'csv',  {
-                                  extend: 'excelHtml5',
-                                  autoFilter: true,
-                                  title: 'Department Reports',
-                                  exportOptions: {
-                                      columns: ':visible'
-                                  }
-                              }, {
-                                  extend: 'pdfHtml5',
-                                  title: 'Department Reports',
-                                  footer: true,
-                                  exportOptions: {
-                                      columns: ':visible'
-                                  }
-                              }
-                          ]
-                      },  {
-                      extend: 'colvis',
-                      text:'View'
-                      },{
-                          extend:    'copyHtml5',
-                          header: false,                       
-                          text:      '<i class="bi bi-clipboard"></i>',
-                          titleAttr: 'Copy',
-                          exportOptions: {
-                              columns: ':visible'
-                          }
-                      },{
-                          text:'<i class="bi bi-printer"></i>',
-                          extend: 'print',
-                          messageTop: 'Bestlink college of the philippines Department Report',
-                          exportOptions: {
-                              columns: ':visible'
-                          }
-                        }
-                  ]
-              } );
-            } );
       // modal JS and ajax function
           $(document).ready(function () {
 
@@ -423,10 +423,10 @@ include('session.php');
                         document.getElementById("off_locE").placeholder = data[3];  
                   });
               // End of edit modal calling 
-              $.extend( $.fn.dataTable.defaults, {
-                  searching: false,
-                  ordering:  false
-              } );
+              // $.extend( $.fn.dataTable.defaults, {
+              //     searching: false,
+              //     ordering:  false
+              // } );
               // Edit Department function
               $('#edit').click(function(d){ 
                     d.preventDefault();
@@ -493,7 +493,7 @@ include('session.php');
                   });
               // End of View function 
 
-            });
+          });
 
     </script>
       
