@@ -1,7 +1,7 @@
 <?php
 include('session.php');
 ?>
-<!DOCTYPE html>
+<!Student html>
 <html lang="en">
 <title>ADMISSION | Offically Enrolled</title>
 <head>
@@ -85,8 +85,8 @@ include('session.php');
               </div> 
             </div>
             <div class="card-body" >           
-              <!-- Table for DocType records -->
-              <table class="row-border hover datatable table" id="DocTypeTable">
+              <!-- Table for Student records -->
+              <table class="row-border hover datatable table" id="StudentTable">
                 <thead>
                   <tr>
                     <th WIDTH="10%">Code</th>
@@ -107,6 +107,7 @@ include('session.php');
                       $adm_lname = $rs['lastname'];        
                       $adm_mname = $rs['middlename'];
                       $adm_program = $rs['course'];
+                      $date = $rs['stud_date'];
                       $adm_as = $rs['account_status'];
                   ?>
                   <tr>
@@ -114,6 +115,7 @@ include('session.php');
                     <td data-label="Name" WIDTH="50%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
                     <td data-label="Program"><?php echo $adm_program; ?></td>
                     <td data-label="Status"><?php echo $adm_as?></td>
+                    <td style="display: block;"><?php echo $date?></td>
                     <td WIDTH="7%">      
                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
                         <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>                       
@@ -126,7 +128,7 @@ include('session.php');
                 </tbody>
               
               </table>
-              <!-- End of DocType table record -->
+              <!-- End of Student table record -->
 
             </div>
           </div>
@@ -138,13 +140,13 @@ include('session.php');
 
   </main><!-- End #main -->
 
-  <!-- DocType Modals -->
-      <!-- Create DocType Modal -->
+  <!-- Student Modals -->
+      <!-- Create Student Modal -->
       <div class="modal fade" id="AddModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">DOCTYPE CREDENTIALS</h5>
+                          <h5 class="modal-title">Student CREDENTIALS</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           <div class="card" style="margin: 10px;">
@@ -153,7 +155,7 @@ include('session.php');
                                 <!-- Fill out Form -->
                                 <div class="row g-3" >
                                   <div class="col-md-4">
-                                      <!-- <input type="text" class="form-control" placeholder="DocType Code" id="dtcode" required> -->
+                                      <!-- <input type="text" class="form-control" placeholder="Student Code" id="dtcode" required> -->
                                   </div>
                                   <br>
                                   <div class="col-md-12">
@@ -175,24 +177,24 @@ include('session.php');
                     </div>
                 </div>     
         </div>
-      <!-- End Create DocType Modal-->
+      <!-- End Create Student Modal-->
 
-      <!-- View DocType modal -->
+      <!-- View Student modal -->
       <div class="modal fade" id="ViewModal" tabindex="-1">
                   <div class="modal-dialog modal-dialog-centered modal-l">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">DOCTYPE INFORMATION</h5>
+                        <h5 class="modal-title">Student INFORMATION</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                       <div class="card" style="margin: 10px;">
                             <div class="card-body">
-                              <h5 class="card-title">DocType Details</h5>
-                                DocType Code: <h5 id="view_code" style="margin-left: 60px;"></h5>
-                                DocType Name: <h5 id="view_name" style="margin-left: 60px;"></h5>
-                                Description: <h5 id="view_loc" style="margin-left: 60px;"></h5>
-                                Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
+                              <h5 class="card-title">Student Details</h5>
+                                Name: <h5 id="view_code" style="margin-left: 60px;"></h5>
+                                Program: <h5 id="view_name" style="margin-left: 60px;"></h5>
+                                Status: <h5 id="view_loc" style="margin-left: 60px;"></h5>
+                                Date Enrolled: <h5 id="view_date" style="margin-left: 60px;"></h5>                
                             </div>
                           </div>   
                       </div>
@@ -202,14 +204,14 @@ include('session.php');
                     </div>
                   </div>
         </div>
-      <!-- End View DocType Modal-->
+      <!-- End View Student Modal-->
 
-      <!-- Edit DocType Modal -->
+      <!-- Edit Student Modal -->
       <div class="modal fade" id="EditModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">EDIT DOCTYPE</h5>
+                          <h5 class="modal-title">EDIT Student</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           <div class="card" style="margin: 10px;">
@@ -241,14 +243,14 @@ include('session.php');
                     </div>
                 </div>
         </div>
-      <!-- End Edit DocType Modal-->
+      <!-- End Edit Student Modal-->
 
-      <!-- Delete DocType Modal -->
+      <!-- Delete Student Modal -->
       <div class="modal fade" id="DeleteModal" tabindex="-1">
               <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">DELETE DOCTYPE</h5>
+                        <h5 class="modal-title">DELETE Student</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                         <div class="card" style="margin: 10px;">
@@ -256,21 +258,21 @@ include('session.php');
                             <br>
                             <input type="hidden"  name="delete_id" id="delete_id" readonly>
                             <center>
-                              <h5>Are you sure you want to delete these DocType?</h5>
+                              <h5>Are you sure you want to delete these Student?</h5>
                               <h5 class="text-danger">This action cannot be undone.</h5>   
                             </center>                
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete DocType</button>
+                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Student</button>
                         </div>
                       <!-- End Form -->
                   </div>
               </div>
         </div>
-      <!-- End delete DocType Modal -->
-  <!-- End of DocType Modals -->
+      <!-- End delete Student Modal -->
+  <!-- End of Student Modals -->
 
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
@@ -287,11 +289,11 @@ include('session.php');
      //export functions
         // //excel
         // function ExportToExcel(type, fn, dl) {
-        // var elt = document.getElementById('DocTypeTable');
-        // var wb = XLSX.utils.table_to_book(elt, { sheet: "DocTypes" });
+        // var elt = document.getElementById('StudentTable');
+        // var wb = XLSX.utils.table_to_book(elt, { sheet: "Students" });
         // return dl ?
         //     XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
-        //     XLSX.writeFile(wb, fn || ('DocType_Records.' + (type || 'xlsx')));
+        //     XLSX.writeFile(wb, fn || ('Student_Records.' + (type || 'xlsx')));
         // }
         // //clipboard
         //   var copyBtn = document.querySelector('#copy_btn');
@@ -332,13 +334,13 @@ include('session.php');
               // Delete function
               $("#dtdel").click(function(b){
                 b.preventDefault();
-                $.post("function/delete_doctype.php",{
+                $.post("function/delete_Student.php",{
                     dtid:$('#delete_id').val()
                   },function(response){
                     // alert ("deleted");
-                    if(response.trim() == "DoctypeDeleted"){
+                    if(response.trim() == "StudentDeleted"){
                       $('#DeleteModal').modal('hide');
-                      Swal.fire ("DocType Successfully Deleted","","success").then(function(){
+                      Swal.fire ("Student Successfully Deleted","","success").then(function(){
                       document.location.reload(true)//refresh pages
                       });
                     }else{
@@ -353,14 +355,14 @@ include('session.php');
                 $('#save').click(function(a){ 
                   a.preventDefault();
                     if($('#dtname').val()!="" && $('#dtdesc').val()!=""){
-                      $.post("function/add_doctype.php", {
+                      $.post("function/add_Student.php", {
                         dtname:$('#dtname').val(),
                         dtdesc:$('#dtdesc').val()
                         },function(data){
                         if (data.trim() == "failed"){
                           $('#AddModal').modal('hide');
                           //response message
-                          Swal.fire("DocType is already in server","","error");
+                          Swal.fire("Student is already in server","","error");
                           
                           // Empty test field
                           $('#dtcode').val("")
@@ -382,7 +384,7 @@ include('session.php');
                                 })
                               Toast.fire({
                               icon: 'success',
-                              title:'DocType successfully Saved'
+                              title:'Student successfully Saved'
                               }).then(function(){
                                 document.location.reload(true)//refresh pages
                               });
@@ -422,7 +424,7 @@ include('session.php');
               $('#edit').click(function(d){ 
                     d.preventDefault();
                       if($('#dt_idE').val()!="" && $('#dt_codeE').val()!="" && $('#dt_nameE').val()!="" && $('#dt_descE').val()!=""){
-                        $.post("function/update_doctype.php", {
+                        $.post("function/update_Student.php", {
                           dtid:$('#dt_idE').val(),
                           dtcode:$('#dt_codeE').val(),
                           dtname:$('#dt_nameE').val(),
@@ -430,7 +432,7 @@ include('session.php');
                           },function(data){
                             if (data.trim() == "failed"){
                             $('#EditModal').modal('hide');
-                            Swal.fire("DocType Title is currently in use","","error");//response message
+                            Swal.fire("Student Title is currently in use","","error");//response message
                             // Empty test field
                             $('#dt_codeE').val("")
                             $('#dt_nameE').val("")

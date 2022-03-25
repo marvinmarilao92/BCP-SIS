@@ -683,14 +683,16 @@
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
   <script type="text/javascript">
 
     //  $("#editableswitch").click(function () {
     //       document.getElementById('divcompany').style.display = 'none';
     //       document.getElementById('divposition').style.display = 'none';
     //   });    
-    function editInfo() {
+    function editInfo(){
         var isChecked = document.getElementById("editableswitch").checked;
           
         if(isChecked){
