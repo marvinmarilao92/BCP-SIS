@@ -66,16 +66,13 @@
 
             if($stmt = mysqli_prepare($link, $sql)){
               // Bind variables to the prepared statement as parameters
-              mysqli_stmt_bind_param($stmt, "issssisssssssss", $student_number, $first_name, $last_name, $middle_name, $email, $contact, $address, $course, $gender, $birthday, $nationality, $religion, $civil_status, $account_status, $date);
+              mysqli_stmt_bind_param($stmt, "sssssssssssssss", $student_number, $first_name, $last_name, $middle_name, $email, $contact, $address, $course, $gender, $birthday, $nationality, $religion, $civil_status, $account_status, $date);
 
               // Attempt to execute the prepared statement
               if(mysqli_stmt_execute($stmt)){
                 // Records created successfully. Redirect to landing page
                 $_SESSION['session_code'] = $student_number;
                 header("location: application-barcode.php");
-                // echo '<script type = "text/javascript">
-                // window.open("application-barcode.php","application-barcode","width=500,height=200","position=center");
-                // </script>';
 
               } else{
                   echo "Oops! Something went wrong. Please try again later.";
@@ -158,8 +155,8 @@
                                 </div>
                                 <div class="col-md-12">
                                   <div class="form-floating">
-                                    <input type="text" class="form-control" name="middle_name" id="middle_name" maxlength="1" onkeypress="return isTextKey(event)" placeholder="middle name" Required onchange="oncollapse()">
-                                    <label for="floatingName">Middle Initial (Optional)</label>
+                                    <input type="text" class="form-control" name="middle_name" id="middle_name"  onkeypress="return isTextKey(event)" placeholder="middle name" Required onchange="oncollapse()">
+                                    <label for="floatingName">Middle Name</label>
                                   </div>
                                 </div>                        
                                 <div class="col-md-12">
@@ -181,26 +178,29 @@
                                 <div class="col-md-12">
                                   <div class="form-floating">
                                     <select class="form-select" name="course" id="course" aria-label="State" Required onchange="oncollapse()">
-                                      <option value="" selected="selected" disabled="disabled">Select Course</option>
-                                      <option value="BS Information Technology">BS Information Technology</option>
-                                      <option value="BS Hospitality Management">BS Hospitality Management</option>
-                                      <option value="BS Office Administration">BS Office Administration</option>
-                                      <option value="BS Business Administration Major in Human Resource Management">BS Business Administration Major in Human Resource Management</option>
-                                      <option value="BS Business Administration Major in Marketing">BS Business Administration Major in Marketing</option>
-                                      <option value="BS Criminology">BS Criminology</option>
-                                      <option value="Bachelor of Elementary Education">Bachelor of Elementary Education</option>
-                                      <option value="Bachelor of Secondary Education Major in English">Bachelor of Secondary Education Major in English</option>
-                                      <option value="Bachelor of Secondary Education Major in Filipino">Bachelor of Secondary Education Major in Filipino</option>
-                                      <option value="Bachelor of Secondary Education Major in Mathematics">Bachelor of Secondary Education Major in Mathematics</option>
-                                      <option value="Bachelor of Secondary Education Major in Social Studies">Bachelor of Secondary Education Major in Social Studies</option>
-                                      <option value="Bachelor of Secondary Education Major in Values Education">Bachelor of Secondary Education Major in Values Education</option>
-                                      <option value="Bachelor of Secondary Education Major in Technology and Livelihood Education">Bachelor of Secondary Education Major in Technology and Livelihood Education</option>
-                                      <option value="BS Computer Engineering">BS Computer Engineering</option>
-                                      <option value="Bachelor of Library in Information Science">Bachelor of Library in Information Science</option>
-                                      <option value="BS Tourism Management">BS Tourism Management</option>
-                                      <option value="BS Entrepreneurship">BS Entrepreneurship</option>
-                                      <option value="BS Accounting Information System">BS Accounting Information System</option>
-                                      <option value="BS Psychology">BS Psychology</option>
+                                      <option value="#" selected="selected" disabled="disabled">Select Course</option>
+                                      <option value="BSIT">BS Information Technology</option>
+                                      <option value="BSHM">BS Hospitality Management</option>
+                                      <option value="BSOA">BS Office Administration</option>
+                                      <option value="BSBA Major in HRM">BS Business Administration Major in Human Resource Management</option>
+                                      <option value="BSBA Major in Marketing">BS Business Administration Major in Marketing</option>
+                                      <option value="BSCriM">BS Criminology</option>
+                                      <option value="BEEd">Bachelor of Elementary Education</option>
+                                      <option value="BSEd Major in English">Bachelor of Secondary Education Major in English</option>
+                                      <option value="BSEd Major in Filipino">Bachelor of Secondary Education Major in Filipino</option>
+                                      <option value="BSEd Major in Mathematics">Bachelor of Secondary Education Major in Mathematics</option>
+                                      <option value="BSEd Major in Social Studies">Bachelor of Secondary Education Major in Social Studies</option>
+                                      <option value="BSEd Major in Values Education">Bachelor of Secondary Education Major in Values Education</option>
+                                      <option value="BSEd Major in Technology and Livelihood Education">Bachelor of Secondary Education Major in Technology and Livelihood Education</option>
+                                      <option value="BSEd Major in MAPEH">Bachelor of Secondary Education Major in MAPEH</option>
+                                      <option value="BSCE">BS Computer Engineering</option>
+                                      <option value="BLIS">Bachelor of Library in Information Science</option>
+                                      <option value="BSTM">BS Tourism Management</option>
+                                      <option value="BSEntrep">BS Entrepreneurship</option>
+                                      <option value="BSAIS">BS Accounting Information System</option>
+                                      <option value="BSPsy">BS Psychology</option>
+                                      <option value="BTVTEd">Bachelor of technical-vocational teacher education major in food service management</option>
+                                      <option value="ACT">Associate in computer technology</option>                                      
                                     </select>
                                     <label for="floatingSelect">College Program</label>
                                   </div>
@@ -533,14 +533,14 @@
                               </div>
                               <div class="col-md-12">
                                 <div class="form-floating">
-                                  <input type="text" class="form-control" name="contact" id="contact" placeholder="number" onkeypress="return isNumberKey(event)" maxlength="11" minlength="11" required>
-                                  <label for="floatingName" required onchange="oncollapse2()">Contact Number</label>
+                                  <input type="text" class="form-control" name="contact" id="contact" placeholder="number" onChange="oncollapse2()"  onkeypress="return isNumberKey(event)" maxlength="11" minlength="11" required>
+                                  <label for="floatingName">Contact Number</label>
                                 </div>
                               </div>
                                 <div class="col-md-12">
                                   <div class="form-floating">
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" onChange="next3Function()" required>
-                                    <label for="floatingName" required onchange="oncollapse2()">Email Address</label>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" onChange="oncollapse2()" required>
+                                    <label for="floatingName" required >Email Address</label>
                                   </div>
                                 </div>
                               <div class="text-right">                            
@@ -733,8 +733,9 @@
         function oncollapse2() {
           let acpno = contact.value;
           let aemail = email.value;
-
-          if(acpno =="" || acpno =="" ){
+          var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+          
+          if(aemail =="" || acpno =="" || (acpno.length() == 11) ||(aemail.value.match(mailformat)) ){
             document.getElementById("next3").setAttribute("data-bs-toggle","");
           }else{
           // commands
@@ -745,7 +746,7 @@
           let acpno = contact.value;
           let aemail = email.value;
 
-          if(acpno =="" || acpno =="" ){
+          if(acpno =="" || acpno =="" || (acpno.length() == 11) ||(aemail.value.match(mailformat)) ){
             Swal.fire("You must fill out every field","","warning");
             document.getElementById("icon3").setAttribute("class","bi bi-exclamation-triangle-fill me-2");
             document.getElementById("icon3").style.color = "red";
@@ -775,15 +776,15 @@
             return false;
         }
         //making text uppercase
-        function forceInputUppercase(e)
-          {
-            var start = e.target.selectionStart;
-            var end = e.target.selectionEnd;
-            e.target.value = e.target.value.toUpperCase();
-            e.target.setSelectionRange(start, end);
-          }
+        // function forceInputUppercase(e)
+        //   {
+        //     var start = e.target.selectionStart;
+        //     var end = e.target.selectionEnd;
+        //     e.target.value = e.target.value.toUpperCase();
+        //     e.target.setSelectionRange(start, end);
+        //   }
 
-        document.getElementById("middle_name").addEventListener("keyup", forceInputUppercase, false);
+        // document.getElementById("middle_name").addEventListener("keyup", forceInputUppercase, false);
         
     </script>
 

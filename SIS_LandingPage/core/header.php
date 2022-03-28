@@ -3,7 +3,7 @@
 
 <div class="d-flex align-items-center justify-content-between">
   <a href="online-enrollment.php" class="logo d-flex align-items-center">
-    <img src="../assets/img/logo300.png" alt="">
+    <img src="../assets/img/BCPlogo.png" alt="">
       <span class="d-none d-lg-block">Bestlink College Of the Philippines</span>
   </a>
 </div><!-- End Logo -->

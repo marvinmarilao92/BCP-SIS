@@ -122,7 +122,6 @@ include('session.php');
     </section>
 
   </main><!-- End #main -->
-  
 
       <!-- Desc Document modal -->
        <div class="modal fade" id="RemarksModal" tabindex="-1">
@@ -234,7 +233,7 @@ include('session.php');
                                         <option selected="selected" disabled="disabled">Recipient</option>
                                           <?php
                                             require_once("include/conn.php");
-                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' AND `id_number` NOT IN ('$verified_session_username') ORDER BY firstname DESC ";
+                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' OR  department = 'SuperUser' AND `id_number` NOT IN ('$verified_session_username') ORDER BY firstname DESC ";
                                             $result=mysqli_query($conn,$query);
                                             while($rs=mysqli_fetch_array($result)){
                                               $dtid =$rs['id'];    
@@ -242,7 +241,7 @@ include('session.php');
                                               $dtFName = $rs['firstname'];    
                                               $dtLName = $rs['lastname'];    
                                             
-                                              echo '<option value = "' . $dtno . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
+                                              echo '<option value = "' . $dtid . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
                                             }
                                         ?>
                                         </select>

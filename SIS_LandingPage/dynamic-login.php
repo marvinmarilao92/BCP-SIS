@@ -83,7 +83,7 @@
                    //statement
                    break;
                  case "DATMS":
-                   //statement
+                   //statement ROLE
                    switch($row1["role"]){
                      case "DATMS Administrator":
                        //statement
@@ -186,6 +186,27 @@
                         
                    }
                    break;
+                 case "SuperUser":
+                       //statement role
+                       switch($row1["role"]){
+                        case "SuperAdmin":
+                          //statement
+                          $_SESSION['session_username'] = $myusername;
+                          if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                              $ip = $_SERVER["HTTP_CLIENT_IP"];
+                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                              $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                            }else{
+                              $ip = $_SERVER["REMOTE_ADDR"];
+                              $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                               $remarks="account has been logged in";  
+                               mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                            }
+                          header("location: ../super_admin/index.php");
+                          break;                                           
+                      }
+                   break;
+
                  case "Student Services":
                    //statement
                    break;

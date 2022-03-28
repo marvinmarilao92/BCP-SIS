@@ -15,11 +15,11 @@
   <li class="nav-item">
     <a href="app_list.php" class="<?php if($page=='applist'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-person-lines-fill"></i>
-      <span>Student Application &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>Student Application &nbsp;&nbsp;</span>
       <span class="badge bg-primary badge-number"> 
         <?php 
              require_once("include/conn.php");
-             $query="SELECT * FROM student_application ORDER BY stud_date DESC ";
+             $query="SELECT * FROM student_application WHERE `account_status` NOT IN ('Enrolled') ORDER BY stud_date DESC ";
             $result=mysqli_query($conn,$query);
             if($result){
                echo mysqli_num_rows($result);

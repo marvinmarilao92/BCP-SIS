@@ -68,7 +68,7 @@
           }
         }
       }
-      
+      $userid ="U".$employee_id;
       $first_name = mysqli_real_escape_string($link,trim($_POST["first_name"]));
       $last_name = mysqli_real_escape_string($link,trim($_POST["last_name"]));
       $middle_name = mysqli_real_escape_string($link,trim($_POST["middle_name"]));
@@ -95,13 +95,13 @@
       }
 
       //Check if the user number is not existing in the database
-      $sql1 = "SELECT id FROM user_information WHERE id_number = '$employee_id'";
+      $sql1 = "SELECT id FROM user_information WHERE id_number = '$userid'";
       $result = mysqli_query($link,$sql1);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $count = mysqli_num_rows($result);
       
       //Check if the user number is not existing in the database
-      $sql2 = "SELECT id FROM users WHERE id_number = '$employee_id'";
+      $sql2 = "SELECT id FROM users WHERE id_number = '$userid'";
       $result2 = mysqli_query($link,$sql2);
       $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
       $count2 = mysqli_num_rows($result2);
@@ -113,7 +113,7 @@
 
         if($stmt = mysqli_prepare($link, $sql)){
           // Bind variables to the prepared statement as parameters
-          mysqli_stmt_bind_param($stmt, "issssissssss", $employee_id, $first_name, $last_name, $middle_name, $email, $contact, $address, $office, $department1, $role, $account_status, $about);
+          mysqli_stmt_bind_param($stmt, "sssssissssss", $userid, $first_name, $last_name, $middle_name, $email, $contact, $address, $office, $department1, $role, $account_status, $about);
 
           // Attempt to execute the prepared statement
           if(mysqli_stmt_execute($stmt)){
@@ -122,7 +122,7 @@
 
             if($stmt1 = mysqli_prepare($link, $sql)){
               // Bind variables to the prepared statement as parameters
-              mysqli_stmt_bind_param($stmt1, "ss", $employee_id, $password);
+              mysqli_stmt_bind_param($stmt1, "ss", $userid, $password);
 
               // Attempt to execute the prepared statement
               if(mysqli_stmt_execute($stmt1)){
@@ -200,7 +200,7 @@ include ("includes/sidebar.php");
           </div>   
           <div class="col-md-2">
             <div class="form-floating">
-              <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Middle Initial (Optional)" maxlength="1" style="text-transform:uppercase" onkeypress="return isTextKey(event)" required>
+              <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Middle Initial (Optional)" maxlength="1" style="text-transform:uppercase" onkeypress="return isTextKey(event)" >
               <label for="floatingName">Middle Initial (Optional)</label>
             </div>
           </div>  

@@ -14,8 +14,6 @@
           //2d holder array
           // $datain = array();
 
-          
-  
           $query ="SELECT * FROM `student_application` WHERE `id_number` = $id AND `account_status` = 'Paid'";
   
           $response = mysqli_query($link, $query);

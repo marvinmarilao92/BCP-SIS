@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Favicons -->
-  <link href="../assets/img/BCPlogo.png" rel="icon">
+  <link href="../../../assets/img/BCPlogo.png" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -24,11 +24,7 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="responsive-table.css"/> -->
-  <!-- <link href="../../assets/css/responsive-table.css" rel="stylesheet"> -->
 
-  <!-- Datatable CSS Connection -->
-  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"/> -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css"/>
 
   

@@ -35,6 +35,10 @@
 <html lang="en">
 
 <head>
+  <script type="text/javascript">
+    // window.history.forward();
+    // function noBack() { window.history.forward(); }
+  </script>
   <!-- header -->
   <?php include ("includes/head.php");?>
 </head>
@@ -67,6 +71,9 @@
                     <p>Take a screenshot of this confiramtion slip. Show this to the cashier to proceed and proceed to the next step</p>
               </div>
               <div class="card-footer">
+                <nav class="justify-content-center d-flex">
+                  <a href="logout.php" class="btn btn-secondary">Close</a>   
+                </nav>
               </div>
             </div>
           <!-- End Card with header and footer -->
@@ -74,14 +81,7 @@
     </section>
 
   </main><!-- End #main -->
-    <footer class="footer">
-      <div class="copyright" style="margin-bottom: 30px;">
-        <center>
-          &copy;Copyright <a href="https://bcp.edu.ph/home" target="_blank " data-bs-toggle="tooltip" data-bs-placement="top" 
-          title="Access BCP Website">Bestlink College of the Philippines</a> All Rights Reserved
-        </center>                 
-      </div>
-    </footer>
+
     <!-- Vendor JS Files -->
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
