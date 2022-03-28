@@ -14,6 +14,14 @@
 
 
   <li class="nav-item">
+  <a href="requirements.php" class="<?php if($page=='req'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+      <i class="ri-folder-5-line"></i>
+      <span>Requirements &nbsp;</span>
+    </a>
+  </li><!-- All docs Nav -->
+
+  
+  <li class="nav-item">
   <a href="documents_list.php" class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-book-2-line"></i>
       <span>Documents &nbsp;&nbsp;&nbsp;</span>

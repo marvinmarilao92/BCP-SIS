@@ -1,103 +1,44 @@
 <?php
+    session_start();
     include 'config.php';
-      // Define variables and initialize with empty values
-      $student_number = "";
-      // personal information 
-      $first_name = "";
-      $last_name = "";
-      $middle_name = "";
-      $course = "";
-      $gender = "";
-      $birthday = "";
-      $nationality = "";
-      $religion = "";
-      $civil_status = "";
-      //address
-      $street1 = "";
-      $street2 = "";
-      $city = "";
-      $zipcode = "";
-      $address = "";
-      //contact number
-      $email = "";
-      $contact = "";
+    if(isset($_SESSION['session_code'])){
+      $user_id_checker = $_SESSION['session_code'];
+  
+      $sql5 = "SELECT * FROM student_application where id_number = '$user_id_checker'";
+              if($result5 = mysqli_query($link, $sql5)){
+                if(mysqli_num_rows($result5) > 0){
+                  while($row5 = mysqli_fetch_array($result5)){
+                    $verified_session_code = $row5['id_number'];
+                    $verified_session_firstname = $row5['firstname'];
+                    $verified_session_lastname = $row5['lastname'];
+                    $verified_session_mname = $row5['middlename'];
+                    $verified_session_contact = $row5['contact'];
+                    $verified_session_date = $row5['stud_date'];
+                  }
+                  // Free result set
+                  mysqli_free_result($result5);
+                }
+              }
       
-      // Processing form data when form is submitted
-      if($_SERVER["REQUEST_METHOD"] == "POST"){
+      if(($verified_session_code == $_SESSION['session_code'])){
 
-        date_default_timezone_set("asia/manila");
-        $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
-        $year = date("Y",strtotime("+0 HOURS"));
-        $random_num= rand(10000000,99999999);
-        $student_number =  $random_num;
-        $account_status = "Active";
-
-        $first_name = mysqli_real_escape_string($link,trim($_POST["first_name"]));
-        $last_name = mysqli_real_escape_string($link,trim($_POST["last_name"]));
-        $middle_name = mysqli_real_escape_string($link,trim($_POST["middle_name"]));
-        $course = mysqli_real_escape_string($link,trim($_POST["course"]));
-        $gender = mysqli_real_escape_string($link,trim($_POST["gender"]));
-        $birthday = date('Y-m-d', strtotime(mysqli_real_escape_string($link,trim($_POST["birthdate"]))));
-        $nationality = mysqli_real_escape_string($link,trim($_POST["nationality"]));
-        $religion = mysqli_real_escape_string($link,trim($_POST["religion"]));
-        $civil_status = mysqli_real_escape_string($link,trim($_POST["civil_status"]));
-        
-        
-        $street1 = mysqli_real_escape_string($link,trim($_POST["add_st1"]));
-        $street2 = mysqli_real_escape_string($link,trim($_POST["add_st2"]));
-        $city = mysqli_real_escape_string($link,trim($_POST["city"]));
-        $zipcode = mysqli_real_escape_string($link,trim($_POST["zip_code"]));
-        $address = $street1." ".$street2." ".$city." ".$zipcode;
-
-        $email = mysqli_real_escape_string($link,trim($_POST["email"]));
-        $contact = mysqli_real_escape_string($link,trim($_POST["contact"]));
-        
-        //Check if the student number is not existing in the database
-        $sql1 = "SELECT id FROM student_application WHERE id_number = '$student_number'";
-        $result = mysqli_query($link,$sql1);
-        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        $count = mysqli_num_rows($result);
-        
-        // If the student number is not existing in the database, count must be 0
-        if($count == 0) {
-          // Prepare an insert statement
-          $sql = "INSERT INTO student_application (id_number, firstname, lastname, middlename, email, contact, address, course, gender, birthday, nationality, religion, civil_status, account_status,stud_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-          if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "issssisssssssss", $student_number, $first_name, $last_name, $middle_name, $email, $contact, $address, $course, $gender, $birthday, $nationality, $religion, $civil_status, $account_status, $date);
-
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-              // Records created successfully. Redirect to landing page
-              header("location: online-enrollment.php");
-              echo '<script type = "text/javascript">
-              alert("Application Successfully Sublitted");
-              window.open("online-enrollment.php","online-enrollment","width=500,height=200","position=center");
-              </script>';
-
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-            
-          }
-
-          // Close statement
-          mysqli_stmt_close($stmt);
-
-          // Close connection
-          mysqli_close($link);
-
-        }else {
-          $student_number_err = "Student Number is already existing";
-        }
+      }else{
+        header("location:pages-error-404.php");
+          die();
       }
-
-  ?>
+    }else{
+      header("location:pages-error-404.php");
+      die();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+  <script type="text/javascript">
+    // window.history.forward();
+    // function noBack() { window.history.forward(); }
+  </script>
   <!-- header -->
   <?php include ("includes/head.php");?>
 </head>
@@ -108,7 +49,7 @@
     <section class="section" style="padding:10px">
       <div class="row">
         <!-- List of requirements -->
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <!-- Card with header and footer -->
             <div class="card">
               <div class="card-header"> 
@@ -117,11 +58,11 @@
               <br>
               <h5 style="margin-top: 10px; color:black;"><solid style="font-weight: bolder;">BCP Admission</solid> confirms that the student data below applied through online admission.
               </h5>
-                <p style="margin-left: 30px;">Online application information <br>
+                <p style="margin-left: 30px;">Appliaction Details: <br>
                       <l>
-                        <ol style="margin-left: 20px;">Student Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </ol>
-                        <ol style="margin-left: 20px;">Date of Application :</ol>
-                        <ol style="margin-left: 20px;">Application Code &nbsp;&nbsp;&nbsp;&nbsp;:</ol>
+                        <ol style="margin-left: 20px;">Student Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<?php echo $verified_session_firstname . " " . $verified_session_mname . "." ." " . $verified_session_lastname ?> </ol>
+                        <ol style="margin-left: 20px;">Date of Application :&nbsp;<?php echo $verified_session_date?></ol>
+                        <ol style="margin-left: 20px;">Contact Number &nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<?php echo $verified_session_contact?></ol>
                       </l>  
                     </p>
                     <div class="col-12" style="text-align: center;">
@@ -130,6 +71,9 @@
                     <p>Take a screenshot of this confiramtion slip. Show this to the cashier to proceed and proceed to the next step</p>
               </div>
               <div class="card-footer">
+                <nav class="justify-content-center d-flex">
+                  <a href="logout.php" class="btn btn-secondary">Close</a>   
+                </nav>
               </div>
             </div>
           <!-- End Card with header and footer -->
@@ -159,7 +103,7 @@
     <!-- Template Main JS File -->
     <script src="../assets/js/main.js"></script>
     <script >
-        JsBarcode("#barcode", "0928392732", {
+        JsBarcode("#barcode", "<?php echo $verified_session_code?>", {
           format: "CODE128",
           lineColor: "#000",
           width: 4,

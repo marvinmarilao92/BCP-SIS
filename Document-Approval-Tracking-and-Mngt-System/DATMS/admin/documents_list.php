@@ -6,6 +6,43 @@ include('session.php');
 <title>DATMS | Document List</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
+<style>
+         /*responsive*/
+        @media(max-width: 500px){
+          .table thead{
+            display: none;
+          }
+
+          .table, .table tbody, .table tr, .table td{
+            display: block;
+            width: 100%;
+          }
+          .table tr{
+            background: #ffffff;
+            box-shadow: 0 8px 8px -4px lightblue;
+            border-radius: 5%;
+            margin-bottom:13px;
+            margin-top: 13px;
+          }
+          .table td{
+            /* max-width: 20px; */
+            padding-left: 50%;
+            text-align: right;
+            position: relative;
+          }
+          .table td::before{      
+            margin-top: 10px;      
+            content: attr(data-label);
+            position: absolute;
+            left:0;
+            width: 50%;
+            padding-left:15px;
+            font-size:15px;
+            font-weight: bold;
+            text-align: left;
+          }
+        }
+</style>
 </head>
 <body>
 
@@ -50,7 +87,7 @@ include('session.php');
               </div> 
             </div>
             <div class="card-body" >           
-              <!-- Table for Office records -->
+              <!-- Table for Document List records -->
               <form method="POST">
                  <table class="table table-hover datatable" >
                 <thead>
@@ -80,12 +117,12 @@ include('session.php');
                       $docRemarks = $rs['doc_remarks'];  
                   ?>
                   <tr>
-                  <td style="display:none"><?php echo $docId?></td>
-                    <td><?php echo $docCode; ?></td>
-                    <td><?php echo $docName; ?></td>
-                    <td><?php echo $docAct2; ?></td>
-                    <td><?php echo $docDate2; ?></td>
-                    <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
+                    <td style="display:none"><?php echo $docId?></td>
+                    <td data-label="Code:"><?php echo $docCode; ?></td>
+                    <td data-label="File Name:" ><?php echo $docName; ?></td>
+                    <td data-label="Title:"><?php echo $docAct2; ?></td>
+                    <td data-label="Date:"><?php echo $docDate2; ?></td>
+                    <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
                     <td style="display:none"><?php echo $docDl; ?></td>
                     <td style="display:none"><?php echo $docTitle?></td>
@@ -113,9 +150,10 @@ include('session.php');
                   <?php } ?>
                   
                 </tbody>
-              </table>
-              <!-- End of office table record -->
+                </table>
+              
               </form>
+              <!-- End of Document table record -->
             </div>
           </div>
 
@@ -126,7 +164,7 @@ include('session.php');
 
   </main><!-- End #main -->
 
-  <!-- Office Modals -->
+  <!-- Document List Modals -->
       <!-- Create Document Modal -->
       <div class="modal fade" id="AddModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
@@ -249,7 +287,7 @@ include('session.php');
         </div>
       <!-- End Desc office Modal-->
 
-      <!-- Edit Office Modal -->
+      <!-- Edit Document List Modal -->
       <div class="modal fade" id="EditModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
@@ -286,9 +324,9 @@ include('session.php');
                     </div>
                 </div>
         </div>
-      <!-- End Edit Office Modal-->
+      <!-- End Edit Document List Modal-->
 
-      <!-- Delete Office Modal -->
+      <!-- Delete Document List Modal -->
       <div class="modal fade" id="DeleteModal" tabindex="-1">
               <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -301,21 +339,21 @@ include('session.php');
                             <br>
                             <input type="hidden"  name="delete_id" id="delete_id" readonly>
                             <center>
-                              <h5>Are you sure you want to delete these Office?</h5>
+                              <h5>Are you sure you want to delete these Document List?</h5>
                               <h5 class="text-danger">This action cannot be undone.</h5>   
                             </center>                
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Office</button>
+                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Document List</button>
                         </div>
                       <!-- End Form -->
                   </div>
               </div>
         </div>
-      <!-- End delete Office Modal -->
-  <!-- End of Office Modals -->
+      <!-- End delete Document List Modal -->
+  <!-- End of Document List Modals -->
 
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
@@ -330,13 +368,13 @@ include('session.php');
   <?php
       // connect to the database
       require_once("include/conn.php");
-
-
+      
       // Uploads files
       if (isset($_POST['save'])) { // if save button on the form is clicked
             // name of the uploaded file
             date_default_timezone_set("asia/manila");
             $time = date("M-d-Y h:i A",strtotime("+0 HOURS"));
+            $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
             // $doc_user = $_POST['doccreator'];
             // $doc_office = $_POST['docoffice'];
             // $doc_title = $_POST['docname'];
@@ -394,7 +432,7 @@ include('session.php');
           } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
                       echo "File too large!";
           } else{
-            $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_title` = '$filename'")or die(mysqli_error($conn));
+            $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
             $counter=mysqli_num_rows($query);
             
             if ($counter == 1) 
@@ -405,7 +443,7 @@ include('session.php');
                         toast: true,
                         position: "top-end",
                         showConfirmButton: false,
-                        timer: 2000,
+                        timer: 3000,
                         timerProsressBar: true,
                         didOpen: (toast) => {
                         toast.addEventListener("mouseenter", Swal.stopTimer)
@@ -414,7 +452,7 @@ include('session.php');
                         })
                         Toast.fire({
                         icon: "warning",
-                        title:"Files already taken"
+                        title:"File name already taken<br>You have to change the name of file"
                         }).then(function(){
                           window.location = "documents_list.php";//refresh pages
                         });
@@ -424,9 +462,15 @@ include('session.php');
             // move the uploaded (temporary) file to the specified destination
               if (move_uploaded_file($file, $destination)) {
                   $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
-                  VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$time','$doc_user','$doc_office','$time','','','','')";
+                   VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$time','$doc_user','$doc_office','$time','','','','')";
+                 
                   if (mysqli_query($conn, $sql)) {
-                    echo'<script type = "text/javascript">
+
+                    $sql1 = "INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
+                    VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date1','','','$date1','Created tracking for document')";
+
+                    if (mysqli_query($conn, $sql1)) {
+                      echo'<script type = "text/javascript">
                         //success message
                         const Toast = Swal.mixin({
                         toast: true,
@@ -445,9 +489,11 @@ include('session.php');
                         }).then(function(){
                           window.location = "documents_list.php";//refresh pages
                         });
-                    </script>
-               ';
-                       
+                    </script>';
+                    
+                    }else{
+                      echo "Failed Upload files!"; 
+                    }                       
                   }
               } else {
                   echo "Failed Upload files!";
@@ -460,166 +506,6 @@ include('session.php');
     <script>
         // this script will execute as soon a the website runs
         $(document).ready(function () {
-
-            // // Delete modal calling
-              // $('.deletebtn').on('click', function () {
-
-              //       $('#DeleteModal').modal('show');
-
-              //       $tr = $(this).closest('tr');
-
-              //       var data = $tr.children("td").map(function () {
-              //           return $(this).text();
-              //       }).get();
-
-              //       console.log(data);
-
-              //     $('#delete_id').val(data[0]);
-              //     });
-              // // end of function
-            
-              // // Delete function
-              // $("#dtdel").click(function(b){
-              //   b.preventDefault();
-              //   $.post("delete_doctype.php",{
-              //       dtid:$('#delete_id').val()
-              //     },function(response){
-              //       // alert ("deleted");
-              //       if(response.trim() == "DoctypeDeleted"){
-              //         $('#DeleteModal').modal('hide');
-              //         Swal.fire ("DocType Successfully Deleted","","success").then(function(){
-              //         document.location.reload(true)//refresh pages
-              //         });
-              //       }else{
-              //         $('#DeleteModal').modal('hide');
-              //         Swal.fire (response);
-              //       }
-              //     })
-              //   })
-              // // End Delete function
-                
-              // Save function
-              //   $('#save').click(function(a){ 
-              //     a.preventDefault();
-              //       if($('#doccreator').val()!="" && $('#docoffice').val()!="" && $('#doctitle').val()!=""
-              //       &&$('#doctype').val()!="" && $('#docfile').val()!="" && $('#docdesc').val()!=""){
-              //         $.post("fileprocess.php", {
-              //           doccreator:$('#doccreator').val(),
-              //           docoffice:$('#docoffice').val(),
-              //           doctitle:$('#doctitle').val(),
-              //           doctype:$('#doctype').val(),
-              //           docfile:$('#docfile').val(),
-              //           docdesc:$('#docdesc').val()
-              //           },function(data){
-              //           if (data.trim() == "failed"){
-
-              //             //response message
-              //             Swal.fire("Document is already in server","","error");
-              //             // Empty test field
-              //              $('#docfile').val("")
-                         
-              //           }else if(data.trim() == "success"){
-              //             $('#AddModal').modal('hide');
-              //                   //success message
-              //                   const Toast = Swal.mixin({
-              //                   toast: true,
-              //                   position: 'top-end',
-              //                   showConfirmButton: false,
-              //                   timer: 1100,
-              //                   timerProsressBar: true,
-              //                   didOpen: (toast) => {
-              //                   toast.addEventListener('mouseenter', Swal.stopTimer)
-              //                   toast.addEventListener('mouseleave', Swal.resumeTimer)                  
-              //                   }
-              //                   })
-              //                 Toast.fire({
-              //                 icon: 'success',
-              //                 title:'Office successfully Saved'
-              //                 }).then(function(){
-              //                   document.location.reload(true)//refresh pages
-              //                 });
-              //                   // $('#dtcode').val("")
-              //                   // $('#dtname').val("")
-              //                   // $('#dtdesc').val("")
-              //             }else{
-              //               Swal.fire("there is something wrong");
-                            
-              //           }
-              //         })
-              //       }else{
-              //         Swal.fire("You must fill out every field","","warning");
-              //       }
-              //     })
-              // End Save function
-
-              // // Edit modal calling
-              //   $('.editbtn').on('click', function () {
-
-              //       $('#EditModal').modal('show');
-
-              //       $tr = $(this).closest('tr');
-
-              //       var data = $tr.children("td").map(function () {
-              //           return $(this).text();
-              //       }).get();
-
-              //       console.log(data);        
-              //           $('#dt_idE').val(data[0]);
-              //           $('#dt_codeE').val(data[1]);
-              //           document.getElementById("dt_nameE").placeholder = data[2];
-              //           document.getElementById("dt_descE").placeholder = data[3];  
-              //     });
-              // // End of edit modal calling 
-
-              // // Edit function
-              // $('#edit').click(function(d){ 
-              //       d.preventDefault();
-              //         if($('#dt_idE').val()!="" && $('#dt_codeE').val()!="" && $('#dt_nameE').val()!="" && $('#dt_descE').val()!=""){
-              //           $.post("update_doctype.php", {
-              //             dtid:$('#dt_idE').val(),
-              //             dtcode:$('#dt_codeE').val(),
-              //             dtname:$('#dt_nameE').val(),
-              //             dtdesc:$('#dt_descE').val()
-              //             },function(data){
-              //               if (data.trim() == "failed"){
-              //               $('#EditModal').modal('hide');
-              //               Swal.fire("Office Title is currently in use","","error");//response message
-              //               // Empty test field
-              //               $('#dt_codeE').val("")
-              //               $('#dt_nameE').val("")
-              //               $('#dt_descE').val("")
-              //             }else if(data.trim() == "success"){
-              //               $('#EditModal').modal('hide');
-              //                     //success message
-              //                       const Toast = Swal.mixin({
-              //                       toast: true,
-              //                       position: 'top-end',
-              //                       showConfirmButton: false,
-              //                       timer: 1100,
-              //                       timerProsressBar: true,
-              //                       didOpen: (toast) => {
-              //                       toast.addEventListener('mouseenter', Swal.stopTimer)
-              //                       toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
-              //                     }
-              //                     })
-              //                       Toast.fire({
-              //                       icon: 'Success',
-              //                       title:'Changes Successfully Saved'
-              //                   }).then(function(){
-              //                     document.location.reload(true)//refresh pages
-              //                   });
-              //                       $('#dt_codeE').val("")
-              //                       $('#dt_nameE').val("")
-              //                       $('#dt_descE').val("")
-              //               }else{
-              //                 Swal.fire("There is somthing wrong","","error");
-              //             }
-              //           })
-              //         }else{
-              //           Swal.fire("You must fill out every field","","warning");
-              //         }
-              //     })
-            // // End Edit function
 
               // View Function
                 $('.viewbtn').on('click', function () {

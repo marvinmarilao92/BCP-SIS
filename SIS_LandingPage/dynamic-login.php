@@ -4,147 +4,275 @@
     session_start();
   $error = "";
   if($_SERVER["REQUEST_METHOD"] == "POST") {
+    
     // username and password sent from form 
+    date_default_timezone_set("asia/manila");
+		$date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
     $myusername = mysqli_real_escape_string($link,$_POST['username']);
-    $mypassword = mysqli_real_escape_string($link,$_POST['password']);  
+    $mypassword = mysqli_real_escape_string($link,$_POST['password']); 
 
-    $sql = "SELECT * FROM users WHERE id_number = '$myusername' and password = '$mypassword'";
-      $result = mysqli_query($link,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      $count = mysqli_num_rows($result);
-      
+      // $sql = "SELECT * FROM users WHERE id_number = '$myusername' and password = '$mypassword'";
+      // $result = mysqli_query($link,$sql);
+      // $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      // $count = mysqli_num_rows($result);
+
+      $sql=mysqli_query($link,"SELECT * FROM users WHERE id_number = '$myusername'")or die(mysqli_error($link));
+		  $row=mysqli_fetch_array($sql);
+      $count = mysqli_num_rows($sql);
       // If result matched $myusername and $mypassword, table row must be 1 row
-      if($count == 1) {
-        //Check department and role
-        $sql1 = "SELECT * FROM user_information where id_number = '$myusername' ";
-        if($result1 = mysqli_query($link, $sql1)){
-          if(mysqli_num_rows($result1) > 0){
-            while($row1 = mysqli_fetch_array($result1)){
-              switch($row1["department"]){
-                case "Clearance System":
-                  //statement
-                  switch($row1["role"]){
-                    case "Clearance Administrator":
-                      //statement
-                      $_SESSION['session_username'] = $myusername;
-                      header("location: Clearance/clearance-administrator/index.php");
-                      break;
-                    case "Laboratory Coordinator":
-                      //statement
-                      $_SESSION['session_username'] = $myusername;
-                      header("location: Clearance/laboratory-coordinator/index.php");
-                      break;
-                    case "Book Coordinator":
-                      //statement
-                      $_SESSION['session_username'] = $myusername;
-                      header("location: Clearance/book-coordinator/index.php");
-                      break;
-                    case "Library Coordinator":
-                      //statement
-                      $_SESSION['session_username'] = $myusername;
-                      header("location: Clearance/library-coordinator/index.php");
-                      break;
-                    case "Cashier Coordinator":
-                      //statement
-                      $_SESSION['session_username'] = $myusername;
-                      header("location: Clearance/cashier-coordinator/index.php");
-                      break;
-                    case "Registrar Coordinator":
-                      //statement
-                      $_SESSION['session_username'] = $myusername;
-                      header("location: Clearance/registrar-coordinator/index.php");
-                      break;
-                    case "Guidance Coordinator":
-                      //statement
-                      $_SESSION['session_username'] = $myusername;
-                      header("location: Clearance/guidance-coordinator/index.php");
-                      break;
-                    case "Department Head":
-                      //statement
-                      $_SESSION['session_username'] = $myusername;
-                      header("location: Clearance/department-head/index.php");
-                      break;
-                  }
-                  break;
-                case "Guidance and Counselling":
-                  //statement
-                  break;
-                case "DATMS":
-                  //statement
-                  switch($row1["role"]){
-                    case "DATMS Administrator":
-                      //statement
-                      $_SESSION['session_username'] = $myusername;
-                      header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index.php");
-                      break;
-                    case "DATMS Approver":
-                      //statement
-                      $_SESSION['session_username'] = $myusername;
-                      header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index.php");
-                      break;
-                    case "DATMS Secretary":
-                       //statement
-                       $_SESSION['session_username'] = $myusername;
-                       header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index.php");
-                       break;
-                    case "DATMS Faculty":
-                       //statement
-                       $_SESSION['session_username'] = $myusername;
-                       header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index.php");
-                       break;
-                  }
-                  break;
-                case "Student Services":
-                  //statement
-                  break;
-                case "Health Check Monitoring":
-                  //statement
-                  break;
-                case "LMS Moodle":
-                  //statement
-                  break;
-                case "Medical System":
-                  //statement
-                  break;
-                case "Scholarship System":
-                  //statement
-                  break;
-                case "User Management":
-                  //statement
-                  switch($row1["role"]){
-                    case "User Management Administrator":
-                      //statement
-                      $_SESSION['session_username'] = $myusername;
-                      header("location: ../UserManagement/index.php");
-                      break;
-                  }
-                  break;
-              }
-            }
-            // Free result set
-            mysqli_free_result($result1);
-          }
-          else{
-            // The user was not in the list of departments above, so it means the the user is a student
-            // Validate if the user was actually a student
-            $sql2 = "SELECT * FROM student_information where id_number = '$myusername'";
-            if($result2 = mysqli_query($link, $sql2)){
-              if(mysqli_num_rows($result2) > 0){
-                while($row2 = mysqli_fetch_array($result2)){
-                  //Add data to session
-                  $_SESSION['session_username'] = $myusername;
-                  $_SESSION['session_department'] = "Student";
-                  header("location: Student/index.php");
-                }
-                // Free result set
-                mysqli_free_result($result2);
-              }
-            }
-          }
-        }
-      }else {
+      if($count == 0) {
         $error = "Your Username or Password is invalid";
-      }
+      }else {
+        //password checking
+        if(password_verify($mypassword, $row["password"])){
+          //Check department and role
+         $sql1 = "SELECT * FROM user_information where id_number = '$myusername' ";
+         if($result1 = mysqli_query($link, $sql1)){
+           if(mysqli_num_rows($result1) > 0){
+             while($row1 = mysqli_fetch_array($result1)){
+               $id=$row1['id'];
+               $admin=$row1['id_number'];
+               $fname=$row1['firstname'].' '.$row1['middlename'].'.'.' '.$row1['lastname'];     
+               switch($row1["department"]){
+                 case "Clearance System":
+                   //statement
+                   switch($row1["role"]){
+                     case "Clearance Administrator":
+                       //statement
+                       $_SESSION['session_username'] = $myusername;
+                       header("location: Clearance/clearance-administrator/index.php");
+                       break;
+                     case "Laboratory Coordinator":
+                       //statement
+                       $_SESSION['session_username'] = $myusername;
+                       header("location: Clearance/laboratory-coordinator/index.php");
+                       break;
+                     case "Book Coordinator":
+                       //statement
+                       $_SESSION['session_username'] = $myusername;
+                       header("location: Clearance/book-coordinator/index.php");
+                       break;
+                     case "Library Coordinator":
+                       //statement
+                       $_SESSION['session_username'] = $myusername;
+                       header("location: Clearance/library-coordinator/index.php");
+                       break;
+                     case "Cashier Coordinator":
+                       //statement
+                       $_SESSION['session_username'] = $myusername;
+                       header("location: Clearance/cashier-coordinator/index.php");
+                       break;
+                     case "Registrar Coordinator":
+                       //statement
+                       $_SESSION['session_username'] = $myusername;
+                       header("location: Clearance/registrar-coordinator/index.php");
+                       break;
+                     case "Guidance Coordinator":
+                       //statement
+                       $_SESSION['session_username'] = $myusername;
+                       header("location: Clearance/guidance-coordinator/index.php");
+                       break;
+                     case "Department Head":
+                       //statement
+                       $_SESSION['session_username'] = $myusername;
+                       header("location: Clearance/department-head/index.php");
+                       break;
+                   }
+                   break;
+                 case "Guidance and Counselling":
+                   //statement
+                   break;
+                 case "DATMS":
+                   //statement ROLE
+                   switch($row1["role"]){
+                     case "DATMS Administrator":
+                       //statement
+                       $_SESSION['session_username'] = $myusername;
+                       if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                           $ip = $_SERVER["HTTP_CLIENT_IP"];
+                         }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                           $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                         }else{
+                           $ip = $_SERVER["REMOTE_ADDR"];
+                           $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                            $remarks="account has been logged in";  
+                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                           
+                         }
+                       header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index.php");
+                       break;
+                     case "DATMS Approver":
+                       //statement
+                       $_SESSION['session_username'] = $myusername;
+                       if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                           $ip = $_SERVER["HTTP_CLIENT_IP"];
+                         }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                           $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                         }else{
+                           $ip = $_SERVER["REMOTE_ADDR"];
+                           $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                            $remarks="account has been logged in";  
+                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                           
+                         }
+                       header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index.php");
+                       break;
+                     case "DATMS Secretary":
+                        //statement
+                        $_SESSION['session_username'] = $myusername;
+                        if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                           $ip = $_SERVER["HTTP_CLIENT_IP"];
+                         }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                           $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                         }else{
+                           $ip = $_SERVER["REMOTE_ADDR"];
+                           $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                            $remarks="account has been logged in";  
+                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                           
+                         }
+                        header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index.php");
+                        break;
+                     case "DATMS Faculty":
+                        //statement
+                        $_SESSION['session_username'] = $myusername;
+                        if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                           $ip = $_SERVER["HTTP_CLIENT_IP"];
+                         }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                           $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                         }else{
+                           $ip = $_SERVER["REMOTE_ADDR"];
+                           $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                            $remarks="account has been logged in";  
+                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                           
+                         }
+                        header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index.php");
+                        break;
+
+                      case "Cashier":
+                        //statement
+                        $_SESSION['session_username'] = $myusername;
+                        if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                            $ip = $_SERVER["HTTP_CLIENT_IP"];
+                          }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                            $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                          }else{
+                            $ip = $_SERVER["REMOTE_ADDR"];
+                            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                            $remarks="account has been logged in";  
+                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                            
+                          }
+                        header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index.php");
+                        break;
+
+                      case "Admission":
+                        //statement
+                        $_SESSION['session_username'] = $myusername;
+                        if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                            $ip = $_SERVER["HTTP_CLIENT_IP"];
+                          }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                            $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                          }else{
+                            $ip = $_SERVER["REMOTE_ADDR"];
+                            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                            $remarks="account has been logged in";  
+                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                            
+                          }
+                        header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index.php");
+                        break;
+                        
+                   }
+                   break;
+                 case "SuperUser":
+                       //statement role
+                       switch($row1["role"]){
+                        case "SuperAdmin":
+                          //statement
+                          $_SESSION['session_username'] = $myusername;
+                          if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                              $ip = $_SERVER["HTTP_CLIENT_IP"];
+                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                              $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                            }else{
+                              $ip = $_SERVER["REMOTE_ADDR"];
+                              $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                               $remarks="account has been logged in";  
+                               mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                            }
+                          header("location: ../super_admin/index.php");
+                          break;                                           
+                      }
+                   break;
+
+                 case "Student Services":
+                   //statement
+                   break;
+                 case "Health Check Monitoring":
+                   //statement
+                   break;
+                 case "LMS Moodle":
+                   //statement
+                   break;
+                 case "Medical System":
+                   //statement
+                   break;
+                 case "Scholarship System":
+                   //statement
+                   break;
+                 case "User Management":
+                   //statement
+                   switch($row1["role"]){
+                     case "User Management Administrator":
+                       //statement
+                       $_SESSION['session_username'] = $myusername;
+ 
+                       if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                           $ip = $_SERVER["HTTP_CLIENT_IP"];
+                         }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                           $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                         }else{
+                           $ip = $_SERVER["REMOTE_ADDR"];
+                           $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                            $remarks="account has been logged in";  
+                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                           
+                         }
+                       
+                       header("location: ../Usermanagement/index.php");
+                       break;
+                   }
+                   break;
+               }
+             }
+             // Free result set
+             mysqli_free_result($result1);
+           }
+           else{
+             // The user was not in the list of departments above, so it means the the user is a student
+             // Validate if the user was actually a student
+             $sql2 = "SELECT * FROM student_information where id_number = '$myusername'";
+             if($result2 = mysqli_query($link, $sql2)){
+               if(mysqli_num_rows($result2) > 0){
+                 while($row2 = mysqli_fetch_array($result2)){
+                   //Add data to session
+                   $_SESSION['session_username'] = $myusername;
+                   $_SESSION['session_department'] = "Student";
+                   header("location: Student/index.php");
+                 }
+                 // Free result set
+                 mysqli_free_result($result2);
+               }
+             }
+           }
+         }
+        }//end of password checking
+        else{
+          $error = "Your Username or Password is invalid";
+        }
+      }//end else
     }
   ?>
 
@@ -184,20 +312,17 @@
                   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="row g-3">
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
+                      <div class="form-floating">
+                        <input type="text" class="form-control" name="username" id="username"  placeholder="first name" Required autofocus>
+                        <label for="floatingName">Username</label>
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <br>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <!-- <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
-                      <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i> -->
-                      <div class="invalid-feedback">Please enter your password!</div>
+                      <div class="form-floating">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="first name" Required >
+                        <label for="floatingName">Password</label>
+                      </div>
                     </div>
                     <!-- Error Message -->
                     <?php 
@@ -221,16 +346,17 @@
 
                 </div>
               </div>
-              <div class="copyright">
-                <center>
-                  &copy;Copyright <a href="https://bcp.edu.ph/home" target="_blank " data-bs-toggle="tooltip" data-bs-placement="top" 
-                  title="Access BCP Website">Bestlink College of the Philippines</a> All Rights Reserved
-                </center>                 
-              </div>
+              <footer class="footer">
+                <div class="copyright">
+                  <center>
+                    &copy;Copyright <a href="https://bcp.edu.ph/home" target="_blank " data-bs-toggle="tooltip" data-bs-placement="top" 
+                    title="Access BCP Website">Bestlink College of the Philippines</a> All Rights Reserved
+                  </center>                 
+                </div>
+              </footer>
             </div>
           </div>
         </div>
-
       </section>
 
     </div>

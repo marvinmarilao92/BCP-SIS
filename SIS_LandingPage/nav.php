@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-xs-6">
             
-            <div id="fh5co-logo"><img src="../assets/img/logo300.png" width="50px" height="55px"><a href="index.php" style="color: rgb(29, 70, 146);"><i></i>Bestlink College of the Philippines</a></div>
+            <div id="fh5co-logo"><img src="../assets/img/BCPlogo.png" width="33px" height="35px"><a href="index.php" style="color: rgb(29, 70, 146);"><i></i>Bestlink College of the Philippines</a></div>
             </div>
             <div class="col-xs-6 text-right menu-1">
                 <ul>
