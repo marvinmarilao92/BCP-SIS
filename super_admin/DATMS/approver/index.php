@@ -345,9 +345,9 @@ include('session.php');
                             </center>                
                           </div>
                         </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Document List</button>
+                        <div class="">
+                          <button type="reset" class="btn btn-secondary btn-lg">Reset</button> 
+                          <button type="submit" class="btn btn-primary btn-lg ">Enroll</button>          
                         </div>
                       <!-- End Form -->
                   </div>

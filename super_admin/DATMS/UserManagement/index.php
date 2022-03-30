@@ -40,9 +40,9 @@ include('session.php');
                 <div class="form-group col-md-2 btn-lg"  style="float: left; padding:20px;">
                     <h4>List of Students</h4>
                 </div>
-                <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
+                <!-- <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
                    <a href="student-create.php" class="btn btn-primary pull-right">Add New Student</a>
-                </div> 
+                </div>  -->
               </div>
             <div class="card-body">
                <!-- Table for Office records -->
@@ -66,7 +66,7 @@ include('session.php');
                     <th style="display:none"></th>
                     <th style="display:none"></th>
                     <th scope='col'>Course</th>
-                    <th>Last Access</th>
+                    <!-- <th>Last Access</th> -->
                     <th>Account Status</th>
                     <th scope="col">Action</th>
                   </tr>
@@ -115,23 +115,23 @@ include('session.php');
                     <td style="display:none"><?php echo $cs?></td>
                     <?php
                     // Include config file
-                    require_once "config.php";
+                    // require_once "config.php";
 
-                     $sql1 = "SELECT * FROM users WHERE id_number = " . $studno = $rs['id_number'] . " ";
-                     if($result1 = mysqli_query($link, $sql1)){
-                       if(mysqli_num_rows($result1) > 0){
-                         while($row1 = mysqli_fetch_array($result1)){
-                           echo "<td>" . $row1['last_access'] . "</td>";
-                         }
-                         // Free result set
-                         mysqli_free_result($result1);
-                       }
-                     }?>
+                    //  $sql1 = "SELECT * FROM users WHERE id_number = " . $studno = $rs['id_number'] . " ";
+                    //  if($result1 = mysqli_query($link, $sql1)){
+                    //    if(mysqli_num_rows($result1) > 0){
+                    //      while($row1 = mysqli_fetch_array($result1)){
+                    //        echo "<td>" . $row1['last_access'] . "</td>";
+                    //      }
+                    //      // Free result set
+                    //      mysqli_free_result($result1);
+                    //    }
+                    //  }?>
                     <td ><?php echo $as?></td>
                     <td style="display:none"><?php echo $sd?></td>
                     
                   </td>
-                    <td>                      
+                    <td WIDTH="13%">                      
                       <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>
                       <button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button>
                       <button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>

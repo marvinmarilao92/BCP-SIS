@@ -668,10 +668,10 @@
             </div>
           </div>
 
-          <nav class="justify-content-center d-flex">
-            <button type="reset" class="btn btn-secondary btn-lg col-sm-1">Reset</button>&nbsp;&nbsp;  
-            <button type="submit" class="btn btn-primary btn-lg col-sm-1 ">Enroll</button>          
-          </nav>
+          <div class="justify-content-center d-flex">
+            <button type="reset" class="btn btn-secondary btn-lg">Reset</button>&nbsp;&nbsp;  
+            <button type="submit" class="btn btn-primary btn-lg ">Enroll</button>          
+          </div>
 
         </div>
       </div>

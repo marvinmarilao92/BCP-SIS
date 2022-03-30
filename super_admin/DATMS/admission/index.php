@@ -669,8 +669,8 @@
           </div>
 
           <nav class="justify-content-center d-flex">
-            <button type="reset" class="btn btn-secondary btn-lg col-sm-1">Reset</button>&nbsp;&nbsp;  
-            <button type="submit" class="btn btn-primary btn-lg col-sm-1 ">Enroll</button>          
+            <button type="reset button" class="btn btn-secondary col-sm-2 pt-1">Reset</button>&nbsp;&nbsp;  
+            <button type="submit button" class="btn btn-primary col-sm-2 pt-1">Enroll</button>          
           </nav>
 
         </div>
