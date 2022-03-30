@@ -19,7 +19,7 @@ $db = mysqli_select_db($conn, 'sis_db');
 
              $d_remarks = mysqli_real_escape_string($conn,$_POST['docs_remarks']);
            
-             $sql = "SELECT * FROM `user_information` WHERE `id_number` = '$d_act2'";
+             $sql = "SELECT * FROM `user_information` WHERE `id` = '$d_act2'";
              if($result = mysqli_query($conn, $sql)){
                 if(mysqli_num_rows($result) > 0){
                    while ($row = mysqli_fetch_array($result)) {
@@ -33,9 +33,31 @@ $db = mysqli_select_db($conn, 'sis_db');
             if($v_checkcode < 1){
                 echo ('Val30');
             }else {
-                $conn->query("UPDATE datms_documents SET doc_status = 'Outgoing', doc_actor3 ='$d_actor3', doc_off3='$d_off2', doc_date3 ='$date'
+                $conn->query("UPDATE datms_documents SET doc_status = 'Outgoing', doc_actor1 ='$d_actor3', doc_off1='$d_off2', doc_date1 ='$date'
                 , doc_actor2 ='$d_act1', doc_off2='$d_off1', doc_date2 ='$d_date1', doc_remarks='$d_remarks' WHERE doc_id='$id'") or die(mysqli_error($conn));
-                echo ('success');
+                // record for tracking
+                $sql1 = "SELECT * FROM `datms_documents` WHERE `doc_code` = '$doc_code'";
+                    if($result1 = mysqli_query($conn, $sql1)){
+                        if(mysqli_num_rows($result1) > 0){
+                        while ($row1 = mysqli_fetch_array($result1)) {
+                            $doc_title =  mysqli_real_escape_string($conn,$row1["doc_title"]);
+                            $filename =  mysqli_real_escape_string($conn,$row1["doc_name"]);
+                            $size =  mysqli_real_escape_string($conn,$row1["doc_size"]);
+                            $doc_type =  mysqli_real_escape_string($conn,$row1["doc_type"]);
+                            $doc_desc =  mysqli_real_escape_string($conn,$row1["doc_desc"]);
+
+                            $act1 =  mysqli_real_escape_string($conn,$row1["doc_actor2"]);
+                            $off1 =  mysqli_real_escape_string($conn,$row1["doc_off2"]);
+                            $date1 =  mysqli_real_escape_string($conn,$row1["doc_date2"]);
+
+                            $conn->query("INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
+                            VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type','Outgoing','$doc_desc','$d_actor3','$d_off2','$date','$act1','$off1','$date1','Document is submitted to')") or die(mysqli_error($conn));
+
+                            echo ('success');
+                            }
+                        }
+                    }
+                
             }
         }else{
             echo ('Val69');

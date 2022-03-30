@@ -21,13 +21,21 @@
 
 
   <li class="nav-item">
+  <a href="requirements.php" class="<?php if($page=='req'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+      <i class="ri-folder-5-line"></i>
+      <span>Requirements &nbsp;</span>
+    </a>
+  </li><!-- All docs Nav -->
+
+  
+  <li class="nav-item">
   <a href="documents_list.php" class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-book-2-line"></i>
       <span>Documents &nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-secondary">
          <?php 
             require_once("include/conn.php");
-            $query="SELECT * FROM datms_documents WHERE (`doc_actor1`='$verified_session_firstname $verified_session_lastname' OR `doc_off1` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted')";
+            $query="SELECT * FROM datms_documents WHERE (`doc_actor3`='$verified_session_firstname $verified_session_lastname' OR `doc_off3` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted')";
             $result=mysqli_query($conn,$query);
             if($result){
                echo mysqli_num_rows($result);
@@ -44,7 +52,7 @@
       <span class="badge bg-warning text-dark">
       <?php 
             require_once("include/conn.php");
-            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing' AND (`doc_actor3`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off3` = '$verified_session_office');";
+            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing' AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname ');";
             $result=mysqli_query($conn,$query);
             if($result){
                echo mysqli_num_rows($result);
@@ -61,7 +69,7 @@
       <span class="badge bg-success badge-number">
         <?php 
             require_once("include/conn.php");
-            $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Received') AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office');";
+            $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Received') AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname ');";
             $result=mysqli_query($conn,$query);
             if($result){
                echo mysqli_num_rows($result);
@@ -78,7 +86,7 @@
       <span class="badge bg-danger badge-number">
       <?php 
             require_once("include/conn.php");
-            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing'  AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office');";
+            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing'  AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ');";
             $result=mysqli_query($conn,$query);
             if($result){
                echo mysqli_num_rows($result);
@@ -94,7 +102,7 @@
       <span>Hold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-primary badge-number"> <?php 
             require_once("include/conn.php");
-            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Hold'  AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office')";
+            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Hold'  AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ')";
             $result=mysqli_query($conn,$query);
             if($result){
                echo mysqli_num_rows($result);
@@ -109,7 +117,7 @@
       <span>Rejected &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-dark badge-number"> <?php 
             require_once("include/conn.php");
-            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Rejected'  AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off1` = '$verified_session_office')";
+            $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Rejected'  AND (`doc_actor3`='$verified_session_firstname $verified_session_lastname ')";
             $result=mysqli_query($conn,$query);
             if($result){
                echo mysqli_num_rows($result);

@@ -26,7 +26,7 @@
         //password checking
         if(password_verify($mypassword, $row["password"])){
           //Check department and role
-         $sql1 = "SELECT * FROM user_information where id_number = '$myusername' ";
+         $sql1 = "SELECT * FROM user_information WHERE id_number = '$myusername' AND account_status='Active'";
          if($result1 = mysqli_query($link, $sql1)){
            if(mysqli_num_rows($result1) > 0){
              while($row1 = mysqli_fetch_array($result1)){
@@ -251,21 +251,39 @@
              mysqli_free_result($result1);
            }
            else{
-             // The user was not in the list of departments above, so it means the the user is a student
-             // Validate if the user was actually a student
-             $sql2 = "SELECT * FROM student_information where id_number = '$myusername'";
-             if($result2 = mysqli_query($link, $sql2)){
-               if(mysqli_num_rows($result2) > 0){
-                 while($row2 = mysqli_fetch_array($result2)){
-                   //Add data to session
-                   $_SESSION['session_username'] = $myusername;
-                   $_SESSION['session_department'] = "Student";
-                   header("location: Student/index.php");
-                 }
-                 // Free result set
-                 mysqli_free_result($result2);
-               }
-             }
+            // The user was not in the list of departments above, so it means the user may be a student
+            // Validate if the user was actually a student
+            $sql2 = "SELECT * FROM student_information where id_number = '$myusername' AND (account_status='Offical' OR account_status='Transferee')";
+            if($result2 = mysqli_query($link, $sql2)){
+              if(mysqli_num_rows($result2) > 0){
+                while($row2 = mysqli_fetch_array($result2)){
+                  //Add data to session
+                  $_SESSION['session_username'] = $myusername;
+                  $_SESSION['session_department'] = "Student";
+                  header("location: ../Student_Portal/index.php");
+                }
+                // Free result set
+                mysqli_free_result($result2);
+              }else{
+                //The user was not in the list of departments above and not also in the list of student, so that user may be a teacher
+                //Validate if the user was actually a teacher
+                $sql3 = "SELECT * FROM teacher_information where id_number = '$myusername' AND account_status='Active'";
+                if($result3 = mysqli_query($link, $sql3)){
+                  if(mysqli_num_rows($result3) > 0){
+                    while($row2 = mysqli_fetch_array($result3)){
+                      //Add data to session
+                      $_SESSION['session_username'] = $myusername;
+                      $_SESSION['session_department'] = "Teacher";
+                      header("location: ../Teacher_Portal/index.php");
+                    }
+                    // Free result set
+                    mysqli_free_result($result3);
+                  }
+                }
+              }
+            }else{
+              $error = "Your Username or Password is invalid";
+            }
            }
          }
         }//end of password checking

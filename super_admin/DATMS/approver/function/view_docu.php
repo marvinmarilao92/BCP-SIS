@@ -10,11 +10,11 @@ if (isset($_GET['ID'])) {
     $result = mysqli_query($conn, $sql);
 
     $file = mysqli_fetch_assoc($result);
-    $filepath = '../../uploads/' . $file['doc_name'];
+    $filepath = '../../../../assets/uploads/' . $file['doc_name'];
 
     if (file_exists($filepath)) {
         header('Content-Type: application/pdf');
-        readfile('../../uploads/' . $file['doc_name']);
+        readfile('../../../../assets/uploads/' . $file['doc_name']);
 
         mysqli_query($conn, $updateQuery);
         exit;

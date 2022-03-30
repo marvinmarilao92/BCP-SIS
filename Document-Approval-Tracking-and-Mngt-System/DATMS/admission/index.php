@@ -544,6 +544,7 @@
                 <option selected disabled value="">Select Status</option>
                 <option value="Unoffical">Unoffical</option>
                 <option value="Offical">Offical</option>
+                <option value="Transferee">Transferee</option>
               </select>
               <label for="floatingSelect">Student Status</label>
             </div>

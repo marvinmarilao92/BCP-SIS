@@ -74,7 +74,7 @@ include('session.php');
                                                   mysqli_free_result($result1);
                                                 }
                                               }
-                                              echo "<td WIDTH='10%'>";
+                                              echo "<td WIDTH='13%'>";
                                                   echo '<button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button> ';
                                                   echo '<button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button> ';
                                                   echo '<button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>';

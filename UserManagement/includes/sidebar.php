@@ -12,12 +12,12 @@
       <!-- End Dashboard Nav -->
       <li class="nav-heading">Module</li>
 
-      <!-- <li class="nav-item">
+      <li class="nav-item">
         <a class="<?php if($page=='SI'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="index.php">
           <i class="bi bi-person-plus-fill"></i>
           <span>Students</span>
         </a>
-      </li> -->
+      </li>
       <!-- End Student Page Nav -->
 
       <li class="nav-item">

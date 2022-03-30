@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Received') AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname' OR  `doc_off2` = '$verified_session_office')
+                    $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Received') AND `doc_actor1`='$verified_session_firstname $verified_session_lastname'
                     ORDER BY doc_date2 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
@@ -73,33 +73,33 @@ include('session.php');
                       $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
                       $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
                       $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
+                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];    
                       $docRemarks = $rs['doc_remarks'];   
   
   
                   ?>
                   <tr>
                     <td style="display:none"><?php echo $docId?></td>
-                    <td><?php echo $docCode; ?>
-                    <td><?php echo $docName; ?>
-                    <td><?php echo $docAct2; ?>
-                    <td><?php echo $docDate2; ?>
-                    <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
-                    <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
-                    <td style="display:none"><?php echo $docDl; ?>
+                    <td><?php echo $docCode; ?></td>
+                    <td><?php echo $docName; ?></td>
+                    <td><?php echo $docAct1; ?></td>
+                    <td style="display:none"><?php echo $docOff1?></td>
+                    <td><?php echo $docDate1; ?></td>
+                    <td><?php echo $docStat; ?></td>
+                    <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
+                    <td style="display:none"><?php echo $docDl; ?></td>
                     <td style="display:none"><?php echo $docTitle?></td>
                     <td style="display:none"><?php echo $docType?></td>
-                    <td style="display:none"><?php echo $docDesc?></td>
-                    <td style="display:none"><?php echo $docOff1?></td>
-                    <td style="display:none"><?php echo $docAct1?></td>
+                    <td style="display:none"><?php echo $docDesc?></td>                    
+                    <td style="display:none"><?php echo $docAct2?></td>
                     <td style="display:none"><?php echo $docOff2?></td>
-                    <td style="display:none"><?php echo $docDate1?></td>
+                    <td style="display:none"><?php echo $docDate2?></td>
                     <td style="display:none"><?php echo $docAct3?></td>
                     <td style="display:none"><?php echo $docOff3?></td>
                     <td style="display:none"><?php echo $docDate3?></td>
                     <td style="display:none"><?php echo $docRemarks?></td>
 
-                  </td>
+                  
                     <td>                    
                       <a class="btn btn-success sendbtn"><i class="bi bi-cursor-fill"></i></a>
                       <a class="btn btn-danger holdbtn" ><i class="bi bi-folder-symlink" ></i></a>
@@ -122,7 +122,6 @@ include('session.php');
     </section>
 
   </main><!-- End #main -->
-  
 
       <!-- Desc Document modal -->
        <div class="modal fade" id="RemarksModal" tabindex="-1">
@@ -210,8 +209,8 @@ include('session.php');
           </div>
       <!-- End Hold Docs Modal-->
 
-       <!-- Send Docs Modal -->
-       <div class="modal fade" id="SendModal" tabindex="-1">
+         <!-- Send Docs Modal -->
+    <div class="modal fade" id="SendModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -232,19 +231,19 @@ include('session.php');
                                       <div class="col-md-12">
                                         <select class="form-select" id="send_act2" name="send_act2" onChange="fetchOffice(this.value);">
                                         <option selected="selected" disabled="disabled">Recipient</option>
-                                          <?php
-                                            require_once("include/conn.php");
-                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' AND `id_number` NOT IN ('$verified_session_username') ORDER BY firstname DESC ";
-                                            $result=mysqli_query($conn,$query);
-                                            while($rs=mysqli_fetch_array($result)){
-                                              $dtid =$rs['id'];    
-                                              $dtno =$rs['id_number'];                                  
-                                              $dtFName = $rs['firstname'];    
-                                              $dtLName = $rs['lastname'];    
-                                            
-                                              echo '<option value = "' . $dtno . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
-                                            }
-                                        ?>
+                                           <?php
+                                              require_once("include/conn.php");
+                                              $query="SELECT * FROM user_information WHERE (department = 'DATMS' OR  department = 'SuperUser') AND `id_number` NOT IN ('$verified_session_username') AND role NOT LIKE '%Cashier%' AND role NOT LIKE '%Admission%' ORDER BY firstname DESC ";
+                                              $result=mysqli_query($conn,$query);
+                                              while($rs=mysqli_fetch_array($result)){
+                                                $dtid =$rs['id'];    
+                                                $dtno =$rs['id_number'];                                  
+                                                $dtFName = $rs['firstname'];    
+                                                $dtLName = $rs['lastname'];    
+                                              
+                                                echo '<option value = "' . $dtid . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
+                                              }
+                                          ?>
                                         </select>
                                       </div>
                                       <div class="col-md-12">
@@ -315,7 +314,7 @@ include('session.php');
         $(document).ready(function () {
 
           
-            // View Function
+              // View Function
                   $('.remarksbtn').on('click', function () {
 
                       $('#RemarksModal').modal('show');
@@ -369,23 +368,23 @@ include('session.php');
                           }else if(data.trim() == "success"){
                             $('#ReceivedModal').modal('hide');
                                   //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
+                                  const Toast = Swal.mixin({
+                                  toast: true,
+                                  position: "top-end",
+                                  showConfirmButton: false,
+                                  timer: 2000,
+                                  timerProsressBar: true,
+                                  didOpen: (toast) => {
+                                  toast.addEventListener("mouseenter", Swal.stopTimer)
+                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
                                   }
                                   })
-                                    Toast.fire({
-                                    icon: 'Success',
-                                    title:'Document is now on hold'
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
+                                  Toast.fire({
+                                  icon: "success",
+                                  title:"Document is now on hold",
+                                  }).then(function(){
+                                    document.location.reload(true)//refresh pages
+                                  });                       
                                     $('#doc_code').val("")
                                     $('#doc_act2').val("")
                                     $('#doc_off2').val("")
@@ -397,6 +396,7 @@ include('session.php');
                       }else{
                         Swal.fire("You must fill out every field","","warning");
                       }
+                      Swal.fire(data);
                   })
               // End Hold function
 
@@ -412,9 +412,9 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#send_act1').val(data[12]);  
-                      $('#send_off1').val(data[13]);
-                      $('#send_date1').val(data[14]); 
+                      $('#send_act1').val(data[3]);  
+                      $('#send_off1').val(data[4]);
+                      $('#send_date1').val(data[5]); 
 
                       $('#doc_fileN1').text(data[2]);  
                       $('#send_id').val(data[0]);
@@ -440,29 +440,29 @@ include('session.php');
                           }else if(data.trim() == "success"){
                             $('#ReceivedModal').modal('hide');
                                   //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
+                                  const Toast = Swal.mixin({
+                                  toast: true,
+                                  position: "top-end",
+                                  showConfirmButton: false,
+                                  timer: 2000,
+                                  timerProsressBar: true,
+                                  didOpen: (toast) => {
+                                  toast.addEventListener("mouseenter", Swal.stopTimer)
+                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
                                   }
                                   })
-                                    Toast.fire({
-                                    icon: 'Success',
-                                    title:'Document is Successfully Submitted'
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
+                                  Toast.fire({
+                                  icon: "success",
+                                  title:"Document to track Successfully Submitted"
+                                  }).then(function(){
+                                    document.location.reload(true)//refresh pages
+                                  });                       
                                     $('#doc_code').val("")
                                     $('#doc_act2').val("")
                                     $('#doc_off2').val("")
                             }else{
-                              Swal.fire("There is somthing wrong","","error");
-                              // Swal.fire(data);
+                              // Swal.fire("There is somthing wrong","","error");
+                              Swal.fire(data);
                           }
                         })
                       }else{

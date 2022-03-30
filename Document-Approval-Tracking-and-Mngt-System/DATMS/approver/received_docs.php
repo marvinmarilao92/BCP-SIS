@@ -54,7 +54,7 @@ include('session.php');
                     <th scope="col">DocCode</th>
                     <th scope="col" >Filename</th>
                     <!-- <th scope="col">Filesize</th>    -->
-                    <th scope="col">Sender</th>   
+                    <th scope="col">Current Actor</th>   
                     <th scope="col">Date/Time</th>       
                     <th scope="col">Status</th>  
                     <!-- <th scope="col">Downloads</th>    -->
@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Pending') AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname' OR  `doc_off2` = '$verified_session_office')
+                    $query="SELECT * FROM datms_documents WHERE (`doc_status` = 'Created' OR `doc_status` = 'Pending') AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname')
                     ORDER BY doc_date2 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
@@ -78,18 +78,18 @@ include('session.php');
   
                   ?>
                   <tr>
-                    <td style="display:none"><?php echo $docId?></td>
-                    <td><?php echo $docCode; ?>
-                    <td class="viewbtn"><?php echo $docName; ?>
-                    <td><?php echo $docAct1; ?>
-                    <td><?php echo $docDate1; ?>
-                    <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
-                    <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
-                    <td style="display:none"><?php echo $docDl; ?>
+                  <td style="display:none"><?php echo $docId?></td>
+                    <td><?php echo $docCode; ?></td>
+                    <td><?php echo $docName; ?></td>
+                    <td><?php echo $docAct1; ?></td>
+                    <td style="display:none"><?php echo $docOff1?></td>
+                    <td><?php echo $docDate1; ?></td>
+                    <td><?php echo $docStat; ?></td>
+                    <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
+                    <td style="display:none"><?php echo $docDl; ?></td>
                     <td style="display:none"><?php echo $docTitle?></td>
                     <td style="display:none"><?php echo $docType?></td>
-                    <td style="display:none"><?php echo $docDesc?></td>
-                    <td style="display:none"><?php echo $docOff1?></td>
+                    <td style="display:none"><?php echo $docDesc?></td>                    
                     <td style="display:none"><?php echo $docAct2?></td>
                     <td style="display:none"><?php echo $docOff2?></td>
                     <td style="display:none"><?php echo $docDate2?></td>
@@ -98,13 +98,13 @@ include('session.php');
                     <td style="display:none"><?php echo $docDate3?></td>
                     <td style="display:none"><?php echo $docRemarks?></td>
 
-                  </td>
-                    <td>                                           
-                      <a class="btn btn-success approvedbtn"><i class="bi bi-check-lg"></i></a>
-                      <a class="btn btn-danger rejectbtn" ><i class="bi bi-x-lg" ></i></a>      
-                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>                
-                      <a class="btn btn-secondary sendbtn"><i class="bi bi-cursor-fill"></i></a>
-                      <a class="btn btn-dark holdbtn" ><i class="bi bi-question-lg" ></i></a>              
+                  
+                    <td WIDTH="17%">                       
+                      <a class="btn btn-success approvedbtn" title="Approve"><i class="bi bi-check-lg"></i></a>
+                      <a class="btn btn-danger rejectbtn" title="Reject"><i class="bi bi-x-lg" ></i></a>      
+                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="bi bi-eye-fill"></i></a>                
+                      <a class="btn btn-secondary sendbtn" title="Send"><i class="bi bi-cursor-fill"></i></a>
+                      <a class="btn btn-dark holdbtn" title="Hold"><i class="bi bi-question-lg" ></i></a>              
                     </td>
                   </tr>
 
@@ -302,19 +302,19 @@ include('session.php');
                                       <div class="col-md-12">
                                         <select class="form-select" id="send_act2" name="send_act2" onChange="fetchOffice(this.value);">
                                         <option selected="selected" disabled="disabled">Recipient</option>
-                                          <?php
-                                            require_once("include/conn.php");
-                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' OR  department = 'SuperUser' AND `id_number` NOT IN ('$verified_session_username') ORDER BY firstname DESC ";
-                                            $result=mysqli_query($conn,$query);
-                                            while($rs=mysqli_fetch_array($result)){
-                                              $dtid =$rs['id'];    
-                                              $dtno =$rs['id_number'];                                  
-                                              $dtFName = $rs['firstname'];    
-                                              $dtLName = $rs['lastname'];    
-                                            
-                                              echo '<option value = "' . $dtid . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
-                                            }
-                                        ?>
+                                         <?php
+                                              require_once("include/conn.php");
+                                              $query="SELECT * FROM user_information WHERE (department = 'DATMS' OR  department = 'SuperUser') AND `id_number` NOT IN ('$verified_session_username') AND role NOT LIKE '%Cashier%' AND role NOT LIKE '%Admission%' ORDER BY firstname DESC ";
+                                              $result=mysqli_query($conn,$query);
+                                              while($rs=mysqli_fetch_array($result)){
+                                                $dtid =$rs['id'];    
+                                                $dtno =$rs['id_number'];                                  
+                                                $dtFName = $rs['firstname'];    
+                                                $dtLName = $rs['lastname'];    
+                                              
+                                                echo '<option value = "' . $dtid . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
+                                              }
+                                          ?>
                                         </select>
                                       </div>
                                       <div class="col-md-12">
@@ -598,7 +598,7 @@ include('session.php');
                   })
               // End Hold function
 
-               // Send modal calling
+              // Send modal calling
               $('.sendbtn').on('click', function () {
 
                   $('#SendModal').modal('show');
@@ -610,16 +610,16 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#send_act1').val(data[12]);  
-                      $('#send_off1').val(data[13]);
-                      $('#send_date1').val(data[14]); 
+                      $('#send_act1').val(data[3]);  
+                      $('#send_off1').val(data[4]);
+                      $('#send_date1').val(data[5]); 
 
                       $('#doc_fileN1').text(data[2]);  
                       $('#send_id').val(data[0]);
                       $('#send_code').val(data[1]); 
                 });
               // End of Send modal calling 
-
+              
               // Send function
               $('#send').click(function(d){ 
                     d.preventDefault();
