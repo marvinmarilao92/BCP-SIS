@@ -1,4 +1,4 @@
-  <?php
+<?php
       include 'config.php';
       session_start();
         // Define variables and initialize with empty values
@@ -178,7 +178,7 @@
                                 <div class="col-md-12">
                                   <div class="form-floating">
                                     <select class="form-select" name="course" id="course" aria-label="State" Required onchange="oncollapse()">
-                                      <option value="#" selected="selected" disabled="disabled">Select Course</option>
+                                                <option value="#" selected="selected" disabled="disabled">Select Course</option>
                                       <option value="BSIT">BS Information Technology</option>
                                       <option value="BSHM">BS Hospitality Management</option>
                                       <option value="BSOA">BS Office Administration</option>
@@ -198,7 +198,7 @@
                                       <option value="BSTM">BS Tourism Management</option>
                                       <option value="BSEntrep">BS Entrepreneurship</option>
                                       <option value="BSAIS">BS Accounting Information System</option>
-                                      <option value="BSPsy">BS Psychology</option>                                                     
+                                      <option value="BSPsy">BS Psychology</option>                                  
                                     </select>
                                     <label for="floatingSelect">College Program</label>
                                   </div>
@@ -406,7 +406,7 @@
                                 </div>  
                                 <div class="col-md-12">
                                   <div class="form-floating">
-                                    <select class="form-select" name="religion" id="religion" aria-label="State" Required onchange="oncollapse()">
+                                    <select class="form-select" name="religion" id="religion" aria-label="State" onchange="oncollapse()">
                                       <option value="" selected="selected" disabled="disabled">Select Religion</option>
                                       <option value="African Traditional &amp; Diasporic">African Traditional &amp; Diasporic</option>
                                       <option value="Agnostic">Agnostic</option>
@@ -484,7 +484,7 @@
                                 </div>
                                 <div class="col-md-12">
                                   <div class="form-floating">
-                                    <input type="text" class="form-control" name="add_st2" id="add_st2"  placeholder="Your Name" required onchange="oncollapse1()">
+                                    <input type="text" class="form-control" name="add_st2" id="add_st2"  placeholder="Your Name" onchange="oncollapse1()">
                                     <label for="floatingName">Street Address Line 2</label>
                                   </div>
                                 </div>

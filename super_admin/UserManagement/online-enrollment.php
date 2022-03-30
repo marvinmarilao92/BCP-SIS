@@ -178,7 +178,7 @@
                                 <div class="col-md-12">
                                   <div class="form-floating">
                                     <select class="form-select" name="course" id="course" aria-label="State" Required onchange="oncollapse()">
-                                    <option value="#" selected="selected" disabled="disabled">Select Course</option>
+                                                <option value="#" selected="selected" disabled="disabled">Select Course</option>
                                       <option value="BSIT">BS Information Technology</option>
                                       <option value="BSHM">BS Hospitality Management</option>
                                       <option value="BSOA">BS Office Administration</option>

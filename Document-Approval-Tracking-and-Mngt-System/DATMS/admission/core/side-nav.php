@@ -47,6 +47,11 @@
         </a>
       </li>
       <li>
+      <a href="transstud_list.php" class="<?php if($page=='translist'){echo 'active';}?>">
+        <i class="bi bi-circle"></i><span>Trasnferee Students</span>
+        </a>
+      </li>
+      <li>
       <a href="unstud_list.php" class="<?php if($page=='unlist'){echo 'active';}?>">
         <i class="bi bi-circle"></i><span>Unoffically Enrolled</span>
         </a>
@@ -57,7 +62,7 @@
   <li class="nav-item">
     <a href="outgoing_docs.php" class="<?php if($page=='outgoing'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-send-plane-line"></i>
-        <span>Requirement Submited</span>
+        <span>Requirements Submission</span>
     </a>
   </li><!-- outgoing item Nav -->
 

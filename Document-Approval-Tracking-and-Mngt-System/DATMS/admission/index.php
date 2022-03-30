@@ -621,7 +621,14 @@
                       <label class="form-check-label" for="gridCheck1">
                         Form 137
                       </label>
-                    </div>                  
+                    </div>    
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="gridCheck1">
+                      <label class="form-check-label" for="gridCheck1">
+                        Honorable Dismissal
+                      </label>
+                    </div>              
 
                   </div>
                   
@@ -656,6 +663,13 @@
                       <input class="form-check-input" type="checkbox" id="gridCheck1">
                       <label class="form-check-label" for="gridCheck1">
                         Barangay Clearance
+                      </label>
+                    </div>
+                    
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="gridCheck1">
+                      <label class="form-check-label" for="gridCheck1">
+                        Transcript of Records(TOR)
                       </label>
                     </div>
 
