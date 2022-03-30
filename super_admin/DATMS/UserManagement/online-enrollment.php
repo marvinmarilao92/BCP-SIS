@@ -178,7 +178,7 @@
                                 <div class="col-md-12">
                                   <div class="form-floating">
                                     <select class="form-select" name="course" id="course" aria-label="State" Required onchange="oncollapse()">
-                                      <option value="#" selected="selected" disabled="disabled">Select Course</option>
+                                    <option value="#" selected="selected" disabled="disabled">Select Course</option>
                                       <option value="BSIT">BS Information Technology</option>
                                       <option value="BSHM">BS Hospitality Management</option>
                                       <option value="BSOA">BS Office Administration</option>
@@ -191,8 +191,8 @@
                                       <option value="BSEd Major in Mathematics">Bachelor of Secondary Education Major in Mathematics</option>
                                       <option value="BSEd Major in Social Studies">Bachelor of Secondary Education Major in Social Studies</option>
                                       <option value="BSEd Major in Values Education">Bachelor of Secondary Education Major in Values Education</option>
-                                      <option value="BSEd Major in Technology and Livelihood Education">Bachelor of Secondary Education Major in Technology and Livelihood Education</option>
-                                      <option value="BSEd Major in MAPEH">Bachelor of Secondary Education Major in MAPEH</option>
+                                      <option value="BTLeD">Bachelor of Technology and Livelihood Education </option>
+                                      <option value="BPEeD">Bachelor of Physical Education</option>
                                       <option value="BSCE">BS Computer Engineering</option>
                                       <option value="BLIS">Bachelor of Library in Information Science</option>
                                       <option value="BSTM">BS Tourism Management</option>
@@ -200,7 +200,7 @@
                                       <option value="BSAIS">BS Accounting Information System</option>
                                       <option value="BSPsy">BS Psychology</option>
                                       <option value="BTVTEd">Bachelor of technical-vocational teacher education major in food service management</option>
-                                      <option value="ACT">Associate in computer technology</option>                                      
+                                      <option value="ACT">Associate in computer technology</option>                               
                                     </select>
                                     <label for="floatingSelect">College Program</label>
                                   </div>
