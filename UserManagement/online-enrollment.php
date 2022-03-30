@@ -155,7 +155,7 @@
                                 </div>
                                 <div class="col-md-12">
                                   <div class="form-floating">
-                                    <input type="text" class="form-control" name="middle_name" id="middle_name"  onkeypress="return isTextKey(event)" placeholder="middle name" Required onchange="oncollapse()">
+                                    <input type="text" class="form-control" name="middle_name" id="middle_name"  onkeypress="return isTextKey(event)" placeholder="middle name" onchange="oncollapse()">
                                     <label for="floatingName">Middle Name</label>
                                   </div>
                                 </div>                        
