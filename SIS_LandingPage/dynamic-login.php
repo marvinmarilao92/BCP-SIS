@@ -32,7 +32,7 @@
              while($row1 = mysqli_fetch_array($result1)){
                $id=$row1['id'];
                $admin=$row1['id_number'];
-               $fname=$row1['firstname'].' '.$row1['middlename'].'.'.' '.$row1['lastname'];     
+               $fname=$row1['firstname'].' '.$row1['lastname'];     
                switch($row1["department"]){
                  case "Clearance System":
                    //statement
@@ -96,7 +96,7 @@
                            $ip = $_SERVER["REMOTE_ADDR"];
                            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                             $remarks="account has been logged in";  
-                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                            mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                            
                          }
                        header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index.php");
@@ -112,7 +112,7 @@
                            $ip = $_SERVER["REMOTE_ADDR"];
                            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                             $remarks="account has been logged in";  
-                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                            mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                            
                          }
                        header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index.php");
@@ -128,7 +128,7 @@
                            $ip = $_SERVER["REMOTE_ADDR"];
                            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                             $remarks="account has been logged in";  
-                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                            mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                            
                          }
                         header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index.php");
@@ -144,7 +144,7 @@
                            $ip = $_SERVER["REMOTE_ADDR"];
                            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                             $remarks="account has been logged in";  
-                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                            mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                            
                          }
                         header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index.php");
@@ -161,7 +161,7 @@
                             $ip = $_SERVER["REMOTE_ADDR"];
                             $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                             $remarks="account has been logged in";  
-                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                            mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                             
                           }
                         header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index.php");
@@ -178,7 +178,7 @@
                             $ip = $_SERVER["REMOTE_ADDR"];
                             $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                             $remarks="account has been logged in";  
-                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                            mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                             
                           }
                         header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index.php");
@@ -200,7 +200,7 @@
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                                $remarks="account has been logged in";  
-                               mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                               mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                             }
                           header("location: ../super_admin/index.php");
                           break;                                           
@@ -237,7 +237,7 @@
                            $ip = $_SERVER["REMOTE_ADDR"];
                            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                             $remarks="account has been logged in";  
-                            mysqli_query($link,"INSERT INTO audit_trail(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                            mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                            
                          }
                        
@@ -260,6 +260,22 @@
                   //Add data to session
                   $_SESSION['session_username'] = $myusername;
                   $_SESSION['session_department'] = "Student";
+                  $id1=$row2['id'];
+                  $admin1=$row2['id_number'];
+                  $fname1=$row2['firstname'].' '.$row2['lastname'];  
+
+                        if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                            $ip = $_SERVER["HTTP_CLIENT_IP"];
+                          }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                            $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                          }else{
+                            $ip = $_SERVER["REMOTE_ADDR"];
+                            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                            $remarks="account has been logged in";  
+                            mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id1','$admin1','$remarks','$fname1','$ip','$host','$date')")or die(mysqli_error($link));
+                            
+                          }
+
                   header("location: ../Student_Portal/index.php");
                 }
                 // Free result set
@@ -270,10 +286,26 @@
                 $sql3 = "SELECT * FROM teacher_information where id_number = '$myusername' AND account_status='Active'";
                 if($result3 = mysqli_query($link, $sql3)){
                   if(mysqli_num_rows($result3) > 0){
-                    while($row2 = mysqli_fetch_array($result3)){
+                    while($row3 = mysqli_fetch_array($result3)){
                       //Add data to session
                       $_SESSION['session_username'] = $myusername;
                       $_SESSION['session_department'] = "Teacher";
+
+                      $id2=$row3['id'];
+                      $admin2=$row3['id_number'];
+                      $fname2=$row3['firstname'].' '.$row3['lastname'];  
+    
+                            if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                                $ip = $_SERVER["HTTP_CLIENT_IP"];
+                              }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                                $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                              }else{
+                                $ip = $_SERVER["REMOTE_ADDR"];
+                                $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                $remarks="account has been logged in";  
+                                mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id2','$admin2','$remarks','$fname2','$ip','$host','$date')")or die(mysqli_error($link));
+                                
+                              }
                       header("location: ../Teacher_Portal/index.php");
                     }
                     // Free result set
