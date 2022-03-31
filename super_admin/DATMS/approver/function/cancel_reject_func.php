@@ -17,7 +17,7 @@ $db = mysqli_select_db($conn, 'sis_db');
             if($v_checkcode < 1){
                 echo ('Val30');
             }else {
-                $conn->query("UPDATE datms_documents SET doc_status = 'Pending', doc_actor2 ='$d_act2', doc_off2='$d_off2', doc_date2 ='$date' , doc_actor3 ='', doc_off3 ='', doc_date3 ='', doc_remarks ='' WHERE doc_id='$id'") or die(mysqli_error($conn));
+                $conn->query("UPDATE datms_documents SET doc_status = 'Pending', doc_actor1 ='$d_act2', doc_off1='$d_off2', doc_date1 ='$date' , doc_actor2 ='', doc_off2 ='', doc_date2 ='', doc_remarks ='' WHERE doc_id='$id'") or die(mysqli_error($conn));
                 echo ('success');
             }
         }else{

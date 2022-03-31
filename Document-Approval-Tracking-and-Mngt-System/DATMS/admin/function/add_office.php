@@ -19,8 +19,27 @@
 		if($v_checkcode == 1){
 			echo ('failed');
 		}else {
-			$conn->query("INSERT INTO `datms_office` VALUES('','$off_code', '$Office_title', '$Office_loc','$date')") or die(mysqli_error($conn));
-			echo ('success');
+
+		//create audit trail record
+			//add session conncetion
+			include('../session.php');
+			$fname=$verified_session_firstname.' '.$verified_session_lastname; 
+			if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+				$ip = $_SERVER["HTTP_CLIENT_IP"];
+			}elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+				$ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+			}else{
+				$ip = $_SERVER["REMOTE_ADDR"];
+				$host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+				 $remarks="department has been created";  
+				 //save to the audit trail table
+				 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$Office_title','$ip','$host','$date')")or die(mysqli_error($link));
+
+				 //query action
+				 $conn->query("INSERT INTO `datms_office` VALUES('','$off_code', '$Office_title', '$Office_loc','$date')") or die(mysqli_error($conn));
+				 echo ('success');
+			}
+		//end of audit trail
 		}
 	}
  ?>

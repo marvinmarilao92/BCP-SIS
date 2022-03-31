@@ -12,7 +12,6 @@ if($_POST['off_id']){
                   // echo '<option value="" selected="selected" disabled="disabled">Select Office</option>';
                   while($row2 = mysqli_fetch_array($result2)){
                     ?>
-                    <option selected="selected" disabled="disabled">Select Office</option>
                     <option value="<?php echo $row2['office']?>"><?php echo $row2['office']?></option>
                     <?php
                   }

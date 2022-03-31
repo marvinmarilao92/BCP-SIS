@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Hold'  AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off2` = '$verified_session_office') ORDER BY doc_date2 DESC ";
+                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Hold'  AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname ') ORDER BY doc_date2 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -148,19 +148,19 @@ include('session.php');
                                       <div class="col-md-12">
                                         <select class="form-select" id="send_act2" name="send_act2" onChange="fetchOffice(this.value);">
                                         <option selected="selected" disabled="disabled">Recipient</option>
-                                          <?php
-                                            require_once("include/conn.php");
-                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' AND `id_number` NOT IN ('$verified_session_username') ORDER BY firstname DESC ";
-                                            $result=mysqli_query($conn,$query);
-                                            while($rs=mysqli_fetch_array($result)){
-                                              $dtid =$rs['id'];    
-                                              $dtno =$rs['id_number'];                                  
-                                              $dtFName = $rs['firstname'];    
-                                              $dtLName = $rs['lastname'];    
-                                            
-                                              echo '<option value = "' . $dtno . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
-                                            }
-                                        ?>
+                                           <?php
+                                              require_once("include/conn.php");
+                                              $query="SELECT * FROM user_information WHERE (department = 'DATMS' OR  department = 'SuperUser') AND `id_number` NOT IN ('$verified_session_username') AND role NOT LIKE '%Cashier%' AND role NOT LIKE '%Admission%' ORDER BY firstname DESC ";
+                                              $result=mysqli_query($conn,$query);
+                                              while($rs=mysqli_fetch_array($result)){
+                                                $dtid =$rs['id'];    
+                                                $dtno =$rs['id_number'];                                  
+                                                $dtFName = $rs['firstname'];    
+                                                $dtLName = $rs['lastname'];    
+                                              
+                                                echo '<option value = "' . $dtid . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
+                                              }
+                                          ?>
                                         </select>
                                       </div>
                                       <div class="col-md-12">
@@ -243,23 +243,23 @@ include('session.php');
                           }else if(data.trim() == "success"){
                             $('#ReceivedModal').modal('hide');
                                   //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
+                                  const Toast = Swal.mixin({
+                                  toast: true,
+                                  position: "top-end",
+                                  showConfirmButton: false,
+                                  timer: 2000,
+                                  timerProsressBar: true,
+                                  didOpen: (toast) => {
+                                  toast.addEventListener("mouseenter", Swal.stopTimer)
+                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
                                   }
                                   })
-                                    Toast.fire({
-                                    icon: 'Success',
-                                    title:'Document is Successfully Submitted'
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
+                                  Toast.fire({
+                                  icon: "success",
+                                  title:"Document is Successfully Submitted"
+                                  }).then(function(){
+                                    document.location.reload(true)//refresh pages
+                                  });       
                                     $('#doc_code').val("")
                                     $('#doc_act2').val("")
                                     $('#doc_off2').val("")

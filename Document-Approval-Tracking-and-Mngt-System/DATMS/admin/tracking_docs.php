@@ -40,10 +40,10 @@ include('session.php');
                   <!-- Search Bar -->
 
                     <div class="col-md-12" style="margin-top: 30px; margin-bottom: 10px;">
-                          <div class="form-floating">
-                            <input type="text" class="form-control" id="search_text" name="search_text" onChange="fetchTracking(this.value);" placeholder="Your Name" autofocus>
-                            <label for="floatingName">Enter Code</label>
-                          </div>
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="search_text" name="search_text" placeholder="Your Name" autofocus>
+                        <label for="floatingName">Enter Code</label>
+                      </div>
                     </div>  
 
                   <!-- End of search Bar -->
@@ -114,13 +114,11 @@ include('session.php');
   <?php include ('core/js.php');//css connection?>
 
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
   <script type="text/javascript">
       $(document).ready(function(){
-
+      // Providing Overall tracking history
       // load_data();
-
       function load_data(query)
       {
         $.ajax({
@@ -144,23 +142,9 @@ include('session.php');
           $('.activity').html('');
         }
       });
+      //end of tracking history
       });
-      // function fetchTracking(id){
-      //   if($("#search_text").val().length==8){
-      //     $.ajax({
-      //       type:'post',
-      //       url:'function/tracking_docx.php',
-      //       data :{query:query},
-      //       success: function(data){
-      //         $('#activity').html(data);       
-      //       }
-      //     })
-      //   }else{
-      //     Swal.fire ("Application code must be 8 characters","","error").then(function(){
-      //     document.location.reload(true)//refresh pages
-      //     });
-      //   }
-        
-      // }
+      
   </script>
+
 </html>

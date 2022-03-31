@@ -218,7 +218,7 @@
           </div>
           <div class="col-md-3" id="divcourse" style="display: none;">
             <div class="form-floating">
-               <select class="form-select course" name="course" id="course" aria-label="State" Required>
+                <select class="form-select course" name="course" id="course" aria-label="State" Required>
                   <option value="#" selected="selected" disabled="disabled">Select Course</option>
                   <option value="BSIT">BS Information Technology</option>
                   <option value="BSHM">BS Hospitality Management</option>
@@ -232,17 +232,14 @@
                   <option value="BSEd Major in Mathematics">Bachelor of Secondary Education Major in Mathematics</option>
                   <option value="BSEd Major in Social Studies">Bachelor of Secondary Education Major in Social Studies</option>
                   <option value="BSEd Major in Values Education">Bachelor of Secondary Education Major in Values Education</option>
-                  <option value="BSEd Major in Technology and Livelihood Education">Bachelor of Secondary Education Major in Technology and Livelihood Education</option>
-                  <option value="BSEd Major in MAPEH">Bachelor of Secondary Education Major in MAPEH</option>
+                  <option value="BTLeD">Bachelor of Technology and Livelihood Education </option>
+                  <option value="BPEeD">Bachelor of Physical Education</option>
                   <option value="BSCE">BS Computer Engineering</option>
                   <option value="BLIS">Bachelor of Library in Information Science</option>
                   <option value="BSTM">BS Tourism Management</option>
                   <option value="BSEntrep">BS Entrepreneurship</option>
                   <option value="BSAIS">BS Accounting Information System</option>
                   <option value="BSPsy">BS Psychology</option>
-                  <option value="BTVTEd">Bachelor of technical-vocational teacher education major in food service management</option>
-                  <option value="ACT">Associate in computer technology</option>
-                  <option value="TESDA Migrated Porgram">TESDA Migrated Programs (cookery, FBS, HSK, FO, BPP, BAR, SMAW</option>
                 </select>
               <label for="floatingSelect">College Program</label>
             </div>   
@@ -544,6 +541,7 @@
                 <option selected disabled value="">Select Status</option>
                 <option value="Unoffical">Unoffical</option>
                 <option value="Offical">Offical</option>
+                <option value="Transferee">Transferee</option>
               </select>
               <label for="floatingSelect">Student Status</label>
             </div>
@@ -623,7 +621,14 @@
                       <label class="form-check-label" for="gridCheck1">
                         Form 137
                       </label>
-                    </div>                  
+                    </div>    
+                    
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="gridCheck1">
+                      <label class="form-check-label" for="gridCheck1">
+                        Honorable Dismissal
+                      </label>
+                    </div>   
 
                   </div>
                   
@@ -661,16 +666,23 @@
                       </label>
                     </div>
 
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="gridCheck1">
+                      <label class="form-check-label" for="gridCheck1">
+                        Transcript of Records(TOR)
+                      </label>
+                    </div>
+
                   </div>
 
                 </div>
             </div>
           </div>
 
-          <nav class="justify-content-center d-flex">
-            <button type="reset" class="btn btn-secondary btn-lg col-sm-1">Reset</button>&nbsp;&nbsp;  
-            <button type="submit" class="btn btn-primary btn-lg col-sm-1 ">Enroll</button>          
-          </nav>
+          <div class="justify-content-center d-flex">
+            <button type="reset" class="btn btn-secondary btn-lg">Reset</button>&nbsp;&nbsp;  
+            <button type="submit" class="btn btn-primary btn-lg ">Enroll</button>          
+          </div>
 
         </div>
       </div>

@@ -10,7 +10,7 @@ if (isset($_GET['file_id'])) {
     $result = mysqli_query($conn, $sql);
 
     $file = mysqli_fetch_assoc($result);
-    $filepath = '../../uploads/' . $file['doc_name'];
+    $filepath = '../../../../assets/uploads/' . $file['doc_name'];
 
     if (file_exists($filepath)) {
         header('Content-Description: File Transfer');
@@ -19,8 +19,8 @@ if (isset($_GET['file_id'])) {
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
-        header('Content-Length: ' . filesize('../../uploads/' . $file['doc_name']));
-        readfile('../../uploads/' . $file['doc_name']);
+        header('Content-Length: ' . filesize('../../../../assets/uploads/' . $file['doc_name']));
+        readfile('../../../../assets/uploads/' . $file['doc_name']);
 
         // Now update downloads count
         $newCount = $file['doc_dl'] + 1;

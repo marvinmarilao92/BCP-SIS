@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Rejected'  AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off1` = '$verified_session_office') ORDER BY doc_date2 DESC ";
+                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Rejected'  AND (`doc_actor3`='$verified_session_firstname $verified_session_lastname ') ORDER BY doc_date2 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -178,7 +178,7 @@ include('session.php');
                                         <option selected="selected" disabled="disabled">Recipient</option>
                                           <?php
                                             require_once("include/conn.php");
-                                            $query="SELECT * FROM user_information WHERE department = 'DATMS' ORDER BY firstname DESC ";
+                                            $query="SELECT * FROM user_information WHERE (department = 'DATMS' OR  department = 'SuperUser') AND `id_number` NOT IN ('$verified_session_username') AND role NOT LIKE '%Cashier%' AND role NOT LIKE '%Admission%' ORDER BY firstname DESC ";
                                             $result=mysqli_query($conn,$query);
                                             while($rs=mysqli_fetch_array($result)){
                                               $dtid =$rs['id'];    
@@ -186,7 +186,7 @@ include('session.php');
                                               $dtFName = $rs['firstname'];    
                                               $dtLName = $rs['lastname'];    
                                             
-                                              echo '<option value = "' . $dtno . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
+                                              echo '<option value = "' . $dtid . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
                                             }
                                         ?>
                                         </select>
@@ -275,7 +275,7 @@ include('session.php');
                     });
               // End of View function 
            
-               // Delete modal calling
+               // Send modal calling
               $('.sendbtn').on('click', function () {
 
                   $('#SendModal').modal('show');
@@ -287,17 +287,17 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#send_act1').val(data[12]);  
-                      $('#send_off1').val(data[13]);
-                      $('#send_date1').val(data[14]); 
+                      $('#send_act1').val(data[15]);  
+                      $('#send_off1').val(data[16]);
+                      $('#send_date1').val(data[17]); 
 
                       $('#doc_fileN1').text(data[2]);  
                       $('#send_id').val(data[0]);
                       $('#send_code').val(data[1]); 
                 });
-              // End of Delete modal calling 
+              // End of Send modal calling 
 
-              // Delete function
+              // Send function
               $('#send').click(function(d){ 
                     d.preventDefault();
                       if($('#send_id').val()!="" && $('#send_code').val()!="" && $('#send_act2').val()!="" && $('#send_off2').val()!=""
@@ -344,7 +344,7 @@ include('session.php');
                         Swal.fire("You must fill out every field","","warning");
                       }
                   })
-              // End Delete function
+              // End Send function
 
 
                  // Delete modal calling

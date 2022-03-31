@@ -95,9 +95,10 @@ include('session.php');
                     <th scope="col">DocCode</th>
                     <th scope="col" >Filename</th>
                     <!-- <th scope="col">Filesize</th>    -->
-                    <th scope="col">Actor</th>   
-                    <th scope="col">Date/Time</th>       
-                    <th scope="col">Status</th>  
+                    <th scope="col">Tracker</th>   
+                    <th scope="col">Tracking Date</th>    
+                    <th scope="col">Current Actor</th>    
+                    <th scope="col">Current Status</th>  
                     <!-- <th scope="col">Downloads</th>    -->
                     <th scope="col" WIDTH="15%">Action</th>          
                   </tr>
@@ -105,7 +106,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE (`doc_actor1`='$verified_session_firstname $verified_session_lastname' OR  `doc_off1` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted') ORDER BY doc_date1 DESC ";
+                    $query="SELECT * FROM datms_documents WHERE (`doc_actor3`='$verified_session_firstname $verified_session_lastname' OR  `doc_off3` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted') ORDER BY doc_date1 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -120,8 +121,9 @@ include('session.php');
                     <td style="display:none"><?php echo $docId?></td>
                     <td data-label="Code:"><?php echo $docCode; ?></td>
                     <td data-label="File Name:" ><?php echo $docName; ?></td>
-                    <td data-label="Title:"><?php echo $docAct2; ?></td>
-                    <td data-label="Date:"><?php echo $docDate2; ?></td>
+                    <td data-label="Tracker:"><?php echo $docAct3; ?></td>
+                    <td data-label="Date:"><?php echo $docDate3; ?></td>
+                    <td data-label="Current Actor:"><?php echo $docAct2?></td>
                     <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
                     <td style="display:none"><?php echo $docDl; ?></td>
@@ -131,8 +133,7 @@ include('session.php');
                     <td style="display:none"><?php echo $docOff1?></td>
                     <td style="display:none"><?php echo $docAct1?></td>
                     <td style="display:none"><?php echo $docOff1?></td>
-                    <td style="display:none"><?php echo $docDate2?></td>
-                    <td style="display:none"><?php echo $docAct3?></td>
+                    <td style="display:none"><?php echo $docDate2?></td>                    
                     <td style="display:none"><?php echo $docOff3?></td>
                     <td style="display:none"><?php echo $docDate3?></td>
                     <td style="display:none"><?php echo $docRemarks?></td>
@@ -142,7 +143,7 @@ include('session.php');
                       <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="ri ri-eye-line"></i></a>
                       <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' ><i class="ri ri-download-2-fill" ></i></a>
-                      <a class="btn btn-dark " ><i class="ri ri-history-line" ></i></a>
+                      <a class="btn btn-dark historybtn"><i class="ri ri-history-line" ></i></a>
                     </div>
                     </td>
                   </tr>
@@ -164,7 +165,8 @@ include('session.php');
 
   </main><!-- End #main -->
 
-  <!-- Document List Modals -->
+    <!-- Document List Modals -->
+
       <!-- Create Document Modal -->
       <div class="modal fade" id="AddModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
@@ -226,39 +228,74 @@ include('session.php');
 
       <!-- View Document modal -->
       <div class="modal fade" id="ViewModal" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered modal-l">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Document to Track</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="card" style="margin: 10px;">
-                          <form method="post">
-                            <div class="card-body">
-                                <h5 class="card-title">Document Information</h5>
-                                Filename: <h5 id="view_filename" style="margin-left: 60px;"></h5>
-                                Creator: <h5 id="view_creator" style="margin-left: 60px;"></h5>
-                                Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
-                                <input type="hidden" id="view_code" name="view_code" class="form-control" placeholder="Title" readonly>
-                                <input type="hidden" id="view_title" name="view_title" class="form-control" placeholder="Title" readonly>
-                                <input type="hidden" id="view_filename" name="view_filename" class="form-control" placeholder="Title" readonly>
-                                
-                                <div class="col-12" style="text-align: center;">
-                                  <svg id="barcode"></svg>
-                                </div>
-                            </div>
-                            </form>
-                          </div>   
-                      </div>
-                      <div class="modal-footer">
-                        <button class="btn btn-primary" name="print" id="print" >Print</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
+          <div class="modal-dialog modal-dialog-centered modal-l">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Document to Track</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="card" style="margin: 10px;">
+                  <form method="post">
+                    <div class="card-body">
+                        <h5 class="card-title">Document Information</h5>
+                        Filename: <h5 id="view_filename" style="margin-left: 60px;"></h5>
+                        Creator: <h5 id="view_creator" style="margin-left: 60px;"></h5>
+                        Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
+                        <input type="hidden" id="view_code" name="view_code" class="form-control" placeholder="Title" readonly>
+                        <input type="hidden" id="view_title" name="view_title" class="form-control" placeholder="Title" readonly>
+                        <input type="hidden" id="view_filename" name="view_filename" class="form-control" placeholder="Title" readonly>
+                        
+                        <div class="col-12" style="text-align: center;">
+                          <svg id="barcode"></svg>
+                        </div>
                     </div>
-                  </div>
-        </div>
+                    </form>
+                  </div>   
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary" name="print" id="print" >Print</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+      </div>
       <!-- End View office Modal-->
+
+      <!-- View Document modal -->
+      <div class="modal fade" id="HistoryModal" tabindex="-1">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Tracking History &nbsp; <i class="bi bi-clock-history text-primary"></i></h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="card" style="margin: 5px;">
+                    <div class="card-body">
+                        <input type="text" id="search_text" name="search_text" class="form-control" placeholder="Title" onfocus="docHistory(this.value);" autofocus>
+                    </div>
+                      <!-- Tracking Activity module -->
+                      
+                        <div class="card-body">
+                          <!-- History tables -->
+                            <div class="activity">
+                            </div>
+                          <!-- End History tables -->
+              
+                      </div>
+                      <!-- End Tracking Activity module -->
+                  </div>   
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+      </div>
+      <!-- End View office Modal-->
+
 
        <!-- Desc Document modal -->
        <div class="modal fade" id="RemarksModal" tabindex="-1">
@@ -289,40 +326,40 @@ include('session.php');
 
       <!-- Edit Document List Modal -->
       <div class="modal fade" id="EditModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">EDIT OFFICE</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                          <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h2 class="card-title">Change information</h2>
-                                <!-- Fill out Form -->
-                                <div class="row g-3" >
-                                  <input type="hidden" class="form-control" id="dt_idE" readonly>
-                                  <div class="col-md-4">
-                                      Code: <input type="text" class="form-control" id="dt_codeE" readonly>
-                                  </div>
-                                  <br>
-                                  <div class="col-md-8">
-                                      Name: <input type="text" class="form-control" id="dt_nameE">
-                                  </div>
-                                  <br>
-                                  <div class="col-12">
-                                      Location: <textarea  style="height: 80px" class="form-control" id="dt_descE"></textarea>
-                                  </div>        
-                                </div>
-                              
-                            </div>
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button class="btn btn-primary" name="save" id="edit" >Save changes</button>
-                            </div>
-                        <!-- End Form -->
+            <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">EDIT OFFICE</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                      <div class="card" style="margin: 10px;">
+                        <div class="card-body">
+                          <h2 class="card-title">Change information</h2>
+                            <!-- Fill out Form -->
+                            <div class="row g-3" >
+                              <input type="hidden" class="form-control" id="dt_idE" readonly>
+                              <div class="col-md-4">
+                                  Code: <input type="text" class="form-control" id="dt_codeE" readonly>
+                              </div>
+                              <br>
+                              <div class="col-md-8">
+                                  Name: <input type="text" class="form-control" id="dt_nameE">
+                              </div>
+                              <br>
+                              <div class="col-12">
+                                  Location: <textarea  style="height: 80px" class="form-control" id="dt_descE"></textarea>
+                              </div>        
+                            </div>
+                          
+                        </div>
+                      </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button class="btn btn-primary" name="save" id="edit" >Save changes</button>
+                        </div>
+                    <!-- End Form -->
                 </div>
+            </div>
         </div>
       <!-- End Edit Document List Modal-->
 
@@ -353,7 +390,8 @@ include('session.php');
               </div>
         </div>
       <!-- End delete Document List Modal -->
-  <!-- End of Document List Modals -->
+
+    <!-- End of Document List Modals -->
 
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
@@ -373,7 +411,7 @@ include('session.php');
       if (isset($_POST['save'])) { // if save button on the form is clicked
             // name of the uploaded file
             date_default_timezone_set("asia/manila");
-            $time = date("M-d-Y h:i A",strtotime("+0 HOURS"));
+            $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
             $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
             // $doc_user = $_POST['doccreator'];
             // $doc_office = $_POST['docoffice'];
@@ -390,7 +428,7 @@ include('session.php');
 
             // $Admin = $_FILES['admin']['name'];
             // destination of the file on the server
-            $destination = '../uploads/' . $filename;
+            $destination = '../../../assets/uploads/' . $filename;
 
             // get the file extension
             $extension = pathinfo($filename, PATHINFO_EXTENSION);
@@ -462,12 +500,12 @@ include('session.php');
             // move the uploaded (temporary) file to the specified destination
               if (move_uploaded_file($file, $destination)) {
                   $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
-                   VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$time','$doc_user','$doc_office','$time','','','','')";
+                   VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
                  
                   if (mysqli_query($conn, $sql)) {
 
                     $sql1 = "INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
-                    VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date1','','','$date1','Created tracking for document')";
+                    VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
 
                     if (mysqli_query($conn, $sql1)) {
                       echo'<script type = "text/javascript">
@@ -500,6 +538,7 @@ include('session.php');
               }
               }         
         }
+    //file uploading
       }
   ?>
   <!-- JS Scripts -->
@@ -535,9 +574,27 @@ include('session.php');
                       displayValue: true
                     });
                   });
-            // End of View function 
+              // End of View function 
 
-             // View Function
+              // History Function
+                // $('.historybtn').on('click', function () {
+
+                //     $('#HistoryModal').modal('show');
+
+                //     $tr = $(this).closest('tr');
+
+                //     var data = $tr.children("td").map(function () {
+                //         return $(this).text();
+                //     }).get();
+
+                //     console.log(data); 
+                //     $("#search_text").val(data[1]); 
+                //     $('#HistoryModal').find('input[type="text"]').focus();   
+
+                //   });
+              // End of View function 
+
+             // Remarks view
                 $('.remarksbtn').on('click', function () {
 
                     $('#RemarksModal').modal('show');
@@ -556,8 +613,34 @@ include('session.php');
                     }
                    
                   });
-            // End of View function 
+            // End of Remarks View function 
 
+            // Providing Overall tracking history
+              // load_data();
+              function load_data(query)
+              {
+                $.ajax({
+                url:"function/history.php",
+                method:"POST",
+                data:{query:query},
+                success:function(data)
+                {
+                  $('.activity').html(data);
+                }
+                });
+              }
+              $('#search_text').keyup(function(){
+                var search = $(this).val();
+                if(search != '')
+                {
+                load_data(search);
+                }
+                else
+                {
+                  $('.activity').html('');
+                }
+              });
+            //end of tracking history
           });
 
     </script>
