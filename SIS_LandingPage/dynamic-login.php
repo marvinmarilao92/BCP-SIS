@@ -229,7 +229,7 @@
                            $remarks="account has been logged in";  
                            mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                         }
-                      header("location: ../LMS-Moodle/admin/index.php");
+                      header("location: ../LMS-Moodle/admin/home.php");
                       break;                                           
                       }
 
