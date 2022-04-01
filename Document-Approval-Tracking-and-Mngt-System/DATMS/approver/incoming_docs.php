@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<title>DATMS | Incoming Documents</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 </head>
@@ -54,7 +54,7 @@ include('session.php');
                     <th scope="col">DocCode</th>
                     <th scope="col" >Filename</th>
                     <!-- <th scope="col">Filesize</th>    -->
-                    <th scope="col">Actor</th>   
+                    <th scope="col">Sender</th>   
                     <th scope="col">Date/Time</th>       
                     <th scope="col">Status</th>  
                     <!-- <th scope="col">Downloads</th>    -->
@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing' AND (`doc_actor3`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off3` = '$verified_session_office') ORDER BY doc_date1 DESC ";
+                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing' AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname ') ORDER BY doc_date1 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -72,16 +72,16 @@ include('session.php');
                       $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
                       $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
                       $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3']; 
-                      $docRemarks = $rs['doc_remarks'];     
+                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];   
+                      $docRemarks = $rs['doc_remarks'];   
   
                   ?>
                   <tr>
                   <td style="display:none"><?php echo $docId?></td>
                     <td><?php echo $docCode; ?>
                     <td><?php echo $docName; ?>
-                    <td><?php echo $docAct1; ?>
-                    <td><?php echo $docDate1; ?>
+                    <td><?php echo $docAct2; ?>
+                    <td><?php echo $docDate2; ?>
                     <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
@@ -89,13 +89,14 @@ include('session.php');
                     <td style="display:none"><?php echo $docType?></td>
                     <td style="display:none"><?php echo $docDesc?></td>
                     <td style="display:none"><?php echo $docOff1?></td>
-                    <td style="display:none"><?php echo $docAct2?></td>
+                    <td style="display:none"><?php echo $docAct1?></td>
                     <td style="display:none"><?php echo $docOff2?></td>
-                    <td style="display:none"><?php echo $docDate2?></td>
+                    <td style="display:none"><?php echo $docDate1?></td>
                     <td style="display:none"><?php echo $docAct3?></td>
                     <td style="display:none"><?php echo $docOff3?></td>
                     <td style="display:none"><?php echo $docDate3?></td>
                     <td style="display:none"><?php echo $docRemarks?></td>
+
 
                   </td>
                     <td>                      
@@ -123,7 +124,7 @@ include('session.php');
 
   <!-- Office Modals -->
 
-   <!-- Desc Document modal -->
+      <!-- Desc Document modal -->
        <div class="modal fade" id="RemarksModal" tabindex="-1">
                   <div class="modal-dialog modal-dialog-centered modal-l">
                     <div class="modal-content">
@@ -266,33 +267,6 @@ include('session.php');
         </div>
       <!-- End Received Office Modal-->
 
-      <!-- Delete Office Modal -->
-      <div class="modal fade" id="DeleteModal" tabindex="-1">
-              <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">DELETE OFFICE</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                        <div class="card" style="margin: 10px;">
-                          <div class="card-body">                
-                            <br>
-                            <input type="hidden"  name="delete_id" id="delete_id" readonly>
-                            <center>
-                              <h5>Are you sure you want to delete these Office?</h5>
-                              <h5 class="text-danger">This action cannot be undone.</h5>   
-                            </center>                
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Office</button>
-                        </div>
-                      <!-- End Form -->
-                  </div>
-              </div>
-        </div>
-      <!-- End delete Office Modal -->
   <!-- End of Office Modals -->
 
   <!-- ======= Footer ======= -->
@@ -309,6 +283,7 @@ include('session.php');
     <script>
         // this script will execute as soon a the website runs
         $(document).ready(function () {
+
               // View Function
                   $('.remarksbtn').on('click', function () {
 
@@ -358,23 +333,23 @@ include('session.php');
                           }else if(data.trim() == "success"){
                             $('#ReceivedModal').modal('hide');
                                   //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
+                                  const Toast = Swal.mixin({
+                                  toast: true,
+                                  position: "top-end",
+                                  showConfirmButton: false,
+                                  timer: 2000,
+                                  timerProsressBar: true,
+                                  didOpen: (toast) => {
+                                  toast.addEventListener("mouseenter", Swal.stopTimer)
+                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
                                   }
                                   })
-                                    Toast.fire({
-                                    icon: 'Success',
-                                    title:'Document Successfully Received'
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
+                                  Toast.fire({
+                                  icon: "success",
+                                  title:"Document is Successfully Received"
+                                  }).then(function(){
+                                    document.location.reload(true)//refresh pages
+                                  });              
                                     $('#doc_code').val("")
                                     $('#doc_act2').val("")
                                     $('#doc_off2').val("")
@@ -388,25 +363,6 @@ include('session.php');
                       }
                   })
               // End Received function
-
-              // // View Function
-              //   $('.viewbtn').on('click', function () {
-
-              //       $('#ViewModal').modal('show');
-
-              //       $tr = $(this).closest('tr');
-
-              //       var data = $tr.children("td").map(function () {
-              //           return $(this).text();
-              //       }).get();
-
-              //       console.log(data);        
-              //       $('#view_code').text(data[1]);
-              //       $('#view_name').text(data[2]);
-              //       $('#view_loc').text(data[3]);
-              //       $('#view_date').text(data[4]);
-              //     });
-            // // End of View function 
 
           });
 

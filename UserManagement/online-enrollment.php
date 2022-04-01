@@ -1,4 +1,4 @@
-  <?php
+<?php
       include 'config.php';
       session_start();
         // Define variables and initialize with empty values
@@ -155,7 +155,7 @@
                                 </div>
                                 <div class="col-md-12">
                                   <div class="form-floating">
-                                    <input type="text" class="form-control" name="middle_name" id="middle_name"  onkeypress="return isTextKey(event)" placeholder="middle name" Required onchange="oncollapse()">
+                                    <input type="text" class="form-control" name="middle_name" id="middle_name"  onkeypress="return isTextKey(event)" placeholder="middle name" onchange="oncollapse()">
                                     <label for="floatingName">Middle Name</label>
                                   </div>
                                 </div>                        
@@ -178,7 +178,7 @@
                                 <div class="col-md-12">
                                   <div class="form-floating">
                                     <select class="form-select" name="course" id="course" aria-label="State" Required onchange="oncollapse()">
-                                      <option value="#" selected="selected" disabled="disabled">Select Course</option>
+                                                <option value="#" selected="selected" disabled="disabled">Select Course</option>
                                       <option value="BSIT">BS Information Technology</option>
                                       <option value="BSHM">BS Hospitality Management</option>
                                       <option value="BSOA">BS Office Administration</option>
@@ -191,16 +191,14 @@
                                       <option value="BSEd Major in Mathematics">Bachelor of Secondary Education Major in Mathematics</option>
                                       <option value="BSEd Major in Social Studies">Bachelor of Secondary Education Major in Social Studies</option>
                                       <option value="BSEd Major in Values Education">Bachelor of Secondary Education Major in Values Education</option>
-                                      <option value="BSEd Major in Technology and Livelihood Education">Bachelor of Secondary Education Major in Technology and Livelihood Education</option>
-                                      <option value="BSEd Major in MAPEH">Bachelor of Secondary Education Major in MAPEH</option>
+                                      <option value="BTLeD">Bachelor of Technology and Livelihood Education </option>
+                                      <option value="BPEeD">Bachelor of Physical Education</option>
                                       <option value="BSCE">BS Computer Engineering</option>
                                       <option value="BLIS">Bachelor of Library in Information Science</option>
                                       <option value="BSTM">BS Tourism Management</option>
                                       <option value="BSEntrep">BS Entrepreneurship</option>
                                       <option value="BSAIS">BS Accounting Information System</option>
-                                      <option value="BSPsy">BS Psychology</option>
-                                      <option value="BTVTEd">Bachelor of technical-vocational teacher education major in food service management</option>
-                                      <option value="ACT">Associate in computer technology</option>                                      
+                                      <option value="BSPsy">BS Psychology</option>                                  
                                     </select>
                                     <label for="floatingSelect">College Program</label>
                                   </div>
@@ -408,7 +406,7 @@
                                 </div>  
                                 <div class="col-md-12">
                                   <div class="form-floating">
-                                    <select class="form-select" name="religion" id="religion" aria-label="State" Required onchange="oncollapse()">
+                                    <select class="form-select" name="religion" id="religion" aria-label="State" onchange="oncollapse()">
                                       <option value="" selected="selected" disabled="disabled">Select Religion</option>
                                       <option value="African Traditional &amp; Diasporic">African Traditional &amp; Diasporic</option>
                                       <option value="Agnostic">Agnostic</option>
@@ -486,7 +484,7 @@
                                 </div>
                                 <div class="col-md-12">
                                   <div class="form-floating">
-                                    <input type="text" class="form-control" name="add_st2" id="add_st2"  placeholder="Your Name" required onchange="oncollapse1()">
+                                    <input type="text" class="form-control" name="add_st2" id="add_st2"  placeholder="Your Name" onchange="oncollapse1()">
                                     <label for="floatingName">Street Address Line 2</label>
                                   </div>
                                 </div>
@@ -658,7 +656,7 @@
           let areligion = religion.value;
           let acivil_status = civil_status.value;
           let acourse = course.value;
-          if(fname =="" || lname =="" || agender =="" || abirthdate =="" || anationality =="" || areligion =="" || acivil_status =="" || acourse ==""){
+          if(fname =="" || lname =="" || agender =="" || abirthdate =="" || anationality =="" || acivil_status =="" || acourse ==""){
             document.getElementById("next").setAttribute("data-bs-toggle","");
           }else{
           // commands
@@ -675,7 +673,7 @@
           let areligion = religion.value;
           let acivil_status = civil_status.value;
           let acourse = course.value;
-          if(fname =="" || lname =="" || agender =="" || abirthdate =="" || anationality =="" || areligion =="" || acivil_status =="" || acourse ==""){
+          if(fname =="" || lname =="" || agender =="" || abirthdate =="" || anationality =="" || acivil_status =="" || acourse ==""){
             Swal.fire("You must fill out every field","","warning");
             document.getElementById("icon1").setAttribute("class","bi bi-exclamation-triangle-fill me-2");
             document.getElementById("icon1").style.color = "red";
@@ -699,7 +697,7 @@
           let act = city.value;
           let azp = zip_code.value;
 
-          if(add1 =="" || add2 =="" || act =="" || azp =="" ){
+          if(add1 =="" || act =="" || azp =="" ){
             document.getElementById("next2").setAttribute("data-bs-toggle","");
           }else{
           // commands
@@ -713,7 +711,7 @@
           let act = city.value;
           let azp = zip_code.value;
 
-          if(add1 =="" || add2 =="" || act =="" || azp =="" ){
+          if(add1 =="" || act =="" || azp =="" ){
             Swal.fire("You must fill out every field","","warning");
             document.getElementById("icon2").setAttribute("class","bi bi-exclamation-triangle-fill me-2");
             document.getElementById("icon2").style.color = "red";

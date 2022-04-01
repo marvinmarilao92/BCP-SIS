@@ -3,7 +3,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
 <div class="d-flex align-items-center justify-content-between">
-  <a href="dashboard.php" class="logo d-flex align-items-center">
+  <a href="index.php" class="logo d-flex align-items-center">
     <img src="../assets/img/DATMS_logo.png" alt="">
     <span class="d-none d-lg-block">Document Tracking</span>
   </a>
@@ -195,12 +195,39 @@
           <hr class="dropdown-divider">
         </li>
 
-        <li>
-          <a class="dropdown-item d-flex align-items-center" href="function/logout.php">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Sign Out</span>
-          </a>
-        </li>
+        <!-- Adding return nav item for super admin -->
+        <?php 
+            $output = '';
+            if(isset($verified_session_department) && ($verified_session_username)){
+              switch($verified_session_role){
+                case "SuperAdmin":
+                    //statement
+                    $output .= '
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Sign Out</span>
+                      </a>
+                    </li>    
+                  ';
+                break;  
+
+                default:
+                //statement
+                  $output .= '
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center" href="function/logout.php">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Sign Out</span>
+                      </a>
+                    </li>    
+                  ';
+              }
+              echo $output;
+          }else{
+              // header("location:index.php");
+          }
+          ?>
 
       </ul><!-- End Profile Dropdown Items -->
     </li><!-- End Profile Nav -->

@@ -10,91 +10,135 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'AdL'; $col = 'logs'; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'AdL' ; $col = 'logs'; include ('core/side-nav.php');//Design for sidebar?>
 
-  <main id="main" class="main">
+<main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Department Admin Account Logs</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Account Management</li>
-          <li class="breadcrumb-item active">Department Admin Logged</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-    <div class="">
-  
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
+<div class="pagetitle">
+  <h1>Registrar Admin Logs</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item">Module</li>
+      <li class="breadcrumb-item">Audit Trail</li>
+      <li class="breadcrumb-item active">Registrar Admin Logs</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Department Admin Logs</h5>
-              <!-- <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p> -->
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
 
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Start Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>2016-05-25</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Bridie Kessler</td>
-                    <td>Developer</td>
-                    <td>35</td>
-                    <td>2014-12-05</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Ashleigh Langosh</td>
-                    <td>Finance</td>
-                    <td>45</td>
-                    <td>2011-08-12</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Angus Grady</td>
-                    <td>HR</td>
-                    <td>34</td>
-                    <td>2012-06-11</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Raheem Lehner</td>
-                    <td>Dynamic Division Officer</td>
-                    <td>47</td>
-                    <td>2011-04-19</td>
-                  </tr>
-                  
-                </tbody>
-              </table>
+      <div class="card">
+        <div class="card-body">
+
+          <!-- Report Tabs -->
+          <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="myTabjustified" role="tablist" style="margin-top: 10px;">
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100 active" id=" incoming-tab" data-bs-toggle="tab" data-bs-target="#IncomingDocs" type="button" role="tab" aria-controls="incoming" aria-selected="true">User Logs</button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100" id="received-tab" data-bs-toggle="tab" data-bs-target="#ReceivedDocs" type="button" role="tab" aria-controls="profile" aria-selected="false">Activity Logs</button>
+            </li>
+          </ul>
+          <div class="tab-content pt-2" id="myTabjustifiedContent">
+            <div class="tab-pane fade show active" id="IncomingDocs" role="tabpanel" aria-labelledby=" incoming-tab">
+
+              <!-- IncomingDocs Docs -->
+              <section class="section">
+                    <div class="row">        
+                      <div class="col-lg-12">
+                        <div class="card">
+                          <div class="col-lg-12">
+                            <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
+                                <h4>Admin User Logs</h4>
+                            </div>
+                          </div>
+                          <div class="card-body" >           
+                            <!-- Table for Role records -->
+                            <table class="table table-hover datatable" >
+                              <thead>
+                                <tr>
+                                  <th scope="col">Full Name</th>
+                                  <th scope="col" >Department</th>
+                                  <!-- <th scope="col">Filesize</th>    -->
+                                  <th scope="col">Role</th>   
+                                  <th scope="col">Office</th>       
+                                  <th scope="col">Contact</th>  
+                                  <!-- <th scope="col">Downloads</th>    -->
+                                  <th scope="col">Account Status</th>          
+                                </tr>
+                              </thead>
+                              <tbody>
+                                
+                              </tbody>
+                            </table>
+                            <!-- End of Table -->
+
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    
+                  </section>
               <!-- End Table with stripped rows -->
 
             </div>
-          </div>
+            <div class="tab-pane fade" id="ReceivedDocs" role="tabpanel" aria-labelledby="received-tab">
+              <!-- ReceivedDocs Docs -->
+              <!-- IncomingDocs Docs -->
+              <section class="section">
+                    <div class="row">        
+                      <div class="col-lg-12">
+                        <div class="card">
+                          <div class="col-lg-12">
+                            <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
+                                <h4>Activity logs</h4>
+                            </div>
+                          </div>
+                          <div class="card-body" >           
+                            <!-- Table for Role records -->
+                            <table class="table table-hover datatable" >
+                              <thead>
+                                <tr>
+                                  <th scope="col">Full Name</th>
+                                  <th scope="col" >Department</th>
+                                  <!-- <th scope="col">Filesize</th>    -->
+                                  <th scope="col">Role</th>   
+                                  <th scope="col">Office</th>       
+                                  <th scope="col">Contact</th>  
+                                  <!-- <th scope="col">Downloads</th>    -->
+                                  <th scope="col">Account Status</th>          
+                                </tr>
+                              </thead>
+                              <tbody>
+                                
+                              </tbody>
+                            </table>
+                            <!-- End of Table -->
+
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    
+                  </section>
+              <!-- End Table with stripped rows -->
+            </div>
+          </div><!-- End Default Tabs -->
 
         </div>
       </div>
-    </section>
 
-  </main><!-- End #main -->
+    </div>
+  </div>
+</section>
+
+</main><!-- End #main -->
+
 
  
   <!-- ======= Footer ======= -->

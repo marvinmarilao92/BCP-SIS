@@ -162,12 +162,12 @@ include('session.php');
                  <?php
                        require_once("include/conn.php");
 
-                             $sql ="SELECT *,count(doc_off1) as count FROM datms_documents group by doc_off1;";
+                             $sql ="SELECT *,count(doc_off3) as count FROM datms_documents group by doc_off3;";
                              $result = mysqli_query($conn,$sql);
                              $chart_data="";
                              while ($row = mysqli_fetch_array($result)) { 
                      
-                                $name[]  = $row['doc_off1']  ;
+                                $name[]  = $row['doc_off3']  ;
                                 $counts[] = $row['count'];
                             }
                      

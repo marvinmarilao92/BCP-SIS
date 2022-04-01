@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Approved' AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname' OR  `doc_off2` = '$verified_session_office')
+                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Approved' AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname')
                     ORDER BY doc_date2 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
@@ -78,14 +78,14 @@ include('session.php');
   
                   ?>
                   <tr>
-                    <td style="display:none"><?php echo $docId?></td>
-                    <td><?php echo $docCode; ?>
-                    <td><?php echo $docName; ?>
-                    <td><?php echo $docAct1; ?>
-                    <td><?php echo $docDate1; ?>
+                  <td style="display:none"><?php echo $docId?></td>
+                    <td><?php echo $docCode; ?></td>
+                    <td><?php echo $docName; ?></td>
+                    <td><?php echo $docAct3; ?></td>
+                    <td><?php echo $docDate3; ?></td>
                     <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
-                    <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
-                    <td style="display:none"><?php echo $docDl; ?>
+                    <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
+                    <td style="display:none"><?php echo $docDl; ?></td>
                     <td style="display:none"><?php echo $docTitle?></td>
                     <td style="display:none"><?php echo $docType?></td>
                     <td style="display:none"><?php echo $docDesc?></td>
@@ -93,9 +93,9 @@ include('session.php');
                     <td style="display:none"><?php echo $docAct2?></td>
                     <td style="display:none"><?php echo $docOff2?></td>
                     <td style="display:none"><?php echo $docDate2?></td>
-                    <td style="display:none"><?php echo $docAct3?></td>
+                    <td style="display:none"><?php echo $docAct1?></td>
                     <td style="display:none"><?php echo $docOff3?></td>
-                    <td style="display:none"><?php echo $docDate3?></td>
+                    <td style="display:none"><?php echo $docDate1?></td>
                     <td style="display:none"><?php echo $docRemarks?></td>
 
                   </td>

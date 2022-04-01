@@ -64,7 +64,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing' AND (`doc_actor3`='$verified_session_firstname $verified_session_lastname ' OR  `doc_off3` = '$verified_session_office') ORDER BY doc_date1 DESC ";
+                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing' AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname ') ORDER BY doc_date1 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -80,8 +80,8 @@ include('session.php');
                   <td style="display:none"><?php echo $docId?></td>
                     <td><?php echo $docCode; ?>
                     <td><?php echo $docName; ?>
-                    <td><?php echo $docAct1; ?>
-                    <td><?php echo $docDate1; ?>
+                    <td><?php echo $docAct2; ?>
+                    <td><?php echo $docDate2; ?>
                     <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
@@ -89,9 +89,9 @@ include('session.php');
                     <td style="display:none"><?php echo $docType?></td>
                     <td style="display:none"><?php echo $docDesc?></td>
                     <td style="display:none"><?php echo $docOff1?></td>
-                    <td style="display:none"><?php echo $docAct2?></td>
+                    <td style="display:none"><?php echo $docAct1?></td>
                     <td style="display:none"><?php echo $docOff2?></td>
-                    <td style="display:none"><?php echo $docDate2?></td>
+                    <td style="display:none"><?php echo $docDate1?></td>
                     <td style="display:none"><?php echo $docAct3?></td>
                     <td style="display:none"><?php echo $docOff3?></td>
                     <td style="display:none"><?php echo $docDate3?></td>
@@ -360,23 +360,23 @@ include('session.php');
                           }else if(data.trim() == "success"){
                             $('#ReceivedModal').modal('hide');
                                   //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
+                                  const Toast = Swal.mixin({
+                                  toast: true,
+                                  position: "top-end",
+                                  showConfirmButton: false,
+                                  timer: 2000,
+                                  timerProsressBar: true,
+                                  didOpen: (toast) => {
+                                  toast.addEventListener("mouseenter", Swal.stopTimer)
+                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
                                   }
                                   })
-                                    Toast.fire({
-                                    icon: 'Success',
-                                    title:'Document Successfully Received'
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
+                                  Toast.fire({
+                                  icon: "success",
+                                  title:"Document is Successfully Received"
+                                  }).then(function(){
+                                    document.location.reload(true)//refresh pages
+                                  });              
                                     $('#doc_code').val("")
                                     $('#doc_act2').val("")
                                     $('#doc_off2').val("")
