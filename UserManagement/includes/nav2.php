@@ -13,7 +13,7 @@
 
         <li class="nav-item dropdown pe-3">
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="../SIS_LandingPage/index.php" style="margin-right: 20px;">
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="../" style="margin-right: 20px;">
           <i class="bi bi-house-door-fill"></i>
           <span class="d-none d-md-block ps-2">Home</span>
           </a><!-- End Profile Iamge Icon -->
