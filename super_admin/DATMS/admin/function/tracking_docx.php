@@ -121,7 +121,7 @@ if(mysqli_num_rows($result) > 0)
       '.$idenifier.'
 
       <div class="activity-content card-title" >
-       '. $doc_remarks .' <a href="#" class="fw-bold text-dark ">'.$doc_actor1.'</a> at <a href="#" class="fw-bold text-dark">'. $doc_off1.'</a>
+      <a class="text-dark " title="Date: '.$doc_date1.'">'. $doc_remarks .'</a> <a class="fw-bold text-dark ">'.$doc_actor1.'</a> at <a class="fw-bold text-dark">'. $doc_off1.'</a>
       </div>
     </div>  
     

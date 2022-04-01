@@ -82,7 +82,7 @@ include('session.php');
               </div>
               <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
                   <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
-                   Track Document
+                  Create Tracking
                   </button>
               </div> 
             </div>
