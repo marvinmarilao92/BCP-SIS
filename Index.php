@@ -101,6 +101,7 @@
 						</div>
 					</div>
 				</div>
+				<!-- new comment -->
 				<div class="col-md-3 col-sm-6 text-center animate-box">
 					<div class="services">
 						<span class="icon">
