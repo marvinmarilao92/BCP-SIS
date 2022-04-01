@@ -10,18 +10,18 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'AdL' ; $col = 'logs'; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'AL' ; $col = 'logs'; include ('core/side-nav.php');//Design for sidebar?>
 
 <main id="main" class="main">
 
 <div class="pagetitle">
-  <h1>Registrar Admin Logs</h1>
+  <h1>Assistant Registrar Logs</h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="index.html">Home</a></li>
       <li class="breadcrumb-item">Module</li>
       <li class="breadcrumb-item">Audit Trail</li>
-      <li class="breadcrumb-item active">Registrar Admin Logs</li>
+      <li class="breadcrumb-item active">Assistant Registrar Logs</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->

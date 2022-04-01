@@ -36,19 +36,19 @@ include('session.php');
           <!-- Report Tabs -->
           <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="myTabjustified" role="tablist" style="margin-top: 10px;">
             <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100 active" id=" incoming-tab" data-bs-toggle="tab" data-bs-target="#IncomingDocs" type="button" role="tab" aria-controls="incoming" aria-selected="true">System Admin</button>
+              <button class="nav-link w-100 active" id=" incoming-tab" data-bs-toggle="tab" data-bs-target="#IncomingDocs" type="button" role="tab" aria-controls="incoming" aria-selected="true">Registrar Admin</button>
             </li>
             <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100" id="received-tab" data-bs-toggle="tab" data-bs-target="#ReceivedDocs" type="button" role="tab" aria-controls="profile" aria-selected="false">Approver</button>
+              <button class="nav-link w-100" id="received-tab" data-bs-toggle="tab" data-bs-target="#ReceivedDocs" type="button" role="tab" aria-controls="profile" aria-selected="false">Document Approver</button>
             </li>
             <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100" id="approved-tab" data-bs-toggle="tab" data-bs-target="#ApprovedDocs" type="button" role="tab" aria-controls="approved" aria-selected="false">Department Admin</button>
+              <button class="nav-link w-100" id="approved-tab" data-bs-toggle="tab" data-bs-target="#ApprovedDocs" type="button" role="tab" aria-controls="approved" aria-selected="false">Assistant Registrar</button>
             </li>
             <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100" id="outgoing-tab" data-bs-toggle="tab" data-bs-target="#OutgoingDocs" type="button" role="tab" aria-controls="outgoing" aria-selected="false">Department Secretary</button>
+              <button class="nav-link w-100" id="outgoing-tab" data-bs-toggle="tab" data-bs-target="#OutgoingDocs" type="button" role="tab" aria-controls="outgoing" aria-selected="false">Admission Accounts</button>
             </li>
             <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100" id="hold-tab" data-bs-toggle="tab" data-bs-target="#HoldDocs" type="button" role="tab" aria-controls="hold" aria-selected="false">Faculty</button>
+              <button class="nav-link w-100" id="hold-tab" data-bs-toggle="tab" data-bs-target="#HoldDocs" type="button" role="tab" aria-controls="hold" aria-selected="false">Registrar Officer</button>
             </li>
           </ul>
           <div class="tab-content pt-2" id="myTabjustifiedContent">
@@ -61,7 +61,7 @@ include('session.php');
                         <div class="card">
                           <div class="col-lg-12">
                             <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                <h4>System Admin Reports</h4>
+                                <h4>Registrar Admin Reports</h4>
                             </div>
                           </div>
                           <div class="card-body" >           
@@ -141,7 +141,7 @@ include('session.php');
                         <div class="card">
                           <div class="col-lg-12">
                             <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                <h4>Approver Reports</h4>
+                                <h4>Document Approver Reports</h4>
                             </div>
                           </div>
                           <div class="card-body" >           
@@ -220,7 +220,7 @@ include('session.php');
                         <div class="card">
                           <div class="col-lg-12">
                             <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                <h4>Department Admin Reports</h4>
+                                <h4>Assistant Registrar Reports</h4>
                             </div>
                           </div>
                           <div class="card-body" >           
@@ -300,7 +300,7 @@ include('session.php');
                         <div class="card">
                           <div class="col-lg-12">
                             <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                <h4>Department Secretary Reports</h4>
+                                <h4>Admission Reports</h4>
                             </div>
                           </div>
                           <div class="card-body" >           
@@ -380,7 +380,7 @@ include('session.php');
                         <div class="card">
                           <div class="col-lg-12">
                             <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                <h4>Faculty Reports</h4>
+                                <h4>Registrar Officer Reports</h4>
                             </div>
                           </div>
                           <div class="card-body" >           
