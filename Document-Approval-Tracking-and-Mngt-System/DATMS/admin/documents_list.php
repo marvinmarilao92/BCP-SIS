@@ -112,15 +112,15 @@ include('session.php');
                                       <table class="table table-hover datatable" >
                                       <thead>
                                         <tr>
-                                          <th>DocCode</th>
-                                          <th>Filename</th>
-                                          <!-- <th>Filesize</th>    -->
-                                          <th>Tracker</th>   
-                                          <th>Tracking Date</th>    
-                                          <th>Current Actor</th>    
-                                          <th>Current Status</th>  
-                                          <!-- <th>Downloads</th>    -->
-                                          <th WIDTH="15%">Action</th>          
+                                          <th >DocCode</th>
+                                          <th  >Filename</th>
+                                          <!-- <th >Filesize</th>    -->
+                                          <th >Tracker</th>   
+                                          <th >Tracking Date</th>    
+                                          <th >Current Actor</th>    
+                                          <th >Current Status</th>  
+                                          <!-- <th >Downloads</th>    -->
+                                          <th  WIDTH="8%">Action</th>          
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -140,7 +140,7 @@ include('session.php');
                                         <tr>
                                           <td style="display:none"><?php echo $docId?></td>
                                           <td data-label="Code:"><?php echo $docCode; ?></td>
-                                          <td data-label="File Name:" ><?php echo $docName; ?></td>
+                                          <td data-label="File Name:" WIDTH="25%"><?php echo $docName; ?></td>
                                           <td data-label="Tracker:"><?php echo $docAct3; ?></td>
                                           <td data-label="Date:"><?php echo $docDate3; ?></td>
                                           <td data-label="Current Actor:"><?php echo $docAct2?></td>
@@ -201,22 +201,22 @@ include('session.php');
                                       <table class="table table-hover datatable" >
                                       <thead>
                                         <tr>
-                                          <th>DocCode</th>
-                                          <th >Filename</th>
-                                          <!-- <th>Filesize</th>    -->
-                                          <th>Tracker</th>   
-                                          <th>Department</th>  
-                                          <th>Tracking Date</th>    
-                                          <th>Current Actor</th>    
-                                          <th>Current Status</th>  
-                                          <!-- <th>Downloads</th>    -->
-                                          <th WIDTH="10%">Action</th>          
+                                          <th >DocCode</th>
+                                          <th  >Filename</th>
+                                          <!-- <th >Filesize</th>    -->
+                                          <th >Tracker</th>   
+                                          <th >Department</th>  
+                                          <th >Tracking Date</th>    
+                                          <th >Current Actor</th>    
+                                          <th >Current Status</th>  
+                                          <!-- <th >Downloads</th>    -->
+                                          <th  WIDTH="8%">Action</th>          
                                         </tr>
                                       </thead>
                                       <tbody>
                                         <?php
                                           require_once("include/conn.php");
-                                          $query="SELECT * FROM datms_documents ORDER BY doc_date3 ASC ";
+                                          $query="SELECT * FROM datms_documents ORDER BY doc_date1 DESC ";
                                           $result=mysqli_query($conn,$query);
                                           while($rs=mysqli_fetch_array($result)){
                                             $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
@@ -230,10 +230,10 @@ include('session.php');
                                         <tr>
                                           <td style="display:none"><?php echo $docId?></td>
                                           <td data-label="Code:"><?php echo $docCode; ?></td>
-                                          <td data-label="File Name:" ><?php echo $docName; ?></td>
+                                          <td data-label="File Name:" WIDTH="25%"><?php echo $docName; ?></td>
                                           <td data-label="Tracker:"><?php echo $docAct3; ?></td>
-                                          <td data-label="Department:"><?php echo $docOff3; ?></td>
-                                          <td data-label="Date:"><?php echo $docDate3; ?></td>
+                                          <td data-label="Department:"WIDTH="10%"><?php echo $docOff3; ?></td>
+                                          <td data-label="Date:"WIDTH="10%"><?php echo $docDate3; ?></td>
                                           <td data-label="Current Actor:"><?php echo $docAct2?></td>
                                           <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
                                           <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
@@ -249,7 +249,7 @@ include('session.php');
                                           <td style="display:none"><?php echo $docDate3?></td>
                                           <td style="display:none"><?php echo $docRemarks?></td>
 
-                                          <td WIDTH="10%">
+                                          <td WIDTH="8%">
                                           <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
                                             <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>
                                             <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="ri ri-eye-line"></i></a>

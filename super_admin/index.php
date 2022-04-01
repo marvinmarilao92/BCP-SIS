@@ -520,7 +520,7 @@ include('session.php');
                       <div class="card">
                        
                         <div class="card-body">
-                          <a href="DATMS/admin/index.php"> <h5 class="card-title">REGISTRAR ADMIN</h5></a>
+                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index.php"> <h5 class="card-title">REGISTRAR ADMIN</h5></a>
                           <p class="card-text">Click here to access module</p>
                         </div>
                       </div>
@@ -530,7 +530,7 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <a href="DATMS/approver/index.php"> <h5 class="card-title">DOCUMENT APPROVER</h5></a>
+                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index.php"> <h5 class="card-title">DOCUMENT APPROVER</h5></a>
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>
@@ -540,7 +540,7 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                           <a href="DATMS/admission/index.php"> <h5 class="card-title">ADMISSION</h5></a>
+                           <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index.php"> <h5 class="card-title">ADMISSION</h5></a>
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>
@@ -550,7 +550,7 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <a href="DATMS/cashier/index.php"> <h5 class="card-title">CASHIER</h5></a>
+                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index.php"> <h5 class="card-title">CASHIER</h5></a>
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>

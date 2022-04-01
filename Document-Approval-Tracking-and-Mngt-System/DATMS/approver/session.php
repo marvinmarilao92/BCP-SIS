@@ -28,6 +28,9 @@
           case "DATMS Approver":
             //statement
             break;
+          case "SuperAdmin":
+            //statement
+            break;
           default:
             session_destroy();
             header("location:../index.php");

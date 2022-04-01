@@ -120,7 +120,7 @@ include('session.php');
                                           <th >Current Actor</th>    
                                           <th >Current Status</th>  
                                           <!-- <th >Downloads</th>    -->
-                                          <th  WIDTH="15%">Action</th>          
+                                          <th  WIDTH="8%">Action</th>          
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -140,7 +140,7 @@ include('session.php');
                                         <tr>
                                           <td style="display:none"><?php echo $docId?></td>
                                           <td data-label="Code:"><?php echo $docCode; ?></td>
-                                          <td data-label="File Name:" ><?php echo $docName; ?></td>
+                                          <td data-label="File Name:" WIDTH="25%"><?php echo $docName; ?></td>
                                           <td data-label="Tracker:"><?php echo $docAct3; ?></td>
                                           <td data-label="Date:"><?php echo $docDate3; ?></td>
                                           <td data-label="Current Actor:"><?php echo $docAct2?></td>
@@ -210,7 +210,7 @@ include('session.php');
                                           <th >Current Actor</th>    
                                           <th >Current Status</th>  
                                           <!-- <th >Downloads</th>    -->
-                                          <th  WIDTH="15%">Action</th>          
+                                          <th  WIDTH="8%">Action</th>          
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -230,10 +230,10 @@ include('session.php');
                                         <tr>
                                           <td style="display:none"><?php echo $docId?></td>
                                           <td data-label="Code:"><?php echo $docCode; ?></td>
-                                          <td data-label="File Name:" ><?php echo $docName; ?></td>
+                                          <td data-label="File Name:" WIDTH="25%"><?php echo $docName; ?></td>
                                           <td data-label="Tracker:"><?php echo $docAct3; ?></td>
-                                          <td data-label="Department:"><?php echo $docOff3; ?></td>
-                                          <td data-label="Date:"><?php echo $docDate3; ?></td>
+                                          <td data-label="Department:"WIDTH="10%"><?php echo $docOff3; ?></td>
+                                          <td data-label="Date:"WIDTH="10%"><?php echo $docDate3; ?></td>
                                           <td data-label="Current Actor:"><?php echo $docAct2?></td>
                                           <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
                                           <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
@@ -249,7 +249,7 @@ include('session.php');
                                           <td style="display:none"><?php echo $docDate3?></td>
                                           <td style="display:none"><?php echo $docRemarks?></td>
 
-                                          <td WIDTH="10%">
+                                          <td WIDTH="8%">
                                           <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
                                             <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>
                                             <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="ri ri-eye-line"></i></a>

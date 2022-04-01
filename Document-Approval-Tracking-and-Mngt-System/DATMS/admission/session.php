@@ -29,6 +29,9 @@
           case "Admission":
             //statement
             break;
+          case "SuperAdmin":
+            //statement
+            break;
           default:
             session_destroy();
             header("location:../login.php");

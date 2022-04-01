@@ -4,7 +4,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a href="../../index.php" class="<?php if($page=='return'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="../../index.php" >
             <i class="bi bi-arrow-return-left"></i>
             <span>Return to SuperUser</span>
           </a>
