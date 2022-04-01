@@ -187,6 +187,7 @@ include('session.php');
   <?php include ('core/js.php');//css connection?>
 <!-- Charts -->
 </body>
+
 <!-- List of Modals -->
 
     <!-- Helpdesk System Modal-->
@@ -1049,6 +1050,6 @@ include('session.php');
       </div>
     <!-- End Scholarship System Modal--> 
 
-
 <!-- End of Modals -->
+
 </html>

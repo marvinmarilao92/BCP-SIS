@@ -23,7 +23,7 @@
             }
             echo $output;
         }else{
-            // header("location:index.php");
+
         }
         ?>
 

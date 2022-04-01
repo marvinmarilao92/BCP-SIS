@@ -129,7 +129,6 @@
                            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                             $remarks="account has been logged in";  
                             mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
-                           
                          }
                         header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index.php");
                         break;
@@ -178,12 +177,10 @@
                             $ip = $_SERVER["REMOTE_ADDR"];
                             $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                             $remarks="account has been logged in";  
-                            mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
-                            
+                            mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));                            
                           }
                         header("location: ../Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index.php");
-                        break;
-                        
+                        break;                        
                    }
                    break;
                  case "SuperUser":
@@ -238,9 +235,8 @@
                            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                             $remarks="account has been logged in";  
                             mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
-                           
+                    
                          }
-                       
                        header("location: ../Usermanagement/index.php");
                        break;
                    }
