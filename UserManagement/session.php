@@ -30,6 +30,9 @@
             //  $_SESSION['session_username'] = $myusername;
             //  header("location: ../UserManagement/index.php");
             break;
+            case "SuperAdmin":
+              //statement
+              break;
           default:
             session_destroy();
             header("location:pages-error-404.php");
