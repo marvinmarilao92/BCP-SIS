@@ -341,7 +341,7 @@
             <img src="assets/img/BCPlogo.png" alt="" style=" width: 120px;">
               <div class="d-flex justify-content-center py-4">
 
-                <a href="dynamic-login.php" class="logo d-flex align-items-center w-auto">
+                <a href="dynamic-login.php" class="logo d-flex align-items-center w-auto" style="text-align: center;">
                   <span class="d-none d-lg-block">SCHOOL INFORMATION SYSTEM</span>
                 </a>
               </div><!-- End Logo -->
