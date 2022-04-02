@@ -157,7 +157,7 @@ include('session.php');
           <!-- Insert your Module here -->
           <div class="col-lg-3">
             <div class="card">
-              <a href="UserManagement/index.php"><img src="../assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
+              <a href="../UserManagement/index.php"><img src="../assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
               <div class="card-body">
                 <h5 class="card-title">User Management</h5>
                 <p class="card-text">Subsystem Description insert here...</p>
