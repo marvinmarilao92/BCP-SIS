@@ -57,7 +57,7 @@
                     //statement
                     $output .= '
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php">
+                      <a class="dropdown-item d-flex align-items-center" href="../super_admin/index.php">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>
