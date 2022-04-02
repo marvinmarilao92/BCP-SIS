@@ -1,9 +1,9 @@
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
-
+  <?php include "key_checker.php";?>
 <div class="d-flex align-items-center justify-content-between">
-  <a href="index.php" class="logo d-flex align-items-center">
+  <a href="index.phpid=<?php echo $_SESSION["login_key"];?>" class="logo d-flex align-items-center">
     <img src="../assets/img/superadminlogo.png" alt="">
     <span class="d-none d-lg-block">Super Admin Access</span>
   </a>
@@ -31,7 +31,7 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
+          <a class="dropdown-item d-flex align-items-center" href="users-profile.phpid=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-person"></i>
             <span>My Profile</span>
           </a>

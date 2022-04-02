@@ -5,13 +5,14 @@
    <!-- Adding return nav item for super admin -->
    <?php 
           $output = '';
+          $key = $_SESSION["login_key"];
           if(isset($verified_session_department) && ($verified_session_username)){
             switch($verified_session_role){
               case "SuperAdmin":
                 //statement
                 $output .= '
                 <li class="nav-item">
-                <a href="../../../super_admin/index.php" style="color: rgb(83, 107, 148);font-weight: 600;">
+                <a href="../../../super_admin/index.php?id='.$key.'" style="color: rgb(83, 107, 148);font-weight: 600;">
                   <i class="bi bi-arrow-return-left"></i>
                   <span>Return to SuperUser</span>
                 </a>
@@ -24,11 +25,11 @@
         }else{
             // header("location:index.php");
         }
-        ?>
+  ?>
 <li class="nav-heading">Module</li>
 
   <li class="nav-item">
-  <a href="index.php" class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+  <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-book-2-line"></i>
       <span>Documents &nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-secondary">
@@ -45,7 +46,7 @@
   </li><!-- All docs Nav -->
 
   <li class="nav-item">
-    <a href="incoming_docs.php" class="<?php if($page=='incoming'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="incoming_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='incoming'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-file-download-line"></i>
       <span>Incoming &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-warning text-dark">
@@ -62,7 +63,7 @@
   </li><!-- Incoming item Nav -->
 
   <li class="nav-item">
-    <a href="received_docs.php" class="<?php if($page=='recieved'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="received_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='recieved'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-mail-check-line"></i>
       <span>Received &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-success">
@@ -79,7 +80,7 @@
   </li><!-- recieved item Nav -->
 
   <li class="nav-item">
-    <a href="outgoing_docs.php" class="<?php if($page=='outgoing'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="outgoing_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='outgoing'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-send-plane-line"></i>
       <span>Outgoing &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-danger">
@@ -96,7 +97,7 @@
   </li><!-- outgoing item Nav -->
 
   <li class="nav-item">
-    <a href="hold_docs.php" class="<?php if($page=='hold'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="hold_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='hold'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-question-mark"></i>
       <span>Hold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-primary"> <?php 
@@ -111,7 +112,7 @@
   </li> <!-- hold item Nav -->
 
   <li class="nav-item">
-    <a href="tracking_docs.php" class="<?php if($page=='track'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="tracking_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='track'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-geo"></i>
       <span>Track Douments</span>
     </a>
@@ -124,7 +125,7 @@
         </a>
         <ul id="icons-nav" class="<?php if($col=='records'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
           <li>
-          <a href="approved_docs.php" class="<?php if($page=='approved'){echo 'active';}?>">
+          <a href="approved_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='approved'){echo 'active';}?>">
             <i class="bi bi-circle"></i>
             <span>Approved &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
               <span class="badge bg-info">
@@ -140,7 +141,7 @@
             </a>
           </li>
           <li>
-          <a href="reject_docs.php" class="<?php if($page=='reject'){echo 'active';}?>">
+          <a href="reject_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='reject'){echo 'active';}?>">
             <i class="bi bi-circle"></i>
             <span>Rejected &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
              <span class="badge bg-dark"> <?php 
@@ -160,14 +161,14 @@
   <li class="nav-heading">Settings</li>
 
   <li class="nav-item">
-  <a href="users-profile.php" class="<?php if($page=='PRO'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+  <a href="users-profile.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='PRO'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-person"></i>
       <span>Profile</span>
     </a>
   </li><!-- End Profile Page Nav -->
 
   <li class="nav-item">
-    <a href="FAQ.php" class="<?php if($page=='FAQ'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="FAQ.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='FAQ'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-question-circle"></i>
       <span>F.A.Q</span>
     </a>
@@ -175,7 +176,7 @@
 
   
   <li class="nav-item">
-  <a href="pages-contact.php" class="<?php if($page=='contact'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+  <a href="pages-contact.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='contact'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-envelope"></i>
       <span>Contact</span>
     </a>

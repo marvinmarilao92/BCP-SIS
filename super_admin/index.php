@@ -157,7 +157,7 @@ include('session.php');
           <!-- Insert your Module here -->
           <div class="col-lg-3">
             <div class="card">
-              <a href="UserManagement/index.php"><img src="../assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
+              <a href="../UserManagement/index.php?id=<?php echo $_SESSION["login_key"];?>"><img src="../assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
               <div class="card-body">
                 <h5 class="card-title">User Management</h5>
                 <p class="card-text">Subsystem Description insert here...</p>
@@ -521,7 +521,7 @@ include('session.php');
                       <div class="card">
                        
                         <div class="card-body">
-                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index.php"> <h5 class="card-title">REGISTRAR ADMIN</h5></a>
+                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">REGISTRAR ADMIN</h5></a>
                           <p class="card-text">Click here to access module</p>
                         </div>
                       </div>
@@ -531,7 +531,7 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index.php"> <h5 class="card-title">DOCUMENT APPROVER</h5></a>
+                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">DOCUMENT APPROVER</h5></a>
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>
@@ -541,7 +541,7 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                           <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index.php"> <h5 class="card-title">ADMISSION</h5></a>
+                           <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">ADMISSION</h5></a>
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>
@@ -551,7 +551,7 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index.php"> <h5 class="card-title">CASHIER</h5></a>
+                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">CASHIER</h5></a>
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>

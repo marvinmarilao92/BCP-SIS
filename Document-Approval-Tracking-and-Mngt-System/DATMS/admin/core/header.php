@@ -1,7 +1,7 @@
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
-
+  <?php include "key_checker.php";?>
 <div class="d-flex align-items-center justify-content-between">
   <a href="index.php" class="logo d-flex align-items-center">
     <img src="../assets/img/DATMS_logo.png" alt="">
@@ -156,7 +156,7 @@
     </li><!-- End Messages Nav -->
 
     <li class="nav-item dropdown pe-3">
-
+   
       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
         <img src="../assets/img/BCPlogo.png" alt="Profile" class="rounded-circle">
         <!-- class="rounded-circle" -->
@@ -198,13 +198,14 @@
         <!-- Adding return nav item for super admin -->
           <?php 
             $output = '';
+            $key = $_SESSION["login_key"];
             if(isset($verified_session_department) && ($verified_session_username)){
               switch($verified_session_role){
                 case "SuperAdmin":
                     //statement
                     $output .= '
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php">
+                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php?id='.$key.'">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>

@@ -6,13 +6,14 @@
    <!-- Adding return nav item for super admin -->
    <?php 
           $output = '';
+          $key = $_SESSION["login_key"];
           if(isset($verified_session_department) && ($verified_session_username)){
             switch($verified_session_role){
               case "SuperAdmin":
                 //statement
                 $output .= '
                 <li class="nav-item">
-                <a href="../../../super_admin/index.php" style="color: rgb(83, 107, 148);font-weight: 600; ">
+                <a href="../../../super_admin/index.php?id='.$key.'" style="color: rgb(83, 107, 148);font-weight: 600;">
                   <i class="bi bi-arrow-return-left"></i>
                   <span>Return to SuperUser</span>
                 </a>
@@ -25,19 +26,19 @@
         }else{
             // header("location:index.php");
         }
-        ?>
+  ?>
 
 <li class="nav-heading">Module</li>
 
   <li class="nav-item">
-    <a href="dashboard.php" class="<?php if($page=='dashboard'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="dashboard.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='dashboard'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-bar-chart-line"></i>
       <span>Dashboard</span>
     </a>
   </li><!-- End Dashboard Nav -->
 
   <li class="nav-item">
-    <a href="app_list.php" class="<?php if($page=='applist'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="app_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='applist'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-person-lines-fill"></i>
       <span>Student Application &nbsp;&nbsp;</span>
       <span class="badge bg-primary badge-number"> 
@@ -54,7 +55,7 @@
   </li> <!-- hold item Nav -->
 
   <li class="nav-item">
-    <a href="index.php" class="<?php if($page=='enroll'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='enroll'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-book-2-line"></i>
         <span>Enroll Student &nbsp;&nbsp;&nbsp;</span>
     </a>
@@ -66,17 +67,17 @@
     </a>
     <ul id="icons-nav" class="<?php if($col=='reports'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
       <li>
-      <a href="ofstud_list.php" class="<?php if($page=='offlist'){echo 'active';}?>">
+      <a href="ofstud_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='offlist'){echo 'active';}?>">
         <i class="bi bi-circle"></i><span>Offically Enrolled</span>
         </a>
       </li>
       <li>
-      <a href="transstud_list.php" class="<?php if($page=='translist'){echo 'active';}?>">
+      <a href="transstud_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='translist'){echo 'active';}?>">
         <i class="bi bi-circle"></i><span>Trasnferee Students</span>
         </a>
       </li>
       <li>
-      <a href="unstud_list.php" class="<?php if($page=='unlist'){echo 'active';}?>">
+      <a href="unstud_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='unlist'){echo 'active';}?>">
         <i class="bi bi-circle"></i><span>Unoffically Enrolled</span>
         </a>
       </li>
@@ -84,7 +85,7 @@
   </li><!-- End Reports Nav -->
 
   <li class="nav-item">
-    <a href="outgoing_docs.php" class="<?php if($page=='outgoing'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="outgoing_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='outgoing'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-send-plane-line"></i>
         <span>Requirements Submission</span>
     </a>
