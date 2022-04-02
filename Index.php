@@ -15,7 +15,7 @@
 	?>
 	<aside id="fh5co-hero">
 		<div class="flexslider">
-			<ul class="">
+			<ul class="slides">
 		   	<li style="background-image: url(images/mvcampus4.jpg);">
 		   		<div class="overlay-gradient"></div>
 		   		<div class="container">
