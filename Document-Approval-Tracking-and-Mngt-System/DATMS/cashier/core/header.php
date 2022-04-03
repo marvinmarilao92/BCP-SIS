@@ -31,21 +31,38 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
-            <i class="bi bi-person"></i>
-            <span>My Profile</span>
+          <a class="dropdown-item d-flex align-items-center" href="index.php?id=<?php echo $_SESSION["login_key"];?>">
+            <i class="bi bi-wallet2"></i>
+            <span>Cashier</span>
           </a>
-        </li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-        <li>
-          <hr class="dropdown-divider">
         </li>
 
         <li>
           <hr class="dropdown-divider">
         </li>
+
+        <li>
+          <a class="dropdown-item d-flex align-items-center" href="records.php?id=<?php echo $_SESSION["login_key"];?>">
+            <i class="bi bi-cash-stack"></i>
+            <span>Payment Records</span>
+          </a>
+        </li>
+
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+
+        <li>
+          <a class="dropdown-item d-flex align-items-center" href="users-profile.php?id=<?php echo $_SESSION["login_key"];?>">
+            <i class="bi bi-person"></i>
+            <span>My Profile</span>
+          </a>
+        </li>
+
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+
           <!-- Adding return nav item for super admin -->
           <?php 
             $output = '';
