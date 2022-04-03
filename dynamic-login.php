@@ -40,7 +40,8 @@
               if($rem_attm==0){
                 $error="To many failed login attempts. Please login after 30 sec.";
               }else{
-                $error="Please enter valid login details. $rem_attm attempts remaining";
+                // $error="Please enter valid login details. $rem_attm attempts remaining";
+                $error="Your Username or Password is invalid.";
               }
               $try_time=time();
               //used to adding ip address record for login attempts
@@ -398,7 +399,8 @@
                     if($rem_attm==0){
                       $error="To many failed login attempts. Please login after 30 sec.";
                     }else{
-                      $error="Please enter valid login details. $rem_attm attempts remaining";
+                      // $error="Please enter valid login details. $rem_attm attempts remaining";
+                      $error="Your Username or Password is invalid.";
                     }
                     $try_time=time();
                     mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
@@ -414,7 +416,8 @@
                 if($rem_attm==0){
                   $error="To many failed login attempts. Please login after 30 sec.";
                 }else{
-                  $error="Please enter valid login details. $rem_attm attempts remaining";
+                  // $error="Please enter valid login details. $rem_attm attempts remaining";
+                  $error="Your Username or Password is invalid.";
                 }
                 $try_time=time();
                 mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
@@ -547,7 +550,7 @@
     }
     function doSomething(){
       errormsg.style.display = 'none';
-      document.location.reload(true)//refresh pages
+      // document.location.reload(true)//refresh pages
     }
   </script>
 </body>

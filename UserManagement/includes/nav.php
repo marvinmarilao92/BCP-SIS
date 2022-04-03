@@ -31,7 +31,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.php?<?php echo $verified_session_username ?>">
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.php?id=<?php echo $_SESSION["login_key"];?>">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>

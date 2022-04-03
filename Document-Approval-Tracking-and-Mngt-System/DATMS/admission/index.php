@@ -125,12 +125,13 @@
               // Attempt to execute the prepared statement
               if(mysqli_stmt_execute($stmt1)){
                   // Records created successfully. Redirect to landing page
+                  $key = $_SESSION["login_key"];
                   $query = "UPDATE student_application SET account_status='$status' WHERE id_number='$code'";
                   if($query_run = mysqli_query($link, $query)){
                   echo '<script language="javascript">';
                   echo 'alert("You Successfully Enrolled the Student")';
                   echo '</script>';
-                  echo 'location.replace("index.php")';
+                  header('Location: index.php?id='.$key.'');
                   }else{
                     echo '<script language="javascript">';
                     echo 'alert("No Student Applicaition Detected")';

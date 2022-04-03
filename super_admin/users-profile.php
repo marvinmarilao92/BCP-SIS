@@ -13,7 +13,7 @@ include('session.php');
   <!-- ======= Header ======= -->
   <?php include ('core/header.php');//Design for  Header?>
 
-  <main style="padding: 15px;">
+  <main>
 
     <div class="pagetitle">
       <h1>Profile</h1>
@@ -26,7 +26,7 @@ include('session.php');
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section profile">
+    <section class="section profile" style="padding: 20px;">
       <div class="row">
         <div class="col-xl-4">
 
@@ -58,13 +58,13 @@ include('session.php');
                   <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
                 </li>
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
                 </li>
 
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
-                </li>
+                </li> -->
 
               </ul>
               <div class="tab-content pt-2">
@@ -236,7 +236,14 @@ include('session.php');
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <?php include ('core/footer.php');//css connection?>
+  <footer class="footer">
+      <div class="copyright" style="margin-bottom: 30px;">
+        <center>
+          &copy;Copyright <a href="https://bcp.edu.ph/home" target="_blank " data-bs-toggle="tooltip" data-bs-placement="top" 
+          title="Access BCP Website">Bestlink College of the Philippines</a> All Rights Reserved
+        </center>                 
+      </div>
+  </footer>
   <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

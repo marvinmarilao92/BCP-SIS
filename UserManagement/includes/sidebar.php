@@ -30,7 +30,7 @@
       <li class="nav-heading">Module</li>
 
       <li class="nav-item">
-        <a class="<?php if($page=='SI'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="index.php">
+        <a class="<?php if($page=='SI'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="index.php?id=<?php echo $_SESSION["login_key"];?>">
           <i class="bi bi-person-plus-fill"></i>
           <span>Students</span>
         </a>
@@ -38,14 +38,14 @@
       <!-- End Student Page Nav -->
 
       <li class="nav-item">
-        <a class="<?php if($page=='TI'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="teacher.php">
+        <a class="<?php if($page=='TI'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="teacher.php?id=<?php echo $_SESSION["login_key"];?>">
           <i class="ri ri-parent-fill"></i>
           <span>Teacher</span>
         </a>
       </li><!-- End Teacher Page Nav -->
 
       <li class="nav-item">
-        <a class="<?php if($page=='EI'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="admin.php">
+        <a class="<?php if($page=='EI'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="admin.php?id=<?php echo $_SESSION["login_key"];?>">
           <i class="bi bi-briefcase-fill"></i>
           <span>Employee</span>
         </a>
