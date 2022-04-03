@@ -1,6 +1,7 @@
 <?php
 //fetch.php
-$connect = mysqli_connect("localhost","u692894633_sis_db","l95o@WMN6~a","u692894633_sis_db");
+// $connect = mysqli_connect("localhost","u692894633_sis_db","l95o@WMN6~a","u692894633_sis_db");
+$connect = mysqli_connect("localhost","root","","sis_db");
 $output = '';
 $error = '';
 $idenifier='';

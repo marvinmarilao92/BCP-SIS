@@ -102,6 +102,7 @@ include('session.php');
                     $query="SELECT *, LEFT(middlename,1) FROM student_information WHERE account_status = 'Unoffical' ORDER BY stud_date DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
+                      $adm_id = $rs['id'];
                       $adm_no =$rs['id_number'];
                       $adm_fname = $rs['firstname'];
                       $adm_lname = $rs['lastname'];        
@@ -117,13 +118,15 @@ include('session.php');
                     <td data-label="Status"><?php echo $adm_as?></td>
                     <td style="display: none;"><?php echo $date?></td>
                     <td WIDTH="7%">      
-                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
-                        <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>                       
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>"><i class="bi bi-eye"></i></button>                       
                       </div>
                     </td>
                   </tr>
 
-                  <?php } ?>
+                  <?php 
+                  include 'modals/stud_modals.php';
+                  } ?>
                   
                 </tbody>
               

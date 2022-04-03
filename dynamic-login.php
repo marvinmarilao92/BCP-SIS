@@ -24,8 +24,13 @@
 
           $sql=mysqli_query($link,"SELECT * FROM users WHERE id_number = '$myusername'")or die(mysqli_error($link));
           //used to retreive login key form user table          
-          $row=mysqli_fetch_array($sql);
-          $_SESSION['login_key'] = $row["login_key"];
+          
+          if($row=mysqli_fetch_array($sql)){
+            $_SESSION['login_key'] = $row["login_key"];
+          }else{
+            $error="No login key registered";
+          }
+          
           $count = mysqli_num_rows($sql);
           // If result matched $myusername and $mypassword, table row must be 1 row
           if($count == 0) {
@@ -524,17 +529,6 @@
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
-  <script>
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#id_password');
- 
-  togglePassword.addEventListener('click', function (e) {
-    // toggle the type attribute
-    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
-    // toggle the eye slash icon
-    this.classList.toggle('fa-eye-slash');
-});  
   </script>
 </body>
 

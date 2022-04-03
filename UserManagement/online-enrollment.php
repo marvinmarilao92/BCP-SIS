@@ -453,7 +453,7 @@
                                 </div>   
                                 <div class="text-right">                          
                                   <a class="btn btn-primary collapsed" type="button" id="next" onclick="nextFunction()" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="margin-top: 10px;">NEXT</a>           
-                                  <a class="btn btn-light" href="../SIS_LandingPage/index.php " style="margin-top: 10px;">CANCEL</a>                       
+                                  <a class="btn btn-light" href="../index.php " style="margin-top: 10px;">CANCEL</a>                       
                                   </div>
                                 </button>
                             </div>

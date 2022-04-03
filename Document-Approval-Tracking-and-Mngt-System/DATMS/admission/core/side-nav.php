@@ -73,7 +73,7 @@
       </li>
       <li>
       <a href="transstud_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='translist'){echo 'active';}?>">
-        <i class="bi bi-circle"></i><span>Trasnferee Students</span>
+        <i class="bi bi-circle"></i><span>Transferee Students</span>
         </a>
       </li>
       <li>

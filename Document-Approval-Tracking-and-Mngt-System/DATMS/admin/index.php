@@ -47,7 +47,7 @@ include('session.php');
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Office <span>| Count</span></h5>
+                  <h5 class="card-title">Department <span>| Count</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -62,7 +62,7 @@ include('session.php');
                           echo "<h6>". mysqli_num_rows($result)."</h6>";
                         }
                       ?> 
-                      <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">Number of Office</span>
+                      <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">Number of Department</span>
 
                     </div>
                   </div>
