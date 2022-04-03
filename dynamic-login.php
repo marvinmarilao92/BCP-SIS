@@ -398,7 +398,7 @@
                     if($rem_attm==0){
                       $error="To many failed login attempts. Please login after 30 sec.";
                     }else{
-                      $error="Please enter valid login details.<br/>$rem_attm attempts remaining";
+                      $error="Please enter valid login details. $rem_attm attempts remaining";
                     }
                     $try_time=time();
                     mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
@@ -414,7 +414,7 @@
                 if($rem_attm==0){
                   $error="To many failed login attempts. Please login after 30 sec.";
                 }else{
-                  $error="Please enter valid login details.<br/>$rem_attm attempts remaining";
+                  $error="Please enter valid login details. $rem_attm attempts remaining";
                 }
                 $try_time=time();
                 mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
@@ -490,7 +490,7 @@
                     <!-- Error Message -->
                     <?php 
                       if(!$error==""){
-                        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>";
+                        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert' id='msg'>";
                         echo  $error;
                         echo "</div>";
                       }
@@ -529,6 +529,26 @@
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
+  <script>
+    // timer countdown
+    var timeLeft = 30;
+    var elem = document.getElementById('some_div');
+    var errormsg = document.getElementById('msg');
+    var timerId = setInterval(countdown, 1000);
+    
+    function countdown() {
+      if (timeLeft == -1) {
+        clearTimeout(timerId);
+        doSomething();
+      } else {
+        // elem.innerHTML = "To many failed login attempts. Please login after " +timeLeft +" sec.";
+        timeLeft--;
+      }
+    }
+    function doSomething(){
+      errormsg.style.display = 'none';
+      document.location.reload(true)//refresh pages
+    }
   </script>
 </body>
 
