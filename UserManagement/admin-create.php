@@ -14,10 +14,10 @@
     $role = "";
     $about = "";
 
-    
+    // $key = $_SESSION["login_key"];
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-      $key = $_SESSION["login_key"];
+     
       $current_year = date("y");
       // $employee_id = mysqli_real_escape_string($link,trim($_POST["employee_id"]));
       //agun implementation for student number
@@ -202,7 +202,7 @@ include ("includes/sidebar.php");
           </div>   
           <div class="col-md-2">
             <div class="form-floating">
-              <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Middle Initial (Optional)" maxlength="1" style="text-transform:uppercase" onkeypress="return isTextKey(event)" >
+              <input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Middle Initial (Optional)" onkeypress="return isTextKey(event)" >
               <label for="floatingName">Middle Initial (Optional)</label>
             </div>
           </div>  

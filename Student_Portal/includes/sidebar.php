@@ -4,13 +4,13 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
+        <a class="<?php if($page=='dash'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="index.php">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#clearance-students-nav" data-bs-toggle="collapse" href="#">
+        <a class="<?php if($page=='track'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" data-bs-target="#clearance-students-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-person-lines-fill"></i><span>Clearance For Students</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="clearance-students-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">

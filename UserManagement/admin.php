@@ -43,7 +43,7 @@ include('session.php');
                           // Include config file
                           require_once "config.php";
                           // Attempt select query execution
-                          $sql = "SELECT * FROM user_information WHERE `admin` NOT IN ('1') ORDER BY id_number asc ";
+                          $sql = "SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') ORDER BY id_number asc ";
                           if($result = mysqli_query($link, $sql)){
                               if(mysqli_num_rows($result) > 0){
                                   echo '<table class="table datatable">';
@@ -51,19 +51,20 @@ include('session.php');
                                           echo "<tr>";
                                               echo "<th scope='col'>Employee No.</th>";
                                               echo "<th scope='col'>Full Name</th>";
-                                              echo "<th scope='col'>Department</th>";
-                                              echo "<th scope='col'>Position</th>";                      
-                                              echo "<th scope='col'>Action</th>";
+                                              echo "<th scope='col'>Subsystem</th>";
+                                              echo "<th scope='col'>Position</th>";  
+                                              echo "<th scope='col'>Department</th>";                     
+                                              // echo "<th scope='col'>Action</th>";
                                           echo "</tr>";
                                       echo "</thead>";
                                       echo "<tbody>";
                                       while($row = mysqli_fetch_array($result)){
                                           echo "<tr>";
                                               echo "<td>" . $row['id_number'] . "</td>";
-                                              echo "<td>" . $row['firstname'] .' '.$row['middlename'].' '. $row['lastname']. "</td>";
+                                              echo "<td WIDTH='40%'>" . $row['firstname'] .' '.$row['MI'].' '. $row['lastname']. "</td>";
                                               echo "<td>" . $row['department'] . "</td>";
                                               echo "<td>" . $row['role'] . "</td>";
-
+                                              echo "<td>" . $row['office'] . "</td>";
                                               $sql1 = "SELECT * FROM users WHERE id_number = " . $row['id_number'] . " ";
                                               if($result1 = mysqli_query($link, $sql1)){
                                                 if(mysqli_num_rows($result1) > 0){
@@ -74,11 +75,11 @@ include('session.php');
                                                   mysqli_free_result($result1);
                                                 }
                                               }
-                                              echo "<td WIDTH='13%'>";
-                                                  echo '<button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button> ';
-                                                  echo '<button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button> ';
-                                                  echo '<button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>';
-                                              echo "</td>";
+                                              // echo "<td WIDTH='13%'>";
+                                                  // echo '<button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button> ';
+                                                  // echo '<button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button> ';
+                                                  // echo '<button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>';
+                                              // echo "</td>";
                                           echo "</tr>";
                                       }
                                       echo "</tbody>";                            

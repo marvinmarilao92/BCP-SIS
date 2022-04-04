@@ -68,20 +68,20 @@ include('session.php');
                     <th scope='col'>Course</th>
                     <!-- <th>Last Access</th> -->
                     <th>Account Status</th>
-                    <th scope="col">Action</th>
+                    <!-- <th scope="col">Action</th> -->
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                     require_once("includes/conn.php");
-                    $query="SELECT * FROM student_information ORDER BY stud_date DESC ";
+                    $query="SELECT *, LEFT(middlename,1) as MI FROM student_information ORDER BY stud_date DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $studid =$rs['id'];
                       $studno = $rs['id_number'];
                       $fname = $rs['firstname'];        
                       $lname = $rs['lastname'];
-                      $mname = $rs['middlename'];
+                      $mname = $rs['MI'];
                       $email =$rs['email'];
                       $contact = $rs['contact'];
                       $address = $rs['address'];        
@@ -131,11 +131,11 @@ include('session.php');
                     <td style="display:none"><?php echo $sd?></td>
                     
                   </td>
-                    <td WIDTH="13%">                      
+                    <!-- <td WIDTH="13%">                      
                       <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>
                       <button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button>
                       <button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>
-                    </td>
+                    </td> -->
                   </tr>
 
                   <?php } ?>

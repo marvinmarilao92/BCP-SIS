@@ -1,17 +1,23 @@
 <?php
-include('session.php');
+include('includes/session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <title>DATMS | Tracking Documents</title>
 <head>
-<?php include ('core/css-links.php');//css connection?>
+<?php
+include ("includes/head.php");
+?>
 
 </head>
 <body>
 
-<?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'track';  include ('core/side-nav.php');//Design for sidebar?>
+<?php 
+$page = 'track'; 
+include ("includes/nav.php");
+include ("includes/sidebar.php");
+?>
+
 
   <main id="main" class="main">
 
@@ -50,46 +56,6 @@ include('session.php');
                     <!-- Tracking Activity module -->
                     <div class="activity">
 
-                        <!-- <div class="activity-item d-flex">
-                          <div class="activite-label card-title">20 min</div>
-                          <i class='bi bi-circle-fill activity-badge text-danger align-self-start' style="padding-top: 25px;"></i>
-                          <div class="activity-content card-title" >
-                             Document set Outgoing by <a href="#" class="fw-bold text-dark">Juvell Alquero</a> at <a href="#" class="fw-bold text-dark">Accounting Office</a> 
-                          </div>
-                        </div>
-                        
-                        <div class="activity-item d-flex">
-                          <div class="activite-label card-title">10 min</div>
-                          <i class='bi bi-circle-fill activity-badge text-warning align-self-start' style="padding-top: 25px;"></i>
-                          <div class="activity-content card-title" >
-                              Document set Incoming by <a href="#" class="fw-bold text-dark">Marvin Marilao</a> at <a href="#" class="fw-bold text-dark">CCS Office</a> 
-                          </div>
-                        </div>
-                        
-                        <div class="activity-item d-flex">
-                          <div class="activite-label card-title">15 min</div>
-                          <i class='bi bi-circle-fill activity-badge text-info align-self-start' style="padding-top: 25px;"></i>
-                          <div class="activity-content card-title" >
-                            Document set Approved by <a href="#" class="fw-bold text-dark">Rogel Quintero</a> at <a href="#" class="fw-bold text-dark">VP Office</a> 
-                          </div>
-                        </div>
-                        
-                        <div class="activity-item d-flex">
-                          <div class="activite-label card-title">20 min</div>
-                          <i class='bi bi-circle-fill activity-badge text-success align-self-start' style="padding-top: 25px;"></i>
-                          <div class="activity-content card-title" >
-                            Document set Received by <a href="#" class="fw-bold text-dark">Rogel Quintero</a> at <a href="#" class="fw-bold text-dark">VP Office</a> 
-                          </div>
-                        </div>
-                       
-                        <div class="activity-item d-flex">
-                          <div class="activite-label card-title">90 min</div>
-                          <i class='bi bi-circle-fill activity-badge text-muted align-self-start' style="padding-top: 25px;"></i>
-                          <div class="activity-content card-title" >
-                            Document set Rejected by <a href="#" class="fw-bold text-dark">Rogel Quintero</a> at <a href="#" class="fw-bold text-dark">VP Office</a> 
-                          </div>
-                        </div> -->
-                   
                     </div>
                     <!-- End Tracking Activity module -->
                 </div>
@@ -103,15 +69,12 @@ include('session.php');
     </section>
   </main><!-- End #main -->
 
- 
+  
   <!-- ======= Footer ======= -->
-  <?php include ('core/footer.php');//css connection?>
+  <?php include ("includes/footer.php"); ?>
   <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files/ Template main js file -->
-  <?php include ('core/js.php');//css connection?>
 
 </body>
 

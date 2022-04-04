@@ -11,6 +11,7 @@ include ("includes/head.php");
 <body>
 
 <?php
+$page ='dash';
 include ("includes/nav.php");
 include ("includes/sidebar.php");
 ?>
