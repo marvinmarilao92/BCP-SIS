@@ -17,6 +17,7 @@
     
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
+      $key = $_SESSION["login_key"];
       $current_year = date("y");
       // $employee_id = mysqli_real_escape_string($link,trim($_POST["employee_id"]));
       //agun implementation for student number
@@ -128,7 +129,7 @@
               // Attempt to execute the prepared statement
               if(mysqli_stmt_execute($stmt1)){
                   // Records created successfully. Redirect to landing page
-                  header("location: admin.php");
+                  header("location: admin.php?id='.$key.'");
                   exit();
               } else{
                   echo "Oops! Something went wrong. Please try again later.";
@@ -168,8 +169,8 @@ include ("includes/sidebar.php");
     <h1>Add New Employee</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-        <li class="breadcrumb-item"><a href="admin.php">Employees</a></li>
+        <li class="breadcrumb-item"><a href="index.php?id=<?php echo $_SESSION["login_key"];?>">Home</a></li>
+        <li class="breadcrumb-item"><a href="admin.php?id=<?php echo $_SESSION["login_key"];?>">Employees</a></li>
         <li class="breadcrumb-item">Add New Employee</li>
       </ol>
     </nav>

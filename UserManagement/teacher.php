@@ -41,7 +41,7 @@ include ("includes/sidebar.php");
                   <h4>List of Employee</h4>
               </div>
               <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                <a href="teacher-create.php" class="btn btn-primary pull-right">Add New Teacher</a>
+                <a href="teacher-create.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary pull-right">Add New Teacher</a>
               </div> 
             </div>
             <div class="card-body">

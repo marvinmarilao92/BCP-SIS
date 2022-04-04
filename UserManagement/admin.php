@@ -35,7 +35,7 @@ include('session.php');
                           <h4>List of Employee</h4>
                       </div>
                       <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                        <a href="admin-create.php" class="btn btn-primary pull-right">Add New User</a>
+                        <a href="admin-create.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary pull-right">Add New User</a>
                       </div> 
                     </div>
                   <div class="card-body">

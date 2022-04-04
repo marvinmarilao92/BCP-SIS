@@ -19,7 +19,7 @@ $civil_status = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-  
+  $key = $_SESSION["login_key"];
   $id_number = mysqli_real_escape_string($link,trim($_POST["id_number"]));
   $first_name = mysqli_real_escape_string($link,trim($_POST["first_name"]));
   $last_name = mysqli_real_escape_string($link,trim($_POST["last_name"]));
@@ -68,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           // Attempt to execute the prepared statement
           if(mysqli_stmt_execute($stmt1)){
               // Records created successfully. Redirect to landing page
-              header("location: teacher.php");
+              header("location: teacher.php?id='.$key.'");
               exit();
           } else{
               echo "Oops! Something went wrong. Please try again later.";
@@ -111,8 +111,8 @@ include ("includes/sidebar.php");
       <h1>Add New Teacher</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item"><a href="teacher.php">Teacher</a></li>
+          <li class="breadcrumb-item"><a href="index.php?id=<?php echo $_SESSION["login_key"];?>">Home</a></li>
+          <li class="breadcrumb-item"><a href="teacher.php?id=<?php echo $_SESSION["login_key"];?>">Teacher</a></li>
           <li class="breadcrumb-item">Add New Teacher</li>
         </ol>
       </nav>
