@@ -5,7 +5,7 @@
   $error = "";
   if($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $time=time()-30;
+    $time=time()-60;
     $ip_address=getIpAddr();
     // Getting total count of hits on the basis of IP
     $query=mysqli_query($link,"select count(*) as total_count from login_attempts where attempt_time > $time and ip_address='$ip_address'");
@@ -14,7 +14,7 @@
 
      //Checking if the attempt 3, or youcan set the no of attempt her. For now we taking only 3 fail attempted
 	  if($total_count==3){
-      $error = "To many failed login attempts. Please login after 30 sec.";
+      $error = "To many failed login attempts. Please login after 60 sec.";
     }else{
         // username and password sent from form 
         date_default_timezone_set("asia/manila");
@@ -38,7 +38,7 @@
             $total_count++;
               $rem_attm=3-$total_count;
               if($rem_attm==0){
-                $error="To many failed login attempts. Please login after 30 sec.";
+                $error="To many failed login attempts. Please login after 60 sec.";
               }else{
                 // $error="Please enter valid login details. $rem_attm attempts remaining";
                 $error="Your Username or Password is invalid.";
@@ -397,7 +397,7 @@
                   $total_count++;
                     $rem_attm=3-$total_count;
                     if($rem_attm==0){
-                      $error="To many failed login attempts. Please login after 30 sec.";
+                      $error="To many failed login attempts. Please login after 60 sec.";
                     }else{
                       // $error="Please enter valid login details. $rem_attm attempts remaining";
                       $error="Your Username or Password is invalid.";
@@ -414,7 +414,7 @@
               $total_count++;
                 $rem_attm=3-$total_count;
                 if($rem_attm==0){
-                  $error="To many failed login attempts. Please login after 30 sec.";
+                  $error="To many failed login attempts. Please login after 60 sec.";
                 }else{
                   // $error="Please enter valid login details. $rem_attm attempts remaining";
                   $error="Your Username or Password is invalid.";
@@ -534,10 +534,10 @@
   <?php include ('core/js.php');//css connection?>
   <script>
     // timer countdown
-    var timeLeft = 30;
+    var timeLeft = 60;
     var elem = document.getElementById('some_div');
     var errormsg = document.getElementById('msg');
-    var timerId = setInterval(countdown, 1000);
+    var timerId = setInterval(countdown, 900);
     
     function countdown() {
       if (timeLeft == -1) {

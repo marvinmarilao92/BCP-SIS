@@ -186,7 +186,7 @@
             </li>
             <li>
               <a href="logs_assistant.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='AL'){echo 'active';}?>">
-                <i class="bi bi-circle"></i><span>Assistan Registrar Logs</span>
+                <i class="bi bi-circle"></i><span>Assistant Registrar Logs</span>
               </a>
             </li>
             <li>
