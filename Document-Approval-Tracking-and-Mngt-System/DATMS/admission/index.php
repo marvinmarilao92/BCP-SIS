@@ -1,5 +1,6 @@
 <?php
     include('session.php');
+    require_once "core/update_key.php";
     // Define variables and initialize with empty values
     $student_number = "#";
     $first_name = "#";
@@ -116,11 +117,11 @@
           // Attempt to execute the prepared statement
           if(mysqli_stmt_execute($stmt)){
             //Create user account
-            $sql = "INSERT INTO users (id_number, password) VALUES (?, ?)";
+            $sql = "INSERT INTO users (id_number, password, login_key) VALUES (?, ?, ?)";
 
             if($stmt1 = mysqli_prepare($link, $sql)){
               // Bind variables to the prepared statement as parameters
-              mysqli_stmt_bind_param($stmt1, "ss", $student_number, $password);
+              mysqli_stmt_bind_param($stmt1, "sss", $userid, $password, $getQP);
 
               // Attempt to execute the prepared statement
               if(mysqli_stmt_execute($stmt1)){

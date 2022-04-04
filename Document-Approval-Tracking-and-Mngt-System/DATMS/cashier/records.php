@@ -39,7 +39,7 @@ include('session.php');
                 <button class="nav-link w-100 active" id=" incoming-tab" data-bs-toggle="tab" data-bs-target="#IncomingDocs" type="button" role="tab" aria-controls="incoming" aria-selected="true">Paid Application</button>
               </li>
               <li class="nav-item flex-fill" role="presentation">
-                <button class="nav-link w-100" id="received-tab" data-bs-toggle="tab" data-bs-target="#ReceivedDocs" type="button" role="tab" aria-controls="profile" aria-selected="false">Unpaid Applicaiton</button>
+                <button class="nav-link w-100" id="received-tab" data-bs-toggle="tab" data-bs-target="#ReceivedDocs" type="button" role="tab" aria-controls="profile" aria-selected="false">Unpaid Application</button>
               </li>
             </ul>
             <div class="tab-content pt-2" id="myTabjustifiedContent">
@@ -52,7 +52,7 @@ include('session.php');
                           <div class="card">
                             <div class="col-lg-12">
                               <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                  <h4>Paid Applicaiton Records</h4>
+                                  <h4>Paid Application Records</h4>
                               </div>
                             </div>
                             <div class="card-body" >           
@@ -128,7 +128,7 @@ include('session.php');
                           <div class="card">
                             <div class="col-lg-12">
                               <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                  <h4>Unpaid Applicaiton Records</h4>
+                                  <h4>Unpaid Application Records</h4>
                               </div>
                             </div>
                             <div class="card-body" >           
