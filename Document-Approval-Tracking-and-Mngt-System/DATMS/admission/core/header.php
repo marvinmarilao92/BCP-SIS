@@ -5,7 +5,7 @@
 // include "key_checker.php";
 ?>
 <div class="d-flex align-items-center justify-content-between">
-  <a href="index.phpid=<?php echo $_SESSION["login_key"];?>" class="logo d-flex align-items-center">
+  <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="logo d-flex align-items-center">
     <img src="../assets/img/admission.png" alt="">
     <span class="d-none d-lg-block">Student Admission</span>
   </a>
