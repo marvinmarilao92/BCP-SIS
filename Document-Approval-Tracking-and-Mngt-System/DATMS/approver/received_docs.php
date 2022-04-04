@@ -454,7 +454,7 @@ include('session.php');
                                   icon: "success",
                                   title:"You Successfully Approved this Document"
                                   }).then(function(){
-                                    window.location = "received_docs.php";//refresh pages
+                                    window.location = "received_docs.php?id=<?php echo $_SESSION["login_key"];?>";//refresh pages
                                   });
                                     $('#reject_code').val("")
                                     $('#rejec_act2').val("")
@@ -518,7 +518,7 @@ include('session.php');
                                   icon: "success",
                                   title:"You Successfully Approved this Document"
                                   }).then(function(){
-                                    window.location = "received_docs.php";//refresh pages
+                                    window.location = "received_docs.php?id=<?php echo $_SESSION["login_key"];?>";//refresh pages
                                   });
                                     $('#doc_code').val("")
                                     $('#doc_act2').val("")
