@@ -373,6 +373,7 @@ include('session.php');
       // Uploads files
       if (isset($_POST['save'])) { // if save button on the form is clicked
             // name of the uploaded file
+            $key = $_SESSION["login_key"];
             date_default_timezone_set("asia/manila");
             $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
             $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
@@ -425,7 +426,7 @@ include('session.php');
                         icon: "error",
                         title:"File extension must be: .pdf"
                         }).then(function(){
-                          window.location = "index.php";//refresh pages
+                          window.location = "index.php?id='.$key.'";//refresh pages
                         });
                      </script>
                 ';
@@ -455,7 +456,7 @@ include('session.php');
                         icon: "warning",
                         title:"File name already taken<br>You have to change the name of file"
                         }).then(function(){
-                          window.location = "index.php";//refresh pages
+                          window.location = "index.php?id='.$key.'";//refresh pages
                         });
                     </script>
                ';
@@ -488,7 +489,7 @@ include('session.php');
                         icon: "success",
                         title:"Document to track Successfully Created"
                         }).then(function(){
-                          window.location = "index.php";//refresh pages
+                          window.location = "index.php?id='.$key.'";//refresh pages
                         });
                     </script>';
                     
