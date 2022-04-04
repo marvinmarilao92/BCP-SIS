@@ -94,13 +94,13 @@ include('session.php');
                     <th scope="col">Program</th>                    
                     <th >Status</th>
                     <th scope="col">Date Applied</th>
-                    <th scope="col" WIDTH="7%">Action</th>
+                    <!-- <th scope="col" WIDTH="7%">Action</th> -->
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT *, LEFT(middlename,1) FROM student_application   WHERE `account_status` NOT IN ('Enrolled') ORDER BY stud_date DESC ";
+                    $query="SELECT *, LEFT(middlename,1) FROM student_application   WHERE `account_status` NOT IN ('Enrolled') ORDER BY stud_date ASC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $adm_no =$rs['id_number'];
@@ -117,11 +117,11 @@ include('session.php');
                     <td data-label="Program"><?php echo $adm_program; ?></td>
                     <td data-label="Status"><?php echo $adm_as?></td>
                     <td data-label="Admission Date"WIDTH="15%"><?php echo $adm_date?></td>             
-                    <td WIDTH="7%">      
+                    <!-- <td WIDTH="7%">      
                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
                         <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>                       
                       </div>
-                    </td>
+                    </td> -->
                   </tr>
 
                   <?php } ?>

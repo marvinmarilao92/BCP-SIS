@@ -1,7 +1,7 @@
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
-
+  <?php include "key_checker.php";?>
 <div class="d-flex align-items-center justify-content-between">
   <a href="index.php" class="logo d-flex align-items-center">
     <img src="../assets/img/Cashier.png" alt="">
@@ -31,31 +31,49 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
-            <i class="bi bi-person"></i>
-            <span>My Profile</span>
+          <a class="dropdown-item d-flex align-items-center" href="index.php?id=<?php echo $_SESSION["login_key"];?>">
+            <i class="bi bi-wallet2"></i>
+            <span>Cashier</span>
           </a>
-        </li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-        <li>
-          <hr class="dropdown-divider">
         </li>
 
         <li>
           <hr class="dropdown-divider">
         </li>
+
+        <li>
+          <a class="dropdown-item d-flex align-items-center" href="records.php?id=<?php echo $_SESSION["login_key"];?>">
+            <i class="bi bi-cash-stack"></i>
+            <span>Payment Records</span>
+          </a>
+        </li>
+
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+
+        <li>
+          <a class="dropdown-item d-flex align-items-center" href="users-profile.php?id=<?php echo $_SESSION["login_key"];?>">
+            <i class="bi bi-person"></i>
+            <span>My Profile</span>
+          </a>
+        </li>
+
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+
           <!-- Adding return nav item for super admin -->
           <?php 
             $output = '';
+            $key = $_SESSION["login_key"];
             if(isset($verified_session_department) && ($verified_session_username)){
               switch($verified_session_role){
                 case "SuperAdmin":
                     //statement
                     $output .= '
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php">
+                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php?id='.$key.'">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>
@@ -67,7 +85,7 @@
                 //statement
                   $output .= '
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="function/logout.php">
+                      <a class="dropdown-item d-flex align-items-center" href="function/logout.php?id=<?php echo $_SESSION["login_key"];?>">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>

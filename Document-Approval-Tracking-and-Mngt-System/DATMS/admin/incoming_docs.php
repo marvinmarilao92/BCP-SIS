@@ -100,9 +100,9 @@ include('session.php');
 
                   </td>
                     <td>                      
-                      <a class="btn btn-success receivedbtn"><i class="bi bi-check-lg"></i></a>
+                      <a class="btn btn-success receivedbtn" title="Received"><i class="bi bi-check-lg"></i></a>
                       <!-- <a class="btn btn-danger "><i class="bi bi-x-lg"></i></a> -->
-                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
+                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="bi bi-eye-fill"></i></a>
                     </td>
                   </tr>
 

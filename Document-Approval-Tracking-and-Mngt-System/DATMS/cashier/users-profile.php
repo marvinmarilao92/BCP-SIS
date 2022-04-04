@@ -26,7 +26,7 @@ include('session.php');
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section profile">
+    <section class="section profile" style="padding: 20px;">
       <div class="row">
         <div class="col-xl-4">
 

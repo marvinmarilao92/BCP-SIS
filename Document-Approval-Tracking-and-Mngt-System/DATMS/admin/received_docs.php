@@ -104,9 +104,9 @@ include('session.php');
 
                   
                     <td>                    
-                      <a class="btn btn-success sendbtn"><i class="bi bi-cursor-fill"></i></a>
-                      <a class="btn btn-danger holdbtn" ><i class="bi bi-folder-symlink" ></i></a>
-                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>                
+                      <a class="btn btn-success sendbtn" title="Send"><i class="bi bi-cursor-fill"></i></a>
+                      <a class="btn btn-danger holdbtn" title="Hold"><i class="bi bi-folder-symlink" ></i></a>
+                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="bi bi-eye-fill"></i></a>                
                     </td>
                   </tr>
 

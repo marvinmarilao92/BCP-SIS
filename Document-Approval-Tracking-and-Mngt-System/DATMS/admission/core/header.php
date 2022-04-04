@@ -1,9 +1,11 @@
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
-
+<?php 
+include "key_checker.php";
+?>
 <div class="d-flex align-items-center justify-content-between">
-  <a href="index.php" class="logo d-flex align-items-center">
+  <a href="index.phpid=<?php echo $_SESSION["login_key"];?>" class="logo d-flex align-items-center">
     <img src="../assets/img/admission.png" alt="">
     <span class="d-none d-lg-block">Student Admission</span>
   </a>
@@ -31,7 +33,7 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
+          <a class="dropdown-item d-flex align-items-center" href="users-profile.phpid=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-person"></i>
             <span>My Profile</span>
           </a>
@@ -44,7 +46,7 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+          <a class="dropdown-item d-flex align-items-center" href="pages-faq.htmlid=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-question-circle"></i>
             <span>Need Help?</span>
           </a>
@@ -56,13 +58,14 @@
         <!-- Adding return nav item for super admin -->
         <?php 
             $output = '';
+            $key = $_SESSION["login_key"];
             if(isset($verified_session_department) && ($verified_session_username)){
               switch($verified_session_role){
                 case "SuperAdmin":
                     //statement
                     $output .= '
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php">
+                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php?id='.$key.'">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>
@@ -74,7 +77,7 @@
                 //statement
                   $output .= '
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="function/logout.php">
+                      <a class="dropdown-item d-flex align-items-center" href="function/logout.php?id=<?php echo $_SESSION["login_key"];?>">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>

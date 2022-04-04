@@ -81,7 +81,7 @@ include('session.php');
           <div class="card">
             <div class="col-lg-12">
               <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                  <h4>Offically Enrolled Students</h4>
+                  <h4>Transferee Students</h4>
               </div> 
             </div>
             <div class="card-body" >           
@@ -102,6 +102,7 @@ include('session.php');
                     $query="SELECT *,LEFT(middlename,1) FROM student_information WHERE account_status = 'Transferee' ORDER BY stud_date DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
+                      $adm_id = $rs['id'];
                       $adm_no =$rs['id_number'];
                       $adm_fname = $rs['firstname'];
                       $adm_lname = $rs['lastname'];        
@@ -117,13 +118,15 @@ include('session.php');
                     <td data-label="Status"><?php echo $adm_as?></td>
                     <td data-label="Status" style="display: none;"><?php echo $date?></td>
                     <td WIDTH="7%">      
-                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
-                        <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>                       
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>"><i class="bi bi-eye"></i></button>                       
                       </div>
                     </td>
                   </tr>
 
-                  <?php } ?>
+                  <?php 
+                  include 'modals/stud_modals.php';
+                  } ?>
                   
                 </tbody>
               

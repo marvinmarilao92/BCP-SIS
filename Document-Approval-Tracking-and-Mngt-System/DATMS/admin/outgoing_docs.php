@@ -97,8 +97,8 @@ include('session.php');
                     <td style="display:none"><?php echo $docOff3?></td>
                     <td style="display:none"><?php echo $docRemarks?></td>
                     <td>                      
-                     <a class="btn btn-danger cancelbtn"><i class="bi bi-x-lg"></i></a>
-                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
+                     <a class="btn btn-danger cancelbtn" title="Cancel"><i class="bi bi-x-lg"></i></a>
+                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="bi bi-eye-fill"></i></a>
                     </td>
                   </tr>
 

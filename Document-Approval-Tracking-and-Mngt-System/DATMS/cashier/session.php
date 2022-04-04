@@ -34,16 +34,16 @@
             break;
           default:
             session_destroy();
-            header("location:../login.php");
+            header("location:../index.php");
             die();
 
         }
     }else{
-        header("location:../login.php");
+        header("location:../index.php");
         die();
     }
   }else{
-    header("location:../login.php");
+    header("location:../index.php");
     die();
   }
 ?>

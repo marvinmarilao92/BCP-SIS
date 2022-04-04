@@ -160,10 +160,10 @@ include('session.php');
 
                                           <td>
                                           <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
-                                            <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>
-                                            <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="ri ri-eye-line"></i></a>
-                                            <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' ><i class="ri ri-download-2-fill" ></i></a>
-                                            <a class="btn btn-dark historybtn"><i class="ri ri-history-line" ></i></a>
+                                            <a  class="btn btn-secondary viewbtn" title="Barcode"><i class="ri ri-barcode-line"></i></a>
+                                            <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri ri-eye-line"></i></a>
+                                            <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' title="Download"><i class="ri ri-download-2-fill" ></i></a>
+                                            <!-- <a class="btn btn-dark historybtn"><i class="ri ri-history-line" ></i></a> -->
                                           </div>
                                           </td>
                                         </tr>
@@ -219,7 +219,7 @@ include('session.php');
                                           $query="SELECT * FROM datms_documents ORDER BY doc_date1 DESC ";
                                           $result=mysqli_query($conn,$query);
                                           while($rs=mysqli_fetch_array($result)){
-                                            $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
+                                            $docId1 =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
                                             $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
                                             $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
                                             $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
@@ -228,7 +228,7 @@ include('session.php');
                                             $docRemarks = $rs['doc_remarks'];  
                                         ?>
                                         <tr>
-                                          <td style="display:none"><?php echo $docId?></td>
+                                          <td style="display:none"><?php echo $docId1?></td>
                                           <td data-label="Code:"><?php echo $docCode; ?></td>
                                           <td data-label="File Name:" WIDTH="25%"><?php echo $docName; ?></td>
                                           <td data-label="Tracker:"><?php echo $docAct3; ?></td>
@@ -251,8 +251,8 @@ include('session.php');
 
                                           <td WIDTH="8%">
                                           <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
-                                            <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>
-                                            <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="ri ri-eye-line"></i></a>
+                                            <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line" title="Barcode"></i></a>
+                                            <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId1; ?>' target="_blank" title="View"><i class="ri ri-eye-line"></i></a>
                                             <!-- <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' ><i class="ri ri-download-2-fill" ></i></a>
                                             <a class="btn btn-dark historybtn"><i class="ri ri-history-line" ></i></a> -->
                                           </div>
@@ -531,6 +531,7 @@ include('session.php');
             if (isset($_POST['save'])) { // if save button on the form is clicked
                   // name of the uploaded file
                   date_default_timezone_set("asia/manila");
+                  $key = $_SESSION["login_key"];
                   $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
                   $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
                   // $doc_user = $_POST['doccreator'];
@@ -582,7 +583,7 @@ include('session.php');
                               icon: "error",
                               title:"File extension must be: .pdf"
                               }).then(function(){
-                                window.location = "documents_list.php";//refresh pages
+                                window.location = "documents_list.php?id='.$key.'";//refresh pages
                               });
                           </script>
                       ';
@@ -612,7 +613,7 @@ include('session.php');
                               icon: "warning",
                               title:"File name already taken<br>You have to change the name of file"
                               }).then(function(){
-                                window.location = "documents_list.php";//refresh pages
+                                window.location = "documents_list.php?id='.$key.'";//refresh pages
                               });
                           </script>
                     ';
@@ -645,7 +646,7 @@ include('session.php');
                               icon: "success",
                               title:"Document to track Successfully Created"
                               }).then(function(){
-                                window.location = "documents_list.php";//refresh pages
+                                window.location = "documents_list.php?id='.$key.'";//refresh pages
                               });
                           </script>';
                           
