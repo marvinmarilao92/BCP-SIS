@@ -308,7 +308,7 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: Usermanagement/index.php?id=".$_SESSION["login_key"]."");
+                                header("location: UserManagement/index.php?id=".$_SESSION["login_key"]."");
                             }                          
                           break;
                       }
