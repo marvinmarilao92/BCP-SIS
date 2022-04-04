@@ -33,7 +33,7 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="users-profile.phpid=<?php echo $_SESSION["login_key"];?>">
+          <a class="dropdown-item d-flex align-items-center" href="users-profile.php?id=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-person"></i>
             <span>My Profile</span>
           </a>
@@ -46,7 +46,7 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="pages-faq.htmlid=<?php echo $_SESSION["login_key"];?>">
+          <a class="dropdown-item d-flex align-items-center" href="#">
             <i class="bi bi-question-circle"></i>
             <span>Need Help?</span>
           </a>
