@@ -3,7 +3,7 @@ include('session.php');
 require_once "includes/update_key.php";
 
 // Define variables and initialize with empty values
-$student_number = "";
+$id_number = "";
 $first_name = "";
 $last_name = "";
 $middle_name = "";
@@ -20,7 +20,57 @@ $civil_status = "";
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   $key = $_SESSION["login_key"];
-  $id_number = mysqli_real_escape_string($link,trim($_POST["id_number"]));
+  // $id_number = mysqli_real_escape_string($link,trim($_POST["id_number"]));\
+   //agun implementation for student number
+   $sqll = "SELECT id FROM teacher_information ORDER BY id DESC Limit 1";
+   if($resultt = mysqli_query($link, $sqll)){
+     if(mysqli_num_rows($resultt) == 0){
+       $id_number = "" . $current_year . "T000001";
+     }
+     else if(mysqli_num_rows($resultt) > 0){
+       while($roww = mysqli_fetch_array($resultt)){
+         if($roww['id'] < 9){
+           $new_id = $roww['id'] + 1;
+           $id_number = "" . $current_year . "T00000" . $new_id;
+         }
+         else if ($roww['id'] == 9){
+           $id_number = "" . $current_year . "T000010";
+         }
+         else if ($roww['id'] < 99){
+           $new_id = $roww['id'] + 1;
+           $id_number = "" . $current_year . "T0000" . $new_id;
+         }
+         else if ($roww['id'] == 99){
+           $id_number = "" . $current_year . "T000100";
+         }
+         else if ($roww['id'] < 999){
+           $new_id = $roww['id'] + 1;
+           $id_number = "" . $current_year . "T000" . $new_id;
+         }
+         else if ($roww['id'] == 999){
+           $id_number = "" . $current_year . "T001000";
+         }
+         else if ($roww['id'] < 9999){
+           $new_id = $roww['id'] + 1;
+           $id_number = "" . $current_year . "T00" . $new_id;
+         }
+         else if ($roww['id'] == 9999){
+           $id_number = "" . $current_year . "T000000";
+         }
+         else if ($roww['id'] < 99999){
+           $new_id = $roww['id'] + 1;
+           $id_number = "" . $current_year . "T0" . $new_id;
+         }
+         else if ($roww['id'] == 99999){
+           $id_number = "" . $current_year . "T100000";
+         }
+         else if ($roww['id'] < 999999){
+           $new_id = $roww['id'] + 1;
+           $id_number = "" . $current_year . "" . $new_id;
+         }
+       }
+     }
+   }
   $first_name = mysqli_real_escape_string($link,trim($_POST["first_name"]));
   $last_name = mysqli_real_escape_string($link,trim($_POST["last_name"]));
   $middle_name = mysqli_real_escape_string($link,trim($_POST["middle_name"]));
@@ -124,14 +174,14 @@ include ("includes/sidebar.php");
 
         <!-- No Labels Form -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="row g-3">
-          <div class="col-md-2">
+          <!-- <div class="col-md-2">
             <input type="number" name="id_number" class="form-control <?php echo (!empty($id_number_err)) ? 'is-invalid' : ''; ?>" Required placeholder="ID Number">
             <span class="invalid-feedback"><?php echo $id_number_err;?></span>
-          </div>
-          <div class="col-md-4">
+          </div> -->
+          <div class="col-md-5">
             <input type="text" name="first_name" class="form-control" Required placeholder="First Name">
           </div>
-          <div class="col-md-4">
+          <div class="col-md-5">
             <input type="text" name="last_name" class="form-control" Required placeholder="Last Name">
           </div>
           <div class="col-md-2">
