@@ -124,19 +124,51 @@ include('session.php');
 
           // Attempt to execute the prepared statement
           if(mysqli_stmt_execute($stmt)){
-            // Records created successfully. Redirect to landing page
-            // Records created successfully. Redirect to landing page          
-            $query = "UPDATE student_application SET account_status='$status' WHERE id_number='$code'";
-            if($query_run = mysqli_query($link, $query)){
-              echo '<script language="javascript">';
-              echo 'alert("Student Enrolled")';
-              echo '</script>';
-            }else{
-              echo '<script language="javascript">';
-              echo 'alert("No Student Applicaition Detected")';
-              echo '</script>';
-            }
+            //Create user account
+            require_once "core/update_key.php";
+            $sql = "INSERT INTO users (id_number, password, login_key) VALUES (?, ?, ?)";
 
+            if($stmt1 = mysqli_prepare($link, $sql)){
+              // Bind variables to the prepared statement as parameters
+              mysqli_stmt_bind_param($stmt1, "sss", $student_number, $password, $getQP);
+
+              // Attempt to execute the prepared statement
+              if(mysqli_stmt_execute($stmt1)){
+                
+                  // Records created successfully. Redirect to landing page          
+                  $query = "UPDATE student_application SET account_status='$status' WHERE id_number='$code'";
+                  if($query_run = mysqli_query($link, $query)){
+                    echo'<script type = "text/javascript">
+                    //success message
+                    const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProsressBar: true,
+                    didOpen: (toast) => {
+                    toast.addEventListener("mouseenter", Swal.stopTimer)
+                    toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                    }
+                    })
+                    Toast.fire({
+                    icon: "success",
+                    title:"Student Successfully en"
+                    }).then(function(){
+                      window.location = "index.php?id='.$key.'";//refresh pages
+                    });
+                </script>';
+                  }else{
+                    echo '<script language="javascript">';
+                    echo 'alert("No Student Applicaition Detected")';
+                    echo '</script>';
+                  }
+                  
+
+              } else{
+                  echo "Oops! Something went wrong. Please try again later.";
+              }
+            }
           } else{
               echo "Oops! Something went wrong. Please try again later.";
           }
