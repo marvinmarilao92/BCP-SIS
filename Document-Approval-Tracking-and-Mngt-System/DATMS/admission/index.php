@@ -133,25 +133,25 @@
                   echo '</script>';                
                   }else{
                     echo '<script language="javascript">';
-                    echo 'alert("No Student Applicaition Detected")';
+                    echo 'alert("error4")';
                     echo '</script>';
                   }
                   
 
               } else{
                 echo '<script language="javascript">';
-                echo 'alert("No Student Applicaition Detected")';
+                echo 'alert("error3")';
                 echo '</script>';
               }
             }
           } else{
             echo '<script language="javascript">';
-            echo 'alert("No Student Applicaition Detected")';
+            echo 'alert("error2")';
             echo '</script>';
           }
         }else{
           echo '<script language="javascript">';
-                    echo 'alert("No Student Applicaition Detected")';
+                    echo 'alert("error1")';
                     echo '</script>';
         }
 
