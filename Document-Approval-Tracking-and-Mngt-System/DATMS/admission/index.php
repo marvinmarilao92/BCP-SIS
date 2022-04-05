@@ -1,22 +1,22 @@
 <?php
     include('session.php');
     // Define variables and initialize with empty values
-    $student_number = "#";
-    $first_name = "#";
-    $last_name = "#";
-    $middle_name = "#";
-    $course = "#";
-    $year_level = "#";
-    $section = "#";
-    $school_year = "#";
-    $address = "#";
-    $email = "#";
-    $contact = "#";
-    $gender = "#";
-    $birthday = "#";
-    $nationality = "#";
-    $religion = "#";
-    $civil_status = "#";
+    $student_number = "";
+    $first_name = "";
+    $last_name = "";
+    $middle_name = "";
+    $course = "";
+    $year_level = "";
+    $section = "";
+    $school_year = "";
+    $address = "";
+    $email = "";
+    $contact = "";
+    $gender = "";
+    $birthday = "";
+    $nationality = "";
+    $religion = "";
+    $civil_status = "";
     $status = "Enrolled";
     // agon date
     $current_year = date("y");
@@ -140,12 +140,20 @@
                   
 
               } else{
-                  echo "Oops! Something went wrong. Please try again later.";
+                echo '<script language="javascript">';
+                echo 'alert("No Student Applicaition Detected")';
+                echo '</script>';
               }
             }
           } else{
-              echo "Oops! Something went wrong. Please try again later.";
+            echo '<script language="javascript">';
+            echo 'alert("No Student Applicaition Detected")';
+            echo '</script>';
           }
+        }else{
+          echo '<script language="javascript">';
+                    echo 'alert("No Student Applicaition Detected")';
+                    echo '</script>';
         }
 
         // Close statement
