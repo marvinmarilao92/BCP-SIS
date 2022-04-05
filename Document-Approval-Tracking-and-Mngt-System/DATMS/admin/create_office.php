@@ -109,7 +109,7 @@ include('session.php');
                   <tbody>
                     <?php
                       require_once("include/conn.php");
-                      $query="SELECT * FROM datms_office ORDER BY off_name ASC ";
+                      $query="SELECT * FROM datms_office ORDER BY off_date asc ";
                       $result=mysqli_query($conn,$query);
                       while($rs=mysqli_fetch_array($result)){
                         $offid =$rs['off_id'];

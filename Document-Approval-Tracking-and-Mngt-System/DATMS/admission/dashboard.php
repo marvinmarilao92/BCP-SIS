@@ -267,7 +267,7 @@ include('session.php');
     //pie
     var ctxP = document.getElementById("accountChart").getContext('2d');
     var myPieChart = new Chart(ctxP, {
-      type: 'doughnut',      
+      type: 'pie',      
       data: {
         labels:<?php echo json_encode($name1); ?>,
             datasets: [{

@@ -223,8 +223,7 @@ include('session.php');
                                   <td data-label="Date:"><?php echo $LA1?></td>    
                                 </tr>
 
-                                <?php 
-                                } ?>
+                                <?php } ?>
                                 
                               </tbody>
                             </table>

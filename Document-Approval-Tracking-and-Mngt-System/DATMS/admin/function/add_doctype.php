@@ -24,7 +24,7 @@
 		//create audit trail record
 			//add session conncetion
  			include('../session.php');
-			$fname=$verified_session_firstname.' '.$verified_session_lastname; 
+			$fname=$verified_session_role; 
 			if (!empty($_SERVER["HTTP_CLIENT_IP"])){
 				$ip = $_SERVER["HTTP_CLIENT_IP"];
 			}elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){

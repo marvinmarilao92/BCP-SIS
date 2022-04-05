@@ -60,18 +60,51 @@ include('session.php');
                             <table class="table table-hover datatable" >
                               <thead>
                                 <tr>
-                                  <th scope="col">Full Name</th>
-                                  <th scope="col" >Department</th>
-                                  <!-- <th scope="col">Filesize</th>    -->
-                                  <th scope="col">Role</th>   
-                                  <th scope="col">Office</th>       
-                                  <th scope="col">Contact</th>  
-                                  <!-- <th scope="col">Downloads</th>    -->
-                                  <th scope="col">Account Status</th>          
+                                  <th scope="col">Username</th>
+                                  <th scope="col">Full Name</th>  
+                                  <th scope="col">Action</th>    
+                                  <th scope="col">IP Address</th> 
+                                  <th scope="col">Host</th>   
+                                  <th scope="col">Date</th>        
                                 </tr>
                               </thead>
                               <tbody>
-                                
+                              <?php
+                                  require_once("include/conn.php");
+                                  $query="SELECT * FROM audit_logs WHERE `action_name` = 'Registrar Officer' ORDER BY login_time DESC ";
+                                  $result=mysqli_query($conn,$query);
+                                  while($rs=mysqli_fetch_array($result)){
+                                    $id = $rs['account_no']; 
+                                    $host = $rs['host']; 
+                                    $action = $rs['action'];                        
+                                    $ip =$rs['ip'];                                         
+                                    $date =$rs['login_time'];
+                                                               
+
+                                    $sql1 = "SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `id_number` = '$id'";
+                                        if($result1 = mysqli_query($link, $sql1)){
+                                          if(mysqli_num_rows($result1) > 0){
+                                            while($row1 = mysqli_fetch_array($result1)){
+                                              $fname = $row1['firstname'];      
+                                              $lname =$row1['lastname']; 
+                                              $mname = $row1['MI']; 
+                                            }
+                                            // Free result set
+                                            mysqli_free_result($result1);
+                                          }
+                                        }
+                                ?>
+                                <tr>                     
+                                  <td data-label="Username:"><?php echo $id; ?></td>
+                                  <td data-label="Full Name:"><?php echo $fname.' '.$mname.' '.$lname; ?></td>
+                                  <td data-label="Dept:"><?php echo $action; ?></td>
+                                  <td data-label="Status:"><?php echo $ip; ?></td>
+                                  <td data-label="Date:"><?php echo $host?></td> 
+                                  <td data-label="Date:"><?php echo $date?></td>                                         
+                                </tr>
+
+                                <?php 
+                                } ?>
                               </tbody>
                             </table>
                             <!-- End of Table -->
@@ -103,22 +136,56 @@ include('session.php');
                             <table class="table table-hover datatable" >
                               <thead>
                                 <tr>
-                                  <th scope="col">Full Name</th>
-                                  <th scope="col" >Department</th>
-                                  <!-- <th scope="col">Filesize</th>    -->
-                                  <th scope="col">Role</th>   
-                                  <th scope="col">Office</th>       
-                                  <th scope="col">Contact</th>  
-                                  <!-- <th scope="col">Downloads</th>    -->
-                                  <th scope="col">Account Status</th>          
+                                  <th scope="col">Username</th>
+                                  <th scope="col">Full Name</th>  
+                                  <th scope="col">Action</th>    
+                                  <th scope="col">affected</th> 
+                                  <th scope="col">IP Address</th> 
+                                  <th scope="col">Host</th>   
+                                  <th scope="col">Date</th>  
                                 </tr>
                               </thead>
                               <tbody>
-                                
+                              <?php
+                                    require_once("include/conn.php");
+                                    $query="SELECT * FROM audit_trail WHERE `actor` = 'Registrar Officer' ORDER BY date DESC ";
+                                    $result=mysqli_query($conn,$query);
+                                    while($rs=mysqli_fetch_array($result)){
+                                      $id = $rs['account_no']; 
+                                      $host = $rs['host']; 
+                                      $action = $rs['action'];                        
+                                      $affected = $rs['affected']; 
+                                      $ip =$rs['ip'];                                         
+                                      $date =$rs['date'];
+                                                                
+
+                                      $sql1 = "SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `id_number` = '$id'";
+                                          if($result1 = mysqli_query($link, $sql1)){
+                                            if(mysqli_num_rows($result1) > 0){
+                                              while($row1 = mysqli_fetch_array($result1)){
+                                                $fname = $row1['firstname'];      
+                                                $lname =$row1['lastname']; 
+                                                $mname = $row1['MI']; 
+                                              }
+                                              // Free result set
+                                              mysqli_free_result($result1);
+                                            }
+                                          }
+                                  ?>
+                                  <tr>                     
+                                    <td data-label="Username:"><?php echo $id; ?></td>
+                                    <td data-label="Full Name:"><?php echo $fname.' '.$mname.' '.$lname; ?></td>
+                                    <td data-label="Dept:"><?php echo $action; ?></td>
+                                    <td data-label="Dept:"><?php echo $affected; ?></td>
+                                    <td data-label="Status:"><?php echo $ip; ?></td>
+                                    <td data-label="Date:"><?php echo $host?></td> 
+                                    <td data-label="Date:"><?php echo $date?></td>                                         
+                                  </tr>
+
+                                  <?php } ?>
                               </tbody>
                             </table>
                             <!-- End of Table -->
-
                           </div>
                         </div>
 

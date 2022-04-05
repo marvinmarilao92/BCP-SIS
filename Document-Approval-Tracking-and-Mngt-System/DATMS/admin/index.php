@@ -331,7 +331,7 @@ include('session.php');
      data: {
             labels:<?php echo json_encode($name3); ?>,
             datasets: [{
-                 label: 'Line Chart',
+                 label: 'Number of Students ',
                         fill: false,
                         borderColor: 'rgb(13, 110, 253)',
                         // tension: 0.1,

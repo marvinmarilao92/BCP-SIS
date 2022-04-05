@@ -447,7 +447,7 @@ include('session.php');
           <div class="card col-md-12">
             <div class="card-body">
               <h5 class="card-title">New Student Requirements:</h5>
-                <div class="row mb-3">
+                <div class="row mb-3" aria-required="true">
                   
                   <div class="col-sm-2 pt-1">
 
