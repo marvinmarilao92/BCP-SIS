@@ -544,8 +544,7 @@ include('session.php');
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
-</body>
-<?php
+  <?php
     // Define variables and initialize with empty values
     $student_number = "#";
     $first_name = "#";
@@ -722,14 +721,9 @@ include('session.php');
     }
 
 ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
+</body>
   <script type="text/javascript">
-
-    //  $("#editableswitch").click(function () {
-    //       document.getElementById('divcompany').style.display = 'none';
-    //       document.getElementById('divposition').style.display = 'none';
-    //   });    
+ 
     function editInfo(){
         var isChecked = document.getElementById("editableswitch").checked;
           
@@ -830,15 +824,6 @@ include('session.php');
         }
         
       }
-       //making text uppercase
-       function forceInputUppercase(e)
-        {
-          var start = e.target.selectionStart;
-          var end = e.target.selectionEnd;
-          e.target.value = e.target.value.toUpperCase();
-          e.target.setSelectionRange(start, end);
-        }
 
-      document.getElementById("middle_name").addEventListener("keyup", forceInputUppercase, false);
   </script>
 </html>
