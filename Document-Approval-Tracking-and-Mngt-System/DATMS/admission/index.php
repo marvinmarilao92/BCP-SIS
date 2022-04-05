@@ -138,26 +138,9 @@ include('session.php');
                   // Records created successfully. Redirect to landing page          
                   $query = "UPDATE student_application SET account_status='$status' WHERE id_number='$code'";
                   if($query_run = mysqli_query($link, $query)){
-                    echo'<script type = "text/javascript">
-                    //success message
-                    const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 2000,
-                    timerProsressBar: true,
-                    didOpen: (toast) => {
-                    toast.addEventListener("mouseenter", Swal.stopTimer)
-                    toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                    }
-                    })
-                    Toast.fire({
-                    icon: "success",
-                    title:"Student Successfully en"
-                    }).then(function(){
-                      window.location = "index.php?id='.$key.'";//refresh pages
-                    });
-                </script>';
+                    echo '<script language="javascript">';
+                    echo 'alert("No Student Applicaition Detected")';
+                    echo '</script>';
                   }else{
                     echo '<script language="javascript">';
                     echo 'alert("No Student Applicaition Detected")';
