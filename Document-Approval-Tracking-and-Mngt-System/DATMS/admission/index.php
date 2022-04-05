@@ -130,8 +130,7 @@
                   if($query_run = mysqli_query($link, $query)){
                   echo '<script language="javascript">';
                   echo 'alert("You Successfully Enrolled the Student")';
-                  echo '</script>';
-                  echo 'location.replace("index.php")';
+                  echo '</script>';                
                   }else{
                     echo '<script language="javascript">';
                     echo 'alert("No Student Applicaition Detected")';
