@@ -544,31 +544,31 @@ include('session.php');
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
-</body>
-<?php
+  <?php
     // Define variables and initialize with empty values
-    $student_number = "#";
-    $first_name = "#";
-    $last_name = "#";
-    $middle_name = "#";
-    $course = "#";
-    $year_level = "#";
-    $section = "#";
-    $school_year = "#";
-    $address = "#";
-    $email = "#";
-    $contact = "#";
-    $gender = "#";
-    $birthday = "#";
-    $nationality = "#";
-    $religion = "#";
-    $civil_status = "#";
+    $student_number = "";
+    $first_name = "";
+    $last_name = "";
+    $middle_name = "";
+    $course = "";
+    $year_level = "";
+    $section = "";
+    $school_year = "";
+    $address = "";
+    $email = "";
+    $contact = "";
+    $gender = "";
+    $birthday = "";
+    $nationality = "";
+    $religion = "";
+    $civil_status = "";
     $status = "Enrolled";
     // agon date
     $current_year = date("y");
+    $key = $_SESSION["login_key"];
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-      $key = $_SESSION["login_key"];
+      
       //agun implementation for student number
       $sqll = "SELECT id FROM student_information ORDER BY id DESC Limit 1";
       if($resultt = mysqli_query($link, $sqll)){
@@ -708,6 +708,10 @@ include('session.php');
           } else{
               echo "Oops! Something went wrong. Please try again later.";
           }
+        }else{
+          echo '<script language="javascript">';
+          echo 'alert("Error1")';
+          echo '</script>';
         }
 
         // Close statement
@@ -722,6 +726,8 @@ include('session.php');
     }
 
 ?>
+</body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
   <script type="text/javascript">
