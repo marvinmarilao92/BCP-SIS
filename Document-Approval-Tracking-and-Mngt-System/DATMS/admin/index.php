@@ -157,7 +157,7 @@ include('session.php');
                 </div>
                 <!-- Bar Chart -->
                 <div class="card-body">
-                  <h5 class="card-title">Document Tracked <span>Per Office</span></h5>
+                  <h5 class="card-title">Document Tracked <span>| Per Department</span></h5>
                 <canvas id="barChart" style="max-height: 400px;"></canvas>
                  <?php
                        require_once("include/conn.php");
@@ -178,6 +178,42 @@ include('session.php');
               </div>
             </div><!-- End Reports -->
 
+             <!-- Student Enrolled per year -->
+             <div class="col-12">
+                <div class="card">
+
+                  <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                      <li class="dropdown-header text-start">
+                        <h6>Tables</h6>
+                      </li>
+
+                      <li><a class="dropdown-item" href="#">Show</a></li>
+                    </ul>
+                  </div>
+                  <!-- Bar Chart -->
+                  <div class="card-body">
+                    <h5 class="card-title">Students Enrolled<span> | Per Year</span></h5>
+                  <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                  <?php
+                    require_once("include/conn.php");
+                          $sql3="SELECT *, YEAR(`stud_date`) AS Stud_Year, count('Stud_Year') as countyear FROM student_information group by Stud_Year";
+                          //  $sql ="SELECT *,count(doc_off3) as count FROM datms_documents group by doc_off3;";
+                          $result3 = mysqli_query($conn,$sql3);
+                          $chart_data="";
+                          while ($row3 = mysqli_fetch_array($result3)) { 
+                              $name3[]  = $row3['Stud_Year']  ;
+                              $counts3[] = $row3['countyear'];
+                          }
+                  
+                  ?>
+              
+                  </div>
+                <!-- End Bar CHart -->
+                </div>
+              </div><!-- End Reports -->
+
           </div>
         </div><!-- End Left side columns -->
 
@@ -187,7 +223,7 @@ include('session.php');
           <!-- Website Traffic -->
           <div class="card">
             <div class="card-body pb-0">
-              <h5 class="card-title">User Accounts <span>| Graph</span></h5>
+              <h5 class="card-title">User Accounts <span>| Per Role</span></h5>
 
               <canvas id="accountChart" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
                   <?php
@@ -204,6 +240,28 @@ include('session.php');
 
             </div>
           </div><!-- End Website Traffic -->
+
+           <!-- Website Traffic -->
+           <div class="card">
+            <div class="card-body pb-0">
+              <h5 class="card-title">Student Count <span>| Per Program</span></h5>
+
+              <canvas id="studChart" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
+                  <?php
+                       require_once("include/conn.php");
+                             $sql2 ="SELECT *,count(course) as count FROM student_information group by course;";
+                             $result2 = mysqli_query($conn,$sql2);
+                             $chart_data="";
+                             while ($row2 = mysqli_fetch_array($result2)) { 
+                     
+                                $name2[]  = $row2['course']  ;
+                                $counts2[] = $row2['count'];
+                            }
+                    ?>
+
+            </div>
+          </div><!-- End Website Traffic -->
+
         </div><!-- End Right side columns -->
 
       </div>
@@ -221,7 +279,7 @@ include('session.php');
   <?php include ('core/js.php');//css connection?>
 <!-- Charts -->
 <script>
-    // Line
+    // BAR
     var ctx = document.getElementById("barChart").getContext('2d');
     var myChart = new Chart(ctx, {
       type: 'bar',
@@ -255,6 +313,43 @@ include('session.php');
           legend: {
             display: false
           },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+
+        }
+      }
+    });
+
+    // Line
+    var ctx = document.getElementById("lineChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'line',
+     data: {
+            labels:<?php echo json_encode($name3); ?>,
+            datasets: [{
+                 label: 'Line Chart',
+                        fill: false,
+                        borderColor: 'rgb(13, 110, 253)',
+                        // tension: 0.1,
+                        borderWidth: 2,
+                        hoverOffset: 5,
+                        data:<?php echo json_encode($counts3); ?>,
+            }]
+        },
+      options: {
+        responsive: true,
+            interaction: {
+            intersect: false,
+            axis: 'x'
+          },
+          legend: {
+            display: false
+          },
+          
         scales: {
           yAxes: [{
             ticks: {
@@ -307,6 +402,48 @@ include('session.php');
       },
       
     });
+
+     //stud radio
+     var ctxP = document.getElementById("studChart").getContext('2d');
+    var myPieChart = new Chart(ctxP, {
+      type: 'polarArea',      
+      data: {
+        labels:<?php echo json_encode($name2); ?>,
+            datasets: [{
+                 label: 'Pie Chart',
+                  backgroundColor: [
+                          'rgba(255, 99, 132, 0.5)',
+                          'rgba(255, 159, 64, 0.5)',
+                          'rgba(255, 205, 86, 0.5)',
+                          'rgba(75, 192, 192, 0.5)',
+                          'rgba(54, 162, 235, 0.5)',
+                          'rgba(153, 102, 255, 0.5)',
+                          'rgba(201, 203, 207, 0.5)'
+                        ],
+                        borderColor: [
+                          'rgb(255, 99, 132)',
+                          'rgb(255, 159, 64)',
+                          'rgb(255, 205, 86)',
+                          'rgb(75, 192, 192)',
+                          'rgb(54, 162, 235)',
+                          'rgb(153, 102, 255)',
+                          'rgb(201, 203, 207)'
+                        ],
+                        
+                        borderWidth: 1,
+                data:<?php echo json_encode($counts2); ?>,
+            }]
+      },
+      options: {
+        responsive: true,
+        legend: false
+      }, 
+      labelLine: {
+        show: false
+      },
+      
+    });
+
 
   </script>
 </body>

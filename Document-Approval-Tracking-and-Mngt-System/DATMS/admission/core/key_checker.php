@@ -14,6 +14,6 @@
       }
       if (!isset($_GET['id']))
         {
-          echo '<script type="text/javascript">location.href = "../../../dynamic-login.php"</script>';   session_destroy(); die();
+          echo '<script type="text/javascript">location.href = "index.php?id='.$key.'"</script>';   
         }
       ?>

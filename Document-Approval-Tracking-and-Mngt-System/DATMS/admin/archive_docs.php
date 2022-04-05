@@ -5,8 +5,46 @@ include('session.php');
 <html lang="en">
 <title>DATMS | Archive</title>
 <head>
-<?php include ('core/css-links.php');//css connection?>
-</head>
+  <?php include ('core/css-links.php');//css connection?>
+  <style>
+        /*responsive*/
+        @media(max-width: 500px){
+          .table thead{
+            display: none;
+          }
+
+          .table, .table tbody, .table tr, .table td{
+            display: block;
+            width: 100%;
+          }
+          .table tr{
+            background: #ffffff;
+            box-shadow: 0 8px 8px -4px lightblue;
+            border-radius: 5%;
+            margin-bottom:13px;
+            margin-top: 13px;
+          }
+          .table td{
+            /* max-width: 20px; */
+            padding-left: 50%;
+            text-align: right;
+            position: relative;
+          }
+          .table td::before{      
+            margin-top: 10px;      
+            content: attr(data-label);
+            position: absolute;
+            left:0;
+            width: 50%;
+            padding-left:15px;
+            font-size:15px;
+            font-weight: bold;
+            text-align: left;
+          }
+        }
+      </style>
+    </head>
+  </head>
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
@@ -77,11 +115,11 @@ include('session.php');
                   ?>
                   <tr>
                     <td style="display:none"><?php echo $docId?></td>
-                    <td><?php echo $docCode; ?>
-                    <td><?php echo $docName; ?>
-                    <td><?php echo $docAct1; ?>
-                    <td><?php echo $docDate1; ?>
-                    <td><?php echo $docStat; ?>
+                    <td data-label="Code:"><?php echo $docCode; ?>
+                    <td data-label="Filename:"><?php echo $docName; ?>
+                    <td data-label="Actor:"><?php echo $docAct1; ?>
+                    <td data-label="Date&T:"><?php echo $docDate1; ?>
+                    <td data-label="Status:"><?php echo $docStat; ?>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
                     <td style="display:none"><?php echo $docTitle?></td>
@@ -105,7 +143,7 @@ include('session.php');
                           <a href="#">Link 3</a>
                         </div>
                       </div>                -->
-                      <a class="btn btn-secondary cancelbtn"><i class="bi bi-reply-fill"></i></a>
+                      <a class="btn btn-secondary cancelbtn" title="Retrieve"><i class="bi bi-reply-fill"></i></a>
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
                     </td>
                   </tr>

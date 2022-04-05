@@ -144,7 +144,7 @@ include('session.php');
                                           <td data-label="Tracker:"><?php echo $docAct3; ?></td>
                                           <td data-label="Date:"><?php echo $docDate3; ?></td>
                                           <td data-label="Current Actor:"><?php echo $docAct2?></td>
-                                          <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
+                                          <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
                                           <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
                                           <td style="display:none"><?php echo $docDl; ?></td>
                                           <td style="display:none"><?php echo $docTitle?></td>
@@ -159,12 +159,12 @@ include('session.php');
                                           <td style="display:none"><?php echo $docRemarks?></td>
 
                                           <td>
-                                          <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
-                                            <a  class="btn btn-secondary viewbtn" title="Barcode"><i class="ri ri-barcode-line"></i></a>
-                                            <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri ri-eye-line"></i></a>
-                                            <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' title="Download"><i class="ri ri-download-2-fill" ></i></a>
-                                            <!-- <a class="btn btn-dark historybtn"><i class="ri ri-history-line" ></i></a> -->
-                                          </div>
+                                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
+                                              <a  class="btn btn-secondary viewbtn" title="Barcode"><i class="ri ri-barcode-line"></i></a>
+                                              <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri ri-eye-line"></i></a>
+                                              <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' title="Download"><i class="ri ri-download-2-fill" ></i></a>
+                                              <!-- <a class="btn btn-dark historybtn"><i class="ri ri-history-line" ></i></a> -->
+                                            </div>
                                           </td>
                                         </tr>
 
@@ -235,7 +235,7 @@ include('session.php');
                                           <td data-label="Department:"WIDTH="10%"><?php echo $docOff3; ?></td>
                                           <td data-label="Date:"WIDTH="10%"><?php echo $docDate3; ?></td>
                                           <td data-label="Current Actor:"><?php echo $docAct2?></td>
-                                          <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
+                                          <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
                                           <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
                                           <td style="display:none"><?php echo $docDl; ?></td>
                                           <td style="display:none"><?php echo $docTitle?></td>

@@ -566,10 +566,9 @@ include('session.php');
     $status = "Enrolled";
     // agon date
     $current_year = date("y");
-
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-      
+      $key = $_SESSION["login_key"];
       //agun implementation for student number
       $sqll = "SELECT id FROM student_information ORDER BY id DESC Limit 1";
       if($resultt = mysqli_query($link, $sqll)){
@@ -672,6 +671,7 @@ include('session.php');
               // Attempt to execute the prepared statement
               if(mysqli_stmt_execute($stmt1)){
                   // Records created successfully. Redirect to landing page
+             
                   $query = "UPDATE student_application SET account_status='$status' WHERE id_number='$code'";
                   if($query_run = mysqli_query($link, $query)){
                     echo'<script type = "text/javascript">

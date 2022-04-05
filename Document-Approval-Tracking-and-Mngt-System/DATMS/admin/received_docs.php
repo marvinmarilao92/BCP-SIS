@@ -5,7 +5,44 @@ include('session.php');
 <html lang="en">
 <title>DATMS | Received Documents</title>
 <head>
-<?php include ('core/css-links.php');//css connection?>
+  <?php include ('core/css-links.php');//css connection?>
+  <style>
+    /*responsive*/
+    @media(max-width: 500px){
+      .table thead{
+        display: none;
+      }
+
+      .table, .table tbody, .table tr, .table td{
+        display: block;
+        width: 100%;
+      }
+      .table tr{
+        background: #ffffff;
+        box-shadow: 0 8px 8px -4px lightblue;
+        border-radius: 5%;
+        margin-bottom:13px;
+        margin-top: 13px;
+      }
+      .table td{
+        /* max-width: 20px; */
+        padding-left: 50%;
+        text-align: right;
+        position: relative;
+      }
+      .table td::before{      
+        margin-top: 10px;      
+        content: attr(data-label);
+        position: absolute;
+        left:0;
+        width: 50%;
+        padding-left:15px;
+        font-size:15px;
+        font-weight: bold;
+        text-align: left;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -58,7 +95,7 @@ include('session.php');
                     <th scope="col" >Filename</th>
                     <!-- <th scope="col">Filesize</th>    -->
                     <th scope="col">Actor</th>   
-                    <th scope="col">Date/Time</th>       
+                    <th scope="col">Date&Time</th>       
                     <th scope="col">Status</th>  
                     <!-- <th scope="col">Downloads</th>    -->
                     <th scope="col">Action</th>          
@@ -83,12 +120,12 @@ include('session.php');
                   ?>
                   <tr>
                     <td style="display:none"><?php echo $docId?></td>
-                    <td><?php echo $docCode; ?></td>
-                    <td><?php echo $docName; ?></td>
-                    <td><?php echo $docAct1; ?></td>
+                    <td data-label="Code:"><?php echo $docCode; ?></td>
+                    <td data-label="Filename:"><?php echo $docName; ?></td>
+                    <td data-label="Actor:"><?php echo $docAct1; ?></td>
                     <td style="display:none"><?php echo $docOff1?></td>
-                    <td><?php echo $docDate1; ?></td>
-                    <td><?php echo $docStat; ?></td>
+                    <td data-label="Date&T:"><?php echo $docDate1; ?></td>
+                    <td data-label="Status:"><?php echo $docStat; ?></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
                     <td style="display:none"><?php echo $docDl; ?></td>
                     <td style="display:none"><?php echo $docTitle?></td>

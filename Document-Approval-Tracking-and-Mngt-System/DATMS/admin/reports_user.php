@@ -6,6 +6,43 @@ include('session.php');
 <title>DATMS | User Reports</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
+<style>
+      /*responsive*/
+    @media(max-width: 500px){
+      .table thead{
+        display: none;
+      }
+
+      .table, .table tbody, .table tr, .table td{
+        display: block;
+        width: 100%;
+      }
+      .table tr{
+        background: #ffffff;
+        box-shadow: 0 8px 8px -4px lightblue;
+        border-radius: 5%;
+        margin-bottom:13px;
+        margin-top: 13px;
+      }
+      .table td{
+        /* max-width: 20px; */
+        padding-left: 50%;
+        text-align: right;
+        position: relative;
+      }
+      .table td::before{      
+        margin-top: 10px;      
+        content: attr(data-label);
+        position: absolute;
+        left:0;
+        width: 50%;
+        padding-left:15px;
+        font-size:15px;
+        font-weight: bold;
+        text-align: left;
+      }
+    }
+</style>
 </head>
 <body>
 
@@ -69,54 +106,50 @@ include('session.php');
                             <table class="table table-hover datatable" >
                               <thead>
                                 <tr>
+                                  <th scope="col">Username</th>
                                   <th scope="col">Full Name</th>
                                   <th scope="col" >Department</th>
-                                  <!-- <th scope="col">Filesize</th>    -->
-                                  <th scope="col">Role</th>   
-                                  <th scope="col">Office</th>       
-                                  <th scope="col">Contact</th>  
-                                  <!-- <th scope="col">Downloads</th>    -->
-                                  <th scope="col">Account Status</th>          
+                                  <th scope="col">Account Status</th>    
+                                  <th scope="col">Last Access</th>
+                                              
                                 </tr>
                               </thead>
                               <tbody>
                                 <?php
                                   require_once("include/conn.php");
-                                  $query="SELECT * FROM datms_documents WHERE (`doc_actor3`='$verified_session_firstname $verified_session_lastname' OR  `doc_off3` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted') ORDER BY doc_date1 DESC ";
+                                  $query="SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') AND `role` = 'DATMS Administrator'";
                                   $result=mysqli_query($conn,$query);
                                   while($rs=mysqli_fetch_array($result)){
-                                    $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
-                                    $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
-                                    $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
-                                    $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                                    $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                                    $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
-                                    $docRemarks = $rs['doc_remarks'];  
+                                    $uid =$rs['id']; 
+                                    $uname = $rs['id_number']; 
+                                    $fname = $rs['firstname'];      
+                                    $lname =$rs['lastname'];
+                                    $mname = $rs['MI']; 
+                                    $dept = $rs['office'];                       
+                                    $status =$rs['account_status'];
+
+                                    $sql1 = "SELECT * FROM users WHERE id_number = '$uname' ORDER BY last_access DESC ";
+                                        if($result1 = mysqli_query($link, $sql1)){
+                                          if(mysqli_num_rows($result1) > 0){
+                                            while($row1 = mysqli_fetch_array($result1)){
+                                              $LA = $row1['last_access'];                                          
+                                            }
+                                            // Free result set
+                                            mysqli_free_result($result1);
+                                          }
+                                        }
                                 ?>
                                 <tr>
-                                  <td style="display:none"><?php echo $docId?></td>
-                                  <td data-label="Code:"><?php echo $docCode; ?></td>
-                                  <td data-label="File Name:" ><?php echo $docName; ?></td>
-                                  <td data-label="Tracker:"><?php echo $docAct3; ?></td>
-                                  <td data-label="Date:"><?php echo $docDate3; ?></td>
-                                  <td data-label="Current Actor:"><?php echo $docAct2?></td>
-                                  <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
-                                  <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
-                                  <td style="display:none"><?php echo $docDl; ?></td>
-                                  <td style="display:none"><?php echo $docTitle?></td>
-                                  <td style="display:none"><?php echo $docType?></td>
-                                  <td style="display:none"><?php echo $docDesc?></td>
-                                  <td style="display:none"><?php echo $docOff1?></td>
-                                  <td style="display:none"><?php echo $docAct1?></td>
-                                  <td style="display:none"><?php echo $docOff1?></td>
-                                  <td style="display:none"><?php echo $docDate2?></td>                    
-                                  <td style="display:none"><?php echo $docOff3?></td>
-                                  <td style="display:none"><?php echo $docDate3?></td>
-                                  <td style="display:none"><?php echo $docRemarks?></td>
-
+                                  <td style="display:none"><?php echo $uid?></td>
+                                  <td data-label="Username:"><?php echo $uname; ?></td>
+                                  <td data-label="Full Name:" WIDTH="40%"><?php echo $fname.' '.$mname.' '.$lname; ?></td>
+                                  <td data-label="Dept:"><?php echo $dept; ?></td>
+                                  <td data-label="Status:"><?php echo $status; ?></td>
+                                  <td data-label="Date:"><?php echo $LA?></td>                                          
                                 </tr>
 
-                                <?php } ?>
+                                <?php 
+                                } ?>
                                 
                               </tbody>
                             </table>
@@ -149,54 +182,49 @@ include('session.php');
                             <table class="table table-hover datatable" >
                               <thead>
                                 <tr>
+                                  <th scope="col">Username</th>
                                   <th scope="col">Full Name</th>
                                   <th scope="col" >Department</th>
-                                  <!-- <th scope="col">Filesize</th>    -->
-                                  <th scope="col">Role</th>   
-                                  <th scope="col">Office</th>       
-                                  <th scope="col">Contact</th>  
-                                  <!-- <th scope="col">Downloads</th>    -->
-                                  <th scope="col">Account Status</th>          
+                                  <th scope="col">Account Status</th>    
+                                  <th scope="col">Last Access</th>                                    
                                 </tr>
                               </thead>
                               <tbody>
                                 <?php
                                   require_once("include/conn.php");
-                                  $query="SELECT * FROM datms_documents WHERE (`doc_actor3`='$verified_session_firstname $verified_session_lastname' OR  `doc_off3` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted') ORDER BY doc_date1 DESC ";
-                                  $result=mysqli_query($conn,$query);
-                                  while($rs=mysqli_fetch_array($result)){
-                                    $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
-                                    $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
-                                    $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
-                                    $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                                    $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                                    $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
-                                    $docRemarks = $rs['doc_remarks'];  
+                                  $query1="SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') AND `role` = 'DATMS Approver'";
+                                  $result1=mysqli_query($conn,$query1);
+                                  while($rs1=mysqli_fetch_array($result1)){
+                                    $uid1 =$rs1['id']; 
+                                    $uname1 = $rs1['id_number']; 
+                                    $fname1 = $rs1['firstname'];      
+                                    $lname1 =$rs1['lastname'];
+                                    $mname1 = $rs1['MI']; 
+                                    $dept1 = $rs1['office'];                       
+                                    $status1 =$rs1['account_status'];
+
+                                    $sql11 = "SELECT * FROM users WHERE id_number = '$uname' ORDER BY last_access DESC ";
+                                        if($result11 = mysqli_query($link, $sql11)){
+                                          if(mysqli_num_rows($result11) > 0){
+                                            while($row11 = mysqli_fetch_array($result11)){
+                                              $LA1 = $row11['last_access'];                                          
+                                            }
+                                            // Free result set
+                                            mysqli_free_result($result11);
+                                          }
+                                        }
                                 ?>
                                 <tr>
-                                  <td style="display:none"><?php echo $docId?></td>
-                                  <td data-label="Code:"><?php echo $docCode; ?></td>
-                                  <td data-label="File Name:" ><?php echo $docName; ?></td>
-                                  <td data-label="Tracker:"><?php echo $docAct3; ?></td>
-                                  <td data-label="Date:"><?php echo $docDate3; ?></td>
-                                  <td data-label="Current Actor:"><?php echo $docAct2?></td>
-                                  <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
-                                  <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
-                                  <td style="display:none"><?php echo $docDl; ?></td>
-                                  <td style="display:none"><?php echo $docTitle?></td>
-                                  <td style="display:none"><?php echo $docType?></td>
-                                  <td style="display:none"><?php echo $docDesc?></td>
-                                  <td style="display:none"><?php echo $docOff1?></td>
-                                  <td style="display:none"><?php echo $docAct1?></td>
-                                  <td style="display:none"><?php echo $docOff1?></td>
-                                  <td style="display:none"><?php echo $docDate2?></td>                    
-                                  <td style="display:none"><?php echo $docOff3?></td>
-                                  <td style="display:none"><?php echo $docDate3?></td>
-                                  <td style="display:none"><?php echo $docRemarks?></td>
-
+                                  <td style="display:none"><?php echo $uid1?></td>
+                                  <td data-label="Username:"><?php echo $uname1; ?></td>
+                                  <td data-label="Full Name:" WIDTH="40%"><?php echo $fname1.' '.$mname1.' '.$lname1; ?></td>
+                                  <td data-label="Dept:"><?php echo $dept1; ?></td>
+                                  <td data-label="Status:"><?php echo $status1; ?></td>
+                                  <td data-label="Date:"><?php echo $LA1?></td>    
                                 </tr>
 
-                                <?php } ?>
+                                <?php 
+                                } ?>
                                 
                               </tbody>
                             </table>
@@ -228,54 +256,50 @@ include('session.php');
                             <table class="table table-hover datatable" >
                               <thead>
                                 <tr>
+                                  <th scope="col">Username</th>
                                   <th scope="col">Full Name</th>
                                   <th scope="col" >Department</th>
-                                  <!-- <th scope="col">Filesize</th>    -->
-                                  <th scope="col">Role</th>   
-                                  <th scope="col">Office</th>       
-                                  <th scope="col">Contact</th>  
-                                  <!-- <th scope="col">Downloads</th>    -->
-                                  <th scope="col">Account Status</th>          
+                                  <th scope="col">Account Status</th>    
+                                  <th scope="col">Last Access</th> 
+                                              
                                 </tr>
                               </thead>
                               <tbody>
                                 <?php
                                   require_once("include/conn.php");
-                                  $query="SELECT * FROM datms_documents WHERE (`doc_actor3`='$verified_session_firstname $verified_session_lastname' OR  `doc_off3` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted') ORDER BY doc_date1 DESC ";
+                                  $query="SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') AND `role` = 'DATMS Assistant'";
                                   $result=mysqli_query($conn,$query);
                                   while($rs=mysqli_fetch_array($result)){
-                                    $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
-                                    $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
-                                    $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
-                                    $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                                    $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                                    $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
-                                    $docRemarks = $rs['doc_remarks'];  
+                                    $uid =$rs['id']; 
+                                    $uname = $rs['id_number']; 
+                                    $fname = $rs['firstname'];      
+                                    $lname =$rs['lastname'];
+                                    $mname = $rs['MI']; 
+                                    $dept = $rs['office'];                       
+                                    $status =$rs['account_status'];
+
+                                    $sql1 = "SELECT * FROM users WHERE id_number = '$uname' ORDER BY last_access DESC ";
+                                        if($result1 = mysqli_query($link, $sql1)){
+                                          if(mysqli_num_rows($result1) > 0){
+                                            while($row1 = mysqli_fetch_array($result1)){
+                                              $LA = $row1['last_access'];                                          
+                                            }
+                                            // Free result set
+                                            mysqli_free_result($result1);
+                                          }
+                                        }
                                 ?>
                                 <tr>
-                                  <td style="display:none"><?php echo $docId?></td>
-                                  <td data-label="Code:"><?php echo $docCode; ?></td>
-                                  <td data-label="File Name:" ><?php echo $docName; ?></td>
-                                  <td data-label="Tracker:"><?php echo $docAct3; ?></td>
-                                  <td data-label="Date:"><?php echo $docDate3; ?></td>
-                                  <td data-label="Current Actor:"><?php echo $docAct2?></td>
-                                  <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
-                                  <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
-                                  <td style="display:none"><?php echo $docDl; ?></td>
-                                  <td style="display:none"><?php echo $docTitle?></td>
-                                  <td style="display:none"><?php echo $docType?></td>
-                                  <td style="display:none"><?php echo $docDesc?></td>
-                                  <td style="display:none"><?php echo $docOff1?></td>
-                                  <td style="display:none"><?php echo $docAct1?></td>
-                                  <td style="display:none"><?php echo $docOff1?></td>
-                                  <td style="display:none"><?php echo $docDate2?></td>                    
-                                  <td style="display:none"><?php echo $docOff3?></td>
-                                  <td style="display:none"><?php echo $docDate3?></td>
-                                  <td style="display:none"><?php echo $docRemarks?></td>
-
+                                  <td style="display:none"><?php echo $uid?></td>
+                                  <td data-label="Username:"><?php echo $uname; ?></td>
+                                  <td data-label="Full Name:" WIDTH="40%"><?php echo $fname.' '.$mname.' '.$lname; ?></td>
+                                  <td data-label="Dept:"><?php echo $dept; ?></td>
+                                  <td data-label="Status:"><?php echo $status; ?></td>
+                                  <td data-label="Date:"><?php echo $LA?></td>                                                  
                                 </tr>
 
-                                <?php } ?>
+                                <?php 
+                                } ?>
                                 
                               </tbody>
                             </table>
@@ -308,54 +332,50 @@ include('session.php');
                             <table class="table table-hover datatable" >
                               <thead>
                                 <tr>
+                                  <th scope="col">Username</th>
                                   <th scope="col">Full Name</th>
                                   <th scope="col" >Department</th>
-                                  <!-- <th scope="col">Filesize</th>    -->
-                                  <th scope="col">Role</th>   
-                                  <th scope="col">Office</th>       
-                                  <th scope="col">Contact</th>  
-                                  <!-- <th scope="col">Downloads</th>    -->
-                                  <th scope="col">Account Status</th>          
+                                  <th scope="col">Account Status</th>    
+                                  <th scope="col">Last Access</th> 
+                                              
                                 </tr>
                               </thead>
                               <tbody>
                                 <?php
                                   require_once("include/conn.php");
-                                  $query="SELECT * FROM datms_documents WHERE (`doc_actor3`='$verified_session_firstname $verified_session_lastname' OR  `doc_off3` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted') ORDER BY doc_date1 DESC ";
+                                  $query="SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') AND `role` = 'Admission'";
                                   $result=mysqli_query($conn,$query);
                                   while($rs=mysqli_fetch_array($result)){
-                                    $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
-                                    $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
-                                    $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
-                                    $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                                    $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                                    $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
-                                    $docRemarks = $rs['doc_remarks'];  
+                                    $uid =$rs['id']; 
+                                    $uname = $rs['id_number']; 
+                                    $fname = $rs['firstname'];      
+                                    $lname =$rs['lastname'];
+                                    $mname = $rs['MI']; 
+                                    $dept = $rs['office'];                       
+                                    $status =$rs['account_status'];
+
+                                    $sql1 = "SELECT * FROM users WHERE id_number = '$uname' ORDER BY last_access DESC ";
+                                        if($result1 = mysqli_query($link, $sql1)){
+                                          if(mysqli_num_rows($result1) > 0){
+                                            while($row1 = mysqli_fetch_array($result1)){
+                                              $LA = $row1['last_access'];                                          
+                                            }
+                                            // Free result set
+                                            mysqli_free_result($result1);
+                                          }
+                                        }
                                 ?>
                                 <tr>
-                                  <td style="display:none"><?php echo $docId?></td>
-                                  <td data-label="Code:"><?php echo $docCode; ?></td>
-                                  <td data-label="File Name:" ><?php echo $docName; ?></td>
-                                  <td data-label="Tracker:"><?php echo $docAct3; ?></td>
-                                  <td data-label="Date:"><?php echo $docDate3; ?></td>
-                                  <td data-label="Current Actor:"><?php echo $docAct2?></td>
-                                  <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
-                                  <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
-                                  <td style="display:none"><?php echo $docDl; ?></td>
-                                  <td style="display:none"><?php echo $docTitle?></td>
-                                  <td style="display:none"><?php echo $docType?></td>
-                                  <td style="display:none"><?php echo $docDesc?></td>
-                                  <td style="display:none"><?php echo $docOff1?></td>
-                                  <td style="display:none"><?php echo $docAct1?></td>
-                                  <td style="display:none"><?php echo $docOff1?></td>
-                                  <td style="display:none"><?php echo $docDate2?></td>                    
-                                  <td style="display:none"><?php echo $docOff3?></td>
-                                  <td style="display:none"><?php echo $docDate3?></td>
-                                  <td style="display:none"><?php echo $docRemarks?></td>
-
+                                  <td style="display:none"><?php echo $uid?></td>
+                                  <td data-label="Username:"><?php echo $uname; ?></td>
+                                  <td data-label="Full Name:" WIDTH="40%"><?php echo $fname.' '.$mname.' '.$lname; ?></td>
+                                  <td data-label="Dept:"><?php echo $dept; ?></td>
+                                  <td data-label="Status:"><?php echo $status; ?></td>
+                                  <td data-label="Date:"><?php echo $LA?></td>                                                
                                 </tr>
 
-                                <?php } ?>
+                                <?php 
+                                } ?>
                                 
                               </tbody>
                             </table>
@@ -388,54 +408,50 @@ include('session.php');
                             <table class="table table-hover datatable" >
                               <thead>
                                 <tr>
+                                  <th scope="col">Username</th>
                                   <th scope="col">Full Name</th>
                                   <th scope="col" >Department</th>
-                                  <!-- <th scope="col">Filesize</th>    -->
-                                  <th scope="col">Role</th>   
-                                  <th scope="col">Office</th>       
-                                  <th scope="col">Contact</th>  
-                                  <!-- <th scope="col">Downloads</th>    -->
-                                  <th scope="col">Account Status</th>          
+                                  <th scope="col">Account Status</th>    
+                                  <th scope="col">Last Access</th> 
+                                              
                                 </tr>
                               </thead>
                               <tbody>
                                 <?php
                                   require_once("include/conn.php");
-                                  $query="SELECT * FROM datms_documents WHERE (`doc_actor3`='$verified_session_firstname $verified_session_lastname' OR  `doc_off3` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted') ORDER BY doc_date1 DESC ";
+                                  $query="SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') AND `role` = 'DATMS Officer'";
                                   $result=mysqli_query($conn,$query);
                                   while($rs=mysqli_fetch_array($result)){
-                                    $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
-                                    $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
-                                    $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
-                                    $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                                    $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                                    $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
-                                    $docRemarks = $rs['doc_remarks'];  
+                                    $uid =$rs['id']; 
+                                    $uname = $rs['id_number']; 
+                                    $fname = $rs['firstname'];      
+                                    $lname =$rs['lastname'];
+                                    $mname = $rs['MI']; 
+                                    $dept = $rs['office'];                       
+                                    $status =$rs['account_status'];
+
+                                    $sql1 = "SELECT * FROM users WHERE id_number = '$uname' ORDER BY last_access DESC ";
+                                        if($result1 = mysqli_query($link, $sql1)){
+                                          if(mysqli_num_rows($result1) > 0){
+                                            while($row1 = mysqli_fetch_array($result1)){
+                                              $LA = $row1['last_access'];                                          
+                                            }
+                                            // Free result set
+                                            mysqli_free_result($result1);
+                                          }
+                                        }
                                 ?>
                                 <tr>
-                                  <td style="display:none"><?php echo $docId?></td>
-                                  <td data-label="Code:"><?php echo $docCode; ?></td>
-                                  <td data-label="File Name:" ><?php echo $docName; ?></td>
-                                  <td data-label="Tracker:"><?php echo $docAct3; ?></td>
-                                  <td data-label="Date:"><?php echo $docDate3; ?></td>
-                                  <td data-label="Current Actor:"><?php echo $docAct2?></td>
-                                  <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
-                                  <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
-                                  <td style="display:none"><?php echo $docDl; ?></td>
-                                  <td style="display:none"><?php echo $docTitle?></td>
-                                  <td style="display:none"><?php echo $docType?></td>
-                                  <td style="display:none"><?php echo $docDesc?></td>
-                                  <td style="display:none"><?php echo $docOff1?></td>
-                                  <td style="display:none"><?php echo $docAct1?></td>
-                                  <td style="display:none"><?php echo $docOff1?></td>
-                                  <td style="display:none"><?php echo $docDate2?></td>                    
-                                  <td style="display:none"><?php echo $docOff3?></td>
-                                  <td style="display:none"><?php echo $docDate3?></td>
-                                  <td style="display:none"><?php echo $docRemarks?></td>
-
+                                  <td style="display:none"><?php echo $uid?></td>
+                                  <td data-label="Username:"><?php echo $uname; ?></td>
+                                  <td data-label="Full Name:" WIDTH="40%"><?php echo $fname.' '.$mname.' '.$lname; ?></td>
+                                  <td data-label="Dept:"><?php echo $dept; ?></td>
+                                  <td data-label="Status:"><?php echo $status; ?></td>
+                                  <td data-label="Date:"><?php echo $LA?></td>                                            
                                 </tr>
 
-                                <?php } ?>
+                                <?php 
+                                } ?>
                                 
                               </tbody>
                             </table>

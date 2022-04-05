@@ -31,7 +31,6 @@
         <li>
           <hr class="dropdown-divider">
         </li>
-
         <li>
           <a class="dropdown-item d-flex align-items-center" href="users-profile.php?id=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-person"></i>
@@ -41,10 +40,6 @@
         <li>
           <hr class="dropdown-divider">
         </li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-
         <li>
           <a class="dropdown-item d-flex align-items-center" href="#">
             <i class="bi bi-question-circle"></i>

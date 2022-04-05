@@ -17,7 +17,7 @@
 
       <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
         <i class="bi bi-bell"></i>
-        <span class="badge bg-primary badge-number">4</span>
+        <span class="badge bg-primary badge-number">1</span>
       </a><!-- End Notification Icon -->
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
@@ -33,8 +33,8 @@
         <li class="notification-item">
           <i class="bi bi-exclamation-circle text-warning"></i>
           <div>
-            <h4>Lorem Ipsum</h4>
-            <p>Quae dolorem earum veritatis oditseno</p>
+            <h4>Announcement</h4>
+            <p>Put notification here</p>
             <p>30 min. ago</p>
           </div>
         </li>
@@ -46,8 +46,8 @@
         <li class="notification-item">
           <i class="bi bi-x-circle text-danger"></i>
           <div>
-            <h4>Atque rerum nesciunt</h4>
-            <p>Quae dolorem earum veritatis oditseno</p>
+            <h4>Memo</h4>
+            <p>Put notification here</p>
             <p>1 hr. ago</p>
           </div>
         </li>
@@ -59,8 +59,8 @@
         <li class="notification-item">
           <i class="bi bi-check-circle text-success"></i>
           <div>
-            <h4>Sit rerum fuga</h4>
-            <p>Quae dolorem earum veritatis oditseno</p>
+            <h4>Announcement</h4>
+            <p>Put notification here</p>
             <p>2 hrs. ago</p>
           </div>
         </li>
@@ -72,8 +72,8 @@
         <li class="notification-item">
           <i class="bi bi-info-circle text-primary"></i>
           <div>
-            <h4>Dicta reprehenderit</h4>
-            <p>Quae dolorem earum veritatis oditseno</p>
+            <h4>Announcement</h4>
+            <p>Put notification here</p>
             <p>4 hrs. ago</p>
           </div>
         </li>
@@ -110,7 +110,7 @@
             <img src="../assets/img/messages-1.jpg" alt="" class="rounded-circle">
             <div>
               <h4>Maria Hudson</h4>
-              <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+              <p>Message Content Must Be Placed Here...</p>
               <p>4 hrs. ago</p>
             </div>
           </a>
@@ -124,7 +124,7 @@
             <img src="../assets/img/messages-2.jpg" alt="" class="rounded-circle">
             <div>
               <h4>Anna Nelson</h4>
-              <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+              <p>Message Content Must Be Placed Here...</p>
               <p>6 hrs. ago</p>
             </div>
           </a>
@@ -138,7 +138,7 @@
             <img src="../assets/img/messages-3.jpg" alt="" class="rounded-circle">
             <div>
               <h4>David Muldon</h4>
-              <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+              <p>Message Content Must Be Placed Here...</p>
               <p>8 hrs. ago</p>
             </div>
           </a>
@@ -156,7 +156,7 @@
     </li><!-- End Messages Nav -->
 
     <li class="nav-item dropdown pe-3">
-
+   
       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
         <img src="../assets/img/BCPlogo.png" alt="Profile" class="rounded-circle">
         <!-- class="rounded-circle" -->
@@ -186,7 +186,7 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="pages-faq.html?id=<?php echo $_SESSION["login_key"];?>">
+          <a class="dropdown-item d-flex align-items-center" href="pages-faq.php?id=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-question-circle"></i>
             <span>Need Help?</span>
           </a>
@@ -196,22 +196,22 @@
         </li>
 
         <!-- Adding return nav item for super admin -->
-        <?php 
-           $output = '';
-           $key = $_SESSION["login_key"];
-           if(isset($verified_session_department) && ($verified_session_username)){
-             switch($verified_session_role){
-               case "SuperAdmin":
-                   //statement
-                   $output .= '
-                   <li>
-                     <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php?id='.$key.'">
-                       <i class="bi bi-box-arrow-right"></i>
-                       <span>Sign Out</span>
-                     </a>
-                   </li>    
-                 ';
-               break;  
+          <?php 
+            $output = '';
+            $key = $_SESSION["login_key"];
+            if(isset($verified_session_department) && ($verified_session_username)){
+              switch($verified_session_role){
+                case "SuperAdmin":
+                    //statement
+                    $output .= '
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php?id='.$key.'">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Sign Out</span>
+                      </a>
+                    </li>    
+                  ';
+                break;  
 
                 default:
                 //statement
@@ -229,6 +229,8 @@
               // header("location:index.php");
           }
           ?>
+
+        
 
       </ul><!-- End Profile Dropdown Items -->
     </li><!-- End Profile Nav -->
