@@ -1,87 +1,79 @@
 <?php
-include('session.php');
+    include('session.php');
     // Define variables and initialize with empty values
-    $student_number = "";
-    // personal information 
-    $first_name = "";
-    $last_name = "";
-    $middle_name = "";
-    $course = "";
-    $gender = "";
-    $birthday = "";
-    $nationality = "";
-    $religion = "";
-    $civil_status = "";
-    //address
-    $street1 = "";
-    $street2 = "";
-    $city = "";
-    $zipcode = "";
-    $address = "";
-    //contact number
-    $email = "";
-    $contact = "";
-     // agon date
+    $student_number = "#";
+    $first_name = "#";
+    $last_name = "#";
+    $middle_name = "#";
+    $course = "#";
+    $year_level = "#";
+    $section = "#";
+    $school_year = "#";
+    $address = "#";
+    $email = "#";
+    $contact = "#";
+    $gender = "#";
+    $birthday = "#";
+    $nationality = "#";
+    $religion = "#";
+    $civil_status = "#";
+    $status = "Enrolled";
+    // agon date
     $current_year = date("y");
-    $key = $_SESSION["login_key"];
+
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-      date_default_timezone_set("asia/manila");
-      $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
-      $year = date("Y",strtotime("+0 HOURS"));
-      $random_num= rand(10000000,99999999);
-       //agun implementation for student number
-       $sqll = "SELECT id FROM student_information ORDER BY id DESC Limit 1";
-       if($resultt = mysqli_query($link, $sqll)){
-         if(mysqli_num_rows($resultt) == 0){
-           $student_number = "" . $current_year . "010001";
-         }
-         else if(mysqli_num_rows($resultt) > 0){
-           while($roww = mysqli_fetch_array($resultt)){
-             if($roww['id'] < 9){
-               $new_id = $roww['id'] + 1;
-               $student_number = "" . $current_year . "01000" . $new_id;
-             }
-             else if ($roww['id'] == 9){
-               $student_number = "" . $current_year . "010010";
-             }
-             else if ($roww['id'] < 99){
-               $new_id = $roww['id'] + 1;
-               $student_number = "" . $current_year . "0100" . $new_id;
-             }
-             else if ($roww['id'] == 99){
-               $student_number = "" . $current_year . "010100";
-             }
-             else if ($roww['id'] < 999){
-               $new_id = $roww['id'] + 1;
-               $student_number = "" . $current_year . "010" . $new_id;
-             }
-             else if ($roww['id'] == 999){
-               $student_number = "" . $current_year . "011000";
-             }
-             else if ($roww['id'] < 9999){
-               $new_id = $roww['id'] + 1;
-               $student_number = "" . $current_year . "01" . $new_id;
-             }
-             else if ($roww['id'] == 9999){
-               $student_number = "" . $current_year . "010000";
-             }
-             else if ($roww['id'] < 99999){
-               $new_id = $roww['id'] + 1;
-               $student_number = "" . $current_year . "0" . $new_id;
-             }
-             else if ($roww['id'] == 99999){
-               $student_number = "" . $current_year . "100000";
-             }
-             else if ($roww['id'] < 999999){
-               $new_id = $roww['id'] + 1;
-               $student_number = "" . $current_year . "" . $new_id;
-             }
-           }
-         }
-       }
-
+      
+      //agun implementation for student number
+      $sqll = "SELECT id FROM student_information ORDER BY id DESC Limit 1";
+      if($resultt = mysqli_query($link, $sqll)){
+        if(mysqli_num_rows($resultt) == 0){
+          $student_number = "" . $current_year . "010001";
+        }
+        else if(mysqli_num_rows($resultt) > 0){
+          while($roww = mysqli_fetch_array($resultt)){
+            if($roww['id'] < 9){
+              $new_id = $roww['id'] + 1;
+              $student_number = "" . $current_year . "01000" . $new_id;
+            }
+            else if ($roww['id'] == 9){
+              $student_number = "" . $current_year . "010010";
+            }
+            else if ($roww['id'] < 99){
+              $new_id = $roww['id'] + 1;
+              $student_number = "" . $current_year . "0100" . $new_id;
+            }
+            else if ($roww['id'] == 99){
+              $student_number = "" . $current_year . "010100";
+            }
+            else if ($roww['id'] < 999){
+              $new_id = $roww['id'] + 1;
+              $student_number = "" . $current_year . "010" . $new_id;
+            }
+            else if ($roww['id'] == 999){
+              $student_number = "" . $current_year . "011000";
+            }
+            else if ($roww['id'] < 9999){
+              $new_id = $roww['id'] + 1;
+              $student_number = "" . $current_year . "01" . $new_id;
+            }
+            else if ($roww['id'] == 9999){
+              $student_number = "" . $current_year . "010000";
+            }
+            else if ($roww['id'] < 99999){
+              $new_id = $roww['id'] + 1;
+              $student_number = "" . $current_year . "0" . $new_id;
+            }
+            else if ($roww['id'] == 99999){
+              $student_number = "" . $current_year . "100000";
+            }
+            else if ($roww['id'] < 999999){
+              $new_id = $roww['id'] + 1;
+              $student_number = "" . $current_year . "" . $new_id;
+            }
+          }
+        }
+      }
       $code = mysqli_real_escape_string($link,trim($_POST["application_code"]));
       $first_name = mysqli_real_escape_string($link,trim($_POST["first_name"]));
       $last_name = mysqli_real_escape_string($link,trim($_POST["last_name"]));
@@ -100,18 +92,17 @@ include('session.php');
       $civil_status = mysqli_real_escape_string($link,trim($_POST["civil_status"]));
       $account_status = mysqli_real_escape_string($link,trim($_POST["status"]));
       $password = password_hash("#ChangeMe01!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
+      //Check if the student number is not existing in the database
+      $sql1 = "SELECT id FROM student_information WHERE id_number = '$student_number'";
+      $result = mysqli_query($link,$sql1);
+      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      $count = mysqli_num_rows($result);
       
-     //Check if the student number is not existing in the database
-     $sql1 = "SELECT id FROM student_information WHERE id_number = '$student_number'";
-     $result = mysqli_query($link,$sql1);
-     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-     $count = mysqli_num_rows($result);
-
-     //Check if the student number is not existing in the database
-     $sql2 = "SELECT id FROM users WHERE id_number = '$student_number'";
-     $result2 = mysqli_query($link,$sql2);
-     $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-     $count2 = mysqli_num_rows($result2);
+      //Check if the student number is not existing in the database
+      $sql2 = "SELECT id FROM users WHERE id_number = '$student_number'";
+      $result2 = mysqli_query($link,$sql2);
+      $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+      $count2 = mysqli_num_rows($result2);
       
       // If the student number is not existing in the database, count must be 0
       if($count == 0 && $count2 == 0) {
@@ -119,8 +110,8 @@ include('session.php');
         $sql = "INSERT INTO student_information (id_number, firstname, lastname, middlename, email, contact, address, course, year_level, section, school_year, gender, birthday, nationality, religion, civil_status, account_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         if($stmt = mysqli_prepare($link, $sql)){
-           // Bind variables to the prepared statement as parameters
-           mysqli_stmt_bind_param($stmt, "sssssssssssssssss", $student_number, $first_name, $last_name, $middle_name, $email, $contact, $address, $course, $year_level, $section, $school_year, $gender, $birthday, $nationality, $religion, $civil_status, $account_status);
+          // Bind variables to the prepared statement as parameters
+          mysqli_stmt_bind_param($stmt, "sssssssssssssssss", $student_number, $first_name, $last_name, $middle_name, $email, $contact, $address, $course, $year_level, $section, $school_year, $gender, $birthday, $nationality, $religion, $civil_status, $account_status);
 
           // Attempt to execute the prepared statement
           if(mysqli_stmt_execute($stmt)){
@@ -134,13 +125,13 @@ include('session.php');
 
               // Attempt to execute the prepared statement
               if(mysqli_stmt_execute($stmt1)){
-                
-                  // Records created successfully. Redirect to landing page          
+                  // Records created successfully. Redirect to landing page
                   $query = "UPDATE student_application SET account_status='$status' WHERE id_number='$code'";
                   if($query_run = mysqli_query($link, $query)){
-                    echo '<script language="javascript">';
-                    echo 'alert("No Student Applicaition Detected")';
-                    echo '</script>';
+                  echo '<script language="javascript">';
+                  echo 'alert("You Successfully Enrolled the Student")';
+                  echo '</script>';
+                  echo 'location.replace("index.php")';
                   }else{
                     echo '<script language="javascript">';
                     echo 'alert("No Student Applicaition Detected")';
@@ -155,7 +146,6 @@ include('session.php');
           } else{
               echo "Oops! Something went wrong. Please try again later.";
           }
-          
         }
 
         // Close statement
@@ -616,7 +606,7 @@ include('session.php');
           <div class="card col-md-12">
             <div class="card-body">
               <h5 class="card-title">New Student Requirements:</h5>
-                <div class="row mb-3" aria-required="true">
+                <div class="row mb-3">
                   
                   <div class="col-sm-2 pt-1">
 
@@ -713,7 +703,6 @@ include('session.php');
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
-
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -824,15 +813,15 @@ include('session.php');
         }
         
       }
-      //  //making text uppercase
-      //  function forceInputUppercase(e)
-      //   {
-      //     var start = e.target.selectionStart;
-      //     var end = e.target.selectionEnd;
-      //     e.target.value = e.target.value.toUpperCase();
-      //     e.target.setSelectionRange(start, end);
-      //   }
+       //making text uppercase
+       function forceInputUppercase(e)
+        {
+          var start = e.target.selectionStart;
+          var end = e.target.selectionEnd;
+          e.target.value = e.target.value.toUpperCase();
+          e.target.setSelectionRange(start, end);
+        }
 
-      // document.getElementById("middle_name").addEventListener("keyup", forceInputUppercase, false);
+      document.getElementById("middle_name").addEventListener("keyup", forceInputUppercase, false);
   </script>
 </html>
