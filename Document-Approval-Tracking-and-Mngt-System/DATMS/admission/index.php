@@ -709,9 +709,9 @@ include('session.php');
               echo "Oops! Something went wrong. Please try again later.";
           }
         }else{
-          echo '<script language="javascript">';
-          echo 'alert("Error1")';
-          echo '</script>';
+           echo '<script language="javascript">';
+                    echo 'alert("No Student Applicaition Detected")';
+                    echo '</script>';
         }
 
         // Close statement
@@ -836,15 +836,15 @@ include('session.php');
         }
         
       }
-       //making text uppercase
-       function forceInputUppercase(e)
-        {
-          var start = e.target.selectionStart;
-          var end = e.target.selectionEnd;
-          e.target.value = e.target.value.toUpperCase();
-          e.target.setSelectionRange(start, end);
-        }
+      //  //making text uppercase
+      //  function forceInputUppercase(e)
+      //   {
+      //     var start = e.target.selectionStart;
+      //     var end = e.target.selectionEnd;
+      //     e.target.value = e.target.value.toUpperCase();
+      //     e.target.setSelectionRange(start, end);
+      //   }
 
-      document.getElementById("middle_name").addEventListener("keyup", forceInputUppercase, false);
+      // document.getElementById("middle_name").addEventListener("keyup", forceInputUppercase, false);
   </script>
 </html>
