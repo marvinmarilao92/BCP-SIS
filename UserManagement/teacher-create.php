@@ -396,12 +396,12 @@ $birthday = "";
 $nationality = "";
 $religion = "";
 $civil_status = "";
-
+$key = $_SESSION["login_key"];
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   
   // $id_number = mysqli_real_escape_string($link,trim($_POST["id_number"]));
-    $key = $_SESSION["login_key"];
+    
     // $id_number = mysqli_real_escape_string($link,trim($_POST["id_number"]));\
     $current_year = date("y");
     //agun implementation for student number
