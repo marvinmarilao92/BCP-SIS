@@ -71,13 +71,13 @@
     $account_status = "Active";
     $password = password_hash("#ChangeMe01!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
     //Check if the id number is not existing in the database
-    $sql1 = "SELECT id FROM teacher_information WHERE id_number = '$id_number'";
+    $sql1 = "SELECT id FROM teacher_information WHERE id_number = '$userid'";
     $result = mysqli_query($conn,$sql1);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $count = mysqli_num_rows($result);
     
     //Check if the id number is not existing in the database
-    $sql2 = "SELECT id FROM users WHERE id_number = '$id_number'";
+    $sql2 = "SELECT id FROM users WHERE id_number = '$userid'";
     $result2 = mysqli_query($conn,$sql2);
     $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
     $count2 = mysqli_num_rows($result2);
