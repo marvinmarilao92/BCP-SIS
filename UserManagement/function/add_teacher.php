@@ -77,13 +77,13 @@
     $count = mysqli_num_rows($result);
     
     //Check if the id number is not existing in the database
-    $sql2 = "SELECT id FROM users WHERE id_number = '$userid'";
-    $result2 = mysqli_query($conn,$sql2);
-    $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
-    $count2 = mysqli_num_rows($result2);
+    // $sql2 = "SELECT id FROM users WHERE id_number = '$userid'";
+    // $result2 = mysqli_query($conn,$sql2);
+    // $row2 = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+    // $count2 = mysqli_num_rows($result2);
     
     // If the id number is not existing in the database, count must be 0
-    if($count == 0 && $count2 == 0) {
+    if($count == 0) {
       // Prepare an insert statement
       $sql = "INSERT INTO teacher_information (id_number, firstname, lastname, middlename, email, contact, address, course, gender, birthday, nationality, religion, civil_status, account_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
