@@ -399,7 +399,7 @@ include ("includes/footer.php");
                 },function(data){
                 if (data.trim() == "failed"){
                   //response message
-                  Swal.fire("The data that you input is already in the system","","error");
+                  Swal.fire(data);
                   // Empty test field
                   $('#first_name').val("")
                   $('#last_name').val("")
