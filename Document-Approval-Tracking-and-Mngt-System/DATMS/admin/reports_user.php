@@ -122,7 +122,7 @@ include('session.php');
                             <h4>Registrar Admin Reports</h4>
                         </div>
                         <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                          <button class="btn btn-outline-dark " onclick="AdmExportToExcel('xlsx')">Excel</button>
+                          <button class="btn btn-outline-dark " onclick="AdExportToExcel('xlsx')">Excel</button>
                           <button class="btn btn-outline-dark " id="adm_print" type="button"><i class='bi bi-printer'></i></button>
                         </div> 
                       </div>
@@ -436,7 +436,7 @@ include('session.php');
                             <h4>Registrar Officer Reports</h4>
                         </div>
                         <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                          <button class="btn btn-outline-dark " onclick="AdmExportToExcel('xlsx')">Excel</button>
+                          <button class="btn btn-outline-dark " onclick="ROExportToExcel('xlsx')">Excel</button>
                           <button class="btn btn-outline-dark " id="copyadm_btn" type="button"><i class='bi bi-printer'></i></button>
                         </div> 
                       </div>
@@ -527,7 +527,7 @@ include('session.php');
   <script>
     //export functions
         //excel admin
-        function AdmExportToExcel(type, fn, dl) {
+        function AdExportToExcel(type, fn, dl) {
         var elt = document.getElementById('AdminTable');
         var wb = XLSX.utils.table_to_book(elt, { sheet: "Registrar Admin Report" });
         return dl ?
