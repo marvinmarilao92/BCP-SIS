@@ -68,7 +68,7 @@
     <ul id="icons-nav" class="<?php if($col=='reports'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
       <li>
       <a href="ofstud_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='offlist'){echo 'active';}?>">
-        <i class="bi bi-circle"></i><span>Offically Enrolled</span>
+        <i class="bi bi-circle"></i><span>Officially Enrolled</span>
         </a>
       </li>
       <li>
@@ -78,7 +78,7 @@
       </li>
       <li>
       <a href="unstud_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='unlist'){echo 'active';}?>">
-        <i class="bi bi-circle"></i><span>Unoffically Enrolled</span>
+        <i class="bi bi-circle"></i><span>Unofficially Enrolled</span>
         </a>
       </li>
     </ul>

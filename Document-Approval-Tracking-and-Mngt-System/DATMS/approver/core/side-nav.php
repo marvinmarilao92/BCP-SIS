@@ -158,6 +158,24 @@
         </ul>
       </li><!-- End Reports Nav -->
 
+      <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#list-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-person-lines-fill"></i><span>Over All Records</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="list-nav" class="<?php if($col=='list'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
+            <li>
+            <a href="stud_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SL'){echo 'active';}?>">
+              <i class="bi bi-circle"></i><span>Students List</span>
+              </a>
+            </li>
+            <li>
+            <a href="teacher_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TL'){echo 'active';}?>">
+              <i class="bi bi-circle"></i><span>Teachers List</span>
+              </a>
+            </li>
+          </ul>
+        </li><!-- End Reports Nav -->
+
   <li class="nav-heading">Settings</li>
 
   <li class="nav-item">

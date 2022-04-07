@@ -132,7 +132,7 @@
                                         <thead>
                                           <tr>
                                             <th >DocCode</th>
-                                            <th  >Filename</th>
+                                            <th  >Requested By</th>
                                             <!-- <th >Filesize</th>    -->
                                             <th >Tracker</th>   
                                             <th >Tracking Date</th>    
@@ -159,14 +159,14 @@
                                           <tr>
                                             <td style="display:none"><?php echo $docId?></td>
                                             <td data-label="Code:"><?php echo $docCode; ?></td>
-                                            <td data-label="File Name:" WIDTH="25%"><?php echo $docName; ?></td>
+                                            <td data-label="Requested By:"><?php echo $docTitle; ?></td>
                                             <td data-label="Tracker:"><?php echo $docAct3; ?></td>
                                             <td data-label="Date:"><?php echo $docDate3; ?></td>
                                             <td data-label="Current Actor:"><?php echo $docAct2?></td>
                                             <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
                                             <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
                                             <td style="display:none"><?php echo $docDl; ?></td>
-                                            <td style="display:none"><?php echo $docTitle?></td>
+                                            <td style="display:none"><?php echo $docName?></td>
                                             <td style="display:none"><?php echo $docType?></td>
                                             <td style="display:none"><?php echo $docDesc?></td>
                                             <td style="display:none"><?php echo $docOff1?></td>
@@ -221,7 +221,7 @@
                                         <thead>
                                           <tr>
                                             <th >DocCode</th>
-                                            <th  >Filename</th>
+                                            <th  >Requested By</th>
                                             <!-- <th >Filesize</th>    -->
                                             <th >Tracker</th>   
                                             <th >Department</th>  
@@ -249,7 +249,7 @@
                                           <tr>
                                             <td style="display:none"><?php echo $docId1?></td>
                                             <td data-label="Code:"><?php echo $docCode; ?></td>
-                                            <td data-label="File Name:" WIDTH="25%"><?php echo $docName; ?></td>
+                                            <td data-label="Requested By:" ><?php echo $docTitle; ?></td>
                                             <td data-label="Tracker:"><?php echo $docAct3; ?></td>
                                             <td data-label="Department:"WIDTH="10%"><?php echo $docOff3; ?></td>
                                             <td data-label="Date:"WIDTH="10%"><?php echo $docDate3; ?></td>
@@ -257,7 +257,7 @@
                                             <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
                                             <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
                                             <td style="display:none"><?php echo $docDl; ?></td>
-                                            <td style="display:none"><?php echo $docTitle?></td>
+                                            <td style="display:none"><?php echo $docName?></td>
                                             <td style="display:none"><?php echo $docType?></td>
                                             <td style="display:none"><?php echo $docDesc?></td>
                                             <td style="display:none"><?php echo $docOff1?></td>
@@ -309,60 +309,71 @@
 
             <!-- Create Document Modal -->
             <div class="modal fade" id="AddModal" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title">CREATE TRACKING DOCUMENT</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <form method="post" enctype="multipart/form-data">
-                            <div class="card" style="margin: 10px;">
-                              <div class="card-body">
-                                <h2 class="card-title">Fill all neccessary info</h2>
-                                  <!-- Fill out Form -->
-                                  
-                                  <div class="row g-3" >
-                                  <input type="hidden" id="doccreator" name="doccreator" class="form-control"  value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
-                                  <input type="hidden" id="docoffice" name="docoffice" class="form-control"  value="<?php echo $verified_session_office?>" readonly>
-                                    <div class="col-md-6">
-                                        <input type="text" id="docname" name="docname" class="form-control" placeholder="Title" required>
+                <div class="modal-dialog  modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">CREATE TRACKING DOCUMENT</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" enctype="multipart/form-data">
+                          <div class="card" style="margin: 10px;">
+                            <div class="card-body">
+                              <h2 class="card-title">Fill all neccessary info</h2>
+                                <!-- Fill out Form -->
+                                
+                                <div class="row g-3" >
+                                <input type="hidden" id="doccreator" name="doccreator" class="form-control"  value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
+                                <input type="hidden" id="docoffice" name="docoffice" class="form-control"  value="<?php echo $verified_session_office?>" readonly>        
+                                                        
+                                    <div class="col-md-12" >
+                                      <div class="form-floating">
+                                        <input type="text" class="form-control" id="docname" name="docname" onChange="fetchTracking(this.value);" placeholder="Your Name" autofocus>
+                                        <label for="floatingName">Account No.</label>
+                                      </div>
+                                    </div>                                  
+                                  <!-- Account Information -->
+                                    <div class="activity">                                         
                                     </div>
-                                    <br>
-                                    <div class="col-md-6">
-                                      <select class="form-select" id="doctype" name="doctype">
-                                      <option selected="selected" disabled="disabled">Document Type</option>
-                                        <?php
-                                          require_once("include/conn.php");
-                                          $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC ";
-                                          $result=mysqli_query($conn,$query);
-                                          while($rs=mysqli_fetch_array($result)){
-                                            $dtid =$rs['dt_id'];                                    
-                                            $dtName = $rs['dt_name'];       
-                                        ?>
-                                          <option><?php echo $dtName;?></option>
-                                      <?php }?>
-                                      </select>
-                                    </div>
-                                    <div class="col-md-12">                                    
-                                      <input class="form-control"  type="file" id="docfile" name="docfile" accept="application/pdf" >                                    
-                                    </div>
+                                  <!-- End Account Information --> 
 
-                                    <div class="col-12">
-                                        <textarea class="form-control" style="height: 80px" placeholder="Description" name="docdesc" id="docdesc" required></textarea>
-                                    </div>        
+                                  <div class="col-md-12">
+                                    <div class="form-floating">
+                                      <select class="form-select" name="doctype" id="doctype" aria-label="State" Required onchange="oncollapse()">
+                                        <option value="" selected="selected" disabled="disabled">Select DocType</option>
+                                        <?php
+                                            require_once("include/conn.php");
+                                            $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC ";
+                                            $result=mysqli_query($conn,$query);
+                                            while($rs=mysqli_fetch_array($result)){
+                                              $dtid =$rs['dt_id'];                                    
+                                              $dtName = $rs['dt_name'];       
+                                          ?>
+                                            <option><?php echo $dtName;?></option>
+                                        <?php }?>
+                                      </select>
+                                      <label for="floatingSelect">DocType</label>
+                                    </div>
+                                  </div>  
+                                  <div class="col-md-12">                                    
+                                    <input class="form-control"  type="file" id="docfile" name="docfile" accept="application/pdf" >                                    
                                   </div>
-                                              
-                              </div>
+
+                                  <div class="col-12">
+                                      <textarea class="form-control" style="height: 80px" placeholder="Description" name="docdesc" id="docdesc" required></textarea>
+                                  </div>        
+                                </div>
+                                            
                             </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" name="save">Create Document</button>
-                              </div>
-                          </form>
-                          <!-- End Form -->
-                      </div>
-                  </div>     
-              </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button class="btn btn-primary" name="save">Create Document</button>
+                            </div>
+                        </form>
+                        <!-- End Form -->
+                    </div>
+                </div>     
+            </div>
             <!-- End Create Document Modal-->
 
             <!-- View Document modal -->
@@ -401,7 +412,7 @@
             </div>
             <!-- End View office Modal-->
 
-            <!-- View Document modal -->
+            <!-- History Document modal -->
             <div class="modal fade" id="HistoryModal" tabindex="-1">
                 <div class="modal-dialog modal-xl">
                   <div class="modal-content">
@@ -433,7 +444,7 @@
                   </div>
                 </div>
             </div>
-            <!-- End View office Modal-->
+            <!-- End History office Modal-->
 
             <!-- Desc Document modal -->
             <div class="modal fade" id="RemarksModal" tabindex="-1">
@@ -583,44 +594,209 @@
                     $random_num= rand(1000,9999);
                     $doc_code =  "doc".$year.$random_num;
 
-                  if (!in_array($extension, ['pdf'])) {
+                    $query  = "SELECT *,LEFT(middlename,1) as MI FROM student_information WHERE `account_status` NOT IN ('Unofficial') AND id_number = '".$doc_title."'";
+                    $result = mysqli_query($conn, $query);
+                    if(mysqli_num_rows($result) > 0){
+                      if (!in_array($extension, ['pdf'])) {
+                        echo'<script type = "text/javascript">
+                                  //success message
+                                  const Toast = Swal.mixin({
+                                  toast: true,
+                                  position: "top-end",
+                                  showConfirmButton: false,
+                                  timer: 2000,
+                                  timerProsressBar: true,
+                                  didOpen: (toast) => {
+                                  toast.addEventListener("mouseenter", Swal.stopTimer)
+                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                  }
+                                  })
+                                  Toast.fire({
+                                  icon: "error",
+                                  title:"File extension must be: .pdf"
+                                  }).then(function(){
+                                    window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                  });
+                              </script>
+                          ';
+                                      
+                        } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
+                                    echo "File too large!";
+                        }else{
+                          $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
+                          $counter=mysqli_num_rows($query);
+                          
+                          if ($counter == 1) 
+                            { 
+                              echo'<script type = "text/javascript">
+                                      //success message
+                                      const Toast = Swal.mixin({
+                                      toast: true,
+                                      position: "top-end",
+                                      showConfirmButton: false,
+                                      timer: 3000,
+                                      timerProsressBar: true,
+                                      didOpen: (toast) => {
+                                      toast.addEventListener("mouseenter", Swal.stopTimer)
+                                      toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                      }
+                                      })
+                                      Toast.fire({
+                                      icon: "warning",
+                                      title:"File name already taken<br>You have to change the name of file"
+                                      }).then(function(){
+                                        window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                      });
+                                  </script>
+                            ';
+                            }else{
+                            // move the uploaded (temporary) file to the specified destination
+                              if (move_uploaded_file($file, $destination)) {
+                                  $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
+                                  VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
+                                
+                                  if (mysqli_query($conn, $sql)) {
+
+                                    $sql1 = "INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
+                                    VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
+
+                                    if (mysqli_query($conn, $sql1)) {
+                                      echo'<script type = "text/javascript">
+                                        //success message
+                                        const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: "top-end",
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                        timerProsressBar: true,
+                                        didOpen: (toast) => {
+                                        toast.addEventListener("mouseenter", Swal.stopTimer)
+                                        toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                        }
+                                        })
+                                        Toast.fire({
+                                        icon: "success",
+                                        title:"Document to track Successfully Created"
+                                        }).then(function(){
+                                          window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                        });
+                                    </script>';
+                                    
+                                    }else{
+                                      echo "Failed Upload files!"; 
+                                    }                       
+                                  }
+                              } else {
+                                  echo "Failed Upload files!";
+                              }
+                              }         
+                        }
+                      }else{
+                      $query  = "SELECT *,LEFT(middlename,1) as MI FROM teacher_information WHERE `account_status` NOT IN ('Inactive') AND id_number = '".$doc_title."'";
+                      $result = mysqli_query($conn, $query);
+                      if(mysqli_num_rows($result) > 0){
+                        if (!in_array($extension, ['pdf'])) {
                           echo'<script type = "text/javascript">
-                                //success message
-                                const Toast = Swal.mixin({
-                                toast: true,
-                                position: "top-end",
-                                showConfirmButton: false,
-                                timer: 2000,
-                                timerProsressBar: true,
-                                didOpen: (toast) => {
-                                toast.addEventListener("mouseenter", Swal.stopTimer)
-                                toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                }
-                                })
-                                Toast.fire({
-                                icon: "error",
-                                title:"File extension must be: .pdf"
-                                }).then(function(){
-                                  window.location = "documents_list.php?id='.$key.'";//refresh pages
-                                });
-                            </script>
-                        ';
+                                    //success message
+                                    const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: "top-end",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    timerProsressBar: true,
+                                    didOpen: (toast) => {
+                                    toast.addEventListener("mouseenter", Swal.stopTimer)
+                                    toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                    }
+                                    })
+                                    Toast.fire({
+                                    icon: "error",
+                                    title:"File extension must be: .pdf"
+                                    }).then(function(){
+                                      window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                    });
+                                </script>
+                            ';
                                         
-                  } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
-                              echo "File too large!";
-                  } else{
-                    $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
-                    $counter=mysqli_num_rows($query);
-                    
-                    if ($counter == 1) 
-                      { 
+                          } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
+                                      echo "File too large!";
+                          }else{
+                            $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
+                            $counter=mysqli_num_rows($query);
+                            
+                            if ($counter == 1) 
+                              { 
+                                echo'<script type = "text/javascript">
+                                        //success message
+                                        const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: "top-end",
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProsressBar: true,
+                                        didOpen: (toast) => {
+                                        toast.addEventListener("mouseenter", Swal.stopTimer)
+                                        toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                        }
+                                        })
+                                        Toast.fire({
+                                        icon: "warning",
+                                        title:"File name already taken<br>You have to change the name of file"
+                                        }).then(function(){
+                                          window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                        });
+                                    </script>
+                              ';
+                              }else{
+                              // move the uploaded (temporary) file to the specified destination
+                                if (move_uploaded_file($file, $destination)) {
+                                    $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
+                                    VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
+                                  
+                                    if (mysqli_query($conn, $sql)) {
+
+                                      $sql1 = "INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
+                                      VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
+
+                                      if (mysqli_query($conn, $sql1)) {
+                                        echo'<script type = "text/javascript">
+                                          //success message
+                                          const Toast = Swal.mixin({
+                                          toast: true,
+                                          position: "top-end",
+                                          showConfirmButton: false,
+                                          timer: 2000,
+                                          timerProsressBar: true,
+                                          didOpen: (toast) => {
+                                          toast.addEventListener("mouseenter", Swal.stopTimer)
+                                          toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                          }
+                                          })
+                                          Toast.fire({
+                                          icon: "success",
+                                          title:"Document to track Successfully Created"
+                                          }).then(function(){
+                                            window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                          });
+                                      </script>';
+                                      
+                                      }else{
+                                        echo "Failed Upload files!"; 
+                                      }                       
+                                    }
+                                } else {
+                                    echo "Failed Upload files!";
+                                }
+                                }         
+                          }
+                        }else{
                         echo'<script type = "text/javascript">
                                 //success message
                                 const Toast = Swal.mixin({
                                 toast: true,
                                 position: "top-end",
                                 showConfirmButton: false,
-                                timer: 3000,
+                                timer: 2000,
                                 timerProsressBar: true,
                                 didOpen: (toast) => {
                                 toast.addEventListener("mouseenter", Swal.stopTimer)
@@ -629,54 +805,15 @@
                                 })
                                 Toast.fire({
                                 icon: "warning",
-                                title:"File name already taken<br>You have to change the name of file"
+                                title:"No account registered to account number"
                                 }).then(function(){
                                   window.location = "documents_list.php?id='.$key.'";//refresh pages
                                 });
                             </script>
-                      ';
-                      }else{
-                    // move the uploaded (temporary) file to the specified destination
-                      if (move_uploaded_file($file, $destination)) {
-                          $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
-                          VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
-                        
-                          if (mysqli_query($conn, $sql)) {
-
-                            $sql1 = "INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
-                            VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
-
-                            if (mysqli_query($conn, $sql1)) {
-                              echo'<script type = "text/javascript">
-                                //success message
-                                const Toast = Swal.mixin({
-                                toast: true,
-                                position: "top-end",
-                                showConfirmButton: false,
-                                timer: 2000,
-                                timerProsressBar: true,
-                                didOpen: (toast) => {
-                                toast.addEventListener("mouseenter", Swal.stopTimer)
-                                toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                }
-                                })
-                                Toast.fire({
-                                icon: "success",
-                                title:"Document to track Successfully Created"
-                                }).then(function(){
-                                  window.location = "documents_list.php?id='.$key.'";//refresh pages
-                                });
-                            </script>';
-                            
-                            }else{
-                              echo "Failed Upload files!"; 
-                            }                       
-                          }
-                      } else {
-                          echo "Failed Upload files!";
+                        ';
+                        }
                       }
-                      }         
-                }
+                  
             //file uploading
               }
           ?>
@@ -718,8 +855,8 @@
                           console.log(data); 
                           document.getElementById("view_code").placeholder = data[1];      
                           document.getElementById("view_title").placeholder = data[8];   
-                          document.getElementById("view_filename").placeholder = data[2];   
-                          $('#view_filename').text(data[2]);
+                          document.getElementById("view_filename").placeholder = data[9];   
+                          $('#view_filename').text(data[9]);
                           $('#view_creator').text(data[3]);
                           $('#view_date').text(data[4]);
                           // JsBarcode("#barcode", data[1]);
@@ -746,7 +883,7 @@
 
                           console.log(data); 
                           if(data[18] ==""){
-                            $('#remarks').text(data[10]);
+                            $('#remarks').text(data[11]);
                           }else{
                             $('#remarks').text(data[18]);
                           }
@@ -756,10 +893,36 @@
 
                   // Providing Overall tracking history
                     // load_data();
-                    function load_data(query)
+                    // function load_data(query)
+                    // {
+                    //   $.ajax({
+                    //   url:"function/history.php",
+                    //   method:"POST",
+                    //   data:{query:query},
+                    //   success:function(data)
+                    //   {
+                    //     $('.activity').html(data);
+                    //   }
+                    //   });
+                    // }
+                    // $('#search_text').keyup(function(){
+                    //   var search = $(this).val();
+                    //   if(search != '')
+                    //   {
+                    //   load_data(search);
+                    //   }
+                    //   else
+                    //   {
+                    //     $('.activity').html('');
+                    //   }
+                    // });
+                  //end of tracking history
+
+                //
+                  function load_data(query)
                     {
                       $.ajax({
-                      url:"function/history.php",
+                      url:"function/view_studinfo.php",
                       method:"POST",
                       data:{query:query},
                       success:function(data)
@@ -768,7 +931,7 @@
                       }
                       });
                     }
-                    $('#search_text').keyup(function(){
+                    $('#docname').keyup(function(){
                       var search = $(this).val();
                       if(search != '')
                       {
@@ -779,7 +942,7 @@
                         $('.activity').html('');
                       }
                     });
-                  //end of tracking history
+
                 });
 
           </script>
