@@ -116,13 +116,13 @@ include('session.php');
                   <tr>
                     <td style="display:none"><?php echo $docId?></td>
                     <td data-label="Code:"><?php echo $docCode; ?>
-                    <td data-label="Filename:"><?php echo $docName; ?>
+                    <td data-label="Filename:"><?php echo $docTitle; ?>
                     <td data-label="Actor:"><?php echo $docAct2; ?>
                     <td data-label="Date&T:"><?php echo $docDate2; ?>
                     <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
-                    <td style="display:none"><?php echo $docTitle?></td>
+                    <td style="display:none"><?php echo $docName?></td>
                     <td style="display:none"><?php echo $docType?></td>
                     <td style="display:none"><?php echo $docDesc?></td>
                     <td style="display:none"><?php echo $docOff1?></td>
@@ -328,7 +328,7 @@ include('session.php');
                       $('#send_off1').val(data[16]);
                       $('#send_date1').val(data[17]); 
 
-                      $('#doc_fileN1').text(data[2]);  
+                      $('#doc_fileN1').text(data[9]);  
                       $('#send_id').val(data[0]);
                       $('#send_code').val(data[1]); 
                 });
@@ -396,7 +396,7 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#delete_fileN').text(data[2]);  
+                      $('#delete_fileN').text(data[9]);  
                       $('#delete_id').val(data[0]);
                       $('#delete_code').val(data[1]); 
                 });

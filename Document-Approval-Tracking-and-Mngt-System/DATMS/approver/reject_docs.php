@@ -6,6 +6,43 @@ include('session.php');
 
 <head>
 <?php include ('core/css-links.php');//css connection?>
+<style>
+    /*responsive*/
+  @media(max-width: 500px){
+    .table thead{
+      display: none;
+    }
+
+    .table, .table tbody, .table tr, .table td{
+      display: block;
+      width: 100%;
+    }
+    .table tr{
+      background: #ffffff;
+      box-shadow: 0 8px 8px -4px lightblue;
+      border-radius: 5%;
+      margin-bottom:13px;
+      margin-top: 13px;
+    }
+    .table td{
+      /* max-width: 20px; */
+      padding-left: 50%;
+      text-align: right;
+      position: relative;
+    }
+    .table td::before{      
+      margin-top: 10px;      
+      content: attr(data-label);
+      position: absolute;
+      left:0;
+      width: 50%;
+      padding-left:15px;
+      font-size:15px;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+</style>
 </head>
 <body>
 
@@ -52,7 +89,7 @@ include('session.php');
                 <thead>
                   <tr>
                     <th scope="col">DocCode</th>
-                    <th scope="col" >Filename</th>
+                    <th scope="col" >Requested By</th>
                     <!-- <th scope="col">Filesize</th>    -->
                     <th scope="col">Tracking Creator</th>   
                     <th scope="col">Date/Time</th>       
@@ -78,14 +115,14 @@ include('session.php');
                   ?>
                   <tr>
                     <td style="display:none"><?php echo $docId?></td>
-                    <td><?php echo $docCode; ?></td>
-                    <td><?php echo $docName; ?></td>
-                    <td><?php echo $docAct3; ?></td>
-                    <td><?php echo $docDate3; ?></td>
-                    <td><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
+                    <td data-label="Code:"><?php echo $docCode; ?></td>
+                    <td data-label="Requested By:"><?php echo $docTitle; ?></td>
+                    <td data-label="Actor:"><?php echo $docAct3; ?></td>
+                    <td data-label="Date:"><?php echo $docDate3; ?></td>
+                    <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
                     <td style="display:none"><?php echo $docDl; ?></td>
-                    <td style="display:none"><?php echo $docTitle?></td>
+                    <td style="display:none"><?php echo $docName?></td>
                     <td style="display:none"><?php echo $docType?></td>
                     <td style="display:none"><?php echo $docDesc?></td>
                     <td style="display:none"><?php echo $docOff1?></td>
@@ -221,7 +258,7 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#doc_fileN').text(data[2]);  
+                      $('#doc_fileN').text(data[9]);  
                       $('#doc_id').val(data[0]);
                       $('#doc_code').val(data[1]); 
                 });

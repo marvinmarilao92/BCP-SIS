@@ -1,7 +1,6 @@
 <?php
 //fetch.php
-// $connect = mysqli_connect("localhost","u692894633_sis_db","l95o@WMN6~a","u692894633_sis_db");
-$connect = mysqli_connect("localhost","root","","sis_db");
+require_once("../include/conn.php");
 $output = '';
 $error = '';
 $idenifier='';
@@ -9,14 +8,14 @@ $d1;
 $d2;
 if(isset($_POST["query"]))
 {
- $search = mysqli_real_escape_string($connect, $_POST["query"]);
+ $search = mysqli_real_escape_string($conn, $_POST["query"]);
  $query = " SELECT * FROM datms_tracking WHERE doc_code = '".$search."'";
 }
 else
 {
  $query = "SELECT * FROM datms_tracking ORDER BY doc_code";
 }
-$result = mysqli_query($connect, $query);
+$result = mysqli_query($conn, $query);
 if(mysqli_num_rows($result) > 0)
 {
  while($row = mysqli_fetch_array($result))

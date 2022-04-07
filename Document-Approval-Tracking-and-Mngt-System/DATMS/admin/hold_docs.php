@@ -89,7 +89,7 @@ include('session.php');
                 <thead>
                   <tr>
                     <th scope="col">DocCode</th>
-                    <th scope="col" >Filename</th>
+                    <th scope="col" >Requested By</th>
                     <!-- <th scope="col">Filesize</th>    -->
                     <th scope="col">Actor</th>   
                     <th scope="col">Date&Time</th>       
@@ -115,13 +115,13 @@ include('session.php');
                   <tr>
                     <td style="display:none"><?php echo $docId?></td>
                     <td data-label="Code:"><?php echo $docCode; ?>
-                    <td data-label="Filename:"><?php echo $docName; ?>
+                    <td data-label="Requested By:"><?php echo $docTitle; ?>
                     <td data-label="Actor:"><?php echo $docAct1; ?>
                     <td data-label="Date&T:"><?php echo $docDate1; ?>
                     <td data-label="Status:"><?php echo $docStat; ?>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
-                    <td style="display:none"><?php echo $docTitle?></td>
+                    <td style="display:none"><?php echo $docName?></td>
                     <td style="display:none"><?php echo $docType?></td>
                     <td style="display:none"><?php echo $docDesc?></td>
                     <td style="display:none"><?php echo $docOff1?></td>
@@ -256,7 +256,7 @@ include('session.php');
                       $('#send_off1').val(data[13]);
                       $('#send_date1').val(data[14]); 
 
-                      $('#doc_fileN1').text(data[2]);  
+                      $('#doc_fileN1').text(data[9]);  
                       $('#send_id').val(data[0]);
                       $('#send_code').val(data[1]); 
                 });

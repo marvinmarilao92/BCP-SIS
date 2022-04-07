@@ -321,7 +321,7 @@
               else{
                 // The user was not in the list of departments above, so it means the user may be a student
                 // Validate if the user was actually a student
-                $sql2 = "SELECT * FROM student_information where id_number = '$myusername' AND (account_status='Offical' OR account_status='Transferee')";
+                $sql2 = "SELECT * FROM student_information where id_number = '$myusername' AND (account_status='Official' OR account_status='Transferee')";
                 if($result2 = mysqli_query($link, $sql2)){
                   if(mysqli_num_rows($result2) > 0){
                     while($row2 = mysqli_fetch_array($result2)){

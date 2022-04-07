@@ -92,7 +92,7 @@ include('session.php');
                 <thead>
                   <tr>
                     <th scope="col">DocCode</th>
-                    <th scope="col" >Filename</th>
+                    <th scope="col" >Requested By</th>
                     <!-- <th scope="col">Filesize</th>    -->
                     <th scope="col">Actor</th>   
                     <th scope="col">Date&Time</th>       
@@ -121,14 +121,14 @@ include('session.php');
                   <tr>
                     <td style="display:none"><?php echo $docId?></td>
                     <td data-label="Code:"><?php echo $docCode; ?></td>
-                    <td data-label="Filename:"><?php echo $docName; ?></td>
+                    <td data-label="Requested By:"><?php echo $docTitle; ?></td>
                     <td data-label="Actor:"><?php echo $docAct1; ?></td>
                     <td style="display:none"><?php echo $docOff1?></td>
                     <td data-label="Date&T:"><?php echo $docDate1; ?></td>
                     <td data-label="Status:"><?php echo $docStat; ?></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
                     <td style="display:none"><?php echo $docDl; ?></td>
-                    <td style="display:none"><?php echo $docTitle?></td>
+                    <td style="display:none"><?php echo $docName?></td>
                     <td style="display:none"><?php echo $docType?></td>
                     <td style="display:none"><?php echo $docDesc?></td>                    
                     <td style="display:none"><?php echo $docAct2?></td>
@@ -140,7 +140,7 @@ include('session.php');
                     <td style="display:none"><?php echo $docRemarks?></td>
 
                   
-                    <td>                    
+                    <td WIDTH="13%">                    
                       <a class="btn btn-success sendbtn" title="Send"><i class="bi bi-cursor-fill"></i></a>
                       <a class="btn btn-danger holdbtn" title="Hold"><i class="bi bi-folder-symlink" ></i></a>
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="bi bi-eye-fill"></i></a>                
@@ -271,6 +271,7 @@ include('session.php');
                                       <input type="hidden" class="form-control" id="send_date1" readonly>                  
                                       <div class="col-md-12">
                                         <select class="form-select select send_act2" id="send_act2" name="send_act2" onChange="fetchOffice(this.value);">
+                                          <option value="" selected="selected" disabled="disabled">Select Receiver</option>
                                               <?php
                                                 require_once("include/conn.php");
                                                 $query="SELECT * FROM user_information WHERE (department = 'DATMS' OR  department = 'SuperUser') AND `id_number` NOT IN ('$verified_session_username') AND role NOT LIKE '%Cashier%' AND role NOT LIKE '%Admission%' ORDER BY firstname DESC ";
@@ -287,7 +288,7 @@ include('session.php');
                                         </select>
                                       </div>
                                       <div class="col-md-12">
-                                        <select class="form-select" id="send_off2" name="send_off2">
+                                        <select class="form-select" id="send_off2" name="send_off2" >
                                           <option selected="selected" disabled="disabled">Select Office</option>
                                         </select>
                                       </div>
@@ -385,7 +386,7 @@ include('session.php');
                 }).get();
 
                 console.log(data);      
-                    $('#doc_fileN').text(data[2]);  
+                    $('#doc_fileN').text(data[9]);  
                     $('#doc_id').val(data[0]);
                     $('#doc_code').val(data[1]); 
                 });
@@ -454,7 +455,7 @@ include('session.php');
                     $('#send_off1').val(data[4]);
                     $('#send_date1').val(data[5]); 
 
-                    $('#doc_fileN1').text(data[2]);  
+                    $('#doc_fileN1').text(data[9]);  
                     $('#send_id').val(data[0]);
                     $('#send_code').val(data[1]); 
                 });

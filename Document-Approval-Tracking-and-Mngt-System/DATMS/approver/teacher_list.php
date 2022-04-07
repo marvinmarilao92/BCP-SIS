@@ -3,74 +3,64 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<title>DATMS | Teacher List</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 <style>
-    /*responsive*/
-  @media(max-width: 500px){
-    .table thead{
-      display: none;
-    }
+        /*responsive*/
+        @media(max-width: 500px){
+          .table thead{
+            display: none;
+          }
 
-    .table, .table tbody, .table tr, .table td{
-      display: block;
-      width: 100%;
-    }
-    .table tr{
-      background: #ffffff;
-      box-shadow: 0 8px 8px -4px lightblue;
-      border-radius: 5%;
-      margin-bottom:13px;
-      margin-top: 13px;
-    }
-    .table td{
-      /* max-width: 20px; */
-      padding-left: 50%;
-      text-align: right;
-      position: relative;
-    }
-    .table td::before{      
-      margin-top: 10px;      
-      content: attr(data-label);
-      position: absolute;
-      left:0;
-      width: 50%;
-      padding-left:15px;
-      font-size:15px;
-      font-weight: bold;
-      text-align: left;
-    }
-  }
-</style>
+          .table, .table tbody, .table tr, .table td{
+            display: block;
+            width: 100%;
+          }
+          .table tr{
+            background: #ffffff;
+            box-shadow: 0 8px 8px -4px lightblue;
+            border-radius: 5%;
+            margin-bottom:13px;
+            margin-top: 13px;
+          }
+          .table td{
+            /* max-width: 20px; */
+            padding-left: 50%;
+            text-align: right;
+            position: relative;
+          }
+          .table td::before{      
+            margin-top: 10px;      
+            content: attr(data-label);
+            position: absolute;
+            left:0;
+            width: 50%;
+            padding-left:15px;
+            font-size:15px;
+            font-weight: bold;
+            text-align: left;
+          }
+        }
+      </style>
 </head>
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'approved'; $col = 'records';include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'TL' ; $col = 'list'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Approved Documents</h1>
+      <h1>Teacher List</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Module</li>
-          <li class="breadcrumb-item active">Approved Documents</li>
+          <li class="breadcrumb-item active">Teacher List</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
-    <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-      <h4 class="alert-heading">READ CAREFULLY</h4>
-      <p>
-        You may use the service and the contents contained in the Services solely for your own individual non-commercial and informational purpose
-        only. Any other use, including for any commercial purposes, is strictly prohibited without our express prior witten or verbal consent.
-      </p>
-      <hr>
-      <p class="mb-0">© Copyright Bestlink College of the Philippines. All Rights Reserved.</p>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
     <div class="">
     <section class="section">
       <div class="row">        
@@ -78,75 +68,60 @@ include('session.php');
           <div class="card">
             <div class="col-lg-12">
               <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                  <h4>Document List</h4>
+                  <h4>Teacher Records</h4>
               </div>
               <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
               </div> 
             </div>
             <div class="card-body" >           
-              <!-- Table for Office records -->
-              <table class="table table-hover datatable" >
+               <!-- Table for Students records -->
+               <table class="row-border hover datatable table" id="StudentsTable">
                 <thead>
                   <tr>
-                    <th scope="col">DocCode</th>
-                    <th scope="col" >Requested By</th>
-                    <!-- <th scope="col">Filesize</th>    -->
-                    <th scope="col">Actor</th>   
-                    <th scope="col">Date/Time</th>       
-                    <th scope="col">Status</th>  
-                    <!-- <th scope="col">Downloads</th>    -->
-                    <th scope="col">Action</th>          
+                    <th WIDTH="10%">Account No.</th>
+                    <th >Name</th>
+                    <th scope="col">Program Handled</th>                    
+                    <th >Status</th>
+                    <th scope="col" WIDTH="7%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Approved' AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname')
-                    ORDER BY doc_date2 DESC ";
+                    $query="SELECT *,LEFT(middlename,1) FROM teacher_information ORDER BY date ASC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
-                      $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
-                      $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
-                      $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
-                      $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                      $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
-                      $docRemarks = $rs['doc_remarks'];  
-  
+                      $adm_id = $rs['id'];
+                      $adm_no =$rs['id_number'];
+                      $adm_fname = $rs['firstname'];
+                      $adm_lname = $rs['lastname'];        
+                      $adm_mname = $rs['LEFT(middlename,1)'];
+                      $adm_program = $rs['course'];
+                      $date = $rs['date'];
+                      $adm_as = $rs['account_status'];
+
                   ?>
                   <tr>
-                  <td style="display:none"><?php echo $docId?></td>
-                    <td data-label="Code:"><?php echo $docCode; ?></td>
-                    <td data-label="Requested By:"><?php echo $docTitle; ?></td>
-                    <td data-label="Actor:"><?php echo $docAct3; ?></td>
-                    <td data-label="Date:"><?php echo $docDate3; ?></td>
-                    <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
-                    <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
-                    <td style="display:none"><?php echo $docDl; ?></td>
-                    <td style="display:none"><?php echo $docName?></td>
-                    <td style="display:none"><?php echo $docType?></td>
-                    <td style="display:none"><?php echo $docDesc?></td>
-                    <td style="display:none"><?php echo $docOff1?></td>
-                    <td style="display:none"><?php echo $docAct2?></td>
-                    <td style="display:none"><?php echo $docOff2?></td>
-                    <td style="display:none"><?php echo $docDate2?></td>
-                    <td style="display:none"><?php echo $docAct1?></td>
-                    <td style="display:none"><?php echo $docOff3?></td>
-                    <td style="display:none"><?php echo $docDate1?></td>
-                    <td style="display:none"><?php echo $docRemarks?></td>
-
-                  </td>
-                    <td>                      
-                      <a class="btn btn-secondary cancelbtn"><i class="bi bi-reply-fill"></i></a>
-                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>                
+                    <td data-label="Student No."><?php echo $adm_no; ?></td>
+                    <td data-label="Name" WIDTH="50%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
+                    <td data-label="Program"><?php echo $adm_program; ?></td>
+                    <td data-label="Status"><?php echo $adm_as?></td>
+                    <td data-label="Status" style="display: none;"><?php echo $date?></td>
+                    <td WIDTH="7%">      
+                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>"><i class="bi bi-eye"></i></button>                       
+                      </div>
                     </td>
                   </tr>
 
-                  <?php } ?>
+                  <?php 
+                  include 'modals/teach_modals.php';
+                  } ?>
                   
                 </tbody>
+              
               </table>
-              <!-- End of office table record -->
+              <!-- End of Students table record -->
 
             </div>
           </div>
@@ -157,10 +132,8 @@ include('session.php');
     </section>
 
   </main><!-- End #main -->
-  
-  <!-- Document Modals -->
 
-    <!-- Desc Document modal -->
+     <!-- Desc Document modal -->
        <div class="modal fade" id="RemarksModal" tabindex="-1">
                   <div class="modal-dialog modal-dialog-centered modal-l">
                     <div class="modal-content">
@@ -187,7 +160,7 @@ include('session.php');
         </div>
       <!-- End Desc office Modal-->
       <!-- CancelModal Docs Modal -->
-       <div class="modal fade" id="CancelModal" tabindex="-1">
+      <div class="modal fade" id="CancelModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -218,7 +191,7 @@ include('session.php');
           </div>
       <!-- End CancelModal Docs Modal-->
 
-  <!-- End of Document Modals -->
+  <!-- End of Office Modals -->
 
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
@@ -231,11 +204,12 @@ include('session.php');
   <?php include ('core/js.php');//css connection?>
 
   <!-- JS Scripts -->
-    <script>
+  <script>
       // this script will execute as soon a the website runs
         $(document).ready(function () {
 
-            // View Function
+
+           // View Function
                   $('.remarksbtn').on('click', function () {
 
                       $('#RemarksModal').modal('show');
@@ -247,11 +221,11 @@ include('session.php');
                       }).get();
 
                       console.log(data); 
-                      $('#remarks').text("Your Remarks: ".data[18]);
+                      $('#remarks').text(data[18]);
                     });
               // End of View function 
-          
-              // Cancel modal calling
+
+            // Received modal calling
               $('.cancelbtn').on('click', function () {
 
                   $('#CancelModal').modal('show');
@@ -263,17 +237,17 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#doc_fileN').text(data[9]);  
+                      $('#doc_fileN').text(data[2]);  
                       $('#doc_id').val(data[0]);
                       $('#doc_code').val(data[1]); 
                 });
-              // End of Cancel modal calling 
+              // End of Received modal calling 
 
-              // Cancel function
+              // Received function
               $('#cancel').click(function(d){ 
                     d.preventDefault();
                       if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
-                        $.post("function/cancel_reject_func.php", {
+                        $.post("function/cancel_hold_func.php", {
                           docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
                           docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
                           },function(data){
@@ -297,7 +271,7 @@ include('session.php');
                                   })
                                     Toast.fire({
                                     icon: 'Success',
-                                    title:'Document Cancel the Approval Successfully '
+                                    title:'Document Returned Successfully '
                                 }).then(function(){
                                   document.location.reload(true)//refresh pages
                                 });
@@ -313,10 +287,11 @@ include('session.php');
                         Swal.fire("You must fill out every field","","warning");
                       }
                   })
-              // End Cancel function
-
+              // End Received function
           });
 
     </script>
+  
 </body>
+
 </html>

@@ -34,7 +34,7 @@ include ("includes/sidebar.php");
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
-      <div class="row">
+
         <!-- Left side columns -->
           <div class="row">
 
@@ -62,9 +62,6 @@ include ("includes/sidebar.php");
               <!-- End Activity Body -->
               </div>
             </div>
-
-          </div>
-
       
     </section>
   </main><!-- End #main -->
