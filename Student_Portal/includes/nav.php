@@ -31,7 +31,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="student-profile.php?<?php echo $verified_session_username ?>">
+              <a class="dropdown-item d-flex align-items-center" href="student-profile.php">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>

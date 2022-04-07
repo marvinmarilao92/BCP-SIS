@@ -388,6 +388,19 @@
                         }
                         // Free result set
                         mysqli_free_result($result3);
+                      }else{
+                        //this is used to identify the numbers of attempts
+                        $total_count++;
+                        $rem_attm=3-$total_count;
+                        if($rem_attm==0){
+                          $error="To many failed login attempts. Please login after 60 sec.";
+                        }else{
+                          // $error="Please enter valid login details. $rem_attm attempts remaining";
+                          $error="Your Username or Password is invalid.";
+                        }
+                        $try_time=time();
+                        mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
+                      
                       }
                     }
                   }

@@ -12,6 +12,7 @@ include ("includes/head.php");
 
 <?php
 include ("includes/nav.php");
+$page = 'clrS' ; $col = 'Clearance';
 include ("includes/sidebar.php");
 ?>
 
