@@ -25,7 +25,7 @@ include('session.php');
 
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Add New Student 
+        <h5 class="card-title">New Student 
           <div class="form-check form-switch" style="float: right;">
             <input class="form-check-input" type="checkbox" id="editableswitch" onchange="editInfo()">
             <label class="form-check-label" for="editableswitch">Editable</label>

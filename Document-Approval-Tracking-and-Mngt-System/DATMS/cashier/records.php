@@ -6,6 +6,43 @@ include('session.php');
 <title>DATMS | Profile</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
+<style>
+    /*responsive*/
+  @media(max-width: 500px){
+    .table thead{
+      display: none;
+    }
+
+    .table, .table tbody, .table tr, .table td{
+      display: block;
+      width: 100%;
+    }
+    .table tr{
+      background: #ffffff;
+      box-shadow: 0 8px 8px -4px lightblue;
+      border-radius: 5%;
+      margin-bottom:13px;
+      margin-top: 13px;
+    }
+    .table td{
+      /* max-width: 20px; */
+      padding-left: 50%;
+      text-align: right;
+      position: relative;
+    }
+    .table td::before{      
+      margin-top: 10px;      
+      content: attr(data-label);
+      position: absolute;
+      left:0;
+      width: 50%;
+      padding-left:15px;
+      font-size:15px;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+</style>
 </head>
 
 <body>
@@ -97,12 +134,12 @@ include('session.php');
                                         
                                   ?>
                                 <tr>
-                                  <td data-label="Application Code"><?php echo $adm_no; ?></td>
-                                  <td data-label="Name" WIDTH="25%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
-                                  <td data-label="Program"><?php echo $adm_program; ?></td>                                  
-                                  <td data-label="Admission Date"WIDTH="15%"><?php echo $adm_date?></td>   
-                                  <td data-label="Status"><?php echo $adm_ORNum?></td>     
-                                  <td data-label="Status"><?php echo $adm_DP?></td>  
+                                  <td data-label="Code: "><?php echo $adm_no; ?></td>
+                                  <td data-label="Name: " WIDTH="25%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
+                                  <td data-label="Program: "><?php echo $adm_program; ?></td>                                  
+                                  <td data-label="Date: "WIDTH="15%"><?php echo $adm_date?></td>   
+                                  <td data-label="Status: "><?php echo $adm_ORNum?></td>     
+                                  <td data-label="Date: "><?php echo $adm_DP?></td>  
                                 </tr>
                                 <?php } ?>
                                 </tbody>
