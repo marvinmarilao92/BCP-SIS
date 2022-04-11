@@ -6,7 +6,10 @@ $db = mysqli_select_db($conn, 'sis_db');
 
 if(isset($_POST['offid']))
 {
+  date_default_timezone_set("asia/manila");
+		 $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
     $id = $_POST['offid'];
+    $code = $_POST['offcode'];
 
     $query = "DELETE FROM datms_dept WHERE off_id='$id'";
     $query_run = mysqli_query($conn, $query);
@@ -26,7 +29,7 @@ if(isset($_POST['offid']))
           $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
           $remarks="Department has been delete";  
           //save to the audit trail table
-          mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$Office_title','$ip','$host','$date')")or die(mysqli_error($link));
+          mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$code','$ip','$host','$date')")or die(mysqli_error($link));
 
           //save doctype to the database
           echo  "DepartmentDeleted";
