@@ -143,7 +143,7 @@
                         <td data-label="Tracker:"><?php echo $docAct3; ?></td>
                         <td data-label="Date:"><?php echo $docDate3; ?></td>
                         <td data-label="Current Actor:"><?php echo $docAct2?></td>
-                        <td data-label="Status:"><a class="fw-bold text-dark remarksbtn"><?php echo $docStat; ?></a></td>
+                        <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
                         <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
                         <td style="display:none"><?php echo $docDl; ?></td>
                         <td style="display:none"><?php echo $docName?></td>

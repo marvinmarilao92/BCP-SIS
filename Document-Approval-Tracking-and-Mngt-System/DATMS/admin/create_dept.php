@@ -109,7 +109,7 @@ include('session.php');
                   <tbody>
                     <?php
                       require_once("include/conn.php");
-                      $query="SELECT * FROM datms_office ORDER BY off_date asc ";
+                      $query="SELECT * FROM datms_dept ORDER BY off_date asc ";
                       $result=mysqli_query($conn,$query);
                       while($rs=mysqli_fetch_array($result)){
                         $offid =$rs['off_id'];
@@ -263,6 +263,7 @@ include('session.php');
                           <div class="card-body">                
                             <br>
                             <input type="hidden"  name="delete_id" id="delete_id" readonly>
+                            <input type="hidden"  name="delete_code" id="delete_code" readonly>
                             <center>
                               <h5>Are you sure you want to delete these Department?</h5>
                               <h5 class="text-danger">This action cannot be undone.</h5>   
@@ -334,6 +335,7 @@ include('session.php');
                     console.log(data);
 
                   $('#delete_id').val(data[0]);
+                  $('#delete_code').val(data[2]);
                   
                   });
               // end of function
@@ -341,8 +343,9 @@ include('session.php');
               // Delete Department function
               $("#offdel").click(function(b){
                 b.preventDefault();
-                $.post("function/delete_office.php",{
-                    offid:$('#delete_id').val()
+                $.post("function/delete_dept.php",{
+                    offid:$('#delete_id').val(),
+                    offcode:$('#delete_code').val()
                   },function(response){
                     // alert ("deleted");
                     if(response.trim() == "DepartmentDeleted"){
@@ -362,7 +365,7 @@ include('session.php');
               $('#save').click(function(a){ 
                   a.preventDefault();
                     if($('#offtitle').val()!="" && $('#offloc').val()!=""){
-                      $.post("function/add_office.php", {
+                      $.post("function/add_dept.php", {
                         offname:$('#offtitle').val(),
                         offloc:$('#offloc').val()
                         },function(data){
@@ -431,7 +434,7 @@ include('session.php');
               $('#edit').click(function(d){ 
                     d.preventDefault();
                       if($('#off_idE').val()!="" && $('#off_codeE').val()!="" && $('#off_nameE').val()!="" && $('#off_locE').val()!=""){
-                        $.post("function/update_office.php", {
+                        $.post("function/update_dept.php", {
                           offid:$('#off_idE').val(),
                           offcode:$('#off_codeE').val(),
                           offname:$('#off_nameE').val(),

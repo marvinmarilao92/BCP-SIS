@@ -8,7 +8,7 @@ if(isset($_POST['offid']))
 {
     $id = $_POST['offid'];
 
-    $query = "DELETE FROM datms_office WHERE off_id='$id'";
+    $query = "DELETE FROM datms_dept WHERE off_id='$id'";
     $query_run = mysqli_query($conn, $query);
 
     if($query_run)

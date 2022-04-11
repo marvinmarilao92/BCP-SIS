@@ -12,12 +12,12 @@ $db = mysqli_select_db($conn, 'sis_db');
              $Off_name = mysqli_real_escape_string($conn,$_POST['offname']);
              $Off_loc = mysqli_real_escape_string($conn,$_POST['offloc']);
              
-        $q_checkcode = $conn->query("SELECT * FROM `datms_office` WHERE `off_name` = '$Off_name'") or die(mysqli_error($conn));
+        $q_checkcode = $conn->query("SELECT * FROM `datms_dept` WHERE `off_name` = '$Off_name'") or die(mysqli_error($conn));
             $v_checkcode = $q_checkcode->num_rows;
             if($v_checkcode == 1){
                 echo ('failed');
             }else {
-                $conn->query("UPDATE datms_office SET off_code='$Off_code', off_name='$Off_name', off_location='$Off_loc', off_date='$date' WHERE off_id='$id'") or die(mysqli_error($conn));
+                $conn->query("UPDATE datms_dept SET off_code='$Off_code', off_name='$Off_name', off_location='$Off_loc', off_date='$date' WHERE off_id='$id'") or die(mysqli_error($conn));
                 echo ('success');
             }
         }

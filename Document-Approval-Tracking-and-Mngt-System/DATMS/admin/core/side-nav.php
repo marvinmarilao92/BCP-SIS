@@ -222,6 +222,12 @@
         
       <li class="nav-heading">Settings</li>
 
+       <li class="nav-item">
+          <a href="create_program.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='prog'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+            <i class="bi bi-book"></i>
+            <span>Program</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
           <a href="create_doctype.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='doctT'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
@@ -231,8 +237,8 @@
         </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a href="create_office.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='department'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-            <i class="bi bi-book"></i>
+          <a href="create_dept.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='department'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+            <i class="bi bi-building"></i>
             <span>Department</span>
           </a>
         </li><!-- End Add office Page Nav -->
