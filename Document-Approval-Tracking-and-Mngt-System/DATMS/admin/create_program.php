@@ -95,7 +95,7 @@ include('session.php');
             </div>
             <div class="card-body" >               
                 <!-- Table for Document List records -->
-                <table class="table table-hover datatable" id="ProgramTable">
+                <table class="table table-hover" id="ProgramTable">
                   <thead>
                     <tr>
                       <th style="display:none"></th>
@@ -124,13 +124,16 @@ include('session.php');
                       <td data-label="Date"><?php echo $date?></td>
                       <td data-label="">
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">                     
-                          <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>
+                          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $progid;?>"><i class="bi bi-eye"></i></button> 
+                          <!-- <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button> -->
                           <button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button>
                           <button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>
                         </div>
                       </td>
                     </tr>
-                    <?php } ?>
+                    <?php 
+                  include 'modals/program_modals.php';
+                  } ?>
                   </tbody>
                 </table>
                 <!-- End of Document table record -->

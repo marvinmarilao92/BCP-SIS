@@ -95,7 +95,7 @@ include('session.php');
             </div>
             <div class="card-body" >               
                 <!-- Table for Document List records -->
-                <table class="table table-hover datatable" id="DepartmentTable">
+                <table class="table table-hover " id="DepartmentTable">
                   <thead>
                     <tr>
                       <th style="display:none"></th>
