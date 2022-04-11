@@ -62,26 +62,21 @@ include('session.php');
             <div class="form-floating">
                 <select class="form-select course" name="course" id="course" aria-label="State" Required>
                   <option value="#" selected="selected" disabled="disabled">Select Course</option>
-                  <option value="BSIT">BS Information Technology</option>
-                  <option value="BSHM">BS Hospitality Management</option>
-                  <option value="BSOA">BS Office Administration</option>
-                  <option value="BSBA Major in HRM">BS Business Administration Major in Human Resource Management</option>
-                  <option value="BSBA Major in Marketing">BS Business Administration Major in Marketing</option>
-                  <option value="BSCriM">BS Criminology</option>
-                  <option value="BEEd">Bachelor of Elementary Education</option>
-                  <option value="BSEd Major in English">Bachelor of Secondary Education Major in English</option>
-                  <option value="BSEd Major in Filipino">Bachelor of Secondary Education Major in Filipino</option>
-                  <option value="BSEd Major in Mathematics">Bachelor of Secondary Education Major in Mathematics</option>
-                  <option value="BSEd Major in Social Studies">Bachelor of Secondary Education Major in Social Studies</option>
-                  <option value="BSEd Major in Values Education">Bachelor of Secondary Education Major in Values Education</option>
-                  <option value="BTLeD">Bachelor of Technology and Livelihood Education </option>
-                  <option value="BPEeD">Bachelor of Physical Education</option>
-                  <option value="BSCE">BS Computer Engineering</option>
-                  <option value="BLIS">Bachelor of Library in Information Science</option>
-                  <option value="BSTM">BS Tourism Management</option>
-                  <option value="BSEntrep">BS Entrepreneurship</option>
-                  <option value="BSAIS">BS Accounting Information System</option>
-                  <option value="BSPsy">BS Psychology</option>  
+                  <?php
+                      // Include config file
+                      require_once "include/config.php";
+                      // Attempt select query execution
+                      $sql2 = "SELECT * FROM datms_program ORDER BY date desc ";
+                      if($result2 = mysqli_query($link, $sql2)){
+                        if(mysqli_num_rows($result2) > 0){
+                          while($row2 = mysqli_fetch_array($result2)){
+                            echo '<option value = "' . $row2["p_code"] . '">' . $row2["p_name"] . '</option>';
+                          }
+                          // Free result set
+                          mysqli_free_result($result2);
+                        }
+                      }
+                  ?>        
                 </select>
               <label for="floatingSelect">College Program</label>
             </div>   
@@ -373,8 +368,8 @@ include('session.php');
             <div class="form-floating">
               <select class="form-select" name="status" id="status" aria-label="State" required>
                 <option selected disabled value="">Select Status</option>
-                <option value="Unoffical">Unofficial</option>
-                <option value="Offical">Official</option>
+                <option value="Unofficial">Unofficial</option>
+                <option value="Official">Official</option>
                 <option value="Transferee">Transferee</option>
               </select>
               <label for="floatingSelect">Student Status</label>

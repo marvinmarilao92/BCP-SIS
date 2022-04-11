@@ -235,21 +235,26 @@ include('session.php');
       // this script will execute as soon a the website runs
         $(document).ready(function () {
 
-            // View Function
-                  $('.remarksbtn').on('click', function () {
+              // Remarks view
+              $('.remarksbtn').on('click', function () {
 
-                      $('#RemarksModal').modal('show');
+                  $('#RemarksModal').modal('show');
 
-                      $tr = $(this).closest('tr');
+                  $tr = $(this).closest('tr');
 
-                      var data = $tr.children("td").map(function () {
-                          return $(this).text();
-                      }).get();
+                  var data = $tr.children("td").map(function () {
+                      return $(this).text();
+                  }).get();
 
-                      console.log(data); 
-                      $('#remarks').text("Your Remarks: ".data[18]);
-                    });
-              // End of View function 
+                  console.log(data); 
+                  if(data[18] ==""){
+                    $('#remarks').text(data[11]);
+                  }else{
+                    $('#remarks').text(data[18]);
+                  }
+                
+                });
+              // End of Remarks View function 
           
               // Cancel modal calling
               $('.cancelbtn').on('click', function () {

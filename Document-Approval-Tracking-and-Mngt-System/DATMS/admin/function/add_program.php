@@ -2,19 +2,19 @@
 
  require_once("../include/conn.php");
    
-   if(isset($_POST['offname'])&&isset($_POST['offloc'])){
+   if(isset($_POST['progcode'])&&isset($_POST['progname'])){
     // Object Connection
 		 date_default_timezone_set("asia/manila");
 		 $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
         //  $Office_code = mysqli_real_escape_string($conn,$_POST['offcode']);
-         $Office_title = mysqli_real_escape_string($conn,$_POST['offname']);
-         $Office_loc = mysqli_real_escape_string($conn,$_POST['offloc']);
+         $Prog_code = mysqli_real_escape_string($conn,$_POST['progcode']);
+         $Prog_name = mysqli_real_escape_string($conn,$_POST['progname']);
          		date_default_timezone_set("asia/manila");
             $year = date("Y",strtotime("+0 HOURS"));
             $random_num= rand(10000000,99999999);
             $off_code =  "doc".$year.$random_num;
 				 
-	$q_checkcode = $conn->query("SELECT * FROM `datms_office` WHERE `off_name` = '$Office_title'") or die(mysqli_error($conn));
+	$q_checkcode = $conn->query("SELECT * FROM `datms_program` WHERE `p_code` = '$Prog_code'") or die(mysqli_error($conn));
 		$v_checkcode = $q_checkcode->num_rows;
 		if($v_checkcode == 1){
 			echo ('failed');
@@ -31,12 +31,12 @@
 			}else{
 				$ip = $_SERVER["REMOTE_ADDR"];
 				$host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-				 $remarks="department has been created";  
+				 $remarks="Program has been created";  
 				 //save to the audit trail table
-				 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$Office_title','$ip','$host','$date')")or die(mysqli_error($link));
+				 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$Prog_code','$ip','$host','$date')")or die(mysqli_error($link));
 
 				 //query action
-				 $conn->query("INSERT INTO `datms_office` VALUES('','$off_code', '$Office_title', '$Office_loc','$date')") or die(mysqli_error($conn));
+				 $conn->query("INSERT INTO `datms_program` VALUES('', '$Prog_code', '$Prog_name','$date')") or die(mysqli_error($conn));
 				 echo ('success');
 			}
 		//end of audit trail
