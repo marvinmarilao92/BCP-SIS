@@ -93,7 +93,7 @@ include('session.php');
                     <th >Name</th>
                     <th scope="col">Program</th>                    
                     <th >Status</th>
-                    <th >Requirements</th>
+                    <th >Requirements Submitted</th>
                     <th scope="col" WIDTH="7%">Action</th>
                   </tr>
                 </thead>

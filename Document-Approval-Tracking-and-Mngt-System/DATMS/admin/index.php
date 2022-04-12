@@ -56,7 +56,7 @@ include('session.php');
                     <div class="ps-3">
                       <?php 
                         require_once("include/conn.php");
-                        $query="SELECT * FROM datms_office";
+                        $query="SELECT * FROM datms_dept";
                         $result=mysqli_query($conn,$query);
                         if($result){
                           echo "<h6>". mysqli_num_rows($result)."</h6>";
@@ -158,7 +158,7 @@ include('session.php');
                 <!-- Bar Chart -->
                 <div class="card-body">
                   <h5 class="card-title">Document Tracked <span>| Per Department</span></h5>
-                <canvas id="barChart" style="max-height: 400px;"></canvas>
+                <canvas id="TrackedbarChart" style="max-height: 400px;"></canvas>
                  <?php
                        require_once("include/conn.php");
 
@@ -195,7 +195,7 @@ include('session.php');
                   <!-- Bar Chart -->
                   <div class="card-body">
                     <h5 class="card-title">Students Enrolled<span> | Per Year</span></h5>
-                  <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                  <canvas id="StudlineChart" style="max-height: 400px;"></canvas>
                   <?php
                     require_once("include/conn.php");
                           $sql3="SELECT *, YEAR(`stud_date`) AS Stud_Year, count('Stud_Year') as countyear FROM student_information group by Stud_Year";
@@ -280,8 +280,8 @@ include('session.php');
 <!-- Charts -->
 <script>
     // BAR
-    var ctx = document.getElementById("barChart").getContext('2d');
-    var myChart = new Chart(ctx, {
+    var ctx = document.getElementById("TrackedbarChart").getContext('2d');
+    var myTrackedChart = new Chart(ctx, {
       type: 'bar',
      data: {
             labels:<?php echo json_encode($name); ?>,
@@ -325,8 +325,8 @@ include('session.php');
     });
 
     // Line
-    var ctx = document.getElementById("lineChart").getContext('2d');
-    var myChart = new Chart(ctx, {
+    var ctx = document.getElementById("StudlineChart").getContext('2d');
+    var myStudChart = new Chart(ctx, {
       type: 'line',
      data: {
             labels:<?php echo json_encode($name3); ?>,
@@ -364,7 +364,7 @@ include('session.php');
 
     //pie
     var ctxP = document.getElementById("accountChart").getContext('2d');
-    var myPieChart = new Chart(ctxP, {
+    var myDoughChart = new Chart(ctxP, {
       type: 'doughnut',      
       data: {
         labels:<?php echo json_encode($name1); ?>,
@@ -404,8 +404,8 @@ include('session.php');
     });
 
      //stud radio
-     var ctxP = document.getElementById("studChart").getContext('2d');
-    var myPieChart = new Chart(ctxP, {
+    var ctxP = document.getElementById("studChart").getContext('2d');
+    var myAreaChart = new Chart(ctxP, {
       type: 'polarArea',      
       data: {
         labels:<?php echo json_encode($name2); ?>,

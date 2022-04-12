@@ -457,14 +457,14 @@ include('session.php');
                 </div>
               </div><!-- End No Labels Form -->
               <?php
-                unset($_SESSION['status']);
+                
           }else{ ?>
-            <form class="card col-md-12" action="function/req_submit.php" method="POST">
+            <form class="card col-md-12" method="POST">
               <div class="card-body">
                 <h5 class="card-title">New Student Requirements:</h5>
-                  <div class="row mb-3" aria-required="true">
+                  <div class="row mb-12" aria-required="true">
                     
-                    <div class="col-sm-2 pt-1">
+                    <div class="col-md-12 pt-1">
 
                     <?php
                     $requirments ='';
@@ -510,6 +510,110 @@ include('session.php');
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
 </body>
+<?php
+require_once("include/config.php");
+ // agon date
+ $current_year = date("y");
+ $key = $_SESSION["login_key"];
+if(isset($_POST['submit_req']))
+{
+   //agun implementation for student number
+   $sqll = "SELECT id FROM student_information ORDER BY id DESC Limit 1";
+   if($resultt = mysqli_query($link, $sqll)){
+     if(mysqli_num_rows($resultt) == 0){
+       $student_number = "" . $current_year . "010001";
+     }
+     else if(mysqli_num_rows($resultt) > 0){
+       while($roww = mysqli_fetch_array($resultt)){
+         if($roww['id'] < 9){
+           $new_id = $roww['id'] + 1;
+           $student_number = "" . $current_year . "01000" . $new_id;
+         }
+         else if ($roww['id'] == 9){
+           $student_number = "" . $current_year . "010010";
+         }
+         else if ($roww['id'] < 99){
+           $new_id = $roww['id'] + 1;
+           $student_number = "" . $current_year . "0100" . $new_id;
+         }
+         else if ($roww['id'] == 99){
+           $student_number = "" . $current_year . "010100";
+         }
+         else if ($roww['id'] < 999){
+           $new_id = $roww['id'] + 1;
+           $student_number = "" . $current_year . "010" . $new_id;
+         }
+         else if ($roww['id'] == 999){
+           $student_number = "" . $current_year . "011000";
+         }
+         else if ($roww['id'] < 9999){
+           $new_id = $roww['id'] + 1;
+           $student_number = "" . $current_year . "01" . $new_id;
+         }
+         else if ($roww['id'] == 9999){
+           $student_number = "" . $current_year . "010000";
+         }
+         else if ($roww['id'] < 99999){
+           $new_id = $roww['id'] + 1;
+           $student_number = "" . $current_year . "0" . $new_id;
+         }
+         else if ($roww['id'] == 99999){
+           $student_number = "" . $current_year . "100000";
+         }
+         else if ($roww['id'] < 999999){
+           $new_id = $roww['id'] + 1;
+           $student_number = "" . $current_year . "" . $new_id;
+         }
+       }
+     }
+   }
+    $reqItem = $_POST['req_item'];
+    // echo $reqItem;
+
+    foreach($reqItem as $item)
+    {
+        // echo $item . "<br>";
+        $query = "INSERT INTO datms_studreq(id_number,req) VALUES('$student_number','$item')";
+        $query_run = mysqli_query($link, $query);
+    }
+
+    if($query_run)
+    {
+        $_SESSION['status'] = "Success";
+        
+        // echo '<script>alert("Submitted")</script>';
+        // header("Location: ../index.php?id='.$key.'");
+        echo'<script type = "text/javascript">
+            //success message
+            const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProsressBar: true,
+            didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer)
+            toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+            }
+            })
+            Toast.fire({
+            icon: "success",
+            title:"Requirements successfully submitted"
+            }).then(function(){
+              window.location = "index.php?id='.$key.'";//refresh pages
+            });
+        </script>';
+    }
+    else
+    {
+        // $_SESSION['status'] = "Data Not Inserted";
+        // echo '<script>alert("Failed")</script>';
+        $_SESSION['status'] = "Failed";
+        // header("Location: ../index.php?id='.$key.'");
+       
+    }
+}
+?>
 <!-- Script Functions -->
   <script type="text/javascript">
         function editInfo(){

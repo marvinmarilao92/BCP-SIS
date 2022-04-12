@@ -95,7 +95,7 @@ include('session.php');
             </div>
             <div class="card-body" >               
                 <!-- Table for Document List records -->
-                <table class="table table-hover" id="ProgramTable">
+                <table class="table table-hover datatable" id="ProgramTable">
                   <thead>
                     <tr>
                       <th style="display:none"></th>
@@ -285,9 +285,10 @@ include('session.php');
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files/ Template main js file -->
-  <?php include ('core/js.php');//css connection?>
+  <?php include ('core/js.php');//css connection?>     
 
-  <!-- JS Scripts -->
+  </body>
+    <!-- JS Scripts -->
     <script>
       //export functions
         //excel
@@ -318,6 +319,7 @@ include('session.php');
       // modal JS and ajax function
           $(document).ready(function () {
 
+          
               // Opening modal for delete
               $('.deletebtn').on('click', function () {
   
@@ -491,7 +493,4 @@ include('session.php');
           });
 
     </script>
-      
-
-  </body>
 </html>
