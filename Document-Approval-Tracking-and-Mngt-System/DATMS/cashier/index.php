@@ -71,7 +71,6 @@ include('session.php');
     </section>
 
   </main><!-- End #main -->
-  <hr>
     <!-- ======= Footer ======= -->
     <footer class="footer">
       <div class="copyright" style="margin-bottom: 30px;">

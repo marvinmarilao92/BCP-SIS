@@ -1,4 +1,5 @@
 <?php
+    include('../session.php');
     // database configuration
     require_once("../include/config.php");
     // Define variables and initialize with empty values
@@ -114,6 +115,7 @@
              
                   $query = "UPDATE student_application SET account_status='$status' WHERE id_number='$code'";
                   if($query_run = mysqli_query($link, $query)){
+                    unset($_SESSION['status']);
                     echo ('success');
                   }else{
                     echo ('failed');

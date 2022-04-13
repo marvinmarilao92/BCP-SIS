@@ -55,7 +55,7 @@ include('session.php');
       <h1>Submitted Requirements</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a >Home</a></li>
           <li class="breadcrumb-item">Settings</li>
           <li class="breadcrumb-item active">Submitted Requirements</li>
         </ol>
@@ -93,7 +93,7 @@ include('session.php');
                     <th >Name</th>
                     <th scope="col">Program</th>                    
                     <th >Status</th>
-                    <th >Requirements</th>
+                    <th >Requirements Submitted</th>
                     <th scope="col" WIDTH="7%">Action</th>
                   </tr>
                 </thead>

@@ -263,7 +263,7 @@ include ("includes/sidebar.php");
                 <option value="" selected="selected" disabled="disabled">Select Department</option>
                 <?php
                   require_once("includes/conn.php");
-                  $query="SELECT * FROM datms_office ORDER BY off_date DESC ";
+                  $query="SELECT * FROM datms_dept ORDER BY off_date DESC ";
                   $result=mysqli_query($conn,$query);
                   while($rs=mysqli_fetch_array($result)){
                   $offid =$rs['off_id'];                                    

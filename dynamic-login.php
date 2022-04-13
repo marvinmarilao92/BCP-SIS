@@ -5,7 +5,7 @@
   $error = "";
   if($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $time=time()-60;
+    $time=time()-70;
     $ip_address=getIpAddr();
     // Getting total count of hits on the basis of IP
     $query=mysqli_query($link,"select count(*) as total_count from login_attempts where attempt_time > $time and ip_address='$ip_address'");
@@ -65,42 +65,61 @@
                         case "Clearance Administrator":
                           //statement
                           $_SESSION['session_username'] = $myusername;
-                          header("location: Clearance/clearance-administrator/index.php");
+                          if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                              $ip = $_SERVER["HTTP_CLIENT_IP"];
+                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                              $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                            }else{
+                              $ip = $_SERVER["REMOTE_ADDR"];
+                              $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                $remarks="account has been logged in";  
+                                mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                                //used to delete ip address record for login attempts
+                                mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
+                                //calling php file for new login_key
+                                require_once "core/update_key.php";
+                                //update login key
+                                $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                                header("location: Clearance/clearance-administrator/index.php?id=".$_SESSION["login_key"]."");
+                                
+                            }
                           break;
-                        case "Laboratory Coordinator":
+                        
+                          default:
                           //statement
-                          $_SESSION['session_username'] = $myusername;
-                          header("location: Clearance/laboratory-coordinator/index.php");
-                          break;
-                        case "Book Coordinator":
-                          //statement
-                          $_SESSION['session_username'] = $myusername;
-                          header("location: Clearance/book-coordinator/index.php");
-                          break;
-                        case "Library Coordinator":
-                          //statement
-                          $_SESSION['session_username'] = $myusername;
-                          header("location: Clearance/library-coordinator/index.php");
-                          break;
-                        case "Cashier Coordinator":
-                          //statement
-                          $_SESSION['session_username'] = $myusername;
-                          header("location: Clearance/cashier-coordinator/index.php");
-                          break;
-                        case "Registrar Coordinator":
-                          //statement
-                          $_SESSION['session_username'] = $myusername;
-                          header("location: Clearance/registrar-coordinator/index.php");
-                          break;
-                        case "Guidance Coordinator":
-                          //statement
-                          $_SESSION['session_username'] = $myusername;
-                          header("location: Clearance/guidance-coordinator/index.php");
-                          break;
-                        case "Department Head":
-                          //statement
-                          $_SESSION['session_username'] = $myusername;
-                          header("location: Clearance/department-head/index.php");
+                          // Attempt select query execution
+                            $sqll = "SELECT * FROM roles WHERE department_id = 4";
+                            if($resultt = mysqli_query($link, $sqll)){
+                                if(mysqli_num_rows($resultt) > 0){
+                                    
+                                        while($roww = mysqli_fetch_array($resultt)){
+                                            if($row1["role"] == $roww["role"]){
+                                              $_SESSION['session_username'] = $myusername;
+                                              if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                                                  $ip = $_SERVER["HTTP_CLIENT_IP"];
+                                                }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                                                  $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                                                }else{
+                                                  $ip = $_SERVER["REMOTE_ADDR"];
+                                                  $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                                    $remarks="account has been logged in";  
+                                                    mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                                                    //used to delete ip address record for login attempts
+                                                    mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
+                                                    //calling php file for new login_key
+                                                    require_once "core/update_key.php";
+                                                    //update login key
+                                                    $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                                                    header("location: Clearance/clearance-coordinator/index.php?id=".$_SESSION["login_key"]."");
+                                                    
+                                                }
+                                                                                           
+                                            }
+                                        }
+                                    // Free result set
+                                    mysqli_free_result($resultt);
+                                }
+                            }
                           break;
                       }
                       break;
@@ -110,7 +129,7 @@
                     case "DATMS":
                       //statement ROLE
                       switch($row1["role"]){
-                        case "DATMS Administrator":
+                        case "Registrar Administrator":
                           //statement
                           $_SESSION['session_username'] = $myusername;
                           if (!empty($_SERVER["HTTP_CLIENT_IP"])){
@@ -155,7 +174,7 @@
                             }
                           
                           break;
-                        case "DATMS Secretary":
+                        case "Assistant Registrar":
                             //statement
                             $_SESSION['session_username'] = $myusername;
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
@@ -177,7 +196,7 @@
                             }
                             
                             break;
-                        case "DATMS Faculty":
+                        case "Registrar Officer":
                             //statement
                             $_SESSION['session_username'] = $myusername;
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
