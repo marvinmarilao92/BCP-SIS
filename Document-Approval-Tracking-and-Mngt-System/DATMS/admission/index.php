@@ -571,47 +571,101 @@ if(isset($_POST['submit_req']))
     // echo $reqItem;
 
     foreach($reqItem as $item)
-    {
-        // echo $item . "<br>";
-        $query = "INSERT INTO datms_studreq(id_number,req) VALUES('$student_number','$item')";
-        $query_run = mysqli_query($link, $query);
-    }
+      {
+         //Check if the Req is already in the database
+          $sql1 = "SELECT req FROM datms_studreq WHERE id_number = '$student_number' AND `req` LIKE ('%$item%') ";
+          $result = mysqli_query($link,$sql1);
+          $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+          $count = mysqli_num_rows($result);
 
-    if($query_run)
-    {
-        $_SESSION['status'] = "Success";
-        
-        // echo '<script>alert("Submitted")</script>';
-        // header("Location: ../index.php?id='.$key.'");
-        echo'<script type = "text/javascript">
-            //success message
-            const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 2000,
-            timerProsressBar: true,
-            didOpen: (toast) => {
-            toast.addEventListener("mouseenter", Swal.stopTimer)
-            toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-            }
-            })
-            Toast.fire({
-            icon: "success",
-            title:"Requirements successfully submitted"
-            }).then(function(){
-              window.location = "index.php?id='.$key.'";//refresh pages
-            });
-        </script>';
+      }
+    
+    if($count!=0){
+          echo'<script type = "text/javascript">
+              //success message
+              const Toast = Swal.mixin({
+              toast: true,
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 2000,
+              timerProsressBar: true,
+              didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer)
+              toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+              }
+              })
+              Toast.fire({
+              icon: "error",
+              title:"Some of the requirements is already on your account"
+              }).then(function(){
+                window.location = "index.php?id='.$key.'";//refresh pages
+              });
+          </script>';
+    }else{
+      foreach($reqItem as $item)
+      {
+          // echo $item . "<br>";
+          $query = "INSERT INTO datms_studreq(id_number,req) VALUES('$student_number','$item')";
+          $query_run = mysqli_query($link, $query);
+      }
+  
+      if($query_run)
+      {
+          $_SESSION['status'] = "Success";
+          
+          // echo '<script>alert("Submitted")</script>';
+          // header("Location: ../index.php?id='.$key.'");
+          echo'<script type = "text/javascript">
+              //success message
+              const Toast = Swal.mixin({
+              toast: true,
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 2000,
+              timerProsressBar: true,
+              didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer)
+              toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+              }
+              })
+              Toast.fire({
+              icon: "success",
+              title:"Requirements successfully submitted"
+              }).then(function(){
+                window.location = "index.php?id='.$key.'";//refresh pages
+              });
+          </script>';
+      }
+      else
+      {
+          // $_SESSION['status'] = "Data Not Inserted";
+          // echo '<script>alert("Failed")</script>';
+          // $_SESSION['status'] = "Failed";
+          echo'<script type = "text/javascript">
+          //success message
+          const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 2000,
+          timerProsressBar: true,
+          didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer)
+          toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+          }
+          })
+          Toast.fire({
+          icon: "error",
+          title:"Requirements failed to submit"
+          }).then(function(){
+            window.location = "index.php?id='.$key.'";//refresh pages
+          });
+      </script>';
+          // header("Location: ../index.php?id='.$key.'");
+         
+      }
     }
-    else
-    {
-        // $_SESSION['status'] = "Data Not Inserted";
-        // echo '<script>alert("Failed")</script>';
-        $_SESSION['status'] = "Failed";
-        // header("Location: ../index.php?id='.$key.'");
-       
-    }
+    
 }
 ?>
 <!-- Script Functions -->

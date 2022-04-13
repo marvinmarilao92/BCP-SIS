@@ -115,7 +115,14 @@ include('session.php');
                     <td data-label="Application Code"><?php echo $adm_no; ?></td>
                     <td data-label="Name" WIDTH="50%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
                     <td data-label="Program"><?php echo $adm_program; ?></td>
-                    <td data-label="Status"><?php echo $adm_as?></td>
+                    <td data-label="Status"><?php 
+                    if($adm_as=='Paid'){
+                      
+                      echo '<span class="badge bg-success">'.$adm_as.'</span>';
+                    }else{
+                      echo '<span class="badge bg-danger">'.$adm_as.'</span>';
+                    }                  
+                    ?></td>
                     <td data-label="Admission Date"WIDTH="15%"><?php echo $adm_date?></td>             
                     <!-- <td WIDTH="7%">      
                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">                

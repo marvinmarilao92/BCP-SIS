@@ -84,75 +84,75 @@ include('session.php');
 
                 <!-- IncomingDocs Docs -->
                 <section class="section">
-                      <div class="row">        
+                  <div class="row">        
+                    <div class="col-lg-12">
+                      <div class="card">
                         <div class="col-lg-12">
-                          <div class="card">
-                            <div class="col-lg-12">
-                              <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                  <h4>Paid Application Records</h4>
-                              </div>
-                            </div>
-                            <div class="card-body" >           
-                              <!-- Table for Role records -->
-                              <table class="table table-hover datatable" >
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Application Number</th>
-                                    <th scope="col" >Student Name</th>          
-                                    <th scope="col">Program</th>   
-                                    <th scope="col">Date Registered</th>       
-                                    <th scope="col">OR Number</th>
-                                    <th scope="col">Date of Payment</th>  
-                                    <!-- <th scope="col">Account Status</th>           -->
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <?php
-                                    require_once("include/conn.php");
-                                    $query="SELECT *, LEFT(middlename,1) FROM student_application  WHERE account_status = 'Paid' AND `account_status` NOT IN ('Enrolled') ORDER BY stud_date ASC ";
-                                    $result=mysqli_query($conn,$query);
-                                    while($rs=mysqli_fetch_array($result)){
-                                      $adm_no =$rs['id_number'];
-                                      $adm_fname = $rs['firstname'];
-                                      $adm_lname = $rs['lastname'];        
-                                      $adm_mname = $rs['LEFT(middlename,1)'];
-                                      $adm_program = $rs['course'];
-                                      $adm_as = $rs['account_status'];
-                                      $adm_date = $rs['stud_date'];
-
-                                      $sql1 = "SELECT * FROM cashier WHERE adm_num = " . $adm_no . " ";
-                                        if($result1 = mysqli_query($link, $sql1)){
-                                          if(mysqli_num_rows($result1) > 0){
-                                            while($row1 = mysqli_fetch_array($result1)){
-                                              $adm_ORNum = $row1['or_num'];  
-                                              $adm_DP = $row1['date'];                                         
-                                            }
-                                            // Free result set
-                                            mysqli_free_result($result1);
-                                          }
-                                        }
-                                        
-                                  ?>
-                                <tr>
-                                  <td data-label="Code: "><?php echo $adm_no; ?></td>
-                                  <td data-label="Name: " WIDTH="25%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
-                                  <td data-label="Program: "><?php echo $adm_program; ?></td>                                  
-                                  <td data-label="Date: "WIDTH="15%"><?php echo $adm_date?></td>   
-                                  <td data-label="Status: "><?php echo $adm_ORNum?></td>     
-                                  <td data-label="Date: "><?php echo $adm_DP?></td>  
-                                </tr>
-                                <?php } ?>
-                                </tbody>
-                              </table>
-                              <!-- End of Table -->
-
-                            </div>
+                          <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
+                              <h4>Paid Application Records</h4>
                           </div>
+                        </div>
+                        <div class="card-body" >           
+                          <!-- Table for Role records -->
+                          <table class="table table-hover datatable" >
+                            <thead>
+                              <tr>
+                                <th scope="col">Application Number</th>
+                                <th scope="col" >Student Name</th>          
+                                <th scope="col">Program</th>   
+                                <th scope="col">Date Registered</th>       
+                                <th scope="col">OR Number</th>
+                                <th scope="col">Date of Payment</th>  
+                                <!-- <th scope="col">Account Status</th>           -->
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                                require_once("include/conn.php");
+                                $query="SELECT *, LEFT(middlename,1) FROM student_application  WHERE account_status = 'Paid' AND `account_status` NOT IN ('Enrolled') ORDER BY stud_date ASC ";
+                                $result=mysqli_query($conn,$query);
+                                while($rs=mysqli_fetch_array($result)){
+                                  $adm_no =$rs['id_number'];
+                                  $adm_fname = $rs['firstname'];
+                                  $adm_lname = $rs['lastname'];        
+                                  $adm_mname = $rs['LEFT(middlename,1)'];
+                                  $adm_program = $rs['course'];
+                                  $adm_as = $rs['account_status'];
+                                  $adm_date = $rs['stud_date'];
+
+                                  $sql1 = "SELECT * FROM cashier WHERE adm_num = " . $adm_no . " ";
+                                    if($result1 = mysqli_query($link, $sql1)){
+                                      if(mysqli_num_rows($result1) > 0){
+                                        while($row1 = mysqli_fetch_array($result1)){
+                                          $adm_ORNum = $row1['or_num'];  
+                                          $adm_DP = $row1['date'];                                         
+                                        }
+                                        // Free result set
+                                        mysqli_free_result($result1);
+                                      }
+                                    }
+                                    
+                              ?>
+                            <tr>
+                              <td data-label="Code: "><?php echo $adm_no; ?></td>
+                              <td data-label="Name: " WIDTH="25%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
+                              <td data-label="Program: "><?php echo $adm_program; ?></td>                                  
+                              <td data-label="Date: "WIDTH="15%"><?php echo $adm_date?></td>   
+                              <td data-label="Status: "><?php echo $adm_ORNum?></td>     
+                              <td data-label="Date: "><?php echo $adm_DP?></td>  
+                            </tr>
+                            <?php } ?>
+                            </tbody>
+                          </table>
+                          <!-- End of Table -->
 
                         </div>
                       </div>
-                      
-                    </section>
+
+                    </div>
+                  </div>
+                  
+                </section>
                 <!-- End Table with stripped rows -->
 
               </div>

@@ -51,7 +51,7 @@ include('session.php');
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-house-door"></i>
+                      <i class="bi bi-building"></i>
                     </div>
                     <div class="ps-3">
                       <?php 
