@@ -359,65 +359,43 @@ include('session.php');
                 <div class="modal-body">
                   <div class="row align-items-top">
                   <!-- Insert your Module here -->
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                       <div class="card">
                         <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
+                        <a href="../Clearance/clearance-administrator/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">CLEARANCE ADMINISTRATOR</h5></a>                          
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>
                     </div>
                     <!-- End Insert your Module here -->
                     <!-- Insert your Module here -->
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                       <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
+                        <div class="card-body">        
+                          <select class="form-select" id="role_select" style="margin-top: 15px;" aria-label="State">
+                              <option value="#" selected="selected" disabled="disabled">Select Course</option>
+                                <?php
+                                  // Include config file
+                                  require_once "include/config.php";
+                                  // Attempt select query execution
+                                  $sql2 = "SELECT * FROM roles WHERE department_id = 4";
+                                  if($result2 = mysqli_query($link, $sql2)){
+                                    if(mysqli_num_rows($result2) > 0){
+                                      while($row2 = mysqli_fetch_array($result2)){
+                                        echo '<option value = "' . $row2["role"] . '">' . $row2["role"] . '</option>';
+                                      }
+                                      // Free result set
+                                      mysqli_free_result($result2);
+                                    }
+                                  }
+                                  ?>  
+                            </select>                
+                        <a href="../Clearance/super-admin-clearance-coordinator/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">CLEARANCE COORDINATOR</h5></a>                                                     
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>
                     </div>
-                    <!-- End Insert your Module here -->
-                    <!-- Insert your Module here -->
-                    <div class="col-lg-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
-                          <p class="card-text">Subsystem Description insert here...</p>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End Insert your Module here -->
-                    <!-- Insert your Module here -->
-                    <div class="col-lg-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
-                          <p class="card-text">Subsystem Description insert here...</p>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End Insert your Module here -->
-                    <!-- Insert your Module here -->
-                    <div class="col-lg-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
-                          <p class="card-text">Subsystem Description insert here...</p>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End Insert your Module here -->
-                    <!-- Insert your Module here -->
-                    <div class="col-lg-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
-                          <p class="card-text">Subsystem Description insert here...</p>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End Insert your Module here -->
+                    <!-- End Insert your Module here -->                  
                   </div>
                 </div>
               <div class="modal-footer">
