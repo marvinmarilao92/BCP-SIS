@@ -1,88 +1,9 @@
-<?php
-include('includes/session.php');
 
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-  $req_id = mysqli_real_escape_string($link,$_POST['req_id']);
-  $req_name = mysqli_real_escape_string($link,$_POST['req_name']);
-  $id = mysqli_real_escape_string($link,$_POST['id']);
-  $name = mysqli_real_escape_string($link,$_POST['name']);
-  $temp_status="";
-  if(isset($_POST['status']) && trim($_POST['status']) == "Declined"){
-    $temp_status = mysqli_real_escape_string($link,$_POST['status']);
-  }
-  $location = "Database";
-  $status = "Under Review";
-  $file = $_FILES['file'];
-
-  $fileName = $_FILES['file']['name'];
-  $fileTmpName = $_FILES['file']['tmp_name'];
-  $fileSize = $_FILES['file']['size'];
-  $fileError = $_FILES['file']['error'];
-  $fileType = $_FILES['file']['type'];
-
-  $fileExt = explode('.', $fileName);
-  $fileActualExt = strtolower(end($fileExt));
-  $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'docx');
-  if(in_array($fileActualExt, $allowed)){
-    if($fileError === 0){
-      if($fileSize < 52428800){
-        $fileNameNew = str_replace('.','',uniqid('',true)).".".$fileActualExt;
-        $fileDestination = 'uploads/'.$fileNameNew;
-
-
-        if ($temp_status == "Declined") {
-            $sql1 = "SELECT * FROM clearance_student_status where clearance_requirement_id = '$req_id' and student_id = '$verified_session_username' LIMIT 1";
-            if($result1 = mysqli_query($link, $sql1)){
-              if(mysqli_num_rows($result1) > 0){
-                while($row1 = mysqli_fetch_array($result1)){
-                  $path = 'uploads/' . $row1['file_link'];
-                  if(unlink($path)){
-                    $sql3 = "DELETE FROM clearance_student_status where clearance_requirement_id = '$req_id' and student_id = '$verified_session_username' LIMIT 1";
-                    $result3 = mysqli_query($link,$sql3);
-                    if(move_uploaded_file($fileTmpName, $fileDestination)){
-
-                      $sql = "INSERT INTO clearance_student_status (clearance_requirement_id, location, student_id, status, clearance_department_id, file_link) VALUES ('$req_id', '$location', '$verified_session_username', '$status', '$id', '$fileNameNew')";
-                      if (mysqli_query($link, $sql)) {
-                          header("Location: clearance-status-read.php?id=".$id."&name=".$name."");
-                      }else{
-                      }
-                    }
-                  }
-                }
-              } else{
-              }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-          }else{
-            if(move_uploaded_file($fileTmpName, $fileDestination)){
-
-              $sql = "INSERT INTO clearance_student_status (clearance_requirement_id, location, student_id, status, clearance_department_id, file_link) VALUES ('$req_id', '$location', '$verified_session_username', '$status', '$id', '$fileNameNew')";
-              if (mysqli_query($link, $sql)) {
-                  header("Location: clearance-status-read.php?id=".$id."&name=".$name."");
-              }else{
-              }
-            }
-          }
-
-        
-        
-      }else{
-        echo "Your file is too big!"; 
-      }
-    }else{
-      echo "There was an error uploading your file!";
-    }
-  }else{
-    echo "You cannot upload files of this type!";
-  }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <?php
+include('includes/session.php');
 include ("includes/head.php");
 ?>
 
@@ -117,8 +38,13 @@ include ("includes/sidebar.php");
 
               <!-- General Form Elements -->
               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">  
+                  <h4 class="alert-heading">Accepted File Format is PDF.</h4>
+                  <p>
                   Once you uploaded a file, please wait for the clearance coordinator to verify the file. You will be notified if the file was approved or not.
+                  </p>
+                  <hr>
+                  <p class="mb-0">© Copyright Bestlink College of the Philippines. All Rights Reserved.</p>
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <div class="row mb-3">
@@ -157,7 +83,147 @@ include ("includes/sidebar.php");
 <?php
 include ("includes/footer.php");
 ?>
+<?php
+    
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+      $req_id = mysqli_real_escape_string($link,$_POST['req_id']);
+      $req_name = mysqli_real_escape_string($link,$_POST['req_name']);
+      $id = mysqli_real_escape_string($link,$_POST['id']);
+      $name = mysqli_real_escape_string($link,$_POST['name']);
+      $temp_status="";
+      if(isset($_POST['status']) && trim($_POST['status']) == "Declined"){
+        $temp_status = mysqli_real_escape_string($link,$_POST['status']);
+      }
+      $location = "Database";
+      $status = "Under Review";
+      $file = $_FILES['file'];
 
+      $fileName = $_FILES['file']['name'];
+      $fileTmpName = $_FILES['file']['tmp_name'];
+      $fileSize = $_FILES['file']['size'];
+      $fileError = $_FILES['file']['error'];
+      $fileType = $_FILES['file']['type'];
+
+      $fileExt = explode('.', $fileName);
+      $fileActualExt = strtolower(end($fileExt));
+      // $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'docx');
+      $allowed = array('pdf');
+      if(in_array($fileActualExt, $allowed)){
+        if($fileError === 0){
+          if($fileSize < 52428800){
+            $fileNameNew = str_replace('.','',uniqid('',true)).".".$fileActualExt;
+            $fileDestination = 'uploads/'.$fileNameNew;
+
+
+            if ($temp_status == "Declined") {
+                $sql1 = "SELECT * FROM clearance_student_status where clearance_requirement_id = '$req_id' and student_id = '$verified_session_username' LIMIT 1";
+                if($result1 = mysqli_query($link, $sql1)){
+                  if(mysqli_num_rows($result1) > 0){
+                    while($row1 = mysqli_fetch_array($result1)){
+                      $path = 'uploads/' . $row1['file_link'];
+                      if(unlink($path)){
+                        $sql3 = "DELETE FROM clearance_student_status where clearance_requirement_id = '$req_id' and student_id = '$verified_session_username' LIMIT 1";
+                        $result3 = mysqli_query($link,$sql3);
+                        if(move_uploaded_file($fileTmpName, $fileDestination)){
+
+                          $sql = "INSERT INTO clearance_student_status (clearance_requirement_id, location, student_id, status, clearance_department_id, file_link) VALUES ('$req_id', '$location', '$verified_session_username', '$status', '$id', '$fileNameNew')";
+                          if (mysqli_query($link, $sql)) {
+                            echo'<script type = "text/javascript">
+                                    //success message
+                                    const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: "top-end",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    timerProsressBar: true,
+                                    didOpen: (toast) => {
+                                    toast.addEventListener("mouseenter", Swal.stopTimer)
+                                    toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                    }
+                                    })
+                                    Toast.fire({
+                                    icon: "success",
+                                    title:"File upload success"
+                                    }).then(function(){
+                                      window.location = "clearance-status-read.php?id='.$id.'&name='.$name.'";//refresh pages
+                                    });
+                                </script>
+                          ';
+                          }else{
+                          }
+                        }
+                      }
+                    }
+                  } else{
+                  }
+                } else{
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+              }else{
+                if(move_uploaded_file($fileTmpName, $fileDestination)){
+
+                  $sql = "INSERT INTO clearance_student_status (clearance_requirement_id, location, student_id, status, clearance_department_id, file_link) VALUES ('$req_id', '$location', '$verified_session_username', '$status', '$id', '$fileNameNew')";
+                  if (mysqli_query($link, $sql)) {
+                        echo'<script type = "text/javascript">
+                                //success message
+                                const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProsressBar: true,
+                                didOpen: (toast) => {
+                                toast.addEventListener("mouseenter", Swal.stopTimer)
+                                toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                }
+                                })
+                                Toast.fire({
+                                icon: "success",
+                                title:"File upload success"
+                                }).then(function(){
+                                  window.location = "clearance-status-read.php?id='.$id.'&name='.$name.'";//refresh pages
+                                });
+                            </script>
+                      ';
+                      // header("Location: clearance-status-read.php?id=".$id."&name=".$name."");
+                  }else{
+                  }
+                }
+              }
+
+            
+            
+          }else{
+            echo "Your file is too big!"; 
+          }
+        }else{
+          echo "There was an error uploading your file!";
+        }
+      }else{
+        echo'<script type = "text/javascript">
+              //success message
+              const Toast = Swal.mixin({
+              toast: true,
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 2000,
+              timerProsressBar: true,
+              didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer)
+              toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+              }
+              })
+              Toast.fire({
+              icon: "error",
+              title:"File extension must be: .pdf"
+              }).then(function(){
+                window.location = "clearance-status-upload.php?req_id='. $req_id .'&req_name='. $req_name .'&id='. $id .'&name='. $name .'";//refresh pages
+              });
+          </script>
+      ';
+      }
+    }
+?>
 </body>
 
 </html>
