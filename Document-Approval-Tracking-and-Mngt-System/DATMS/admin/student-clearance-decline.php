@@ -1,7 +1,73 @@
 <?php
 include('session.php');
 
+if(isset($_POST["req_id"]) && !empty($_POST["req_id"]) && isset($_POST["remarks"]) && !empty($_POST["remarks"])){
 
+    if(trim($_POST["loc"]) == "Database"){
+      // Prepare an insert statement
+        $sql = "UPDATE clearance_student_status SET status=?, remarks=? WHERE clearance_requirement_id=? and student_id=?";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "ssii", $param_status, $param_remarks, $param_req_id, $param_id);
+
+            // Set parameters
+            $param_status = "Declined";
+            $param_remarks = trim($_POST["remarks"]);
+            $param_req_id = trim($_POST["req_id"]);
+            $param_id = trim($_POST["id"]);
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Records created successfully. Redirect to landing page
+                header("location: student-clearance-view.php?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
+                exit();
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+    }else{
+        // Prepare an insert statement
+        $sql = "INSERT INTO clearance_student_status (clearance_requirement_id, location, student_id, status, clearance_department_id, remarks) VALUES (?, ?, ?, ?, ?, ?)";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "isisis", $param_req_id, $param_location, $param_id, $param_status, $param_dept_id, $param_remarks);
+
+            // Set parameters
+            $param_req_id = trim($_POST["req_id"]);
+            $param_location = "Office";
+            $param_id = trim($_POST["id"]);
+            $param_status = "Declined";
+            $param_dept_id = trim($_POST["dept_id"]);
+            $param_remarks = trim($_POST["remarks"]);
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Records created successfully. Redirect to landing page
+                header("location: student-clearance-view.php?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
+
+                // header("location: student-clearance-view.php?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
+                exit();
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+    }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
+    
+    // Close connection
+        mysqli_close($link);
+    } else{
+        // Check existence of name parameter
+        if(empty(trim($_GET["name"]))){
+            // URL doesn't contain name parameter. Redirect to error page
+            header("location: error.php");
+            exit();
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +117,7 @@ include('session.php');
                                 <input type="hidden" name="loc" value="<?php echo trim($_GET["loc"]); ?>"/>
                                     <div class="col-md-12">
                                         <div class="form-floating">
-                                        <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Requirement Name" autofocus>
+                                        <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Requirement Name" required autofocus>
                                         <label for="floatingName">Remarks</label>
                                         </div>
                                     </div>
@@ -77,74 +143,6 @@ include('session.php');
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
-
-  <?php 
-  if(isset($_POST["req_id"]) && !empty($_POST["req_id"]) && isset($_POST["remarks"]) && !empty($_POST["remarks"])){
-
-    if(trim($_POST["loc"]) == "Database"){
-      // Prepare an insert statement
-        $sql = "UPDATE clearance_student_status SET status=?, remarks=? WHERE clearance_requirement_id=? and student_id=?";
-
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssii", $param_status, $param_remarks, $param_req_id, $param_id);
-
-            // Set parameters
-            $param_status = "Declined";
-            $param_remarks = trim($_POST["remarks"]);
-            $param_req_id = trim($_POST["req_id"]);
-            $param_id = trim($_POST["id"]);
-
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Records created successfully. Redirect to landing page
-                header("location: student-clearance-view.php?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
-                exit();
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-        }
-    }else{
-        // Prepare an insert statement
-        $sql = "INSERT INTO clearance_student_status (clearance_requirement_id, location, student_id, status, clearance_department_id, remarks) VALUES (?, ?, ?, ?, ?, ?)";
-
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "isisis", $param_req_id, $param_location, $param_id, $param_status, $param_dept_id, $param_remarks);
-
-            // Set parameters
-            $param_req_id = trim($_POST["req_id"]);
-            $param_location = "Office";
-            $param_id = trim($_POST["id"]);
-            $param_status = "Declined";
-            $param_dept_id = trim($_POST["dept_id"]);
-            $param_remarks = trim($_POST["remarks"]);
-
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Records created successfully. Redirect to landing page
-                header("location: student-clearance-view.php?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
-                exit();
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-        }
-    }
-
-        // Close statement
-        mysqli_stmt_close($stmt);
-    
-    // Close connection
-        mysqli_close($link);
-    } else{
-        // Check existence of name parameter
-        if(empty(trim($_GET["name"]))){
-            // URL doesn't contain name parameter. Redirect to error page
-            header("location: error.php");
-            exit();
-        }
-    }
-  ?>
 
 </body>
 

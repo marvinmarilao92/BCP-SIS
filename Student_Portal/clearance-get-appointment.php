@@ -5,7 +5,7 @@ date_default_timezone_set('Asia/Manila');
 $statement = "";
 $appointment_limit = 0;
 $appointment_value = 0;
-$sql = "SELECT * FROM clearance_student_appointment_limit where department = '" . trim($_GET["name"]) . "' and id = '" . trim($_GET["id"]) . "' LIMIT 1";
+$sql = "SELECT * FROM clearance_student_appointment_limit where department = '" . trim($_GET["name"]) . "' and department_id = " . trim($_GET["id"]) . " LIMIT 1";
 if($result = mysqli_query($link, $sql)){
   if(mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_array($result)){
@@ -69,7 +69,7 @@ $week .= str_repeat('<td></td>', $str - 1);
 for($day = 1; $day <= $day_count; $day++, $str++){
   $date = $ym . '-' . $day;
   if($today == $date){
-    $week .= '<td class="today bg-light">';
+    $week .= '<td class="today table-primary">';
   }else{
     $week .= '<td>';
   }
@@ -86,13 +86,17 @@ for($day = 1; $day <= $day_count; $day++, $str++){
         if($month_timestamp == $day_month && $day_today == $day){
           $statement = '<p style="margin-top: 10px;">Today</p style="margin-top: 2px;">';
         }else if($month_timestamp == $day_month && $day_today < $day){
-          $statement = '<p style="margin-top: 10px;"><a href="clearance-set-appointment.php?date='. $date .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'">' . $appointment_limit - $appointment_value .' Slots</a></p style="margin-top: 2px;">';
+          $statement = '
+          <p style="margin-top: 10px; "><a href="clearance-set-appointment.php?date='. $date .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'" class="btn btn-primary rounded-pill btn-sm">' . $appointment_limit - $appointment_value .' Slots</a></p style="margin-top: 2px;">';
         }else if($month_timestamp != $day_month){
-          $statement = '<p style="margin-top: 10px;"><a href="clearance-set-appointment.php?date='. $date .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'">' . $appointment_limit - $appointment_value .' Slots</a></p style="margin-top: 2px;">';
+          $statement = '<p style="margin-top: 10px;"><a href="clearance-set-appointment.php?date='. $date .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'" class="btn btn-primary rounded-pill btn-sm">' . $appointment_limit - $appointment_value .' Slots</a></p style="margin-top: 2px;">';
         }
       }else if($year_timestamp > $day_year){
-          $statement = '<p style="margin-top: 10px;"><a href="clearance-set-appointment.php?date='. $date .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'">' . $appointment_limit - $appointment_value .' Slots</a></p style="margin-top: 2px;">';
+          $statement = '<p style="margin-top: 10px;"><a href="clearance-set-appointment.php?date='. $date .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'" class="btn btn-primary rounded-pill btn-sm">' . $appointment_limit - $appointment_value .' Slots</a></p style="margin-top: 2px;">';
       }
+    }
+    else{
+      $statement = '';
     }
   }else{
     $statement = '';
@@ -138,10 +142,10 @@ include ("includes/head.php");
     height: 100px;
   }
   th:nth-of-type(6), td:nth-of-type(6) {
-    color: blue;
+    color: rgb(11, 94, 215);
   }
   th:nth-of-type(7), td:nth-of-type(7) {
-    color: red;
+    color: rgb(226, 59, 46);
   }
   .today {
     background-color: gray;
@@ -173,12 +177,13 @@ include ("includes/sidebar.php");
     <div class="card">
       <div class="card-body">
         <div class="container">
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="?ym=<?= $prev; ?>&id=<?=trim($_GET["id"]);?>&name=<?=trim($_GET["name"]);?>" class="btn btn-link">&lt; prev</a></li>
-            <li class="list-inline-item"><span class="title"><?= $title; ?></span></li>
-            <li class="list-inline-item"><a href="?ym=<?= $next; ?>&id=<?=trim($_GET["id"]);?>&name=<?=trim($_GET["name"]);?>" class="btn btn-link">next &gt;</a></li>
+          <ul class="pagination justify-content-center pagination-lg">
+            <li class="page-item" aria-disabled="true"><a href="?ym=<?= $prev; ?>&id=<?=trim($_GET["id"]);?>&name=<?=trim($_GET["name"]);?>" class="page-link">Prev</a></li>
+            <li class="page-item active" aria-current="page"><span class="page-link"><?= $title; ?></span></li>
+            <!-- <li class="class="page-item""><a class="page-link" href="#"></a></li> -->
+            <li class="page-item"><a href="?ym=<?= $next; ?>&id=<?=trim($_GET["id"]);?>&name=<?=trim($_GET["name"]);?>" class="page-link">Next</a></li>
             </ul>
-            <p class="text-end"><a href="clearance-get-appointment.php?id=<?=trim($_GET["id"]);?>&name=<?=trim($_GET["name"]);?>">Today</a></p>
+            <p class="text-end"><a href="clearance-get-appointment.php?id=<?=trim($_GET["id"]);?>&name=<?=trim($_GET["name"]);?>" class="btn btn-primary">Today</a></p>
             <table class="table table-bordered">
             <thead>
               <tr>
