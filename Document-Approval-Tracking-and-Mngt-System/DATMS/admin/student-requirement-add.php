@@ -89,16 +89,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <!-- No Labels Form -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="row g-3">
           <div class="col-md-6">
-            <input type="text" name="clearance_name" class="form-control" Required placeholder="Requirement Name">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="clearance_name" name="clearance_name" placeholder="Requirement Name" autofocus>
+              <label for="floatingName">Requirement Name</label>
+            </div>
           </div>
           <div class="col-md-6">
-            <select id="inputState" name="clearance_type" class="form-select" Required>
-              <option value="" selected="selected" disabled="disabled">Select Requirement Type</option>
-              <option value="File Submission Hard Copy (Original Copy must be submitted)">File Submission Hard Copy (Original Copy must be submitted)</option>
-              <option value="File Submission Soft Copy (Can be submitted online) or Hard Copy (Optional to submit the original copy)">File Submission Soft Copy (Can be submitted online) or Hard Copy (Optional to submit the original copy)</option>
-              <option value="Account Balance (Pending Payment)">Account Balance (Pending Payment) </option>
-              <option value="Clearance Record (Pending Record)">Clearance Record (Pending Record)</option>
-            </select>
+            <div class="form-floating">
+              <select class="form-select" name="clearance_type" id="clearance_type" aria-label="State" Required>
+                <option value="" selected="selected" disabled="disabled">Select Requirement Type</option>
+                <option value="File Submission Hard Copy (Original Copy must be submitted)">File Submission Hard Copy (Original Copy must be submitted)</option>
+                <option value="File Submission Soft Copy (Can be submitted online) or Hard Copy (Optional to submit the original copy)">File Submission Soft Copy (Can be submitted online) or Hard Copy (Optional to submit the original copy)</option>
+                <option value="Account Balance (Pending Payment)">Account Balance (Pending Payment) </option>
+                <option value="Clearance Record (Pending Record)">Clearance Record (Pending Record)</option>
+              </select>
+              <label for="floatingSelect">DocType</label>
+            </div>
+
           </div>
           <div class="text-end">
             <button type="submit" class="btn btn-primary">Submit</button>

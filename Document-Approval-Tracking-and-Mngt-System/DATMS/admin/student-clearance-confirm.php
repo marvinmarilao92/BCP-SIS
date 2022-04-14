@@ -136,13 +136,14 @@ if(isset($_POST["req_id"]) && !empty($_POST["req_id"])){
 <style>
         .wrapper{
             width: 600px;
+            height: 550px;
             margin: 0 auto;
         }
 </style>
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'SCR' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'SCS' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
 
 
     <main id="main" class="main">
@@ -159,24 +160,27 @@ if(isset($_POST["req_id"]) && !empty($_POST["req_id"])){
         </ol>
         </nav>
     </div><!-- End Page Title -->
-    <div class="wrapper">
+    <div class="wrapper justify-content-center" style="margin-top: 200px;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <div class="alert alert-success">
-                            <input type="hidden" name="req_id" value="<?php echo trim($_GET["req_id"]); ?>"/>
-                            <input type="hidden" name="req_name" value="<?php echo trim($_GET["req_name"]); ?>"/>
-                            <input type="hidden" name="id" value="<?php echo trim($_GET["id"]); ?>"/>
-                            <input type="hidden" name="name" value="<?php echo trim($_GET["name"]); ?>"/>
-                            <input type="hidden" name="dept_id" value="<?php echo trim($_GET["dept_id"]); ?>"/>
-                            <input type="hidden" name="loc" value="<?php echo trim($_GET["loc"]); ?>"/>
-                            <input type="hidden" name="status" value="<?php echo trim($_GET["status"]); ?>"/>
-                            <p>Are you sure you want to confirm clearance for <?php echo trim($_GET["req_name"]); ?>?</p>
-                            <p>
-                                <input type="submit" value="Yes" class="btn btn-success">
-                                <a href="student-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>" class="btn btn-secondary">No</a>
-                            </p>
+                        <div class="card">
+                            <div class="card-body">
+                                <input type="hidden" name="req_id" value="<?php echo trim($_GET["req_id"]); ?>"/>
+                                <input type="hidden" name="req_name" value="<?php echo trim($_GET["req_name"]); ?>"/>
+                                <input type="hidden" name="id" value="<?php echo trim($_GET["id"]); ?>"/>
+                                <input type="hidden" name="name" value="<?php echo trim($_GET["name"]); ?>"/>
+                                <input type="hidden" name="dept_id" value="<?php echo trim($_GET["dept_id"]); ?>"/>
+                                <input type="hidden" name="loc" value="<?php echo trim($_GET["loc"]); ?>"/>
+                                <input type="hidden" name="status" value="<?php echo trim($_GET["status"]); ?>"/>
+                                <h5 class="card-title">Are you sure you want to confirm clearance for <?php echo trim($_GET["req_name"]); ?>?</h5>
+                                <p>
+                                    <input type="submit" value="Yes" class="btn btn-success">
+                                    <a href="student-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>" class="btn btn-secondary">No</a>
+                                </p>
+                            </div>
+                            
                         </div>
                     </form>
                 </div>

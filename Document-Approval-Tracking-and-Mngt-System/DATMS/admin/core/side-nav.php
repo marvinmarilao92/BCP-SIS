@@ -162,7 +162,7 @@
               </li>
               <li>
                 <a href="student-clearance-status.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SCS'){echo 'active';}?>">
-                  <i class="bi bi-circle"></i><span>Clearance Status</span>
+                  <i class="bi bi-circle"></i><span>Clearance Status List</span>
                 </a>
               </li>
               <li>

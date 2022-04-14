@@ -51,7 +51,7 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'SCR' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'SCS' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
 
 
 
