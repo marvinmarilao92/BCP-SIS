@@ -327,7 +327,7 @@ include('session.php');
         $(document).ready(function () {
 
               // Delete modal calling
-              $('.deletebtn').on('click', function () {
+              $('#DocTypeTable').on('click','.deletebtn', function () {
 
                     $('#DeleteModal').modal('show');
 
@@ -414,7 +414,7 @@ include('session.php');
               // End Save function
 
               // Edit modal calling
-                $('.editbtn').on('click', function () {
+              $('#DocTypeTable').on('click','.editbtn', function () {
 
                     $('#EditModal').modal('show');
 

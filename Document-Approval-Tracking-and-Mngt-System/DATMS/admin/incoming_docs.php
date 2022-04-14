@@ -85,7 +85,7 @@ include('session.php');
             </div>
             <div class="card-body" >           
               <!-- Table for Office records -->
-              <table class="table table-hover datatable" >
+              <table class="table table-hover datatable" id="incomingTable">
                 <thead>
                   <tr>
                     <th scope="col">DocCode</th>
@@ -349,7 +349,7 @@ include('session.php');
         $(document).ready(function () {
 
               // View Function
-                  $('.remarksbtn').on('click', function () {
+              $('#incomingTable').on('click','.remarksbtn', function () {
 
                       $('#RemarksModal').modal('show');
 
@@ -365,7 +365,7 @@ include('session.php');
               // End of View function 
 
               // Received modal calling
-                $('.receivedbtn').on('click', function () {
+                $('#incomingTable').on('click','.receivedbtn', function () {
 
                     $('#ReceivedModal').modal('show');
 
@@ -427,25 +427,7 @@ include('session.php');
                       }
                   })
               // End Received function
-
-              // // View Function
-              //   $('.viewbtn').on('click', function () {
-
-              //       $('#ViewModal').modal('show');
-
-              //       $tr = $(this).closest('tr');
-
-              //       var data = $tr.children("td").map(function () {
-              //           return $(this).text();
-              //       }).get();
-
-              //       console.log(data);        
-              //       $('#view_code').text(data[1]);
-              //       $('#view_name').text(data[2]);
-              //       $('#view_loc').text(data[3]);
-              //       $('#view_date').text(data[4]);
-              //     });
-            // // End of View function 
+        
 
           });
 

@@ -128,11 +128,12 @@ include('session.php');
                           <!-- <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button> -->
                           <button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button>
                           <button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>
+                          <!-- <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal<?php echo $progid;?>"><i class="bi bi-trash"></i></button>  -->
                         </div>
                       </td>
                     </tr>
                     <?php 
-                  include 'modals/program_modals.php';
+                  include 'modals/program_view.php';
                   } ?>
                   </tbody>
                 </table>
@@ -249,7 +250,7 @@ include('session.php');
       <!-- End Edit Program Modal-->
 
       <!-- Delete Program Modal -->
-      <div class="modal fade" id="DeleteModal" tabindex="-1">
+      <div class="modal fade DeleteModal" id="DeleteModal" tabindex="-1">
               <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -259,8 +260,8 @@ include('session.php');
                         <div class="card" style="margin: 10px;">
                           <div class="card-body">                
                             <br>
-                            <input type="hidden"  name="delete_id" id="delete_id" readonly>
-                            <input type="hidden"  name="delete_code" id="delete_code" readonly>
+                            <input type="hidden" class="delete_id" name="delete_id" id="delete_id" readonly>
+                            <input type="hidden" class="delete_code" name="delete_code" id="delete_code" readonly>
                             <center>
                               <h5>Are you sure you want to delete these Program?</h5>
                               <h5 class="text-danger">This action cannot be undone.</h5>   
@@ -321,9 +322,9 @@ include('session.php');
 
           
               // Opening modal for delete
-              $('.deletebtn').on('click', function () {
+              $('#ProgramTable').on('click', '.deletebtn', function () {
   
-                    $('#DeleteModal').modal('show');
+                    $('.DeleteModal').modal('show');
 
                     $tr = $(this).closest('tr');
 
@@ -333,8 +334,8 @@ include('session.php');
 
                     console.log(data);
 
-                  $('#delete_id').val(data[0]);
-                  $('#delete_code').val(data[1]);
+                  $('.delete_id').val(data[0]);
+                  $('.delete_code').val(data[1]);
                   
                   });
               // end of function
@@ -343,17 +344,17 @@ include('session.php');
               $("#progdel").click(function(b){
                 b.preventDefault();
                 $.post("function/delete_program.php",{
-                    progid:$('#delete_id').val(),
-                    progcode:$('#delete_code').val()
+                    progid:$('.delete_id').val(),
+                    progcode:$('.delete_code').val()
                   },function(response){
                     // alert ("deleted");
                     if(response.trim() == "ProgramDeleted"){
-                      $('#DeleteModal').modal('hide');
+                      $('.DeleteModal').modal('hide');
                       Swal.fire ("Program Successfully Deleted","","success").then(function(){
                                 document.location.reload(true)//refresh pages
                               });                      
                     }else{
-                      $('#DeleteModal').modal('hide');
+                      $('.DeleteModal').modal('hide');
                       Swal.fire (response);
                     }
                   })
@@ -408,7 +409,7 @@ include('session.php');
               // End Save Program function
 
               // Edit Program modal calling
-              $('.editbtn').on('click', function () {
+              $('#ProgramTable').on('click', '.editbtn',function () {
 
                     $('#EditModal').modal('show');
 

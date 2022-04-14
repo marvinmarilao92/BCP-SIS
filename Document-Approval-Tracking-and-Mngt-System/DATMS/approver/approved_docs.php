@@ -85,7 +85,7 @@ include('session.php');
             </div>
             <div class="card-body" >           
               <!-- Table for Office records -->
-              <table class="table table-hover datatable" >
+              <table class="table table-hover datatable" id="approvedTable">
                 <thead>
                   <tr>
                     <th scope="col">DocCode</th>
@@ -236,7 +236,7 @@ include('session.php');
         $(document).ready(function () {
 
               // Remarks view
-              $('.remarksbtn').on('click', function () {
+              $('#approvedTable').on('click','.remarksbtn', function () {
 
                   $('#RemarksModal').modal('show');
 
@@ -257,7 +257,7 @@ include('session.php');
               // End of Remarks View function 
           
               // Cancel modal calling
-              $('.cancelbtn').on('click', function () {
+              $('#approvedTable').on('click','.cancelbtn', function () {
 
                   $('#CancelModal').modal('show');
 

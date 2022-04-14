@@ -88,7 +88,7 @@ include('session.php');
 
             <div class="card-body" >           
               <!-- Table for Office records -->
-              <table class="table table-hover datatable" >
+              <table class="table table-hover datatable" id="receivedTable">
                 <thead>
                   <tr>
                     <th scope="col">DocCode</th>
@@ -354,7 +354,7 @@ include('session.php');
         $(document).ready(function () {
           // $('.send_act2').select2();
             // Remarks Function
-              $('.remarksbtn').on('click', function () {
+            $('#receivedTable').on('click','.remarksbtn', function () {
 
                     $('#RemarksModal').modal('show');
 
@@ -375,7 +375,7 @@ include('session.php');
             // End of View function 
 
             // Hold modal calling
-              $('.holdbtn').on('click', function () {
+            $('#receivedTable').on('click','.holdbtn', function () {
 
                 $('#HoldModal').modal('show');
 
@@ -440,7 +440,7 @@ include('session.php');
             // End Hold function
 
             // Send modal calling
-              $('.sendbtn').on('click', function () {
+            $('#receivedTable').on('click','.sendbtn', function () {
 
                 $('#SendModal').modal('show');
 
