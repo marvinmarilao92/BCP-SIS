@@ -5,7 +5,43 @@ include('session.php');
 <html lang="en">
 <title>DATMS | Clearance Appointment</title>
 <?php include ('core/css-links.php');//css connection?>
+<style>
+  /*responsive*/
+  @media(max-width: 500px){
+    .table thead{
+      display: none;
+    }
 
+    .table, .table tbody, .table tr, .table td{
+      display: block;
+      width: 100%;
+    }
+    .table tr{
+      background: #ffffff;
+      box-shadow: 0 8px 8px -4px lightblue;
+      border-radius: 5%;
+      margin-bottom:13px;
+      margin-top: 13px;
+    }
+    .table td{
+      /* max-width: 20px; */
+      padding-left: 50%;
+      text-align: right;
+      position: relative;
+    }
+    .table td::before{      
+      margin-top: 10px;      
+      content: attr(data-label);
+      position: absolute;
+      left:0;
+      width: 50%;
+      padding-left:15px;
+      font-size:15px;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+</style>
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
@@ -41,7 +77,7 @@ include('session.php');
                                     echo "<tr>";
                                         echo "<th scope='col'>Student ID</th>";
                                         echo "<th scope='col'>Name</th>";
-                                        echo "<th scope='col'>Course</th>";
+                                        echo "<th scope='col'>Program</th>";
                                         echo "<th scope='col'>Year Level</th>";
                                         echo "<th scope='col'>Appointment Date</th>";
                                         echo "<th scope='col'>Action</th>";
@@ -50,14 +86,14 @@ include('session.php');
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                    $sql1 = "SELECT * FROM student_information where id_number = '" . $row['student_id'] ."'";
+                                    $sql1 = "SELECT *,LEFT(middlename,1) AS MI FROM student_information where id_number = '" . $row['student_id'] ."'";
                                     if($result1 = mysqli_query($link, $sql1)){
                                       if(mysqli_num_rows($result1) > 0){
                                         while($row1 = mysqli_fetch_array($result1)){
                                           $temp_name = $row1['firstname'] . " " . $row1['lastname'];
-                                          echo "<td>" . $row1['id_number'] . "</td>";
-                                          echo "<td>" . $row1['firstname'] . " " . $row1['lastname'] . "</td>";
-                                          echo "<td>" . $row1['course'] . "</td>";
+                                          echo "<td data-label='Stud No.:'>" . $row1['id_number'] . "</td>";
+                                          echo "<td data-label='Name:'>" . $row1['lastname'] . ", " . $row1['firstname'] .' '. $row1['MI'] .'.'."</td>";
+                                          echo "<td data-label='Program:'>" . $row1['course'] . "</td>";
                                           echo "<td>" . $row1['year_level'] . "</td>";
                                         }
                                       } else{
