@@ -322,7 +322,7 @@ include('session.php');
           $(document).ready(function () {
 
               // Opening modal for delete
-              $('.deletebtn').on('click', function () {
+              $('#DepartmentTable').on('click','.deletebtn', function () {
   
                     $('#DeleteModal').modal('show');
 
@@ -409,7 +409,7 @@ include('session.php');
               // End Save Department function
 
               // Edit Department modal calling
-              $('.editbtn').on('click', function () {
+              $('#DepartmentTable').on('click','.editbtn',function () {
 
                     $('#EditModal').modal('show');
 

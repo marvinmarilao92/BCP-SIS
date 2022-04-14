@@ -86,7 +86,7 @@ include('session.php');
             </div>
             <div class="card-body" >           
               <!-- Table for Office records -->
-              <table class="table table-hover datatable" >
+              <table class="table table-hover datatable" id="AchiveTable">
                 <thead>
                   <tr>
                     <th scope="col">DocCode</th>
@@ -274,7 +274,7 @@ include('session.php');
         $(document).ready(function () {
 
          // Cancel modal calling
-              $('.cancelbtn').on('click', function () {
+         $('#AchiveTable').on('click','.cancelbtn', function () {
 
                   $('#CancelModal').modal('show');
 
