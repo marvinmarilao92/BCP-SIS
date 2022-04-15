@@ -6,7 +6,7 @@ $db = mysqli_select_db($conn, 'sis_db');
     if(isset($_POST['dtid'])&&isset($_POST['dtcode'])&&isset($_POST['dtname'])&&isset($_POST['dtdesc'])){
         // Object Connection
              date_default_timezone_set("asia/manila");
-             $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+             $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
              $id = mysqli_real_escape_string($conn,$_POST['dtid']);
              $dt_code = mysqli_real_escape_string($conn,$_POST['dtcode']);
              $dt_name = mysqli_real_escape_string($conn,$_POST['dtname']);
