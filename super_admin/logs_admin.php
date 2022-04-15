@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>DATMS | Admin Logs</title>
+<title>SuperUser | Admin Logs</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 <?php  include "core/key_checker.php"; ?>
@@ -11,21 +11,17 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'AdL' ; $col = 'logs'; include ('core/side-nav.php');//Design for sidebar?>
 
-<main id="main" class="main">
+<main style="padding: 20px;">
 
-<div class="pagetitle">
-  <h1>Registrar Admin Logs</h1>
-  <nav>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-      <li class="breadcrumb-item">Module</li>
-      <li class="breadcrumb-item">Audit Trail</li>
-      <li class="breadcrumb-item active">Registrar Admin Logs</li>
-    </ol>
-  </nav>
-</div><!-- End Page Title -->
+  <div class="pagetitle">
+      <h1>Profile</h1>
+      <nav>
+        <ol class="breadcrumb">
+     
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
 
 <section class="section">
   <div class="row">
@@ -53,7 +49,7 @@ include('session.php');
                         <div class="card">
                           <div class="col-lg-12">
                             <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                <h4>Admin User Logs</h4>
+                                <h4>Super Admin Logs</h4>
                             </div>
                           </div>
                           <div class="card-body" >           
@@ -72,7 +68,7 @@ include('session.php');
                               <tbody>
                               <?php
                                   require_once("include/conn.php");
-                                  $query="SELECT * FROM audit_logs WHERE `action_name` = 'Registrar Administrator' ORDER BY login_time DESC ";
+                                  $query="SELECT * FROM audit_logs WHERE `account_no` = '$user_id_checker' ORDER BY login_time DESC ";
                                   $result=mysqli_query($conn,$query);
                                   while($rs=mysqli_fetch_array($result)){
                                     $id = $rs['account_no']; 
@@ -149,7 +145,7 @@ include('session.php');
                               <tbody>
                               <?php
                                     require_once("include/conn.php");
-                                    $query="SELECT * FROM audit_trail WHERE `actor` = 'Registrar Administrator' ORDER BY date DESC ";
+                                    $query="SELECT * FROM audit_trail WHERE  `account_no` = '$user_id_checker' ORDER BY date DESC ";
                                     $result=mysqli_query($conn,$query);
                                     while($rs=mysqli_fetch_array($result)){
                                       $id = $rs['account_no']; 
