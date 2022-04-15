@@ -143,7 +143,7 @@ include('session.php');
                           <tbody>
                             <?php
                               require_once("include/conn.php");
-                              $query="SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') AND `role` = 'DATMS Administrator'";
+                              $query="SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') AND `role` = 'Registrar Administrator'";
                               $result=mysqli_query($conn,$query);
                               while($rs=mysqli_fetch_array($result)){
                                 $uid =$rs['id']; 
@@ -299,7 +299,7 @@ include('session.php');
                           <tbody>
                             <?php
                               require_once("include/conn.php");
-                              $query="SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') AND `role` = 'DATMS Assistant'";
+                              $query="SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') AND `role` = 'Assistant Registrar'";
                               $result=mysqli_query($conn,$query);
                               while($rs=mysqli_fetch_array($result)){
                                 $uid =$rs['id']; 
@@ -457,7 +457,7 @@ include('session.php');
                           <tbody>
                             <?php
                               require_once("include/conn.php");
-                              $query="SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') AND `role` = 'DATMS Officer'";
+                              $query="SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') AND `role` = 'Registrar Officer'";
                               $result=mysqli_query($conn,$query);
                               while($rs=mysqli_fetch_array($result)){
                                 $uid =$rs['id']; 
