@@ -4,6 +4,7 @@
     <title>DATMS | Document List</title>
       <head>
         <?php include ('core/css-links.php');//css connection?>
+        <?php  include "core/key_checker.php"; ?>
         <style>
           /* Print ccs */
           @media screen {
@@ -561,7 +562,7 @@
                     // name of the uploaded file
                     date_default_timezone_set("asia/manila");
                     $key = $_SESSION["login_key"];
-                    $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+                    $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
                     $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
                     // $doc_user = $_POST['doccreator'];
                     // $doc_office = $_POST['docoffice'];

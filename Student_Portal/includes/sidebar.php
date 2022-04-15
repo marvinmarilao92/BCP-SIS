@@ -10,7 +10,9 @@
         </a>
       </li><!-- End Dashboard Nav -->
 
-      <!-- Audit Trail -->
+    <li class="nav-heading">Clearance</li>
+
+        <!-- Audit Trail -->
         <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-people"></i><span>Clearance For Students</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -23,6 +25,17 @@
             </li>
           </ul>
         </li><!-- End Account Management Nav -->
+
+    <li class="nav-heading">Document Tracking</li>
+
+      <li class="nav-item">
+        <a class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="docu_req.php">
+          <i class="bi bi-file-earmark-text"></i>
+          <span>Documents Requested </span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+    
 
       <!-- <li class="nav-item">
         <a class="<?php if($page=='track'){echo 'nav-link';}else{echo 'nav-link collapsed show';}?>" data-bs-target="#clearance-students-nav" data-bs-toggle="collapse" href="#">

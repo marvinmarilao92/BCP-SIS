@@ -9,6 +9,16 @@
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
+
+      <li class="nav-heading">Document Tracking</li>
+      
+      <li class="nav-item">
+        <a class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="docu_req.php">
+          <i class="bi bi-file-earmark-text"></i>
+          <span>Documents Requested </span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      
       <li class="nav-item">
           <a href="tracking_docs.php" class="<?php if($page=='track'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="bi bi-geo"></i>

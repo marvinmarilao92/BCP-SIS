@@ -23,7 +23,7 @@
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
 			   					<h1>The Roots of Education are Bitter, But the Fruit is Sweet</h1>
-									<p><a class="btn btn-primary btn-lg" href="dynamic-login.php" target="_blank">Start Learning Now!</a></p>
+									<p><a class="btn btn-primary btn-lg" href="dynamic-login.php" >Start Learning Now!</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
@@ -36,7 +36,7 @@
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
 			   					<h1>The Great Aim of Education is not Knowledge, But Action</h1>
-									<p><a class="btn btn-primary btn-lg" href="dynamic-login.php" target="_blank">Start Learning Now!</a></p>
+									<p><a class="btn btn-primary btn-lg" href="dynamic-login.php" >Start Learning Now!</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
@@ -49,7 +49,7 @@
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
 			   					<h1>We Help You to Learn New Things</h1>
-									<p><a class="btn btn-primary btn-lg" href="dynamic-login.php" target="_blank">Start Learning Now!</a></p>
+									<p><a class="btn btn-primary btn-lg" href="dynamic-login.php" >Start Learning Now!</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
@@ -130,7 +130,7 @@
 							<i class="icon-home-outline"></i>
 						</span>
 						<div class="desc">
-							<h3><a href="#">Real Estate</a></h3>
+							<h3><a href="#">HRM</a></h3>
 							<p></p>
 						</div>
 					</div>
@@ -169,22 +169,58 @@
 					<div class="row">
 						<div class="col-md-3 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-world"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="3297" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">Foreign Partnership</span>
+							<span class="fh5co-counter js-counter" data-from="0" data-to="
+							<?php 
+								require_once("config.php");
+								$query="SELECT * FROM user_information";
+								$result=mysqli_query($link,$query);
+								if($result){
+									echo  mysqli_num_rows($result);
+								}
+							?> 
+							" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter-label">Active Users</span>
 						</div>
 						<div class="col-md-3 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-study"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="22851" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter js-counter" data-from="0" data-to="
+							<?php 
+								require_once("config.php");
+								$query="SELECT * FROM student_information";
+								$result=mysqli_query($link,$query);
+								if($result){
+									echo  mysqli_num_rows($result);
+								}
+							?> 
+							" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="fh5co-counter-label">Students Enrolled</span>
 						</div>
 						<div class="col-md-3 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-bulb"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="15" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter js-counter" data-from="0" data-to="
+							<?php 
+								require_once("config.php");
+								$query="SELECT * FROM datms_program";
+								$result=mysqli_query($link,$query);
+								if($result){
+									echo  mysqli_num_rows($result);
+								}
+							?> 
+							" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="fh5co-counter-label">Course available</span>
 						</div>
 						<div class="col-md-3 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-head"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="156" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter js-counter" data-from="0" data-to="
+							<?php 
+								require_once("config.php");
+								$query="SELECT * FROM teacher_information";
+								$result=mysqli_query($link,$query);
+								if($result){
+									echo  mysqli_num_rows($result);
+								}
+							?> 
+							" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="fh5co-counter-label">Certified Teachers</span>
 						</div>
 					</div>

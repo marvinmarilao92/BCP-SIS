@@ -18,7 +18,7 @@
     }else{
         // username and password sent from form 
         date_default_timezone_set("asia/manila");
-        $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+        $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
         $myusername = mysqli_real_escape_string($link,$_POST['username']);
         $mypassword = mysqli_real_escape_string($link,$_POST['password']); 
 

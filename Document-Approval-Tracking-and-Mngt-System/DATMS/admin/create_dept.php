@@ -5,6 +5,7 @@ include('session.php');
 <html lang="en">
 <title>DATMS | Department</title>
 <head>
+<?php  include "core/key_checker.php"; ?>
 <style>
          /*responsive*/
         @media(max-width: 550px){
@@ -109,7 +110,7 @@ include('session.php');
                   <tbody>
                     <?php
                       require_once("include/conn.php");
-                      $query="SELECT * FROM datms_dept ORDER BY off_date asc ";
+                      $query="SELECT * FROM datms_dept ORDER BY off_date DESC ";
                       $result=mysqli_query($conn,$query);
                       while($rs=mysqli_fetch_array($result)){
                         $offid =$rs['off_id'];
@@ -478,7 +479,7 @@ include('session.php');
               // End Edit Department function
 
               // View Department Function
-              $('.viewbtn').on('click', function () {
+              $('#DepartmentTable').on('click','.viewbtn',function () {
 
                     $('#ViewModal').modal('show');
 

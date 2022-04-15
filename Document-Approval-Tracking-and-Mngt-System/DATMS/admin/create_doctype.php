@@ -7,6 +7,7 @@ include('session.php');
 <head>
 <?php include ('core/css-links.php');//css connection?>
 <style>
+  <?php  include "core/key_checker.php"; ?>
          /*responsive*/
         @media(max-width: 500px){
           .table thead{
@@ -111,7 +112,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_doctype ORDER BY dt_date asc";
+                    $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $dtid =$rs['dt_id'];
@@ -483,7 +484,7 @@ include('session.php');
               // End Edit function
 
               // View Function
-                $('.viewbtn').on('click', function () {
+              $('#DocTypeTable').on('click','.viewbtn', function () {
 
                     $('#ViewModal').modal('show');
 

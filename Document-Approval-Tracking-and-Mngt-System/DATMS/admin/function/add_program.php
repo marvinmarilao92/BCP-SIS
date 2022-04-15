@@ -5,7 +5,7 @@
    if(isset($_POST['progcode'])&&isset($_POST['progname'])){
     // Object Connection
 		 date_default_timezone_set("asia/manila");
-		 $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+		 $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
         //  $Office_code = mysqli_real_escape_string($conn,$_POST['offcode']);
          $Prog_code = mysqli_real_escape_string($conn,$_POST['progcode']);
          $Prog_name = mysqli_real_escape_string($conn,$_POST['progname']);

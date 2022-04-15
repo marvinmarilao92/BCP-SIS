@@ -7,7 +7,7 @@ $db = mysqli_select_db($conn, 'sis_db');
 if(isset($_POST['progid'])&& isset($_POST['progcode']))
 {
   date_default_timezone_set("asia/manila");
-  $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+  $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
     $id = $_POST['progid'];
     $code = $_POST['progcode'];
 
