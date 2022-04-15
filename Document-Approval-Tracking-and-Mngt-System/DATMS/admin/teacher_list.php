@@ -6,6 +6,7 @@ include('session.php');
 <title>DATMS | Teacher List</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
+<?php  include "core/key_checker.php"; ?>
 <style>
         /*responsive*/
         @media(max-width: 500px){

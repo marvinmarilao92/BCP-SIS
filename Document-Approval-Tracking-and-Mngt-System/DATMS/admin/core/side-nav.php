@@ -151,23 +151,23 @@
         </li><!-- tracking item Nav -->
          <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#clearance-students-nav" data-bs-toggle="collapse" href="#">
-              <i class="bi bi-card-checklist"></i><span>Clearance For Students</span><i class="bi bi-chevron-down ms-auto"></i>
+              <i class="bi bi-card-checklist"></i><span>Registrar Clearance</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="clearance-students-nav" class="<?php if($col=="clr"){echo "nav-content collapse show";}else{echo "nav-content collapse";}?>
             " data-bs-parent="#sidebar-nav">
               <li>
                 <a href="student-clearance-requirements.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SCR'){echo 'active';}?>">
-                  <i class="bi bi-circle"></i><span>Clearance Requirements</span>
+                  <i class="bi bi-circle"></i><span>Students Requirements</span>
                 </a>
               </li>
               <li>
                 <a href="student-clearance-status.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SCS'){echo 'active';}?>">
-                  <i class="bi bi-circle"></i><span>Clearance Status List</span>
+                  <i class="bi bi-circle"></i><span>Students Status List</span>
                 </a>
               </li>
               <li>
                 <a href="student-clearance-appointment.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SCA'){echo 'active';}?>">
-                  <i class="bi bi-circle"></i><span>Clearance Appointments</span>
+                  <i class="bi bi-circle"></i><span>Students Appointments</span>
                 </a>
               </li>
             </ul>

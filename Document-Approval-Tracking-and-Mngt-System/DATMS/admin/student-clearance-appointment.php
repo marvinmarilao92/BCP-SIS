@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>DATMS | Clearance Appointment</title>
+<title>DATMS | Registrar Appointment</title>
 <?php include ('core/css-links.php');//css connection?>
 <style>
   /*responsive*/
@@ -51,11 +51,11 @@ include('session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Clearance Appointments for Students</h1>
+      <h1>Registrar Appointments for Students</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Clearance Appointments for Students</li>
+          <li class="breadcrumb-item">Registrar Appointments for Students</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -65,7 +65,7 @@ include('session.php');
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Students' Clearance Appointments </h5>
+              <h5 class="card-title">Students' Registrar Appointments </h5>
               <?php
                     $temp_name = "";
                     // Attempt select query execution

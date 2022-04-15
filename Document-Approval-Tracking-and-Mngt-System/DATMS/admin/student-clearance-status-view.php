@@ -85,41 +85,57 @@ if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !em
             <div class="card-body">
               <h5 class="card-title">View Record</h5>
               <!-- General Form Elements -->
-              <form>
-                <div class="row mb-3">
-                  <label for="" class="col-sm-2 col-form-label">Department's Name</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" value="<?php echo $dept_name; ?>" disabled>
+              <div class="row g-3">
+
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" value="<?php echo $dept_name; ?>" placeholder="Your Name"disabled>
+                    <label for="floatingName">Department's Name</label>
                   </div>
                 </div>
-                <div class="row mb-3">
-                  <label for="" class="col-sm-2 col-form-label">Requirement's Name</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" value="<?php echo $req_name; ?>" disabled>
+
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" value="<?php echo $req_name; ?>" placeholder="Your Name"disabled>
+                    <label for="floatingName">Requirement's Name</label>
+                  </div>
+                </div>      
+
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" value="<?php echo $status; ?>" placeholder="Your Name"disabled>
+                    <label for="floatingName">Status</label>
                   </div>
                 </div>
-                <div class="row mb-3">
-                  <label for="" class="col-sm-2 col-form-label">Status</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" value="<?php echo $status; ?>" disabled>
+                <?php 
+                if($date!=""){
+                  echo'
+                   <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingName" value="'.$date.'" placeholder="Your Name"disabled>
+                      <label for="floatingName">Date Completed</label>
+                    </div>
                   </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="" class="col-sm-2 col-form-label">Date Completed</label>
-                  <div class="col-sm-10">
-                    <input type="datetime" class="form-control" value="<?php echo $date; ?>" disabled>
+                  ';
+
+                }              
+     
+                if($remarks!=""){
+                  echo'
+                   <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingName" value="'.$remarks.'" placeholder="Your Name"disabled>
+                      <label for="floatingName">Remarks</label>
+                    </div>
                   </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="" class="col-sm-2 col-form-label">Remarks</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" value="<?php echo $remarks; ?>" disabled>
-                  </div>
-                </div>
-                <div class="float-end mb-3">
+                  ';
+
+                }              
+                ?>
+                <div class="modal-footer">
                     <a href="student-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>"><button type="button" class="btn btn-primary">Back</button></a>
                 </div>
-              </form><!-- End General Form Elements -->
+              </div><!-- End General Form Elements -->
             </div>
           </div><!-- End Default Card -->
 

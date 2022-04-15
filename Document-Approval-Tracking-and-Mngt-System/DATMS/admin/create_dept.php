@@ -5,6 +5,7 @@ include('session.php');
 <html lang="en">
 <title>DATMS | Department</title>
 <head>
+<?php  include "core/key_checker.php"; ?>
 <style>
          /*responsive*/
         @media(max-width: 550px){

@@ -5,6 +5,7 @@ include('session.php');
 <html lang="en">
 <title>DATMS | Archive</title>
 <head>
+<?php  include "core/key_checker.php"; ?>
   <?php include ('core/css-links.php');//css connection?>
   <style>
         /*responsive*/

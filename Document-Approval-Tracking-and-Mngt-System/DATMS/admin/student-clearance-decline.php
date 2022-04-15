@@ -80,6 +80,7 @@ if(isset($_POST["req_id"]) && !empty($_POST["req_id"]) && isset($_POST["remarks"
             height: 550px;
             margin: 0 auto;
         }
+        
 </style>
 <body>
 

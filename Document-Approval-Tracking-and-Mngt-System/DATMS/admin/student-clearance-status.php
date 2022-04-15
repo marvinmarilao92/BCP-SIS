@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>DATMS | Clearance Status</title>
+<title>DATMS | Registrar Status</title>
 <?php include ('core/css-links.php');//css connection?>
 <style>
   /*responsive*/
@@ -52,11 +52,11 @@ include('session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Clearance Status of Students</h1>
+      <h1>Registrar Status of Students</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Clearance Status of Students</li>
+          <li class="breadcrumb-item">Registrar Status of Students</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->

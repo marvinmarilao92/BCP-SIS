@@ -6,6 +6,7 @@ include('session.php');
 <title>DATMS | Admin Logs</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
+<?php  include "core/key_checker.php"; ?>
 </head>
 <body>
 

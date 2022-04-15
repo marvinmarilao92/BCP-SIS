@@ -52,11 +52,11 @@ include('session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Clearance Requirements for Students</h1>
+      <h1>Registrar Requirements for Students</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Clearance Requirements for Students</li>
+          <li class="breadcrumb-item">Registrar Requirements for Students</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -67,7 +67,7 @@ include('session.php');
           <div class="card">
             <div class="col-lg-12">
               <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                  <h4>Clearance Requirements</h4>
+                  <h4>Registrar Requirements</h4>
               </div>
               <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
                   <a type="button" href="student-requirement-add.php" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
