@@ -6,6 +6,7 @@ include('session.php');
 <title>ADMISSION | Requirements</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
+<?php  include "core/key_checker.php"; ?>
 <style>
          /*responsive*/
         @media(max-width: 500px){
@@ -92,9 +93,9 @@ include('session.php');
                     <th WIDTH="10%">Student No.</th>
                     <th >Name</th>
                     <th scope="col">Program</th>                    
-                    <th >Status</th>
-                    <th >Requirements Submitted</th>
-                    <th scope="col" WIDTH="7%">Action</th>
+                    <!-- <th >Status</th> -->
+                    <th >Completed Requirements</th>
+
                   </tr>
                 </thead>
                 <tbody>
@@ -114,20 +115,24 @@ include('session.php');
 
                   ?>
                   <tr>
-                    <td data-label="Student No."><?php echo $adm_no; ?></td>
+                    <td data-label="Student No."><a style="font-weight: bold;" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>"><?php echo $adm_no; ?></a></td>
                     <td data-label="Name" WIDTH="25%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
                     <td data-label="Program"><?php echo $adm_program; ?></td>
-                    <td data-label="Status"><?php echo $adm_as?></td>
+                    <!-- <td data-label="Status"><?php echo $adm_as?></td> -->
                     <?php 
                       $requirments ='';
-                        $sql1 = " SELECT *, GROUP_CONCAT(DISTINCT req SEPARATOR ', ') AS concat FROM datms_studreq WHERE id_number = " . $adm_no . "  GROUP BY id_number ";
+                        $sql1 = " SELECT css.student_id, css.status, GROUP_CONCAT(DISTINCT crs.clearance_name  SEPARATOR ', ') AS concat
+                        FROM clearance_student_status css
+                        INNER JOIN clearance_requirements_students crs
+                        ON css.clearance_requirement_id = crs.id WHERE student_id = ".$adm_no." AND css.status = 'completed' ";
+
                         if($result1 = mysqli_query($link, $sql1)){
                           if(mysqli_num_rows($result1) > 0){
                             while($row1 = mysqli_fetch_array($result1)){
                               $Req = $row1["concat"];
                                 
                               // $adm_DP = $row1['date'];
-                              $requirments .='<td data-label="Req." WIDTH="20%">'.$Req.'</td>';
+                              $requirments .='<td  WIDTH="40%">'.$Req.'</td>';
                                                                 
                             }
                             echo $requirments;   
@@ -136,12 +141,7 @@ include('session.php');
                           }
                         }
                     ?>
-                    <td data-label="Status" style="display: none;"><?php echo $date?></td>
-                    <td WIDTH="7%">      
-                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>"><i class="bi bi-eye"></i></button>                       
-                      </div>
-                    </td>
+                    <td data-label="Status" style="display: none;"><?php echo $date?></td>                  
                   </tr>
 
                   <?php 
@@ -201,33 +201,6 @@ include('session.php');
                 </div>     
         </div>
       <!-- End Create Students Modal-->
-
-      <!-- View Students modal -->
-      <!-- <div class="modal fade" id="ViewModal" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered modal-l">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Students INFORMATION</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                      <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h5 class="card-title">Students Details</h5>
-                                Students Code: <h5 id="view_code" style="margin-left: 60px;"></h5>
-                                Students Name: <h5 id="view_name" style="margin-left: 60px;"></h5>
-                                Program: <h5 id="view_loc" style="margin-left: 60px;"></h5>
-                                Date Enrolled: <h5 id="view_date" style="margin-left: 60px;"></h5>                
-                            </div>
-                          </div>   
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-        </div> -->
-      <!-- End View Students Modal-->
 
       <!-- Edit Students Modal -->
       <div class="modal fade" id="EditModal" tabindex="-1">

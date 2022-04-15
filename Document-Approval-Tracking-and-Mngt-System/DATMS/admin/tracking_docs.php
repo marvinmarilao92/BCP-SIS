@@ -6,7 +6,7 @@ include('session.php');
 <title>DATMS | Tracking Documents</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
-
+<?php  include "core/key_checker.php"; ?>
 </head>
 <body>
 

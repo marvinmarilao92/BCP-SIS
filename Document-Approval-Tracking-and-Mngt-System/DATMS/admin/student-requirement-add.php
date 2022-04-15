@@ -109,7 +109,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           </div>
           <div class="text-end">
             <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="reset" class="btn btn-secondary">Reset</button>
+            <a type="button" href="student-clearance-requirements.php" class="btn btn-secondary">Cancel</a>
           </div>
         </form><!-- End No Labels Form -->
 

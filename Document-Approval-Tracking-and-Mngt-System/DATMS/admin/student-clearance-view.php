@@ -52,7 +52,43 @@ include('session.php');
 
 <?php include ('core/header.php');//Design for  Header?>
 <?php $page = 'SCS' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
+<style>
+  /*responsive*/
+  @media(max-width: 500px){
+    .table thead{
+      display: none;
+    }
 
+    .table, .table tbody, .table tr, .table td{
+      display: block;
+      width: 100%;
+    }
+    .table tr{
+      background: #ffffff;
+      box-shadow: 0 8px 8px -4px lightblue;
+      border-radius: 5%;
+      margin-bottom:13px;
+      margin-top: 13px;
+    }
+    .table td{
+      /* max-width: 20px; */
+      padding-left: 50%;
+      text-align: right;
+      position: relative;
+    }
+    .table td::before{      
+      margin-top: 10px;      
+      content: attr(data-label);
+      position: absolute;
+      left:0;
+      width: 50%;
+      padding-left:15px;
+      font-size:15px;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+</style>
 
 
   <main id="main" class="main">
@@ -74,13 +110,21 @@ include('session.php');
           <div class="card">
           <div class="col-lg-12">
               <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                  <h4>Requirements To Submit</h4>
+                  <h4>Requirements to Validate</h4>
               </div>
-              <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                  <a type="button" href="student-clearance-status.php" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
-                  Return
-                  </a>
-              </div> 
+              <nav aria-label="Page navigation example" style="padding: 20px;">
+                  <ul class="pagination justify-content-end">      
+                  <div class="col-lg-2">          
+                     <a type="button" href="initial_requirements.php?id=<?php echo trim($_GET["id"]); ?>" class="btn btn-success form-control page-item" data-toggle="modal" data-target="#AddModal" >Requirements</a>
+                  </div>
+                  &nbsp;&nbsp;
+                  <div class="col-lg-1">          
+                     <a type="button" href="student-clearance-status.php" class="btn btn-primary form-control page-item" data-toggle="modal" data-target="#AddModal" >Back</a>
+                  </div>
+                  </li>
+                </ul>
+              </nav>          
+              
             </div>
             <div class="card-body">
               <?php
@@ -92,17 +136,17 @@ include('session.php');
                             echo '<table id="example" class="table datatable">';
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th scope='col'>Clearance Name</th>";
-                                        echo "<th scope='col'>Clearance Type</th>";
-                                        echo "<th scope='col'>Status</th>";
-                                        echo "<th scope='col'>Action</th>";
+                                        echo "<th >Clearance Name</th>";
+                                        echo "<th >Clearance Type</th>";
+                                        echo "<th >Status</th>";
+                                        echo "<th >Action</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . $row['clearance_name'] . "</td>";
-                                        echo "<td>" . $row['clearance_type'] . "</td>";
+                                        echo "<td WIDTH='30%'>" . $row['clearance_name'] . "</td>";
+                                        echo "<td WIDTH='50%'>" . $row['clearance_type'] . "</td>";
                                         $temp_id = $row['id'];
                                         $status = "";
                                         $location = "";
