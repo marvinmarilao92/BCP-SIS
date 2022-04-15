@@ -5,9 +5,10 @@ include('session.php');
 <html lang="en">
 <title>DATMS | Incoming Documents</title>
 <head>
+<?php  include "core/key_checker.php"; ?>
 <?php include ('core/css-links.php');//css connection?>
 <style>
-    /*responsive*/
+  /*responsive*/
   @media(max-width: 500px){
     .table thead{
       display: none;
@@ -92,7 +93,7 @@ include('session.php');
                     <th scope="col" >Requested By</th>
                     <!-- <th scope="col">Filesize</th>    -->
                     <th scope="col">Sender</th>   
-                    <th scope="col">Date/Time</th>       
+                    <th scope="col">Date&Time</th>       
                     <th scope="col">Status</th>  
                     <!-- <th scope="col">Downloads</th>    -->
                     <th scope="col">Action</th>          
@@ -115,10 +116,10 @@ include('session.php');
                   ?>
                   <tr>
                   <td style="display:none"><?php echo $docId?></td>
-                    <td data-label="Code: "><?php echo $docCode; ?>
-                    <td data-label="Requested By: "><?php echo $docTitle; ?>
+                    <td data-label="Code:"><?php echo $docCode; ?>
+                    <td data-label="Requested By:"><?php echo $docTitle; ?>
                     <td data-label="Sender:"><?php echo $docAct2; ?>
-                    <td data-label="Date:"><?php echo $docDate2; ?>
+                    <td data-label="Date&T:"><?php echo $docDate2; ?>
                     <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
@@ -137,9 +138,9 @@ include('session.php');
 
                   </td>
                     <td>                      
-                      <a class="btn btn-success receivedbtn"><i class="bi bi-check-lg"></i></a>
+                      <a class="btn btn-success receivedbtn" title="Received"><i class="bi bi-check-lg"></i></a>
                       <!-- <a class="btn btn-danger "><i class="bi bi-x-lg"></i></a> -->
-                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
+                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="bi bi-eye-fill"></i></a>
                     </td>
                   </tr>
 
@@ -304,6 +305,33 @@ include('session.php');
         </div>
       <!-- End Received Office Modal-->
 
+      <!-- Delete Office Modal -->
+      <div class="modal fade" id="DeleteModal" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">DELETE OFFICE</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                        <div class="card" style="margin: 10px;">
+                          <div class="card-body">                
+                            <br>
+                            <input type="hidden"  name="delete_id" id="delete_id" readonly>
+                            <center>
+                              <h5>Are you sure you want to delete these Office?</h5>
+                              <h5 class="text-danger">This action cannot be undone.</h5>   
+                            </center>                
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Office</button>
+                        </div>
+                      <!-- End Form -->
+                  </div>
+              </div>
+        </div>
+      <!-- End delete Office Modal -->
   <!-- End of Office Modals -->
 
   <!-- ======= Footer ======= -->
@@ -322,7 +350,7 @@ include('session.php');
         $(document).ready(function () {
 
               // View Function
-                  $('#incomingTable').on('click','remarksbtn', function () {
+              $('#incomingTable').on('click','.remarksbtn', function () {
 
                       $('#RemarksModal').modal('show');
 
@@ -338,7 +366,7 @@ include('session.php');
               // End of View function 
 
               // Received modal calling
-              $('#incomingTable').on('click','receivedbtn', function () {
+                $('#incomingTable').on('click','.receivedbtn', function () {
 
                     $('#ReceivedModal').modal('show');
 
@@ -400,6 +428,7 @@ include('session.php');
                       }
                   })
               // End Received function
+        
 
           });
 
