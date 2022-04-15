@@ -232,7 +232,7 @@ include('session.php');
 
            
               // Remarks view
-              $('#rejectTable').on('click','remarksbtn',  function () {
+              $('#rejectTable').on('click','.remarksbtn',  function () {
 
                     $('#RemarksModal').modal('show');
 
@@ -252,7 +252,7 @@ include('session.php');
                   });
                   // End of Remarks View function 
               // Cancel modal calling
-              $('#rejectTable').on('click','cancelbtn',  function () {
+              $('#rejectTable').on('click','.cancelbtn',  function () {
 
                   $('#CancelModal').modal('show');
 

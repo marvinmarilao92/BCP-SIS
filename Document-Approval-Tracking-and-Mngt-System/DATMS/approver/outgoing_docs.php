@@ -232,7 +232,7 @@ include('session.php');
         $(document).ready(function () {
             
               // View Function
-              $('#outgoingTable').on('click','remarksbtn', function () {
+              $('#outgoingTable').on('click','.remarksbtn', function () {
 
                       $('#RemarksModal').modal('show');
 
