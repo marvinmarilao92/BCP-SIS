@@ -110,7 +110,7 @@ include('session.php');
                   <tbody>
                     <?php
                       require_once("include/conn.php");
-                      $query="SELECT * FROM datms_program ORDER BY date desc ";
+                      $query="SELECT * FROM datms_program ORDER BY date DESC ";
                       $result=mysqli_query($conn,$query);
                       while($rs=mysqli_fetch_array($result)){
                         $progid =$rs['id'];

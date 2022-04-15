@@ -5,7 +5,7 @@
 
   if(session_destroy()) {
     date_default_timezone_set("asia/manila");
-		$date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+		$date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
     $fname=$verified_session_firstname.' '.$verified_session_lastname;  
     if (!empty($_SERVER["HTTP_CLIENT_IP"])){
       $ip = $_SERVER["HTTP_CLIENT_IP"];

@@ -5,7 +5,7 @@
    if(isset($_POST['offname'])&&isset($_POST['offloc'])){
     // Object Connection
 		 date_default_timezone_set("asia/manila");
-		 $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+		 $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
         //  $Office_code = mysqli_real_escape_string($conn,$_POST['offcode']);
          $Office_title = mysqli_real_escape_string($conn,$_POST['offname']);
          $Office_loc = mysqli_real_escape_string($conn,$_POST['offloc']);
