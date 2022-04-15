@@ -484,7 +484,7 @@ include('session.php');
               // End Edit function
 
               // View Function
-                $('.viewbtn').on('click', function () {
+              $('#DocTypeTable').on('click','.viewbtn', function () {
 
                     $('#ViewModal').modal('show');
 
