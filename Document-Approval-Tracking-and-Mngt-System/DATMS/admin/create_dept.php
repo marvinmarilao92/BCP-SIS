@@ -479,7 +479,7 @@ include('session.php');
               // End Edit Department function
 
               // View Department Function
-              $('.viewbtn').on('click', function () {
+              $('#DepartmentTable').on('click','.viewbtn',function () {
 
                     $('#ViewModal').modal('show');
 
