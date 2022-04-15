@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Super Admin</title>
+<title>SuperUser | Home</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 </head>

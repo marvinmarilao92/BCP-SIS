@@ -31,7 +31,7 @@
         </li>
         <li>
           <a class="dropdown-item d-flex align-items-center" href="index.php?id=<?php echo $_SESSION["login_key"];?>">
-            <i class="bi bi-arrow-return-left"></i>
+            <i class="bi bi-house-door"></i>
             <span>Return to super admin</span>
           </a>
         </li>
@@ -42,6 +42,12 @@
           <a class="dropdown-item d-flex align-items-center" href="users-profile.php?id=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-person"></i>
             <span>My Profile</span>
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item d-flex align-items-center" href="logs_admin.php?id=<?php echo $_SESSION["login_key"];?>">
+            <i class="bi bi-gear"></i>
+            <span>Audit Trail</span>
           </a>
         </li>
         <li>
