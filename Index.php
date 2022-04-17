@@ -231,12 +231,12 @@
 
 	<div id="fh5co-blog">
 		<div class="container">
-		<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+				<div class="col-md-8 col-md-offset-2 animate-box text-center fh5co-heading">
 					<h2>Faculty</h2>
 					<p>Responsible for the quality and content of instruction in the classroom. The instructor should at all times strive to promote the general purposes of the University and to achieve the objectives of the College. </p>
 				</div>
 			<div class="row">
-				<div class="col-md-3 text-center">
+				<div class="col-md-3 animate-box text-center">
 					<div class="staff">
 						<div class="staff-img" style="background-image: url(images/CEO_img.png);">
 						</div>
@@ -358,11 +358,19 @@
 			</div>
 		</div>
 	</div>
+	<!-- Map Location -->
+	<div>
+		<br><br>
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
+					<h2>Bestlink Main campus Location</h2>
+					<p>#1071 Brgy. Kaligayahan, Quirino Highway Novaliches Quezon City, Philippines 1123</p>
+				</div>
+		<iframe style="border:0; width: 100%; height: 400px;" class="animate-box" src="https://maps.google.com/maps?q=Bestlink%20College%20of%20the%20Philippines&t=&z=19&ie=UTF8&iwloc=&output=embed" frameborder="0" allowfullscreen></iframe>
+	</div>
 
 	<div id="fh5co-blog">
 		<div class="container">
-			<center>
-				<h1 class="heading-section">BCP Branches</h1></center>
+			<center><h2 class="heading-section animate-box">BCP Branches</h2></center>
 			<div class="row">
 				<div class="col-lg-4 col-md-4">
 					<div class="fh5co-blog animate-box">
@@ -421,7 +429,12 @@
 
 	</div>
 
-	<div class="gototop js-top">
+	<div class="gototop js-top" 
+	style="background: rgb(45, 108, 223); 
+	-webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
 	
@@ -557,7 +570,7 @@
 		<!-- End of Modal -->
 
 		<?php
-			// footer
+			// JS
 			include ('js.php');
 		?>
 	</body>
