@@ -9,7 +9,7 @@
   <script src="../assets/vendor/echarts/echarts.min.js"></script>
 
   <!-- datatable filter -->
-  <script type="text/javascript" src="dataTables.filter.html.js"></script>
+  <!-- <script type="text/javascript" src="dataTables.filter.html.js"></script> -->
   <!-- for sweet alert -->
   <script src="../assets/vendor/bootstrap/js/sweetalert2.min.js"></script>
   <script src="../assets/vendor/bootstrap/js/jquery-3.6.0.min.js"></script>
