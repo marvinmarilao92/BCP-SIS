@@ -228,8 +228,91 @@
 			</div>
 		</div>
 	</div>
+	
 	</div>	
-	<div id="fh5co-staff">
+	<!-- end of -->
+	<div id="fh5co-blog">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>Faculty</h2>
+					<p>Responsible for the quality and content of instruction in the classroom. The instructor should at all times strive to promote the general purposes of the University and to achieve the objectives of the College. </p>
+				</div>
+			</div>
+			<div class="row row-padded-mb">
+
+				<div class="col-lg-4 col-md-4">
+					<div class="fh5co-blog animate-box">
+						<a href="#" class="blog-img-holder" style="background-image: url(images/CEO_img.png);"></a>
+						<div class="blog-text">
+							<h3><a href="#">PRESIDENT/ CEO</a></h3>
+							<span class="posted_on">DR. MARIA M. VICENTE</span>					
+							<p>Highest Educational Attainment: Doctor of Philosophy major in Development of Education, Business Accountancy.</p>
+						</div> 
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-4">
+					<div class="fh5co-blog animate-box">
+						<a href="#" class="blog-img-holder" style="background-image: url(images/VICE_img.png);"></a>
+						<div class="blog-text">
+							<h3><a href="#">EXECUTIVE VICE PRESIDENT</a></h3>
+							<span class="posted_on">DR. CHARLIE I. CARIÑO</span>					
+							<p>Highest Educational Attainment: Doctor of Philosophy major in Development of Education, Business Accountancy.</p>
+						</div> 
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-4">
+					<div class="fh5co-blog animate-box">
+						<a href="#" class="blog-img-holder" style="background-image: url(images/vpAdmin.png);"></a>
+						<div class="blog-text">
+							<h3><a href="#">VICE PRESIDENT FOR ADMIN AND FINANC</a></h3>
+							<span class="posted_on">ENGR. DIOSDADO T. LLENO</span>					
+							<p>Highest Educational Attainment: Master of Science in Information Technology.</p>
+						</div> 
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-4">
+					<div class="fh5co-blog animate-box">
+						<a href="#" class="blog-img-holder" style="background-image: url(images/DeanBSIT_img.png);"></a>
+						<div class="blog-text">
+							<h3><a href="#">DEAN, BS in INFORMATION TECHNOLOGY</a></h3>
+							<span class="posted_on">DR. ROSICAR E. ESCOBER</span>					
+							<p>Educational Attainment: PhD in Business Management, Doctor in Public Administration (Dissertation Writing On-going).</p>
+						</div> 
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-4">
+					<div class="fh5co-blog animate-box">
+						<a href="#" class="blog-img-holder" style="background-image: url(images/DeptheadIT.png);"></a>
+						<div class="blog-text">
+							<h3><a href="#">PROGRAM HEAD, BSIT</a></h3>
+							<span class="posted_on">MR. ROMMEL J. CONSTANTINO</span>					
+							<p>Educational Attainment: Doctor of Information Technology - 6 Units earned, Master of Science in Information and Technology.</p>
+						</div> 
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-4">
+					<div class="fh5co-blog animate-box">
+						<a href="#" class="blog-img-holder" style="background-image: url(images/DHTour.png);"></a>
+						<div class="blog-text">
+							<h3><a href="#">PROGRAM HEAD, BSTM</a></h3>
+							<span class="posted_on">DR. RUBY D. ODULIO</span>					
+							<p>Doctor of Philosophy major in Development Education, Master of Arts in Educational Management, Master in Business Administration.</p>
+						</div> 
+					</div>
+				</div>
+			
+			</div>
+			
+		</div>
+	</div>
+
+	<!-- <div id="fh5co-staff">
 		<div class="container">
 			<h1 class="heading-section">Our Faculty</h1>
 			<div class="row">
@@ -307,7 +390,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<div id="fh5co-testimonial" style="background-image: url(images/school.jpg);">
 		<div class="overlay"></div>
@@ -357,7 +440,8 @@
 
 	<div id="fh5co-blog">
 		<div class="container">
-			<center><h1 class="heading-section">BCP Branches</h1></center>
+			<center>
+				<h1 class="heading-section">BCP Branches</h1></center>
 			<div class="row">
 				<div class="col-lg-4 col-md-4">
 					<div class="fh5co-blog animate-box">
@@ -392,6 +476,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<?php
 		// footer
 		include ('footer.php');
@@ -399,7 +484,7 @@
 	</div>
 
 	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+		<a href="#" class="js-gotop"><i class="icon-arrow-up" ></i></a>
 	</div>
 	
 	<!-- jQuery -->

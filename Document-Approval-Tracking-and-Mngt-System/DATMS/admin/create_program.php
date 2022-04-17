@@ -5,8 +5,9 @@ include('session.php');
 <html lang="en">
 <title>DATMS | Program</title>
 <head>
+<?php  include "core/key_checker.php"; ?>
 <style>
-  <?php  include "core/key_checker.php"; ?>
+
          /*responsive*/
         @media(max-width: 550px){
           .table thead{

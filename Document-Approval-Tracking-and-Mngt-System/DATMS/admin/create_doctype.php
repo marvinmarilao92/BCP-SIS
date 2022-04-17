@@ -6,8 +6,9 @@ include('session.php');
 <title>DATMS | Document Type</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
+<?php  include "core/key_checker.php"; ?>
 <style>
-  <?php  include "core/key_checker.php"; ?>
+
          /*responsive*/
         @media(max-width: 500px){
           .table thead{

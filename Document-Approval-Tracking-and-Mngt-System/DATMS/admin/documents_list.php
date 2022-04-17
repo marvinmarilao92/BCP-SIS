@@ -367,7 +367,7 @@
                             </div>
                           </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                               <button class="btn btn-primary" name="save">Create Document</button>
                             </div>
                         </form>
@@ -473,73 +473,6 @@
                 </div>
             </div>
             <!-- End Desc office Modal-->
-
-            <!-- Edit Document List Modal -->
-            <div class="modal fade" id="EditModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">EDIT OFFICE</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                          <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h2 class="card-title">Change information</h2>
-                                <!-- Fill out Form -->
-                                <div class="row g-3" >
-                                  <input type="hidden" class="form-control" id="dt_idE" readonly>
-                                  <div class="col-md-4">
-                                      Code: <input type="text" class="form-control" id="dt_codeE" readonly>
-                                  </div>
-                                  <br>
-                                  <div class="col-md-8">
-                                      Name: <input type="text" class="form-control" id="dt_nameE">
-                                  </div>
-                                  <br>
-                                  <div class="col-12">
-                                      Location: <textarea  style="height: 80px" class="form-control" id="dt_descE"></textarea>
-                                  </div>        
-                                </div>
-                              
-                            </div>
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button class="btn btn-primary" name="save" id="edit" >Save changes</button>
-                            </div>
-                        <!-- End Form -->
-                    </div>
-                </div>
-            </div>
-            <!-- End Edit Document List Modal-->
-
-            <!-- Delete Document List Modal -->
-            <div class="modal fade" id="DeleteModal" tabindex="-1">
-              <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">DELETE OFFICE</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                        <div class="card" style="margin: 10px;">
-                          <div class="card-body">                
-                            <br>
-                            <input type="hidden"  name="delete_id" id="delete_id" readonly>
-                            <center>
-                              <h5>Are you sure you want to delete these Document List?</h5>
-                              <h5 class="text-danger">This action cannot be undone.</h5>   
-                            </center>                
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Document List</button>
-                        </div>
-                      <!-- End Form -->
-                  </div>
-              </div>
-            </div>
-            <!-- End delete Document List Modal -->
 
           <!-- End of Document List Modals -->
           
