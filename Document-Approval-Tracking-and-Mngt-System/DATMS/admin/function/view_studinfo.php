@@ -11,6 +11,8 @@ if(isset($_POST["query"]))
   $search = mysqli_real_escape_string($conn, $_POST["query"]);
   $query  = "SELECT *,LEFT(middlename,1) as MI FROM student_information WHERE `account_status` NOT IN ('Unofficial') AND id_number = '".$search."'";
   $result = mysqli_query($conn, $query);
+
+
   if(mysqli_num_rows($result) > 0)
   {
     while($row = mysqli_fetch_array($result))
@@ -31,11 +33,7 @@ if(isset($_POST["query"]))
       
     }
   echo $output;
-  }else{
-    $query = "SELECT *,LEFT(middlename,1) as MI FROM teacher_information WHERE `account_status` NOT IN ('Inactive') AND id_number = '".$search."'";
-      $result = mysqli_query($conn, $query);
-      if(mysqli_num_rows($result) > 0)
-      {
+  }else if(mysqli_num_rows($result) > 0){
         while($row = mysqli_fetch_array($result))
         {
           //array data
@@ -48,21 +46,37 @@ if(isset($_POST["query"]))
             // $doc_actor1 = $row["section"];
             // $doc_actor1 = $row["school_year"];
             $doc_actor1 = $row["account_status"];
-
-            $output .= ' <small>Name: '. $fname .' '. $mname .'. '. $lname .' ('. $course .' Teacher)</small>    
-      ';          
+          $output .= ' <small>Name: '. $fname .' '. $mname .'. '. $lname .' ('. $course .' Teacher)</small>';          
         }
       echo $output;
-      }else{
-        $error .='
-        <div class="alert alert-primary border-light alert-dismissible fade show" role="alert">
-          <i class="bi bi-info-circle me-1"></i>
-          No Data Detected
-        </div>
-      ';
-      echo $error;
-      }
-         
+        }else{
+          $query = "SELECT *,LEFT(middlename,1) as MI FROM user_information WHERE `account_status` NOT IN ('Inactive') AND id_number = '".$search."'";
+          $result = mysqli_query($conn, $query);
+          if(mysqli_num_rows($result) > 0)
+          {
+            while($row = mysqli_fetch_array($result))
+            {
+              //array data
+                $idnum = $row["id_number"];
+                $fname = $row["firstname"];
+                $lname = $row["lastname"];
+                $mname = $row["MI"];
+                $dept = $row["office"];
+                $subsys = $row["department"];
+                $role = $row["role"];
+    
+                $output .= ' <small>Name: '. $fname .' '. $mname .'. '. $lname .' ('. $subsys .' | '. $role .' | '. $dept .')</small>';    
+            }
+          echo $output;
+          }else{
+            $error .='
+            <div class="alert alert-primary border-light alert-dismissible fade show" role="alert">
+              <i class="bi bi-info-circle me-1"></i>
+              No Data Detected
+            </div>
+            ';
+          echo $error;
+          }
         }
 }else{
     $error .='
