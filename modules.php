@@ -15,25 +15,8 @@
 		include 'nav.php';
 	?>
 	
-	<aside id="fh5co-hero">
-		<div class="flexslider">
-			<ul class="slides">
-		   	<li style="background-image: url(images/aboutwall.jpg);">
-		   		<div class="overlay-gradient"></div>
-		   		<div class="container">
-		   			<div class="row">
-			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
-			   				<div class="slider-text-inner">
-			   					<h1 class="heading-section">BCP Modules</h1>
-			   					<h2>“It’s time to step up to the plate and get passionate about your work commit to making eLearning courses that don't bore people to tears, but instead inspire and motivate them to learn a new skill, change a certain behavior, or improve their performance.”</h2>
-			   				</div>
-			   			</div>
-			   		</div>
-		   		</div>
-		   	</li>
-		  	</ul>
-	  	</div>
-	</aside>
+	<!-- <iframe id="ytplayer" type="text/html" width="100%" height="400" src="https://www.youtube.com/embed/JVJJo5Izqfc?autoplay=1&mute=1"
+		frameborder="0"></iframe> -->
 
 	<div id="fh5co-course">
 		<div class="container">
@@ -189,8 +172,8 @@
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
-			<!-- Modal -->
-			<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-backdrop="static">
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-backdrop="static">
 			<div class="modal-dialog modal-dialog-centered" role="document" >
 				<div class="modal-content">
 					<div class="modal-header">

@@ -365,7 +365,7 @@
 					<h2>Bestlink Main campus Location</h2>
 					<p>#1071 Brgy. Kaligayahan, Quirino Highway Novaliches Quezon City, Philippines 1123</p>
 				</div>
-		<iframe style="border:0; width: 100%; height: 400px;" class="animate-box" src="https://maps.google.com/maps?q=Bestlink%20College%20of%20the%20Philippines&t=&z=19&ie=UTF8&iwloc=&output=embed" frameborder="0" allowfullscreen></iframe>
+		<iframe style="border:0; width: 100%; height: 500px;" class="animate-box" src="https://maps.google.com/maps?q=Bestlink%20College%20of%20the%20Philippines&t=&z=19&ie=UTF8&iwloc=&output=embed" frameborder="0" allowfullscreen></iframe>
 	</div>
 
 	<div id="fh5co-blog">
