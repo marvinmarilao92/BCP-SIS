@@ -275,7 +275,98 @@
                       //statement
                       break;
                     case "Health Check Monitoring":
-                      //statement
+                      
+                      switch($row1["role"]){
+                        case "Health Check Monitoring Administrator":
+                          //statement
+                          $_SESSION['session_username'] = $myusername;
+                          if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                              $ip = $_SERVER["HTTP_CLIENT_IP"];
+                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                              $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                            }else{
+                              $ip = $_SERVER["REMOTE_ADDR"];
+                              $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                $remarks="account has been logged in";  
+                                mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                                //used to delete ip address record for login attempts
+                                mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
+                                //calling php file for new login_key
+                                require_once "core/update_key.php";
+                                //update login key
+                                $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                                header("location: Health-Check-Monitoring/HCM-Administrator/index.php?id=".$_SESSION["login_key"]."");
+                                
+                            }
+                          
+                          break;
+                        case "Health Check Monitoring Nurse":
+                          //statement
+                          $_SESSION['session_username'] = $myusername;
+                          if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                              $ip = $_SERVER["HTTP_CLIENT_IP"];
+                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                              $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                            }else{
+                              $ip = $_SERVER["REMOTE_ADDR"];
+                              $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                $remarks="account has been logged in";  
+                                mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                                //used to delete ip address record for login attempts
+                                mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
+                                //calling php file for new login_key
+                                require_once "core/update_key.php";
+                                //update login key
+                                $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                                header("location: Health-Check-Monitoring/HCM-Nurse/index.php?id=".$_SESSION["login_key"]."");
+                            }
+                          
+                          break;
+                        case "Health Check Monitoring Dentist":
+                            //statement
+                            $_SESSION['session_username'] = $myusername;
+                            if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                              $ip = $_SERVER["HTTP_CLIENT_IP"];
+                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                              $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                            }else{
+                              $ip = $_SERVER["REMOTE_ADDR"];
+                              $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                $remarks="account has been logged in";  
+                                mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                                //used to delete ip address record for login attempts
+                                mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
+                                //calling php file for new login_key
+                                require_once "core/update_key.php";
+                                //update login key
+                                $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                                header("location: Health-Check-Monitoring/HCM-Medical-Personnel/index.php?id=".$_SESSION["login_key"]."");
+                            }
+                            
+                            break;
+                        case "Health Check Monitoring School Physician":
+                            //statement
+                            $_SESSION['session_username'] = $myusername;
+                            if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                              $ip = $_SERVER["HTTP_CLIENT_IP"];
+                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                              $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                            }else{
+                              $ip = $_SERVER["REMOTE_ADDR"];
+                              $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                $remarks="account has been logged in";  
+                                mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                                //used to delete ip address record for login attempts
+                                mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
+                                //calling php file for new login_key
+                                require_once "core/update_key.php";
+                                //update login key
+                                $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                              header("location: Health-Check-Monitoring/HCM-Physician/index.php?id=".$_SESSION["login_key"]."");
+                            }                          
+                            break;
+                  
+                      }
                       break;
                     case "LMS Moodle":
                       //statement
