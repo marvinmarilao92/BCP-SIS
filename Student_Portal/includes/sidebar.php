@@ -19,7 +19,7 @@
           </a>
           <ul id="components-nav" class="<?php if($col=='Clearance'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
           <li>
-              <a href="clearance-status.php" class="<?php if($page=='clrS'){echo 'active';}?>">
+              <a href="clearance-status.php" class="<?php if($page=='clr'){echo 'active';}?>">
                 <i class="bi bi-circle"></i><span>Clearance Status</span>
               </a>
             </li>

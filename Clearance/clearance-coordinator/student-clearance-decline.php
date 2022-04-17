@@ -83,7 +83,7 @@ include ("includes/head.php");
 
 <?php
 include ("includes/nav.php");
-include ("includes/sidebar.php");
+$page = 'SCS' ; $col = 'clr'; include ("includes/sidebar.php");
 ?>
 
 
@@ -101,35 +101,38 @@ include ("includes/sidebar.php");
         </ol>
       </nav>
     </div><!-- End Page Title -->
-    <div class="wrapper">
+    <div class="wrapper" style="margin-top: 200px;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <div class="alert alert-danger">
-                            <div class="row mb-3">
-                              <label for="inputText" class="col-sm-2 col-form-label">Remarks</label>
-                              <div class="col-sm-10">
-                                <input type="text" name="remarks" class="form-control" required>
-                              </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Are you sure you want to decline clearance for <?php echo trim($_GET["req_name"]); ?>?</h5>
+                                <input type="hidden" name="req_id" value="<?php echo trim($_GET["req_id"]); ?>"/>
+                                <input type="hidden" name="req_name" value="<?php echo trim($_GET["req_name"]); ?>"/>
+                                <input type="hidden" name="id" value="<?php echo trim($_GET["id"]); ?>"/>
+                                <input type="hidden" name="name" value="<?php echo trim($_GET["name"]); ?>"/>
+                                <input type="hidden" name="dept_id" value="<?php echo trim($_GET["dept_id"]); ?>"/>
+                                <input type="hidden" name="loc" value="<?php echo trim($_GET["loc"]); ?>"/>
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                        <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Requirement Name" required autofocus>
+                                        <label for="floatingName">Remarks</label>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" value="Yes" class="btn btn-danger">
+                                        <a href="student-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>" class="btn btn-secondary">No</a>
+                                    </div>
                             </div>
-                            <input type="hidden" name="req_id" value="<?php echo trim($_GET["req_id"]); ?>"/>
-                            <input type="hidden" name="req_name" value="<?php echo trim($_GET["req_name"]); ?>"/>
-                            <input type="hidden" name="id" value="<?php echo trim($_GET["id"]); ?>"/>
-                            <input type="hidden" name="name" value="<?php echo trim($_GET["name"]); ?>"/>
-                            <input type="hidden" name="dept_id" value="<?php echo trim($_GET["dept_id"]); ?>"/>
-                            <input type="hidden" name="loc" value="<?php echo trim($_GET["loc"]); ?>"/>
-                            <p>Are you sure you want to decline clearance for <?php echo trim($_GET["req_name"]); ?>?</p>
-                            <p>
-                                <input type="submit" value="Yes" class="btn btn-danger">
-                                <a href="student-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>" class="btn btn-secondary">No</a>
-                            </p>
                         </div>
                     </form>
                 </div>
             </div>        
         </div>
     </div>
+
 
 
   </main><!-- End #main -->
