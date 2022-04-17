@@ -14,7 +14,7 @@
                     <li class="<?php if($page=='modules'){echo 'active';}?>"><a href="modules.php">Modules</a></li>
                     <li class=""><a href="dynamic-login.php"><span>Login</span></a></li>
                     <!-- <li class="<?php if($page=='about'){echo 'active';}?>"><a href="about.php">About</a></li> -->
-					<li class="btn-cta" ><a href="UserManagement/online-enrollment.php" ><span>APPLY ONLINE</span></a></li>
+					<li class="btn-cta" ><a data-toggle="modal" data-target="#exampleModalLong"><span>APPLY ONLINE</span></a></li>
 				</ul>
             </div>
         </div>
