@@ -1,0 +1,4 @@
+<br />
+<b>Warning</b>:  filesize(): stat failed for ../../Student/uploads/62567869663c5055345460.pdf in <b>C:\xampp\htdocs\Projects\Cluster_6A\Clearance\clearance-coordinator\student-clearance-view.php</b> on line <b>22</b><br />
+<br />
+<b>Warning</b>:  readfile(../../Student/uploads/62567869663c5055345460.pdf): Failed to open stream: No such file or directory in <b>C:\xampp\htdocs\Projects\Cluster_6A\Clearance\clearance-coordinator\student-clearance-view.php</b> on line <b>23</b><br />

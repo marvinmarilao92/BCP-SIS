@@ -97,7 +97,7 @@ include('session.php');
             </div>
             <div class="card-body" >           
               <!-- Table for DocType records -->
-              <table class="row-border hover datatable table" id="DocTypeTable">
+              <table class="table table-hover datatable" id="DocTypeTable">
                 <thead>
                   <tr>
                     <th style="display:none"></th>
@@ -139,16 +139,6 @@ include('session.php');
                   <?php } ?>
                   
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th style="display:none"></th>
-                    <th style="display:none"></th>
-                    <th scope="col" WIDTH="70%">Document Type</th>                    
-                    <th style="display:none"></th>
-                    <th scope="col">Date Created</th>
-                    <th scope="col" WIDTH="10%">Action</th>
-                  </tr>
-                </tfoot>
               </table>
               <!-- End of DocType table record -->
 
@@ -337,7 +327,7 @@ include('session.php');
         $(document).ready(function () {
 
               // Delete modal calling
-              $('.deletebtn').on('click', function () {
+              $('#DocTypeTable').on('click','.deletebtn', function () {
 
                     $('#DeleteModal').modal('show');
 
@@ -424,7 +414,7 @@ include('session.php');
               // End Save function
 
               // Edit modal calling
-                $('.editbtn').on('click', function () {
+              $('#DocTypeTable').on('click','.editbtn', function () {
 
                     $('#EditModal').modal('show');
 

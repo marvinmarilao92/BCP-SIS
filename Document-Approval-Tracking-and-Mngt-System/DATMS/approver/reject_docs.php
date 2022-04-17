@@ -85,7 +85,7 @@ include('session.php');
             </div>
             <div class="card-body" >           
               <!-- Table for Office records -->
-              <table class="table table-hover datatable" >
+              <table class="table table-hover datatable" id="rejectTable">
                 <thead>
                   <tr>
                     <th scope="col">DocCode</th>
@@ -231,23 +231,28 @@ include('session.php');
         $(document).ready(function () {
 
            
-           // View Function
-                  $('.remarksbtn').on('click', function () {
+              // Remarks view
+              $('#rejectTable').on('click','remarksbtn',  function () {
 
-                      $('#RemarksModal').modal('show');
+                    $('#RemarksModal').modal('show');
 
-                      $tr = $(this).closest('tr');
+                    $tr = $(this).closest('tr');
 
-                      var data = $tr.children("td").map(function () {
-                          return $(this).text();
-                      }).get();
+                    var data = $tr.children("td").map(function () {
+                        return $(this).text();
+                    }).get();
 
-                      console.log(data); 
-                      $('#remarks').text("Revision Remarks: ".data[18]);
-                    });
-              // End of View function 
+                    console.log(data); 
+                    if(data[18] ==""){
+                      $('#remarks').text(data[11]);
+                    }else{
+                      $('#remarks').text(data[18]);
+                    }
+                  
+                  });
+                  // End of Remarks View function 
               // Cancel modal calling
-              $('.cancelbtn').on('click', function () {
+              $('#rejectTable').on('click','cancelbtn',  function () {
 
                   $('#CancelModal').modal('show');
 

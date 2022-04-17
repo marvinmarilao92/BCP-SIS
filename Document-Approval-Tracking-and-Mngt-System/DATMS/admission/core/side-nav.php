@@ -85,7 +85,7 @@
   </li><!-- End Reports Nav -->
 
   <li class="nav-item">
-    <a href="outgoing_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='outgoing'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="stud_req.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='req'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-send-plane-line"></i>
         <span>Requirements Submission</span>
     </a>

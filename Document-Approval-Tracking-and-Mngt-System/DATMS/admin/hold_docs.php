@@ -85,7 +85,7 @@ include('session.php');
             </div>
             <div class="card-body" >           
               <!-- Table for Office records -->
-              <table class="table table-hover datatable" >
+              <table class="table table-hover datatable" id="holdTable">
                 <thead>
                   <tr>
                     <th scope="col">DocCode</th>
@@ -241,7 +241,7 @@ include('session.php');
 
            
               // Hold modal calling
-              $('.sendbtn').on('click', function () {
+              $('#holdTable').on('click','.sendbtn', function () {
 
                   $('#SendModal').modal('show');
 

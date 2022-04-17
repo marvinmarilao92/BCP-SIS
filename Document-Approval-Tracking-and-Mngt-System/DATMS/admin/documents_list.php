@@ -128,7 +128,7 @@
                                     <div class="card-body" >           
                                       <!-- Table for Document List records -->
                                       <form method="POST">
-                                        <table class="table table-hover datatable" >
+                                        <table class="table table-hover datatable" id="DocuTable">
                                         <thead>
                                           <tr>
                                             <th >DocCode</th>
@@ -842,7 +842,7 @@
                     window.print();
                 }            
                     // View Function
-                      $('.viewbtn').on('click', function () {
+                    $('#DocuTable').on('click','.viewbtn', function () {
 
                           $('#ViewModal').modal('show');
 
@@ -890,34 +890,6 @@
                         
                         });
                   // End of Remarks View function 
-
-                  // Providing Overall tracking history
-                    // load_data();
-                    // function load_data(query)
-                    // {
-                    //   $.ajax({
-                    //   url:"function/history.php",
-                    //   method:"POST",
-                    //   data:{query:query},
-                    //   success:function(data)
-                    //   {
-                    //     $('.activity').html(data);
-                    //   }
-                    //   });
-                    // }
-                    // $('#search_text').keyup(function(){
-                    //   var search = $(this).val();
-                    //   if(search != '')
-                    //   {
-                    //   load_data(search);
-                    //   }
-                    //   else
-                    //   {
-                    //     $('.activity').html('');
-                    //   }
-                    // });
-                  //end of tracking history
-
                 //
                   function load_data(query)
                     {

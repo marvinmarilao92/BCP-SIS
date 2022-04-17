@@ -26,7 +26,7 @@
     
     if(isset($verified_session_department) && ($verified_session_username == $_SESSION['session_username'])){
         switch($verified_session_role){
-          case "DATMS Administrator":
+          case "Registrar Administrator":
             //statement
             break;
           case "SuperAdmin":

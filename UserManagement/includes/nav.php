@@ -1,7 +1,7 @@
 <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
   <?php 
-  include "key_checker.php";?>
+  // include "key_checker.php";?>
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="logo d-flex align-items-center">
         <img src="../assets/img/BCPlogo.png" alt="">

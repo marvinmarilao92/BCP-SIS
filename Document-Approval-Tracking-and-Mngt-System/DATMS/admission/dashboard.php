@@ -56,7 +56,7 @@ include('session.php');
                     <div class="ps-3">
                       <?php 
                         require_once("include/conn.php");
-                        $query="SELECT * FROM datms_office";
+                        $query="SELECT *,LEFT(middlename,1) FROM student_information WHERE account_status = 'Unofficial' ORDER BY stud_date DESC ";
                         $result=mysqli_query($conn,$query);
                         if($result){
                           echo "<h6>". mysqli_num_rows($result)."</h6>";
@@ -85,7 +85,7 @@ include('session.php');
                     <div class="ps-3">
                       <?php 
                         require_once("include/conn.php");
-                        $query="SELECT * FROM user_information WHERE `department` = 'DATMS'";
+                        $query="SELECT *,LEFT(middlename,1) FROM student_Application WHERE account_status = 'Enrolled'";
                         $result=mysqli_query($conn,$query);
                         if($result){
                           echo "<h6>". mysqli_num_rows($result)."</h6>";
@@ -125,7 +125,7 @@ include('session.php');
                     <div class="ps-3">
                     <?php 
                         require_once("include/conn.php");
-                        $query="SELECT * FROM datms_doctype";
+                        $query="SELECT *,LEFT(middlename,1) FROM student_information WHERE account_status = 'Official' ORDER BY stud_date DESC ";
                         $result=mysqli_query($conn,$query);
                         if($result){
                           echo "<h6>". mysqli_num_rows($result)."</h6>";
