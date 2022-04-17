@@ -1,14 +1,20 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<?php include ('header.php');//header ?>
-	</head>
+	<?php include ('header.php');//header ?>
 	<body>
-		
 	<div class="fh5co-loader"></div>
-	
 	<div id="page">
-	<?php $page = 'home'; include 'nav.php';// Navigation bar ?>
+		
+	<?php
+		// Navigation bar
+		$page = 'home';
+		include 'nav.php';
+	?>
+	<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  Launch demo modal
+</button> -->
+
 
 	<aside id="fh5co-hero">
 		<div class="flexslider">
@@ -20,8 +26,7 @@
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
 			   					<h1>The Roots of Education are Bitter, But the Fruit is Sweet</h1>
-									<!-- <p><a class="btn btn-primary btn-lg" href="dynamic-login.php" >Start Learning Now!</a></p> -->
-									<p><a data-toggle="modal" data-target="#exampleModalLong" class="btn btn-primary btn-lg btn-reg">Register Now!</a></p>
+									<p><a class="btn btn-primary btn-lg" href="dynamic-login.php" >Start Learning Now!</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
@@ -34,8 +39,7 @@
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
 			   					<h1>The Great Aim of Education is not Knowledge, But Action</h1>
-									<!-- <p><a class="btn btn-primary btn-lg" href="dynamic-login.php" >Start Learning Now!</a></p> -->
-									<p><a data-toggle="modal" data-target="#exampleModalLong" class="btn btn-primary btn-lg btn-reg">Register Now!</a></p>
+									<p><a class="btn btn-primary btn-lg" href="dynamic-login.php" >Start Learning Now!</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
@@ -48,8 +52,7 @@
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
 			   					<h1>We Help You to Learn New Things</h1>
-									<!-- <p><a class="btn btn-primary btn-lg" href="dynamic-login.php" >Start Learning Now!</a></p> -->
-									<p><a data-toggle="modal" data-target="#exampleModalLong" class="btn btn-primary btn-lg btn-reg">Register Now!</a></p>
+									<p><a class="btn btn-primary btn-lg" href="dynamic-login.php" >Start Learning Now!</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
@@ -228,7 +231,9 @@
 			</div>
 		</div>
 	</div>
-
+	
+	</div>	
+	<!-- end of -->
 	<div id="fh5co-blog">
 		<div class="container">
 		<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
@@ -397,34 +402,12 @@
 			</div>
 		</div>
 	</div>
-
-	<div id="fh5co-register" style="background-image: url(images/mvcampus1.jpg);">
-		<div class="overlay"></div>
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2 animate-box">
-				<div class="date-counter text-center">
-					<h2>School Year Countdown</h2>
-					<h3>Bestlink College of the Philippines</h3>
-					<div class="simply-countdown simply-countdown-one"></div>
-					<p><strong>Limited Slot, Hurry Up!</strong></p>
-					<p><a data-toggle="modal" data-target="#exampleModalLong" class="btn btn-primary btn-lg btn-reg">Register Now!</a></p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
+	
 	<?php
 		// footer
 		include ('footer.php');
 	?>
-
 	</div>
-
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
-	
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-backdrop="static">
 			<div class="modal-dialog modal-dialog-centered" role="document" >
@@ -555,11 +538,51 @@
 			</div>
 		</div>
 		<!-- End of Modal -->
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up" ></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Stellar Parallax -->
+	<script src="js/jquery.stellar.min.js"></script>
+	<!-- Carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- Flexslider -->
+	<script src="js/jquery.flexslider-min.js"></script>
+	<!-- countTo -->
+	<script src="js/jquery.countTo.js"></script>
+	<!-- Magnific Popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	<!-- Count Down -->
+	<script src="js/simplyCountdown.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+	<script>
+    var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
 
-		<?php
-			// footer
-			include ('js.php');
-		?>
+    // default example
+    simplyCountdown('.simply-countdown-one', {
+        year: d.getFullYear(),
+        month: d.getMonth() + 1,
+        day: d.getDate()
+    });
+
+    //jQuery example
+    $('#simply-countdown-losange').simplyCountdown({
+        year: d.getFullYear(),
+        month: d.getMonth() + 1,
+        day: d.getDate(),
+        enableUtc: false
+    });
+	</script>
 	</body>
 </html>
 
