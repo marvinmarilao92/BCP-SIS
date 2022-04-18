@@ -84,7 +84,7 @@ include('session.php');
               <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
                   <h4>Students Requirements</h4>
               </div> 
-              <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
+              <div class="form-group col-md-1.5 btn-lg"  style="float: right; padding:20px;">
                 <a type="button" class="btn btn-primary form-control" href="admission_req.php?id=<?php echo $_SESSION["login_key"];?>" >
                 Admission Records
                 </a>
