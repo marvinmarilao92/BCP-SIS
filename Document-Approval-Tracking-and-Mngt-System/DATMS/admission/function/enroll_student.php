@@ -115,7 +115,8 @@
              
                   $query = "UPDATE student_application SET account_status='$status' WHERE id_number='$code'";
                   if($query_run = mysqli_query($link, $query)){
-                    unset($_SESSION['status']);
+                    // unset($_SESSION['status']);
+                    $_SESSION['studnum'] = $student_number;
                     echo ('success');
                   }else{
                     echo ('failed');

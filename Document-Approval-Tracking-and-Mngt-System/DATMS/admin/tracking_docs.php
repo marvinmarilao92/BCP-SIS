@@ -39,7 +39,7 @@ include('session.php');
 
                     <div class="col-md-12" style="margin-top: 30px; margin-bottom: 10px;">
                       <div class="form-floating">
-                        <input type="text" class="form-control" id="search_text" name="search_text" onChange="fetchTracking(this.value);" placeholder="Your Name" autofocus>
+                        <input type="text" class="form-control" id="search_text" name="search_text" placeholder="Your Name" autofocus>
                         <label for="floatingName">Enter Code</label>
                       </div>
                     </div>  
