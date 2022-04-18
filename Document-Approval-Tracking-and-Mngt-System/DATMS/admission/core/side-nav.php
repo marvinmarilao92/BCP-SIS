@@ -38,7 +38,7 @@
   </li><!-- End Dashboard Nav -->
 
   <li class="nav-item">
-    <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='applist'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="app_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='applist'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="bi bi-person-lines-fill"></i>
       <span>Student Application &nbsp;&nbsp;</span>
       <span class="badge bg-primary badge-number"> 
@@ -55,7 +55,7 @@
   </li> <!-- hold item Nav -->
 
   <li class="nav-item">
-    <a href="enrollment.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='enroll'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='enroll'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-book-2-line"></i>
         <span>Enroll Student &nbsp;&nbsp;&nbsp;</span>
     </a>

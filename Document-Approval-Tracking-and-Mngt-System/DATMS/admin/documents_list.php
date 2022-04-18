@@ -368,7 +368,7 @@
                           </div>
                             <div class="modal-footer">
                               <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button class="btn btn-primary" name="save">Create Document</button>
+                              <button class="btn btn-primary" name="save">Create Tracking</button>
                             </div>
                         </form>
                         <!-- End Form -->
