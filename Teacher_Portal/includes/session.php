@@ -11,6 +11,7 @@
                 $verified_session_username = $row5['id_number'];
                 $verified_session_firstname = $row5['firstname'];
                 $verified_session_lastname = $row5['lastname'];
+                $verified_session_course = $row5['course'];
               }
               // Free result set
               mysqli_free_result($result5);
