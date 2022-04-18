@@ -1,10 +1,10 @@
 <?php
-include('security/session.php');
-
+  $path = 'view';
+   include_once('includes/source.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>HCM | Dashboard</title>
+<title>Records Validation</title>
 <head>
 <?php include ('includes/head_ext.php');?>
 
@@ -85,8 +85,8 @@ include('security/session.php');
                           <tr>
                               <th scope="col">#</th>
                               <th scope="col">Student Number</th>
+                              <th scope="col">Full Name</th>
                               <th scope="col">Remarks</th>
-                              <th scope="col">Record</th>
                               <th scope="col">Action</th>
                           </tr>
                       </thead>
@@ -100,8 +100,8 @@ include('security/session.php');
                         <tr>
                           <td>#<?php echo $row['id'];?></td>
                           <td><?php echo $row['stud_id'];?></td>
+                          <td><?php echo $row['full_n'];?></td>
                           <td><?php echo $row['remarks'];?></td>
-                          <td><?php echo $row['file_name'];?></td>
                           <td>
                             <div class="input-group">
                               <?php $table_name = "hcms_student_records";?>
@@ -136,6 +136,7 @@ include('security/session.php');
                           <tr>
                               <th scope="col">#</th>
                               <th scope="col">Student Number</th>
+                              <th scope="col">Full Name</th>
                               <th scope="col">Remarks</th>
                               <th scope="col">Assessed Date</th>
                           </tr>
@@ -150,6 +151,7 @@ include('security/session.php');
                         <tr>
                           <td>#<?php echo $row['id'];?></td>
                           <td><?php echo $row['stud_id'];?></td>
+                          <td><?php echo $row['full_n'];?></td>
                           <td><?php echo $row['remarks'];?></td>
                           <td><?php echo $row['assess_date'];?></td>
                         </tr>
@@ -179,6 +181,7 @@ include('security/session.php');
                           <tr>
                               <th scope="col">#</th>
                               <th scope="col">Student Number</th>
+                              <th scope="col">Full Name</th>
                               <th scope="col">Remarks</th>
                               <th scope="col">Assessed Date</th>
                           </tr>
@@ -193,6 +196,7 @@ include('security/session.php');
                         <tr>
                           <td>#<?php echo $row['id'];?></td>
                           <td><?php echo $row['stud_id'];?></td>
+                          <td><?php echo $row['full_n'];?></td>
                           <td><?php echo $row['remarks'];?></td>
                           <td><?php echo $row['assess_date'];?></td>
                         </tr>
@@ -218,6 +222,5 @@ include('security/session.php');
 
 </main>
 <?php include('includes/footer.php'); ?>
-<?php include('includes/scripts.php'); ?>
 </body>
 </html>

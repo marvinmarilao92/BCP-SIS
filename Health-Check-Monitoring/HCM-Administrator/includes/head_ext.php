@@ -28,8 +28,21 @@
 
   <!-- Selector search -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link href="cropperjs/cropper.min.css" rel="stylesheet" type="text/css"/>
   <style>
  
+ img {
+            display: block;
+            max-width: 100%;
+        }
+        .preview {
+            overflow: hidden;
+            width: 160px; 
+            height: 160px;
+            margin: 10px;
+            border: 1px solid red;
+        }
+
 #imgLarge {
     float: left;
     width: 100px;
@@ -54,24 +67,44 @@
     cursor: pointer;
 }
 
+@media(max-width: 500px){
+      .table thead{
+        display: none;
+      }
+
+      .table, .table tbody, .table tr, .table td{
+        display: block;
+        width: 100%;
+      }
+      .table tr{
+        background: #ffffff;
+        box-shadow: 0 8px 8px -4px lightblue;
+        border-radius: 5%;
+        margin-bottom:13px;
+        margin-top: 13px;
+      }
+      .table td{
+        /* max-width: 20px; */
+        padding-left: 50%;
+        text-align: right;
+        position: relative;
+      }
+      .table td::before{      
+        margin-top: 10px;      
+        content: attr(data-label);
+        position: absolute;
+        left:0;
+        width: 50%;
+        padding-left:15px;
+        font-size:15px;
+        font-weight: bold;
+        text-align: left;
+      }
+    }
 </style>
-  
- <?php
-  function displayProfile($verified_session_img, $idImg) {
-    $path = "../../assets/users/";
-    $person = "person-circle.svg";
-    $dir = "{$path}{$person}";
-    $dir2 = "{$path}{$verified_session_img}";
-    $hasNoImage = '<img src="' . $dir . '" id="' . $idImg . '" alt="Profile" class="rounded-circle m-2">'; 
-    $hasImage = '<img src="' . $dir2 . '" id="' .$idImg. '" alt="Profile" class="rounded-circle m-2">'; 
-    $str = is_null($verified_session_img) ? $hasNoImage : $hasImage;
-    return $str;
-  } 
- 
-
- ?>
 
   
+
 
   
 

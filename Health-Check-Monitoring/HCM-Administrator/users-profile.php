@@ -1,10 +1,11 @@
 <?php
-  include('security/session.php');
+    $path = 'view';
+    include_once('includes/source.php');
 ?>
 
 <!DOCTYPE html>
   <html lang="en">
-  <title>HCM | Dashboard</title>
+  <title>Account</title>
   <head>
     <?php include ('includes/head_ext.php');?>
     <style>
@@ -290,7 +291,6 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <?php include('includes/scripts.php'); ?>
   <?php include('includes/footer.php'); ?>
  
 

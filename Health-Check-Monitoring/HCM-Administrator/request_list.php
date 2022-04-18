@@ -1,10 +1,10 @@
 <?php
-include('security/session.php');
-
+  $path = 'view';
+  include_once('includes/source.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>HCM | Dashboard</title>
+<title>List of Requests</title>
 <head>
 <?php include ('includes/head_ext.php');?>
 </head>
@@ -223,6 +223,5 @@ include('security/session.php');
 
 </main>
 <?php include('includes/footer.php'); ?>
-<?php include('includes/scripts.php'); ?>
 </body>
 </html>

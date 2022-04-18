@@ -62,7 +62,7 @@
         <span class="badge bg-secondary badge-number">
           <?php 
             require_once("security/sec-conn.php");
-            $query="SELECT * FROM hcms_request WHERE `status` = 'Pending'";
+            $query="SELECT * FROM hcms_student_records WHERE `status` = 'Pending'";
             $result=mysqli_query($conn2,$query);
             if($result){
               echo mysqli_num_rows($result);
@@ -94,15 +94,20 @@
       <a class="nav-link collapsed" data-bs-target="#logs-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-person-lines-fill"></i><span>Employee Logs</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="logs-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+      <ul id="logs-nav" class="<?php if($nav=='logs'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="#?id=<?php echo $_SESSION["login_key"];?>" class="nav-link">
+          <a href="logs-admin.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='logs-admin'){echo 'active';}?>">
             <i class="bi bi-circle"></i><span>HCMS Admin</span>
           </a>
         </li>
         <li>
-          <a href="#id=<?php echo $_SESSION["login_key"];?>" class="nav-link">
+          <a href="logs-staff.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='logs-staffs'){echo 'active';}?>">
             <i class="bi bi-circle"></i><span>HCMS Staffs</span>
+          </a>
+        </li>
+        <li>
+          <a href="activities.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='activities'){echo 'active';}?>">
+            <i class="bi bi-circle"></i><span>Activities</span>
           </a>
         </li>
       </ul>
@@ -110,16 +115,16 @@
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#enrolled-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-card-list"></i><span>List of Enrolled</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-card-list"></i><span>Over All Records</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>  
-      <ul id="enrolled-nav" class="<?php if($nav=='#'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
+      <ul id="enrolled-nav" class="<?php if($nav=='OAR'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="student-list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='#'){echo 'active';}?>">
+          <a href="overall-records-students.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='student-list'){echo 'active';}?>">
             <i class="bi bi-circle"></i><span>Student List</span> 
           </a>
         </li>
         <li>
-          <a href="faculty-list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='#'){echo 'active';}?>">
+          <a href="overall-records-teacher.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='teacher-list'){echo 'active';}?>">
             <i class="bi bi-circle"></i><span>Faculty List</span>
           </a>
         </li>

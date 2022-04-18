@@ -1,22 +1,18 @@
 <?php 
-include_once('../security/session.php');
-include('../includes/oopGlobal.php');
+include('../includes/source.php');
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-  // <!-- ======= From input form Personal Information======= -->
+  // <!-- ======= From input form======= -->
   $id = mysqli_real_escape_string($conn, $_POST['id_number']);
-  // <!-- ======= From input form Personal Information ENTITY FULL NAME======= -->
-  $fname= mysqli_real_escape_string($conn, $_POST['fname']);
-  $mname = mysqli_real_escape_string($conn, $_POST['mname']);
-  $lname= mysqli_real_escape_string($conn, $_POST['lname']);
-  $fullname = $fname. '' .$mname. '' .$lname;
+  $fname = mysqli_real_escape_string($conn, $_POST['firstname']);
+  $mname = mysqli_real_escape_string($conn, $_POST['middlename']);
+  $lname = mysqli_real_escape_string($conn, $_POST['lastname']);
+  $fullname = $fname.' '.$mname.' '.$lname;
 
-   // <!-- ======= From input form Personal Information OTHER====== -->
   $gender = mysqli_real_escape_string($conn, $_POST['gender']);
-  $course= mysqli_real_escape_string($conn, $_POST['course']);
-  $status2= mysqli_real_escape_string($conn, $_POST['status2']);
-
-   // <!-- ======= Table name for function====== -->
-  $table_name= mysqli_real_escape_string($conn, $_POST['tablename']);
+  $course = mysqli_real_escape_string($conn, $_POST['course']);
+  // <!-- ======= From input form======= -->
+  $remarks = mysqli_real_escape_string($conn, $_POST['remarks']);
+  $table_name= "hcms_student_records";
 
   // <!-- ======= Date for file id======= -->
   date_default_timezone_set("asia/manila");
@@ -29,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   $fileType = pathinfo($file, PATHINFO_EXTENSION);
   $fileTmp = $_FILES['upload']['tmp_name'];
 
-  $status = "Approved";
+  $status = "Pending";
   date_default_timezone_set("asia/manila");
   $assessment_date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
 
@@ -40,7 +36,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   $appr = $verified_session_firstname.' '.$verified_session_lastname;
   $type = "Direct";
-  $status2 = "unofficial";
   $role = $verified_session_role;
   $dept = $verified_session_department;
 
@@ -54,8 +49,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(move_uploaded_file($fileTmp, $targetDir)){
     
     
-    $query = "INSERT INTO ".$table_name." (`stud_id`, `full_n`, `status`, `assess_date`, `file_id`, `file_name`, `status2`, `appr_name`, `cons_role`, `cons_dept`, `remarks`, `type`) 
-              VALUES ('$id', '$fullname', '$status', '$assessment_date', '$file_id', '$file', '$status2', '$appr', '$role', '$dept', '$remarks', '$type')" ;
+    $query = "INSERT INTO ".$table_name." (`stud_id`, `full_n`, `status`, `assess_date`, `file_id`, `file_name`, `appr_name`, `cons_role`, `cons_dept`, `remarks`, `type`) 
+              VALUES ('$id', '$fullname', '$status', '$assessment_date', '$file_id', '$file', '$appr', '$role', '$dept', '$remarks', '$type')" ;
 
     $query_run = mysqli_query($conn, $query);
 
@@ -76,19 +71,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
   
       }else{
-  
+        date_default_timezone_set("asia/manila");
+        $audit_date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
         $ip = $_SERVER["REMOTE_ADDR"];
         $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-        $remarks= "User Profile has been updated";  
+        $remarks= "Record Registered";  
         //save to the audit trail table
-          mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$office','$ip','$host','$date')")or die(mysqli_error($conn));  
-          
+
+          $sql_run = auditQuery($conn, $verified_session_username, $remarks , $fname, $office , $ip , $host , $audit_date);
+          if($sql_run){
           $_SESSION['alert'] = "Successfully Uploaded";
+          // swal
           $msg = "Record Added";
           $icon = "success";
           functionSwal($msg, $icon);
           header("location:". $SERVER['HTTP_REFERER']);
           exit();
+          }
         }
 
      }else{

@@ -1,11 +1,10 @@
 <?php
-include('security/session.php');
-include('includes/oopGlobal.php');
+  $path = 'view';
+  include_once('includes/source.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-<title>HCM | Dashboard</title>
+<title>Manage Records</title>
 <head>
 <?php include ('includes/head_ext.php');?>
 <style>
@@ -46,7 +45,7 @@ include('includes/oopGlobal.php');
           </div>
         </div>
         <div class="col-sm-6">
-          <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#myModal"><i class="ri-add-circle-line"></i>&nbspAdd Unofficial</button>
+          <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#myModal"><i class="ri-add-circle-line"></i>&nbspRegister</button>
         </div>
       </div>
       
@@ -147,7 +146,7 @@ include('includes/oopGlobal.php');
     </form><!-- End No Labels Form -->
   </div>
 </div>
-<form action="resources/add_records.php" method="POST" enctype="multipart/form-data">
+<form action="resources/register_records.php" method="POST" enctype="multipart/form-data">
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModallabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
@@ -164,26 +163,26 @@ include('includes/oopGlobal.php');
               <legend class="float-none w-auto p-2">Personal Information:</legend>
               <div class="row g-2">
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="#" placeholder="ID Number" required>
+                  <input type="text" class="form-control" name="id_number" placeholder="ID Number" required>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="#" placeholder="First Name" required>
-                </div>
-              </div>
-              <div class="row g-2 pt-3">
-                <div class="col-md-6">
-                  <input type="text" class="form-control" name="#" placeholder="Middle Name" required>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" name="#" placeholder="Last name" required>
+                  <input type="text" class="form-control" name="firstname" placeholder="First Name" required>
                 </div>
               </div>
               <div class="row g-2 pt-3">
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="#" placeholder="Gender"required>
+                  <input type="text" class="form-control" name="middlename" placeholder="Middle Name" required>
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="#" placeholder="Course"required>
+                  <input type="text" class="form-control" name="lastname" placeholder="Last name" required>
+                </div>
+              </div>
+              <div class="row g-2 pt-3">
+                <div class="col-md-6">
+                  <input type="text" class="form-control" name="gender" placeholder="Gender"required>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" name="course" placeholder="Course"required>
                 </div>
               </div>
             </fieldset>
@@ -220,9 +219,6 @@ include('includes/oopGlobal.php');
             <h5 id="display-name"  class="row d-flex justify-content-center"></h5>
           </div>  
           <div class="text-center p-4">
-            <input type="hidden" name = "fullname" value = "'.$row['firstname'].' '.$row['middlename'].' '.$row['lastname'].'">
-            <input type="hidden" name="id_number" value="'. $row['id_number'].'">
-            <input type="hidden" name="tablename" value="hcms_studen_records">
             <button type="submit" name ="submit" class="btn btn-primary">Submit</button>
             <button type="close" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">close</button>
           </div>
@@ -245,7 +241,6 @@ function getImage(imagename)
 
 </script>
 <?php
-include ("includes/scripts.php");
 include ("includes/footer.php");
 ?>
 </script>

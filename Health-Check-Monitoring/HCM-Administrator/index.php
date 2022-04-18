@@ -1,5 +1,6 @@
 <?php
-  include('security/session.php');
+  $path = 'view';
+  include_once('includes/source.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +99,6 @@
 
 
   <?php include('includes/footer.php'); ?>
-  <?php include('includes/scripts.php'); ?>
 </body>
 
 </html>

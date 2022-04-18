@@ -1,6 +1,5 @@
 <?php 
-include ('../security/session.php');
-include_once('../includes/scripts-top.php');
+include_once('../includes/source.php');
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
   date_default_timezone_set("asia/manila");
@@ -12,12 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   $email = mysqli_real_escape_string($conn,$_POST['email']); 
 
 
-
-  $query = "UPDATE user_information 
-            SET `about` = '{$about}', `address` = '{$address}', `contact` = '{$phone}', `email` = '{$email}' 
-            WHERE `id_number` = '$verified_session_username'";
-
-  $query_run = mysqli_query($conn, $query);
+  $query_run = updateProfile($conn, $about, $address, $phone, $email, $verified_session_username);
 
   if ($query_run){
     $fname= $verified_session_role; 
@@ -33,15 +27,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
 
     }else{
-
+      date_default_timezone_set("asia/manila");
+      $audit_date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
       $ip = $_SERVER["REMOTE_ADDR"];
       $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
       $remarks= "User Profile has been updated";  
       //save to the audit trail table
-        mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$office','$ip','$host','$date')")or die(mysqli_error($conn));  
-        $_SESSION['alert'] = "Successfully Updated";
+      
+        $sql_run = auditQuery($conn, $verified_session_username, $remarks , $fname, $office , $ip , $host , $audit_date);
+        if($sql_run){
+        $_SESSION['alert'] = "Successfully Uploaded";
+        // swal
+        $msg = "Record Added";
+        $icon = "success";
+        functionSwal($msg, $icon);
         header("location:". $SERVER['HTTP_REFERER']);
-        
+        exit();
+        }
       }
 
   }else{
@@ -49,7 +51,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $icon = "error";
     functionSwal($msg, $icon);
     }
-  }else{
-
-}
+  }
 ?>

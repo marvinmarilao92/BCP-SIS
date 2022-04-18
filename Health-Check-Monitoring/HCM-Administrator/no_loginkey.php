@@ -1,5 +1,6 @@
 <?php
-include('session.php');
+  $path = 'view';
+  include_once('includes/source.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,6 +62,7 @@ include('session.php');
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
 <!-- Charts -->
+
 </body>
 
 </html>
