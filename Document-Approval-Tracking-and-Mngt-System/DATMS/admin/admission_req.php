@@ -47,7 +47,7 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'SCS' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'req' ; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
