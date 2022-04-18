@@ -605,7 +605,7 @@ if(isset($_POST['submit_req']))
       foreach($reqItem as $item)
       {
           // echo $item . "<br>";
-          $query = "INSERT INTO datms_studreq(id_number,req) VALUES('$student_number','$item')";
+          $query = "INSERT INTO datms_studreq(id_number,req,status) VALUES('$student_number','$item','Onhold')";
           $query_run = mysqli_query($link, $query);
       }
   
