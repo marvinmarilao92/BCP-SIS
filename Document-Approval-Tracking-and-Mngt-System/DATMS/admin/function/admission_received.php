@@ -9,9 +9,10 @@ $db = mysqli_select_db($conn, 'sis_db');
              $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
              $id = mysqli_real_escape_string($conn,$_POST['dtid']);  
              
-        $q_checkcode = $conn->query("SELECT * FROM `datms_studreq` WHERE `id_number` = '$id '") or die(mysqli_error($conn));
+        $q_checkcode = $conn->query("SELECT * FROM `datms_studreq` WHERE `id_number` = '$id'") or die(mysqli_error($conn));
             $v_checkcode = $q_checkcode->num_rows;
-            if($v_checkcode > 1){
+            
+            if($v_checkcode == 0){
                 echo ('failed');
             }else {
                 $conn->query("UPDATE datms_studreq SET status='Received' WHERE id_number='$id'") or die(mysqli_error($conn));
