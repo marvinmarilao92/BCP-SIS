@@ -12,7 +12,7 @@ include ("includes/head.php");
 
 <?php
 include ("includes/nav.php");
-include ("includes/sidebar.php");
+$page = 'clr' ; $col = 'Clearance'; include ("includes/sidebar.php");
 ?>
 
 
@@ -56,8 +56,8 @@ include ("includes/sidebar.php");
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . $row['clearance_name'] . "</td>";
-                                        echo "<td>" . $row['clearance_type'] . "</td>";
+                                        echo "<td WIDTH='30%'>" . $row['clearance_name'] . "</td>";
+                                        echo "<td WIDTH='50%'>" . $row['clearance_type'] . "</td>";
                                         $temp_id = $row['id'];
                                         $status = "";
                                         $sql1 = "SELECT * FROM clearance_student_status where clearance_requirement_id = '$temp_id' and student_id = '$verified_session_username' LIMIT 1";

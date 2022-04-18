@@ -282,31 +282,7 @@ include('session.php');
 
   <!-- JS Scripts -->
     <script> 
-     //export functions
-        // //excel
-        // function ExportToExcel(type, fn, dl) {
-        // var elt = document.getElementById('StudentsTable');
-        // var wb = XLSX.utils.table_to_book(elt, { sheet: "Studentss" });
-        // return dl ?
-        //     XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
-        //     XLSX.writeFile(wb, fn || ('Students_Records.' + (type || 'xlsx')));
-        // }
-        // //clipboard
-        //   var copyBtn = document.querySelector('#copy_btn');
-        //     copyBtn.addEventListener('click', function () {
-        //       var urlField = document.querySelector('table');
-              
-        //       // create a Range object
-        //       var range = document.createRange();  
-        //       // set the Node to select the "range"
-        //       range.selectNode(urlField);
-        //       // add the Range to the set of window selections
-        //       window.getSelection().addRange(range);
-              
-        //       // execute 'copy', can't 'cut' in this case
-        //       document.execCommand('copy');
-        //     }, false);
-      // end of export
+  
         // this script will execute as soon a the website runs
         $(document).ready(function () {
 

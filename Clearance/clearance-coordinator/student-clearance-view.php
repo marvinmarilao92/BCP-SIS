@@ -6,21 +6,35 @@ include('includes/session.php');
         $student_id = $_GET['student_id'];
         $req_id = $_GET['req_id'];
 
+        // // fetch file to download from database
+        // $sql = "SELECT * FROM clearance_student_status WHERE student_id=$student_id and clearance_requirement_id=$req_id";
+        // $result = mysqli_query($link, $sql);
+        // $file = mysqli_fetch_assoc($result);
+        // $filepath = '../../Student_Portal/uploads/' . $file['file_link'];
+
+        // if (file_exists($filepath)) {
+        //     header('Content-Description: File Transfer');
+        //     header('Content-Type: application/octet-stream');
+        //     header('Content-Disposition: attachment; filename=' . basename($filepath));
+        //     header('Expires: 0');
+        //     header('Cache-Control: must-revalidate');
+        //     header('Pragma: public');
+        //     header('Content-Length: ' . filesize('../../Student_Portal/uploads/' . $file['file_link']));
+        //     readfile('../../Student_Portal/uploads/' . $file['file_link']);
+        //     exit;
+        // }
+
         // fetch file to download from database
         $sql = "SELECT * FROM clearance_student_status WHERE student_id=$student_id and clearance_requirement_id=$req_id";
         $result = mysqli_query($link, $sql);
         $file = mysqli_fetch_assoc($result);
         $filepath = '../../Student_Portal/uploads/' . $file['file_link'];
-
+    
         if (file_exists($filepath)) {
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename=' . basename($filepath));
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize('../../Student_Portal/uploads/' . $file['file_link']));
+            header('Content-Type: application/pdf');
             readfile('../../Student_Portal/uploads/' . $file['file_link']);
+    
+            mysqli_query($link, $updateQuery);
             exit;
         }
 
@@ -38,9 +52,45 @@ include ("includes/head.php");
 
 <?php
 include ("includes/nav.php");
-include ("includes/sidebar.php");
+$page = 'SCS' ; $col = 'clr'; include ("includes/sidebar.php");
 ?>
+<style>
+  /*responsive*/
+  @media(max-width: 500px){
+    .table thead{
+      display: none;
+    }
 
+    .table, .table tbody, .table tr, .table td{
+      display: block;
+      width: 100%;
+    }
+    .table tr{
+      background: #ffffff;
+      box-shadow: 0 8px 8px -4px lightblue;
+      border-radius: 5%;
+      margin-bottom:13px;
+      margin-top: 13px;
+    }
+    .table td{
+      /* max-width: 20px; */
+      padding-left: 50%;
+      text-align: right;
+      position: relative;
+    }
+    .table td::before{      
+      margin-top: 10px;      
+      content: attr(data-label);
+      position: absolute;
+      left:0;
+      width: 50%;
+      padding-left:15px;
+      font-size:15px;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+</style>
 
   <main id="main" class="main">
 
@@ -59,6 +109,18 @@ include ("includes/sidebar.php");
         <div class="col-lg-12">
 
           <div class="card">
+            <div class="col-lg-12">
+              <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
+                  <h4>Requirements to Validate</h4>
+              </div>
+              <nav aria-label="Page navigation example" style="padding: 20px;">
+                  <ul class="pagination justify-content-end">  
+                  <div class="col-lg-1">          
+                      <a type="button" href="student-clearance-status.php" class="btn btn-primary form-control page-item" data-toggle="modal" data-target="#AddModal" >Back</a>
+                  </div>
+                </ul>
+              </nav> 
+            </div>
             <div class="card-body">
               <h5 class="card-title">List of <?php echo$verified_session_role; ?>'s Clearance Requirements for Students</h5>
               <?php
@@ -79,8 +141,8 @@ include ("includes/sidebar.php");
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . $row['clearance_name'] . "</td>";
-                                        echo "<td>" . $row['clearance_type'] . "</td>";
+                                        echo "<td WIDTH='30%'>" . $row['clearance_name'] . "</td>";
+                                        echo "<td WIDTH='50%'>" . $row['clearance_type'] . "</td>";
                                         $temp_id = $row['id'];
                                         $status = "";
                                         $location = "";
@@ -114,7 +176,7 @@ include ("includes/sidebar.php");
                                             echo "Oops! Something went wrong. Please try again later.";
                                         }
                                         echo "<td>";
-                                          echo '<a href="student-clearance-status-view.php?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'" class="m-1 btn btn-primary" data-toggle="tooltip" title="View details"><span class="bi bi-info-lg"></span></a>';
+                                          echo '<a href="student-clearance-status-view.php?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'" class="m-1 btn btn-info" data-toggle="tooltip" title="View details"><span class="bi bi-info-lg"></span></a>';
                                           if($status == "Declined"){
                                             echo '<a href="student-clearance-confirm.php?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'&status=Declined" target="" class="m-1 btn btn-success" title="Confirm Clearance" data-toggle="tooltip"><span class="bi bi-check-lg"></span></a>';
                                           }else if($status != "Declined" && $status == "Completed"){
@@ -123,10 +185,10 @@ include ("includes/sidebar.php");
                                           }
                                           if($status == "Under Review"){
                                             echo '<a href="student-clearance-decline.php?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'" target="" class="m-1 btn btn-danger" title="Decline Clearance" data-toggle="tooltip"><span class="bi bi-x-lg"></span></a>';
-                                            echo '<a href="?student_id='. trim($_GET["id"]).'&req_id='. $row['id'].'" target="" class="m-1 btn btn-info" title="Download File" data-toggle="tooltip"><span class="bi bi-download"></span></a>';
+                                            echo '<a href="?student_id='. trim($_GET["id"]).'&req_id='. $row['id'].'" target="" class="m-1 btn btn-primary" title="Download File" data-toggle="tooltip"><span class="bi bi-eye"></span></a>';
                                           }
                                           if($status == "Completed" && $location == "Database"){
-                                            echo '<a href="?student_id='. trim($_GET["id"]).'&req_id='. $row['id'].'" target="" class="m-1 btn btn-info" title="Download File" data-toggle="tooltip"><span class="bi bi-download"></span></a>';
+                                            echo '<a href="?student_id='. trim($_GET["id"]).'&req_id='. $row['id'].'" target="_blank" class="m-1 btn btn-primary" title="Download File" data-toggle="tooltip"><span class="bi bi-eye"></span></a>';
                                           }
                                           if($status == "Pending" && $row['clearance_type'] == "Clearance Record (Pending Record)"){
                                             echo '<a href="student-clearance-decline.php?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'" target="" class="m-1 btn btn-danger" title="Decline Clearance" data-toggle="tooltip"><span class="bi bi-x-lg"></span></a>';

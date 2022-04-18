@@ -57,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Attempt to execute the prepared statement
                 if(mysqli_stmt_execute($stmt2)){
                     // Records created successfully. Redirect to landing page
-                    header("location: clearance-get-appointment.php?id=" . trim($_POST["id"]) . "&name=" . trim($_POST["name"]) . "");
+                    header("location: clearance-appointments.php");
                     exit();
                 } else{
                     echo "Oops! Something went wrong. Please try again later.";
@@ -85,7 +85,7 @@ include ("includes/head.php");
 
 <?php
 include ("includes/nav.php");
-include ("includes/sidebar.php");
+$page = 'clr' ; $col = 'Clearance'; include ("includes/sidebar.php");
 ?>
 
 
