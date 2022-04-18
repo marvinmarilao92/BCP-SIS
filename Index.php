@@ -229,7 +229,7 @@
 		</div>
 	</div>
 
-	<div id="fh5co-blog">
+	<div id="fh5co-pricing">
 		<div class="container">
 				<div class="col-md-8 col-md-offset-2 animate-box text-center fh5co-heading">
 					<h2>Faculty</h2>
@@ -359,18 +359,23 @@
 		</div>
 	</div>
 	<!-- Map Location -->
-	<!-- <div>
+	<div>
 		<br><br>
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
 					<h2>Bestlink Main campus Location</h2>
 					<p>#1071 Brgy. Kaligayahan, Quirino Highway Novaliches Quezon City, Philippines 1123</p>
 				</div>
+				<!-- <iframe class="animate-box" width="100%" height="500" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ-w1yV1awlzMRvqkkCg_6fno&key=AIzaSyAJPMvY02_WVR-UOZU0r7Brn4V4SelYi9o"></iframe> -->
+			
 				<iframe class="animate-box" width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Bestlink%20College%20of%20the%20Philipines&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-	</div> -->
+	</div>
 
 	<div id="fh5co-blog">
 		<div class="container">
-			<center><h2 class="heading-section animate-box">BCP Branches</h2></center>
+		<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
+					<h2>BCP Branches</h2>
+					<p>Here are the current available branches of Bestlink College of the Philippines</p>
+				</div>
 			<div class="row">
 				<div class="col-lg-4 col-md-4">
 					<div class="fh5co-blog animate-box">
