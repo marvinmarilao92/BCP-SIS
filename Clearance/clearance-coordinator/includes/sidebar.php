@@ -78,7 +78,7 @@
             <a class="nav-link collapsed" data-bs-target="#clearance-teachers-nav" data-bs-toggle="collapse" href="#">
               <i class="bi bi-menu-button-wide"></i><span>Clearance For Teachers</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="clearance-teachers-nav" class="<?php if($col=="clr"){echo "nav-content collapse show";}else{echo "nav-content collapse";}?>" data-bs-parent="#sidebar-nav">
+            <ul id="clearance-teachers-nav" class="<?php if($col=="clr1"){echo "nav-content collapse show";}else{echo "nav-content collapse";}?>" data-bs-parent="#sidebar-nav">
               <li>
                 <a href="teacher-clearance-requirements.php" class="<?php if($page=='TCR'){echo 'active';}?>">
                   <i class="bi bi-circle"></i><span>Clearance Requirements</span>
