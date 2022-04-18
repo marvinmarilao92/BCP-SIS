@@ -27,7 +27,7 @@ include ("includes/sidebar.php");
         </ol>
       </nav>
     </div><!-- End Page Title -->
-    <h2>Hello <?php echo $verified_session_role ?></h2>
+    <!-- <h2>Hello <?php echo $verified_session_role ?></h2> -->
 
   </main><!-- End #main -->
 
