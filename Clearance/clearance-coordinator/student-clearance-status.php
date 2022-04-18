@@ -21,7 +21,7 @@ include ("includes/head.php");
 </script>
 <?php
 include ("includes/nav.php");
-include ("includes/sidebar.php");
+$page = 'SCS' ; $col = 'clr'; include ("includes/sidebar.php");
 ?>
 
 

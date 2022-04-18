@@ -72,7 +72,7 @@ include ("includes/head.php");
 
 <?php
 include ("includes/nav.php");
-include ("includes/sidebar.php");
+$page = 'clr' ; $col = 'Clearance'; include ("includes/sidebar.php");
 ?>
 
 

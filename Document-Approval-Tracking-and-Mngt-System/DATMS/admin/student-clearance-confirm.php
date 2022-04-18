@@ -34,7 +34,7 @@ if(isset($_POST["req_id"]) && !empty($_POST["req_id"])){
         if($result1 = mysqli_query($link, $sql1)){
             if(mysqli_num_rows($result1) > 0){
             while($row1 = mysqli_fetch_array($result1)){
-                $path = '../../Student/uploads/' . $row1['file_link'];
+                $path = '../../../Student_Portal/uploads/' . $row1['file_link'];
                 if(unlink($path)){
                 $sql = "UPDATE clearance_student_status SET status=?, location=?, date=?, file_link=null, remarks=null WHERE clearance_requirement_id=? and student_id=?";
 

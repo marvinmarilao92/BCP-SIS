@@ -12,7 +12,7 @@ include ("includes/head.php");
 
 <?php
 include ("includes/nav.php");
-include ("includes/sidebar.php");
+$page = 'SCA' ; $col = 'clr'; include ("includes/sidebar.php");
 ?>
 
 

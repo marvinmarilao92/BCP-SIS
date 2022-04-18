@@ -22,7 +22,7 @@ include ("includes/head.php");
 
 <?php
 include ("includes/nav.php");
-include ("includes/sidebar.php");
+$page = 'SCR' ; $col = 'clr'; include ("includes/sidebar.php");
 ?>
 
 
@@ -40,10 +40,18 @@ include ("includes/sidebar.php");
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-
           <div class="card">
+            <div class="col-lg-12">
+              <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
+                  <h4><?php echo $verified_session_role; ?>'s Requirements</h4>
+              </div>
+              <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
+                  <a type="button" href="student-requirement-add.php" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
+                  Add New Requirement
+                  </a>
+              </div> 
+            </div>
             <div class="card-body">
-              <h5 class="card-title">List of <?php echo $verified_session_role; ?>'s Clearance Requirements for Students</h5>
               <?php
                     
                     // Attempt select query execution
@@ -83,15 +91,6 @@ include ("includes/sidebar.php");
                     mysqli_close($link);
                     ?>
 
-            </div>
-            <div class="container-fluid">
-              <div class="row mb-4">
-                <div class="col-md-10">
-                </div>
-                <div class="col-md-2">
-                  <a href="student-requirement-add.php" class="btn btn-success pull-right">Add New Requirement</a>
-                </div>
-              </div>
             </div>
           </div>
 

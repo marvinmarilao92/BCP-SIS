@@ -39,28 +39,30 @@
       $sql = "SELECT * FROM clearance_department_students where department_name = '$verified_session_role'";
       if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
-          echo '<li class="nav-item">
-                  <a class="nav-link collapsed" data-bs-target="#clearance-students-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Clearance For Students</span><i class="bi bi-chevron-down ms-auto"></i>
-                  </a>
-                  <ul id="clearance-students-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <li>
-                      <a href="student-clearance-requirements.php">
-                        <i class="bi bi-circle"></i><span>Clearance Requirements</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="student-clearance-status.php">
-                        <i class="bi bi-circle"></i><span>Clearance Status</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="student-clearance-appointment.php">
-                        <i class="bi bi-circle"></i><span>Clearance Appointments</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>';
+          ?>
+          <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#clearance-students-nav" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-menu-button-wide"></i><span>Clearance For Students</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="clearance-students-nav" class="<?php if($col=="clr"){echo "nav-content collapse show";}else{echo "nav-content collapse";}?>" data-bs-parent="#sidebar-nav">
+              <li>
+                <a href="student-clearance-requirements.php" class="<?php if($page=='SCR'){echo 'active';}?>">
+                  <i class="bi bi-circle"></i><span>Clearance Requirements</span>
+                </a>
+              </li>
+              <li>
+                <a href="student-clearance-status.php" class="<?php if($page=='SCS'){echo 'active';}?>">
+                  <i class="bi bi-circle"></i><span>Clearance Status</span>
+                </a>
+              </li>
+              <li>
+                <a href="student-clearance-appointment.php" class="<?php if($page=='SCA'){echo 'active';}?>">
+                  <i class="bi bi-circle"></i><span>Clearance Appointments</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <?php
         } else{
             
         }
@@ -71,23 +73,25 @@
         $sql = "SELECT * FROM clearance_department_teachers where department_name = '$verified_session_role'";
       if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
-          echo '<li class="nav-item">
-                  <a class="nav-link collapsed" data-bs-target="#clearance-teachers-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Clearance For Teachers</span><i class="bi bi-chevron-down ms-auto"></i>
-                  </a>
-                  <ul id="clearance-teachers-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <li>
-                      <a href="teacher-clearance-requirements.php">
-                        <i class="bi bi-circle"></i><span>Clearance Requirements</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="teacher-clearance-status.php">
-                        <i class="bi bi-circle"></i><span>Clearance Status</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>';
+          ?>
+          <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#clearance-teachers-nav" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-menu-button-wide"></i><span>Clearance For Teachers</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="clearance-teachers-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+              <li>
+                <a href="teacher-clearance-requirements.php">
+                  <i class="bi bi-circle"></i><span>Clearance Requirements</span>
+                </a>
+              </li>
+              <li>
+                <a href="teacher-clearance-status.php">
+                  <i class="bi bi-circle"></i><span>Clearance Status</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <?php
         } else{
             
         }
