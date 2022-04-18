@@ -6,7 +6,6 @@ include('session.php');
 <title>ADMISSION | Requirements</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
-<?php  include "core/key_checker.php"; ?>
 <style>
          /*responsive*/
         @media(max-width: 500px){
@@ -48,7 +47,7 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'req' ; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'SCS' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
@@ -84,28 +83,24 @@ include('session.php');
               <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
                   <h4>Students Requirements</h4>
               </div> 
-              <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                <a type="button" class="btn btn-primary form-control" href="admission_req.php?id=<?php echo $_SESSION["login_key"];?>" >
-                Admission Records
-                </a>
-            </div> 
             </div>
+            
             <div class="card-body" >           
               <!-- Table for Students records -->
-              <table class="row-border hover datatable table" id="StudentsTable">
+              <table class="row-border hover datatable table" id="AdmTable">
                 <thead>
                   <tr>
                     <th WIDTH="10%">Student No.</th>
                     <th >Name</th>
                     <th scope="col">Program</th>                    
                     <!-- <th >Status</th> -->
-                    <th >Completed Requirements</th>
-
+                    <th >Initial Requirements</th>            
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                     require_once("include/conn.php");
+                    $student_id = trim($_GET["id"]);
                     $query="SELECT *,LEFT(middlename,1) FROM student_information ORDER BY stud_date DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
@@ -120,22 +115,19 @@ include('session.php');
 
                   ?>
                   <tr>
-                    <td data-label="Student No."><a style="font-weight: bold;" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>"><?php echo $adm_no; ?></a></td>
+                    <td data-label="Student No."><a data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>"><?php echo $adm_no; ?></a></td>
                     <td data-label="Name" WIDTH="25%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
                     <td data-label="Program"><?php echo $adm_program; ?></td>
                     <!-- <td data-label="Status"><?php echo $adm_as?></td> -->
                     <?php 
                       $requirments ='';
-                        $sql1 = " SELECT css.student_id, css.status, GROUP_CONCAT(DISTINCT crs.clearance_name  SEPARATOR ', ') AS concat
-                        FROM clearance_student_status css
-                        INNER JOIN clearance_requirements_students crs
-                        ON css.clearance_requirement_id = crs.id WHERE student_id = ".$adm_no." AND css.status = 'completed' ";
-
+                        $sql1 = " SELECT *, GROUP_CONCAT(DISTINCT req SEPARATOR ', ') AS concat FROM datms_studreq WHERE id_number = " . $adm_no . "  GROUP BY id_number ";
                         if($result1 = mysqli_query($link, $sql1)){
                           if(mysqli_num_rows($result1) > 0){
                             while($row1 = mysqli_fetch_array($result1)){
+                              $id = $row1["id"];
                               $Req = $row1["concat"];
-                                
+                              $stat2 = $row1["status"];
                               // $adm_DP = $row1['date'];
                               $requirments .='<td  WIDTH="40%">'.$Req.'</td>';
                                                                 
@@ -146,7 +138,17 @@ include('session.php');
                           }
                         }
                     ?>
-                    <td data-label="Status" style="display: none;"><?php echo $date?></td>                  
+                    <td data-label="Status" style="display: none;"><?php echo $id?></td>   
+                        <?php
+                        if($stat2=='Onhold'){?>
+                        <td WIDTH="7%">      
+                          <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
+                            <button class="btn btn-success receivedbtn"><i class="bi bi-check-lg"></i></button>                       
+                          </div>
+                        </td>
+                         <?php
+                        }
+                        ?>
                   </tr>
 
                   <?php 
@@ -208,37 +210,27 @@ include('session.php');
       <!-- End Create Students Modal-->
 
       <!-- Edit Students Modal -->
-      <div class="modal fade" id="EditModal" tabindex="-1">
+      <div class="modal fade" id="RecievedModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">EDIT Students</h5>
+                          <h5 class="modal-title">Received Requirements</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           <div class="card" style="margin: 10px;">
                             <div class="card-body">
-                              <h2 class="card-title">Change information</h2>
+                              <h2 class="card-title">Are you sure you want to recieve requirements submitted by:</h2>
+                              <h5 id="stud_num" style="text-align: end; color:black"></h5> 
                                 <!-- Fill out Form -->
-                                <div class="row g-3" >
-                                  <input type="hidden" class="form-control" id="dt_idE" readonly>
-                                  <div class="col-md-4">
-                                       <input type="hidden" class="form-control" id="dt_codeE" readonly>
-                                  </div>
-                                  <br>
-                                  <div class="col-md-12">
-                                      Name: <input type="text" class="form-control" id="dt_nameE">
-                                  </div>
-                                  <br>
-                                  <div class="col-12">
-                                      Location: <textarea  style="height: 80px" class="form-control" id="dt_descE"></textarea>
-                                  </div>        
+                                <div class="row g-3" >                                
+                                  <input type="hidden" class="form-control" id="dt_idE" readonly>                              
                                 </div>
                               
                             </div>
                           </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button class="btn btn-primary" name="save" id="edit" >Save changes</button>
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                              <button class="btn btn-primary" name="save" id="received" >Yes</button>
                             </div>
                         <!-- End Form -->
                     </div>
@@ -246,33 +238,6 @@ include('session.php');
         </div>
       <!-- End Edit Students Modal-->
 
-      <!-- Delete Students Modal -->
-      <div class="modal fade" id="DeleteModal" tabindex="-1">
-              <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">DELETE Students</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                        <div class="card" style="margin: 10px;">
-                          <div class="card-body">                
-                            <br>
-                            <input type="hidden"  name="delete_id" id="delete_id" readonly>
-                            <center>
-                              <h5>Are you sure you want to delete these Students?</h5>
-                              <h5 class="text-danger">This action cannot be undone.</h5>   
-                            </center>                
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Students</button>
-                        </div>
-                      <!-- End Form -->
-                  </div>
-              </div>
-        </div>
-      <!-- End delete Students Modal -->
   <!-- End of Students Modals -->
 
   <!-- ======= Footer ======= -->
@@ -287,101 +252,15 @@ include('session.php');
 
   <!-- JS Scripts -->
     <script> 
-  
+     
         // this script will execute as soon a the website runs
         $(document).ready(function () {
 
-              // Delete modal calling
-              $('.deletebtn').on('click', function () {
 
-                    $('#DeleteModal').modal('show');
+              // Received modal calling
+              $('#AdmTable').on('click','.receivedbtn', function () {
 
-                    $tr = $(this).closest('tr');
-
-                    var data = $tr.children("td").map(function () {
-                        return $(this).text();
-                    }).get();
-
-                    console.log(data);
-
-                  $('#delete_id').val(data[0]);
-                  });
-              // end of function
-            
-              // Delete function
-              $("#dtdel").click(function(b){
-                b.preventDefault();
-                $.post("function/delete_Students.php",{
-                    dtid:$('#delete_id').val()
-                  },function(response){
-                    // alert ("deleted");
-                    if(response.trim() == "StudentsDeleted"){
-                      $('#DeleteModal').modal('hide');
-                      Swal.fire ("Students Successfully Deleted","","success").then(function(){
-                      document.location.reload(true)//refresh pages
-                      });
-                    }else{
-                      $('#DeleteModal').modal('hide');
-                      Swal.fire (response);
-                    }
-                  })
-                })
-              // End Delete function
-                
-              // Save function
-                $('#save').click(function(a){ 
-                  a.preventDefault();
-                    if($('#dtname').val()!="" && $('#dtdesc').val()!=""){
-                      $.post("function/add_Students.php", {
-                        dtname:$('#dtname').val(),
-                        dtdesc:$('#dtdesc').val()
-                        },function(data){
-                        if (data.trim() == "failed"){
-                          $('#AddModal').modal('hide');
-                          //response message
-                          Swal.fire("Students is already in server","","error");
-                          
-                          // Empty test field
-                          $('#dtcode').val("")
-                          $('#dtname').val("")
-                          $('#dtdesc').val("")
-                        }else if(data.trim() == "success"){
-                          $('#AddModal').modal('hide');
-                                //success message
-                                const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 1500,
-                                timerProsressBar: true,
-                                didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)                  
-                                }
-                                })
-                              Toast.fire({
-                              icon: 'success',
-                              title:'Students successfully Saved'
-                              }).then(function(){
-                                document.location.reload(true)//refresh pages
-                              });
-                                $('#dtcode').val("")
-                                $('#dtname').val("")
-                                $('#dtdesc').val("")
-                          }else{
-                            Swal.fire(data);
-                        }
-                      })
-                    }else{
-                      Swal.fire("You must fill out every field","","warning");
-                    }
-                  })
-              // End Save function
-
-              // Edit modal calling
-                $('.editbtn').on('click', function () {
-
-                    $('#EditModal').modal('show');
+                    $('#RecievedModal').modal('show');
 
                     $tr = $(this).closest('tr');
 
@@ -389,33 +268,25 @@ include('session.php');
                         return $(this).text();
                     }).get();
 
-                    console.log(data);        
+                    console.log(data);     
+                    $('#stud_num').text(data[1]);   
                         $('#dt_idE').val(data[0]);
-                        $('#dt_codeE').val(data[1]);
-                        document.getElementById("dt_nameE").placeholder = data[2];
-                        document.getElementById("dt_descE").placeholder = data[3];  
                   });
-              // End of edit modal calling 
+              // End of Received modal calling 
 
-              // Edit function
-              $('#edit').click(function(d){ 
+              // Received function
+              $('#received').click(function(d){ 
                     d.preventDefault();
-                      if($('#dt_idE').val()!="" && $('#dt_codeE').val()!="" && $('#dt_nameE').val()!="" && $('#dt_descE').val()!=""){
-                        $.post("function/update_Students.php", {
-                          dtid:$('#dt_idE').val(),
-                          dtcode:$('#dt_codeE').val(),
-                          dtname:$('#dt_nameE').val(),
-                          dtdesc:$('#dt_descE').val()
+                      if($('#dt_idE').val()!=""){
+                        $.post("function/admission_received.php", {
+                          dtid:$('#dt_idE').val()
                           },function(data){
                             if (data.trim() == "failed"){
-                            $('#EditModal').modal('hide');
-                            Swal.fire("Students Title is currently in use","","error");//response message
-                            // Empty test field
-                            $('#dt_codeE').val("")
-                            $('#dt_nameE').val("")
-                            $('#dt_descE').val("")
+                            $('#RecievedModal').modal('hide');
+                            Swal.fire("No Admission Data Detected","","error");//response message
+                            // Empty test field                      
                           }else if(data.trim() == "success"){
-                            $('#EditModal').modal('hide');
+                            $('#RecievedModal').modal('hide');
                                   //success message                                    
                                       const Toast = Swal.mixin({
                                       toast: true,
@@ -430,13 +301,10 @@ include('session.php');
                                       })
                                     Toast.fire({
                                     icon: 'success',
-                                    title:'Changes Save Successfully'
+                                    title:'Requirements Successfully Received'
                                     }).then(function(){
                                       document.location.reload(true)//refresh pages
                                     }); 
-                                    $('#dt_codeE').val("")
-                                    $('#dt_nameE').val("")
-                                    $('#dt_descE').val("")
                             }else{
                               Swal.fire("There is somthing wrong","","error");
                           }
@@ -445,26 +313,7 @@ include('session.php');
                         Swal.fire("You must fill out every field","","warning");
                       }
                   })
-              // End Edit function
-
-              // View Function
-                $('.viewbtn').on('click', function () {
-
-                    $('#ViewModal').modal('show');
-
-                    $tr = $(this).closest('tr');
-
-                    var data = $tr.children("td").map(function () {
-                        return $(this).text();
-                    }).get();
-
-                    console.log(data);        
-                    $('#view_code').text(data[1]);
-                    $('#view_name').text(data[2]);
-                    $('#view_loc').text(data[3]);
-                    $('#view_date').text(data[4]);
-                  });
-              // End of View function 
+              // End Received function
 
           });
 

@@ -47,7 +47,7 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'req' ; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'adreq' ; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
@@ -88,12 +88,13 @@ include('session.php');
               <!-- Table for Students records -->
               <table class="row-border hover datatable table" id="StudentsTable">
                 <thead>
-                  <tr>
+                  <tr>             
                     <th WIDTH="10%">Student No.</th>
                     <th >Name</th>
                     <th scope="col">Program</th>                    
                     <th >Status</th>
                     <th >Requirements Submitted</th>
+                    <th >Confirmation</th>
                     <th scope="col" WIDTH="7%">Action</th>
                   </tr>
                 </thead>
@@ -116,18 +117,20 @@ include('session.php');
                   <tr>
                     <td data-label="Student No."><?php echo $adm_no; ?></td>
                     <td data-label="Name" WIDTH="25%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
-                    <td data-label="Program"><?php echo $adm_program; ?></td>
+                    <td data-label="Program" WIDTH="15%"><?php echo $adm_program; ?></td>
                     <td data-label="Status"><?php echo $adm_as?></td>
                     <?php 
                       $requirments ='';
-                        $sql1 = " SELECT *, GROUP_CONCAT(DISTINCT req SEPARATOR ', ') AS concat FROM datms_studreq WHERE id_number = " . $adm_no . "  GROUP BY id_number ";
+                        $sql1 = " SELECT status, GROUP_CONCAT(DISTINCT req SEPARATOR ', ') AS concat FROM datms_studreq WHERE id_number = " . $adm_no . "  GROUP BY id_number ";
                         if($result1 = mysqli_query($link, $sql1)){
                           if(mysqli_num_rows($result1) > 0){
                             while($row1 = mysqli_fetch_array($result1)){
                               $Req = $row1["concat"];
+                              $stat2 = $row1["status"];
                                 
                               // $adm_DP = $row1['date'];
                               $requirments .='<td data-label="Req." WIDTH="20%">'.$Req.'</td>';
+                              $requirments .='<td data-label="Req." WIDTH="10%">'.$stat2.'</td>';
                                                                 
                             }
                             echo $requirments;   
@@ -136,7 +139,8 @@ include('session.php');
                           }
                         }
                     ?>
-                    <td data-label="Status" style="display: none;"><?php echo $date?></td>
+                    <td data-label="Date" style="display: none;"><?php echo $date?></td>
+                    <td data-label="Date" style="display: none;"><?php echo $stat2?></td>
                     <td WIDTH="7%">      
                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>"><i class="bi bi-eye"></i></button>                       
