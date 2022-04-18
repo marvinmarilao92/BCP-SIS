@@ -171,71 +171,35 @@ include('session.php');
   </main><!-- End #main -->
 
   <!-- Students Modals -->
-      <!-- Create Students Modal -->
-      <div class="modal fade" id="AddModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Students CREDENTIALS</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                          <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h2 class="card-title">Fill all neccessary info</h2>
-                                <!-- Fill out Form -->
-                                <div class="row g-3" >
-                                  <div class="col-md-4">
-                                      <!-- <input type="text" class="form-control" placeholder="Students Code" id="dtcode" required> -->
-                                  </div>
-                                  <br>
-                                  <div class="col-md-1 2">
-                                      <input type="text" class="form-control" placeholder="Name" id="dtname" required>
-                                  </div>
-                                  <br>
-                                  <div class="col-12">
-                                      <textarea class="form-control" style="height: 80px" placeholder="Description" id="dtdesc" required></textarea>
-                                  </div>        
-                                </div>
-                                            
-                            </div>
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button class="btn btn-primary" name="save" id="save" >Save changes</button>
-                            </div>
-                        <!-- End Form -->
-                    </div>
-                </div>     
-        </div>
-      <!-- End Create Students Modal-->
+    
 
       <!-- Edit Students Modal -->
       <div class="modal fade" id="RecievedModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Received Requirements</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                          <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h2 class="card-title">Are you sure you want to recieve requirements submitted by:</h2>
-                              <h5 id="stud_num" style="text-align: end; color:black"></h5> 
-                                <!-- Fill out Form -->
-                                <div class="row g-3" >                                
-                                  <input type="hidden" class="form-control" id="dt_idE" readonly>                              
-                                </div>
-                              
-                            </div>
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-                              <button class="btn btn-primary" name="save" id="received" >Yes</button>
-                            </div>
-                        <!-- End Form -->
-                    </div>
+        <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Received Requirements</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                  <div class="card" style="margin: 10px;">
+                    <div class="card-body">
+                      <h2 class="card-title">Are you sure you want to recieve requirements submitted by:</h2>
+                      <h5 id="stud_num" style="text-align: end; color:black"></h5> 
+                        <!-- Fill out Form -->
+                        <div class="row g-3" >                                
+                          <input type="hidden" class="form-control" id="dt_idE" readonly>                              
+                        </div>
+                      
+                    </div>
+                  </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                      <button class="btn btn-primary" name="save" id="received" >Yes</button>
+                    </div>
+                <!-- End Form -->
+            </div>
         </div>
+      </div>
       <!-- End Edit Students Modal-->
 
   <!-- End of Students Modals -->
