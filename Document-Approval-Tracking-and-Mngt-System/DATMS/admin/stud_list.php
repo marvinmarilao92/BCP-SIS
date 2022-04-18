@@ -108,9 +108,15 @@ include('session.php');
                     <td data-label="Program"><?php echo $adm_program; ?></td>
                     <td data-label="Status"><?php echo $adm_as?></td>
                     <td data-label="Status" style="display: none;"><?php echo $date?></td>
-                    <td WIDTH="7%">      
+                    <td WIDTH="10%">      
                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>"><i class="bi bi-eye"></i></button>                       
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>"><i class="bi bi-eye"></i></button> 
+                        <?php
+                        if($adm_as=='Unofficial'){?>                                  
+                            <button class="btn btn-success updatebtn"><i class="bi bi-check-lg"></i></button>                       
+                         <?php
+                        }
+                        ?>                      
                       </div>
                     </td>
                   </tr>
@@ -134,63 +140,33 @@ include('session.php');
 
   </main><!-- End #main -->
 
-     <!-- Desc Document modal -->
-       <div class="modal fade" id="RemarksModal" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered modal-l">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">DOCUMENT DESCRIPTION</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="card" style="margin: 10px;">
-                          <form method="post">
-                            <div class="card-body">
-                               <h5 id="remarks" style="margin-top: 10px;"></h5>                                          
-                                <div class="col-12" style="text-align: center;">
-                                </div>
-                            </div>
-                            </form>
-                          </div>   
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
+   <!-- Edit Students Modal -->
+   <div class="modal fade" id="UpdateModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Received Requirements</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                  <div class="card" style="margin: 10px;">
+                    <div class="card-body">
+                      <h2 class="card-title">Update Student status as Officially Enrolled</h2>
+                      <h5 id="stud_num" style="text-align: end; color:black"></h5> 
+                        <!-- Fill out Form -->
+                        <div class="row g-3" >                                
+                          <input type="hidden" class="form-control" id="dt_idE" readonly>                              
+                        </div>
                     </div>
                   </div>
-        </div>
-      <!-- End Desc office Modal-->
-      <!-- CancelModal Docs Modal -->
-      <div class="modal fade" id="CancelModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Cancel Submission</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                          <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h2 class="card-title">Return this document?</h2>
-                                <!-- Fill out Form -->
-                                <div class="row g-3" >
-                                  <input type="hidden" class="form-control" id="doc_id" readonly>
-                                      <input type="hidden" class="form-control" id="doc_code" readonly>                  
-                                      <input type="hidden" class="form-control" id="doc_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
-                                      <input type="hidden" class="form-control" id="doc_off2" value="<?php echo $verified_session_office?>" readonly> 
-                                      <h5 id="doc_fileN" style="text-align: end; color:black"></h5>   
-                                </div>
-                              
-                            </div>
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                              <button class="btn btn-success" name="save" id="cancel" >Return Document</button>
-                            </div>
-                        <!-- End Form -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button class="btn btn-primary" name="save" id="save" >Save Changes</button>
                     </div>
-                </div>
-          </div>
-      <!-- End CancelModal Docs Modal-->
+                <!-- End Form -->
+            </div>
+        </div>
+      </div>
+      <!-- End Edit Students Modal-->
 
   <!-- End of Office Modals -->
 
@@ -204,94 +180,76 @@ include('session.php');
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
 
-  <!-- JS Scripts -->
-  <script>
-      // this script will execute as soon a the website runs
-        $(document).ready(function () {
+   <!-- JS Scripts -->
+   <script> 
+     
+     // this script will execute as soon a the website runs
+     $(document).ready(function () {
 
 
-           // View Function
-                  $('.remarksbtn').on('click', function () {
+           // Received modal calling
+           $('#StudentsTable').on('click','.updatebtn', function () {
 
-                      $('#RemarksModal').modal('show');
+                 $('#UpdateModal').modal('show');
 
-                      $tr = $(this).closest('tr');
+                 $tr = $(this).closest('tr');
 
-                      var data = $tr.children("td").map(function () {
-                          return $(this).text();
-                      }).get();
+                 var data = $tr.children("td").map(function () {
+                     return $(this).text();
+                 }).get();
 
-                      console.log(data); 
-                      $('#remarks').text(data[18]);
-                    });
-              // End of View function 
+                 console.log(data);     
+                 $('#stud_num').text(data[1]);   
+                     $('#dt_idE').val(data[0]);
+               });
+           // End of Received modal calling 
 
-            // Received modal calling
-              $('.cancelbtn').on('click', function () {
+           // Received function
+           $('#save').click(function(d){ 
+                 d.preventDefault();
+                   if($('#dt_idE').val()!=""&&$('#dt_stud').val()!=""){
+                     $.post("function/stud_update.php", {
+                       dtid:$('#dt_idE').val()
+                      //  dtstat:$('#dt_stud').val()
+                       },function(data){
+                         if (data.trim() == "failed"){
+                         $('#UpdateModal').modal('hide');
+                         Swal.fire("No Admission Data Detected","","error");//response message
+                         // Empty test field                      
+                       }else if(data.trim() == "success"){
+                         $('#UpdateModal').modal('hide');
+                               //success message                                    
+                                   const Toast = Swal.mixin({
+                                   toast: true,
+                                   position: 'top-end',
+                                   showConfirmButton: false,
+                                   timer: 1500,
+                                   timerProsressBar: true,
+                                   didOpen: (toast) => {
+                                   toast.addEventListener('mouseenter', Swal.stopTimer)
+                                   toast.addEventListener('mouseleave', Swal.resumeTimer)                  
+                                   }
+                                   })
+                                 Toast.fire({
+                                 icon: 'success',
+                                 title:'Student status successfully submitted'
+                                 }).then(function(){
+                                   document.location.reload(true)//refresh pages
+                                 }); 
+                         }else{
+                           Swal.fire("There is somthing wrong","","error");
+                       }
+                     })
+                   }else{
+                     Swal.fire("You must fill out every field","","warning");
+                   }
+               })
+           // End Received function
 
-                  $('#CancelModal').modal('show');
+       });
 
-                  $tr = $(this).closest('tr');
+ </script>
 
-                  var data = $tr.children("td").map(function () {
-                      return $(this).text();
-                  }).get();
-
-                  console.log(data);      
-                      $('#doc_fileN').text(data[2]);  
-                      $('#doc_id').val(data[0]);
-                      $('#doc_code').val(data[1]); 
-                });
-              // End of Received modal calling 
-
-              // Received function
-              $('#cancel').click(function(d){ 
-                    d.preventDefault();
-                      if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
-                        $.post("function/cancel_hold_func.php", {
-                          docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
-                          docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
-                          },function(data){
-                            if (data.trim() == "Val30"){
-                            $('#EditModal').modal('hide');
-                            Swal.fire("No data stored in our database","","error");//response message
-                            // Empty test field
-                          }else if(data.trim() == "success"){
-                            $('#ReceivedModal').modal('hide');
-                                  //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
-                                  }
-                                  })
-                                    Toast.fire({
-                                    icon: 'Success',
-                                    title:'Document Returned Successfully '
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
-                                    $('#doc_code').val("")
-                                    $('#doc_act2').val("")
-                                    $('#doc_off2').val("")
-                            }else{
-                              Swal.fire("There is somthing wrong","","error");
-                              // Swal.fire(data);
-                          }
-                        })
-                      }else{
-                        Swal.fire("You must fill out every field","","warning");
-                      }
-                  })
-              // End Received function
-          });
-
-    </script>
   
 </body>
 
