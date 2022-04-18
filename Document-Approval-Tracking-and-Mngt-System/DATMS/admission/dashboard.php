@@ -47,7 +47,7 @@ include('session.php');
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Unoffically Enrolled <span>| Students</span></h5>
+                  <h5 class="card-title">Online Application <span>| Students</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -56,7 +56,7 @@ include('session.php');
                     <div class="ps-3">
                       <?php 
                         require_once("include/conn.php");
-                        $query="SELECT *,LEFT(middlename,1) FROM student_information WHERE account_status = 'Unofficial' ORDER BY stud_date DESC ";
+                        $query="SELECT *,LEFT(middlename,1) FROM student_application WHERE `account_status` NOT IN ('Enrolled') ORDER BY stud_date DESC ";
                         $result=mysqli_query($conn,$query);
                         if($result){
                           echo "<h6>". mysqli_num_rows($result)."</h6>";
