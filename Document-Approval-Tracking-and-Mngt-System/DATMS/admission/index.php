@@ -12,7 +12,7 @@ include('session.php');
 <?php include ('core/header.php');//Design for  Header?>
 <?php $page = 'enroll'; include ('core/side-nav.php');//Design for sidebar?>
   <?php 
-  if(isset($_SESSION['status'])=="" && isset($_SESSION['studnum'])==""){
+  // if(isset($_SESSION['status'])=="" && isset($_SESSION['studnum'])==""){
 ?>
 <main id="main" class="main">
 
@@ -20,7 +20,7 @@ include('session.php');
     <h1>Enroll Student</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.php">Module</a></li>
+        <li class="breadcrumb-item"><a>Module</a></li>
         <li class="breadcrumb-item">Enroll Student</li>
       </ol>
     </nav>
@@ -37,7 +37,7 @@ include('session.php');
 
       <!-- No Labels Form -->
       <div class="row g-3">
-
+       <label class="req"></label>
         <div class="col-md-2">
           <div class="form-floating">
             <input type="text" class="form-control" name="application_code" id="application_code" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="middle name" onChange="fetchStudInfo(this.value);"  Required autofocus>
@@ -384,7 +384,7 @@ include('session.php');
           <div class="form-floating">
             <select class="form-select" name="status" id="status" aria-label="State" required>
               <option selected disabled value="">Select Status</option>
-              <option value="Unofficial">Unofficial</option>
+              <option value="Temporally Enrolled">Temporally Enrolled</option>
               <option value="Official">Official</option>
               <option value="Transferee">Transferee</option>
             </select>
@@ -498,11 +498,11 @@ include('session.php');
 
 </main><!-- End #main -->
 <?php
-  }else{
-    echo'<script type = "text/javascript">            
-          window.location = "req_submit.php?id='.$key.'";//refresh pages
-         </script>';
-  }
+  // }else{
+  //   echo'<script type = "text/javascript">            
+  //         window.location = "req_submit.php?id='.$key.'";//refresh pages
+  //        </script>';
+  // }
   ?>
   
 
@@ -578,6 +578,7 @@ include('session.php');
                   $(".middle_name").val(jsonObj['data'][0].adm_mname);
                   $(".email").val(jsonObj['data'][0].adm_email);
                   $(".contact").val(jsonObj['data'][0].adm_contact);
+                  $(".req").text("Submitted Requirements: "+jsonObj['data'][0].adm_req);
                   $(".address").text(jsonObj['data'][0].adm_add);
                   $(".course").val(jsonObj['data'][0].adm_course).change();
                   $(".gender").val(jsonObj['data'][0].adm_gen);
@@ -585,9 +586,9 @@ include('session.php');
                   $(".nationality").val(jsonObj['data'][0].adm_nation).change();
                   $(".religion").val(jsonObj['data'][0].adm_religion).change();
                   $(".civil_status").val(jsonObj['data'][0].adm_cs).change();
-
+                  
               }else{
-                Swal.fire ("No application info or student is not yet paid","","error").then(function(){
+                Swal.fire ("No data has been retreive","","error").then(function(){
                 document.location.reload(true)//refresh pages
                 });
               }
@@ -697,13 +698,7 @@ include('session.php');
         })
 
     var jsonObj;
-      // input numbers only
-      function isNumberKey(evt){
-        var charCode = (evt.which) ? evt.which : evt.keyCode
-        if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-        return true;
-      }
+    
 
       // input text only
       function isTextKey(evt){
@@ -713,5 +708,12 @@ include('session.php');
           return false;
         }
     });  
+      // input numbers only
+      function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+      }
   </script>
 </html>

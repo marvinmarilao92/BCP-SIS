@@ -72,7 +72,7 @@ include('session.php');
               <?php
                     $requirements_completed = 0;
                     // Attempt select query execution
-                    $sql = "SELECT *,LEFT(middlename,1) AS MI FROM student_information where account_status = 'Official' ORDER BY id_number";
+                    $sql = "SELECT *,LEFT(middlename,1) AS MI FROM student_information ORDER BY id_number";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table id="example" class="table datatable">';

@@ -23,7 +23,7 @@
                while($rows = mysqli_fetch_array($response)){
                   //setting second array
                   // $datain["$rows[1]"] = array();
-                  $studid = $rows[1];
+  
                   $index['adm_fname'] = $rows[2];
                   $index['adm_lname'] = $rows[3];
                   $index['adm_mname'] = $rows[4];
@@ -36,20 +36,7 @@
                   $index['adm_nation'] = $rows[11];
                   $index['adm_religion'] = $rows[12];
                   $index['adm_cs'] = $rows[13];
-
-                  $sql1 = " SELECT status, GROUP_CONCAT(DISTINCT req SEPARATOR ', ') AS concat FROM datms_studreq WHERE id_number = " . $studid . "  GROUP BY id_number ";
-                  if($result1 = mysqli_query($link, $sql1)){
-                    if(mysqli_num_rows($result1) > 0){
-                      while($row1 = mysqli_fetch_array($result1)){
-                       $index['adm_req'] = $row1['concat'];
-                                                          
-                      } 
-                      // Free result set
-                      mysqli_free_result($result1);
-                    }else{
-                      echo ("error");
-                    }
-                  }
+                  
                   array_push($result["data"], $index);
                   // array_push($result['data'], $index);
                   // var_dump($index);

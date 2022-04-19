@@ -10,28 +10,40 @@ include('session.php');
 
 <body>
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'enroll'; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'reqsub'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Enroll Student</h1>
+      <h1>Submit Requirments</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Module</a></li>
-          <li class="breadcrumb-item">Enroll Student</li>
+          <li class="breadcrumb-item"><a>Module</a></li>
+          <li class="breadcrumb-item">Submit Requirments</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <form class="card col-md-12" method="POST">
       <div class="card-body">
-        <h5 class="card-title">New Student Requirements:</h5>
+        
           <div class="row mb-12" aria-required="true">
-            <div class="col-md-12 pt-1">
-
+            <div class="col-md-4 pt-1">
+            <!-- <input type="text" style="display:none;" name="stud_id" id="stud_id" maxlength="1" value="'.$_SESSION['studnum'].'" Required readonly> -->
+            <br>
+            <div class="col-md-12" >
+              <div class="form-floating">
+                <input type="text" class="form-control" id="stud_id" name="stud_id" onChange="fetchTracking(this.value);" onkeypress="return isNumberKey(event)" maxlength="8" placeholder="Your Name" autofocus>
+                <label for="floatingName" >Application Code</label>
+              </div>
+              
+            </div>                                 
+            <!-- Account Information -->
+            <div class="activity">                                         
+                </div>
+              <!-- End Account Information --> 
+          <h5 class="card-title">New Student Requirements:</h5>
             <?php
-            echo '<input type="text" style="display:none;" name="stud_id" id="stud_id" maxlength="1" value="'.$_SESSION['studnum'].'" Required readonly>';
             $requirments ='';
                 // Include config file
                 require_once "include/config.php";
@@ -115,7 +127,7 @@ if(isset($_POST['submit_req'])&&$_POST['stud_id'])
               icon: "error",
               title:"Some of the requirements is already on your account"
               }).then(function(){
-                window.location = "index.php?id='.$key.'";//refresh pages
+                window.location = "req_submit.php?id='.$key.'";//refresh pages
               });
           </script>';
     }else{
@@ -131,7 +143,7 @@ if(isset($_POST['submit_req'])&&$_POST['stud_id'])
           // $_SESSION['status'] = "Success";
           
           // echo '<script>alert("Submitted")</script>';
-          // header("Location: ../index.php?id='.$key.'");
+          // header("Location: ../req_submit.php?id='.$key.'");
           echo'<script type = "text/javascript">
               //success message
               const Toast = Swal.mixin({
@@ -150,7 +162,7 @@ if(isset($_POST['submit_req'])&&$_POST['stud_id'])
               title:"Requirements successfully submitted"
               }).then(function(){
                 
-                window.location = "index.php?id='.$key.'";//refresh pages
+                window.location = "req_submit.php?id='.$key.'";//refresh pages
               });
           </script>';
           unset($_SESSION["status"]);
@@ -178,10 +190,10 @@ if(isset($_POST['submit_req'])&&$_POST['stud_id'])
           icon: "error",
           title:"Requirements failed to submit"
           }).then(function(){
-            window.location = "index.php?id='.$key.'";//refresh pages
+            window.location = "req_submit.php?id='.$key.'";//refresh pages
           });
       </script>';
-          // header("Location: ../index.php?id='.$key.'");
+          // header("Location: ../req_submit.php?id='.$key.'");
          
       }
     }
@@ -367,14 +379,7 @@ if(isset($_POST['submit_req'])&&$_POST['stud_id'])
         })
 
     var jsonObj;
-      // input numbers only
-      function isNumberKey(evt){
-        var charCode = (evt.which) ? evt.which : evt.keyCode
-        if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
-        return true;
-      }
-
+ 
       // input text only
       function isTextKey(evt){
           var charCode = (evt.which) ? evt.which : evt.keyCode
@@ -382,6 +387,40 @@ if(isset($_POST['submit_req'])&&$_POST['stud_id'])
               return true;
           return false;
         }
+
+        // show student info
+        function load_data(query)
+          {
+            $.ajax({
+            url:"function/view_studinfo.php",
+            method:"POST",
+            data:{query:query},
+            success:function(data)
+            {
+              $('.activity').html(data);
+            }
+            });
+          }
+          $('#stud_id').keyup(function(){
+            var search = $(this).val();
+            if(search != '')
+            {
+            load_data(search);
+            }
+            else
+            {
+              $('.activity').html('');
+            }
+          });
+
     });  
+         // input numbers only
+         function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+      }
+
   </script>
 </html>
