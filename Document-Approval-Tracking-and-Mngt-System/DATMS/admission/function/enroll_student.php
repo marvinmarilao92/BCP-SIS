@@ -117,7 +117,15 @@
                   if($query_run = mysqli_query($link, $query)){
                     // unset($_SESSION['status']);
                     $_SESSION['studnum'] = $student_number;
-                    echo ('success');
+                    // echo ('success');
+                    $query = "UPDATE datms_studreq SET id_number='$student_number' WHERE id_number='$code'";
+                    if($query_run = mysqli_query($link, $query)){
+                      // unset($_SESSION['status']);
+                      $_SESSION['studnum'] = $student_number;
+                      echo ('success');
+                    }else{
+                      echo ('failed');
+                    }
                   }else{
                     echo ('failed');
                   }

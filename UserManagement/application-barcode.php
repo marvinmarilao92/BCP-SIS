@@ -68,7 +68,7 @@
                     <div class="col-12" style="text-align: center;">
                       <svg id="barcode"></svg>
                     </div>
-                    <p>Take a screenshot of this confiramtion slip. Show this to the cashier to proceed and proceed to the next step</p>
+                    <p>Take a screenshot of this confiramtion slip. Show this to the admission and submit your requirements and proceed to the next step.</p>
               </div>
               <div class="card-footer">
                 <nav class="justify-content-center d-flex">

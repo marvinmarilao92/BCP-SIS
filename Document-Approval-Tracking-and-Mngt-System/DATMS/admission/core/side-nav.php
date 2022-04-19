@@ -55,6 +55,13 @@
   </li> <!-- hold item Nav -->
 
   <li class="nav-item">
+    <a href="req_submit.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='reqsub'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+      <i class="ri-pencil-line"></i>
+        <span>Submit Requirements&nbsp;&nbsp;&nbsp;</span>
+    </a>
+  </li><!-- All docs Nav -->
+
+  <li class="nav-item">
     <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='enroll'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
       <i class="ri-book-2-line"></i>
         <span>Enroll Student &nbsp;&nbsp;&nbsp;</span>
