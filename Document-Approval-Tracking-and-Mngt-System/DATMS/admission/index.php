@@ -387,6 +387,7 @@ include('session.php');
               <option value="Temporally Enrolled">Temporally Enrolled</option>
               <option value="Official">Official</option>
               <option value="Transferee">Transferee</option>
+              <!-- <option value="Returnee">Returnee</option> -->
             </select>
             <label for="floatingSelect">Student Status</label>
           </div>
