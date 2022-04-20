@@ -18,6 +18,7 @@ $db = mysqli_select_db($conn, 'sis_db');
             }else {         
                 $conn->query("DELETE FROM student_information WHERE id_number=".$id."") or die(mysqli_error($conn));
                 $conn->query("DELETE FROM datms_studreq WHERE id_number=".$id."") or die(mysqli_error($conn));
+                $conn->query("DELETE FROM users WHERE id_number=".$id."") or die(mysqli_error($conn));
                 echo ('success');
             }
         }
