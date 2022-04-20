@@ -183,8 +183,13 @@ include('session.php');
                 </div>
                   <div class="card" style="margin: 10px;">
                     <div class="card-body">
-                      <h2 class="card-title">Are you sure you want to recieve requirements submitted by:</h2>
-                      <h5 id="stud_num" style="text-align: end; color:black"></h5> 
+                      <h2 class="card-title">Are you sure you want to recieve requirements?</h2>
+                      <h6 id="stud_num" style="color:black"></h6>
+                      <h6 id="req_receiver" style="color:black"><?php echo "Receiver: ".$verified_session_firstname." ".$verified_session_lastname;?></h6>
+                      <h6 style="color:black"><?php 
+                      date_default_timezone_set("asia/manila");
+		                  $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+                      echo "Date: ".$date;?></h6> 
                         <!-- Fill out Form -->
                         <div class="row g-3" >                                
                           <input type="hidden" class="form-control" id="dt_idE" readonly>                              
@@ -233,7 +238,7 @@ include('session.php');
                     }).get();
 
                     console.log(data);     
-                    $('#stud_num').text(data[1]);   
+                    $('#stud_num').text("Submitted by: "+data[1]);   
                         $('#dt_idE').val(data[0]);
                   });
               // End of Received modal calling 
@@ -270,7 +275,8 @@ include('session.php');
                                       document.location.reload(true)//refresh pages
                                     }); 
                             }else{
-                              Swal.fire("There is somthing wrong","","error");
+                              // Swal.fire("There is somthing wrong","","error");
+                              Swal.fire(data);
                           }
                         })
                       }else{
