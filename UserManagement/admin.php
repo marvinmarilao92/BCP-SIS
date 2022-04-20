@@ -43,7 +43,7 @@ include('session.php');
                           // Include config file
                           require_once "config.php";
                           // Attempt select query execution
-                          $sql = "SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') ORDER BY id_number asc ";
+                          $sql = "SELECT *, LEFT(middlename,1) as MI FROM user_information WHERE `admin` NOT IN ('1') ORDER BY id_number DESC ";
                           if($result = mysqli_query($link, $sql)){
                               if(mysqli_num_rows($result) > 0){
                                   echo '<table class="table datatable">';

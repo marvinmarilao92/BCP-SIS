@@ -40,7 +40,7 @@ include('session.php');
        <label class="req"></label>
         <div class="col-md-2">
           <div class="form-floating">
-            <input type="text" class="form-control" name="application_code" id="application_code" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="middle name" onChange="fetchStudInfo(this.value);"  Required autofocus>
+            <input type="text" class="form-control" name="application_code" id="application_code" maxlength="8"  placeholder="middle name" onChange="fetchStudInfo(this.value);"  Required autofocus>
             <label for="floatingName">Application Code</label>
           </div>
         </div>
@@ -384,9 +384,10 @@ include('session.php');
           <div class="form-floating">
             <select class="form-select" name="status" id="status" aria-label="State" required>
               <option selected disabled value="">Select Status</option>
-              <option value="Temporally Enrolled">Temporally Enrolled</option>
+              <option value="Temporarily Enrolled">Temporarily Enrolled</option>
               <option value="Official">Official</option>
               <option value="Transferee">Transferee</option>
+              <!-- <option value="Returnee">Returnee</option> -->
             </select>
             <label for="floatingSelect">Student Status</label>
           </div>
@@ -666,7 +667,7 @@ include('session.php');
                       icon: 'success',
                       title:'Student is successfully enrolled'
                       }).then(function(){
-                        window.location.replace('req_submit.php?id=".$_SESSION["login_key"]."');
+                        window.location.replace('index.php?id=".$_SESSION["login_key"]."');
                         // window.location = "req_submit.php?id='.$_SESSION["login_key"].'";
                         // document.location.reload(true)//refresh pages
                       });

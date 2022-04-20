@@ -84,8 +84,18 @@
         </a>
       </li>
       <li>
+      <a href="returnstud_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='retlist'){echo 'active';}?>">
+        <i class="bi bi-circle"></i><span>Returnee Students</span>
+        </a>
+      </li>
+      <li>
       <a href="unstud_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='unlist'){echo 'active';}?>">
-        <i class="bi bi-circle"></i><span>Unofficially Enrolled</span>
+        <i class="bi bi-circle"></i><span>Temporarily Enrolled</span>
+        </a>
+      </li>
+      <li>
+      <a href="deactstud_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='deactlist'){echo 'active';}?>">
+        <i class="bi bi-circle"></i><span>Deactivated</span>
         </a>
       </li>
     </ul>

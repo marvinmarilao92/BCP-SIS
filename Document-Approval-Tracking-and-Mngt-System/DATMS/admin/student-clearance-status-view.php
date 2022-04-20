@@ -61,10 +61,8 @@ if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !em
 
 <body>
 
-<?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'SCR' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
-
-
+  <?php include ('core/header.php');//Design for  Header?>
+  <?php $page = 'SCR' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 

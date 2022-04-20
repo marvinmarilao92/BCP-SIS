@@ -76,7 +76,7 @@ include('session.php');
               <div class="card info-card revenue-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Enrolled <span>| Students</span></h5>
+                  <h5 class="card-title">Officially Enrolled <span>| Students</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -85,7 +85,7 @@ include('session.php');
                     <div class="ps-3">
                       <?php 
                         require_once("include/conn.php");
-                        $query="SELECT *,LEFT(middlename,1) FROM student_Application WHERE account_status = 'Enrolled'";
+                        $query="SELECT *,LEFT(middlename,1) FROM student_information WHERE account_status = 'Official' ORDER BY stud_date DESC ";
                         $result=mysqli_query($conn,$query);
                         if($result){
                           echo "<h6>". mysqli_num_rows($result)."</h6>";
@@ -116,7 +116,7 @@ include('session.php');
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Complete Requirements</h5>
+                  <h5 class="card-title">Deactivated <span>| Account</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -125,7 +125,7 @@ include('session.php');
                     <div class="ps-3">
                     <?php 
                         require_once("include/conn.php");
-                        $query="SELECT *,LEFT(middlename,1) FROM student_information WHERE account_status = 'Official' ORDER BY stud_date DESC ";
+                        $query="SELECT *,LEFT(middlename,1) FROM student_information WHERE account_status = 'Deactivated' ORDER BY stud_date DESC ";
                         $result=mysqli_query($conn,$query);
                         if($result){
                           echo "<h6>". mysqli_num_rows($result)."</h6>";

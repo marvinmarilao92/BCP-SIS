@@ -3,41 +3,40 @@ include('session.php');
 
     // Downloads files
     if (isset($_GET['student_id'])&&isset($_GET['req_id'])) {
-        $student_id = $_GET['student_id'];
-        $req_id = $_GET['req_id'];
+      $student_id = $_GET['student_id'];
+      $req_id = $_GET['req_id'];
 
-        // // fetch file to download from database
-        // $sql = "SELECT * FROM clearance_student_status WHERE student_id=$student_id and clearance_requirement_id=$req_id";
-        // $result = mysqli_query($link, $sql);
-        // $file = mysqli_fetch_assoc($result);
-        // $filepath = '../../../Student_Portal/uploads/' . $file['file_link'];
+      // fetch file to download from database
+      $sql = "SELECT * FROM clearance_student_status WHERE student_id=$student_id and clearance_requirement_id=$req_id";
+      $result = mysqli_query($link, $sql);
+      $file = mysqli_fetch_assoc($result);
+      $filepath = '../../../Student_Portal/uploads/' . $file['file_link'];
 
-        // if (file_exists($filepath)) {
-        //     header('Content-Description: File Transfer');
-        //     header('Content-Type: application/octet-stream');
-        //     header('Content-Disposition: attachment; filename=' . basename($filepath));
-        //     header('Expires: 0');
-        //     header('Cache-Control: must-revalidate');
-        //     header('Pragma: public');
-        //     header('Content-Length: ' . filesize('../../../Student_Portal/uploads/' . $file['file_link']));
-        //     readfile('../../../Student_Portal/uploads/' . $file['file_link']);
-        //     exit;
-        // }
-
+      if (file_exists($filepath)) {
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . basename($filepath));
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize('../../../Student_Portal/uploads/' . $file['file_link']));
+        readfile('../../../Student_Portal/uploads/' . $file['file_link']);
+        exit;
+      }
 
          // fetch file to download from database
-         $sql = "SELECT * FROM clearance_student_status WHERE student_id=$student_id and clearance_requirement_id=$req_id";
-         $result = mysqli_query($link, $sql);
-         $file = mysqli_fetch_assoc($result);
-         $filepath = '../../../Student_Portal/uploads/' . $file['file_link'];
+        //  $sql = "SELECT * FROM clearance_student_status WHERE student_id=$student_id and clearance_requirement_id=$req_id";
+        //  $result = mysqli_query($link, $sql);
+        //  $file = mysqli_fetch_assoc($result);
+        //  $filepath = '../../../Student_Portal/uploads/' . $file['file_link'];
     
-        if (file_exists($filepath)) {
-            header('Content-Type: application/pdf');
-            readfile('../../../Student_Portal/uploads/' . $file['file_link']);
+        // if (file_exists($filepath)) {
+        //     header('Content-Type: application/pdf');
+        //     readfile('../../../Student_Portal/uploads/' . $file['file_link']);
     
-            mysqli_query($link, $updateQuery);
-            exit;
-        }
+        //     mysqli_query($link, $updateQuery);
+        //     exit;
+        // }
 
     }
 
@@ -45,13 +44,7 @@ include('session.php');
 <!DOCTYPE html>
 <html lang="en">
 <title>DATMS | Clearance View</title>
-
 <?php include ('core/css-links.php');//css connection?>
-
-<body>
-
-<?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'SCS' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
 <style>
   /*responsive*/
   @media(max-width: 500px){
@@ -89,7 +82,10 @@ include('session.php');
     }
   }
 </style>
+<body>
 
+<?php include ('core/header.php');//Design for  Header?>
+<?php $page = 'SCS' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 

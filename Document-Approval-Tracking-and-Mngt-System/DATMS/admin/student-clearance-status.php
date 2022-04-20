@@ -45,8 +45,8 @@ include('session.php');
 </head>
 <body>
 
-<?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'SCS' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
+  <?php include ('core/header.php');//Design for  Header?>
+  <?php $page = 'SCS' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
 
 
   <main id="main" class="main">

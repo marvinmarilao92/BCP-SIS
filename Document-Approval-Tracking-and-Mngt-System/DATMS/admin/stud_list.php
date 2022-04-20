@@ -110,11 +110,20 @@ include('session.php');
                     <td data-label="Status" style="display: none;"><?php echo $date?></td>
                     <td WIDTH="10%">      
                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>"><i class="bi bi-eye"></i></button> 
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>" title="View Info"><i class="bi bi-eye"></i></button> 
                         <?php
-                        if($adm_as=='Unofficial'){?>                                  
-                            <button class="btn btn-success updatebtn"><i class="bi bi-check-lg"></i></button>                       
+                        if($adm_as=='Temporarily Enrolled'){?>                                  
+                            <button class="btn btn-success updatebtn" title="Enroll"><i class="bi bi-check-lg"></i></button>                       
                          <?php
+                        }elseif($adm_as=='Deactivated'){
+                          ?>
+                          <!-- <button class="btn btn-success activatebtn" title="Activate"><i class="bi bi-check-lg"></i></button>  -->
+                          <?php
+                        }else{
+                          ?>
+                            <button class="btn btn-danger dropbtn" title="Drop Student"><i class="bi bi-trash-fill"></i></button> 
+                            <button class="btn btn-warning deactbtn" title="Deactivate"><i class="bi bi-x-lg"></i></button> 
+                          <?php
                         }
                         ?>                      
                       </div>
@@ -145,7 +154,7 @@ include('session.php');
         <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Received Requirements</h5>
+                  <h5 class="modal-title">UPDATE STUDENT STATUS</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                   <div class="card" style="margin: 10px;">
@@ -170,6 +179,68 @@ include('session.php');
 
   <!-- End of Office Modals -->
 
+  <!-- Edit Students Modal -->
+  <div class="modal fade" id="DropModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">DROP STUDENT</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                  <div class="card" style="margin: 10px;">
+                    <div class="card-body">
+                      <h5 style="color: rgb(1, 41, 135);">Are you sure you want to drop this student?<small style="color: rgb(187, 45, 59);"><br>(This transaction is Irreversible)</small></h4>
+                      
+                      <h5 id="stud_num1" style="text-align: end; color:black"></h5> 
+                        <!-- Fill out Form -->
+                        <div class="row g-3" >                                
+                          <input type="hidden" class="form-control" id="dt_idE1" readonly>                              
+                        </div>
+                    </div>
+                  </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                      <button class="btn btn-danger" name="drop" id="drop" >YES</button>
+                    </div>
+                <!-- End Form -->
+            </div>
+        </div>
+      </div>
+      <!-- End Edit Students Modal-->
+
+  <!-- End of Office Modals -->
+
+  <!-- Edit Students Modal -->
+  <div class="modal fade" id="StopModal" tabindex="-1"> 
+        <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">INACTIVATE STUDENT</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                  <div class="card" style="margin: 10px;">
+                    <div class="card-body">
+                      <h5 style="color: rgb(1, 41, 135);">Deactivate this account?<small style="color: rgb(25, 135, 84);"><br>(You can activiate this accoun at the admission)</small></h5>
+                      
+                      <h5 id="stud_num2" style="text-align: end; color:black"></h5> 
+                        <!-- Fill out Form -->
+                        <div class="row g-3" >                                
+                          <input type="hidden" class="form-control" id="dt_idE2" readonly>                              
+                        </div>
+                    </div>
+                  </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                      <button class="btn btn-primary" name="deact" id="deact" >YES</button>
+                    </div>
+                <!-- End Form -->
+            </div>
+        </div>
+      </div>
+      <!-- End Edit Students Modal-->
+
+  <!-- End of Office Modals -->
+  
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
@@ -187,7 +258,7 @@ include('session.php');
      $(document).ready(function () {
 
 
-           // Received modal calling
+           // Enroll modal calling
            $('#StudentsTable').on('click','.updatebtn', function () {
 
                  $('#UpdateModal').modal('show');
@@ -202,9 +273,9 @@ include('session.php');
                  $('#stud_num').text(data[1]);   
                      $('#dt_idE').val(data[0]);
                });
-           // End of Received modal calling 
+           // End of Enroll modal calling 
 
-           // Received function
+           // Enroll function
            $('#save').click(function(d){ 
                  d.preventDefault();
                    if($('#dt_idE').val()!=""&&$('#dt_stud').val()!=""){
@@ -214,7 +285,7 @@ include('session.php');
                        },function(data){
                          if (data.trim() == "failed"){
                          $('#UpdateModal').modal('hide');
-                         Swal.fire("No Admission Data Detected","","error");//response message
+                         Swal.fire("No Student Detected","","error");//response message
                          // Empty test field                      
                        }else if(data.trim() == "success"){
                          $('#UpdateModal').modal('hide');
@@ -244,7 +315,127 @@ include('session.php');
                      Swal.fire("You must fill out every field","","warning");
                    }
                })
-           // End Received function
+           // End Enroll function
+
+           // Drop modal calling
+           $('#StudentsTable').on('click','.dropbtn', function () {
+
+                 $('#DropModal').modal('show');
+
+                 $tr = $(this).closest('tr');
+
+                 var data = $tr.children("td").map(function () {
+                     return $(this).text();
+                 }).get();
+
+                 console.log(data);     
+                 $('#stud_num1').text(data[1]);   
+                     $('#dt_idE1').val(data[0]);
+               });
+           // End of Drop modal calling 
+
+           // Drop function
+           $('#drop').click(function(d){ 
+                 d.preventDefault();
+                   if($('#dt_idE1').val()!=""&&$('#dt_stud1').val()!=""){
+                     $.post("function/stud_drop.php", {
+                       dropid:$('#dt_idE1').val()
+                      //  dtstat:$('#dt_stud').val()
+                       },function(data){
+                         if (data.trim() == "failed"){
+                         $('#DropModal').modal('hide');
+                         Swal.fire("No Student Detected","","error");//response message
+                         // Empty test field                      
+                       }else if(data.trim() == "success"){
+                         $('#DropModal').modal('hide');
+                               //success message                                    
+                                   const Toast = Swal.mixin({
+                                   toast: true,
+                                   position: 'top-end',
+                                   showConfirmButton: false,
+                                   timer: 1500,
+                                   timerProsressBar: true,
+                                   didOpen: (toast) => {
+                                   toast.addEventListener('mouseenter', Swal.stopTimer)
+                                   toast.addEventListener('mouseleave', Swal.resumeTimer)                  
+                                   }
+                                   })
+                                 Toast.fire({
+                                 icon: 'success',
+                                 title:'This student is successfully dropped'
+                                 }).then(function(){
+                                   document.location.reload(true)//refresh pages
+                                 }); 
+                         }else{
+                          //  Swal.fire("There is somthing wrong","","error");
+                          Swal.fire(data);
+                       }
+                     })
+                   }else{
+                     Swal.fire("You must fill out every field","","warning");
+                   }
+               })
+           // End Drop function
+
+            // Enroll modal calling
+           $('#StudentsTable').on('click','.deactbtn', function () {
+
+                 $('#StopModal').modal('show');
+
+                 $tr = $(this).closest('tr');
+
+                 var data = $tr.children("td").map(function () {
+                     return $(this).text();
+                 }).get();
+
+                 console.log(data);     
+                 $('#stud_num2').text(data[1]);   
+                     $('#dt_idE2').val(data[0]);
+               });
+           // End of Enroll modal calling 
+
+           // Enroll function
+           $('#deact').click(function(d){ 
+                 d.preventDefault();
+                   if($('#dt_idE2').val()!=""&&$('#dt_stud2').val()!=""){
+                     $.post("function/stud_deact.php", {
+                       deactid:$('#dt_idE2').val()
+                      //  dtstat:$('#dt_stud').val()
+                       },function(data){
+                         if (data.trim() == "failed"){
+                         $('#StopModal').modal('hide');
+                         Swal.fire("No Student Detected","","error");//response message
+                         // Empty test field                      
+                       }else if(data.trim() == "success"){
+                         $('#StopModal').modal('hide');
+                               //success message                                    
+                                   const Toast = Swal.mixin({
+                                   toast: true,
+                                   position: 'top-end',
+                                   showConfirmButton: false,
+                                   timer: 1500,
+                                   timerProsressBar: true,
+                                   didOpen: (toast) => {
+                                   toast.addEventListener('mouseenter', Swal.stopTimer)
+                                   toast.addEventListener('mouseleave', Swal.resumeTimer)                  
+                                   }
+                                   })
+                                 Toast.fire({
+                                 icon: 'success',
+                                 title:'You successfully deactivate the account'
+                                 }).then(function(){
+                                   document.location.reload(true)//refresh pages
+                                 }); 
+                         }else{
+                           Swal.fire(data);
+                       }
+                     })
+                   }else{
+                     Swal.fire("You must fill out every field","","warning");
+                   }
+               })
+           // End Enroll function
+
 
        });
 
