@@ -7,36 +7,37 @@ include('session.php');
         $req_id = $_GET['req_id'];
 
         // // fetch file to download from database
-        // $sql = "SELECT * FROM clearance_teacher_status WHERE teacher_id=$teacher_id and clearance_requirement_id=$req_id";
-        // $result = mysqli_query($link, $sql);
-        // $file = mysqli_fetch_assoc($result);
-        // $filepath = '../../teacher_Portal/uploads/' . $file['file_link'];
-
-        // if (file_exists($filepath)) {
-        //     header('Content-Description: File Transfer');
-        //     header('Content-Type: application/octet-stream');
-        //     header('Content-Disposition: attachment; filename=' . basename($filepath));
-        //     header('Expires: 0');
-        //     header('Cache-Control: must-revalidate');
-        //     header('Pragma: public');
-        //     header('Content-Length: ' . filesize('../../teacher_Portal/uploads/' . $file['file_link']));
-        //     readfile('../../teacher_Portal/uploads/' . $file['file_link']);
-        //     exit;
-        // }
-
-        // fetch file to download from database
-        $sql = "SELECT * FROM clearance_teacher_status WHERE teacher_id='$teacher_id' and clearance_requirement_id=$req_id";
+        $sql = "SELECT * FROM clearance_teacher_status WHERE teacher_id='$teacher_id' and clearance_requirement_id='$req_id'";
+        // $sql = "SELECT * FROM clearance_teacher_status WHERE teacher_id = $teacher_id AND clearance_requirement_id = $req_id";
         $result = mysqli_query($link, $sql);
         $file = mysqli_fetch_assoc($result);
-        $filepath = '../../Teacher_Portal/uploads/' . $file['file_link'];
-    
+        $filepath = '../../../Teacher_Portal/uploads/' . $file['file_link'];
+
         if (file_exists($filepath)) {
-            header('Content-Type: application/pdf');
-            readfile('../../Teacher_Portal/uploads/' . $file['file_link']);
-    
-            mysqli_query($link, $updateQuery);
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename=' . basename($filepath));
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize('../../../Teacher_Portal/uploads/' . $file['file_link']));
+            readfile('../../../Teacher_Portal/uploads/' . $file['file_link']);
             exit;
         }
+
+        // fetch file to download from database
+        // $sql = "SELECT * FROM clearance_teacher_status WHERE teacher_id='$teacher_id' and clearance_requirement_id=$req_id";
+        // $result = mysqli_query($link, $sql);
+        // $file = mysqli_fetch_assoc($result);
+        // $filepath = '../../../Teacher_Portal/uploads/' . $file['file_link'];
+    
+        // if (file_exists($filepath)) {
+        //     header('Content-Type: application/pdf');
+        //     readfile('../../../Teacher_Portal/uploads/' . $file['file_link']);
+    
+        //     mysqli_query($link, $updateQuery);
+        //     exit;
+        // }
 
     }
 
