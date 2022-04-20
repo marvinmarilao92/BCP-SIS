@@ -40,7 +40,7 @@ include('session.php');
        <label class="req"></label>
         <div class="col-md-2">
           <div class="form-floating">
-            <input type="text" class="form-control" name="application_code" id="application_code" maxlength="8"  placeholder="middle name" onChange="fetchStudInfo(this.value);"  Required autofocus>
+            <input type="text" class="form-control" name="application_code" id="application_code" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="middle name" onChange="fetchStudInfo(this.value);"  Required autofocus>
             <label for="floatingName">Application Code</label>
           </div>
         </div>
