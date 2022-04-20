@@ -27,7 +27,7 @@ include ("includes/sidebar.php");
         </ol>
       </nav>
     </div><!-- End Page Title -->
-    <h2>Hello Clearance Admin</h2>
+    
 
   </main><!-- End #main -->
 
