@@ -7,7 +7,7 @@ include('session.php');
       $req_id = $_GET['req_id'];
 
       // fetch file to download from database
-      $sql = "SELECT * FROM clearance_student_status WHERE student_id='$student_id' and clearance_requirement_id='$req_id'";
+      $sql = "SELECT * FROM clearance_student_status WHERE student_id=$student_id and clearance_requirement_id=$req_id";
       $result = mysqli_query($link, $sql);
       $file = mysqli_fetch_assoc($result);
       $filepath = '../../../Student_Portal/uploads/' . $file['file_link'];
