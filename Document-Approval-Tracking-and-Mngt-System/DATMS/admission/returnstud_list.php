@@ -47,7 +47,7 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'translist' ; $col = 'reports'; include ('core/side-nav.php');//Design for sidebar?>
+<?php $page = 'retlist' ; $col = 'reports'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
@@ -99,7 +99,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT *,LEFT(middlename,1) FROM student_information WHERE account_status = 'Transferee' AND account_status = 'Returnee' ORDER BY stud_date DESC ";
+                    $query="SELECT *,LEFT(middlename,1) FROM student_information WHERE account_status = 'Retrunee' ORDER BY stud_date DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $adm_id = $rs['id'];
