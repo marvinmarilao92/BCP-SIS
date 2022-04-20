@@ -1,12 +1,12 @@
 <?php
-include('includes/session.php');
+include('session.php');
 
 // Check existence of id parameter before processing further
 if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !empty(trim($_GET["id"])) && !empty(trim($_GET["dept_id"]))){
     $teacher_id = trim($_GET["id"]);
     $dept_id = trim($_GET["dept_id"]);
     $req_name = trim($_GET["req_name"]);
-    $dept_name = $verified_session_role;
+    $dept_name = 'Registrar Coordinator';
     // Prepare a select statement
     $sql = "SELECT * FROM clearance_teacher_status WHERE clearance_requirement_id = ? and teacher_id = ? and clearance_department_id = ?";
     if($stmt = mysqli_prepare($link, $sql)){
@@ -47,7 +47,7 @@ if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !em
             echo "Oops! Something went wrong. Please try again later.";
         }
     }
-} else{
+} else {
     // URL doesn't contain id parameter. Redirect to error page
     header("location: error.php");
     exit();
@@ -55,17 +55,11 @@ if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !em
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
-<?php
-include ("includes/head.php");
-?>
-
+<?php include ('core/css-links.php');//css connection?>
 <body>
 
-<?php
-include ("includes/nav.php");
-$page = 'TCS' ; $col = 'clr1'; include ("includes/sidebar.php");
-?>
+<?php include ('core/header.php');//Design for  Header?>
+  <?php $page = 'TCS' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
 
 
   <main id="main" class="main">
@@ -142,9 +136,14 @@ $page = 'TCS' ; $col = 'clr1'; include ("includes/sidebar.php");
 
   </main><!-- End #main -->
 
-<?php
-include ("includes/footer.php");
-?>
+  <!-- ======= Footer ======= -->
+  <?php include ('core/footer.php');//css connection?>
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files/ Template main js file -->
+  <?php include ('core/js.php');//css connection?>
 
 </body>
 
