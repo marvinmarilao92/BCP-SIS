@@ -41,23 +41,25 @@
                   if($result1 = mysqli_query($link, $sql1)){
                     if(mysqli_num_rows($result1) > 0){
                       while($row1 = mysqli_fetch_array($result1)){
-                       $index['adm_req'] = $row1['concat'];
-                                                          
+                       $index['adm_req'] = $row1['concat'];   
+                       array_push($result["data"], $index);                                 
                       } 
+                      $result["success"]="1";//for checking
+                      echo json_encode($result);   
                       // Free result set
                       mysqli_free_result($result1);
                     }else{
-                      echo ("error");
+                      $result["success"]="0";//for checking
+                      echo json_encode($result);  
                     }
                   }
-                  array_push($result["data"], $index);
+                  
                   // array_push($result['data'], $index);
                   // var_dump($index);
               }
               // $result['data'] = $datain;
               // var_dump($datain);
-              $result["success"]="1";//for checking
-              echo json_encode($result);
+           
             }else{
               $result["success"]="0";//for checking
               echo json_encode($result);
