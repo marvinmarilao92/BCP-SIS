@@ -13,7 +13,7 @@
                 <div class="card-body">                              
                   <div class="tab-pane fade show active profile-overview" id="profile-overview">
                         
-                        <h5 class="card-title">Department Details</h5>
+                        <h5 class="card-title">Program Details</h5>
                         <div class="row">
                           <h6>Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <?php echo $progCode; ?></h6>                              
                         </div>

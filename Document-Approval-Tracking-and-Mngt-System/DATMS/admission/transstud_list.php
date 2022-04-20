@@ -99,7 +99,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT *,LEFT(middlename,1) FROM student_information WHERE account_status = 'Transferee' ORDER BY stud_date DESC ";
+                    $query="SELECT *,LEFT(middlename,1) FROM student_information WHERE account_status = 'Transferee' ORDER BY id DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $adm_id = $rs['id'];
