@@ -76,7 +76,7 @@ include('session.php');
               <div class="card info-card revenue-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Offcially Enrolled <span>| Students</span></h5>
+                  <h5 class="card-title">Officially Enrolled <span>| Students</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
