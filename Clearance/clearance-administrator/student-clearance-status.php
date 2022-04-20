@@ -74,9 +74,9 @@ include ("includes/sidebar.php");
                     // Close connection
                     mysqli_close($link);
                     ?>
-              <!-- <div class="float-end">
-                <button>Reset Clearance</button>
-              </div> -->
+              <div class="float-end">
+                <a href="reset-clearance-student.php"><button type="button" class="btn btn-danger">Reset Clearance of Students</button></a>
+              </div>
             </div>
           </div>
         </div>

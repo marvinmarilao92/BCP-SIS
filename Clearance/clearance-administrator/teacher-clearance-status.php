@@ -72,7 +72,9 @@ include ("includes/sidebar.php");
                     // Close connection
                     mysqli_close($link);
                     ?>
-
+              <div class="float-end">
+                <a href="reset-clearance-teacher.php"><button type="button" class="btn btn-danger">Reset Clearance of Teachers</button></a>
+              </div>
             </div>
           </div>
         </div>
