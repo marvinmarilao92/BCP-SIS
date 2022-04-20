@@ -40,35 +40,42 @@
     }
   }
 </style>
-</head>
 <body>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+</script> -->
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'SCR' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
-
+<?php $page = 'TCR' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Registrar Requirements for Students</h1>
+      <h1>Clearance Requirements for Teachers</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Registrar Requirements for Students</li>
+          <li class="breadcrumb-item">Clearance Requirements for Teachers</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-
           <div class="card">
             <div class="col-lg-12">
               <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                  <h5 style="color: rgb(1, 41, 112); font-weight:650; ">Registrar Requirements</h5>
+                  <h5 style="color: rgb(1, 41, 112); font-weight:610; ">Teachers Requirements</h5>
               </div>
               <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                  <a type="button" href="student-requirement-add.php" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
+                  <a type="button" href="teacher-requirement-add.php" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
                   Add New Requirement
                   </a>
               </div> 
@@ -76,7 +83,7 @@
             <div class="card-body">              
               <?php
                   // Attempt select query execution
-                  $sql = "SELECT * FROM clearance_requirements_students where department = 'Registrar Coordinator'";
+                  $sql = "SELECT * FROM clearance_requirements_teachers where department = 'Registrar Coordinator'";
                   if($result = mysqli_query($link, $sql)){
                       if(mysqli_num_rows($result) > 0){
                           echo '<table id="example" class="table datatable">';
@@ -121,7 +128,6 @@
 
   </main><!-- End #main -->
 
- 
   <!-- ======= Footer ======= -->
   <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
