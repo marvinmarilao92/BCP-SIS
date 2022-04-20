@@ -126,10 +126,10 @@ include('session.php');
                     <!-- <td data-label="Status"><?php echo $adm_as?></td> -->
                     <?php 
                       $requirments ='';
-                        $sql1 = " SELECT css.student_id, css.status, GROUP_CONCAT(DISTINCT crs.clearance_name  SEPARATOR ', ') AS concat
+                        $sql1 = " SELECT css.student_id,  css.status, GROUP_CONCAT(DISTINCT crs.clearance_name  SEPARATOR ', ') AS concat
                         FROM clearance_student_status css
                         INNER JOIN clearance_requirements_students crs
-                        ON css.clearance_requirement_id = crs.id WHERE student_id = ".$adm_no." AND css.status = 'completed' AND css.department = 'Registrar Coordinator' ";
+                        ON css.clearance_requirement_id = crs.id WHERE student_id = ".$adm_no." AND css.status = 'completed' 	AND css.clearance_department_id = '5'";
 
                         if($result1 = mysqli_query($link, $sql1)){
                           if(mysqli_num_rows($result1) > 0){
