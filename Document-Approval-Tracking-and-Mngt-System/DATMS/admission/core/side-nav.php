@@ -90,7 +90,7 @@
       </li>
       <li>
       <a href="unstud_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='unlist'){echo 'active';}?>">
-        <i class="bi bi-circle"></i><span>Temporally Enrolled</span>
+        <i class="bi bi-circle"></i><span>Temporarily Enrolled</span>
         </a>
       </li>
       <li>

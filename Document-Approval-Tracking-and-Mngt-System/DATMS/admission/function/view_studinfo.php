@@ -47,22 +47,22 @@ if(isset($_POST["query"]))
         }
       echo $output;
         }else{
-          $query = "SELECT *,LEFT(middlename,1) as MI FROM user_information WHERE `account_status` NOT IN ('Inactive') AND id_number = '".$search."'";
+          $query = "SELECT *,LEFT(middlename,1) as MI FROM student_information WHERE `account_status` NOT IN ('Inactive') AND id_number = '".$search."'";
           $result = mysqli_query($conn, $query);
           if(mysqli_num_rows($result) > 0)
           {
             while($row = mysqli_fetch_array($result))
             {
               //array data
-                $idnum = $row["id_number"];
-                $fname = $row["firstname"];
-                $lname = $row["lastname"];
-                $mname = $row["MI"];
-                $dept = $row["office"];
-                $subsys = $row["department"];
-                $role = $row["role"];
+              $idnum = $row["id_number"];
+              $fname = $row["firstname"];
+              $lname = $row["lastname"];
+              $mname = $row["MI"];
+              $course = $row["course"];
+              $AS = $row["account_status"];
     
-                $output .= ' <small>Name: '. $fname .' '. $mname .'. '. $lname .' ('. $subsys .' | '. $role .' | '. $dept .')</small>';    
+                $output .= ' <p style="margin-top: 5px;">Name: '. $fname .' '. $mname .'. '. $lname .' ('. $course .' Student)</p>    
+      '; 
             }
           echo $output;
           }else{

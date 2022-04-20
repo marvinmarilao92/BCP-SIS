@@ -112,7 +112,7 @@ include('session.php');
                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>" title="View Info"><i class="bi bi-eye"></i></button> 
                         <?php
-                        if($adm_as=='Temporally Enrolled'){?>                                  
+                        if($adm_as=='Temporarily Enrolled'){?>                                  
                             <button class="btn btn-success updatebtn" title="Enroll"><i class="bi bi-check-lg"></i></button>                       
                          <?php
                         }elseif($adm_as=='Deactivated'){
