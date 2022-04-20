@@ -15,7 +15,7 @@ $db = mysqli_select_db($conn, 'sis_db');
             if($v_checkcode == 0){
                 echo ('failed');
             }else {
-                $conn->query("UPDATE datms_studreq SET status='Received' WHERE id_number='$id'") or die(mysqli_error($conn));
+                $conn->query("UPDATE datms_studreq SET `status`='Received',`date` = '$date' WHERE `id_number`='$id'") or die(mysqli_error($conn));
                 echo ('success');
             }
         }
