@@ -384,7 +384,7 @@ include('session.php');
           <div class="form-floating">
             <select class="form-select" name="status" id="status" aria-label="State" required>
               <option selected disabled value="">Select Status</option>
-              <option value="Temporally Enrolled">Temporally Enrolled</option>
+              <option value="Temporarily Enrolled">Temporarily Enrolled</option>
               <option value="Official">Official</option>
               <option value="Transferee">Transferee</option>
               <!-- <option value="Returnee">Returnee</option> -->
