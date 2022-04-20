@@ -40,7 +40,7 @@ include('session.php');
        <label class="req"></label>
         <div class="col-md-2">
           <div class="form-floating">
-            <input type="text" class="form-control" name="application_code" id="application_code" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="middle name" onChange="fetchStudInfo(this.value);"  Required autofocus>
+            <input type="text" class="form-control" name="application_code" id="application_code" maxlength="8"  placeholder="middle name" onChange="fetchStudInfo(this.value);"  Required autofocus>
             <label for="floatingName">Application Code</label>
           </div>
         </div>
@@ -666,7 +666,7 @@ include('session.php');
                       icon: 'success',
                       title:'Student is successfully enrolled'
                       }).then(function(){
-                        window.location.replace('req_submit.php?id=".$_SESSION["login_key"]."');
+                        window.location.replace('index.php?id=".$_SESSION["login_key"]."');
                         // window.location = "req_submit.php?id='.$_SESSION["login_key"].'";
                         // document.location.reload(true)//refresh pages
                       });
