@@ -16,7 +16,7 @@ $db = mysqli_select_db($conn, 'sis_db');
             if($v_checkcode > 1){
                 echo ('failed');
             }else {
-                $conn->query("UPDATE student_information SET account_status= 'Official' WHERE id_number='$id'") or die(mysqli_error($conn));
+                $conn->query("UPDATE student_information SET account_status= 'Official', stud_date ='$date' WHERE id_number='$id'") or die(mysqli_error($conn));
                 echo ('success');
             }
         }
