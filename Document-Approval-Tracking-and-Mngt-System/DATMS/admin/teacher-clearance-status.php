@@ -42,21 +42,29 @@ include('session.php');
     }
   }
 </style>
-</head>
 <body>
-
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+</script> -->
   <?php include ('core/header.php');//Design for  Header?>
-  <?php $page = 'SCS' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
+  <?php $page = 'TCS' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
 
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Registrar Status of Students</h1>
+      <h1>Clearance Status of Teachers</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Registrar Status of Students</li>
+          <li class="breadcrumb-item">Clearance Status of Teachers</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -68,20 +76,20 @@ include('session.php');
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">List of Students</h5>
+              <h5 class="card-title">List of Teachers</h5>
               <?php
                     $requirements_completed = 0;
                     // Attempt select query execution
-                    $sql = "SELECT *,LEFT(middlename,1) AS MI FROM student_information ORDER BY id_number";
+                    $sql = "SELECT * FROM teacher_information where account_status = 'Active' ORDER BY id_number";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table id="example" class="table datatable">';
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th scope='col'>Student Number</th>";
-                                        echo "<th scope='col'>Full Name</th>";
-                                        // echo "<th scope='col'>Last Name</th>";
-                                        echo "<th scope='col'>Program</th>";
+                                        echo "<th scope='col'>ID Number</th>";
+                                        echo "<th scope='col'>First Name</th>";
+                                        echo "<th scope='col'>Last Name</th>";
+                                        echo "<th scope='col'>Course</th>";
                                         echo "<th scope='col'>Pending/Under Review</th>";
                                         echo "<th scope='col'>Completed</th>";
                                         echo "<th scope='col'>Action</th>";
@@ -90,14 +98,14 @@ include('session.php');
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td data-label='Stud No.:'>" . $row['id_number'] . "</td>";
-                                        echo "<td data-label='Name:'>" . $row['lastname'] .', '. $row['firstname'] .' '. $row['MI'] .'.'."</td>";
-                                        // echo "<td>" . $row['lastname'] . "</td>";
-                                        echo "<td data-label='Program:'>" . $row['course'] . "</td>";
+                                        echo "<td>" . $row['id_number'] . "</td>";
+                                        echo "<td>" . $row['firstname'] . "</td>";
+                                        echo "<td>" . $row['lastname'] . "</td>";
+                                        echo "<td>" . $row['course'] . "</td>";
                                         $requirements_completed = 0;
-                                        $student_id = $row['id_number'];
+                                        $teacher_id = $row['id_number'];
                                         $dept_id = 0;
-                                        $sql2 = "SELECT * FROM clearance_department_students where department_name = 'Registrar Coordinator'";
+                                        $sql2 = "SELECT * FROM clearance_department_teachers where department_name = 'Registrar Coordinator'";
                                         if($result2 = mysqli_query($link, $sql2)){
                                           if(mysqli_num_rows($result2) > 0){
                                             while($row2 = mysqli_fetch_array($result2)){
@@ -105,7 +113,7 @@ include('session.php');
                                             }
                                           }
                                         }
-                                        $sql1 = "SELECT * FROM clearance_student_status where student_id = $student_id and clearance_department_id = $dept_id";
+                                        $sql1 = "SELECT * FROM clearance_teacher_status where teacher_id = '$teacher_id' and clearance_department_id = $dept_id";
                                         if($result1 = mysqli_query($link, $sql1)){
                                           if(mysqli_num_rows($result1) > 0){
                                             while($row1 = mysqli_fetch_array($result1)){
@@ -115,15 +123,15 @@ include('session.php');
                                             }
                                           }
                                         }
-                                        $sql1 = "SELECT * FROM clearance_requirements_students where department = 'Registrar Coordinator' and status = 'Active'";
+                                        $sql1 = "SELECT * FROM clearance_requirements_teachers where department = 'Registrar Coordinator' and status = 'Active'";
                                         if($result1 = mysqli_query($link, $sql1)){
                                           $requirements_total = mysqli_num_rows($result1);
                                         }
                                         $pending = $requirements_total - $requirements_completed;
-                                        echo "<td data-label='Pending:'>$pending</td>";
-                                        echo "<td data-label='Completed:'>$requirements_completed</td>";
+                                        echo "<td>$pending</td>";
+                                        echo "<td>$requirements_completed</td>";
                                         echo "<td>";
-                                            echo '<a href="student-clearance-view.php?id='. $row['id_number'] .'&name='. $row['firstname'] .' '.$row['lastname'] .'" class="m-1 btn btn-info" title="View Record" data-toggle="tooltip"><span class="bi bi-eye-fill"></span></a>';
+                                            echo '<a href="teacher-clearance-view.php?id='. $row['id_number'] .'&name='. $row['firstname'] .' '.$row['lastname'] .'" class="m-1 btn btn-info" title="View Record" data-toggle="tooltip"><span class="bi bi-eye-fill"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }
@@ -150,7 +158,6 @@ include('session.php');
 
   </main><!-- End #main -->
 
- 
   <!-- ======= Footer ======= -->
   <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->

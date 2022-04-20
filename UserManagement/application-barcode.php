@@ -4,14 +4,14 @@
     if(isset($_SESSION['session_code'])){
       $user_id_checker = $_SESSION['session_code'];
   
-      $sql5 = "SELECT * FROM student_application where id_number = '$user_id_checker'";
+      $sql5 = "SELECT *,LEFT(middlename,1) as MI FROM student_application where id_number = '$user_id_checker'";
               if($result5 = mysqli_query($link, $sql5)){
                 if(mysqli_num_rows($result5) > 0){
                   while($row5 = mysqli_fetch_array($result5)){
                     $verified_session_code = $row5['id_number'];
                     $verified_session_firstname = $row5['firstname'];
                     $verified_session_lastname = $row5['lastname'];
-                    $verified_session_mname = $row5['middlename'];
+                    $verified_session_mname = $row5['MI'];
                     $verified_session_contact = $row5['contact'];
                     $verified_session_date = $row5['stud_date'];
                   }
@@ -68,7 +68,7 @@
                     <div class="col-12" style="text-align: center;">
                       <svg id="barcode"></svg>
                     </div>
-                    <p>Take a screenshot of this confiramtion slip. Show this to the admission and submit your requirements and proceed to the next step.</p>
+                    <p>Take a screenshot of this confiramtion slip. Show this to the admission and submit your requirements to proceed to the next step.</p>
               </div>
               <div class="card-footer">
                 <nav class="justify-content-center d-flex">

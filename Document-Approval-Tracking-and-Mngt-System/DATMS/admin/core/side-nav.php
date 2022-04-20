@@ -155,6 +155,8 @@
             </a>
             <ul id="clearance-students-nav" class="<?php if($col=="clr"){echo "nav-content collapse show";}else{echo "nav-content collapse";}?>
             " data-bs-parent="#sidebar-nav">
+
+            <li class="nav-heading">Students Clearance</li>
               <li>
                 <a href="student-clearance-requirements.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SCR'){echo 'active';}?>">
                   <i class="bi bi-circle"></i><span>Students Requirements</span>
@@ -170,6 +172,24 @@
                   <i class="bi bi-circle"></i><span>Students Appointments</span>
                 </a>
               </li>
+
+              <li class="nav-heading">Teachers Clearance</li>
+              <li>
+                <a href="teacher-clearance-requirements.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TCR'){echo 'active';}?>">
+                  <i class="bi bi-circle"></i><span>Teachers Requirements</span>
+                </a>
+              </li>
+              <li>
+                <a href="teacher-clearance-status.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TCS'){echo 'active';}?>">
+                  <i class="bi bi-circle"></i><span>Teachers Status List</span>
+                </a>
+              </li>
+              <li>
+                <a href="teacher-clearance-appointment.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TCA'){echo 'active';}?>">
+                  <i class="bi bi-circle"></i><span>Teachers Appointments</span>
+                </a>
+              </li>
+              
             </ul>
           </li>
 

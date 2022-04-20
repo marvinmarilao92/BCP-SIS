@@ -39,7 +39,7 @@ $page = 'clr' ; $col = 'Clearance'; include ("includes/sidebar.php");
               <!-- General Form Elements -->
               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                 <div class="alert alert-primary alert-dismissible fade show" role="alert">  
-                  <h4 class="alert-heading">Accepted File Format is PDF.</h4>
+                  <h4 class="alert-heading">Accepted File Format is jpg, jpeg, png, pdf, docx.</h4>
                   <p>
                   Once you uploaded a file, please wait for the clearance coordinator to verify the file. You will be notified if the file was approved or not.
                   </p>
@@ -106,8 +106,7 @@ include ("includes/footer.php");
 
       $fileExt = explode('.', $fileName);
       $fileActualExt = strtolower(end($fileExt));
-      // $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'docx');
-      $allowed = array('pdf');
+      $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'docx');
       if(in_array($fileActualExt, $allowed)){
         if($fileError === 0){
           if($fileSize < 52428800){
@@ -215,7 +214,7 @@ include ("includes/footer.php");
               })
               Toast.fire({
               icon: "error",
-              title:"File extension must be: .pdf"
+              title:"File extension must be: jpg, jpeg, png, pdf, docx"
               }).then(function(){
                 window.location = "clearance-status-upload.php?req_id='. $req_id .'&req_name='. $req_name .'&id='. $id .'&name='. $name .'";//refresh pages
               });

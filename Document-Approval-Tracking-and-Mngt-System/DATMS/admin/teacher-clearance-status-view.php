@@ -1,23 +1,23 @@
 <?php
-include('session.php');
+include('includes/session.php');
 
 // Check existence of id parameter before processing further
 if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !empty(trim($_GET["id"])) && !empty(trim($_GET["dept_id"]))){
-    $student_id = trim($_GET["id"]);
+    $teacher_id = trim($_GET["id"]);
     $dept_id = trim($_GET["dept_id"]);
     $req_name = trim($_GET["req_name"]);
-    $dept_name = 'Registrar Coordinator';
+    $dept_name = $verified_session_role;
     // Prepare a select statement
-    $sql = "SELECT * FROM clearance_student_status WHERE clearance_requirement_id = ? and student_id = ? and clearance_department_id = ?";
+    $sql = "SELECT * FROM clearance_teacher_status WHERE clearance_requirement_id = ? and teacher_id = ? and clearance_department_id = ?";
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "iii", $param_req_id, $param_student_id, $param_dept_id);
+        mysqli_stmt_bind_param($stmt, "isi", $param_req_id, $param_teacher_id, $param_dept_id);
         
 
         // Set parameters
         $param_dept_id = $dept_id;
         $param_req_id = trim($_GET["req_id"]);
-        $param_student_id = $student_id;
+        $param_teacher_id = $teacher_id;
         
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
@@ -30,7 +30,7 @@ if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !em
                 
                 // Retrieve individual field value
                 $clearance_requirement_id = $row["clearance_requirement_id"]; 
-                $student_id = $row["student_id"];  
+                $teacher_id = $row["teacher_id"];  
                 $clearance_department_id = $row["clearance_department_id"]; 
                 $location = $row["location"]; 
                 $status = $row["status"]; 
@@ -55,14 +55,18 @@ if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !em
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>DATMS | Clearance Status</title>
 
-<?php include ('core/css-links.php');//css connection?>
+<?php
+include ("includes/head.php");
+?>
 
 <body>
 
-  <?php include ('core/header.php');//Design for  Header?>
-  <?php $page = 'SCR' ; $col = 'clr'; include ('core/side-nav.php');//Design for sidebar?>
+<?php
+include ("includes/nav.php");
+$page = 'TCS' ; $col = 'clr1'; include ("includes/sidebar.php");
+?>
+
 
   <main id="main" class="main">
 
@@ -71,8 +75,8 @@ if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !em
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item"><a href="student-clearance-status.php">Clearance Status of Students</a></li>
-          <li class="breadcrumb-item"><a href="student-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>">Clearance Status of <?php $str= trim($_GET["name"]);
+          <li class="breadcrumb-item"><a href="teacher-clearance-status.php">Clearance Status of teachers</a></li>
+          <li class="breadcrumb-item"><a href="teacher-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>">Clearance Status of <?php $str= trim($_GET["name"]);
       echo $str; ?></a></li>
           <li class="breadcrumb-item"><?php echo trim($_GET["req_name"]); ?>'s Info</li>
         </ol>
@@ -108,7 +112,7 @@ if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !em
                 <?php 
                 if($date!=""){
                   echo'
-                   <div class="col-md-12">
+                  <div class="col-md-12">
                     <div class="form-floating">
                       <input type="text" class="form-control" id="floatingName" value="'.$date.'" placeholder="Your Name"disabled>
                       <label for="floatingName">Date Completed</label>
@@ -116,11 +120,10 @@ if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !em
                   </div>
                   ';
 
-                }              
-     
+                }     
                 if($remarks!=""){
                   echo'
-                   <div class="col-md-12">
+                  <div class="col-md-12">
                     <div class="form-floating">
                       <input type="text" class="form-control" id="floatingName" value="'.$remarks.'" placeholder="Your Name"disabled>
                       <label for="floatingName">Remarks</label>
@@ -131,21 +134,17 @@ if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !em
                 }              
                 ?>
                 <div class="modal-footer">
-                    <a href="student-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>"><button type="button" class="btn btn-primary">Back</button></a>
+                    <a href="teacher-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>"><button type="button" class="btn btn-primary">Back</button></a>
                 </div>
               </div><!-- End General Form Elements -->
             </div>
           </div><!-- End Default Card -->
 
   </main><!-- End #main -->
-  <!-- ======= Footer ======= -->
-  <?php include ('core/footer.php');//css connection?>
-  <!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files/ Template main js file -->
-  <?php include ('core/js.php');//css connection?>
+<?php
+include ("includes/footer.php");
+?>
 
 </body>
 
