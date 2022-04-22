@@ -1,5 +1,17 @@
 <?php
   $path = 'view';
+  
+define('DB_SERVER', '31.220.110.2');
+define('DB_USERNAME', 'u692894633_sis_db');
+define('DB_PASSWORD', 'l95o@WMN6~a');
+define('DB_NAME', 'u692894633_sis_db');
+
+/* Attempt to connect to MySQL database */
+$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+// Check connection
+if($conn === false){  
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
   include_once('includes/source.php');
 ?>
 <!DOCTYPE html>
@@ -116,7 +128,7 @@
                         </div>
                       <div class="row">
                         <div class="col d-flex justify-content-center">
-                          <label for="uploadPDF"><i class="btn btn-primary ri-upload-cloud-2-fill">&nbspUpload</i><label>
+                          <label for="uploadPDF"><i class="btn btn-primary ri-attachment-line">&nbspUpload</i><label>
                           <input type="file" name="upload" id="uploadPDF" class="form-control form-control-md" onchange="getImage(this.value)" style="display: none; visibility:none;">
                         </div>
                       </div>
@@ -212,7 +224,7 @@
               </div>
             <div class="row">
               <div class="col d-flex justify-content-center">
-                <label for="uploadPDF"><i class="btn btn-primary ri-upload-cloud-2-fill">&nbspUpload</i><label>
+                <label for="uploadPDF"><i class="btn btn-primary ri-attachment-line">&nbspUpload</i><label>
                 <input type="file" name="upload" id="uploadPDF" class="form-control form-control-md" onchange="getImage(this.value)" style="display: none; visibility:none;">
               </div>
             </div>
@@ -229,6 +241,11 @@
 </div>
 </form>
 </main><!-- End #main -->
+
+<?php
+include ("includes/footer.php");
+?>
+
 <script>
 
  
@@ -239,10 +256,6 @@ function getImage(imagename)
     }
 
 
-</script>
-<?php
-include ("includes/footer.php");
-?>
 </script>
 </body>
 

@@ -27,4 +27,16 @@ if(!$conn)
         </div>
     ';
 }
+
+// define('DB_SERVER', '31.220.110.2');
+// define('DB_USERNAME', 'u692894633_sis_db');
+// define('DB_PASSWORD', 'l95o@WMN6~a');
+// define('DB_NAME', 'u692894633_sis_db');
+
+// /* Attempt to connect to MySQL database */
+// $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+// // Check connection
+// if($conn === false){  
+//     die("ERROR: Could not connect. " . mysqli_connect_error());
+// }
 ?>

@@ -48,18 +48,7 @@
           <h1 class="card-title">List of Requests</h1>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="home" aria-selected="true">Pending
-              <span class="badge bg-success badge-number">
-                <?php 
-                  require_once("security/sec-conn.php");
-                  $query="SELECT * FROM hcms_request WHERE `status` = 'Pending'";
-                  $result=mysqli_query($conn2,$query);
-                  if($result){
-                    echo mysqli_num_rows($result);
-                    }
-                ?> 
-              </span>   
-              </button>
+              <button class="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="home" aria-selected="true">Pending  </button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="approved-tab" data-bs-toggle="tab" data-bs-target="#approved" type="button" role="tab" aria-controls="profile" aria-selected="false">Approved</button>

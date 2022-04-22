@@ -38,12 +38,13 @@ $fstatus = "Approved";
           
           $sql_run = auditQuery($conn, $verified_session_username, $remarks , $fname, $office , $ip , $host , $audit_date);
           if($sql_run){
-          $_SESSION['alert'] = "Successfully Uploaded";
+        
           // swal
           $msg = "Record Added";
           $icon = "success";
           functionSwal($msg, $icon);
           header("location:". $SERVER['HTTP_REFERER']);
+          $_SESSION['alert'] = "Successfully Uploaded";
           exit();
           }
         }

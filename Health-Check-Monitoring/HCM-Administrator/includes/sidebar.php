@@ -130,8 +130,14 @@
         </li>
       </ul>
     </li>
-
+    <li class="nav-heading">Program</li>
  
+    <li class="nav-item">
+      <a href="annua-examination.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='Records-list'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>">
+        <i class="ri-health-book-line"></i>
+        <span>Annual Medical Examination</span>
+      </a>
+    </li>
 
     <li class="nav-heading">Settings</li>
 
