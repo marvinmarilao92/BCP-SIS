@@ -33,7 +33,7 @@ include('session.php');
             <br>
             <div class="col-md-12" >
               <div class="form-floating">
-                <input type="text" class="form-control" id="stud_id" name="stud_id" onChange="fetchTracking(this.value);" onkeypress="return isNumberKey(event)" maxlength="8" placeholder="Your Name" autofocus>
+                <input type="text" class="form-control" id="stud_id" name="stud_id" onChange="fetchTracking(this.value);" onkeypress="return isNumberKey(event)" maxlength="8" placeholder="Your Name" autofocus required>
                 <label for="floatingName" >Application Code</label>
               </div>
               
@@ -55,7 +55,7 @@ include('session.php');
                       $requirments .='
                       
                       <div class="form-check">                      
-                        <input class="form-check-input" type="checkbox" id="req_item" name="req_item[]" value="'.$row["req_name"].'">
+                        <input class="form-check-input " type="checkbox" id="req_item" name="req_item[]" value="'.$row["req_name"].'">
                         <label class="form-check-label" for="gridCheck1">
                         '.$row["req_name"].'
                         </label>
@@ -72,7 +72,7 @@ include('session.php');
             </div>
 
           </div>
-          <button type="submit" class="btn btn-primary btn-lg" name="submit_req" style="float: right;">Submit</button>
+          <button type="submit" class="btn btn-primary btn-lg" name="submit_req" id="checkBtn" style="float: right;">Submit</button>
       </div>
     </form>
 
@@ -99,18 +99,45 @@ include('session.php');
       $reqItem = $_POST['req_item'];
       // echo $reqItem;
 
+        //Check if the Req is already in the database
+        $sql = "SELECT req FROM datms_studreq WHERE id_number = '$student_number'";
+        $result1 = mysqli_query($link,$sql);
+        $row1 = mysqli_fetch_array($result1,MYSQLI_ASSOC);
+
       foreach($reqItem as $item)
         {
           //Check if the Req is already in the database
-            $sql1 = "SELECT req FROM datms_studreq WHERE id_number = '$student_number' AND `req` LIKE ('%$item%') ";
+            $sql1 = "SELECT req FROM datms_studreq WHERE id_number = '$student_number' AND `req` LIKE ('%$item%')";
             $result = mysqli_query($link,$sql1);
             $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
             $count = mysqli_num_rows($result);
 
         }
       
+      // if($row1['status']=='Received'){
+      //       echo'<script type = "text/javascript">
+      //           //success message
+      //           const Toast = Swal.mixin({
+      //           toast: true,
+      //           position: "top-end",
+      //           showConfirmButton: false,
+      //           timer: 2000,
+      //           timerProsressBar: true,
+      //           didOpen: (toast) => {
+      //           toast.addEventListener("mouseenter", Swal.stopTimer)
+      //           toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+      //           }
+      //           })
+      //           Toast.fire({
+      //           icon: "error",
+      //           title:"Your requirements is already submitted to registrar"               
+      //           }).then(function(){
+      //             window.location = "req_submit.php?id='.$key.'";//refresh pages
+      //           });
+      //       </script>';
+      // }else 
       if($count!=0){
-            echo'<script type = "text/javascript">
+          echo'<script type = "text/javascript">
                 //success message
                 const Toast = Swal.mixin({
                 toast: true,
@@ -414,6 +441,37 @@ include('session.php');
           });
 
     });  
+    // required checkbox input
+    $(document).ready(function () {
+    $('#checkBtn').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+            //success message
+            const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProsressBar: true,
+            didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer)
+            toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+            }
+            })
+            Toast.fire({
+            icon: "warning",
+            title:"Pick student requirements first"
+            }).then(function(){
+              document.location.reload(true)//refresh pages
+            });
+        return false;
+      }
+
+    });
+});
+
+
          // input numbers only
          function isNumberKey(evt){
         var charCode = (evt.which) ? evt.which : evt.keyCode

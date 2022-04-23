@@ -290,26 +290,21 @@ include('session.php');
                 labels:<?php echo json_encode($name); ?>,
                 datasets: [{
                     label: 'Documents Count',
-                      backgroundColor: [
-                              'rgb(255, 99, 132, 0.2)',
-                              'rgb(255, 159, 64, 0.2)',
-                              'rgb(255, 205, 86, 0.2)',
-                              'rgb(75, 192, 192, 0.2)',
-                              'rgb(54, 162, 235, 0.2)',
-                              'rgb(153, 102, 255, 0.2)',
-                              'rgb(201, 203, 207, 0.2)'
-                            ],
-                            borderColor: [
-                              'rgb(255, 99, 132)',
-                              'rgb(255, 159, 64)',
-                              'rgb(255, 205, 86)',
-                              'rgb(75, 192, 192)',
-                              'rgb(54, 162, 235)',
-                              'rgb(153, 102, 255)',
-                              'rgb(201, 203, 207)'
-                            ],
-                            hoverOffset: 4,
-                            borderWidth: 1,
+                    backgroundColor: [
+                        'rgb(13, 110, 253)',
+                        'rgb(104, 174, 236)',
+                        'rgb(220, 53, 69)',
+                        'rgb(4, 165, 66)',
+                        'rgb(255, 193, 7)',
+                        'rgb(108, 117, 125)',
+                        'rgb(255, 145, 26)'
+                        
+                      ],
+                      borderColor: [
+                        'rgb(255, 255, 255)'
+                      ],
+                      hoverOffset: 10,
+                      borderWidth: 4,
                     data:<?php echo json_encode($counts); ?>,
                 }]
             },
@@ -369,25 +364,20 @@ include('session.php');
         var data = [{
               data: <?php echo json_encode($counts1); ?>,
               backgroundColor: [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(255, 159, 64, 0.5)',
-                'rgba(255, 205, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
-                'rgba(201, 203, 207, 0.5)'
+                'rgb(13, 110, 253)',
+                'rgb(220, 53, 69)',
+                'rgb(4, 165, 66)',
+                'rgb(255, 193, 7)',
+                'rgb(108, 117, 125)',
+                'rgb(104, 174, 236)',
+                'rgb(255, 145, 26)'
+                
               ],
               borderColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)',
-                'rgb(153, 102, 255)',
-                'rgb(201, 203, 207)'
+                'rgb(255, 255, 255)'
               ],
-              hoverOffset: 10,
-              borderWidth: 1,
+              hoverOffset: 15,
+              borderWidth: 4,
             }];
 
             var options = {
@@ -402,10 +392,10 @@ include('session.php');
                     const percentage = value / total * 100
                     return percentage.toFixed(2) + "%";
                   },
-                  color: 'rgb(0, 0, 0)',
+                  color: 'rgb(255, 255, 255)',
                   font: {
-                    size: 13,
-                    weight: 'bold'
+                    size: 15,
+                    weight: '700'
                   },
                   
                   
@@ -432,25 +422,20 @@ include('session.php');
         var data = [{
               data: <?php echo json_encode($counts2); ?>,
               backgroundColor: [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(255, 159, 64, 0.5)',
-                'rgba(255, 205, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
-                'rgba(201, 203, 207, 0.5)'
+                'rgb(13, 110, 253)',
+                'rgb(220, 53, 69)',
+                'rgb(4, 165, 66)',
+                'rgb(255, 193, 7)',
+                'rgb(108, 117, 125)',
+                'rgb(104, 174, 236)',
+                'rgb(255, 145, 26)'
+                
               ],
               borderColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)',
-                'rgb(153, 102, 255)',
-                'rgb(201, 203, 207)'
+                'rgb(255, 255, 255)'
               ],
-              hoverOffset: 10,
-              borderWidth: 1,
+              hoverOffset: 15,
+              borderWidth: 4,
             }];
 
             var options = {
@@ -465,10 +450,10 @@ include('session.php');
                     const percentage = value / total * 100
                     return percentage.toFixed(2) + "%";
                   },
-                  color: 'rgb(0, 0, 0)',
+                  color: 'rgb(255, 255, 255)',
                   font: {
-                    size: 13,
-                    weight: 'bold'
+                    size: 15,
+                    weight: '700'
                   }
                 }
               }

@@ -161,7 +161,7 @@
                                 </div>                        
                                 <div class="col-md-12">
                                   <div class="form-floating">
-                                    <input type="Date" class="form-control" name="birthdate" id="birthdate" onkeydown="return false" min="1988-12-31" max="1999-12-31"  placeholder="birthday" Required onchange="oncollapse()">
+                                    <input type="Date" class="form-control" name="birthdate" id="birthdate" onkeydown="return false" min="1988-12-31" max="<?php $currentYear = date("Y"); $previousYear = $currentYear-18; echo $previousYear;?>-12-31"  placeholder="birthday" Required onchange="oncollapse()">
                                     <label for="floatingName">Birthdate</label>
                                   </div>
                                 </div>     
