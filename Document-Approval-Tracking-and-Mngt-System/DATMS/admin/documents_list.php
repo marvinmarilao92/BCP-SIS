@@ -723,28 +723,127 @@
                                 }
                                 }         
                           }
-                        }else{
-                        echo'<script type = "text/javascript">
-                                //success message
-                                const Toast = Swal.mixin({
-                                toast: true,
-                                position: "top-end",
-                                showConfirmButton: false,
-                                timer: 2000,
-                                timerProsressBar: true,
-                                didOpen: (toast) => {
-                                toast.addEventListener("mouseenter", Swal.stopTimer)
-                                toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                }
-                                })
-                                Toast.fire({
-                                icon: "warning",
-                                title:"No account registered to account number"
-                                }).then(function(){
-                                  window.location = "documents_list.php?id='.$key.'";//refresh pages
-                                });
-                            </script>
-                        ';
+                        }else{                          
+                          $query  = "SELECT *,LEFT(middlename,1) as MI FROM user_information WHERE `account_status` NOT IN ('Inactive') AND id_number = '".$doc_title."'";
+                          $result = mysqli_query($conn, $query);
+                          if(mysqli_num_rows($result) > 0){
+                            if (!in_array($extension, ['pdf'])) {
+                              echo'<script type = "text/javascript">
+                                        //success message
+                                        const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: "top-end",
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                        timerProsressBar: true,
+                                        didOpen: (toast) => {
+                                        toast.addEventListener("mouseenter", Swal.stopTimer)
+                                        toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                        }
+                                        })
+                                        Toast.fire({
+                                        icon: "error",
+                                        title:"File extension must be: .pdf"
+                                        }).then(function(){
+                                          window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                        });
+                                    </script>
+                                ';
+                                            
+                              } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
+                                          echo "File too large!";
+                              }else{
+                                $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
+                                $counter=mysqli_num_rows($query);
+                                
+                                if ($counter == 1) 
+                                  { 
+                                    echo'<script type = "text/javascript">
+                                            //success message
+                                            const Toast = Swal.mixin({
+                                            toast: true,
+                                            position: "top-end",
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProsressBar: true,
+                                            didOpen: (toast) => {
+                                            toast.addEventListener("mouseenter", Swal.stopTimer)
+                                            toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                            }
+                                            })
+                                            Toast.fire({
+                                            icon: "warning",
+                                            title:"File name already taken<br>You have to change the name of file"
+                                            }).then(function(){
+                                              window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                            });
+                                        </script>
+                                  ';
+                                  }else{
+                                  // move the uploaded (temporary) file to the specified destination
+                                    if (move_uploaded_file($file, $destination)) {
+                                        $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
+                                        VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
+                                      
+                                        if (mysqli_query($conn, $sql)) {
+    
+                                          $sql1 = "INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
+                                          VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
+    
+                                          if (mysqli_query($conn, $sql1)) {
+                                            echo'<script type = "text/javascript">
+                                              //success message
+                                              const Toast = Swal.mixin({
+                                              toast: true,
+                                              position: "top-end",
+                                              showConfirmButton: false,
+                                              timer: 2000,
+                                              timerProsressBar: true,
+                                              didOpen: (toast) => {
+                                              toast.addEventListener("mouseenter", Swal.stopTimer)
+                                              toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                              }
+                                              })
+                                              Toast.fire({
+                                              icon: "success",
+                                              title:"Document to track Successfully Created"
+                                              }).then(function(){
+                                                window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                              });
+                                          </script>';
+                                          
+                                          }else{
+                                            echo "Failed Upload files!"; 
+                                          }                       
+                                        }
+                                    } else {
+                                        echo "Failed Upload files!";
+                                    }
+                                    }         
+                              }
+                            }else{
+                            echo'<script type = "text/javascript">
+                                    //success message
+                                    const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: "top-end",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    timerProsressBar: true,
+                                    didOpen: (toast) => {
+                                    toast.addEventListener("mouseenter", Swal.stopTimer)
+                                    toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                    }
+                                    })
+                                    Toast.fire({
+                                    icon: "warning",
+                                    title:"No account registered to account number"
+                                    }).then(function(){
+                                      window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                    });
+                                </script>
+                            ';
+                            }
                         }
                       }
                   

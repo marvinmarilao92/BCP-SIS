@@ -308,6 +308,7 @@ include('session.php');
                               'rgb(153, 102, 255)',
                               'rgb(201, 203, 207)'
                             ],
+                            hoverOffset: 4,
                             borderWidth: 1,
                     data:<?php echo json_encode($counts); ?>,
                 }]
@@ -364,88 +365,166 @@ include('session.php');
           }
         });
 
-
         //pie
-        var ctxP = document.getElementById("accountChart").getContext('2d');
-        var myDoughChart = new Chart(ctxP, {
-          type: 'doughnut',      
-          data: {
-            labels:<?php echo json_encode($name1); ?>,
-                datasets: [{
-                    label: 'Pie Chart',
-                      backgroundColor: [
-                              'rgba(255, 99, 132, 0.5)',
-                              'rgba(255, 159, 64, 0.5)',
-                              'rgba(255, 205, 86, 0.5)',
-                              'rgba(75, 192, 192, 0.5)',
-                              'rgba(54, 162, 235, 0.5)',
-                              'rgba(153, 102, 255, 0.5)',
-                              'rgba(201, 203, 207, 0.5)'
-                            ],
-                            borderColor: [
-                              'rgb(255, 99, 132)',
-                              'rgb(255, 159, 64)',
-                              'rgb(255, 205, 86)',
-                              'rgb(75, 192, 192)',
-                              'rgb(54, 162, 235)',
-                              'rgb(153, 102, 255)',
-                              'rgb(201, 203, 207)'
-                            ],
-                            
-                            borderWidth: 1,
-                    data:<?php echo json_encode($counts1); ?>,
-                }]
-          },
-          options: {
-            responsive: true,
-            legend: false
-          }, 
-          labelLine: {
-            show: false
-          },
-          
-        });
+        var data = [{
+              data: <?php echo json_encode($counts1); ?>,
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(255, 159, 64, 0.5)',
+                'rgba(255, 205, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                'rgba(201, 203, 207, 0.5)'
+              ],
+              borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+              ],
+              hoverOffset: 10,
+              borderWidth: 1,
+            }];
+
+            var options = {
+              tooltips: {
+                enabled: true
+              },
+              plugins: {
+                datalabels: {
+                  formatter: (value, ctx) => {
+                    const datapoints = ctx.chart.data.datasets[0].data
+                    const total = datapoints.reduce((total, datapoint) => total + datapoint, 0)
+                    const percentage = value / total * 100
+                    return percentage.toFixed(2) + "%";
+                  },
+                  color: 'rgb(0, 0, 0)',
+                  font: {
+                    size: 13,
+                    weight: 'bold'
+                  },
+                  
+                  
+                }
+              }
+            };
+
+            var ctx = document.getElementById("accountChart").getContext('2d');
+            var myDoughChart = new Chart(ctx, {
+              type: 'doughnut',
+              data: {
+              labels: <?php echo json_encode($name1); ?>,
+                datasets: data
+              },
+              options: options,
+              plugins: [ChartDataLabels],
+            });
+            // myDoughChart.data.datasets[0].data[2] = 50; // Would update the first dataset's value of 'March' to be 50
+            // myDoughChart.update(); // Calling update now animates the position of March from 90 to 50.
+ 
+
 
         //stud radio
-        var ctxP = document.getElementById("studChart").getContext('2d');
-        var myAreaChart = new Chart(ctxP, {
-          type: 'polarArea',      
-          data: {
-            labels:<?php echo json_encode($name2); ?>,
-                datasets: [{
-                    label: 'Pie Chart',
-                      backgroundColor: [
-                              'rgba(255, 99, 132, 0.5)',
-                              'rgba(255, 159, 64, 0.5)',
-                              'rgba(255, 205, 86, 0.5)',
-                              'rgba(75, 192, 192, 0.5)',
-                              'rgba(54, 162, 235, 0.5)',
-                              'rgba(153, 102, 255, 0.5)',
-                              'rgba(201, 203, 207, 0.5)'
-                            ],
-                            borderColor: [
-                              'rgb(255, 99, 132)',
-                              'rgb(255, 159, 64)',
-                              'rgb(255, 205, 86)',
-                              'rgb(75, 192, 192)',
-                              'rgb(54, 162, 235)',
-                              'rgb(153, 102, 255)',
-                              'rgb(201, 203, 207)'
-                            ],
+        var data = [{
+              data: <?php echo json_encode($counts2); ?>,
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(255, 159, 64, 0.5)',
+                'rgba(255, 205, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                'rgba(201, 203, 207, 0.5)'
+              ],
+              borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+              ],
+              hoverOffset: 10,
+              borderWidth: 1,
+            }];
+
+            var options = {
+              tooltips: {
+                enabled: true
+              },
+              plugins: {
+                datalabels: {
+                  formatter: (value, ctx) => {
+                    const datapoints = ctx.chart.data.datasets[0].data
+                    const total = datapoints.reduce((total, datapoint) => total + datapoint, 0)
+                    const percentage = value / total * 100
+                    return percentage.toFixed(2) + "%";
+                  },
+                  color: 'rgb(0, 0, 0)',
+                  font: {
+                    size: 13,
+                    weight: 'bold'
+                  }
+                }
+              }
+            };
+
+            var ctx = document.getElementById("studChart").getContext('2d');
+            var myAreaChart = new Chart(ctx, {
+              type: 'polarArea',
+              data: {
+              labels: <?php echo json_encode($name2); ?>,
+                datasets: data
+              },
+              
+              options: options,
+              plugins: [ChartDataLabels],
+            });
+
+        // var ctxP = document.getElementById("studChart").getContext('2d');
+        // var myAreaChart = new Chart(ctxP, {
+        //   type: 'polarArea',      
+        //   data: {
+        //     labels:<?php echo json_encode($name2); ?>,
+        //         datasets: [{
+        //             label: 'Pie Chart',
+        //               backgroundColor: [
+        //                       'rgba(255, 99, 132, 0.5)',
+        //                       'rgba(255, 159, 64, 0.5)',
+        //                       'rgba(255, 205, 86, 0.5)',
+        //                       'rgba(75, 192, 192, 0.5)',
+        //                       'rgba(54, 162, 235, 0.5)',
+        //                       'rgba(153, 102, 255, 0.5)',
+        //                       'rgba(201, 203, 207, 0.5)'
+        //                     ],
+        //                     borderColor: [
+        //                       'rgb(255, 99, 132)',
+        //                       'rgb(255, 159, 64)',
+        //                       'rgb(255, 205, 86)',
+        //                       'rgb(75, 192, 192)',
+        //                       'rgb(54, 162, 235)',
+        //                       'rgb(153, 102, 255)',
+        //                       'rgb(201, 203, 207)'
+        //                     ],
                             
-                            borderWidth: 1,
-                    data:<?php echo json_encode($counts2); ?>,
-                }]
-          },
-          options: {
-            responsive: true,
-            legend: false
-          }, 
-          labelLine: {
-            show: false
-          },
+        //                     borderWidth: 1,
+        //             data:<?php echo json_encode($counts2); ?>,
+        //         }]
+        //   },
+        //   options: {
+        //     responsive: true,
+        //     legend: false
+        //   }, 
+        //   labelLine: {
+        //     show: false
+        //   },
           
-        });
+        // });
 
 
     </script>
