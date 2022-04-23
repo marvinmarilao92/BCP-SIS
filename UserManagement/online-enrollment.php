@@ -161,7 +161,7 @@
                                 </div>                        
                                 <div class="col-md-12">
                                   <div class="form-floating">
-                                    <input type="Date" class="form-control" name="birthdate" id="birthdate" placeholder="birthday" Required onchange="oncollapse()">
+                                    <input type="Date" class="form-control" name="birthdate" id="birthdate" onkeydown="return false" min="1988-12-31" max="1999-12-31"  placeholder="birthday" Required onchange="oncollapse()">
                                     <label for="floatingName">Birthdate</label>
                                   </div>
                                 </div>     
@@ -768,6 +768,11 @@
                 return true;
             return false;
         }
+
+        // $('birthdate').keypress(function(e) {
+        //     e.preventDefault();
+        //     return false;
+        // });
         //making text uppercase
         // function forceInputUppercase(e)
         //   {
@@ -778,7 +783,7 @@
         //   }
 
         // document.getElementById("middle_name").addEventListener("keyup", forceInputUppercase, false);
-        
+        // document.getElementById('birthdate').max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
     </script>
 
 
