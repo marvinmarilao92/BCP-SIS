@@ -15,11 +15,11 @@ include('session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Submit Requirments</h1>
+      <h1>Submit Requirements</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a>Module</a></li>
-          <li class="breadcrumb-item">Submit Requirments</li>
+          <li class="breadcrumb-item">Submit Requirements</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->

@@ -30,7 +30,31 @@
   <!-- Datatable CSS Connection -->
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"/> -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css"/>
-
+  <style>
+    #loader {
+        border: 12px solid #f3f3f3;
+        border-radius: 100%;
+        border-top: 12px solid #0d6efd;
+        width: 120px;
+        height: 120px;
+        animation: spin 1s linear infinite;
+    }
+      
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+      
+    .center {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+  </style>
   
 
   

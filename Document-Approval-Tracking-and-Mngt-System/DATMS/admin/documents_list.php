@@ -328,7 +328,7 @@
                                                         
                                     <div class="col-md-12" >
                                       <div class="form-floating">
-                                        <input type="text" class="form-control" id="docname" name="docname" onChange="fetchTracking(this.value);" placeholder="Your Name" autofocus>
+                                        <input type="text" class="form-control" id="docname" name="docname" onChange="fetchDoctype(this.value);" placeholder="Your Name" autofocus>
                                         <label for="floatingName">Account No.</label>
                                       </div>
                                     </div>                                  
@@ -341,20 +341,12 @@
                                     <div class="form-floating">
                                       <select class="form-select" name="doctype" id="doctype" aria-label="State" Required onchange="oncollapse()">
                                         <option value="" selected="selected" disabled="disabled">Select DocType</option>
-                                        <?php
-                                            require_once("include/conn.php");
-                                            $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC ";
-                                            $result=mysqli_query($conn,$query);
-                                            while($rs=mysqli_fetch_array($result)){
-                                              $dtid =$rs['dt_id'];                                    
-                                              $dtName = $rs['dt_name'];       
-                                          ?>
-                                            <option><?php echo $dtName;?></option>
-                                        <?php }?>
+                                       
                                       </select>
                                       <label for="floatingSelect">DocType</label>
                                     </div>
                                   </div>  
+
                                   <div class="col-md-12">                                    
                                     <input class="form-control"  type="file" id="docfile" name="docfile" accept="application/pdf" >                                    
                                   </div>
@@ -367,7 +359,7 @@
                             </div>
                           </div>
                             <div class="modal-footer">
-                              <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                               <button class="btn btn-primary" name="save">Create Tracking</button>
                             </div>
                         </form>
@@ -496,7 +488,7 @@
                     date_default_timezone_set("asia/manila");
                     $key = $_SESSION["login_key"];
                     $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
-                    $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
+                    // $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
                     // $doc_user = $_POST['doccreator'];
                     // $doc_office = $_POST['docoffice'];
                     // $doc_title = $_POST['docname'];
@@ -586,8 +578,8 @@
                             }else{
                             // move the uploaded (temporary) file to the specified destination
                               if (move_uploaded_file($file, $destination)) {
-                                  $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
-                                  VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
+                                $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
+                                VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
                                 
                                   if (mysqli_query($conn, $sql)) {
 
@@ -852,14 +844,26 @@
           ?>
           <!-- JS Scripts -->
           <script type="text/javascript">
-            
-              // this script will execute as soon a the website runs
-              $(document).ready(function () {
+              
+              // used to show doctype for specific account
+              function fetchDoctype(id){
+                  $('#doctype').html('');
+                  $.ajax({
+                    type:'post',
+                    url:'function/fetchDoctype.php',
+                    data : 'acc_id='+id,
+                    success: function(data){
+                      $('#doctype').html(data);
+                    }
+                  })
+                }
+                // this script will execute as soon a the website runs
+              $(document).ready(function () {                
                 //print function
                 document.getElementById("print").onclick = function () {
                     printElement(document.getElementById("printcode"));
                   }
-
+                  //used for print function
                 function printElement(elem) {
                     var domClone = elem.cloneNode(true);
                     
@@ -874,7 +878,7 @@
                     $printSection.appendChild(domClone);
                     window.print();
                 }            
-                    // View Function
+                    // View barcode Function
                     $('#DocuTable').on('click','.viewbtn', function () {
 
                           $('#ViewModal').modal('show');
@@ -949,6 +953,7 @@
                     });
 
                 });
+             
 
           </script>
 

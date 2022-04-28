@@ -34,7 +34,7 @@ if(isset($_POST["query"]))
     }
   echo $output;
         }else{
-          $query = "SELECT *,LEFT(middlename,1) as MI FROM user_information WHERE `account_status` NOT IN ('Inactive') AND id_number = '".$search."'";
+          $query = "SELECT *,LEFT(middlename,1) as MI FROM user_information WHERE `account_status` NOT IN ('Deactivated') AND id_number = '".$search."'";
           $result = mysqli_query($conn, $query);
           if(mysqli_num_rows($result) > 0)
           {

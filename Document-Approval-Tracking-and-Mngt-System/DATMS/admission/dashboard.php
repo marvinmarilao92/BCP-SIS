@@ -212,99 +212,107 @@ include('session.php');
   <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center" style="background-color: rgb(13, 110, 253);"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
 <!-- Charts -->
 <script>
-    // Line
+     // BAR
     var ctx = document.getElementById("barChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-     data: {
-            labels:<?php echo json_encode($name); ?>,
-            datasets: [{
-                 label: 'Bar Chart',
-                  backgroundColor: [
-                          'rgb(255, 99, 132, 0.2)',
-                          'rgb(255, 159, 64, 0.2)',
-                          'rgb(255, 205, 86, 0.2)',
-                          'rgb(75, 192, 192, 0.2)',
-                          'rgb(54, 162, 235, 0.2)',
-                          'rgb(153, 102, 255, 0.2)',
-                          'rgb(201, 203, 207, 0.2)'
-                        ],
-                        borderColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(255, 159, 64)',
-                          'rgb(255, 205, 86)',
-                          'rgb(75, 192, 192)',
-                          'rgb(54, 162, 235)',
-                          'rgb(153, 102, 255)',
-                          'rgb(201, 203, 207)'
-                        ],
-                        borderWidth: 1,
-                data:<?php echo json_encode($counts); ?>,
-            }]
-        },
-      options: {
-          legend: {
-            display: false
-          },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
+        var myTrackedChart = new Chart(ctx, {
+          type: 'bar',
+        data: {
+                labels:<?php echo json_encode($name); ?>,
+                datasets: [{
+                    label: 'Documents Count',
+                    backgroundColor: [
+                        'rgb(13, 110, 253)',
+                        'rgb(220, 53, 69)',
+                        'rgb(4, 165, 66)',
+                        'rgb(255, 193, 7)',
+                        'rgb(108, 117, 125)',
+                        'rgb(104, 174, 236)',
+                        'rgb(255, 145, 26)'
+                        
+                      ],
+                      borderColor: [
+                        'rgb(255, 255, 255)'
+                      ],
+                      hoverOffset: 10,
+                      borderWidth: 4,
+                    data:<?php echo json_encode($counts); ?>,
+                }]
+            },
+          options: {
+              legend: {
+                display: false
+              },
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
 
-        }
-      }
-    });
+            }
+          }
+        });
 
 
     //pie
-    var ctxP = document.getElementById("accountChart").getContext('2d');
-    var myPieChart = new Chart(ctxP, {
-      type: 'pie',      
-      data: {
-        labels:<?php echo json_encode($name1); ?>,
-            datasets: [{
-                 label: 'Pie Chart',
-                  backgroundColor: [
-                          'rgba(255, 99, 132, 0.5)',
-                          'rgba(255, 159, 64, 0.5)',
-                          'rgba(255, 205, 86, 0.5)',
-                          'rgba(75, 192, 192, 0.5)',
-                          'rgba(54, 162, 235, 0.5)',
-                          'rgba(153, 102, 255, 0.5)',
-                          'rgba(201, 203, 207, 0.5)'
-                        ],
-                        borderColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(255, 159, 64)',
-                          'rgb(255, 205, 86)',
-                          'rgb(75, 192, 192)',
-                          'rgb(54, 162, 235)',
-                          'rgb(153, 102, 255)',
-                          'rgb(201, 203, 207)'
-                        ],
-                        
-                        borderWidth: 1,
-                data:<?php echo json_encode($counts1); ?>,
-            }]
-      },
-      options: {
-        responsive: true,
-        legend: false
-      }, 
-      labelLine: {
-        show: false
-      },
-      
-    });
+    var data = [{
+          data: <?php echo json_encode($counts1); ?>,
+          backgroundColor: [
+            'rgb(13, 110, 253)',
+            'rgb(220, 53, 69)',
+            'rgb(4, 165, 66)',
+            'rgb(255, 193, 7)',
+            'rgb(108, 117, 125)',
+            'rgb(104, 174, 236)',
+            'rgb(255, 145, 26)'
+            
+          ],
+          borderColor: [
+            'rgb(255, 255, 255)'
+          ],
+          hoverOffset: 15,
+          borderWidth: 4,
+        }];
 
+        var options = {
+          tooltips: {
+            enabled: true
+          },
+          plugins: {
+            datalabels: {
+              formatter: (value, ctx) => {
+                const datapoints = ctx.chart.data.datasets[0].data
+                const total = datapoints.reduce((total, datapoint) => total + datapoint, 0)
+                const percentage = value / total * 100
+                return percentage.toFixed(2) + "%";
+              },
+              color: 'rgb(255, 255, 255)',
+              font: {
+                size: 15,
+                weight: '700'
+              },
+              
+              
+            }
+          }
+        };
+
+        var ctx = document.getElementById("accountChart").getContext('2d');
+        var myDoughChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+          labels: <?php echo json_encode($name1); ?>,
+            datasets: data
+          },
+          options: options,
+          plugins: [ChartDataLabels],
+        }); 
   </script>
 </body>
 

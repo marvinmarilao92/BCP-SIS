@@ -428,62 +428,14 @@ include('session.php');
       </div>
     </div>
   </div><!-- End No Labels Form -->
-  <!-- 
-  <form class="card col-md-12" method="POST">
-    <div class="card-body">
-      <h5 class="card-title">New Student Requirements:</h5>
-        <div class="row mb-12" aria-required="true">
-          
-          <div class="col-md-12 pt-1">
-
-          <?php
-          $requirments ='';
-              // Include config file
-              require_once "include/config.php";
-              // Attempt select query execution
-              $sql = "SELECT * FROM datms_req ORDER BY id asc ";
-              if($result = mysqli_query($link, $sql)){
-                if(mysqli_num_rows($result) > 0){
-                  while($row = mysqli_fetch_array($result)){
-                    $requirments .='
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="req_item" name="req_item[]" value="'.$row["req_name"].'">
-                      <label class="form-check-label" for="gridCheck1">
-                      '.$row["req_name"].'
-                      </label>
-                    </div>
-                    ';
-          
-                  }
-                  echo $requirments;
-                  // Free result set
-                  mysqli_free_result($result);
-                }
-              }
-          ?>        
-          </div>
-
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg" name="submit_req" style="float: right;">Submit</button>
-    </div>
-  </form> -->
-
-
 </main><!-- End #main -->
-<?php
-  // }else{
-  //   echo'<script type = "text/javascript">            
-  //         window.location = "req_submit.php?id='.$key.'";//refresh pages
-  //        </script>';
-  // }
-  ?>
-  
+ 
 
   <!-- ======= Footer ======= -->
   <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center" style="background-color: rgb(13, 110, 253);"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
@@ -491,6 +443,43 @@ include('session.php');
 
 <!-- Script Functions -->
   <script type="text/javascript">
+    // Prevent you from turning back or using back button
+        (function (global) {
+
+          if(typeof (global) === "undefined") {
+              throw new Error("window is undefined");
+          }
+
+          var _hash = "!";
+          var noBackPlease = function () {
+              global.location.href += "#";
+
+              // Making sure we have the fruit available for juice (^__^)
+              global.setTimeout(function () {
+                  global.location.href += "!";
+              }, 50);
+          };
+
+          global.onhashchange = function () {
+              if (global.location.hash !== _hash) {
+                  global.location.hash = _hash;
+              }
+          };
+
+          global.onload = function () {
+              noBackPlease();
+
+              // Disables backspace on page except on input fields and textarea..
+              document.body.onkeydown = function (e) {
+                  var elm = e.target.nodeName.toLowerCase();
+                  if (e.which === 8 && (elm !== 'input' && elm  !== 'textarea')) {
+                      e.preventDefault();
+                  }
+                  // Stopping the event bubbling up the DOM tree...
+                  e.stopPropagation();
+              };
+          }
+        })(window);
         function editInfo(){
           var isChecked = document.getElementById("editableswitch").checked;
             

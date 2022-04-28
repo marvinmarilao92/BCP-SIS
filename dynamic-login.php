@@ -40,8 +40,8 @@
               if($rem_attm==0){
                 $error="To many failed login attempts. Please login after 60 sec.";
               }else{
-                // $error="Please enter valid login details. $rem_attm attempts remaining";
-                $error="Your Username or Password is invalid.";
+                $error="Your Username or Password is invalid. remaining attempts: $rem_attm  ";
+                // $error="Your Username or Password is invalid.";
               }
               $try_time=time();
               //used to adding ip address record for login attempts
@@ -555,18 +555,18 @@
       
     
 
-    // Getting IP Address
-    function getIpAddr(){
-      if (!empty($_SERVER['HTTP_CLIENT_IP'])){
-        $ipAddr=$_SERVER['HTTP_CLIENT_IP'];
-      }elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-        $ipAddr=$_SERVER['HTTP_X_FORWARDED_FOR'];
-      }else{
-        $ipAddr=$_SERVER['REMOTE_ADDR'];
-      }
-    return $ipAddr;
-}
-  ?>
+      // Getting IP Address
+      function getIpAddr(){
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])){
+          $ipAddr=$_SERVER['HTTP_CLIENT_IP'];
+        }elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+          $ipAddr=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        }else{
+          $ipAddr=$_SERVER['REMOTE_ADDR'];
+        }
+      return $ipAddr;
+  }
+?>
 
 <!DOCTYPE html>
 <html lang="en">

@@ -1,103 +1,105 @@
 <?php
-      include 'config.php';
-      session_start();
-        // Define variables and initialize with empty values
-        $student_number = "";
-        // personal information 
-        $first_name = "";
-        $last_name = "";
-        $middle_name = "";
-        $course = "";
-        $gender = "";
-        $birthday = "";
-        $nationality = "";
-        $religion = "";
-        $civil_status = "";
-        //address
-        $street1 = "";
-        $street2 = "";
-        $city = "";
-        $zipcode = "";
-        $address = "";
-        //contact number
-        $email = "";
-        $contact = "";
-        
-        // Processing form data when form is submitted
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
+  include 'config.php';
+  session_start();
+    // Define variables and initialize with empty values
+    $student_number = "";
+    // personal information 
+    $first_name = "";
+    $last_name = "";
+    $middle_name = "";
+    $course = "";
+    $gender = "";
+    $birthday = "";
+    $nationality = "";
+    $religion = "";
+    $civil_status = "";
+    //address
+    $street1 = "";
+    $street2 = "";
+    $city = "";
+    $zipcode = "";
+    $address = "";
+    //contact number
+    $email = "";
+    $contact = "";
+    
+    // Processing form data when form is submitted
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-          date_default_timezone_set("asia/manila");
-          $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
-          $year = date("Y",strtotime("+0 HOURS"));
-          $random_num= rand(10000000,99999999);
-          $student_number =  $random_num;
-          $account_status = "Unpaid";
+      date_default_timezone_set("asia/manila");
+      $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+      $year = date("Y",strtotime("+0 HOURS"));
+      $random_num= rand(10000000,99999999);
+      $student_number =  $random_num;
+      $account_status = "Unpaid";
 
-          $first_name = mysqli_real_escape_string($link,trim($_POST["first_name"]));
-          $last_name = mysqli_real_escape_string($link,trim($_POST["last_name"]));
-          $middle_name = mysqli_real_escape_string($link,trim($_POST["middle_name"]));
-          $course = mysqli_real_escape_string($link,trim($_POST["course"]));
-          $gender = mysqli_real_escape_string($link,trim($_POST["gender"]));
-          $birthday = date('Y-m-d', strtotime(mysqli_real_escape_string($link,trim($_POST["birthdate"]))));
-          $nationality = mysqli_real_escape_string($link,trim($_POST["nationality"]));
-          $religion = mysqli_real_escape_string($link,trim($_POST["religion"]));
-          $civil_status = mysqli_real_escape_string($link,trim($_POST["civil_status"]));
-          
-          
-          $street1 = mysqli_real_escape_string($link,trim($_POST["add_st1"]));
-          $street2 = mysqli_real_escape_string($link,trim($_POST["add_st2"]));
-          $city = mysqli_real_escape_string($link,trim($_POST["city"]));
-          $zipcode = mysqli_real_escape_string($link,trim($_POST["zip_code"]));
-          $address = $street1." ".$street2." ".$city." ".$zipcode;
+      $first_name = mysqli_real_escape_string($link,trim($_POST["first_name"]));
+      $last_name = mysqli_real_escape_string($link,trim($_POST["last_name"]));
+      $middle_name = mysqli_real_escape_string($link,trim($_POST["middle_name"]));
+      $course = mysqli_real_escape_string($link,trim($_POST["course"]));
+      $gender = mysqli_real_escape_string($link,trim($_POST["gender"]));
+      $birthday = date('Y-m-d', strtotime(mysqli_real_escape_string($link,trim($_POST["birthdate"]))));
+      $nationality = mysqli_real_escape_string($link,trim($_POST["nationality"]));
+      $religion = mysqli_real_escape_string($link,trim($_POST["religion"]));
+      $civil_status = mysqli_real_escape_string($link,trim($_POST["civil_status"]));
+      
+      
+      $street1 = mysqli_real_escape_string($link,trim($_POST["add_st1"]));
+      $street2 = mysqli_real_escape_string($link,trim($_POST["add_st2"]));
+      $city = mysqli_real_escape_string($link,trim($_POST["city"]));
+      $zipcode = mysqli_real_escape_string($link,trim($_POST["zip_code"]));
+      $address = $street1." ".$street2." ".$city." ".$zipcode;
 
-          $email = mysqli_real_escape_string($link,trim($_POST["email"]));
-          $contact = mysqli_real_escape_string($link,trim($_POST["contact"]));
-          
-          //Check if the student number is not existing in the database
-          $sql1 = "SELECT id FROM student_application WHERE id_number = '$student_number'";
-          $result = mysqli_query($link,$sql1);
-          $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-          $count = mysqli_num_rows($result);
-          
-          // If the student number is not existing in the database, count must be 0
-          if($count == 0) {
-            // Prepare an insert statement
-            $sql = "INSERT INTO student_application (id_number, firstname, lastname, middlename, email, contact, address, course, gender, birthday, nationality, religion, civil_status, account_status,stud_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      $email = mysqli_real_escape_string($link,trim($_POST["email"]));
+      $contact = mysqli_real_escape_string($link,trim($_POST["contact"]));
+      
+      //Check if the student number is not existing in the database
+      $sql1 = "SELECT id FROM student_application WHERE id_number = '$student_number'";
+      $result = mysqli_query($link,$sql1);
+      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      $count = mysqli_num_rows($result);
+      
+      // If the student number is not existing in the database, count must be 0
+      if($count == 0) {
+        // Prepare an insert statement
+        $sql = "INSERT INTO student_application (id_number, firstname, lastname, middlename, email, contact, address, course, gender, birthday, nationality, religion, civil_status, account_status,stud_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            if($stmt = mysqli_prepare($link, $sql)){
-              // Bind variables to the prepared statement as parameters
-              mysqli_stmt_bind_param($stmt, "sssssssssssssss", $student_number, $first_name, $last_name, $middle_name, $email, $contact, $address, $course, $gender, $birthday, $nationality, $religion, $civil_status, $account_status, $date);
+        if($stmt = mysqli_prepare($link, $sql)){
+          // Bind variables to the prepared statement as parameters
+          mysqli_stmt_bind_param($stmt, "sssssssssssssss", $student_number, $first_name, $last_name, $middle_name, $email, $contact, $address, $course, $gender, $birthday, $nationality, $religion, $civil_status, $account_status, $date);
 
-              // Attempt to execute the prepared statement
-              if(mysqli_stmt_execute($stmt)){
-                // Records created successfully. Redirect to landing page
-                $_SESSION['session_code'] = $student_number;
-                header("location: application-barcode.php");
+          // Attempt to execute the prepared statement
+          if(mysqli_stmt_execute($stmt)){
+            // Records created successfully. Redirect to landing page
+            $_SESSION['session_code'] = $student_number;
+            header("location: application-barcode.php");
 
-              } else{
-                  echo "Oops! Something went wrong. Please try again later.";
-              }
-              
-            }
-
-            // Close statement
-            mysqli_stmt_close($stmt);
-
-            // Close connection
-            mysqli_close($link);
-
-          }else {
-            $student_number_err = "Student Number is already existing";
+          } else{
+              echo "Oops! Something went wrong. Please try again later.";
           }
+          
         }
 
-    ?>
+        // Close statement
+        mysqli_stmt_close($stmt);
+
+        // Close connection
+        mysqli_close($link);
+
+      }else {
+        $student_number_err = "Student Number is already existing";
+      }
+    }
+
+?>
   <!DOCTYPE html>
   <html lang="en">
 
   <head>
     <!-- header -->
     <?php include ("includes/head.php");?>
+    <!-- api for recaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
 
   <body>
@@ -117,7 +119,7 @@
         <div class="row">
            <!-- Admission Form -->
            <div class="col-lg-8">
-            <form class="card" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form class="card" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="return submitUserForm();" method="post">
                 <div class="card-body">
                   <h5 class="card-title">FILL OUT THE FOLLOWING
                   <div class="progress mt-3" style="height: 30px;">
@@ -143,7 +145,7 @@
                               <!-- General Form Elements -->
                               <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" name="first_name" id="first_name" onkeypress="return isTextKey(event)" placeholder="first name" Required onchange="oncollapse()">
+                                    <input type="text" class="form-control" name="first_name" id="first_name" onkeypress="return isTextKey(event)" placeholder="first name" Required onchange="oncollapse()" autofocus>
                                     <label for="floatingName">First Name</label>
                                   </div>
                                 </div>
@@ -536,6 +538,8 @@
                                     <label for="floatingName" required >Email Address</label>
                                   </div>
                                 </div>
+                                <div class="g-recaptcha" data-sitekey="6LeGr6kfAAAAAPgPSzckwkJ78QLrILqvo9IIyjzU" data-callback="verifyCaptcha"></div>
+                                <div id="g-recaptcha-error"></div>
                               <div class="text-right">                            
                                   <button type="submit" class="btn btn-primary" onclick="next3Function()">Submit</button>
                                   <!-- <a type="submit" class="btn btn-primary collapsed">Submit</a> -->
@@ -610,6 +614,20 @@
       <!-- Template Main JS File -->
       <script src="../assets/js/main.js"></script>
       <script>
+        var recaptcha_response = '';
+          function submitUserForm() {
+              if(recaptcha_response.length == 0) {
+                  // document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
+                  Swal.fire("Recaptcha is required","","error ");
+                  return false;
+              }
+              return true;
+          }
+          
+          function verifyCaptcha(token) {
+              recaptcha_response = token;
+              // document.getElementById('g-recaptcha-error').innerHTML = '';
+          }
         //input text field
           const fname   =  document.querySelector("#first_name");
           const lname   =  document.querySelector("#last_name");

@@ -11,6 +11,7 @@ include('session.php');
   </head>
 
   <body>
+    <div id="loader" class="center"></div>
     <?php include ('core/header.php');//Design for  Header?>
     <?php $page = 'dashboard';include ('core/side-nav.php');//Design for sidebar?>
 
@@ -282,6 +283,56 @@ include('session.php');
 
     <!-- Charts -->
     <script>
+      // Prevent you from turning back or using back button
+      (function (global) {
+
+        if(typeof (global) === "undefined") {
+            throw new Error("window is undefined");
+        }
+
+        var _hash = "!";
+        var noBackPlease = function () {
+            global.location.href += "#";
+
+            // Making sure we have the fruit available for juice (^__^)
+            global.setTimeout(function () {
+                global.location.href += "!";
+            }, 50);
+        };
+
+        global.onhashchange = function () {
+            if (global.location.hash !== _hash) {
+                global.location.hash = _hash;
+            }
+        };
+
+        global.onload = function () {
+            noBackPlease();
+
+            // Disables backspace on page except on input fields and textarea..
+            document.body.onkeydown = function (e) {
+                var elm = e.target.nodeName.toLowerCase();
+                if (e.which === 8 && (elm !== 'input' && elm  !== 'textarea')) {
+                    e.preventDefault();
+                }
+                // Stopping the event bubbling up the DOM tree...
+                e.stopPropagation();
+            };
+        }
+      })(window);
+      document.onreadystatechange = function() {
+            if (document.readyState !== "complete") {
+                document.querySelector(
+                  "body").style.visibility = "hidden";
+                document.querySelector(
+                  "#loader").style.visibility = "visible";
+            } else {
+                document.querySelector(
+                  "#loader").style.display = "none";
+                document.querySelector(
+                  "body").style.visibility = "visible";
+            }
+        };
         // BAR
         var ctx = document.getElementById("TrackedbarChart").getContext('2d');
         var myTrackedChart = new Chart(ctx, {
@@ -292,11 +343,11 @@ include('session.php');
                     label: 'Documents Count',
                     backgroundColor: [
                         'rgb(13, 110, 253)',
-                        'rgb(104, 174, 236)',
                         'rgb(220, 53, 69)',
                         'rgb(4, 165, 66)',
                         'rgb(255, 193, 7)',
                         'rgb(108, 117, 125)',
+                        'rgb(104, 174, 236)',
                         'rgb(255, 145, 26)'
                         
                       ],
@@ -412,10 +463,7 @@ include('session.php');
               },
               options: options,
               plugins: [ChartDataLabels],
-            });
-            // myDoughChart.data.datasets[0].data[2] = 50; // Would update the first dataset's value of 'March' to be 50
-            // myDoughChart.update(); // Calling update now animates the position of March from 90 to 50.
- 
+            }); 
 
 
         //stud radio
@@ -472,42 +520,42 @@ include('session.php');
             });
 
         // var ctxP = document.getElementById("studChart").getContext('2d');
-        // var myAreaChart = new Chart(ctxP, {
-        //   type: 'polarArea',      
-        //   data: {
-        //     labels:<?php echo json_encode($name2); ?>,
-        //         datasets: [{
-        //             label: 'Pie Chart',
-        //               backgroundColor: [
-        //                       'rgba(255, 99, 132, 0.5)',
-        //                       'rgba(255, 159, 64, 0.5)',
-        //                       'rgba(255, 205, 86, 0.5)',
-        //                       'rgba(75, 192, 192, 0.5)',
-        //                       'rgba(54, 162, 235, 0.5)',
-        //                       'rgba(153, 102, 255, 0.5)',
-        //                       'rgba(201, 203, 207, 0.5)'
-        //                     ],
-        //                     borderColor: [
-        //                       'rgb(255, 99, 132)',
-        //                       'rgb(255, 159, 64)',
-        //                       'rgb(255, 205, 86)',
-        //                       'rgb(75, 192, 192)',
-        //                       'rgb(54, 162, 235)',
-        //                       'rgb(153, 102, 255)',
-        //                       'rgb(201, 203, 207)'
-        //                     ],
-                            
-        //                     borderWidth: 1,
-        //             data:<?php echo json_encode($counts2); ?>,
-        //         }]
-        //   },
-        //   options: {
-        //     responsive: true,
-        //     legend: false
-        //   }, 
-        //   labelLine: {
-        //     show: false
-        //   },
+          // var myAreaChart = new Chart(ctxP, {
+          //   type: 'polarArea',      
+          //   data: {
+          //     labels:<?php echo json_encode($name2); ?>,
+          //         datasets: [{
+          //             label: 'Pie Chart',
+          //               backgroundColor: [
+          //                       'rgba(255, 99, 132, 0.5)',
+          //                       'rgba(255, 159, 64, 0.5)',
+          //                       'rgba(255, 205, 86, 0.5)',
+          //                       'rgba(75, 192, 192, 0.5)',
+          //                       'rgba(54, 162, 235, 0.5)',
+          //                       'rgba(153, 102, 255, 0.5)',
+          //                       'rgba(201, 203, 207, 0.5)'
+          //                     ],
+          //                     borderColor: [
+          //                       'rgb(255, 99, 132)',
+          //                       'rgb(255, 159, 64)',
+          //                       'rgb(255, 205, 86)',
+          //                       'rgb(75, 192, 192)',
+          //                       'rgb(54, 162, 235)',
+          //                       'rgb(153, 102, 255)',
+          //                       'rgb(201, 203, 207)'
+          //                     ],
+                              
+          //                     borderWidth: 1,
+          //             data:<?php echo json_encode($counts2); ?>,
+          //         }]
+          //   },
+          //   options: {
+          //     responsive: true,
+          //     legend: false
+          //   }, 
+          //   labelLine: {
+          //     show: false
+          //   },
           
         // });
 
