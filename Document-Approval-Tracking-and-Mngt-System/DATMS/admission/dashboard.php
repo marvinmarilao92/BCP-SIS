@@ -190,7 +190,7 @@ include('session.php');
               <canvas id="accountChart" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
                   <?php
                        require_once("include/conn.php");
-                             $sql1 ="SELECT *,count(course) as count FROM student_information group by account_status;";
+                             $sql1 ="SELECT *,count(account_status) as count FROM student_information group by account_status;";
                              $result1 = mysqli_query($conn,$sql1);
                              $chart_data="";
                              while ($row1 = mysqli_fetch_array($result1)) { 
@@ -198,6 +198,10 @@ include('session.php');
                                 $name1[]  = $row1['account_status']  ;
                                 $counts1[] = $row1['count'];
                             }
+                            $sql11 ="SELECT account_status FROM student_information";
+                            $result11 = mysqli_query($conn,$sql11);
+                            $total1 = mysqli_num_rows($result11);
+                            $overall1[] = $total1;
                     ?>
             </div>
           </div><!-- End Website Traffic -->
@@ -289,7 +293,7 @@ include('session.php');
               formatter: (value, ctx) => {
                 const datapoints = ctx.chart.data.datasets[0].data
                 const total = datapoints.reduce((total, datapoint) => total + datapoint, 0)
-                const percentage = value / total * 100
+                const percentage = value / <?php echo json_encode($overall1);?> * 100
                 return percentage.toFixed(2) + "%";
               },
               color: 'rgb(255, 255, 255)',

@@ -232,13 +232,17 @@ include('session.php');
                     <?php
                       require_once("include/conn.php");
                         $sql1 ="SELECT *,count(office) as count FROM user_information WHERE department='DATMS' group by office;";
-                        $result1 = mysqli_query($conn,$sql1);
+                        $result1 = mysqli_query($conn,$sql1);                    
                         $chart_data="";
                         while ($row1 = mysqli_fetch_array($result1)) { 
                 
                             $name1[]  = $row1['office']  ;
                             $counts1[] = $row1['count'];
                         }
+                        $sql11 ="SELECT office FROM user_information WHERE department='DATMS' ";
+                        $result11 = mysqli_query($conn,$sql11);
+                        $total1 = mysqli_num_rows($result11);
+                        $overall1[] = $total1;
                       ?>
               </div>
             </div>
@@ -251,14 +255,18 @@ include('session.php');
                 <canvas id="studChart" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
                     <?php
                       require_once("include/conn.php");
-                        $sql2 ="SELECT *,count(course) as count FROM student_information group by course;";
+                        $sql2 ="SELECT course,count(course) as count FROM student_information group by course;";
                         $result2 = mysqli_query($conn,$sql2);
                         $chart_data="";
                         while ($row2 = mysqli_fetch_array($result2)) { 
                 
-                            $name2[]  = $row2['course']  ;
+                            $name2[]  = $row2['course'];
                             $counts2[] = $row2['count'];
                         }
+                        $sql22 ="SELECT course FROM student_information";
+                        $result22 = mysqli_query($conn,$sql22);
+                        $total2 = mysqli_num_rows($result22);
+                        $overall2[] = $total2;
                       ?>
               </div>
             </div>
@@ -440,13 +448,13 @@ include('session.php');
                   formatter: (value, ctx) => {
                     const datapoints = ctx.chart.data.datasets[0].data
                     const total = datapoints.reduce((total, datapoint) => total + datapoint, 0)
-                    const percentage = value / total * 100
+                    const percentage = value / <?php echo json_encode($overall1);?> * 100
                     return percentage.toFixed(2) + "%";
                   },
                   color: 'rgb(255, 255, 255)',
                   font: {
-                    size: 15,
-                    weight: '700'
+                    size: 13,
+                    weight: '500'
                   },
                   
                   
@@ -495,13 +503,13 @@ include('session.php');
                   formatter: (value, ctx) => {
                     const datapoints = ctx.chart.data.datasets[0].data
                     const total = datapoints.reduce((total, datapoint) => total + datapoint, 0)
-                    const percentage = value / total * 100
+                    const percentage = value / <?php echo json_encode($overall2);?> * 100
                     return percentage.toFixed(2) + "%";
                   },
                   color: 'rgb(255, 255, 255)',
                   font: {
-                    size: 15,
-                    weight: '700'
+                    size: 13,
+                    weight: '500'
                   }
                 }
               }
@@ -509,7 +517,7 @@ include('session.php');
 
             var ctx = document.getElementById("studChart").getContext('2d');
             var myAreaChart = new Chart(ctx, {
-              type: 'polarArea',
+              type: 'pie',
               data: {
               labels: <?php echo json_encode($name2); ?>,
                 datasets: data
