@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-xs-6 text-right menu-1">
                     <ul>
-                        <li class="<?php if($page=='home'){echo 'active';}?>"><a href="index">Home</a></li>
+                        <li class="<?php if($page=='home'){echo 'active';}?>"><a href="Index">Home</a></li>
                         <li class="<?php if($page=='modules'){echo 'active';}?>"><a href="modules">Modules</a></li>
                         <li class=""><a href="dynamic-login"><span>Login</span></a></li>
                         <!-- <li class="<?php if($page=='about'){echo 'active';}?>"><a href="about">About</a></li> -->
