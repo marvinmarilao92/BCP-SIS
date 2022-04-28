@@ -1,3 +1,9 @@
+<?php
+session_start();
+  if(isset($_SESSION['session_url'])){
+    header("location: ".$_SESSION['session_url']."");
+  }
+?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -567,7 +573,7 @@
 					</div>					
 					<div class="modal-footer">				
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>   
-						<a type="button" class="btn btn-primary" href="UserManagement/online-enrollment.php" >I AGREE</a>     
+						<a type="button" class="btn btn-primary" href="UserManagement/online-enrollment" >I AGREE</a>     
 					</div>
 				</div>
 			</div>

@@ -499,7 +499,7 @@ include('session.php');
                       <div class="card">
                        
                         <div class="card-body">
-                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">REGISTRAR ADMIN</h5></a>
+                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">REGISTRAR ADMIN</h5></a>
                           <p class="card-text">Click here to access module</p>
                         </div>
                       </div>
@@ -519,7 +519,7 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">DOCUMENT APPROVER</h5></a>
+                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">DOCUMENT APPROVER</h5></a>
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>
@@ -529,7 +529,7 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                           <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">ADMISSION</h5></a>
+                           <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">ADMISSION</h5></a>
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>
@@ -539,7 +539,7 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">CASHIER</h5></a>
+                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">CASHIER</h5></a>
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>

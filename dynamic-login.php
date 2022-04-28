@@ -3,6 +3,10 @@
   require_once "config.php";
     session_start();
   $error = "";
+  if(isset($_SESSION['session_url'])){
+    header("location: ".$_SESSION['session_url']."");
+  }
+
   if($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $time=time()-70;
@@ -65,6 +69,7 @@
                         case "Clearance Administrator":
                           //statement
                           $_SESSION['session_username'] = $myusername;
+                          $_SESSION['session_url'] = "Clearance/clearance-administrator/index.php?id=".$_SESSION["login_key"]."";
                           if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -95,6 +100,7 @@
                                         while($roww = mysqli_fetch_array($resultt)){
                                             if($row1["role"] == $roww["role"]){
                                               $_SESSION['session_username'] = $myusername;
+                                              $_SESSION['session_url'] = "Clearance/clearance-coordinator/index.php?id=".$_SESSION["login_key"]."";
                                               if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                                   $ip = $_SERVER["HTTP_CLIENT_IP"];
                                                 }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -133,6 +139,7 @@
                           case "Help Desk Administrator":
                             //statement
                             $_SESSION['session_username'] = $myusername;
+                            $_SESSION['session_url'] = "Help-Desk-System/Admin/index.php?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                 $ip = $_SERVER["HTTP_CLIENT_IP"];
                               }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -156,6 +163,7 @@
                           case "HDMS School Admin":
                             //statement
                             $_SESSION['session_username'] = $myusername;
+                            $_SESSION['session_url'] = "Help-Desk-System/SchoolAdmin/index.php?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                 $ip = $_SERVER["HTTP_CLIENT_IP"];
                               }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -179,6 +187,7 @@
                             case "HDMS Department":
                               //statement
                               $_SESSION['session_username'] = $myusername;
+                              $_SESSION['session_url'] = "Help-Desk-System/Department/index.php?id=".$_SESSION["login_key"]."";
                               if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                   $ip = $_SERVER["HTTP_CLIENT_IP"];
                                 }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -201,6 +210,7 @@
                             case "HDMS Program":
                               //statement
                               $_SESSION['session_username'] = $myusername;
+                              $_SESSION['session_url'] = "Help-Desk-System/Program/index.php?id=".$_SESSION["login_key"]."";
                               if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                   $ip = $_SERVER["HTTP_CLIENT_IP"];
                                 }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -227,6 +237,7 @@
                         case "Registrar Administrator":
                           //statement
                           $_SESSION['session_username'] = $myusername;
+                          $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index.php?id=".$_SESSION["login_key"]."";
                           if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -250,6 +261,7 @@
                         case "DATMS Approver":
                           //statement
                           $_SESSION['session_username'] = $myusername;
+                          $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index.php?id=".$_SESSION["login_key"]."";
                           if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -272,6 +284,7 @@
                         case "Assistant Registrar":
                             //statement
                             $_SESSION['session_username'] = $myusername;
+                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index.php?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -294,6 +307,7 @@
                         case "Registrar Officer":
                             //statement
                             $_SESSION['session_username'] = $myusername;
+                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index.php?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -316,6 +330,7 @@
                           case "Cashier":
                             //statement
                             $_SESSION['session_username'] = $myusername;
+                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index.php?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                 $ip = $_SERVER["HTTP_CLIENT_IP"];
                               }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -338,6 +353,7 @@
                           case "Admission":
                             //statement
                             $_SESSION['session_username'] = $myusername;
+                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index.php?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                 $ip = $_SERVER["HTTP_CLIENT_IP"];
                               }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -363,7 +379,8 @@
                           switch($row1["role"]){
                             case "SuperAdmin":
                               //statement
-                              $_SESSION['session_username'] = $myusername;
+                              $_SESSION['session_username'] = $myusername;                           
+                              $_SESSION['session_url'] = "super_admin/index.php?id=".$_SESSION["login_key"]."";
                               if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                   $ip = $_SERVER["HTTP_CLIENT_IP"];
                                 }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -406,7 +423,7 @@
                         case "User Management Administrator":
                           //statement
                           $_SESSION['session_username'] = $myusername;
-    
+                          $_SESSION['session_url'] = "UserManagement/index.php?id=".$_SESSION["login_key"]."";
                           if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -442,6 +459,7 @@
                       //Add data to session
                       $_SESSION['session_username'] = $myusername;
                       $_SESSION['session_department'] = "Student";
+                      $_SESSION['session_url'] = "Student_Portal/index.php?id=".$_SESSION["login_key"]."";
                       $id1=$row2['id'];
                       $admin1=$row2['id_number'];
                       $fname1=$row2['role'];
@@ -476,6 +494,7 @@
                         while($row3 = mysqli_fetch_array($result3)){
                           //Add data to session
                           $_SESSION['session_username'] = $myusername;
+                          $_SESSION['session_url'] = "Teacher_Portal/index.php?id=".$_SESSION["login_key"]."";
                           $_SESSION['session_department'] = "Teacher";
 
                           $id2=$row3['id'];
@@ -552,9 +571,7 @@
           }//end else
         }
     }
-      
     
-
       // Getting IP Address
       function getIpAddr(){
         if (!empty($_SERVER['HTTP_CLIENT_IP'])){
