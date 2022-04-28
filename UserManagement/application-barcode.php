@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include 'config.php';
+    include 'includes/config.php';
     if(isset($_SESSION['session_code'])){
       $user_id_checker = $_SESSION['session_code'];
   

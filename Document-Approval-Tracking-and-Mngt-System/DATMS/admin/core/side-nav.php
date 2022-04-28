@@ -11,18 +11,17 @@
             switch($verified_session_role){
               case "SuperAdmin":
                 //statement
-                $output .= '
-                <li class="nav-item" >
-                  <a href="../../../super_admin/index.php?id='.$key.'"style="color: rgb(83, 107, 148);font-weight:600;">
+                ?>
+                 <li class="nav-item">
+                  <a href="../../../super_admin/index?id=<?php echo $_SESSION["login_key"];?>" class="<?php echo 'nav-link collapsed';?>" >
                     <i class="bi bi-arrow-return-left"></i>
                     <span>Return to SuperUser</span>
                   </a>
-                </li><!-- End Return Nav -->    
-                ';
-
+                </li><!-- End Return Nav -->        
+            
+                <?php
                 break;  
-            }
-            echo $output;
+            } 
         }else{
 
         }
@@ -31,7 +30,7 @@
       <li class="nav-heading">Module</li>
 
         <li class="nav-item">
-          <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='dashboard'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="index?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='dashboard'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="bi bi-bar-chart-line"></i>
             <span>Dashboard</span>
           </a>
@@ -39,14 +38,14 @@
 
 
         <li class="nav-item">
-          <a href="requirements.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='req'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="requirements?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='req'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="ri-folder-5-line"></i>
             <span>Requirements &nbsp;</span>
           </a>
         </li><!-- All docs Nav -->
 
         <li class="nav-item">
-          <a href="documents_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="documents_list?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="ri-book-2-line"></i>
             <span>Documents &nbsp;&nbsp;&nbsp;</span>
             <span class="badge bg-secondary">
@@ -63,7 +62,7 @@
         </li><!-- All docs Nav -->
 
         <li class="nav-item">
-          <a href="incoming_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='incoming'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="incoming_docs?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='incoming'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="ri-file-download-line"></i>
             <span>Incoming &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span class="badge bg-warning text-dark">
@@ -80,7 +79,7 @@
         </li><!-- Incoming item Nav -->
 
         <li class="nav-item">
-          <a href="received_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='recieved'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="received_docs?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='recieved'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="ri-mail-check-line"></i>
             <span>Received &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span class="badge bg-success badge-number">
@@ -97,7 +96,7 @@
         </li><!-- recieved item Nav -->
 
         <li class="nav-item">
-          <a href="outgoing_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='outgoing'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="outgoing_docs?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='outgoing'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="ri-send-plane-line"></i>
             <span>Outgoing &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span class="badge bg-danger badge-number">
@@ -114,7 +113,7 @@
         </li><!-- outgoing item Nav -->
 
         <li class="nav-item">
-          <a href="hold_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='hold'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="hold_docs?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='hold'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="ri-question-mark"></i>
             <span>Hold &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span class="badge bg-primary badge-number"> <?php 
@@ -129,7 +128,7 @@
         </li> <!-- hold item Nav -->
 
         <li class="nav-item">
-          <a href="reject_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='reject'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="reject_docs?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='reject'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="ri-delete-bin-2-line"></i>
             <span>Rejected &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span class="badge bg-dark badge-number"> <?php 
@@ -144,7 +143,7 @@
         </li> <!-- hold item Nav -->
 
         <li class="nav-item">
-          <a href="tracking_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='track'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="tracking_docs?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='track'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="bi bi-geo"></i>
             <span>Track Douments</span>
           </a>
@@ -158,34 +157,34 @@
 
             <li class="nav-heading">Students Clearance</li>
               <li>
-                <a href="student-clearance-requirements.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SCR'){echo 'active';}?>">
+                <a href="student-clearance-requirements?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SCR'){echo 'active';}?>">
                   <i class="bi bi-circle"></i><span>Students Requirements</span>
                 </a>
               </li>
               <li>
-                <a href="student-clearance-status.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SCS'){echo 'active';}?>">
+                <a href="student-clearance-status?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SCS'){echo 'active';}?>">
                   <i class="bi bi-circle"></i><span>Students Status List</span>
                 </a>
               </li>
               <li>
-                <a href="student-clearance-appointment.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SCA'){echo 'active';}?>">
+                <a href="student-clearance-appointment?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SCA'){echo 'active';}?>">
                   <i class="bi bi-circle"></i><span>Students Appointments</span>
                 </a>
               </li>
 
               <li class="nav-heading">Teachers Clearance</li>
               <li>
-                <a href="teacher-clearance-requirements.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TCR'){echo 'active';}?>">
+                <a href="teacher-clearance-requirements?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TCR'){echo 'active';}?>">
                   <i class="bi bi-circle"></i><span>Teachers Requirements</span>
                 </a>
               </li>
               <li>
-                <a href="teacher-clearance-status.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TCS'){echo 'active';}?>">
+                <a href="teacher-clearance-status?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TCS'){echo 'active';}?>">
                   <i class="bi bi-circle"></i><span>Teachers Status List</span>
                 </a>
               </li>
               <li>
-                <a href="teacher-clearance-appointment.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TCA'){echo 'active';}?>">
+                <a href="teacher-clearance-appointment?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TCA'){echo 'active';}?>">
                   <i class="bi bi-circle"></i><span>Teachers Appointments</span>
                 </a>
               </li>
@@ -199,12 +198,12 @@
           </a>
           <ul id="list-nav" class="<?php if($col=='list'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
             <li>
-            <a href="stud_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SL'){echo 'active';}?>">
+            <a href="stud_list?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='SL'){echo 'active';}?>">
               <i class="bi bi-circle"></i><span>Students List</span>
               </a>
             </li>
             <li>
-            <a href="teacher_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TL'){echo 'active';}?>">
+            <a href="teacher_list?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TL'){echo 'active';}?>">
               <i class="bi bi-circle"></i><span>Teachers List</span>
               </a>
             </li>
@@ -217,12 +216,12 @@
           </a>
           <ul id="reports-nav" class="<?php if($col=='reports'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
             <li>
-            <a href="reports_user.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='UR'){echo 'active';}?>">
+            <a href="reports_user?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='UR'){echo 'active';}?>">
               <i class="bi bi-circle"></i><span>User Reports</span>
               </a>
             </li>
             <li>
-            <a href="reports_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='DR'){echo 'active';}?>">
+            <a href="reports_docs?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='DR'){echo 'active';}?>">
               <i class="bi bi-circle"></i><span>Document Reports</span>
               </a>
             </li>
@@ -236,27 +235,27 @@
           </a>
           <ul id="audit-nav" class="<?php if($col=='logs'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
           <li>
-              <a href="logs_admin.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='AdL'){echo 'active';}?>">
+              <a href="logs_admin?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='AdL'){echo 'active';}?>">
                 <i class="bi bi-circle"></i><span>Registrar Admin Logs</span>
               </a>
             </li>
             <li>
-              <a href="logs_approver.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='ApL'){echo 'active';}?>">
+              <a href="logs_approver?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='ApL'){echo 'active';}?>">
                 <i class="bi bi-circle"></i><span>Approver Logs</span>
               </a>
             </li>
             <li>
-              <a href="logs_assistant.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='AL'){echo 'active';}?>">
+              <a href="logs_assistant?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='AL'){echo 'active';}?>">
                 <i class="bi bi-circle"></i><span>Assistant Registrar Logs</span>
               </a>
             </li>
             <li>
-              <a href="logs_admission.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='AdmL'){echo 'active';}?>">
+              <a href="logs_admission?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='AdmL'){echo 'active';}?>">
                 <i class="bi bi-circle"></i><span>Admission Logs</span>
               </a>
             </li>
             <li>
-              <a href="logs_ro.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='ROL'){echo 'active';}?>">
+              <a href="logs_ro?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='ROL'){echo 'active';}?>">
                 <i class="bi bi-circle"></i><span>Registrar Officer Logs</span>
               </a>
             </li>
@@ -266,42 +265,42 @@
       <li class="nav-heading">Settings</li>
 
        <li class="nav-item">
-          <a href="create_program.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='prog'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="create_program?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='prog'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="bi bi-book"></i>
             <span>Program</span>
           </a>
         </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a href="create_doctype.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='doctT'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="create_doctype?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='doctT'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="bi bi-file-earmark-text"></i>
             <span>Doc Type</span>
           </a>
         </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a href="create_dept.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='department'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="create_dept?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='department'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="bi bi-building"></i>
             <span>Department</span>
           </a>
         </li><!-- End Add office Page Nav -->
 
         <li class="nav-item">
-          <a href="users-profile.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='PRO'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="users-profile?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='PRO'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="bi bi-person"></i>
             <span>Profile</span>
           </a>
         </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
-          <a href="FAQ.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='FAQ'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="FAQ?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='FAQ'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="bi bi-question-circle"></i>
             <span>F.A.Q</span>
           </a>
         </li><!-- End Contact Page Nav -->
 
         <li class="nav-item">
-          <a href="pages-contact.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='contact'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="pages-contact?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='contact'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="bi bi-envelope"></i>
             <span>Contact</span>
           </a>

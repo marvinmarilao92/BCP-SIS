@@ -1,5 +1,5 @@
 <?php
-      include 'config.php';
+      include 'includes/config.php';
       session_start();
         // Define variables and initialize with empty values
         $student_number = "";
@@ -187,7 +187,7 @@
                                       <option value="#" selected="selected" disabled="disabled">Select Course</option>
                                       <?php
                                         // Include config file
-                                        require_once "config.php";
+                                        require_once "includes/config.php";
                                         // Attempt select query execution
                                         $sql2 = "SELECT * FROM datms_program ORDER BY date desc ";
                                         if($result2 = mysqli_query($link, $sql2)){

@@ -380,7 +380,7 @@ include('session.php');
           </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="form-floating">
             <select class="form-select" name="status" id="status" aria-label="State" required>
               <option selected disabled value="">Select Status</option>
@@ -393,7 +393,7 @@ include('session.php');
           </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="form-floating">
             <select class="form-select" name="year_level" id="year_level" aria-label="State" required>
               <option value="" selected disabled>Select Year Level</option>
@@ -406,42 +406,14 @@ include('session.php');
           </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4" style="display: none;">
           <div class="form-floating">
-            <select class="form-select" name="school_year" id="school_year" aria-label="State" required>
-              <option value="" selected="selected" disabled="disabled">Select School Year</option>
-              <option value="2031-2032">2031-2032</option>
-              <option value="2029-2030">2029-2030</option>
-              <option value="2028-2029">2028-2029</option>
-              <option value="2027-2028">2027-2028</option>
-              <option value="2025-2026">2025-2026</option>
-              <option value="2024-2025">2024-2025</option>
-              <option value="2023-2024">2023-2024</option>
-              <option value="2022-2023">2022-2023</option>
-              <option value="2021-2022">2021-2022</option>
-              <option value="2020-2021">2020-2021</option>
-              <option value="2019-2020">2019-2020</option>
-              <option value="2018-2019">2018-2019</option>
-              <option value="2017-2018">2017-2018</option>
-              <option value="2016-2017">2016-2017</option>
-              <option value="2015-2016">2015-2016</option>
-              <option value="2014-2015">2014-2015</option>
-              <option value="2013-2014">2013-2014</option>
-              <option value="2012-2013">2012-2013</option>
-              <option value="2011-2012">2011-2012</option>
-              <option value="2010-2011">2010-2011</option>
-              <option value="2009-2010">2009-2010</option>
-              <option value="2008-2009">2008-2009</option>
-              <option value="2007-2008">2007-2008</option>
-              <option value="2006-2007">2006-2007</option>
-              <option value="2005-2006">2005-2006</option>
-              <option value="2004-2005">2004-2005</option>
-            </select>
-            <label for="floatingSelect">School Level</label>
+            <input type="text" class="form-control school_year" id="school_year" name="school_year" value="<?php $currentYear = date("Y"); $previousYear = $currentYear-1; $SY = $previousYear.'-'. $currentYear; echo $SY;?>"  id="school_year" required >
+            <label for="floatingName" required>School Year</label>
           </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="form-floating">
             <input type="text" class="form-control" name="section" id="section" placeholder="Section" required>
             <label for="floatingName">Section</label>
@@ -456,62 +428,14 @@ include('session.php');
       </div>
     </div>
   </div><!-- End No Labels Form -->
-  <!-- 
-  <form class="card col-md-12" method="POST">
-    <div class="card-body">
-      <h5 class="card-title">New Student Requirements:</h5>
-        <div class="row mb-12" aria-required="true">
-          
-          <div class="col-md-12 pt-1">
-
-          <?php
-          $requirments ='';
-              // Include config file
-              require_once "include/config.php";
-              // Attempt select query execution
-              $sql = "SELECT * FROM datms_req ORDER BY id asc ";
-              if($result = mysqli_query($link, $sql)){
-                if(mysqli_num_rows($result) > 0){
-                  while($row = mysqli_fetch_array($result)){
-                    $requirments .='
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="req_item" name="req_item[]" value="'.$row["req_name"].'">
-                      <label class="form-check-label" for="gridCheck1">
-                      '.$row["req_name"].'
-                      </label>
-                    </div>
-                    ';
-          
-                  }
-                  echo $requirments;
-                  // Free result set
-                  mysqli_free_result($result);
-                }
-              }
-          ?>        
-          </div>
-
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg" name="submit_req" style="float: right;">Submit</button>
-    </div>
-  </form> -->
-
-
 </main><!-- End #main -->
-<?php
-  // }else{
-  //   echo'<script type = "text/javascript">            
-  //         window.location = "req_submit.php?id='.$key.'";//refresh pages
-  //        </script>';
-  // }
-  ?>
-  
+ 
 
   <!-- ======= Footer ======= -->
   <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center" style="background-color: rgb(13, 110, 253);"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
@@ -519,6 +443,43 @@ include('session.php');
 
 <!-- Script Functions -->
   <script type="text/javascript">
+    // Prevent you from turning back or using back button
+        (function (global) {
+
+          if(typeof (global) === "undefined") {
+              throw new Error("window is undefined");
+          }
+
+          var _hash = "!";
+          var noBackPlease = function () {
+              global.location.href += "#";
+
+              // Making sure we have the fruit available for juice (^__^)
+              global.setTimeout(function () {
+                  global.location.href += "!";
+              }, 50);
+          };
+
+          global.onhashchange = function () {
+              if (global.location.hash !== _hash) {
+                  global.location.hash = _hash;
+              }
+          };
+
+          global.onload = function () {
+              noBackPlease();
+
+              // Disables backspace on page except on input fields and textarea..
+              document.body.onkeydown = function (e) {
+                  var elm = e.target.nodeName.toLowerCase();
+                  if (e.which === 8 && (elm !== 'input' && elm  !== 'textarea')) {
+                      e.preventDefault();
+                  }
+                  // Stopping the event bubbling up the DOM tree...
+                  e.stopPropagation();
+              };
+          }
+        })(window);
         function editInfo(){
           var isChecked = document.getElementById("editableswitch").checked;
             
@@ -700,6 +661,7 @@ include('session.php');
 
     var jsonObj;
     
+    document.getElementById('TextBoxID').readOnly = false; 
 
       // input text only
       function isTextKey(evt){

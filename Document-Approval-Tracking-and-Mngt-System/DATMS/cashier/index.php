@@ -88,65 +88,101 @@ include('session.php');
   <?php include ('core/js.php');//css connection?>
 <!-- Charts -->
 <script>
-      // modal JS and ajax function
-          $(document).ready(function () {
+    // Prevent you from turning back or using back button
+      (function (global) {
 
-              // update payment function
-              $('#btnpaid').click(function(a){ 
-                  a.preventDefault();
-                    if($('#adm_code').val()!="" && $('#or_number').val()!=""){
-                      $.post("function/payment.php", {
-                        admcode:$('#adm_code').val(),
-                        ornumber:$('#or_number').val()
-                        },function(data){
-                        if (data.trim() == "failed"){                          
-                          Swal.fire("No application registered to that code","","error");//response message
-                          // Empty test field
-                          $('#adm_code').val("")
-                          $('#or_number').val("")
-                        }else if(data.trim() == "success"){                          
-                                //success message
-                                const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 1100,
-                                timerProsressBar: true,
-                                didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                
-                                }
-                                })
-                              Toast.fire({
-                              icon: 'success',
-                              title:'You successfully updated payment status'
-                              }).then(function(){
-                                document.location.reload(true)//refresh pages
-                              });
-                                $('#adm_code').val("")
-                                $('#or_number').val("")
-                          }else{
-                            Swal.fire(data);
-                        }
-                      })
-                    }else{
-                      Swal.fire("You must fill out every field","","warning");
+        if(typeof (global) === "undefined") {
+            throw new Error("window is undefined");
+        }
+
+        var _hash = "!";
+        var noBackPlease = function () {
+            global.location.href += "#";
+
+            // Making sure we prevent user to use any form of return function 
+            global.setTimeout(function () {
+                global.location.href += "!";
+            }, 50);
+        };
+
+        global.onhashchange = function () {
+            if (global.location.hash !== _hash) {
+                global.location.hash = _hash;
+            }
+        };
+
+        global.onload = function () {
+            noBackPlease();
+
+            // Disables backspace on page except on input fields and textarea..
+            document.body.onkeydown = function (e) {
+                var elm = e.target.nodeName.toLowerCase();
+                if (e.which === 8 && (elm !== 'input' && elm  !== 'textarea')) {
+                    e.preventDefault();
+                }
+                // Stopping the event bubbling up the DOM tree...
+                e.stopPropagation();
+            };
+        }
+      })(window);
+    // modal JS and ajax function
+      $(document).ready(function () {
+
+          // update payment function
+          $('#btnpaid').click(function(a){ 
+              a.preventDefault();
+                if($('#adm_code').val()!="" && $('#or_number').val()!=""){
+                  $.post("function/payment.php", {
+                    admcode:$('#adm_code').val(),
+                    ornumber:$('#or_number').val()
+                    },function(data){
+                    if (data.trim() == "failed"){                          
+                      Swal.fire("No application registered to that code","","error");//response message
+                      // Empty test field
+                      $('#adm_code').val("")
+                      $('#or_number').val("")
+                    }else if(data.trim() == "success"){                          
+                            //success message
+                            const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 1100,
+                            timerProsressBar: true,
+                            didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            
+                            }
+                            })
+                          Toast.fire({
+                          icon: 'success',
+                          title:'You successfully updated payment status'
+                          }).then(function(){
+                            document.location.reload(true)//refresh pages
+                          });
+                            $('#adm_code').val("")
+                            $('#or_number').val("")
+                      }else{
+                        Swal.fire(data);
                     }
                   })
-              // End Save Department function
+                }else{
+                  Swal.fire("You must fill out every field","","warning");
+                }
+              })
+          // End Save Department function
 
-          });
-
+      });
     // input numbers only
-    function isNumberKey(evt){
-          var charCode = (evt.which) ? evt.which : evt.keyCode
-          if (charCode > 31 && (charCode < 48 || charCode > 57)){
-            return false;
-          }else{
-             return true;
-          }
+      function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57)){
+          return false;
+        }else{
+            return true;
         }
+      }
   </script>
 </body>
 

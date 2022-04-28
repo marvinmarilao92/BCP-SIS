@@ -101,12 +101,12 @@ include('includes/session.php');
                 <div class="col-lg-12">
                   <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
                       <h4>Document List</h4>
-                  </div> 
+                  </div>
                 </div>
                 <div class="card-body" >           
                   <!-- Table for Document List records -->
                   <form method="POST">
-                    <table class="table table-hover datatable" >
+                    <table class="table table-hover datatable" id="DocuTable">
                     <thead>
                       <tr>
                         <th scope="col">DocCode</th>
@@ -281,47 +281,13 @@ include('includes/session.php');
                         </div>   
                     </div>
                     <div class="modal-footer">
-                      <button class="btn btn-primary" name="print" id="print" >Print</button>
+                      <!-- <button class="btn btn-primary" name="print" id="print" >Print</button> -->
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                   </div>
                 </div>
             </div>
             <!-- End View office Modal-->
-
-            <!-- History Document modal -->
-            <div class="modal fade" id="HistoryModal" tabindex="-1">
-                <div class="modal-dialog modal-xl">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Tracking History &nbsp; <i class="bi bi-clock-history text-primary"></i></h5>
-
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="card" style="margin: 5px;">
-                          <div class="card-body">
-                              <input type="text" id="search_text" name="search_text" class="form-control" placeholder="Title" onfocus="docHistory(this.value);" autofocus>
-                          </div>
-                            <!-- Tracking Activity module -->
-                            
-                              <div class="card-body">
-                                <!-- History tables -->
-                                  <div class="activity">
-                                  </div>
-                                <!-- End History tables -->
-                    
-                            </div>
-                            <!-- End Tracking Activity module -->
-                        </div>   
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <!-- End History office Modal-->
 
             <!-- Desc Document modal -->
             <div class="modal fade" id="RemarksModal" tabindex="-1">
@@ -350,73 +316,6 @@ include('includes/session.php');
             </div>
             <!-- End Desc office Modal-->
 
-            <!-- Edit Document List Modal -->
-            <div class="modal fade" id="EditModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">EDIT OFFICE</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                          <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h2 class="card-title">Change information</h2>
-                                <!-- Fill out Form -->
-                                <div class="row g-3" >
-                                  <input type="hidden" class="form-control" id="dt_idE" readonly>
-                                  <div class="col-md-4">
-                                      Code: <input type="text" class="form-control" id="dt_codeE" readonly>
-                                  </div>
-                                  <br>
-                                  <div class="col-md-8">
-                                      Name: <input type="text" class="form-control" id="dt_nameE">
-                                  </div>
-                                  <br>
-                                  <div class="col-12">
-                                      Location: <textarea  style="height: 80px" class="form-control" id="dt_descE"></textarea>
-                                  </div>        
-                                </div>
-                              
-                            </div>
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button class="btn btn-primary" name="save" id="edit" >Save changes</button>
-                            </div>
-                        <!-- End Form -->
-                    </div>
-                </div>
-            </div>
-            <!-- End Edit Document List Modal-->
-
-            <!-- Delete Document List Modal -->
-            <div class="modal fade" id="DeleteModal" tabindex="-1">
-              <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">DELETE OFFICE</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                        <div class="card" style="margin: 10px;">
-                          <div class="card-body">                
-                            <br>
-                            <input type="hidden"  name="delete_id" id="delete_id" readonly>
-                            <center>
-                              <h5>Are you sure you want to delete these Document List?</h5>
-                              <h5 class="text-danger">This action cannot be undone.</h5>   
-                            </center>                
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Document List</button>
-                        </div>
-                      <!-- End Form -->
-                  </div>
-              </div>
-            </div>
-            <!-- End delete Document List Modal -->
-
           <!-- End of Document List Modals -->
           
          <!-- Vendor JS Files/ Template main js file -->
@@ -424,299 +323,13 @@ include('includes/session.php');
           <!-- End Footer -->
 
           <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-          <!-- Create Document to Track -->
-          <?php
-              // connect to the database
-              require_once("includes/conn.php");
-              
-              // Uploads files
-              if (isset($_POST['save'])) { // if save button on the form is clicked
-                    // name of the uploaded file
-                    date_default_timezone_set("asia/manila");
-                    $key = $_SESSION["login_key"];
-                    $date = date("Y-m-dh:i:s A",strtotime("+0 HOURS"));
-                    $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
-                    // $doc_user = $_POST['doccreator'];
-                    // $doc_office = $_POST['docoffice'];
-                    // $doc_title = $_POST['docname'];
-                    // $doc_type = $_POST['doctype'];
-                    // $doc_desc = $_POST['docdesc'];
-                    $doc_user = mysqli_real_escape_string($conn,$_POST['doccreator']);
-                    $doc_office = mysqli_real_escape_string($conn,$_POST['docoffice']);
-                    $doc_title = mysqli_real_escape_string($conn,$_POST['docname']);
-                    $doc_type = mysqli_real_escape_string($conn,$_POST['doctype']);
-                    $doc_desc = mysqli_real_escape_string($conn,$_POST['docdesc']);
-                    
-                    $filename = $_FILES['docfile']['name'];
-
-                    // $Admin = $_FILES['admin']['name'];
-                    // destination of the file on the server
-                    $destination = '../../../assets/uploads/' . $filename;
-
-                    // get the file extension
-                    $extension = pathinfo($filename, PATHINFO_EXTENSION);
-
-                    // the physical file on a temporary uploads directory on the server
-                    $file = $_FILES['docfile']['tmp_name'];
-                    $size = $_FILES['docfile']['size'];
-
-                    $isExist = true;
-                    //checking if there's a duplicate number because we use random number for id numbers to prevent errors (NOTE PARTILLY TESTED)
-                    date_default_timezone_set("asia/manila");
-                    $year = date("Y",strtotime("+0 HOURS"));
-                    $random_num= rand(1000,9999);
-                    $doc_code =  "doc".$year.$random_num;
-
-                    $query  = "SELECT *,LEFT(middlename,1) as MI FROM student_information WHERE `account_status` NOT IN ('Unofficial') AND id_number = '".$doc_title."'";
-                    $result = mysqli_query($conn, $query);
-                    if(mysqli_num_rows($result) > 0){
-                      if (!in_array($extension, ['pdf'])) {
-                        echo'<script type = "text/javascript">
-                                  //success message
-                                  const Toast = Swal.mixin({
-                                  toast: true,
-                                  position: "top-end",
-                                  showConfirmButton: false,
-                                  timer: 2000,
-                                  timerProsressBar: true,
-                                  didOpen: (toast) => {
-                                  toast.addEventListener("mouseenter", Swal.stopTimer)
-                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                  }
-                                  })
-                                  Toast.fire({
-                                  icon: "error",
-                                  title:"File extension must be: .pdf"
-                                  }).then(function(){
-                                    window.location = "index.php?id='.$key.'";//refresh pages
-                                  });
-                              </script>
-                          ';
-                                      
-                        } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
-                                    echo "File too large!";
-                        }else{
-                          $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
-                          $counter=mysqli_num_rows($query);
-                          
-                          if ($counter == 1) 
-                            { 
-                              echo'<script type = "text/javascript">
-                                      //success message
-                                      const Toast = Swal.mixin({
-                                      toast: true,
-                                      position: "top-end",
-                                      showConfirmButton: false,
-                                      timer: 3000,
-                                      timerProsressBar: true,
-                                      didOpen: (toast) => {
-                                      toast.addEventListener("mouseenter", Swal.stopTimer)
-                                      toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                      }
-                                      })
-                                      Toast.fire({
-                                      icon: "warning",
-                                      title:"File name already taken<br>You have to change the name of file"
-                                      }).then(function(){
-                                        window.location = "index.php?id='.$key.'";//refresh pages
-                                      });
-                                  </script>
-                            ';
-                            }else{
-                            // move the uploaded (temporary) file to the specified destination
-                              if (move_uploaded_file($file, $destination)) {
-                                  $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
-                                  VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
-                                
-                                  if (mysqli_query($conn, $sql)) {
-
-                                    $sql1 = "INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
-                                    VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
-
-                                    if (mysqli_query($conn, $sql1)) {
-                                      echo'<script type = "text/javascript">
-                                        //success message
-                                        const Toast = Swal.mixin({
-                                        toast: true,
-                                        position: "top-end",
-                                        showConfirmButton: false,
-                                        timer: 2000,
-                                        timerProsressBar: true,
-                                        didOpen: (toast) => {
-                                        toast.addEventListener("mouseenter", Swal.stopTimer)
-                                        toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                        }
-                                        })
-                                        Toast.fire({
-                                        icon: "success",
-                                        title:"Document to track Successfully Created"
-                                        }).then(function(){
-                                          window.location = "index.php?id='.$key.'";//refresh pages
-                                        });
-                                    </script>';
-                                    
-                                    }else{
-                                      echo "Failed Upload files!"; 
-                                    }                       
-                                  }
-                              } else {
-                                  echo "Failed Upload files!";
-                              }
-                              }         
-                        }
-                      }else{
-                      $query  = "SELECT *,LEFT(middlename,1) as MI FROM teacher_information WHERE `account_status` NOT IN ('Inactive') AND id_number = '".$doc_title."'";
-                      $result = mysqli_query($conn, $query);
-                      if(mysqli_num_rows($result) > 0){
-                        if (!in_array($extension, ['pdf'])) {
-                          echo'<script type = "text/javascript">
-                                    //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: "top-end",
-                                    showConfirmButton: false,
-                                    timer: 2000,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener("mouseenter", Swal.stopTimer)
-                                    toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                    }
-                                    })
-                                    Toast.fire({
-                                    icon: "error",
-                                    title:"File extension must be: .pdf"
-                                    }).then(function(){
-                                      window.location = "index.php?id='.$key.'";//refresh pages
-                                    });
-                                </script>
-                            ';
-                                        
-                          } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
-                                      echo "File too large!";
-                          }else{
-                            $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
-                            $counter=mysqli_num_rows($query);
-                            
-                            if ($counter == 1) 
-                              { 
-                                echo'<script type = "text/javascript">
-                                        //success message
-                                        const Toast = Swal.mixin({
-                                        toast: true,
-                                        position: "top-end",
-                                        showConfirmButton: false,
-                                        timer: 3000,
-                                        timerProsressBar: true,
-                                        didOpen: (toast) => {
-                                        toast.addEventListener("mouseenter", Swal.stopTimer)
-                                        toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                        }
-                                        })
-                                        Toast.fire({
-                                        icon: "warning",
-                                        title:"File name already taken<br>You have to change the name of file"
-                                        }).then(function(){
-                                          window.location = "index.php?id='.$key.'";//refresh pages
-                                        });
-                                    </script>
-                              ';
-                              }else{
-                              // move the uploaded (temporary) file to the specified destination
-                                if (move_uploaded_file($file, $destination)) {
-                                    $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
-                                    VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
-                                  
-                                    if (mysqli_query($conn, $sql)) {
-
-                                      $sql1 = "INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
-                                      VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
-
-                                      if (mysqli_query($conn, $sql1)) {
-                                        echo'<script type = "text/javascript">
-                                          //success message
-                                          const Toast = Swal.mixin({
-                                          toast: true,
-                                          position: "top-end",
-                                          showConfirmButton: false,
-                                          timer: 2000,
-                                          timerProsressBar: true,
-                                          didOpen: (toast) => {
-                                          toast.addEventListener("mouseenter", Swal.stopTimer)
-                                          toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                          }
-                                          })
-                                          Toast.fire({
-                                          icon: "success",
-                                          title:"Document to track Successfully Created"
-                                          }).then(function(){
-                                            window.location = "index.php?id='.$key.'";//refresh pages
-                                          });
-                                      </script>';
-                                      
-                                      }else{
-                                        echo "Failed Upload files!"; 
-                                      }                       
-                                    }
-                                } else {
-                                    echo "Failed Upload files!";
-                                }
-                                }         
-                          }
-                        }else{
-                        echo'<script type = "text/javascript">
-                                //success message
-                                const Toast = Swal.mixin({
-                                toast: true,
-                                position: "top-end",
-                                showConfirmButton: false,
-                                timer: 2000,
-                                timerProsressBar: true,
-                                didOpen: (toast) => {
-                                toast.addEventListener("mouseenter", Swal.stopTimer)
-                                toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                }
-                                })
-                                Toast.fire({
-                                icon: "warning",
-                                title:"No account registered to account number"
-                                }).then(function(){
-                                  window.location = "index.php?id='.$key.'";//refresh pages
-                                });
-                            </script>
-                        ';
-                        }
-                      }
-                  
-            //file uploading
-              }
-          ?>
           <!-- JS Scripts -->
           <script type="text/javascript">
             
               // this script will execute as soon a the website runs
-              $(document).ready(function () {
-                //print function
-                document.getElementById("print").onclick = function () {
-                    printElement(document.getElementById("printcode"));
-                  }
-
-                function printElement(elem) {
-                    var domClone = elem.cloneNode(true);
-                    
-                    var $printSection = document.getElementById("printSection");
-                    
-                    if (!$printSection) {
-                        var $printSection = document.createElement("div");
-                        $printSection.id = "printSection";
-                        document.body.appendChild($printSection);
-                    }                  
-                    $printSection.innerHTML = "";
-                    $printSection.appendChild(domClone);
-                    window.print();
-                }            
-                    // View Function
-                      $('.viewbtn').on('click', function () {
+              $(document).ready(function () {    
+                   // View Function
+                    $('#DocuTable').on('click','.viewbtn', function () {
 
                           $('#ViewModal').modal('show');
 
@@ -743,27 +356,26 @@ include('includes/session.php');
                             displayValue: true
                           });
                         });
+                  // Remarks Function
+            $('#DocuTable').on('click','.remarksbtn', function () {
 
-                  // Remarks view
-                      $('.remarksbtn').on('click', function () {
+                    $('#RemarksModal').modal('show');
 
-                          $('#RemarksModal').modal('show');
+                    $tr = $(this).closest('tr');
 
-                          $tr = $(this).closest('tr');
+                    var data = $tr.children("td").map(function () {
+                        return $(this).text();
+                    }).get();
 
-                          var data = $tr.children("td").map(function () {
-                              return $(this).text();
-                          }).get();
-
-                          console.log(data); 
-                          if(data[18] ==""){
-                            $('#remarks').text(data[11]);
-                          }else{
-                            $('#remarks').text(data[18]);
-                          }
-                        
-                        });
-                  // End of Remarks View function 
+                    console.log(data); 
+                    if(data[18]==""){
+                      $('#remarks').text("This is create Status if you want to see your description go to documents module");
+                    }else{
+                        $('#remarks').text(data[18]);
+                    }
+                    
+                  });
+            // End of View function 
 
                   // Providing Overall tracking history
                     // load_data();
