@@ -29,6 +29,31 @@
 
   <!-- Selector search -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <style>
+    #loader {
+        border: 12px solid #f3f3f3;
+        border-radius: 100%;
+        border-top: 12px solid #0d6efd;
+        width: 120px;
+        height: 120px;
+        animation: spin 1s linear infinite;
+    }
+      
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+      
+    .center {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+  </style>
 
   
 

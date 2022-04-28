@@ -14,11 +14,11 @@ $db = mysqli_select_db($conn, 'sis_db');
              
         $q_checkcode = $conn->query("SELECT * FROM `datms_doctype` WHERE `dt_name` = '$dt_name'") or die(mysqli_error($conn));
             $v_checkcode = $q_checkcode->num_rows;
-            if($v_checkcode == 1){
-                echo ('failed');
-            }else {
+            if($v_checkcode == 1 || $v_checkcode == 0){
                 $conn->query("UPDATE datms_doctype SET dt_code='$dt_code', dt_name='$dt_name', dt_desc='$dt_desc', dt_date='$date' WHERE dt_id='$id'") or die(mysqli_error($conn));
                 echo ('success');
+            }else {               
+                echo ('failed');
             }
         }
 ?>

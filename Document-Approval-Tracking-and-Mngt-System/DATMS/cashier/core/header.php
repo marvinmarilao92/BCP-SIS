@@ -3,7 +3,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
   <?php include "key_checker.php";?>
 <div class="d-flex align-items-center justify-content-between">
-  <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="logo d-flex align-items-center">
+  <a href="index?id=<?php echo $_SESSION["login_key"];?>" class="logo d-flex align-items-center">
     <img src="../assets/img/Cashier.png" alt="">
     <span class="d-none d-lg-block">Payment Update</span>
   </a>
@@ -31,7 +31,7 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="index.php?id=<?php echo $_SESSION["login_key"];?>">
+          <a class="dropdown-item d-flex align-items-center" href="index?id=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-wallet2"></i>
             <span>Cashier</span>
           </a>
@@ -42,7 +42,7 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="records.php?id=<?php echo $_SESSION["login_key"];?>">
+          <a class="dropdown-item d-flex align-items-center" href="records?id=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-cash-stack"></i>
             <span>Payment Records</span>
           </a>
@@ -53,7 +53,7 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="users-profile.php?id=<?php echo $_SESSION["login_key"];?>">
+          <a class="dropdown-item d-flex align-items-center" href="users-profile?id=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-person"></i>
             <span>My Profile</span>
           </a>
@@ -73,7 +73,7 @@
                     //statement
                     $output .= '
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php?id='.$key.'">
+                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index?id='.$key.'">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>
