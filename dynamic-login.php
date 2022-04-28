@@ -69,7 +69,7 @@
                         case "Clearance Administrator":
                           //statement
                           $_SESSION['session_username'] = $myusername;
-                          $_SESSION['session_url'] = "Clearance/clearance-administrator/index.php?id=".$_SESSION["login_key"]."";
+                          $_SESSION['session_url'] = "Clearance/clearance-administrator/index?id=".$_SESSION["login_key"]."";
                           if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -85,7 +85,7 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: Clearance/clearance-administrator/index.php?id=".$_SESSION["login_key"]."");
+                                header("location: Clearance/clearance-administrator/index?id=".$_SESSION["login_key"]."");
                                 
                             }
                           break;
@@ -100,7 +100,7 @@
                                         while($roww = mysqli_fetch_array($resultt)){
                                             if($row1["role"] == $roww["role"]){
                                               $_SESSION['session_username'] = $myusername;
-                                              $_SESSION['session_url'] = "Clearance/clearance-coordinator/index.php?id=".$_SESSION["login_key"]."";
+                                              $_SESSION['session_url'] = "Clearance/clearance-coordinator/index?id=".$_SESSION["login_key"]."";
                                               if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                                   $ip = $_SERVER["HTTP_CLIENT_IP"];
                                                 }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -116,7 +116,7 @@
                                                     require_once "core/update_key.php";
                                                     //update login key
                                                     $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                                    header("location: Clearance/clearance-coordinator/index.php?id=".$_SESSION["login_key"]."");
+                                                    header("location: Clearance/clearance-coordinator/index?id=".$_SESSION["login_key"]."");
                                                     
                                                 }
                                                                                            
@@ -139,7 +139,7 @@
                           case "Help Desk Administrator":
                             //statement
                             $_SESSION['session_username'] = $myusername;
-                            $_SESSION['session_url'] = "Help-Desk-System/Admin/index.php?id=".$_SESSION["login_key"]."";
+                            $_SESSION['session_url'] = "Help-Desk-System/Admin/index?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                 $ip = $_SERVER["HTTP_CLIENT_IP"];
                               }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -155,7 +155,7 @@
                                   require_once "core/update_key.php";
                                   //update login key
                                   $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                  header("location: Help-Desk-System/Admin/index.php?id=".$_SESSION["login_key"]."");
+                                  header("location: Help-Desk-System/Admin/index?id=".$_SESSION["login_key"]."");
                                   
                               }
                             
@@ -163,7 +163,7 @@
                           case "HDMS School Admin":
                             //statement
                             $_SESSION['session_username'] = $myusername;
-                            $_SESSION['session_url'] = "Help-Desk-System/SchoolAdmin/index.php?id=".$_SESSION["login_key"]."";
+                            $_SESSION['session_url'] = "Help-Desk-System/SchoolAdmin/index?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                 $ip = $_SERVER["HTTP_CLIENT_IP"];
                               }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -179,7 +179,7 @@
                                   require_once "core/update_key.php";
                                   //update login key
                                   $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                  header("location: Help-Desk-System/SchoolAdmin/index.php?id=".$_SESSION["login_key"]."");
+                                  header("location: Help-Desk-System/SchoolAdmin/index?id=".$_SESSION["login_key"]."");
                               }
                             
                             break;
@@ -187,7 +187,7 @@
                             case "HDMS Department":
                               //statement
                               $_SESSION['session_username'] = $myusername;
-                              $_SESSION['session_url'] = "Help-Desk-System/Department/index.php?id=".$_SESSION["login_key"]."";
+                              $_SESSION['session_url'] = "Help-Desk-System/Department/index?id=".$_SESSION["login_key"]."";
                               if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                   $ip = $_SERVER["HTTP_CLIENT_IP"];
                                 }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -203,14 +203,14 @@
                                   require_once "core/update_key.php";
                                   //update login key
                                   $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                  header("location: Help-Desk-System/Department/index.php?id=".$_SESSION["login_key"]."");
+                                  header("location: Help-Desk-System/Department/index?id=".$_SESSION["login_key"]."");
                                 }                            
                               break;
   
                             case "HDMS Program":
                               //statement
                               $_SESSION['session_username'] = $myusername;
-                              $_SESSION['session_url'] = "Help-Desk-System/Program/index.php?id=".$_SESSION["login_key"]."";
+                              $_SESSION['session_url'] = "Help-Desk-System/Program/index?id=".$_SESSION["login_key"]."";
                               if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                   $ip = $_SERVER["HTTP_CLIENT_IP"];
                                 }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -226,7 +226,7 @@
                                   require_once "core/update_key.php";
                                   //update login key
                                   $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                   header("location: Help-Desk-System/Program/index.php?id=".$_SESSION["login_key"]."");                         
+                                   header("location: Help-Desk-System/Program/index?id=".$_SESSION["login_key"]."");                         
                                 }                            
                               break;                        
                         }
@@ -237,7 +237,7 @@
                         case "Registrar Administrator":
                           //statement
                           $_SESSION['session_username'] = $myusername;
-                          $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index.php?id=".$_SESSION["login_key"]."";
+                          $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index?id=".$_SESSION["login_key"]."";
                           if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -253,7 +253,7 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index.php?id=".$_SESSION["login_key"]."");
+                                header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index?id=".$_SESSION["login_key"]."");
                                 
                             }
                           
@@ -261,7 +261,7 @@
                         case "DATMS Approver":
                           //statement
                           $_SESSION['session_username'] = $myusername;
-                          $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index.php?id=".$_SESSION["login_key"]."";
+                          $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index?id=".$_SESSION["login_key"]."";
                           if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -277,14 +277,14 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index.php?id=".$_SESSION["login_key"]."");
+                                header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index?id=".$_SESSION["login_key"]."");
                             }
                           
                           break;
                         case "Assistant Registrar":
                             //statement
                             $_SESSION['session_username'] = $myusername;
-                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index.php?id=".$_SESSION["login_key"]."";
+                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -300,14 +300,14 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index.php?id=".$_SESSION["login_key"]."");
+                                header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index?id=".$_SESSION["login_key"]."");
                             }
                             
                             break;
                         case "Registrar Officer":
                             //statement
                             $_SESSION['session_username'] = $myusername;
-                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index.php?id=".$_SESSION["login_key"]."";
+                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -323,14 +323,14 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                              header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index.php?id=".$_SESSION["login_key"]."");
+                              header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index?id=".$_SESSION["login_key"]."");
                             }                          
                             break;
 
                           case "Cashier":
                             //statement
                             $_SESSION['session_username'] = $myusername;
-                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index.php?id=".$_SESSION["login_key"]."";
+                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                 $ip = $_SERVER["HTTP_CLIENT_IP"];
                               }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -346,14 +346,14 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index.php?id=".$_SESSION["login_key"]."");
+                                header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index?id=".$_SESSION["login_key"]."");
                               }                            
                             break;
 
                           case "Admission":
                             //statement
                             $_SESSION['session_username'] = $myusername;
-                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index.php?id=".$_SESSION["login_key"]."";
+                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                 $ip = $_SERVER["HTTP_CLIENT_IP"];
                               }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -369,7 +369,7 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                 header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index.php?id=".$_SESSION["login_key"]."");                         
+                                 header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index?id=".$_SESSION["login_key"]."");                         
                               }                            
                             break;                        
                       }
@@ -380,7 +380,7 @@
                             case "SuperAdmin":
                               //statement
                               $_SESSION['session_username'] = $myusername;                           
-                              $_SESSION['session_url'] = "super_admin/index.php?id=".$_SESSION["login_key"]."";
+                              $_SESSION['session_url'] = "super_admin/index?id=".$_SESSION["login_key"]."";
                               if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                   $ip = $_SERVER["HTTP_CLIENT_IP"];
                                 }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -396,7 +396,7 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: super_admin/index.php?id=".$_SESSION["login_key"]."");
+                                header("location: super_admin/index?id=".$_SESSION["login_key"]."");
                                 }                              
                               break;                                           
                           }
@@ -423,7 +423,7 @@
                         case "User Management Administrator":
                           //statement
                           $_SESSION['session_username'] = $myusername;
-                          $_SESSION['session_url'] = "UserManagement/index.php?id=".$_SESSION["login_key"]."";
+                          $_SESSION['session_url'] = "UserManagement/index?id=".$_SESSION["login_key"]."";
                           if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -439,7 +439,7 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: UserManagement/index.php?id=".$_SESSION["login_key"]."");
+                                header("location: UserManagement/index?id=".$_SESSION["login_key"]."");
                             }                          
                           break;
                       }
@@ -459,7 +459,7 @@
                       //Add data to session
                       $_SESSION['session_username'] = $myusername;
                       $_SESSION['session_department'] = "Student";
-                      $_SESSION['session_url'] = "Student_Portal/index.php?id=".$_SESSION["login_key"]."";
+                      $_SESSION['session_url'] = "Student_Portal/index?id=".$_SESSION["login_key"]."";
                       $id1=$row2['id'];
                       $admin1=$row2['id_number'];
                       $fname1=$row2['role'];
@@ -478,7 +478,7 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: Student_Portal/index.php?id=".$_SESSION["login_key"]."");
+                                header("location: Student_Portal/index?id=".$_SESSION["login_key"]."");
                               }
 
                       
@@ -494,7 +494,7 @@
                         while($row3 = mysqli_fetch_array($result3)){
                           //Add data to session
                           $_SESSION['session_username'] = $myusername;
-                          $_SESSION['session_url'] = "Teacher_Portal/index.php?id=".$_SESSION["login_key"]."";
+                          $_SESSION['session_url'] = "Teacher_Portal/index?id=".$_SESSION["login_key"]."";
                           $_SESSION['session_department'] = "Teacher";
 
                           $id2=$row3['id'];
@@ -516,7 +516,7 @@
                               require_once "core/update_key.php";
                               //update login key
                               $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: Teacher_Portal/index.php?id=".$_SESSION["login_key"]."");
+                                header("location: Teacher_Portal/index?id=".$_SESSION["login_key"]."");
                             }                         
                         }
                         // Free result set
