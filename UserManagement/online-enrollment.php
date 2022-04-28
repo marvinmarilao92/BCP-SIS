@@ -618,7 +618,7 @@
           function submitUserForm() {
               if(recaptcha_response.length == 0) {
                   // document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
-                  Swal.fire("Recaptcha is required","","error ");
+                  Swal.fire("Recaptcha is required","","error");
                   return false;
               }
               return true;
