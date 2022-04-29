@@ -655,11 +655,11 @@
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Did you forget your password? <a href="#">Change Password</a></p>
+                      <p class="small mb-0">Did you forget your password? <a href="forgot-password">Change Password</a></p>
                     </div>
                   </form>
 
-
+                    
                 </div>
               </div>
               <footer class="footer">
