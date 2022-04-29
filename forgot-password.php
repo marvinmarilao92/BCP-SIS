@@ -75,8 +75,8 @@
                 
               <div class="d-flex justify-content-center py-4">
                 <a href="#" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/ojt.png" alt="">
-                  <span class="d-none d-lg-block">Internship</span>
+                  <img src="assets/img/BCPlogo.png" alt="">
+                  <span class="d-none d-lg-block">Change Password</span>
                 </a>
               </div><!-- End Logo -->
                 
