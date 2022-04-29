@@ -3,14 +3,14 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Ticket List</title>
+<title>Ticket</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 </head>
 
 <body>
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'dashboard';include ('core/sidebar.php');//Design for sidebar?>
+<?php $page = 'ticket';include ('core/sidebar.php');//Design for sidebar?>
 
 
 
@@ -88,7 +88,7 @@ if($ctr->num_rows > 0){
     }
 }
 $latest=[];
-$recodes=$db->conn->query("SELECT * FROM hdms_tickets ORDER BY 'date'");
+$recodes=$db->conn->query("SELECT * FROM hdms_tickets WHERE ticket_department = '$verified_session_username' ORDER BY 'date'");
 if($recodes->num_rows >0){
     while ($row = $recodes->fetch_assoc()) {
         $latest[]=$row;
@@ -106,45 +106,8 @@ if($recodes->num_rows >0){
             
                 </div>
             </div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="list-inline admn_ul">
-                        <a href="ticket_waiting.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary">Waiting For Reply</a>
-                        <a href="view-faqs.php?id=<?php echo $_SESSION["login_key"];?>"class="btn btn-primary">Program info</a>
-                   
-                    </div>
-                </div>
             </div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-md-4">
-                            <div class="card bg-info">
-                                <div class="card-body text-white">
-                                    <h3>New Tickets</h3>
-                                    <h2><?php echo $new_count;?></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="card bg-warning">
-                                <div class="card-body text-white">
-                                    <h3>Pending Tickets</h3>
-                                    <h2><?php echo $reply_count;?></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="card bg-dark">
-                                <div class="card-body text-white">
-                                    <h3>Done</h3>
-                                    <h2><?php echo $closed_count;?></h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          
             <div class="card">
                 <div class="card-header">
                     Latest Tickets
@@ -175,6 +138,8 @@ if($recodes->num_rows >0){
                                         <td>'.decryptthis($v['message'],$key).'</td>
                                         <td>'.$v['date'].'</td>
                                         <td><a href="view_ticket.php?id='.$v['id'].'" class="btn btn-outline-info">View<a/></td>
+                                       
+                                        
                                     </tr>
                                     ';
                                 }

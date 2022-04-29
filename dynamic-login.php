@@ -164,7 +164,7 @@
                               }
                             
                             break;
-                          case "HDMS School Admin":
+                          case "Staff":
                             //statement
                             $_SESSION['session_username'] = $myusername;
                             $_SESSION['session_url'] = "Help-Desk-System/SchoolAdmin/index?id=".$_SESSION["login_key"]."";
@@ -183,7 +183,7 @@
                                   require_once "core/update_key.php";
                                   //update login key
                                   $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                  header("location: Help-Desk-System/SchoolAdmin/index?id=".$_SESSION["login_key"]."");
+                                  header("location: Help-Desk-System/Staff/index?id=".$_SESSION["login_key"]."");
                               }
                             
                             break;
