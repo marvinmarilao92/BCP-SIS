@@ -1,36 +1,16 @@
-<?php include "session.php"; ?>
-<meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<?php
+include('includes/session.php');
+?>
+   <!DOCTYPE html>
+   <html lang="en">
+   <title>Ticket</title>
+   <head>
+   <?php include ('includes/head.php');//css connection?>
+   </head>
 
-  <title>BCP - Login</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/BCPlogo.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/plugins/toastr/toastr.min.css">
-
-
-  <!-- Template Main CSS File -->
-  <link href="../assets/css/style.css" rel="stylesheet">
-  <Link href ="../assets/css/styles.css" rel = "stylesheet">
-  
-
-
+   <body>
+   <?php include ('includes/nav.php');//Design for  Header?>
+   <?php $page = 'inbox';include ('includes/sidebar.php');//Design for sidebar?>
 <body>
   
  
@@ -44,7 +24,7 @@
     }
  
 //include the new connection
-include "new_db.php";
+include "includes/new_db.php";
 
 
 //THE KEY FOR ENCRYPTION AND DECRYPTION
@@ -110,7 +90,7 @@ error_reporting(E_ALL);
             $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
              $remarks="reply to a ticket";  
              //save to the audit trail table
-             mysqli_query($link,"INSERT INTO student_audit(account_no,action,actor,ip,host) VALUES('$verified_session_username','$remarks','$fname','$ip','$host')")or die(mysqli_error($link));
+             mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,ip,affected,host) VALUES('$verified_session_username','$remarks','$fname','$ip','$message','$host')")or die(mysqli_error($link));
 
         if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,send_by,message) VALUES('$ticket_id','0','$message')")){
             $success="Reply has been sent";
@@ -219,6 +199,15 @@ error_reporting(E_ALL);
 
  <!-- ======= Footer ======= -->
 
-   <?php include 'core/footer.php'?>
+   <?php include 'includes/footer.php'?>
+   <script>
+if(window.history.replaceState) {
+  window.history.replaceState(null,null,window.location.href)
+}
+
+
+
+
+ </script>
     </body>
 </html>

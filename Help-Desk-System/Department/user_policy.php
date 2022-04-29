@@ -10,7 +10,7 @@ include('session.php');
 
 <body>
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'dashboard';include ('core/sidebar.php');//Design for sidebar?>
+<?php $page = 'UP';include ('core/sidebar.php');//Design for sidebar?>
 
   <main id="main" class="main">
 

@@ -1,9 +1,7 @@
 <?php
 
 
-
-
-include "dept-action.php";
+include('dept-action.php');
 
 if ($_POST['key'] == 'addNew') {
 			$sql = $conn->query("SELECT id FROM hd_department WHERE title = '$title'");
@@ -13,7 +11,7 @@ if ($_POST['key'] == 'addNew') {
 
 					//create audit trail record
 						//add session conncetion
-				
+					
 						$fname=$verified_session_role; 
 						if (!empty($_SERVER["HTTP_CLIENT_IP"])){
 							$ip = $_SERVER["HTTP_CLIENT_IP"];
@@ -24,7 +22,7 @@ if ($_POST['key'] == 'addNew') {
 							$host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 							 $remarks="Faqs has been added";  
 							 //save to the audit trail table
-							 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,title,ip,host) VALUES('$verified_session_username','$remarks','$fname','$title','$ip','$host')")or die(mysqli_error($link));
+							 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host) VALUES('$verified_session_username','$remarks','$fname','$title','$ip','$host')")or die(mysqli_error($link));
 			
 							 //query action
 							 $conn->query("INSERT INTO hd_department (title, shortDesc, longDesc) 

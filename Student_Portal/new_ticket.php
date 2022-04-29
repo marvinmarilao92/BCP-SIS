@@ -3,19 +3,19 @@ include('includes/session.php');
 ?>
   <!DOCTYPE html>
     <html lang="en">
-    <title>Home page</title>
+    <title>Ticket</title>
     <head>
     <?php include ('includes/head.php');//css connection?>
     </head>
 
     <body>
     <?php include ('includes/nav.php');//Design for  Header?>
-    <?php $page = 'index';include ('includes/sidebar.php');//Design for sidebar?>
+    <?php $page = 'faqs';include ('includes/sidebar.php');//Design for sidebar?>
         
 
 
 <body>
- <?php
+<?php
 
 
 //Import PHPMailer classes into the global namespace
@@ -67,7 +67,7 @@ list($encrypted_data, $iv) = array_pad(explode('::', base64_decode($data), 2),2,
 return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
 }
 
-if(isset($_POST['submit'])){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email=$_POST['email'];
     $email=encryptthis($email, $key);
     $subject=$_POST['subject'];
@@ -80,7 +80,7 @@ if(isset($_POST['submit'])){
     $unid=bin2hex($unid);
 
     $db=new DB();
-
+        
         	//create audit trail record
     $fname= $_SESSION['session_department'] = "Student";
     if (!empty($_SERVER["HTTP_CLIENT_IP"])){
@@ -92,14 +92,14 @@ if(isset($_POST['submit'])){
       $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
        $remarks="submitted a ticket";  
        //save to the audit trail table
-       mysqli_query($link,"INSERT INTO student_audit(account_no,action,actor,ip,host) VALUES('$verified_session_username','$remarks','$fname','$ip','$host')")or die(mysqli_error($link));
+       mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,ip,affected,host,date) VALUES('$verified_session_username','$remarks','$fname','$ip','$subject','$host','$date')")or die(mysqli_error($link));
 
     $sql="INSERT INTO hdms_tickets (ticket_id,status,email,subject,message) 
     VALUES ('$unid','0','$email','$subject','$message')" or die("<script>alert('Error');</script>");
     
     $inset=$db->conn->query($sql);
    if($inset){
-        $success='Your ticket has been created. copy this ticket id and save it. '.$unid;
+        $success='Your ticket has been created. Make sure to check your email inbox for ticket ID';
         $mail = new PHPMailer;
         $mail->isSMTP();
         $mail->SMTPDebug = 0;                                           //Send using SMTP
@@ -141,13 +141,13 @@ if(isset($_POST['submit'])){
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         
         $mail->send();
-          echo "Dear Student your tickets has been sent to our help desk support team and we will back to you shortly. and here is your ticket id $unid please keep your ticket id";
+          //echo "Dear Student your tickets has been sent to our help desk support team and we will back to you shortly. and here is your ticket id $unid please keep your ticket id";
         }
         //error message 
      else {
        $error = "Ticket did not send!";
     } 
-      	
+    //echo '<script>showAlert();window.setTimeout(function () {HideAlert();},3000);</script>';  echo "<meta http-equiv='refresh' content='0;url=view_ticket.php'>";
 
     }		
 							
@@ -156,6 +156,7 @@ if(isset($_POST['submit'])){
 }
 
 ?>
+ 
  <main id="main" class="main">
  <div class="pagetitle">
       <h1>Contact Us</h1>
@@ -227,29 +228,7 @@ if(isset($_POST['submit'])){
       <div class="col-md-6">
         <input type="text" class="form-control" name="subject" placeholder="Subject" required>
       </div>
-      <div class="col-md-12">
-      <div class="form-floating mb-3">
-      <select id="department" name="department" class="form-select" required>
-                                  <option value="" selected="selected" disabled="disabled">where you want so send this ticket</option>
-                                  <?php
-                                  // Include config file
-                                  require_once "includes/config.php";
-                                  // Attempt select query execution
-                                  $sql2 = "SELECT * FROM hdms_ticket_department ORDER BY ticket_department";
-                                  if($result2 = mysqli_query($link, $sql2)){
-                                      if(mysqli_num_rows($result2) > 0){
-                                      while($row2 = mysqli_fetch_array($result2)){
-                                          echo '<option value = "' . $row2["id"] . '">' . $row2["ticket_department"] . '</option>';
-                                      }
-                                      // Free result set
-                                      mysqli_free_result($result2);
-                                      }
-                                  }
-                                  ?>
-                              </select>
-                              <label for="floatingSelect">Select<span class="text-danger">*</span></label>
-                              </div>
-                          </div>
+     
                           <div class="col-md-12">
                             <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
                         </div>
@@ -279,5 +258,15 @@ if(isset($_POST['submit'])){
 
 
  <?php include 'includes/footer.php'?>
+
+ <script>
+if(window.history.replaceState) {
+  window.history.replaceState(null,null,window.location.href)
+}
+
+
+
+
+ </script>
     </body>
 </html>
