@@ -69,7 +69,7 @@
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
                         <input type="email" name="username" class="form-control" id="yourUsername" required
                         placeholder = "Enter your Email Address">
-                        <div class="invalid-feedback">Please enter your valid Email</div>
+                        <div class="invalid-feedback">Please enter your valid Email Address</div>
                       </div>
                     </div>
                     
