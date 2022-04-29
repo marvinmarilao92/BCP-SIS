@@ -133,6 +133,10 @@
                       //statement
                       break;
 
+                    case "Internship System":
+                      //statement
+                      break;
+
                     case "Help Desk System":
                         //statement ROLE
                         switch($row1["role"]){
@@ -649,6 +653,9 @@
                     </div>
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Login</button>
+                    </div>
+                    <div class="col-12">
+                      <p class="small mb-0">Did you forget your password? <a href="pages-register.html">Change Password</a></p>
                     </div>
                   </form>
 
