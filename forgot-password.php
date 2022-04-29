@@ -57,9 +57,7 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                  <h5 ><span class="" style="font-size:1em; font-family: serif;">Note: Enter the Email Address associated to your account, We will send you the link to reset your password.
-                  </span>
-                    </h5>
+                  <p class="small"><b>Note:</b> Enter the Email Address associated to your account, We will send you the link to reset your password.</p>                
                   </div>
 
                   <form class="row g-3 needs-validation" action="#" method="POST" autocomplete="off">
@@ -76,7 +74,7 @@
                     </div>
                     
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit" name="btnforgot">Restore</button>
+                      <button class="btn btn-success w-100" type="submit" name="btnforgot">Send reset email</button>
                     </div>
 
                     <div class="col-12">
