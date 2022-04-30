@@ -102,7 +102,7 @@ include('session.php');
                                       }
                                         echo "<td>" . $row['appointment_date'] . "</td>";
                                         echo "<td>";
-                                            echo '<a href="teacher-clearance-view.php?id='. $row['teacher_id'] .'&name='. $temp_name .'" class="m-1 btn btn-primary" title="View Clearance" data-toggle="tooltip"><span class="bi bi-eye-fill"></span></a>';
+                                            echo '<a href="teacher-clearance-view?id='. $row['teacher_id'] .'&name='. $temp_name .'" class="m-1 btn btn-primary" title="View Clearance" data-toggle="tooltip"><span class="bi bi-eye-fill"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }

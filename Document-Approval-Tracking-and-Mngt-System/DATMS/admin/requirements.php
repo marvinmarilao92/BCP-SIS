@@ -85,7 +85,7 @@ include('session.php');
                   <h4>Students Requirements</h4>
               </div> 
               <div class="form-group col-md-1.5 btn-lg"  style="float: right; padding:20px;">
-                <a type="button" class="btn btn-primary form-control" href="admission_req.php?id=<?php echo $_SESSION["login_key"];?>" >
+                <a type="button" class="btn btn-primary form-control" href="admission_req?id=<?php echo $_SESSION["login_key"];?>" >
                 Admission Records
                 </a>
             </div> 
@@ -126,7 +126,7 @@ include('session.php');
                     <!-- <td data-label="Status"><?php echo $adm_as?></td> -->
                     <?php 
                       $requirments ='';
-                        $sql1 = " SELECT css.student_id,  css.status, GROUP_CONCAT(DISTINCT crs.clearance_name  SEPARATOR ', ') AS concat
+                        $sql1 = " SELECT css.student_id,  css.status, GROUP_CONCAT(DISTINCT crs.clearance_name  SEPARATOR '<br>') AS concat
                         FROM clearance_student_status css
                         INNER JOIN clearance_requirements_students crs
                         ON css.clearance_requirement_id = crs.id WHERE student_id = ".$adm_no." AND css.status = 'completed' 	AND css.clearance_department_id = '12'";

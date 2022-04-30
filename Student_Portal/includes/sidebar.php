@@ -30,11 +30,17 @@
 
   <li class="nav-item">
     <a class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="docu_req.php">
-      <i class="bi bi-file-earmark-text"></i>
-      <span>Documents Requested </span>
+      <i class="bi bi-folder"></i>
+      <span>Tracked Files</span>
     </a>
   </li><!-- End Dashboard Nav -->
 
+  <li class="nav-item">
+    <a class="<?php if($page=='req'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="docu_template.php">
+      <i class="bi bi-file-earmark-text"></i>
+      <span>Request Document</span>
+    </a>
+  </li><!-- End Dashboard Nav -->
 
 
   <!-- <li class="nav-item">

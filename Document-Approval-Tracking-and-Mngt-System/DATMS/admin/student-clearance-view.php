@@ -111,7 +111,7 @@ include('session.php');
               <nav aria-label="Page navigation example" style="padding: 20px;">
                   <ul class="pagination justify-content-end">      
                   <div class="col-lg-2">          
-                     <a type="button" href="initial_requirements.php?id=<?php echo trim($_GET["id"]); ?>" class="btn btn-success form-control page-item" data-toggle="modal" data-target="#AddModal" >Requirements</a>
+                     <a type="button" href="initial_requirements?id=<?php echo trim($_GET["id"]); ?>" class="btn btn-success form-control page-item" data-toggle="modal" data-target="#AddModal" >Requirements</a>
                   </div>
                   &nbsp;&nbsp;
                   <div class="col-lg-1">          
@@ -176,22 +176,22 @@ include('session.php');
                                             echo "Oops! Something went wrong. Please try again later.";
                                         }
                                         echo "<td>";
-                                          echo '<a href="student-clearance-status-view.php?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'" class="m-1 btn btn-info" data-toggle="tooltip" title="View details"><span class="bi bi-info-lg"></span></a>';
+                                          echo '<a href="student-clearance-status-view?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'" class="m-1 btn btn-info" data-toggle="tooltip" title="View details"><span class="bi bi-info-lg"></span></a>';
                                           if($status == "Declined"){
-                                            echo '<a href="student-clearance-confirm.php?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'&status=Declined" target="" class="m-1 btn btn-success" title="Confirm Clearance" data-toggle="tooltip"><span class="bi bi-check-lg"></span></a>';
+                                            echo '<a href="student-clearance-confirm?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'&status=Declined" target="" class="m-1 btn btn-success" title="Confirm Clearance" data-toggle="tooltip"><span class="bi bi-check-lg"></span></a>';
                                           }else if($status != "Declined" && $status == "Completed"){
                                           }else{
-                                            echo '<a href="student-clearance-confirm.php?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'&status='. $status .'" target="" class="m-1 btn btn-success" title="Confirm Clearance" data-toggle="tooltip"><span class="bi bi-check-lg"></span></a>';
+                                            echo '<a href="student-clearance-confirm?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'&status='. $status .'" target="" class="m-1 btn btn-success" title="Confirm Clearance" data-toggle="tooltip"><span class="bi bi-check-lg"></span></a>';
                                           }
                                           if($status == "Under Review"){
-                                            echo '<a href="student-clearance-decline.php?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'" target="_blank" class="m-1 btn btn-danger" title="Decline Clearance" data-toggle="tooltip"><span class="bi bi-x-lg"></span></a>';
+                                            echo '<a href="student-clearance-decline?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'" target="_blank" class="m-1 btn btn-danger" title="Decline Clearance" data-toggle="tooltip"><span class="bi bi-x-lg"></span></a>';
                                             echo '<a href="?student_id='. trim($_GET["id"]).'&req_id='. $row['id'].'" target="" class="m-1 btn btn-primary" title="Download File" data-toggle="tooltip"><span class="bi bi-eye"></span></a>';
                                           }
                                           if($status == "Completed" && $location == "Database"){
                                             echo '<a href="?student_id='. trim($_GET["id"]).'&req_id='. $row['id'].'" target="_blank" class="m-1 btn btn-primary" title="Download File" data-toggle="tooltip"><span class="bi bi-eye"></span></a>';
                                           }
                                           if($status == "Pending" && $row['clearance_type'] == "Clearance Record (Pending Record)"){
-                                            echo '<a href="student-clearance-decline.php?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'" target="" class="m-1 btn btn-danger" title="Decline Clearance" data-toggle="tooltip"><span class="bi bi-x-lg"></span></a>';
+                                            echo '<a href="student-clearance-decline?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'" target="" class="m-1 btn btn-danger" title="Decline Clearance" data-toggle="tooltip"><span class="bi bi-x-lg"></span></a>';
                                           }
                                           echo "</td>";
                                     echo "</tr>";

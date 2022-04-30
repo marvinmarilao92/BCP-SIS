@@ -1,5 +1,6 @@
 
 <!-- ======= Header ======= -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <header id="header" class="header fixed-top d-flex align-items-center">
   <?php 
   // include "key_checker.php";
@@ -17,14 +18,14 @@
    
     <li class="nav-item dropdown">
 
-      <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+      <a class="nav-link nav-icon notif" id="viewnotif" data-bs-toggle="dropdown">
         <i class="bi bi-bell"></i>
-        <span class="badge bg-primary badge-number">1</span>
+        <span class="badge bg-primary badge-number count"></span>
       </a><!-- End Notification Icon -->
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
         <li class="dropdown-header">
-          You have 4 new notifications
+          You have <span class="notif"></span> new notifications
           <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
           <span class="status actiuve"></span>
         </li>
@@ -32,64 +33,16 @@
           <hr class="dropdown-divider">
         </li>
 
-        <li class="notification-item">
-          <i class="bi bi-exclamation-circle text-warning"></i>
-          <div>
-            <h4>Announcement</h4>
-            <p>Put notification here</p>
-            <p>30 min. ago</p>
-          </div>
+        <li class="notification">
         </li>
 
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-
-        <li class="notification-item">
-          <i class="bi bi-x-circle text-danger"></i>
-          <div>
-            <h4>Memo</h4>
-            <p>Put notification here</p>
-            <p>1 hr. ago</p>
-          </div>
-        </li>
-
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-
-        <li class="notification-item">
-          <i class="bi bi-check-circle text-success"></i>
-          <div>
-            <h4>Announcement</h4>
-            <p>Put notification here</p>
-            <p>2 hrs. ago</p>
-          </div>
-        </li>
-
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-
-        <li class="notification-item">
-          <i class="bi bi-info-circle text-primary"></i>
-          <div>
-            <h4>Announcement</h4>
-            <p>Put notification here</p>
-            <p>4 hrs. ago</p>
-          </div>
-        </li>
-
-        <li>
-          <hr class="dropdown-divider">
-        </li>
         <li class="dropdown-footer">
           <a href="#">Show all notifications</a>
         </li>
 
-      </ul><!-- End Notification Dropdown Items -->
-
-    </li><!-- End Notification Nav -->
+      </ul>
+    </li>
+    <!-- End Notification Nav -->
 
     <!-- <li class="nav-item dropdown">
 
@@ -242,3 +195,40 @@
 </nav><!-- End Icons Navigation -->
 
 </header><!-- End Header -->
+<!-- for notification -->
+<script>
+  $(document).ready(function(){
+  
+  function load_unseen_notification(view = '')
+  {
+    $.ajax({
+    url:"notif/fetch.php",
+    method:"POST",
+    data:{view:view},
+    dataType:"json",
+    success:function(data)
+    {
+      $('.notification').html(data.notification);
+      if(data.unseen_notification > 0)
+      {
+      $('.count').html(data.unseen_notification);
+      }else{
+        $('.notif').html('0');
+      }
+    }
+    });
+  }
+  
+  load_unseen_notification();
+  
+  $(document).on('click', '#viewnotif', function(){
+    $('.count').html('');
+    load_unseen_notification('yes');
+  });
+  
+  setInterval(function(){ 
+    load_unseen_notification();; 
+  }, 5000);
+  
+  });
+</script>

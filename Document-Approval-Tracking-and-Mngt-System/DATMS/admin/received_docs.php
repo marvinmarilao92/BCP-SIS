@@ -144,7 +144,7 @@ include('session.php');
                     <td WIDTH="13%">                    
                       <a class="btn btn-success sendbtn" title="Send"><i class="bi bi-cursor-fill"></i></a>
                       <a class="btn btn-danger holdbtn" title="Hold"><i class="bi bi-folder-symlink" ></i></a>
-                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="bi bi-eye-fill"></i></a>                
+                      <a class="btn btn-primary " href='function/view_docu?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="bi bi-eye-fill"></i></a>                
                     </td>
                   </tr>
 

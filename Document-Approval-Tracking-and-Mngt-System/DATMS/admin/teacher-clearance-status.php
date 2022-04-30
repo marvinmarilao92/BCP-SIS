@@ -131,7 +131,7 @@ include('session.php');
                                         echo "<td>$pending</td>";
                                         echo "<td>$requirements_completed</td>";
                                         echo "<td>";
-                                            echo '<a href="teacher-clearance-view.php?id='. $row['id_number'] .'&name='. $row['firstname'] .' '.$row['lastname'] .'" class="m-1 btn btn-info" title="View Record" data-toggle="tooltip"><span class="bi bi-eye-fill"></span></a>';
+                                            echo '<a href="teacher-clearance-view?id='. $row['id_number'] .'&name='. $row['firstname'] .' '.$row['lastname'] .'" class="m-1 btn btn-info" title="View Record" data-toggle="tooltip"><span class="bi bi-eye-fill"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }
