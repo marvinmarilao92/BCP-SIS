@@ -369,7 +369,7 @@ include('includes/session.php');
 
                     console.log(data); 
                     if(data[18]==""){
-                      $('#remarks').text("This is create Status if you want to see your description go to documents module");
+                      $('#remarks').text(data[11]);
                     }else{
                         $('#remarks').text(data[18]);
                     }

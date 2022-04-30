@@ -103,7 +103,7 @@ include('session.php');
                                     <h4>Incoming Document Reports</h4>
                                 </div>
                                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                    <a type="button" href="archive_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary form-control">
+                                    <a type="button" href="archive_docs?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary form-control">
                                         Archive &nbsp;
                                       <i class="bi bi-archive me-1"></i>
                                     </a>
@@ -175,7 +175,7 @@ include('session.php');
                                     <h4>Received Document Reports</h4>
                                 </div>
                                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                    <a type="button" href="archive_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary form-control">
+                                    <a type="button" href="archive_docs?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary form-control">
                                         Archive &nbsp;
                                       <i class="bi bi-archive me-1"></i>
                                     </a>
@@ -248,7 +248,7 @@ include('session.php');
                                     <h4>Approved Document Reports</h4>
                                 </div>
                                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                    <a type="button" href="archive_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary form-control">
+                                    <a type="button" href="archive_docs?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary form-control">
                                         Archive &nbsp;
                                       <i class="bi bi-archive me-1"></i>
                                     </a>
@@ -319,7 +319,7 @@ include('session.php');
                                     <h4>Rejected Document Reports</h4>
                                 </div>
                                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                    <a type="button" href="archive_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary form-control">
+                                    <a type="button" href="archive_docs?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary form-control">
                                         Archive &nbsp;
                                       <i class="bi bi-archive me-1"></i>
                                     </a>
@@ -390,7 +390,7 @@ include('session.php');
                                     <h4>Hold Document Reports</h4>
                                 </div>
                                 <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                    <a type="button" href="archive_docs.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary form-control">
+                                    <a type="button" href="archive_docs?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary form-control">
                                         Archive &nbsp;
                                       <i class="bi bi-archive me-1"></i>
                                     </a>

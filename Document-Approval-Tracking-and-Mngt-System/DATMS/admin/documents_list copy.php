@@ -142,8 +142,8 @@ include('session.php');
                     <td>
                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
                       <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>
-                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="ri ri-eye-line"></i></a>
-                      <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' ><i class="ri ri-download-2-fill" ></i></a>
+                      <a class="btn btn-primary " href='function/view_docu?ID=<?php echo $docId; ?>' target="_blank"><i class="ri ri-eye-line"></i></a>
+                      <a class="btn btn-warning " href='function/downloads?file_id=<?php echo $docId; ?>' ><i class="ri ri-download-2-fill" ></i></a>
                       <a class="btn btn-dark historybtn"><i class="ri ri-history-line" ></i></a>
                     </div>
                     </td>

@@ -145,7 +145,7 @@ include('session.php');
                         </div>
                       </div>                -->
                       <a class="btn btn-secondary cancelbtn" title="Retrieve"><i class="bi bi-reply-fill"></i></a>
-                      <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
+                      <a class="btn btn-primary " href='function/view_docu?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
                     </td>
                   </tr>
 

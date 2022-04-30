@@ -100,8 +100,8 @@
                                       echo "<td data-label=''>" . $row['clearance_name'] . "</td>";
                                       echo "<td data-label=''>" . $row['clearance_type'] . "</td>";
                                       echo "<td>";
-                                          echo '<a href="student-requirement-update.php?id='. $row['id'] .'" class="m-1 btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="bi bi-pencil-fill"></span></a>';
-                                          echo '<a href="student-requirement-archive.php?id='. $row['id'] .'" class="m-1 btn btn-danger" title="Archive Record" data-toggle="tooltip"><span class="bi bi-archive-fill"></span></a>';
+                                          echo '<a href="student-requirement-update?id='. $row['id'] .'" class="m-1 btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="bi bi-pencil-fill"></span></a>';
+                                          echo '<a href="student-requirement-archive?id='. $row['id'] .'" class="m-1 btn btn-danger" title="Archive Record" data-toggle="tooltip"><span class="bi bi-archive-fill"></span></a>';
                                       echo "</td>";
                                   echo "</tr>";
                               }

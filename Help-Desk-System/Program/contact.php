@@ -3,14 +3,14 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Help Desk | Dashboard</title>
+<title>Contact</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 </head>
 
 <body>
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'dashboard';include ('core/sidebar.php');//Design for sidebar?>
+<?php $page = 'contact';include ('core/sidebar.php');//Design for sidebar?>
 
 
 

@@ -20,7 +20,7 @@ if(isset($_POST["req_id"]) && !empty($_POST["req_id"])){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Records created successfully. Redirect to landing page
-                header("location: teacher-clearance-view.php?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
+                header("location: teacher-clearance-view?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
                 exit();
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -52,7 +52,7 @@ if(isset($_POST["req_id"]) && !empty($_POST["req_id"])){
                     // Attempt to execute the prepared statement
                     if(mysqli_stmt_execute($stmt)){
                         // Records created successfully. Redirect to landing page
-                        header("location: teacher-clearance-view.php?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
+                        header("location: teacher-clearance-view?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
                         exit();
                     } else{
                         echo "Oops! Something went wrong. Please try again later.";
@@ -80,7 +80,7 @@ if(isset($_POST["req_id"]) && !empty($_POST["req_id"])){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Records created successfully. Redirect to landing page
-                header("location: teacher-clearance-view.php?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
+                header("location: teacher-clearance-view?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
                 exit();
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -105,7 +105,7 @@ if(isset($_POST["req_id"]) && !empty($_POST["req_id"])){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Records created successfully. Redirect to landing page
-                header("location: teacher-clearance-view.php?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
+                header("location: teacher-clearance-view?id=".trim($_POST["id"])."&name=".trim($_POST["name"])."");
                 exit();
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -152,7 +152,7 @@ if(isset($_POST["req_id"]) && !empty($_POST["req_id"])){
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
             <li class="breadcrumb-item"><a href="teacher-clearance-status.php">Clearance Status of teachers</a></li>
-            <li class="breadcrumb-item"><a href="teacher-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>">Clearance Status of <?php $str= trim($_GET["name"]);
+            <li class="breadcrumb-item"><a href="teacher-clearance-view?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>">Clearance Status of <?php $str= trim($_GET["name"]);
         echo $str; ?></a></li>
             <li class="breadcrumb-item">Confirm Clearance for <?php echo trim($_GET["req_name"]); ?></li>
         </ol>
@@ -175,7 +175,7 @@ if(isset($_POST["req_id"]) && !empty($_POST["req_id"])){
                                 <h5 class="card-title">Are you sure you want to confirm clearance for <?php echo trim($_GET["req_name"]); ?>?</h5>
                                 <p>
                                     <input type="submit" value="Yes" class="btn btn-success">
-                                    <a href="teacher-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>" class="btn btn-secondary">No</a>
+                                    <a href="teacher-clearance-view?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>" class="btn btn-secondary">No</a>
                                 </p>
                             </div>
                             

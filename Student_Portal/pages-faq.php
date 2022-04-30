@@ -10,7 +10,7 @@ include('includes/session.php');
 
    <body>
    <?php include ('includes/nav.php');//Design for  Header?>
-   <?php $page = 'page';include ('includes/sidebar.php');//Design for sidebar?>
+   <?php $page = 'faqs';include ('includes/sidebar.php');//Design for sidebar?>
        
 
 
@@ -145,62 +145,8 @@ include('includes/session.php');
 
             </div>
           </div><!-- End F.A.Q Group 1 -->
-
-        </div>
-         <div class="pagetitle">
-      <h1>Common question</h1>
-      
-    </div>
-     
-    <section class="section faq">
-      <div class="row">
-        <div class="col-lg-6">
-
-          <div class="card basic">
-            <div class="card-body">
-              <h5 class="card-title">Basic Questions</h5>
-
-              <div>
-                <h6>Where i can get my diploma?</h6>
-                <p>You can get that in the registrar office in bestlink.</p>
-              </div>
-
-              <div class="pt-2">
-                <h6>What to do if i can't access my lms?</h6>
-                <p>You can contact your adviser for that matter student.</p>
-              </div>
-
-              <div class="pt-2">
-                <h6>What is the use of this system?</h6>
-                <p>The purpose of this system is to help the student with their question and inquiries in school.</p>
-              </div>
-
-            </div>
-          </div>
-           <div class="card basic">
-            <div class="card-body">
-              <h5 class="card-title">Basic Trouble shooting</h5>
-
-              <div>
-                <h6>How to reset password?</h6>
-                <p>Try the forgot password and it will send you a new password to your email.</p>
-              </div>
-
-              <div class="pt-2">
-                <h6>How can i access other module?</h6>
-                <p>You can access that by clicking the module tabs in the nav bar.</p>
-              </div>
-
-              <div class="pt-2">
-                <h6>How can i edit my info in my profile?</h6>
-                <p>In the nav bar you can see your profile info and click the profile.</p>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- F.A.Q Group 1 -->
-          <div class="card">
+             <!-- F.A.Q Group 1 -->
+             <div class="card">
             <div class="card-body">
               <h5 class="card-title">Cashier Info</h5>
 
@@ -281,180 +227,7 @@ include('includes/session.php');
           </div><!-- End F.A.Q Group 1 -->
 
         </div>
-
-        <div class="col-lg-6">
-
-          <!-- F.A.Q Group 2 -->
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Admission Info</h5>
-
-              <div class="accordion accordion-flush" id="faq-group-2">
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsTwo-1" type="button" data-bs-toggle="collapse">
-                      General Admission Policy?
-                    </button>
-                  </h2>
-                  <div id="faqsTwo-1" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
-                    <div class="accordion-body">
-                      Student shall be admitted to the institution upon proof of presentation of the appropriate and valid credential to the admission committee subject to the rules prescribe therein. the documents required are the following:<br>
-                      1. Original High school report card(Form 138)<br>
-                      2. Certificate of good moral Character<br>
-                      3. NSO/PSA Aunthenticated birth certificate<br>
-                      4. Dully Filled up Admission application
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsTwo-2" type="button" data-bs-toggle="collapse">
-                     Enrollment
-                    </button>
-                  </h2>
-                  <div id="faqsTwo-2" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
-                    <div class="accordion-body">
-                     Upon presentation of the original and photo copies of documents enumerated in the general admission. the coordinator shall assess the authenticity of the papers submitted. A brief interview will be conducted and additional papers if any shall be required from the students. 
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsTwo-3" type="button" data-bs-toggle="collapse">
-                     Failure in 3 units of an academic load of 21 units during a semester<br><br>
-                     18 units
-                    </button>
-                  </h2>
-                  <div id="faqsTwo-3" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
-                    <div class="accordion-body">
-                      Repeat subject failed without a reduction of load
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsTwo-4" type="button" data-bs-toggle="collapse">
-                      Back subject
-                    </button>
-                  </h2>
-                  <div id="faqsTwo-4" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
-                    <div class="accordion-body">
-                      Back subject are those where students either dropped or failed in a particular semester that caused the student of unit enrolling the prescribe units for the present semester.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsTwo-5" type="button" data-bs-toggle="collapse">
-                     Transferees
-                    </button>
-                  </h2>
-                  <div id="faqsTwo-5" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
-                    <div class="accordion-body">
-                      Student coming from another school intending to transfer in this institution are likewise required to undergo the procedures indicated and shall submit the pertinent papers for entry.<br><br>
-                      1. Honorable dismissal<br> 
-                      2. Certificate of grades signed be the registrar office(TOR)<br>
-                      3. Evaluation of the subject from BCP registrar office<br>
-                      4. NSO/PSA Certificate photocopy; bring the original for authentication<br>
-                      5. Certificate of good moral character<br>
-                      6. Barangay clearance<br>
-                      7. Medical certificate from clinic affliated by BCP clinic<br>
-                      8. Copy of description of the subject/course taken from previous school   
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </div><!-- End F.A.Q Group 2 -->
-
-          <!-- F.A.Q Group 3 -->
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Registrar Info</h5>
-
-              <div class="accordion accordion-flush" id="faq-group-3">
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsThree-1" type="button" data-bs-toggle="collapse">
-                     Practicum/OJT course
-                    </button>
-                  </h2>
-                  <div id="faqsThree-1" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
-                    <div class="accordion-body">
-                      The ojt practicum of the Four-year courses is the inclusive of the maximum thirty (30) units.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsThree-2" type="button" data-bs-toggle="collapse">
-                      Grading system
-                    </button>
-                  </h2>
-                  <div id="faqsThree-2" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
-                    <div class="accordion-body">
-                      In accordance with the college thrust of achieving academic excellence, the school adopts a grading system that is highly objective nad reflective student's scholastic performance. 
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsThree-3" type="button" data-bs-toggle="collapse">
-                      Correction and changing of personal data
-                    </button>
-                  </h2>
-                  <div id="faqsThree-3" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
-                    <div class="accordion-body">
-                      Corrections/changes of the personal data of the students may be made upon the presentation of the documents to the office of the registrar for validity. 
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsThree-4" type="button" data-bs-toggle="collapse">
-                     Adding/changing subject and schedule
-                    </button>
-                  </h2>
-                  <div id="faqsThree-4" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
-                    <div class="accordion-body">
-                      the school allows student to drop, add, and change subjects for valid reasons and within the prescribe period of one week with regular classes.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsThree-5" type="button" data-bs-toggle="collapse">
-                      Crediting, Equivalence and substitute subjects
-                    </button>
-                  </h2>
-                  <div id="faqsThree-5" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
-                    <div class="accordion-body">
-                      Graduating students with valid reason find difficulty to finish their program requirements due to related curriculum changes.
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </div><!-- End F.A.Q Group 3 -->
-
-        </div>
-
-      </div>
-    </section>
+</section>
 <section>
   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
@@ -475,11 +248,11 @@ include('includes/session.php');
  
   </main><!-- End #main -->
 
-   
-
  <!-- ======= Footer ======= -->
 
- <?php include 'includes/footer.php'?>
+ <?php include 'includes/footer.php';
+ include ("view_ticket.php");
+ ?>
 
   </body>
 </html>
