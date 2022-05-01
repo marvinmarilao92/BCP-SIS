@@ -121,7 +121,7 @@ include('session.php');
                     <!-- <td data-label="Status"><?php echo $adm_as?></td> -->
                     <?php 
                       $requirments ='';
-                        $sql1 = " SELECT *, GROUP_CONCAT(DISTINCT req SEPARATOR ', ') AS concat FROM datms_studreq WHERE id_number = " . $adm_no . "  GROUP BY id_number ";
+                        $sql1 = " SELECT *, GROUP_CONCAT(DISTINCT req SEPARATOR '<br>') AS concat FROM datms_studreq WHERE id_number = " . $adm_no . "  GROUP BY id_number ";
                         if($result1 = mysqli_query($link, $sql1)){
                           if(mysqli_num_rows($result1) > 0){
                             while($row1 = mysqli_fetch_array($result1)){

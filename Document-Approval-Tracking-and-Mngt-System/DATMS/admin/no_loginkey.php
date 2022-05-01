@@ -39,7 +39,7 @@ include('session.php');
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       <center>
-        <a type="button" href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-outline-primary btn-lg">Continue</a>
+        <a type="button" href="index?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-outline-primary btn-lg">Continue</a>
       </center>
     </section>
 

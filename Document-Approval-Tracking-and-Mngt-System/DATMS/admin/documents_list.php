@@ -181,8 +181,8 @@
                                             <td>
                                               <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
                                                 <a  class="btn btn-secondary viewbtn" title="Barcode"><i class="ri ri-barcode-line"></i></a>
-                                                <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri ri-eye-line"></i></a>
-                                                <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' title="Download"><i class="ri ri-download-2-fill" ></i></a>
+                                                <a class="btn btn-primary " href='function/view_docu?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri ri-eye-line"></i></a>
+                                                <a class="btn btn-warning " href='function/downloads?file_id=<?php echo $docId; ?>' title="Download"><i class="ri ri-download-2-fill" ></i></a>
                                                 <!-- <a class="btn btn-dark historybtn"><i class="ri ri-history-line" ></i></a> -->
                                               </div>
                                             </td>
@@ -218,7 +218,7 @@
                                     <div class="card-body" >           
                                       <!-- Table for Document List records -->
                                       <form method="POST">
-                                        <table class="table table-hover datatable" >
+                                        <table class="table table-hover datatable" id="deptTbl">
                                         <thead>
                                           <tr>
                                             <th >DocCode</th>
@@ -272,8 +272,8 @@
                                             <td WIDTH="8%">
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
                                               <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line" title="Barcode"></i></a>
-                                              <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId1; ?>' target="_blank" title="View"><i class="ri ri-eye-line"></i></a>
-                                              <!-- <a class="btn btn-warning " href='function/downloads.php?file_id=<?php echo $docId; ?>' ><i class="ri ri-download-2-fill" ></i></a>
+                                              <a class="btn btn-primary " href='function/view_docu?ID=<?php echo $docId1; ?>' target="_blank" title="View"><i class="ri ri-eye-line"></i></a>
+                                              <!-- <a class="btn btn-warning " href='function/downloads?file_id=<?php echo $docId; ?>' ><i class="ri ri-download-2-fill" ></i></a>
                                               <a class="btn btn-dark historybtn"><i class="ri ri-history-line" ></i></a> -->
                                             </div>
                                             </td>
@@ -541,7 +541,7 @@
                                   icon: "error",
                                   title:"File extension must be: .pdf"
                                   }).then(function(){
-                                    window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                    window.location = "documents_list?id='.$key.'";//refresh pages
                                   });
                               </script>
                           ';
@@ -571,7 +571,7 @@
                                       icon: "warning",
                                       title:"File name already taken<br>You have to change the name of file"
                                       }).then(function(){
-                                        window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                        window.location = "documents_list?id='.$key.'";//refresh pages
                                       });
                                   </script>
                             ';
@@ -604,7 +604,7 @@
                                         icon: "success",
                                         title:"Document to track Successfully Created"
                                         }).then(function(){
-                                          window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                          window.location = "documents_list?id='.$key.'";//refresh pages
                                         });
                                     </script>';
                                     
@@ -639,7 +639,7 @@
                                     icon: "error",
                                     title:"File extension must be: .pdf"
                                     }).then(function(){
-                                      window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                      window.location = "documents_list?id='.$key.'";//refresh pages
                                     });
                                 </script>
                             ';
@@ -669,7 +669,7 @@
                                         icon: "warning",
                                         title:"File name already taken<br>You have to change the name of file"
                                         }).then(function(){
-                                          window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                          window.location = "documents_list?id='.$key.'";//refresh pages
                                         });
                                     </script>
                               ';
@@ -702,7 +702,7 @@
                                           icon: "success",
                                           title:"Document to track Successfully Created"
                                           }).then(function(){
-                                            window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                            window.location = "documents_list?id='.$key.'";//refresh pages
                                           });
                                       </script>';
                                       
@@ -737,7 +737,7 @@
                                         icon: "error",
                                         title:"File extension must be: .pdf"
                                         }).then(function(){
-                                          window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                          window.location = "documents_list?id='.$key.'";//refresh pages
                                         });
                                     </script>
                                 ';
@@ -767,7 +767,7 @@
                                             icon: "warning",
                                             title:"File name already taken<br>You have to change the name of file"
                                             }).then(function(){
-                                              window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                              window.location = "documents_list?id='.$key.'";//refresh pages
                                             });
                                         </script>
                                   ';
@@ -800,7 +800,7 @@
                                               icon: "success",
                                               title:"Document to track Successfully Created"
                                               }).then(function(){
-                                                window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                                window.location = "documents_list?id='.$key.'";//refresh pages
                                               });
                                           </script>';
                                           
@@ -831,7 +831,7 @@
                                     icon: "warning",
                                     title:"No account registered to account number"
                                     }).then(function(){
-                                      window.location = "documents_list.php?id='.$key.'";//refresh pages
+                                      window.location = "documents_list?id='.$key.'";//refresh pages
                                     });
                                 </script>
                             ';
@@ -907,8 +907,8 @@
                           });
                         });
 
-                  // Remarks view
-                      $('.remarksbtn').on('click', function () {
+                  // Remarks view personal
+                      $('#DocuTable').on('click','.remarksbtn', function () {
 
                           $('#RemarksModal').modal('show');
 
@@ -927,7 +927,26 @@
                         
                         });
                   // End of Remarks View function 
-                //
+                  // Remarks view personal
+                      $('#deptTbl').on('click','.remarksbtn', function () {
+
+                          $('#RemarksModal').modal('show');
+
+                          $tr = $(this).closest('tr');
+
+                          var data = $tr.children("td").map(function () {
+                              return $(this).text();
+                          }).get();
+
+                          console.log(data); 
+                          if(data[19] ==""){
+                            $('#remarks').text(data[12]);
+                          }else{
+                            $('#remarks').text(data[19]);
+                          }
+                        
+                        });
+                  // End of Remarks View function                 
                   function load_data(query)
                     {
                       $.ajax({

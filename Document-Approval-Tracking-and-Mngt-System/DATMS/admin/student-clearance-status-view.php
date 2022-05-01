@@ -72,7 +72,7 @@ if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !em
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
           <li class="breadcrumb-item"><a href="student-clearance-status.php">Clearance Status of Students</a></li>
-          <li class="breadcrumb-item"><a href="student-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>">Clearance Status of <?php $str= trim($_GET["name"]);
+          <li class="breadcrumb-item"><a href="student-clearance-view?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>">Clearance Status of <?php $str= trim($_GET["name"]);
       echo $str; ?></a></li>
           <li class="breadcrumb-item"><?php echo trim($_GET["req_name"]); ?>'s Info</li>
         </ol>
@@ -131,7 +131,7 @@ if(isset($_GET["req_id"]) && !empty(trim($_GET["req_id"]) && $_GET["id"]) && !em
                 }              
                 ?>
                 <div class="modal-footer">
-                    <a href="student-clearance-view.php?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>"><button type="button" class="btn btn-primary">Back</button></a>
+                    <a href="student-clearance-view?id=<?php echo trim($_GET["id"]); ?>&name=<?php echo trim($_GET["name"]); ?>"><button type="button" class="btn btn-primary">Back</button></a>
                 </div>
               </div><!-- End General Form Elements -->
             </div>

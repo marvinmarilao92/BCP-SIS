@@ -123,7 +123,7 @@ include('session.php');
                                         echo "<td data-label='Pending:'>$pending</td>";
                                         echo "<td data-label='Completed:'>$requirements_completed</td>";
                                         echo "<td>";
-                                            echo '<a href="student-clearance-view.php?id='. $row['id_number'] .'&name='. $row['firstname'] .' '.$row['lastname'] .'" class="m-1 btn btn-info" title="View Record" data-toggle="tooltip"><span class="bi bi-eye-fill"></span></a>';
+                                            echo '<a href="student-clearance-view?id='. $row['id_number'] .'&name='. $row['firstname'] .' '.$row['lastname'] .'" class="m-1 btn btn-info" title="View Record" data-toggle="tooltip"><span class="bi bi-eye-fill"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }

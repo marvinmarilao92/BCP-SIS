@@ -133,6 +133,10 @@
                       //statement
                       break;
 
+                    case "Internship System":
+                      //statement
+                      break;
+
                     case "Help Desk System":
                         //statement ROLE
                         switch($row1["role"]){
@@ -160,7 +164,7 @@
                               }
                             
                             break;
-                          case "HDMS School Admin":
+                          case "Staff":
                             //statement
                             $_SESSION['session_username'] = $myusername;
                             $_SESSION['session_url'] = "Help-Desk-System/SchoolAdmin/index?id=".$_SESSION["login_key"]."";
@@ -179,7 +183,7 @@
                                   require_once "core/update_key.php";
                                   //update login key
                                   $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                  header("location: Help-Desk-System/SchoolAdmin/index?id=".$_SESSION["login_key"]."");
+                                  header("location: Help-Desk-System/Staff/index?id=".$_SESSION["login_key"]."");
                               }
                             
                             break;
@@ -650,9 +654,12 @@
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
+                    <div class="col-12">
+                      <p class="small mb-0">Did you forget your password? <a href="forgot-password">Change Password</a></p>
+                    </div>
                   </form>
 
-
+                    
                 </div>
               </div>
               <footer class="footer">
