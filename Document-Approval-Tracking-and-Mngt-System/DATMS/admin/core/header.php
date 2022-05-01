@@ -18,7 +18,7 @@
    
     <li class="nav-item dropdown">
 
-      <a class="nav-link nav-icon notif" id="viewnotif" data-bs-toggle="dropdown">
+      <a class="nav-link nav-icon" id="viewnotif" data-bs-toggle="dropdown">
         <i class="bi bi-bell"></i>
         <span class="badge bg-primary badge-number count"></span>
       </a><!-- End Notification Icon -->
