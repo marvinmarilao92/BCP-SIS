@@ -34,10 +34,30 @@ $db = mysqli_select_db($conn, 'sis_db');
                             $d_off1 =  mysqli_real_escape_string($conn,$row1["doc_off1"]);
                             $d_date1 =  mysqli_real_escape_string($conn,$row1["doc_date1"]);
 
-                            $conn->query("INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
-                            VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type','Received','$doc_desc','$d_act2','$d_off2','$date','$d_act1','$d_off1','$d_date1','Document is Recieved by')") or die(mysqli_error($conn));
+                            //create audit trail record
+                                //add session conncetion
+                                include('../session.php');
+                                $fname=$verified_session_role; 
+                                if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                                    $ip = $_SERVER["HTTP_CLIENT_IP"];
+                                }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                                    $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                                }else{
+                                    $ip = $_SERVER["REMOTE_ADDR"];
+                                    $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                    $remarks="You received document from $d_act1";  
+                                    //save to the audit trail table
+                                    mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$doc_code','$ip','$host','$date')")or die(mysqli_error($conn));
+                                    // query
+                                    $conn->query("INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
+                                    VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type','Received','$doc_desc','$d_act2','$d_off2','$date','$d_act1','$d_off1','$d_date1','Document is Recieved by')") or die(mysqli_error($conn));
+        
+                                    $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                    VALUES ('$d_act1', '0' ,'$doc_title','0','Received Document','You successfully received the document','$d_off2','Active','$date')") or die(mysqli_error($conn));
 
-                            echo ('success');
+                                    echo ('success');
+                                }
+                            //end of audit trail
                             }
                         }
                     }
