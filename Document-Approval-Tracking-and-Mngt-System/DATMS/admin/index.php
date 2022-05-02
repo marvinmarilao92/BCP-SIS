@@ -167,13 +167,13 @@ include('session.php');
                   <canvas id="TrackedbarChart" style="max-height: 400px;"></canvas>
                   <?php
                     require_once("include/conn.php");
-                      $sql ="SELECT *,count(doc_off3) as count FROM datms_documents group by doc_off3;";
+                      $sql ="SELECT *,count(doc_off3) as count3 FROM datms_documents group by doc_off3;";
                       $result = mysqli_query($conn,$sql);
                       $chart_data="";
                       while ($row = mysqli_fetch_array($result)) { 
               
                           $name[]  = $row['doc_off3']  ;
-                          $counts[] = $row['count'];
+                          $counts[] = $row['count3'];
                       }                    
                     ?>              
                   </div>                
@@ -231,13 +231,13 @@ include('session.php');
                 <canvas id="accountChart" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
                     <?php
                       require_once("include/conn.php");
-                        $sql1 ="SELECT *,count(office) as count FROM user_information WHERE department='DATMS' group by office;";
+                        $sql1 ="SELECT *,count(office) as count1 FROM user_information WHERE department='DATMS' group by office;";
                         $result1 = mysqli_query($conn,$sql1);                    
                         $chart_data="";
                         while ($row1 = mysqli_fetch_array($result1)) { 
                 
                             $name1[]  = $row1['office']  ;
-                            $counts1[] = $row1['count'];
+                            $counts1[] = $row1['count1'];
                         }
                         $sql11 ="SELECT office FROM user_information WHERE department='DATMS' ";
                         $result11 = mysqli_query($conn,$sql11);
@@ -255,13 +255,13 @@ include('session.php');
                 <canvas id="studChart" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
                     <?php
                       require_once("include/conn.php");
-                        $sql2 ="SELECT course,count(course) as count FROM student_information group by course;";
+                        $sql2 ="SELECT course,count(course) as count2 FROM student_information group by course;";
                         $result2 = mysqli_query($conn,$sql2);
                         $chart_data="";
                         while ($row2 = mysqli_fetch_array($result2)) { 
                 
                             $name2[]  = $row2['course'];
-                            $counts2[] = $row2['count'];
+                            $counts2[] = $row2['count2'];
                         }
                         $sql22 ="SELECT course FROM student_information";
                         $result22 = mysqli_query($conn,$sql22);
@@ -526,46 +526,6 @@ include('session.php');
               options: options,
               plugins: [ChartDataLabels],
             });
-
-        // var ctxP = document.getElementById("studChart").getContext('2d');
-          // var myAreaChart = new Chart(ctxP, {
-          //   type: 'polarArea',      
-          //   data: {
-          //     labels:<?php echo json_encode($name2); ?>,
-          //         datasets: [{
-          //             label: 'Pie Chart',
-          //               backgroundColor: [
-          //                       'rgba(255, 99, 132, 0.5)',
-          //                       'rgba(255, 159, 64, 0.5)',
-          //                       'rgba(255, 205, 86, 0.5)',
-          //                       'rgba(75, 192, 192, 0.5)',
-          //                       'rgba(54, 162, 235, 0.5)',
-          //                       'rgba(153, 102, 255, 0.5)',
-          //                       'rgba(201, 203, 207, 0.5)'
-          //                     ],
-          //                     borderColor: [
-          //                       'rgb(255, 99, 132)',
-          //                       'rgb(255, 159, 64)',
-          //                       'rgb(255, 205, 86)',
-          //                       'rgb(75, 192, 192)',
-          //                       'rgb(54, 162, 235)',
-          //                       'rgb(153, 102, 255)',
-          //                       'rgb(201, 203, 207)'
-          //                     ],
-                              
-          //                     borderWidth: 1,
-          //             data:<?php echo json_encode($counts2); ?>,
-          //         }]
-          //   },
-          //   options: {
-          //     responsive: true,
-          //     legend: false
-          //   }, 
-          //   labelLine: {
-          //     show: false
-          //   },
-          
-        // });
 
 
     </script>

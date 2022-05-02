@@ -8,10 +8,10 @@ if(isset($_POST["view"]))
  include("../include/conn.php");
  if($_POST["view"] != '')
  {
-  $update_query = "UPDATE datms_notification SET stat1 = 1 WHERE act1 = '$verified_session_username' AND stat1 = 0";
+  $update_query = "UPDATE datms_notification SET stat1 = 1 WHERE act1 = '$verified_session_firstname $verified_session_lastname' AND stat1 = 0";
   mysqli_query($conn, $update_query);
  }
- $query = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_username' ORDER BY date DESC LIMIT 10";
+ $query = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' ORDER BY date DESC LIMIT 10";
  $result = mysqli_query($conn, $query);
  $output = '';
  
@@ -73,10 +73,14 @@ if(isset($_POST["view"]))
         $duration = "$years"." yr,";
       }else if($months != 0 ){
         $duration = "$months"." mos";
-      }else if($days != 0 ){
+      }else if($days > 1 ){
         $duration = "$days"." days";
-      }else if($hours != 0 ){
+      }else if($days == 1 ){
+        $duration = "$days"." day";
+      }else if($hours > 1){
         $duration = "$hours"." hrs";
+      }else if($hours == 1){
+        $duration = "$hours"." hr";
       }else if($minutes != 0 ){
         $duration = "$minutes"." min";
       }else if($seconds != 0 ){
@@ -94,9 +98,11 @@ if(isset($_POST["view"]))
        }else if($doc_status =='Received Document'){
         $idenifier=' <i class="bi bi-arrow-down-circle text-primary"></i>';
        }else if($doc_status =='Submitted Document'){
-        $idenifier=' <i class="bi bi-exclamation-circle text-warning"></i>';       
+        $idenifier=' <i class="bi bi-arrow-right-circle text-warning"></i>';       
+       }else if($doc_status =='Created Document'){
+        $idenifier=' <i class="bi bi-plus-circle text-primary"></i>';       
        }else{
-        $idenifier=' <i class="bi bi-info-circle text-secondary"></i>';
+        $idenifier=' <i class="bi bi-info-circle text-primary"></i>';
        }
        $query_2 = "SELECT * FROM datms_notification WHERE date = '$d1' AND date LIKE '%$today%'";
        $result_2 = mysqli_query($conn, $query_2);
@@ -107,43 +113,56 @@ if(isset($_POST["view"]))
        }else{
         $badge='<span style=" color: gray;">●</span>';
        }
+
+       if ($doc_status =='Approved Document' || $doc_status =='Created Document'){
+        $links='documents_list.php?id='.$_SESSION["login_key"].'';
+       }else if($doc_status =='Rejected Document'){
+        $links='reject_docs.php?id='.$_SESSION["login_key"].'';
+       }else if($doc_status =='Received Document'){
+        $links='received_docs.php?id='.$_SESSION["login_key"].'';
+       }else if($doc_status =='Submitted Document'){
+        $links='incoming_docs.php?id='.$_SESSION["login_key"].'';       
+       }else{
+        $links='index.php?id='.$_SESSION["login_key"].'';
+       }
        
     $output .= '
       <li class="notification-item">
         '.$idenifier.'
+        <a href="'.$links.'" style="color: rgb(33, 37, 41);">
         <div>
           <h4>'.$row["subject"].'</h4>
-          <p>'.$row["notif"].'</p>
+          <p>'.$row["notif"].' <br>From: '.$row["dept"].' </p>
           <p>'.$duration.' ago '.$badge.'</p>
         </div>
+        </a>
       </li>
+      
       <li>
         <hr class="dropdown-divider">
       </li>
-      <br>
-
     ';
   }
  }
  else
  {
   $output .= '
-  <li class="notification-item">
-    <i class="bi bi-question-circle text-secondary"></i>
-        <div>   
-          <h4>No Notification</h4>       
-          <p>You have no notification today</p> 
-        </div>
+      <li class="notification-item">
+        <i class="bi bi-question-circle text-secondary"></i>
+        <a href="index.php?id='.$_SESSION["login_key"].'" style="color: rgb(33, 37, 41);">
+          <div>   
+            <h4>No Notification</h4>       
+            <p>You have no notification today</p> 
+          </div>
+        </a>
       </li>
-
       <li>
         <hr class="dropdown-divider">
       </li>
-      <br>
   ';
  }
  
- $query_1 = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_username' AND stat1 = 0";
+ $query_1 = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' AND stat1 = 0";
  $result_1 = mysqli_query($conn, $query_1);
  $count = mysqli_num_rows($result_1);
  $data = array(
