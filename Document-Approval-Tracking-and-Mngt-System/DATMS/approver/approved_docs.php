@@ -101,17 +101,21 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Approved' AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname')
+                    $query="SELECT * FROM datms_tracking WHERE `doc_status` = 'Approved' AND (`doc_actor2`='$verified_session_firstname $verified_session_lastname')
                     ORDER BY doc_date2 DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
-                      $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
+                      $docName =$rs['doc_name']; $docSize = $rs['doc_size']; 
                       $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
                       $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                      $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
+                      $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2'];                       
                       $docRemarks = $rs['doc_remarks'];  
+
+                      $query1="SELECT * FROM datms_documents WHERE `doc_status` = 'Rejected' OR `doc_status` = 'Deleted'  AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname') ORDER BY doc_date1 DESC ";
+                      $result1=mysqli_query($conn,$query1);
+                        while($rs1=mysqli_fetch_array($result1)){
+                        $docAct3 =$rs1['doc_actor3']; $docOff3 = $rs1['doc_off3']; $docDate3 = $rs1['doc_date3']; 
   
                   ?>
                   <tr>
@@ -122,7 +126,7 @@ include('session.php');
                     <td data-label="Date:"><?php echo $docDate3; ?></td>
                     <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
-                    <td style="display:none"><?php echo $docDl; ?></td>
+                    <td style="display:none"><?php echo "none"; ?></td>
                     <td style="display:none"><?php echo $docName?></td>
                     <td style="display:none"><?php echo $docType?></td>
                     <td style="display:none"><?php echo $docDesc?></td>
@@ -142,7 +146,7 @@ include('session.php');
                     </td>
                   </tr>
 
-                  <?php } ?>
+                  <?php } }?>
                   
                 </tbody>
               </table>

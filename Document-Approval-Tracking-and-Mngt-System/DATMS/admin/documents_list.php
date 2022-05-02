@@ -587,29 +587,51 @@
                                     VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
 
                                     if (mysqli_query($conn, $sql1)) {
-                                      echo'<script type = "text/javascript">
-                                        //success message
-                                        const Toast = Swal.mixin({
-                                        toast: true,
-                                        position: "top-end",
-                                        showConfirmButton: false,
-                                        timer: 2000,
-                                        timerProsressBar: true,
-                                        didOpen: (toast) => {
-                                        toast.addEventListener("mouseenter", Swal.stopTimer)
-                                        toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                      $notif_sql = "INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                      VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'$doc_title','0','Created Document','You successfully created tracking document','$verified_session_office','Active','$date')";
+                                      if(mysqli_query($conn, $notif_sql)){                                 
+                                        //create audit trail record                                               
+                                        $fname=$verified_session_role; 
+                                        if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                                          $ip = $_SERVER["HTTP_CLIENT_IP"];
+                                        }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                                          $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                                        }else{
+                                          $ip = $_SERVER["REMOTE_ADDR"];
+                                          $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                          $remarks="Tracking document is successfully created";  
+                                          //save to the audit trail table
+                                          mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$doc_code','$ip','$host','$date')")or die(mysqli_error($conn));                      
+                                          // message 
+                                          echo'<script type = "text/javascript">
+                                              //success message
+                                              const Toast = Swal.mixin({
+                                              toast: true,
+                                              position: "top-end",
+                                              showConfirmButton: false,
+                                              timer: 2000,
+                                              timerProsressBar: true,
+                                              didOpen: (toast) => {
+                                              toast.addEventListener("mouseenter", Swal.stopTimer)
+                                              toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                              }
+                                              })
+                                              Toast.fire({
+                                              icon: "success",
+                                              title:"Document to track Successfully Created"
+                                              }).then(function(){
+                                                window.location = "documents_list?id='.$key.'";//refresh pages
+                                              });
+                                          </script>';
                                         }
-                                        })
-                                        Toast.fire({
-                                        icon: "success",
-                                        title:"Document to track Successfully Created"
-                                        }).then(function(){
-                                          window.location = "documents_list?id='.$key.'";//refresh pages
-                                        });
-                                    </script>';
+                                      //end of audit trail                                        
+                                      }else{
+                                        echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
+                                      }
+                                      
                                     
                                     }else{
-                                      echo "Failed Upload files!"; 
+                                      echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
                                     }                       
                                   }
                               } else {
