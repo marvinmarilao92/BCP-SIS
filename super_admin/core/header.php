@@ -3,7 +3,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
   <?php include "key_checker.php";?>
 <div class="d-flex align-items-center justify-content-between">
-  <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="logo d-flex align-items-center">
+  <a href="index?id=<?php echo $_SESSION["login_key"];?>" class="logo d-flex align-items-center">
     <img src="../assets/img/superadminlogo.png" alt="">
     <span class="d-none d-lg-block">Super Admin Access</span>
   </a>
@@ -30,7 +30,7 @@
           <hr class="dropdown-divider">
         </li>
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="index.php?id=<?php echo $_SESSION["login_key"];?>">
+          <a class="dropdown-item d-flex align-items-center" href="index?id=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-house-door"></i>
             <span>Return to super admin</span>
           </a>
@@ -39,13 +39,13 @@
           <hr class="dropdown-divider">
         </li>
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="users-profile.php?id=<?php echo $_SESSION["login_key"];?>">
+          <a class="dropdown-item d-flex align-items-center" href="users-profile?id=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-person"></i>
             <span>My Profile</span>
           </a>
         </li>
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="logs_admin.php?id=<?php echo $_SESSION["login_key"];?>">
+          <a class="dropdown-item d-flex align-items-center" href="logs_admin?id=<?php echo $_SESSION["login_key"];?>">
             <i class="bi bi-gear"></i>
             <span>Audit Trail</span>
           </a>
