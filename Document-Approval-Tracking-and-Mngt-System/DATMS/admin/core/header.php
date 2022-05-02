@@ -138,7 +138,10 @@
           <hr class="dropdown-divider">
         </li>
         <li>
-          <hr class="dropdown-divider">
+          <a class="dropdown-item d-flex align-items-center" href="logs_personal?id=<?php echo $_SESSION["login_key"];?>">
+            <i class="bi bi-gear"></i>
+            <span>Audit Trail</span>
+          </a>
         </li>
 
         <li>
