@@ -102,6 +102,11 @@ include('includes/session.php');
                   <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
                       <h4>Requested List</h4>
                   </div>
+                  <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
+                      <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
+                      Request Document
+                      </button>
+                  </div> 
                 </div>
                 <div class="card-body" >           
                   <!-- Table for Document List records -->
@@ -109,56 +114,44 @@ include('includes/session.php');
                     <table class="table table-hover datatable" id="DocuTable">
                     <thead>
                       <tr>
-                        <th scope="col">DocCode</th>
-                        <th scope="col" >Requested By</th>
-                        <!-- <th scope="col">Filesize</th>    -->
+                        <th scope="col" WIDTH="12%">Student No.</th>
+                        <th scope="col" >Porgram</th>  
                         <th scope="col">Document</th>   
-                        <th scope="col">Tracking Date</th>    
-                        <th scope="col">Current Actor</th>    
-                        <th scope="col">Current Status</th>  
-                        <!-- <th scope="col">Downloads</th>    -->
-                        <th scope="col" WIDTH="5%">Action</th>          
+                        <th scope="col">Date</th>    
+                        <th scope="col">Status</th>                    
+                        <th scope="col" WIDTH="8%">Action</th>          
                       </tr>
                     </thead>
                     <tbody>
                       <?php
                         require_once("includes/conn.php");
-                        $query="SELECT * FROM datms_documents WHERE `doc_title`='$verified_session_username' ORDER BY doc_date1 DESC ";
+                        $query="SELECT * FROM datms_tempreq WHERE `id_number`='$verified_session_username' ORDER BY date DESC ";
                         $result=mysqli_query($conn,$query);
                         while($rs=mysqli_fetch_array($result)){
-                          $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
-                          $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
-                          $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
-                          $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                          $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                          $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
-                          $docRemarks = $rs['doc_remarks'];  
+                          $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
+                          $doctype =$rs['docu']; $stat = $rs['status']; $remarks = $rs['remarks']; 
+                          $date =$rs['date']; $fname = $rs['file_name'];
                       ?>
                       <tr>
-                        <td style="display:none"><?php echo $docId?></td>
-                        <td data-label="Code:"><?php echo $docCode; ?></td>
-                        <td data-label="Req By:" ><?php echo $docTitle; ?></td>
-                        <td data-label="Document:"><?php echo $docType; ?></td>
-                        <td data-label="Date:"><?php echo $docDate3; ?></td>
-                        <td data-label="Actor:"><?php echo $docAct2?></td>
-                        <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
-                        <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
-                        <td style="display:none"><?php echo $docDl; ?></td>
-                        <td style="display:none"><?php echo $docName?></td>
-                        <td style="display:none"><?php echo $docAct3?></td>
-                        <td style="display:none"><?php echo $docDesc?></td>
-                        <td style="display:none"><?php echo $docOff1?></td>
-                        <td style="display:none"><?php echo $docAct1?></td>
-                        <td style="display:none"><?php echo $docOff1?></td>
-                        <td style="display:none"><?php echo $docDate2?></td>                    
-                        <td style="display:none"><?php echo $docOff3?></td>
-                        <td style="display:none"><?php echo $docDate3?></td>
-                        <td style="display:none"><?php echo $docRemarks?></td>
-
-                        <td WIDTH="5%">
+                        <td style="display:none"><?php echo $docId?></td> 
+                        <td data-label="No:"><?php echo $stud_no; ?></td>
+                        <td data-label="Prog:" ><?php echo $prog; ?></td>                    
+                        <td data-label="Docu:"><?php echo $doctype?></td>                        
+                        <td data-label="Date:"><?php echo $date; ?></td>
+                        <td data-label="Status:">
+                        <?php 
+                        if($adm_as=='Approved'){
+                          echo '<span class="badge bg-success">'.$stat.'</span>';
+                        }else{
+                          echo '<span class="badge bg-danger">'.$stat.'</span>';
+                        }                  
+                        ?>  
+                        <a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>   
+                        <td style="display:none"><?php echo $fname; ?></td>               
+                        <td style="display:none"><?php echo $remarks; ?></td>             
+                        <td WIDTH="8%">
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
-                          <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>                         
-                          <!-- <a class="btn btn-dark " ><i class="ri ri-history-line" ></i></a> -->
+                          <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>                      
                         </div>
                         </td>
                       </tr>

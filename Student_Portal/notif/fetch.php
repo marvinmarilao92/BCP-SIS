@@ -115,10 +115,12 @@ if(isset($_POST["view"]))
         $badge='<span style=" color: gray;">●</span>';
        }
        
-       if ($doc_status =='Request Update'){
-        $links='docu_template.php?id='.$_SESSION["login_key"].'';        
+       if ($doc_status =='Request Decline'){
+        $links='docu_template?id='.$_SESSION["login_key"].'';        
+       }else if ($doc_status =='Request Approved'){
+        $links='docu_template?id='.$_SESSION["login_key"].'';        
        }else{
-        $links='docu_req.php?id='.$_SESSION["login_key"].'';
+        $links='docu_req?id='.$_SESSION["login_key"].'';
        }
        
     $output .= '

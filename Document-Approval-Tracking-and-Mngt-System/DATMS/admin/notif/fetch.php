@@ -115,15 +115,15 @@ if(isset($_POST["view"]))
        }
 
        if ($doc_status =='Approved Document' || $doc_status =='Created Document'){
-        $links='documents_list.php?id='.$_SESSION["login_key"].'';
+        $links='documents_list?id='.$_SESSION["login_key"].'';
        }else if($doc_status =='Rejected Document'){
-        $links='reject_docs.php?id='.$_SESSION["login_key"].'';
+        $links='reject_docs?id='.$_SESSION["login_key"].'';
        }else if($doc_status =='Received Document'){
-        $links='received_docs.php?id='.$_SESSION["login_key"].'';
+        $links='received_docs?id='.$_SESSION["login_key"].'';
        }else if($doc_status =='Submitted Document'){
-        $links='incoming_docs.php?id='.$_SESSION["login_key"].'';       
+        $links='incoming_docs?id='.$_SESSION["login_key"].'';       
        }else{
-        $links='index.php?id='.$_SESSION["login_key"].'';
+        $links='index?id='.$_SESSION["login_key"].'';
        }
        
     $output .= '
@@ -149,7 +149,7 @@ if(isset($_POST["view"]))
   $output .= '
       <li class="notification-item">
         <i class="bi bi-question-circle text-secondary"></i>
-        <a href="index.php?id='.$_SESSION["login_key"].'" style="color: rgb(33, 37, 41);">
+        <a href="index?id='.$_SESSION["login_key"].'" style="color: rgb(33, 37, 41);">
           <div>   
             <h4>No Notification</h4>       
             <p>You have no notification today</p> 
