@@ -374,9 +374,9 @@ include('session.php');
                 }).get();
 
                 console.log(data);      
-                    $('#signed_fileN').text(data[9]);  
+                    $('#signed_fileN').text(data[10]);  
                     $('#signed_id').val(data[0]);
-                    $('#signed_code').val(data[1]); 
+                    $('#signed_code').val(data[2]); 
               });
             // End of Approved modal calling
 
@@ -439,9 +439,9 @@ include('session.php');
                 }).get();
 
                 console.log(data);      
-                    $('#reject_fileN').text(data[9]);  
+                    $('#reject_fileN').text(data[10]);  
                     $('#reject_id').val(data[0]);
-                    $('#reject_code').val(data[1]); 
+                    $('#reject_code').val(data[2]); 
               });
             // End of Reject modal calling 
 
@@ -504,9 +504,9 @@ include('session.php');
                 }).get();
 
                 console.log(data);      
-                    $('#doc_fileN').text(data[9]);  
+                    $('#doc_fileN').text(data[10]);  
                     $('#doc_id').val(data[0]);
-                    $('#doc_code').val(data[1]); 
+                    $('#doc_code').val(data[2]); 
               });
             // End of Hold modal calling 
 
@@ -569,13 +569,13 @@ include('session.php');
                 }).get();
 
                 console.log(data);      
-                    $('#send_act1').val(data[3]);  
-                    $('#send_off1').val(data[4]);
-                    $('#send_date1').val(data[5]); 
+                    $('#send_act1').val(data[4]);  
+                    $('#send_off1').val(data[5]);
+                    $('#send_date1').val(data[6]); 
 
-                    $('#doc_fileN1').text(data[9]);  
+                    $('#doc_fileN1').text(data[10]);  
                     $('#send_id').val(data[0]);
-                    $('#send_code').val(data[1]); 
+                    $('#send_code').val(data[2]); 
               });
             // End of Send modal calling 
 

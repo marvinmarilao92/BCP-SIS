@@ -81,6 +81,11 @@ include('session.php');
               <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
                   <h4>Requests List</h4>
               </div>
+              <div class="form-group col-md-1.5 btn-lg" style="float: right; padding:20px;">
+                  <a type="button" class="btn btn-primary form-control" href="request_req?id=<?php echo $_SESSION["login_key"];?>" >
+                  Status Records
+                  </a>
+              </div> 
               <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
               </div> 
             </div>
@@ -102,7 +107,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_tempreq  ORDER BY date DESC ";
+                    $query="SELECT * FROM datms_tempreq WHERE status='Sent'  ORDER BY date DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
@@ -265,58 +270,67 @@ include('session.php');
       </div>
       <!-- End Create Document Modal-->
 
-      <!-- View Document modal -->
-      <div class="modal fade" id="ViewModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-l">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Office Information</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <div class="card" style="margin: 10px;">
-                  <div class="card-body">
-                    <h5 class="card-title">Office Details</h5>
-                      Office Code: <h5 id="view_code" style="margin-left: 60px;"></h5>
-                      Office Name: <h5 id="view_name" style="margin-left: 60px;"></h5>
-                      Location: <h5 id="view_loc" style="margin-left: 60px;"></h5>
-                      Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
-                  </div>
-                </div>   
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- End View office Modal-->
-
       <!-- Received Office Modal -->
-      <div class="modal fade" id="ReceivedModal" tabindex="-1">
+      <div class="modal fade" id="ApproveModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Document Received</h5>
+                  <h5 class="modal-title">Approve Request</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                   <div class="card" style="margin: 10px;">
                     <div class="card-body">
-                      <h2 class="card-title">Received this document?</h2>
                         <!-- Fill out Form -->
                         <div class="row g-3" >
-                          <input type="hidden" class="form-control" id="doc_id" readonly>
-                              <input type="hidden" class="form-control" id="doc_code" readonly>                  
-                              <input type="hidden" class="form-control" id="doc_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
-                              <input type="hidden" class="form-control" id="doc_off2" value="<?php echo $verified_session_office?>" readonly> 
-                              <h5 id="doc_fileN" style="text-align: end; color:black"></h5>   
+                              <input type="hidden" class="form-control" id="req_docuA" readonly> 
+                              <input type="hidden" class="form-control" id="req_studidA" readonly> 
+                              <input type="hidden" class="form-control" id="req_codeA" readonly>                  
+                              <input type="hidden" class="form-control" id="req_actA" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>                            
+                              <h6 id="req_reasonA" style="margin-top: 30px; color:black"></h6>  
+                              <div class="col-12">
+                                  <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="docremarks" id="approve_remarksA" required></textarea>
+                              </div>   
                         </div>
                       
                     </div>
                   </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button class="btn btn-success" name="save" id="received" >Received</button>
+                      <button class="btn btn-success" name="save" id="decline_btn" >Approve Request</button>
+                    </div>
+                <!-- End Form -->
+            </div>
+        </div>
+      </div>
+      <!-- End Received Office Modal-->
+
+      <!-- Received Office Modal -->
+      <div class="modal fade" id="DeclineModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Reject Request</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                  <div class="card" style="margin: 10px;">
+                    <div class="card-body">
+                        <!-- Fill out Form -->
+                        <div class="row g-3" >
+                              <input type="hidden" class="form-control" id="req_docu" readonly> 
+                              <input type="hidden" class="form-control" id="req_studid" readonly> 
+                              <input type="hidden" class="form-control" id="req_code" readonly>                  
+                              <input type="hidden" class="form-control" id="req_act" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>                            
+                              <h6 id="req_reason" style="margin-top: 30px; color:black"></h6>  
+                              <div class="col-12">
+                                  <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="docremarks" id="reject_remarks" required></textarea>
+                              </div>   
+                        </div>
+                      
+                    </div>
+                  </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button class="btn btn-danger" name="save" id="decline_btn" >Reject Request</button>
                     </div>
                 <!-- End Form -->
             </div>
@@ -384,10 +398,10 @@ include('session.php');
                 });
               // End of View function 
 
-              // Received modal calling
-                $('#ReqTable').on('click','.receivedbtn', function () {
+              // Decline modal calling
+                $('#ReqTable').on('click','.decline', function () {
 
-                  $('#ReceivedModal').modal('show');
+                  $('#DeclineModal').modal('show');
 
                   $tr = $(this).closest('tr');
 
@@ -396,26 +410,33 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#doc_fileN').text(data[9]);  
-                      $('#doc_id').val(data[0]);
-                      $('#doc_code').val(data[1]); 
+                      $('#req_reason').text('Reason for request: '+data[9]);  
+                      $('#req_studid').val(data[3]); 
+                      $('#req_docu').val(data[5]); 
+                      $('#req_code').val(data[2]); 
                 });
-              // End of Received modal calling 
+              // End of Decline modal calling 
 
               // Received function
-                $('#received').click(function(d){ 
+                $('#decline_btn').click(function(d){ 
                   d.preventDefault();
-                    if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
-                      $.post("function/received_func.php", {
-                        docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
-                        docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
+                    if($('#reject_remarks').val()!="" && $('#req_code').val()!="" && $('#req_act').val()!=""&& $('#req_docu').val()!="" && $('#req_studid').val()!=""){
+                      $.post("function/req_reject_func.php", {
+                        remarks:$('#reject_remarks').val(), req_code:$('#req_code').val(),
+                        docu:$('#req_docu').val(), studid:$('#req_studid').val(),
+                        req_act:$('#req_act').val()
                         },function(data){
-                          if (data.trim() == "Val30"){
-                          $('#EditModal').modal('hide');
+                          if (data.trim() == "failed"){
+                          $('#DeclineModal').modal('hide');
                           Swal.fire("No data stored in our database","","error");//response message
+                            $('#req_studid').val("")
+                            $('#req_docu').val("")
+                            $('#req_code').val("")
+                            $('#req_act').val("")
+                            $('#reject_remarks').val("")
                           // Empty test field
                         }else if(data.trim() == "success"){
-                          $('#ReceivedModal').modal('hide');
+                          $('#DeclineModal').modal('hide');
                                 //success message
                                 const Toast = Swal.mixin({
                                 toast: true,
@@ -434,9 +455,85 @@ include('session.php');
                                 }).then(function(){
                                   document.location.reload(true)//refresh pages
                                 });              
-                                  $('#doc_code').val("")
-                                  $('#doc_act2').val("")
-                                  $('#doc_off2').val("")
+                                  $('#req_studid').val("")
+                                  $('#req_docu').val("")
+                                  $('#req_code').val("")
+                                  $('#req_act').val("")
+                                  $('#reject_remarks').val("")
+                          }else{
+                            Swal.fire("There is somthing wrong","","error");
+                            // Swal.fire(data);
+                        }
+                      })
+                    }else{
+                      Swal.fire("You must fill out every field","","warning");
+                    }
+                })
+              // End Received function
+
+
+              // Decline modal calling
+                $('#ReqTable').on('click','.hardcopy_file', function () {
+
+                  $('#ApproveModal').modal('show');
+
+                  $tr = $(this).closest('tr');
+
+                  var data = $tr.children("td").map(function () {
+                      return $(this).text();
+                  }).get();
+
+                  console.log(data);      
+                      $('#req_reasonA').text('Reason for request: '+data[9]);  
+                      $('#req_studidA').val(data[3]); 
+                      $('#req_docuA').val(data[5]); 
+                      $('#req_codeA').val(data[2]); 
+                });
+              // End of Decline modal calling 
+
+              // Received function
+                $('#decline_btn').click(function(d){ 
+                  d.preventDefault();
+                    if($('#approve_remarksA').val()!="" && $('#req_codeA').val()!="" && $('#req_actA').val()!=""&& $('#req_docuA').val()!="" && $('#req_studidA').val()!=""){
+                      $.post("function/req_approve_func.php", {
+                        remarksA:$('#approve_remarksA').val(), req_codeA:$('#req_codeA').val(),
+                        docuA:$('#req_docuA').val(), studidA:$('#req_studidA').val(),
+                        req_actA:$('#req_actA').val()
+                        },function(data){
+                          if (data.trim() == "failed"){
+                          $('#DeclineModal').modal('hide');
+                          Swal.fire("No data stored in our database","","error");//response message
+                            $('#req_studidA').val("")
+                            $('#req_docuA').val("")
+                            $('#req_codeA').val("")
+                            $('#req_actA').val("")
+                            $('#approve_remarksA').val("")
+                          // Empty test field
+                        }else if(data.trim() == "success"){
+                          $('#DeclineModal').modal('hide');
+                                //success message
+                                const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProsressBar: true,
+                                didOpen: (toast) => {
+                                toast.addEventListener("mouseenter", Swal.stopTimer)
+                                toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                }
+                                })
+                                Toast.fire({
+                                icon: "success",
+                                title:"Document is Successfully Received"
+                                }).then(function(){
+                                  document.location.reload(true)//refresh pages
+                                });              
+                                  $('#req_studidA').val("")
+                                  $('#req_docuA').val("")
+                                  $('#req_codeA').val("")
+                                  $('#req_actA').val("")
+                                  $('#approve_remarksA').val("")
                           }else{
                             Swal.fire("There is somthing wrong","","error");
                             // Swal.fire(data);

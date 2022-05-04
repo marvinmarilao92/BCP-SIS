@@ -8,10 +8,10 @@ if(isset($_POST["view"]))
  include("../include/conn.php");
  if($_POST["view"] != '')
  {
-  $update_query = "UPDATE datms_notification SET stat1 = 1 WHERE act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department' AND stat1 = 0";
+  $update_query = "UPDATE datms_notification SET stat1 = 1 WHERE (act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department') AND stat1 = 0";
   mysqli_query($conn, $update_query);
  }
- $query = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department' ORDER BY date DESC LIMIT 10";
+ $query = "SELECT * FROM datms_notification WHERE (act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department') ORDER BY date DESC LIMIT 10";
  $result = mysqli_query($conn, $query);
  $output = '';
  
@@ -91,9 +91,9 @@ if(isset($_POST["view"]))
         $duration = "2";
       }
 
-      if ($doc_status =='Approved Document'){
+      if ($doc_status =='Approved Document' || $doc_status =='Request Approved'){
         $idenifier='<i class="bi bi-check-circle text-success"></i>';
-       }else if($doc_status =='Rejected Document'){
+       }else if($doc_status =='Rejected Document' || $doc_status =='Request Rejected'){
         $idenifier=' <i class="bi bi-x-circle text-danger"></i>';
        }else if($doc_status =='Received Document'){
         $idenifier=' <i class="bi bi-arrow-down-circle text-primary"></i>';
@@ -104,6 +104,7 @@ if(isset($_POST["view"]))
        }else{
         $idenifier=' <i class="bi bi-info-circle text-primary"></i>';
        }
+
        $query_2 = "SELECT * FROM datms_notification WHERE date = '$d1' AND date LIKE '%$today%'";
        $result_2 = mysqli_query($conn, $query_2);
        $count1 = mysqli_num_rows($result_2);
@@ -128,6 +129,14 @@ if(isset($_POST["view"]))
         $links='index?id='.$_SESSION["login_key"].'';
        }
        
+       if ($doc_status =='Request Rejected'){
+        $links='request_req?id='.$_SESSION["login_key"].'';        
+       }else if ($doc_status =='Request Approved'){
+        $links='request_req?id='.$_SESSION["login_key"].'';        
+       }else if ($doc_status =='Incoming Request'){
+        $links='request?id='.$_SESSION["login_key"].'';        
+       }
+
     $output .= '
       <li class="notification-item">
         '.$idenifier.'
@@ -164,7 +173,7 @@ if(isset($_POST["view"]))
   ';
  }
  
- $query_1 = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department' AND stat1 = 0";
+ $query_1 = "SELECT * FROM datms_notification WHERE (act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department') AND stat1 = 0";
  $result_1 = mysqli_query($conn, $query_1);
  $count = mysqli_num_rows($result_1);
  $data = array(

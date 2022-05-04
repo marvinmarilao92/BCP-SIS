@@ -91,9 +91,9 @@ if(isset($_POST["view"]))
         $duration = "2";
       }
 
-      if ($doc_status =='Approved Document'){
+      if ($doc_status =='Approved Document' || $doc_status =='Request Approved'){
         $idenifier='<i class="bi bi-check-circle text-success"></i>';
-       }else if($doc_status =='Rejected Document'){
+       }else if($doc_status =='Rejected Document' || $doc_status =='Request Rejected'){
         $idenifier=' <i class="bi bi-x-circle text-danger"></i>';
        }else if($doc_status =='Received Document'){
         $idenifier=' <i class="bi bi-arrow-down-circle text-primary"></i>';
@@ -104,7 +104,6 @@ if(isset($_POST["view"]))
        }else{
         $idenifier=' <i class="bi bi-info-circle text-primary"></i>';
        }
-
        $query_2 = "SELECT * FROM datms_notification WHERE date = '$d1' AND date LIKE '%$today%'";
        $result_2 = mysqli_query($conn, $query_2);
        $count1 = mysqli_num_rows($result_2);
@@ -115,7 +114,7 @@ if(isset($_POST["view"]))
         $badge='<span style=" color: gray;">●</span>';
        }
        
-       if ($doc_status =='Request Decline'){
+       if ($doc_status =='Request Rejected'){
         $links='docu_template?id='.$_SESSION["login_key"].'';        
        }else if ($doc_status =='Request Approved'){
         $links='docu_template?id='.$_SESSION["login_key"].'';        

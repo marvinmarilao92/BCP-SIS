@@ -333,7 +333,7 @@ include('includes/session.php');
                       }).get();
 
                       console.log(data); 
-                      $('#remarks').text(data[8]);                     
+                      $('#remarks').text(data[9]);                     
                       
                     });            
 

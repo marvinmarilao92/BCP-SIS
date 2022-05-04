@@ -129,6 +129,7 @@ include('session.php');
                       $badge='<span style=" color: gray;">●</span>';
                     }
                     echo $badge?></td>
+                    <td data-label="Code:"><?php echo $docCode?></td>
                     <td data-label="Requested By:"><?php echo $docTitle; ?></td>
                     <td data-label="Actor:"><?php echo $docAct1; ?></td>
                     <td data-label="Date&T:"><?php echo $docDate1; ?></td>
@@ -265,13 +266,13 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#send_act1').val(data[12]);  
-                      $('#send_off1').val(data[13]);
-                      $('#send_date1').val(data[14]); 
+                      $('#send_act1').val(data[13]);  
+                      $('#send_off1').val(data[14]);
+                      $('#send_date1').val(data[15]); 
 
-                      $('#doc_fileN1').text(data[9]);  
+                      $('#doc_fileN1').text(data[10]);  
                       $('#send_id').val(data[0]);
-                      $('#send_code').val(data[1]); 
+                      $('#send_code').val(data[2]); 
                 });
               // End of Hold modal calling 
 

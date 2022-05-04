@@ -257,7 +257,7 @@ include('session.php');
                       }).get();
 
                       console.log(data); 
-                      $('#remarks').text(data[18]);
+                      $('#remarks').text(data[19]);
                     });
               // End of View function 
 
@@ -273,9 +273,9 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#doc_fileN').text(data[9]);  
+                      $('#doc_fileN').text(data[10]);  
                       $('#doc_id').val(data[0]);
-                      $('#doc_code').val(data[1]); 
+                      $('#doc_code').val(data[2]); 
                 });
               // End of Received modal calling 
 

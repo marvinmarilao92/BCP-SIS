@@ -266,13 +266,13 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#send_act1').val(data[12]);  
-                      $('#send_off1').val(data[13]);
-                      $('#send_date1').val(data[14]); 
+                      $('#send_act1').val(data[13]);  
+                      $('#send_off1').val(data[14]);
+                      $('#send_date1').val(data[15]); 
 
-                      $('#doc_fileN1').text(data[9]);  
+                      $('#doc_fileN1').text(data[10]);  
                       $('#send_id').val(data[0]);
-                      $('#send_code').val(data[1]); 
+                      $('#send_code').val(data[2]); 
                 });
               // End of Hold modal calling 
 

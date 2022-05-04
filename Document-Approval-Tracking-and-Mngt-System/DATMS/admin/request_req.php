@@ -67,21 +67,21 @@
         <body>
 
           <?php include ('core/header.php');//Design for  Header?>
-          <?php $page = 'docs'; include ('core/side-nav.php');//Design for sidebar?>
+          <?php $page = 'temp'; include ('core/side-nav.php');//Design for sidebar?>
 
           <main id="main" class="main">
 
               <div class="pagetitle">
-                <h1>Documents</h1>
+                <h1>Template Request Status</h1>
                 <nav>
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item">Module</li>
-                    <li class="breadcrumb-item active">Documents</li>
+                    <li class="breadcrumb-item active">Template Request Status</li>
                   </ol>
                 </nav>
               </div><!-- End Page Title -->
-
+            <!-- 
               <div class="alert alert-secondary alert-dismissible fade show" role="alert">  
                 <h4 class="alert-heading">READ CAREFULLY</h4>
                 <p>
@@ -91,7 +91,7 @@
                 <hr>
                 <p class="mb-0">© Copyright Bestlink College of the Philippines. All Rights Reserved.</p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
+              </div> -->
 
               <section class="section">
                 <div class="row">
@@ -103,10 +103,10 @@
                         <!-- Report Tabs -->
                         <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="myTabjustified" role="tablist" style="margin-top: 10px;">
                           <li class="nav-item flex-fill" role="presentation">
-                            <button class="nav-link w-100 active" id=" incoming-tab" data-bs-toggle="tab" data-bs-target="#IncomingDocs" type="button" role="tab" aria-controls="incoming" aria-selected="true">Personal Files</button>
+                            <button class="nav-link w-100 active" id=" incoming-tab" data-bs-toggle="tab" data-bs-target="#IncomingDocs" type="button" role="tab" aria-controls="incoming" aria-selected="true">Approved Request</button>
                           </li>
                           <li class="nav-item flex-fill" role="presentation">
-                            <button class="nav-link w-100" id="received-tab" data-bs-toggle="tab" data-bs-target="#ReceivedDocs" type="button" role="tab" aria-controls="profile" aria-selected="false">Departmental Files</button>
+                            <button class="nav-link w-100" id="received-tab" data-bs-toggle="tab" data-bs-target="#ReceivedDocs" type="button" role="tab" aria-controls="profile" aria-selected="false">Rejected Request</button>
                           </li>
                         </ul>
                         <div class="tab-content pt-2" id="myTabjustifiedContent">
@@ -118,94 +118,81 @@
                                   <div class="card">
                                     <div class="col-lg-12">
                                       <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                          <h4>Personal Document List</h4>
+                                          <h4>Approved Request List</h4>
                                       </div>
-                                      <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                                          <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
-                                          Create Tracking
-                                          </button>
-                                      </div> 
                                     </div>
                                     <div class="card-body" >           
                                       <!-- Table for Document List records -->
                                       <form method="POST">
-                                        <table class="table table-hover datatable" id="DocuTable">
-                                        <thead>
-                                          <tr>
-                                            <th WIDTH="1%"></th>
-                                            <th >DocCode</th>
-                                            <th  >Requested By</th>
-                                            <!-- <th >Filesize</th>    -->
-                                            <th >Tracker</th>   
-                                            <th >Tracking Date</th>    
-                                            <th >Current Actor</th>    
-                                            <th >Current Status</th>  
-                                            <!-- <th >Downloads</th>    -->
-                                            <th  WIDTH="8%">Action</th>          
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <?php
-                                            require_once("include/conn.php");                                            
-                                            $query="SELECT * FROM datms_documents WHERE (`doc_actor3`='$verified_session_firstname $verified_session_lastname' OR  `doc_off3` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted') ORDER BY doc_date1 DESC ";
-                                            $result=mysqli_query($conn,$query);
-                                            while($rs=mysqli_fetch_array($result)){
-                                              $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
-                                              $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
-                                              $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
-                                              $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                                              $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                                              $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
-                                              $docRemarks = $rs['doc_remarks'];  
-                                          ?>
-                                          <tr>
-                                            <td style="display:none"><?php echo $docId?></td>
-                                            <td ><?php
-                                            date_default_timezone_set("asia/manila");
-                                            $today = date("Y-m-d",strtotime("+0 HOURS"));
-                                            $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
-                                            $result_2 = mysqli_query($conn, $query_2);
-                                            $count1 = mysqli_num_rows($result_2);
+                                        <!-- Table for Request records -->
+                                        <table class="table table-hover datatable" id="ReqTable">
+                                          <thead>
+                                            <tr>
+                                              <th WIDTH="1%"></th>
+                                              <th scope="col" WIDTH="12%">Code</th>
+                                              <th scope="col" WIDTH="12%">Student No.</th>
+                                              <th scope="col" >Porgram</th>  
+                                              <th scope="col">Document</th>   
+                                              <th scope="col">Date</th>    
+                                              <th scope="col">Status</th>                    
+                                              <th scope="col" WIDTH="6%">Action</th>          
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <?php
+                                              require_once("include/conn.php");
+                                              $query="SELECT * FROM datms_tempreq WHERE status='Approved'  ORDER BY date DESC ";
+                                              $result=mysqli_query($conn,$query);
+                                              while($rs=mysqli_fetch_array($result)){
+                                                $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
+                                                $doctype =$rs['docu']; $stat = $rs['status']; $remarks = $rs['remarks']; 
+                                                $date =$rs['date']; $fname = $rs['file_name'];$docCode =$rs['req_code'];
+                                            ?>
+                                            <tr>
+                                              <td style="display:none"><?php echo $docId?></td>
+                                              <td ><?php
+                                              date_default_timezone_set("asia/manila");
+                                              $today = date("Y-m-d",strtotime("+0 HOURS"));
+                                              $query_2 = "SELECT * FROM datms_tempreq WHERE date = '$date' AND date LIKE '%$today%'";
+                                              $result_2 = mysqli_query($conn, $query_2);
+                                              $count1 = mysqli_num_rows($result_2);
 
-                                            if($count1!=0){
-                                              $badge='<span style=" color: green;">●</span>';
-                                            }else{
-                                              $badge='<span style=" color: gray;">●</span>';
-                                            }
-                                            echo $badge?></td>
-                                            <td data-label="Code:"><?php echo $docCode;?></td>
-                                            <td data-label="Requested By:"><?php echo $docTitle; ?></td>
-                                            <td data-label="Tracker:"><?php echo $docAct3; ?></td>
-                                            <td data-label="Date:"><?php echo $docDate3; ?></td>
-                                            <td data-label="Current Actor:"><?php echo $docAct2?></td>
-                                            <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
-                                            <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
-                                            <td style="display:none"><?php echo $docDl; ?></td>
-                                            <td style="display:none"><?php echo $docName?></td>
-                                            <td style="display:none"><?php echo $docType?></td>
-                                            <td style="display:none"><?php echo $docDesc?></td>
-                                            <td style="display:none"><?php echo $docOff1?></td>
-                                            <td style="display:none"><?php echo $docAct1?></td>
-                                            <td style="display:none"><?php echo $docOff1?></td>
-                                            <td style="display:none"><?php echo $docDate2?></td>                    
-                                            <td style="display:none"><?php echo $docOff3?></td>
-                                            <td style="display:none"><?php echo $docDate3?></td>
-                                            <td style="display:none"><?php echo $docRemarks?></td>
-
-                                            <td>
-                                              <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
-                                                <a  class="btn btn-secondary viewbtn" title="Barcode"><i class="ri ri-barcode-line"></i></a>
-                                                <a class="btn btn-primary " href='function/view_docu?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri ri-eye-line"></i></a>
-                                                <a class="btn btn-warning " href='function/downloads?file_id=<?php echo $docId; ?>' title="Download"><i class="ri ri-download-2-fill" ></i></a>
-                                                <!-- <a class="btn btn-dark historybtn"><i class="ri ri-history-line" ></i></a> -->
+                                              if($count1!=0){
+                                                $badge='<span style=" color: green;">●</span>';
+                                              }else{
+                                                $badge='<span style=" color: gray;">●</span>';
+                                              }
+                                              echo $badge?></td>
+                                              <td data-label="Code:"><?php echo $docCode;?></td>
+                                              <td data-label="No:" ><?php echo $stud_no; ?></td>
+                                              <td data-label="Prog:"><?php echo $prog; ?></td>                    
+                                              <td data-label="Docu:"><?php echo $doctype?></td>                        
+                                              <td data-label="Date:"><?php echo $date; ?></td>
+                                              <td data-label="Status:">
+                                              <?php 
+                                              if($stat=='Approved'){
+                                                echo '<span class="badge bg-success">'.$stat.'</span>';
+                                              }else if($stat=='Rejected'){
+                                                echo '<span class="badge bg-danger">'.$stat.'</span>';
+                                              }else{
+                                                echo '<span class="badge bg-primary">'.$stat.'</span>';
+                                              }                 
+                                              ?>  
+                                              <a class="fw-bold remarksbtn">&nbsp;&nbsp;</a></td>   
+                                              <td style="display:none"><?php echo $fname; ?></td>               
+                                              <td style="display:none"><?php echo $remarks; ?></td>             
+                                              <td WIDTH="6%">
+                                              <div class="btn-group" role="group" aria-label="Basic mixed styles example">                       
+                                                <a  class="btn btn-primary remarks"><i class="bi bi-eye"></i></a>                      
                                               </div>
-                                            </td>
-                                          </tr>
+                                              </td>
+                                            </tr>
 
-                                          <?php } ?>
-                                          
-                                        </tbody>
+                                            <?php } ?>
+                                            
+                                          </tbody>
                                         </table>
+                                        <!-- End of Request table record -->
                                       
                                       </form>
                                       <!-- End of Document table record -->
@@ -226,78 +213,81 @@
                                   <div class="card">
                                     <div class="col-lg-12">
                                       <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                          <h4>Departmental Document List</h4>
+                                          <h4>Rejected Request List</h4>
                                       </div>
                                     </div>
                                     <div class="card-body" >           
                                       <!-- Table for Document List records -->
                                       <form method="POST">
-                                        <table class="table table-hover datatable" id="deptTbl">
-                                        <thead>
-                                          <tr>
-                                            <th >DocCode</th>
-                                            <th  >Requested By</th>
-                                            <!-- <th >Filesize</th>    -->
-                                            <th >Tracker</th>   
-                                            <th >Department</th>  
-                                            <th >Tracking Date</th>    
-                                            <th >Current Actor</th>    
-                                            <th >Current Status</th>  
-                                            <!-- <th >Downloads</th>    -->
-                                            <th  WIDTH="8%">Action</th>          
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <?php
-                                            require_once("include/conn.php");
-                                            $query="SELECT * FROM datms_documents ORDER BY doc_date1 DESC ";
-                                            $result=mysqli_query($conn,$query);
-                                            while($rs=mysqli_fetch_array($result)){
-                                              $docId1 =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
-                                              $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
-                                              $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
-                                              $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                                              $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                                              $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
-                                              $docRemarks = $rs['doc_remarks'];  
-                                          ?>
-                                          <tr>
-                                            <td style="display:none"><?php echo $docId1?></td>
-                                            <td data-label="Code:"><?php echo $docCode; ?></td>
-                                            <td data-label="Requested By:" ><?php echo $docTitle; ?></td>
-                                            <td data-label="Tracker:"><?php echo $docAct3; ?></td>
-                                            <td data-label="Department:"WIDTH="10%"><?php echo $docOff3; ?></td>
-                                            <td data-label="Date:"WIDTH="10%"><?php echo $docDate3; ?></td>
-                                            <td data-label="Current Actor:"><?php echo $docAct2?></td>
-                                            <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
-                                            <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
-                                            <td style="display:none"><?php echo $docDl; ?></td>
-                                            <td style="display:none"><?php echo $docName?></td>
-                                            <td style="display:none"><?php echo $docType?></td>
-                                            <td style="display:none"><?php echo $docDesc?></td>
-                                            <td style="display:none"><?php echo $docOff1?></td>
-                                            <td style="display:none"><?php echo $docAct1?></td>
-                                            <td style="display:none"><?php echo $docOff1?></td>
-                                            <td style="display:none"><?php echo $docDate2?></td>                    
-                                            <td style="display:none"><?php echo $docOff3?></td>
-                                            <td style="display:none"><?php echo $docDate3?></td>
-                                            <td style="display:none"><?php echo $docRemarks?></td>
+                                        <!-- Table for Request records -->
+                                        <table class="table table-hover datatable" id="ReqTable">
+                                          <thead>
+                                            <tr>
+                                              <th WIDTH="1%"></th>
+                                              <th scope="col" WIDTH="12%">Code</th>
+                                              <th scope="col" WIDTH="12%">Student No.</th>
+                                              <th scope="col" >Porgram</th>  
+                                              <th scope="col">Document</th>   
+                                              <th scope="col">Date</th>    
+                                              <th scope="col">Status</th>                    
+                                              <th scope="col" WIDTH="6%">Action</th>          
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <?php
+                                              require_once("include/conn.php");
+                                              $query="SELECT * FROM datms_tempreq WHERE status='Rejected'  ORDER BY date DESC ";
+                                              $result=mysqli_query($conn,$query);
+                                              while($rs=mysqli_fetch_array($result)){
+                                                $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
+                                                $doctype =$rs['docu']; $stat = $rs['status']; $remarks = $rs['remarks']; 
+                                                $date =$rs['date']; $fname = $rs['file_name'];$docCode =$rs['req_code'];
+                                            ?>
+                                            <tr>
+                                              <td style="display:none"><?php echo $docId?></td>
+                                              <td ><?php
+                                              date_default_timezone_set("asia/manila");
+                                              $today = date("Y-m-d",strtotime("+0 HOURS"));
+                                              $query_2 = "SELECT * FROM datms_tempreq WHERE date = '$date' AND date LIKE '%$today%'";
+                                              $result_2 = mysqli_query($conn, $query_2);
+                                              $count1 = mysqli_num_rows($result_2);
 
-                                            <td WIDTH="8%">
-                                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
-                                              <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line" title="Barcode"></i></a>
-                                              <a class="btn btn-primary " href='function/view_docu?ID=<?php echo $docId1; ?>' target="_blank" title="View"><i class="ri ri-eye-line"></i></a>
-                                              <!-- <a class="btn btn-warning " href='function/downloads?file_id=<?php echo $docId; ?>' ><i class="ri ri-download-2-fill" ></i></a>
-                                              <a class="btn btn-dark historybtn"><i class="ri ri-history-line" ></i></a> -->
-                                            </div>
-                                            </td>
-                                          </tr>
+                                              if($count1!=0){
+                                                $badge='<span style=" color: green;">●</span>';
+                                              }else{
+                                                $badge='<span style=" color: gray;">●</span>';
+                                              }
+                                              echo $badge?></td>
+                                              <td data-label="Code:"><?php echo $docCode;?></td>
+                                              <td data-label="No:" ><?php echo $stud_no; ?></td>
+                                              <td data-label="Prog:"><?php echo $prog; ?></td>                    
+                                              <td data-label="Docu:"><?php echo $doctype?></td>                        
+                                              <td data-label="Date:"><?php echo $date; ?></td>
+                                              <td data-label="Status:">
+                                              <?php 
+                                              if($stat=='Approved'){
+                                                echo '<span class="badge bg-success">'.$stat.'</span>';
+                                              }else if($stat=='Rejected'){
+                                                echo '<span class="badge bg-danger">'.$stat.'</span>';
+                                              }else{
+                                                echo '<span class="badge bg-primary">'.$stat.'</span>';
+                                              }                 
+                                              ?>  
+                                              <a class="fw-bold remarksbtn">&nbsp;&nbsp;</a></td>   
+                                              <td style="display:none"><?php echo $fname; ?></td>               
+                                              <td style="display:none"><?php echo $remarks; ?></td>             
+                                              <td WIDTH="6%">
+                                              <div class="btn-group" role="group" aria-label="Basic mixed styles example">                       
+                                                <a  class="btn btn-primary view"><i class="bi bi-eye"></i></a>                      
+                                              </div>
+                                              </td>
+                                            </tr>
 
-                                          <?php } ?>
-                                          
-                                        </tbody>
+                                            <?php } ?>
+                                            
+                                          </tbody>
                                         </table>
-                                      
+                                        <!-- End of Request table record -->                                      
                                       </form>
                                       <!-- End of Document table record -->
                                     </div>
@@ -619,7 +609,7 @@
                                           mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$doc_code','$ip','$host','$date')")or die(mysqli_error($conn)); 
                                           //notif of students              
                                           $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                          VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$verified_session_office','Active','$date')") or die(mysqli_error($conn));       
+                                          VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$d_off1','Active','$date')") or die(mysqli_error($conn));       
                                           // message 
                                           echo'<script type = "text/javascript">
                                               //success message
@@ -742,7 +732,7 @@
                                             mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$doc_code','$ip','$host','$date')")or die(mysqli_error($conn)); 
                                             //notif of students              
                                             $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                            VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$verified_session_office','Active','$date')") or die(mysqli_error($conn));       
+                                            VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$d_off1','Active','$date')") or die(mysqli_error($conn));       
                                             // message 
                                             echo'<script type = "text/javascript">
                                                 //success message
@@ -865,7 +855,7 @@
                                                   mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$doc_code','$ip','$host','$date')")or die(mysqli_error($conn)); 
                                                   //notif of students              
                                                   $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                                  VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$verified_session_office','Active','$date')") or die(mysqli_error($conn));       
+                                                  VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$d_off1','Active','$date')") or die(mysqli_error($conn));       
                                                   // message 
                                                   echo'<script type = "text/javascript">
                                                       //success message

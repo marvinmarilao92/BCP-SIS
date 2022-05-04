@@ -357,11 +357,11 @@ include('includes/session.php');
                           document.getElementById("view_code").placeholder = data[1];      
                           document.getElementById("view_title").placeholder = data[8];   
                           document.getElementById("view_filename").placeholder = data[9];   
-                          $('#view_filename').text(data[9]);
-                          $('#view_creator').text(data[3]);
-                          $('#view_date').text(data[4]);
+                          $('#view_filename').text(data[10]);
+                          $('#view_creator').text(data[4]);
+                          $('#view_date').text(data[5]);
                           // JsBarcode("#barcode", data[1]);
-                          JsBarcode("#barcode", data[1], {
+                          JsBarcode("#barcode", data[2], {
                             format: "CODE128",
                             lineColor: "#000",
                             width: 3,
@@ -382,10 +382,10 @@ include('includes/session.php');
                     }).get();
 
                     console.log(data); 
-                    if(data[18]==""){
-                      $('#remarks').text(data[11]);
+                    if(data[19]==""){
+                      $('#remarks').text(data[12]);
                     }else{
-                        $('#remarks').text(data[18]);
+                        $('#remarks').text(data[19]);
                     }
                     
                   });

@@ -265,10 +265,10 @@ include('session.php');
                   }).get();
 
                   console.log(data); 
-                  if(data[18] ==""){
-                    $('#remarks').text(data[11]);
+                  if(data[19] ==""){
+                    $('#remarks').text(data[12]);
                   }else{
-                    $('#remarks').text(data[18]);
+                    $('#remarks').text(data[19]);
                   }
                 
                 });
@@ -286,9 +286,9 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#doc_fileN').text(data[9]);  
+                      $('#doc_fileN').text(data[10]);  
                       $('#doc_id').val(data[0]);
-                      $('#doc_code').val(data[1]); 
+                      $('#doc_code').val(data[2]); 
                 });
               // End of Cancel modal calling 
 

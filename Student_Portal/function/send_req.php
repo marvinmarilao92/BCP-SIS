@@ -36,7 +36,7 @@
 				 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$program','$ip','$host','$date')")or die(mysqli_error($link));
 
 				 //query action
-				 $conn->query("INSERT INTO `datms_tempreq` VALUES('','$req_code', '$verified_session_username', '$program','$docu','Sent','$res','$date','')") or die(mysqli_error($conn));
+				 $conn->query("INSERT INTO `datms_tempreq` VALUES('','$req_code', '$verified_session_username', '$program','$docu','Sent','$res','','$date','')") or die(mysqli_error($conn));
 
 					//notif of students  
 					$conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)

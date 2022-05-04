@@ -117,7 +117,6 @@ include('session.php');
                   ?>
                   <tr>
                   <td style="display:none"><?php echo $docId?></td>
-                    <td ><?php echo $badge?></td>
                     <td ><?php
                     date_default_timezone_set("asia/manila");
                     $today = date("Y-m-d",strtotime("+0 HOURS"));
@@ -131,6 +130,7 @@ include('session.php');
                       $badge='<span style=" color: gray;">●</span>';
                     }
                     echo $badge?></td>
+                    <td data-label="Code:"><?php echo $docCode?></td>
                     <td data-label="Requested By:"><?php echo $docTitle; ?></td>
                     <td data-label="Sender:"><?php echo $docAct2; ?></td>
                     <td data-label="Date&T:"><?php echo $docDate2; ?></td>
@@ -375,7 +375,7 @@ include('session.php');
                       }).get();
 
                       console.log(data); 
-                      $('#remarks').text(data[18]);
+                      $('#remarks').text(data[19]);
                     });
               // End of View function 
 
@@ -391,9 +391,9 @@ include('session.php');
                     }).get();
 
                     console.log(data);      
-                        $('#doc_fileN').text(data[9]);  
+                        $('#doc_fileN').text(data[10]);  
                         $('#doc_id').val(data[0]);
-                        $('#doc_code').val(data[1]); 
+                        $('#doc_code').val(data[2]); 
                   });
               // End of Received modal calling 
 

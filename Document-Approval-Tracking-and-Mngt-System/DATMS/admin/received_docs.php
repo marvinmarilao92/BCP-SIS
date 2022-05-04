@@ -121,7 +121,7 @@ include('session.php');
   
                   ?>
                   <tr>
-                    <td style="display:none"><?php echo $docId?></td>
+                    <td style="display:none"><?php echo $docId?></td>                    
                     <td ><?php
                     date_default_timezone_set("asia/manila");
                     $today = date("Y-m-d",strtotime("+0 HOURS"));
@@ -135,6 +135,7 @@ include('session.php');
                       $badge='<span style=" color: gray;">●</span>';
                     }
                     echo $badge?></td>
+                    <td data-label="Code:"><?php echo $docCode?></td>
                     <td data-label="Requested By:"><?php echo $docTitle; ?></td>
                     <td data-label="Actor:"><?php echo $docAct1; ?></td>
                     <td style="display:none"><?php echo $docOff1?></td>
@@ -322,34 +323,6 @@ include('session.php');
             </div>
         <!-- End Send Docs Modal-->
 
-        <!-- Delete Office Modal -->
-        <div class="modal fade" id="DeleteModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">DELETE OFFICE</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                          <div class="card" style="margin: 10px;">
-                            <div class="card-body">                
-                              <br>
-                              <input type="hidden"  name="delete_id" id="delete_id" readonly>
-                              <center>
-                                <h5>Are you sure you want to delete these Office?</h5>
-                                <h5 class="text-danger">This action cannot be undone.</h5>   
-                              </center>                
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Office</button>
-                          </div>
-                        <!-- End Form -->
-                    </div>
-                </div>
-          </div>
-        <!-- End delete Office Modal -->
-
     <!-- End of Modals -->
 
   <!-- ======= Footer ======= -->
@@ -380,10 +353,10 @@ include('session.php');
                     }).get();
 
                     console.log(data); 
-                    if(data[18]==""){
+                    if(data[19]==""){
                       $('#remarks').text("This is create Status if you want to see your description go to documents module");
                     }else{
-                        $('#remarks').text(data[18]);
+                        $('#remarks').text(data[19]);
                     }
                     
                   });
@@ -401,9 +374,9 @@ include('session.php');
                 }).get();
 
                 console.log(data);      
-                    $('#doc_fileN').text(data[9]);  
+                    $('#doc_fileN').text(data[10]);  
                     $('#doc_id').val(data[0]);
-                    $('#doc_code').val(data[1]); 
+                    $('#doc_code').val(data[2]); 
                 });
             // End of Hold modal calling 
 
@@ -466,13 +439,13 @@ include('session.php');
                 }).get();
 
                 console.log(data);      
-                    $('#send_act1').val(data[3]);  
-                    $('#send_off1').val(data[4]);
-                    $('#send_date1').val(data[5]); 
+                    $('#send_act1').val(data[4]);  
+                    $('#send_off1').val(data[5]);
+                    $('#send_date1').val(data[6]); 
 
-                    $('#doc_fileN1').text(data[9]);  
+                    $('#doc_fileN1').text(data[10]);  
                     $('#send_id').val(data[0]);
-                    $('#send_code').val(data[1]); 
+                    $('#send_code').val(data[2]); 
                 });
             // End of Send modal calling 
 
