@@ -24,10 +24,13 @@
   <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
    <!-- For barcode -->
-   <script src="../assets/vendor/bootstrap/js/JsBarcode.all.min.js"></script>
+   <script src="../assets/vendor/bootstrap/js/JsBarcode.all.min.js"></script>\
+   <script src="includes/changepass.js"></script>
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+
+
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.1.0

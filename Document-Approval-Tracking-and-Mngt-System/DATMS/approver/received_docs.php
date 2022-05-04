@@ -92,6 +92,7 @@ include('session.php');
               <table class="table table-hover datatable" id="receivedTable">
                 <thead>
                   <tr>
+                    <th WIDTH="1%"></th>
                     <th scope="col">DocCode</th>
                     <th scope="col" >Requested By</th>
                     <!-- <th scope="col">Filesize</th>    -->
@@ -121,7 +122,20 @@ include('session.php');
                   ?>
                   <tr>
                     <td style="display:none"><?php echo $docId?></td>
-                    <td data-label="Code:"><?php echo $docCode; ?></td>
+                    <td ><?php
+                    date_default_timezone_set("asia/manila");
+                    $today = date("Y-m-d",strtotime("+0 HOURS"));
+                    $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
+                    $result_2 = mysqli_query($conn, $query_2);
+                    $count1 = mysqli_num_rows($result_2);
+
+                    if($count1!=0){
+                      $badge='<span style=" color: green;">●</span>';
+                    }else{
+                      $badge='<span style=" color: gray;">●</span>';
+                    }
+                    echo $badge?></td>
+                    <td data-label="Code:"><?php echo $docCode;?></td>
                     <td data-label="Requested By:"><?php echo $docTitle; ?></td>
                     <td data-label="Actor:"><?php echo $docAct1; ?></td>
                     <td style="display:none"><?php echo $docOff1?></td>
@@ -360,9 +374,9 @@ include('session.php');
                 }).get();
 
                 console.log(data);      
-                    $('#signed_fileN').text(data[9]);  
+                    $('#signed_fileN').text(data[10]);  
                     $('#signed_id').val(data[0]);
-                    $('#signed_code').val(data[1]); 
+                    $('#signed_code').val(data[2]); 
               });
             // End of Approved modal calling
 
@@ -425,9 +439,9 @@ include('session.php');
                 }).get();
 
                 console.log(data);      
-                    $('#reject_fileN').text(data[9]);  
+                    $('#reject_fileN').text(data[10]);  
                     $('#reject_id').val(data[0]);
-                    $('#reject_code').val(data[1]); 
+                    $('#reject_code').val(data[2]); 
               });
             // End of Reject modal calling 
 
@@ -490,9 +504,9 @@ include('session.php');
                 }).get();
 
                 console.log(data);      
-                    $('#doc_fileN').text(data[9]);  
+                    $('#doc_fileN').text(data[10]);  
                     $('#doc_id').val(data[0]);
-                    $('#doc_code').val(data[1]); 
+                    $('#doc_code').val(data[2]); 
               });
             // End of Hold modal calling 
 
@@ -555,13 +569,13 @@ include('session.php');
                 }).get();
 
                 console.log(data);      
-                    $('#send_act1').val(data[3]);  
-                    $('#send_off1').val(data[4]);
-                    $('#send_date1').val(data[5]); 
+                    $('#send_act1').val(data[4]);  
+                    $('#send_off1').val(data[5]);
+                    $('#send_date1').val(data[6]); 
 
-                    $('#doc_fileN1').text(data[9]);  
+                    $('#doc_fileN1').text(data[10]);  
                     $('#send_id').val(data[0]);
-                    $('#send_code').val(data[1]); 
+                    $('#send_code').val(data[2]); 
               });
             // End of Send modal calling 
 

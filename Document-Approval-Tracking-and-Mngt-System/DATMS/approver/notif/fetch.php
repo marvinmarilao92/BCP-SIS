@@ -8,10 +8,10 @@ if(isset($_POST["view"]))
  include("../include/conn.php");
  if($_POST["view"] != '')
  {
-  $update_query = "UPDATE datms_notification SET stat1 = 1 WHERE act1 = '$verified_session_firstname $verified_session_lastname' AND stat1 = 0";
+  $update_query = "UPDATE datms_notification SET stat1 = 1 WHERE act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department' AND stat1 = 0";
   mysqli_query($conn, $update_query);
  }
- $query = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' ORDER BY date DESC LIMIT 10";
+ $query = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department' ORDER BY date DESC LIMIT 10";
  $result = mysqli_query($conn, $query);
  $output = '';
  
@@ -115,15 +115,15 @@ if(isset($_POST["view"]))
        }
 
        if ($doc_status =='Approved Document' || $doc_status =='Created Document'){
-        $links='documents_list.php?id='.$_SESSION["login_key"].'';
+        $links='approved_docs?id='.$_SESSION["login_key"].'';
        }else if($doc_status =='Rejected Document'){
-        $links='reject_docs.php?id='.$_SESSION["login_key"].'';
+        $links='reject_docs?id='.$_SESSION["login_key"].'';
        }else if($doc_status =='Received Document'){
-        $links='received_docs.php?id='.$_SESSION["login_key"].'';
+        $links='received_docs?id='.$_SESSION["login_key"].'';
        }else if($doc_status =='Submitted Document'){
-        $links='incoming_docs.php?id='.$_SESSION["login_key"].'';       
+        $links='incoming_docs?id='.$_SESSION["login_key"].'';       
        }else{
-        $links='index.php?id='.$_SESSION["login_key"].'';
+        $links='index?id='.$_SESSION["login_key"].'';
        }
        
     $output .= '
@@ -149,7 +149,7 @@ if(isset($_POST["view"]))
   $output .= '
       <li class="notification-item">
         <i class="bi bi-question-circle text-secondary"></i>
-        <a href="index.php?id='.$_SESSION["login_key"].'" style="color: rgb(33, 37, 41);">
+        <a href="index?id='.$_SESSION["login_key"].'" style="color: rgb(33, 37, 41);">
           <div>   
             <h4>No Notification</h4>       
             <p>You have no notification today</p> 
@@ -162,7 +162,7 @@ if(isset($_POST["view"]))
   ';
  }
  
- $query_1 = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' AND stat1 = 0";
+ $query_1 = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department' AND stat1 = 0";
  $result_1 = mysqli_query($conn, $query_1);
  $count = mysqli_num_rows($result_1);
  $data = array(

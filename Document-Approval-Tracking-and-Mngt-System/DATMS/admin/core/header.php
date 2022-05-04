@@ -32,9 +32,11 @@
         <li>
           <hr class="dropdown-divider">
         </li>
-
-        <li class="notification">
-        </li>
+        <div style="overflow-y: scroll; max-height:370px;">
+          <li class="notification">
+          </li>
+        </div>
+        
         
         <li class="dropdown-footer">
           <a data-bs-toggle="modal" data-bs-target="#modalDialogScrollable">Show all notifications</a>
@@ -202,55 +204,174 @@
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Modal Dialog Scrollable</h5>
+          <h5 class="modal-title">Notifications</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
-          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-          This content should appear at the bottom after you scroll.
+        <div class="modal-body">        
+            <div class="card-body">        
+              <?php
+                require_once("./include/conn.php");
+                $query="SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' ORDER BY date DESC";
+                $result=mysqli_query($conn,$query);
+                while($rs=mysqli_fetch_array($result)){
+                  date_default_timezone_set("asia/manila");
+                  $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+                  $d1 = $rs["date"];
+                  $doc_status = $rs["subject"];
+                  $today = date("Y-m-d",strtotime("+0 HOURS"));
+                  $d2 = $date;
+                  // Declare and define two dates
+                  $date1 = strtotime("$d1");
+                  $date2 = strtotime("$d2");
+
+                  // Formulate the Difference between two dates
+                  $diff = abs($date2 - $date1);
+                
+                  // To get the year divide the resultant date into
+                  // total seconds in a year (365*60*60*24)
+                  $years = floor($diff / (365*60*60*24));
+                
+                  // To get the month, subtract it with years and
+                  // divide the resultant date into
+                  // total seconds in a month (30*60*60*24)
+                  $months = floor(($diff - $years * 365*60*60*24)
+                                                / (30*60*60*24));
+                
+                  // To get the day, subtract it with years and
+                  // months and divide the resultant date into
+                  // total seconds in a days (60*60*24)
+                  $days = floor(($diff - $years * 365*60*60*24 -
+                              $months*30*60*60*24)/ (60*60*24));
+                
+                  // To get the hour, subtract it with years,
+                  // months & seconds and divide the resultant
+                  // date into total seconds in a hours (60*60)
+                  $hours = floor(($diff - $years * 365*60*60*24
+                        - $months*30*60*60*24 - $days*60*60*24)
+                                                    / (60*60));
+                
+                  // To get the minutes, subtract it with years,
+                  // months, seconds and hours and divide the
+                  // resultant date into total seconds i.e. 60
+                  $minutes = floor(($diff - $years * 365*60*60*24
+                          - $months*30*60*60*24 - $days*60*60*24
+                                            - $hours*60*60)/ 60);
+                
+                  // To get the minutes, subtract it with years,
+                  // months, seconds, hours and minutes
+                  $seconds = floor(($diff - $years * 365*60*60*24
+                          - $months*30*60*60*24 - $days*60*60*24
+                                  - $hours*60*60 - $minutes*60));
+                        
+                  if($years !=0 ){
+                    // Print the result
+                    $duration = "$years"." yr,";
+                  }else if($months != 0 ){
+                    $duration = "$months"." mos";
+                  }else if($days > 1 ){
+                    $duration = "$days"." days";
+                  }else if($days == 1 ){
+                    $duration = "$days"." day";
+                  }else if($hours > 1){
+                    $duration = "$hours"." hrs";
+                  }else if($hours == 1){
+                    $duration = "$hours"." hr";
+                  }else if($minutes != 0 ){
+                    $duration = "$minutes"." min";
+                  }else if($seconds != 0 ){
+                    $duration = "$seconds"." sec";
+                  }else if($seconds == 0 ){
+                    $duration = "1"." sec";
+                  }else{
+                    $duration = "2";
+                  }
+
+                  if ($doc_status =='Approved Document'){
+                    $idenifier='<i class="bi bi-check-circle text-success"></i>';
+                  }else if($doc_status =='Rejected Document'){
+                    $idenifier=' <i class="bi bi-x-circle text-danger"></i>';
+                  }else if($doc_status =='Received Document'){
+                    $idenifier=' <i class="bi bi-arrow-down-circle text-primary"></i>';
+                  }else if($doc_status =='Submitted Document'){
+                    $idenifier=' <i class="bi bi-arrow-right-circle text-warning"></i>';       
+                  }else if($doc_status =='Created Document'){
+                    $idenifier=' <i class="bi bi-plus-circle text-primary"></i>';       
+                  }else{
+                    $idenifier=' <i class="bi bi-info-circle text-primary"></i>';
+                  }
+                  
+                  $query_2 = "SELECT * FROM datms_notification WHERE date = '$d1' AND date LIKE '%$today%'";
+                  $result_2 = mysqli_query($conn, $query_2);
+                  $count1 = mysqli_num_rows($result_2);
+
+                  if($count1!=0){
+                    $badge='<span style=" color: green;">●</span>';
+                  }else{
+                    $badge='<span style=" color: gray;">●</span>';
+                  }
+
+                  if ($doc_status =='Approved Document' || $doc_status =='Created Document'){
+                    $links='documents_list?id='.$_SESSION["login_key"].'';
+                  }else if($doc_status =='Rejected Document'){
+                    $links='reject_docs?id='.$_SESSION["login_key"].'';
+                  }else if($doc_status =='Received Document'){
+                    $links='received_docs?id='.$_SESSION["login_key"].'';
+                  }else if($doc_status =='Submitted Document'){
+                    $links='incoming_docs?id='.$_SESSION["login_key"].'';       
+                  }else if($doc_status =='Incoming Request'){
+                    $links='request?id='.$_SESSION["login_key"].'';       
+                  }else{
+                    $links='index?id='.$_SESSION["login_key"].'';
+                  }
+              ?>                       
+              <div class="card" style="padding:20px" >
+                <h6 style="font-weight: bold;"><a href="<?php echo $links;?>" style="color: black;"><?php echo $rs["subject"]; ?></a></h6>
+                <h8><?php echo $rs["notif"]; ?></h8>
+                <small><?php echo $duration.' ago '.$badge; ?></small>
+              </div>                     
+              <?php } ?>
+            </div><!-- End sidebar recent posts-->                   
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
   </div><!-- End Modal Dialog Scrollable-->
-<!-- for notification -->
-<script>
-  $(document).ready(function(){
-  
-  function load_unseen_notification(view = '')
-  {
-    $.ajax({
-    url:"notif/fetch.php",
-    method:"POST",
-    data:{view:view},
-    dataType:"json",
-    success:function(data)
+  <!-- for notification -->
+  <script>
+    $(document).ready(function(){
+    
+    function load_unseen_notification(view = '')
     {
-      $('.notification').html(data.notification);
-      if(data.unseen_notification > 0)
+      $.ajax({
+      url:"notif/fetch.php",
+      method:"POST",
+      data:{view:view},
+      dataType:"json",
+      success:function(data)
       {
-      $('.count').html(data.unseen_notification);
-      }else{
-        $('.notif').html('0');
+        $('.notification').html(data.notification);
+        if(data.unseen_notification > 0)
+        {
+        $('.count').html(data.unseen_notification);
+        }else{
+          $('.notif').html('0');
+        }
       }
+      });
     }
-    });
-  }
-  
-  load_unseen_notification();
-  
-  $(document).on('click', '#viewnotif', function(){
-    $('.count').html('');
-    load_unseen_notification('yes');
-  });
-  
-  setInterval(function(){ 
+    
     load_unseen_notification();
-  }, 5000);
-  
-  });
-</script>
+    
+    $(document).on('click', '#viewnotif', function(){
+      $('.count').html('');
+      load_unseen_notification('yes');
+    });
+    
+    setInterval(function(){ 
+      load_unseen_notification();
+    }, 5000);
+    
+    });
+  </script>

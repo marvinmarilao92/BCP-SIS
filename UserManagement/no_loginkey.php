@@ -6,14 +6,14 @@ include('session.php');
 <title>Super Admin</title>
 <head>
 <!-- Link conncetions -->
-<?php include ("includes/head.php");?> 
+<?php include ("includes/head.php");?>
 </head>
 
 <body>
 <?php include ("includes/nav.php"); ?>
 
   <main style="padding: 20px;">
-    
+
     <div class="pagetitle">
       <h1>Dashboard</h1>
       <nav>
@@ -50,9 +50,9 @@ include('session.php');
     <footer class="footer">
       <div class="copyright" style="margin-bottom: 30px;">
         <center>
-          &copy;Copyright <a href="https://bcp.edu.ph/home" target="_blank " data-bs-toggle="tooltip" data-bs-placement="top" 
+          &copy;Copyright <a href="https://bcp.edu.ph/home" target="_blank " data-bs-toggle="tooltip" data-bs-placement="top"
           title="Access BCP Website">Bestlink College of the Philippines</a> All Rights Reserved
-        </center>                 
+        </center>
       </div>
     </footer>
     <!-- End Footer -->

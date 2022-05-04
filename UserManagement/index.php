@@ -10,7 +10,7 @@ include('session.php');
   <head>
       <script>
         $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();   
+            $('[data-toggle="tooltip"]').tooltip();
         });
       </script>
 
@@ -51,17 +51,17 @@ include('session.php');
                   <tr>
                     <th style="display:none"></th>
                     <th >Student No.</th>
-                    <th scope="col">Full Name</th>  
-                    <th style="display:none"></th>
-                    <th style="display:none"></th>                  
+                    <th scope="col">Full Name</th>
                     <th style="display:none"></th>
                     <th style="display:none"></th>
                     <th style="display:none"></th>
-                    <th style="display:none"></th>                  
                     <th style="display:none"></th>
                     <th style="display:none"></th>
                     <th style="display:none"></th>
-                    <th style="display:none"></th>                  
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
+                    <th style="display:none"></th>
                     <th style="display:none"></th>
                     <th style="display:none"></th>
                     <th style="display:none"></th>
@@ -79,22 +79,22 @@ include('session.php');
                     while($rs=mysqli_fetch_array($result)){
                       $studid =$rs['id'];
                       $studno = $rs['id_number'];
-                      $fname = $rs['firstname'];        
+                      $fname = $rs['firstname'];
                       $lname = $rs['lastname'];
                       $mname = $rs['MI'];
                       $email =$rs['email'];
                       $contact = $rs['contact'];
-                      $address = $rs['address'];        
+                      $address = $rs['address'];
                       $course = $rs['course'];
                       $yl = $rs['year_level'];
                       $section =$rs['section'];
                       $sy = $rs['school_year'];
-                      $gender = $rs['gender'];        
+                      $gender = $rs['gender'];
                       $bday = $rs['birthday'];
                       $nationality = $rs['nationality'];
                       $religion =$rs['religion'];
                       $cs = $rs['civil_status'];
-                      $as = $rs['account_status'];        
+                      $as = $rs['account_status'];
                       $sd = $rs['stud_date'];
                   ?>
                   <tr>
@@ -129,9 +129,9 @@ include('session.php');
                     //  }?>
                     <td ><?php echo $as?></td>
                     <td style="display:none"><?php echo $sd?></td>
-                    
+
                   </td>
-                    <!-- <td WIDTH="13%">                      
+                    <!-- <td WIDTH="13%">
                       <button class="btn btn-primary viewbtn"><i class="bi bi-eye"></i></button>
                       <button class="btn btn-success editbtn"><i class="bi bi-pencil-square"></i></button>
                       <button class="btn btn-danger deletebtn" ><i class="bi bi-trash" ></i></button>
@@ -139,10 +139,10 @@ include('session.php');
                   </tr>
 
                   <?php } ?>
-                  
+
                 </tbody>
               </table>
-             
+
             </div>
             <div class="container-fluid">
               <div class="row mb-4">

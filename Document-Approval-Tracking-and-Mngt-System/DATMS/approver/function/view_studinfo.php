@@ -9,7 +9,7 @@ $d2;
 if(isset($_POST["query"]))
 {
   $search = mysqli_real_escape_string($conn, $_POST["query"]);
-  $query  = "SELECT *,LEFT(middlename,1) as MI FROM student_information WHERE `account_status` NOT IN ('Unofficial') AND id_number = '".$search."'";
+  $query  = "SELECT *,LEFT(middlename,1) as MI FROM student_information WHERE id_number = '".$search."'";
   $result = mysqli_query($conn, $query);
 
 

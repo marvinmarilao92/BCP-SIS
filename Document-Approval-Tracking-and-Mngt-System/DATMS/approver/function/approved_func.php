@@ -58,7 +58,14 @@ $db = mysqli_select_db($conn, 'sis_db');
                                     VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type','Approved','$doc_desc','$d_act2','$d_off2','$date','$d_act1','$d_off1','$d_date1','Document is Approved by')") or die(mysqli_error($conn));
 
                                     $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                    VALUES ('$tracker', '0' ,'$doc_title','0','Approved Document','Your document has been approved','$d_off2','Active','$date')") or die(mysqli_error($conn));
+                                    VALUES ('$tracker', '0' ,'','0','Approved Document','Your document has been approved','$d_off2','Active','$date')") or die(mysqli_error($conn));
+                                    // Self notifier
+                                    $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                    VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Approved Document','You approved $doc_type of $doc_title','$d_off2','Active','$date')") or die(mysqli_error($conn));
+
+                                     //notif of students              
+                                     $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                     VALUES ('', '0' ,'$doc_title','0','Approved Document','Your $doc_type is approved by $d_act2','$d_off2','Active','$date')") or die(mysqli_error($conn));   
 
                                     echo ('success');
                                 }

@@ -25,7 +25,7 @@ include('session.php');
       <h1>School Information System</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="index?id=<?php echo $_SESSION["login_key"];?>">Home</a></li>
           <li class="breadcrumb-item active">School Information System</li>
         </ol>
       </nav>

@@ -1,8 +1,10 @@
 <?php
   include 'config.php';
   session_start();
+
   if(isset($_SESSION['session_username'])){
     $user_id_checker = $_SESSION['session_username'];
+
 
     $sql5 = "SELECT * FROM user_information where id_number = '$user_id_checker'";
             if($result5 = mysqli_query($link, $sql5)){
@@ -22,7 +24,8 @@
                 mysqli_free_result($result5);
               }
             }
-    
+
+
     if(isset($verified_session_department) && ($verified_session_username == $_SESSION['session_username'])){
         switch($verified_session_role){
           case "User Management Administrator":
@@ -37,7 +40,6 @@
             session_destroy();
             header("location:pages-error-404.php");
             die();
-
         }
     }else{
       header("location:pages-error-404.php");

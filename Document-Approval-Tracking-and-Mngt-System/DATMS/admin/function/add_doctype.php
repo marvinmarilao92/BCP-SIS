@@ -3,13 +3,14 @@
  require_once("../include/conn.php");
  
 
-   if(isset($_POST['dtname'])&&isset($_POST['dtdesc'])){
+   if(isset($_POST['dtname'])&&isset($_POST['dtacc'])&&isset($_POST['dtkind'])){
     // Object Connection
 		 date_default_timezone_set("asia/manila");
 		 $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
         //  $Dt_code = mysqli_real_escape_string($conn,$_POST['dtcode']);
          $Dt_name = mysqli_real_escape_string($conn,$_POST['dtname']);
-         $Dt_desc = mysqli_real_escape_string($conn,$_POST['dtdesc']);
+         $Dt_acc = mysqli_real_escape_string($conn,$_POST['dtacc']);
+				 $Dt_kind = mysqli_real_escape_string($conn,$_POST['dtkind']);
 
             $year = date("Y",strtotime("+0 HOURS"));
             $random_num= rand(10000000,99999999);
@@ -37,7 +38,7 @@
 				 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$Dt_name','$ip','$host','$date')")or die(mysqli_error($link));
 
 				 //save doctype to the database
-				 $conn->query("INSERT INTO `datms_doctype` VALUES('','$dt_code', '$Dt_name', '$Dt_desc','$date')") or die(mysqli_error($conn));
+				 $conn->query("INSERT INTO `datms_doctype` VALUES('','$dt_code', '$Dt_name', '$Dt_acc','$Dt_kind','$date')") or die(mysqli_error($conn));
 				 echo ('success');
 			}
 		//end of audit trail

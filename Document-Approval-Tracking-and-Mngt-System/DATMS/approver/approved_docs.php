@@ -88,6 +88,7 @@ include('session.php');
               <table class="table table-hover datatable" id="approvedTable">
                 <thead>
                   <tr>
+                    <th WIDTH="1%"></th>
                     <th scope="col">DocCode</th>
                     <th scope="col" >Requested By</th>
                     <!-- <th scope="col">Filesize</th>    -->
@@ -112,15 +113,28 @@ include('session.php');
                       $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2'];                       
                       $docRemarks = $rs['doc_remarks'];  
 
-                      $query1="SELECT * FROM datms_documents WHERE `doc_status` = 'Rejected' OR `doc_status` = 'Deleted'  AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname') ORDER BY doc_date1 DESC ";
+                      $query1="SELECT * FROM datms_documents WHERE `doc_status` = 'Approved' AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname') ORDER BY doc_date1 DESC";
                       $result1=mysqli_query($conn,$query1);
                         while($rs1=mysqli_fetch_array($result1)){
                         $docAct3 =$rs1['doc_actor3']; $docOff3 = $rs1['doc_off3']; $docDate3 = $rs1['doc_date3']; 
   
                   ?>
                   <tr>
-                  <td style="display:none"><?php echo $docId?></td>
-                    <td data-label="Code:"><?php echo $docCode; ?></td>
+                    <td style="display:none"><?php echo $docId?></td>
+                    <td ><?php
+                    date_default_timezone_set("asia/manila");
+                    $today = date("Y-m-d",strtotime("+0 HOURS"));
+                    $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
+                    $result_2 = mysqli_query($conn, $query_2);
+                    $count1 = mysqli_num_rows($result_2);
+
+                    if($count1!=0){
+                      $badge='<span style=" color: green;">●</span>';
+                    }else{
+                      $badge='<span style=" color: gray;">●</span>';
+                    }
+                    echo $badge?></td>
+                    <td data-label="Code:"><?php echo $docCode;?></td>
                     <td data-label="Requested By:"><?php echo $docTitle; ?></td>
                     <td data-label="Actor:"><?php echo $docAct3; ?></td>
                     <td data-label="Date:"><?php echo $docDate3; ?></td>
@@ -141,7 +155,7 @@ include('session.php');
 
                   </td>
                     <td>                      
-                      <a class="btn btn-secondary cancelbtn"><i class="bi bi-reply-fill"></i></a>
+                      <!-- <a class="btn btn-secondary cancelbtn"><i class="bi bi-reply-fill"></i></a> -->
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>                
                     </td>
                   </tr>
@@ -251,10 +265,10 @@ include('session.php');
                   }).get();
 
                   console.log(data); 
-                  if(data[18] ==""){
-                    $('#remarks').text(data[11]);
+                  if(data[19] ==""){
+                    $('#remarks').text(data[12]);
                   }else{
-                    $('#remarks').text(data[18]);
+                    $('#remarks').text(data[19]);
                   }
                 
                 });
@@ -272,9 +286,9 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#doc_fileN').text(data[9]);  
+                      $('#doc_fileN').text(data[10]);  
                       $('#doc_id').val(data[0]);
-                      $('#doc_code').val(data[1]); 
+                      $('#doc_code').val(data[2]); 
                 });
               // End of Cancel modal calling 
 

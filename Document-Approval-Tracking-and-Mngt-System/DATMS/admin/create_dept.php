@@ -7,41 +7,41 @@ include('session.php');
 <head>
 <?php  include "core/key_checker.php"; ?>
 <style>
-         /*responsive*/
-        @media(max-width: 550px){
-          .table thead{
-            display: none;
-          }
+      /*responsive*/
+    @media(max-width: 550px){
+      .table thead{
+        display: none;
+      }
 
-          .table, .table tbody, .table tr, .table td{
-            display: block;
-            width: 100%;
-          }
-          .table tr{
-            background: #ffffff;
-            box-shadow: 0 8px 8px -4px lightblue;
-            border-radius: 5%;
-            margin-bottom:13px;
-            margin-top: 13px;
-          }
-          .table td{
-            text-align: right;
-            padding-left: 50%;
-            text-align: right;
-            position: relative;
-          }
-          .table td::before{      
-            margin-top: 10px;      
-            content: attr(data-label);
-            position: absolute;
-            left:0;
-            width: 50%;
-            padding-left:15px;
-            font-size:15px;
-            font-weight: bold;
-            text-align: left;
-          }
-        }
+      .table, .table tbody, .table tr, .table td{
+        display: block;
+        width: 100%;
+      }
+      .table tr{
+        background: #ffffff;
+        box-shadow: 0 8px 8px -4px lightblue;
+        border-radius: 5%;
+        margin-bottom:13px;
+        margin-top: 13px;
+      }
+      .table td{
+        text-align: right;
+        padding-left: 50%;
+        text-align: right;
+        position: relative;
+      }
+      .table td::before{      
+        margin-top: 10px;      
+        content: attr(data-label);
+        position: absolute;
+        left:0;
+        width: 50%;
+        padding-left:15px;
+        font-size:15px;
+        font-weight: bold;
+        text-align: left;
+      }
+    }
 </style>
   <?php include ('core/css-links.php');//css connection?>
 </head>
