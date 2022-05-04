@@ -1,5 +1,5 @@
 <?php
-  include('../security/session.php');
+  include('../security/newsource.php');
 
   if(session_destroy()) {
     date_default_timezone_set("asia/manila");

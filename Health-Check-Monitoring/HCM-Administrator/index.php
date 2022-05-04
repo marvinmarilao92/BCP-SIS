@@ -1,6 +1,5 @@
 <?php
-  $path = 'view';
-  include_once('includes/source.php');
+  include_once('security/newsource.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,8 +86,79 @@
             </div>
 
           </div>
-        </div><!-- End Revenue Card -->
+        </div>
+        
+        
+        <div class="col-lg-5">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Pie Chart</h5>
 
+              <!-- Pie Chart -->
+              <canvas id="pieChart" style="max-height: 400px;"></canvas>
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  new Chart(document.querySelector('#pieChart'), {
+                    type: 'pie',
+                    data: {
+                      labels: [
+                        'BSIT',
+                        'BSED',
+                        'BSCRIM',
+                        'BSCRIM',
+                        'CASE',
+                      ],
+                      datasets: [{
+                        label: 'My First Dataset',
+                        data: [300, 50, 100],
+                        backgroundColor: [
+                          'rgb(255, 99, 132)',
+                          'rgb(54, 162, 235)',
+                          'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 4
+                      }]
+                    }
+                  });
+                });
+              </script>
+
+
+              <!-- End Pie CHart -->
+
+            </div>
+          </div>
+        </div><!-- End Revenue Card -->
+        <div class="col-lg-7">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Bar Chart</h5>
+
+              <!-- Bar Chart -->
+              <div id="barChart" style="min-height: 400px;" class="echart"></div>
+
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  echarts.init(document.querySelector("#barChart")).setOption({
+                    xAxis: {
+                      type: 'category',
+                      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    },
+                    yAxis: {
+                      type: 'value'
+                    },
+                    series: [{
+                      data: [120, 200, 150, 80, 70, 110, 130],
+                      type: 'bar'
+                    }]
+                  });
+                });
+              </script>
+              <!-- End Bar Chart -->
+
+            </div>
+          </div>
+        </div>
       </div>
     </div><!-- End Left side columns -->
 

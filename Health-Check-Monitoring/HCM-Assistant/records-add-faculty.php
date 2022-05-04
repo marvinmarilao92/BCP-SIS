@@ -129,7 +129,7 @@
             <div class="alert alert-danger">No Records Found</div>
           </div>';
         }
-        mysqli_free_result($result);
+
       }
     ?>
           

@@ -1,27 +1,43 @@
 <?php
-  $path = 'view';
-  
-define('DB_SERVER', '31.220.110.2');
-define('DB_USERNAME', 'u692894633_sis_db');
-define('DB_PASSWORD', 'l95o@WMN6~a');
-define('DB_NAME', 'u692894633_sis_db');
-
-/* Attempt to connect to MySQL database */
-$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-// Check connection
-if($conn === false){  
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
-  include_once('includes/source.php');
+  include_once('security/newsource.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <title>Manage Records</title>
+
+
+
 <head>
 <?php include ('includes/head_ext.php');?>
 <style>
   
 </style>
+<script>
+  function searchstdID(showStudentInformation)
+  {
+    var searchID  = document.getElementById("searchID").value;
+    var takeDataintoArray =
+    'searchID='     + searchID;
+    if (searchID != '')
+    {
+      $.ajax({
+          type: "POST",
+          url: 'resources/searchStdID.php',
+          data: takeDataintoArray,
+          cache: false,
+          success: function(html)
+          {
+            var ajaxDisplay = document.getElementById(showStudentInformation);
+            ajaxDisplay.innerHTML = html;
+          }});
+    }
+    else
+    {
+     alert("ASd");
+    }
+  }
+</script>
+
 </head>
 
 <body>
@@ -51,17 +67,18 @@ if($conn === false){
       <div class="row g-4">
         <div class="col-sm-6 p-3">
           <div class="input-group">
-            <input type="text" placeholder="Search Student Number" class="form-control" name="search" required>
+            <input type="text" placeholder="Search Student Number" id="searchID" class="form-control" name="search"  onchange="searchstdID('showStudentInformation');">
             <label for="sub"><i class="btn btn-primary ri-search-eye-line" style="cursor: pointer;">&nbspSearch</i></label> 
-            <input type="submit" id ="sub" name="submit" style="display: none; visibility: none;">
+            <a href="#" id ="sub" onclick="searchstdID('showStudentInformation');" name="submit" style="display: none; visibility: none;"></a>
           </div>
         </div>
         <div class="col-sm-6">
           <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#myModal"><i class="ri-add-circle-line"></i>&nbspRegister</button>
         </div>
       </div>
-      
     </form>
+
+    <div id="showStudentInformation"></div>
       <?php
   
       if(isset($_POST['submit'])){
@@ -143,7 +160,8 @@ if($conn === false){
                     </div>
                   </div>
                 </div>
-              </div>';
+              </div>  
+          </form>';
 
         } else {
           
@@ -155,7 +173,7 @@ if($conn === false){
         mysqli_free_result($result);
       }
       ?>         
-    </form><!-- End No Labels Form -->
+  
   </div>
 </div>
 <form action="resources/register_records.php" method="POST" enctype="multipart/form-data">

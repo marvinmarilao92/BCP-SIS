@@ -4,13 +4,15 @@
       &copy; Copyright <strong><span>School System</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-      Designed by <a href="https://facebook.com/">HCM Module</a>
+      Designed by <a href="https://facebook.com/">Medical System Module</a>
     </div>
     
   </footer><!-- End Footer -->
 
 <!-- ======= Scripts ======= -->
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
@@ -38,10 +40,15 @@
 
   <!-- Ajax JS -->
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
-
+  <script type="text/javascript" src="../mdb5-free-standard/js/mdb.min.js"></script>
+  <!-- Custom scripts -->
+  <script type="text/javascript"></script>
   <!-- Selector search -->
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+  
+    <!-- Custom scripts -->
+  <script type="text/javascript"></script>
+  
 <!-- ======= @marilao Swal2 Script======= -->
 <?php
 if(isset($_SESSION['status']) && $_SESSION['status'] !='' )

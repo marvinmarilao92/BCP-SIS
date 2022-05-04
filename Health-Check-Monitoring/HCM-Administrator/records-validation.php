@@ -1,6 +1,5 @@
 <?php
-  $path = 'view';
-   include_once('includes/source.php');
+  include_once('security/newsource.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,6 +91,7 @@
                           <td>
                             <div class="input-group">
                               <?php $table_name = "hcms_student_records";?>
+
                               <a class= "btn btn-primary btn-sm float-right bi bi-check" href="resources/req_approved.php?req_id=<?= $row['id']?>&tablename=<?= $table_name?>">Approve</a>                               
                               <a class= "btn btn-danger btn-sm float-right bi bi-x" href="resources/req_reject.php?req_id=<?= $row['id']?>&tablename=<?= $table_name?>">Reject</a>
                             </div>

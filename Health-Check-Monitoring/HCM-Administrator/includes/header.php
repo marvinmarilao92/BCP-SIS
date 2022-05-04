@@ -1,12 +1,12 @@
 <!-- ======= Header ======= -->
-<header id="header" class="header fixed-top d-flex align-items-center">
+<header id="header" class="header fixed-top d-flex align-items-center" style="background-color:#7CA9F4;" >
 <?php include "key_checker.php";?>
 <div class="d-flex align-items-center justify-content-between">
   <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="logo d-flex align-items-center">
-    <img src="../assets/img/hcmlogo.png" alt="">
-    <span class="d-none d-lg-block">HCM System</span>
+    <img src="../assets/img/pulse-svgrepo-com.svg" alt="">
+    <span class="d-none d-lg-block text-light">HCM System</span>
   </a>
-  <i class="bi bi-list toggle-sidebar-btn"></i>
+  <i class="bi bi-list toggle-sidebar-btn text-light"></i>
 </div><!-- End Logo -->
 
 <nav class="header-nav ms-auto">
@@ -14,16 +14,16 @@
    
     <li class="nav-item dropdown">
 
-      <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+      <a class="nav-link nav-icon text-light" href="#" data-bs-toggle="dropdown">
         <i class="bi bi-bell"></i>
-        <span class="badge bg-primary badge-number">1</span>
+        <span class="badge bg-danger badge-number">1</span>
       </a><!-- End Notification Icon -->
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
         <li class="dropdown-header">
           You have 4 new notifications
           <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-          <span class="status actiuve"></span>
+          <span class="status active"></span>
         </li>
         <li>
           <hr class="dropdown-divider">
@@ -90,9 +90,9 @@
 
     <li class="nav-item dropdown">
 
-      <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+      <a class="nav-link nav-icon text-light" href="#" data-bs-toggle="dropdown">
         <i class="bi bi-chat-left-text"></i>
-        <span class="badge bg-success badge-number">3</span>
+        <span class="badge bg-danger badge-number">3</span>
       </a><!-- End Messages Icon -->
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
@@ -163,7 +163,7 @@
             echo $result;
           ?>
         <!-- class="rounded-circle" -->
-        <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $verified_session_firstname . " " . $verified_session_lastname ?></span>
+        <span class="d-none d-md-block dropdown-toggle ps-2 text-light"><?php echo $verified_session_firstname . " " . $verified_session_lastname ?></span>
       </a><!-- End Profile Iamge Icon -->
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -224,7 +224,7 @@
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>
-                    </li>    
+                    </li>
                   ';
               }
               echo $output;

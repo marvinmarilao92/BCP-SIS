@@ -1,6 +1,5 @@
 <?php
-    $path = 'view';
-    include_once('includes/source.php');
+   include_once('security/newsource.php');
 ?>
 
 <!DOCTYPE html>

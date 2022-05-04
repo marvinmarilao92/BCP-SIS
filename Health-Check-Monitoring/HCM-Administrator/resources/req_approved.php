@@ -3,10 +3,19 @@ include_once('../includes/source.php');
 
 if($_SERVER["REQUEST_METHOD"] == "GET"){
 
-$id = $_GET['req_id'];
-$table_name = $_GET['tablename'];
 date_default_timezone_set("asia/manila");
 $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+
+  $sql = "SELECT * FROM hcms_student_records WHERE `create_at` BETWEEN CURRENT_TIMESTAMP AND MONTH(CURRENT_TIMESTAMP - INTERVAL 1 MONTH)";
+  $sql_run = mysqli_query($conn, $sql);
+  if(mysqli_num_rows($query_run) > 0 ){
+
+    $query = $conn->prepare("INSERT INTO 'tablename'(`id_number`, `full_name`, `assess_date`, `remarks`, `file`) VALUES (?, ?, ?, ?, ?) ");
+    $stmt->bind_param("is", $id_number, $full_name, $asses_date, $remarks, $file);
+}
+
+$id = $_GET['req_id'];
+$table_name = $_GET['tablename'];
 $fstatus = "Approved";
 
  
