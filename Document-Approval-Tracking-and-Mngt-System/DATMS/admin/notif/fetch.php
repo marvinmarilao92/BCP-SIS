@@ -122,7 +122,9 @@ if(isset($_POST["view"]))
         $links='received_docs?id='.$_SESSION["login_key"].'';
        }else if($doc_status =='Submitted Document'){
         $links='incoming_docs?id='.$_SESSION["login_key"].'';       
-       }else{
+       }else if($doc_status =='Incoming Request'){
+        $links='request?id='.$_SESSION["login_key"].'';       
+      }else{
         $links='index?id='.$_SESSION["login_key"].'';
        }
        

@@ -110,72 +110,73 @@ include('includes/session.php');
                 <div class="card-body" >           
                   <!-- Table for Document List records -->
                   <form method="POST">
+                    
                     <table class="table table-hover datatable" id="ReqTable">
-                    <thead>
-                      <tr>
-                        <th scope="col" WIDTH="12%">Code</th>
-                        <th scope="col" style="display:none" WIDTH="12%">Student No.</th>
-                        <th scope="col" style="display:none" >Porgram</th>  
-                        <th scope="col">Document</th>   
-                        <th scope="col">Date</th>    
-                        <th scope="col">Status</th>                    
-                        <th scope="col" WIDTH="8%">Action</th>          
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                        require_once("includes/conn.php");
-                        $query="SELECT * FROM datms_tempreq WHERE `id_number`='$verified_session_username' ORDER BY date DESC ";
-                        $result=mysqli_query($conn,$query);
-                        while($rs=mysqli_fetch_array($result)){
-                          $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
-                          $doctype =$rs['docu']; $stat = $rs['status']; $remarks = $rs['remarks']; 
-                          $date =$rs['date']; $fname = $rs['file_name'];$docCode =$rs['req_code'];
-                      ?>
-                      <tr>
-                        <td style="display:none"><?php echo $docId?></td> 
-                        <td data-label="Code:">
-                        <?php 
-                        date_default_timezone_set("asia/manila");
-                        $today = date("Y-m-d",strtotime("+0 HOURS"));
-                        $query_2 = "SELECT * FROM datms_tempreq WHERE date = '$date' AND date LIKE '%$today%'";
-                        $result_2 = mysqli_query($conn, $query_2);
-                        $count1 = mysqli_num_rows($result_2);
+                      <thead>
+                        <tr>
+                          <th WIDTH="1%"></th>
+                          <th scope="col" WIDTH="12%">Code</th>
+                          <th scope="col" style="display:none" WIDTH="12%">Student No.</th>
+                          <th scope="col" style="display:none" >Porgram</th>  
+                          <th scope="col">Document</th>   
+                          <th scope="col">Date</th>    
+                          <th scope="col">Status</th>                    
+                          <th scope="col" WIDTH="8%">Action</th>          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                          require_once("includes/conn.php");
+                          $query="SELECT * FROM datms_tempreq WHERE `id_number`='$verified_session_username' ORDER BY date DESC ";
+                          $result=mysqli_query($conn,$query);
+                          while($rs=mysqli_fetch_array($result)){
+                            $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
+                            $doctype =$rs['docu']; $stat = $rs['status']; $remarks = $rs['remarks']; 
+                            $date =$rs['date']; $fname = $rs['file_name'];$docCode =$rs['req_code'];
+                        ?>
+                        <tr>
+                          <td style="display:none"><?php echo $docId?></td>
+                          <td ><?php
+                          date_default_timezone_set("asia/manila");
+                          $today = date("Y-m-d",strtotime("+0 HOURS"));
+                          $query_2 = "SELECT * FROM datms_tempreq WHERE date = '$date' AND date LIKE '%$today%'";
+                          $result_2 = mysqli_query($conn, $query_2);
+                          $count1 = mysqli_num_rows($result_2);
 
-                        if($count1!=0){
-                          $badge='<span style=" color: green;">●</span>';
-                        }else{
-                          $badge='<span style=" color: gray;">●</span>';
-                        }
-                        echo $badge.' '.$docCode;?>
-                        </td>
-                        <td data-label="No:" style="display:none"><?php echo $stud_no; ?></td>
-                        <td data-label="Prog:" style="display:none"><?php echo $prog; ?></td>                    
-                        <td data-label="Docu:"><?php echo $doctype?></td>                        
-                        <td data-label="Date:"><?php echo $date; ?></td>
-                        <td data-label="Status:">
-                        <?php 
-                        if($stat=='Approved'){
-                          echo '<span class="badge bg-success">'.$stat.'</span>';
-                        }else if($stat=='Rejected'){
-                          echo '<span class="badge bg-danger">'.$stat.'</span>';
-                        }else{
-                          echo '<span class="badge bg-primary">'.$stat.'</span>';
-                        }                 
-                        ?>  
-                        <a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>   
-                        <td style="display:none"><?php echo $fname; ?></td>               
-                        <td style="display:none"><?php echo $remarks; ?></td>             
-                        <td WIDTH="8%">
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
-                          <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>                      
-                        </div>
-                        </td>
-                      </tr>
+                          if($count1!=0){
+                            $badge='<span style=" color: green;">●</span>';
+                          }else{
+                            $badge='<span style=" color: gray;">●</span>';
+                          }
+                          echo $badge?></td>
+                          <td data-label="Code:"><?php echo $docCode;?></td>
+                          <td data-label="No:" style="display:none"><?php echo $stud_no; ?></td>
+                          <td data-label="Prog:" style="display:none"><?php echo $prog; ?></td>                    
+                          <td data-label="Docu:"><?php echo $doctype?></td>                        
+                          <td data-label="Date:"><?php echo $date; ?></td>
+                          <td data-label="Status:">
+                          <?php 
+                          if($stat=='Approved'){
+                            echo '<span class="badge bg-success">'.$stat.'</span>';
+                          }else if($stat=='Rejected'){
+                            echo '<span class="badge bg-danger">'.$stat.'</span>';
+                          }else{
+                            echo '<span class="badge bg-primary">'.$stat.'</span>';
+                          }                 
+                          ?>  
+                          <a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>   
+                          <td style="display:none"><?php echo $fname; ?></td>               
+                          <td style="display:none"><?php echo $remarks; ?></td>             
+                          <td WIDTH="8%">
+                          <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
+                            <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>                      
+                          </div>
+                          </td>
+                        </tr>
 
-                      <?php } ?>
-                      
-                    </tbody>
+                        <?php } ?>
+                        
+                      </tbody>
                     </table>
                   
                   </form>

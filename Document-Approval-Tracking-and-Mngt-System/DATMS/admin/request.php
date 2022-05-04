@@ -85,42 +85,36 @@ include('session.php');
               </div> 
             </div>
             <div class="card-body" >           
-              <!-- Table for Office records -->
-              <table class="table table-hover datatable" id="incomingTable">
+              <!-- Table for Request records -->
+              <table class="table table-hover datatable" id="ReqTable">
                 <thead>
                   <tr>
-                    <th scope="col">DocCode</th>
-                    <th scope="col" >Requested By</th>
-                    <!-- <th scope="col">Filesize</th>    -->
-                    <th scope="col">Sender</th>   
-                    <th scope="col">Date&Time</th>       
-                    <th scope="col">Status</th>  
-                    <!-- <th scope="col">Downloads</th>    -->
-                    <th scope="col">Action</th>          
+                    <th WIDTH="1%"></th>
+                    <th scope="col" WIDTH="12%">Code</th>
+                    <th scope="col" WIDTH="12%">Student No.</th>
+                    <th scope="col" >Porgram</th>  
+                    <th scope="col">Document</th>   
+                    <th scope="col">Date</th>    
+                    <th scope="col">Status</th>                    
+                    <th scope="col" WIDTH="10%">Action</th>          
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $query="SELECT * FROM datms_documents WHERE `doc_status` = 'Outgoing' AND (`doc_actor1`='$verified_session_firstname $verified_session_lastname ') ORDER BY doc_date1 DESC ";
+                    $query="SELECT * FROM datms_tempreq  ORDER BY date DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
-                      $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
-                      $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
-                      $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
-                      $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                      $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                      $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];   
-                      $docRemarks = $rs['doc_remarks'];   
-  
+                      $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
+                      $doctype =$rs['docu']; $stat = $rs['status']; $remarks = $rs['remarks']; 
+                      $date =$rs['date']; $fname = $rs['file_name'];$docCode =$rs['req_code'];
                   ?>
                   <tr>
-                  <td style="display:none"><?php echo $docId?></td>
-                    <td data-label="Code:">
-                    <?php 
+                    <td style="display:none"><?php echo $docId?></td>
+                    <td ><?php
                     date_default_timezone_set("asia/manila");
                     $today = date("Y-m-d",strtotime("+0 HOURS"));
-                    $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
+                    $query_2 = "SELECT * FROM datms_tempreq WHERE date = '$date' AND date LIKE '%$today%'";
                     $result_2 = mysqli_query($conn, $query_2);
                     $count1 = mysqli_num_rows($result_2);
 
@@ -129,32 +123,43 @@ include('session.php');
                     }else{
                       $badge='<span style=" color: gray;">●</span>';
                     }
-                    echo $badge.' '.$docCode;?>
-                    </td>
-                    <td data-label="Requested By:"><?php echo $docTitle; ?></td>
-                    <td data-label="Sender:"><?php echo $docAct2; ?></td>
-                    <td data-label="Date&T:"><?php echo $docDate2; ?></td>
-                    <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
-                    <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
-                    <td style="display:none"><?php echo $docDl; ?>
-                    <td style="display:none"><?php echo $docName?></td>
-                    <td style="display:none"><?php echo $docType?></td>
-                    <td style="display:none"><?php echo $docDesc?></td>
-                    <td style="display:none"><?php echo $docOff1?></td>
-                    <td style="display:none"><?php echo $docAct1?></td>
-                    <td style="display:none"><?php echo $docOff2?></td>
-                    <td style="display:none"><?php echo $docDate1?></td>
-                    <td style="display:none"><?php echo $docAct3?></td>
-                    <td style="display:none"><?php echo $docOff3?></td>
-                    <td style="display:none"><?php echo $docDate3?></td>
-                    <td style="display:none"><?php echo $docRemarks?></td>
-
-
-                  </td>
-                    <td>                      
-                      <a class="btn btn-success receivedbtn" title="Received"><i class="bi bi-check-lg"></i></a>
-                      <!-- <a class="btn btn-danger "><i class="bi bi-x-lg"></i></a> -->
-                      <a class="btn btn-primary " href='function/view_docu?ID=<?php echo $docId; ?>' target="_blank" title="View"><i class="bi bi-eye-fill"></i></a>
+                    echo $badge?></td>
+                    <td data-label="Code:"><?php echo $docCode;?></td>
+                    <td data-label="No:" ><?php echo $stud_no; ?></td>
+                    <td data-label="Prog:"><?php echo $prog; ?></td>                    
+                    <td data-label="Docu:"><?php echo $doctype?></td>                        
+                    <td data-label="Date:"><?php echo $date; ?></td>
+                    <td data-label="Status:">
+                    <?php 
+                    if($stat=='Approved'){
+                      echo '<span class="badge bg-success">'.$stat.'</span>';
+                    }else if($stat=='Rejected'){
+                      echo '<span class="badge bg-danger">'.$stat.'</span>';
+                    }else{
+                      echo '<span class="badge bg-primary">'.$stat.'</span>';
+                    }                 
+                    ?>  
+                    <a class="fw-bold remarksbtn">&nbsp;&nbsp;</a></td>   
+                    <td style="display:none"><?php echo $fname; ?></td>               
+                    <td style="display:none"><?php echo $remarks; ?></td>             
+                    <td WIDTH="10%">
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">      
+                      <?php 
+                      $check_iden= "SELECT * FROM datms_doctype WHERE dt_name = '$doctype' AND dt_kind = 'Softcopy'";
+                      $result_2 = mysqli_query($conn, $check_iden);
+                      $count1 = mysqli_num_rows($result_2);
+                      if($count1!=0){
+                        ?>
+                        <a  class="btn btn-success softcopy_file"><i class="bi bi-check-lg"></i></a>   
+                        <?php
+                      }else{
+                        ?>
+                        <a  class="btn btn-success hardcopy_file"><i class="bi bi-check-lg"></i></a>   
+                        <?php
+                      }
+                      ?>                     
+                      <a  class="btn btn-danger decline"><i class="bi bi-x-lg"></i></a>                      
+                    </div>
                     </td>
                   </tr>
 
@@ -162,7 +167,7 @@ include('session.php');
                   
                 </tbody>
               </table>
-              <!-- End of office table record -->
+              <!-- End of Request table record -->
 
             </div>
           </div>
@@ -177,174 +182,174 @@ include('session.php');
   <!-- Office Modals -->
 
       <!-- Desc Document modal -->
-       <div class="modal fade" id="RemarksModal" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered modal-l">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">DOCUMENT DESCRIPTION</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal fade" id="RemarksModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-l">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">DOCUMENT DESCRIPTION</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="card" style="margin: 10px;">
+                <form method="post">
+                  <div class="card-body">
+                      <h5 id="remarks" style="margin-top: 10px;"></h5>                                          
+                      <div class="col-12" style="text-align: center;">
                       </div>
-                      <div class="modal-body">
-                        <div class="card" style="margin: 10px;">
-                          <form method="post">
-                            <div class="card-body">
-                               <h5 id="remarks" style="margin-top: 10px;"></h5>                                          
-                                <div class="col-12" style="text-align: center;">
-                                </div>
-                            </div>
-                            </form>
-                          </div>   
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
-                    </div>
                   </div>
+                  </form>
+                </div>   
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
         </div>
+      </div>
       <!-- End Desc office Modal-->
       <!-- Create Document Modal -->
       <div class="modal fade" id="AddModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">CREATE DOCUMENT</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form method="post" enctype="multipart/form-data" >
-                          <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h2 class="card-title">Fill all neccessary info</h2>
-                                <!-- Fill out Form -->
-                                
-                                <div class="row g-3" >
-                                <input type="hidden" id="doccreator" name="doccreator" class="form-control"  value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
-                                <input type="hidden" id="docoffice" name="docoffice" class="form-control"  value="<?php echo $verified_session_office?>" readonly>
-                                  <div class="col-md-6">
-                                      <input type="text" id="docname" name="docname" class="form-control" placeholder="Title" required>
-                                  </div>
-                                  <br>
-                                  <div class="col-md-6">
-                                    <select class="form-select" id="doctype" name="doctype">
-                                    <option selected="selected" disabled="disabled">Document Type</option>
-                                      <?php
-                                        require_once("include/conn.php");
-                                        $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC ";
-                                        $result=mysqli_query($conn,$query);
-                                        while($rs=mysqli_fetch_array($result)){
-                                          $dtid =$rs['dt_id'];                                    
-                                          $dtName = $rs['dt_name'];       
-                                      ?>
-                                        <option><?php echo $dtName;?></option>
-                                    <?php }?>
-                                    </select>
-                                  </div>
-                                  <div class="col-md-12">
-                                    <input class="form-control" type="file" id="docfile" name="docfile">
-                                  </div>
-                                  <br>
-                                  <div class="col-12">
-                                      <textarea class="form-control" style="height: 80px" placeholder="Description" name="docdesc" id="docdesc" required></textarea>
-                                  </div>        
-                                </div>
-                                            
-                            </div>
+        <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">CREATE DOCUMENT</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" enctype="multipart/form-data" >
+                  <div class="card" style="margin: 10px;">
+                    <div class="card-body">
+                      <h2 class="card-title">Fill all neccessary info</h2>
+                        <!-- Fill out Form -->
+                        
+                        <div class="row g-3" >
+                        <input type="hidden" id="doccreator" name="doccreator" class="form-control"  value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
+                        <input type="hidden" id="docoffice" name="docoffice" class="form-control"  value="<?php echo $verified_session_office?>" readonly>
+                          <div class="col-md-6">
+                              <input type="text" id="docname" name="docname" class="form-control" placeholder="Title" required>
                           </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button class="btn btn-primary" name="save">Create Document</button>
-                            </div>
-                        </form>
-                        <!-- End Form -->
+                          <br>
+                          <div class="col-md-6">
+                            <select class="form-select" id="doctype" name="doctype">
+                            <option selected="selected" disabled="disabled">Document Type</option>
+                              <?php
+                                require_once("include/conn.php");
+                                $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC ";
+                                $result=mysqli_query($conn,$query);
+                                while($rs=mysqli_fetch_array($result)){
+                                  $dtid =$rs['dt_id'];                                    
+                                  $dtName = $rs['dt_name'];       
+                              ?>
+                                <option><?php echo $dtName;?></option>
+                            <?php }?>
+                            </select>
+                          </div>
+                          <div class="col-md-12">
+                            <input class="form-control" type="file" id="docfile" name="docfile">
+                          </div>
+                          <br>
+                          <div class="col-12">
+                              <textarea class="form-control" style="height: 80px" placeholder="Description" name="docdesc" id="docdesc" required></textarea>
+                          </div>        
+                        </div>
+                                    
                     </div>
-                </div>     
-        </div>
+                  </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button class="btn btn-primary" name="save">Create Document</button>
+                    </div>
+                </form>
+                <!-- End Form -->
+            </div>
+        </div>     
+      </div>
       <!-- End Create Document Modal-->
 
       <!-- View Document modal -->
       <div class="modal fade" id="ViewModal" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered modal-l">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Office Information</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                      <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h5 class="card-title">Office Details</h5>
-                                Office Code: <h5 id="view_code" style="margin-left: 60px;"></h5>
-                                Office Name: <h5 id="view_name" style="margin-left: 60px;"></h5>
-                                Location: <h5 id="view_loc" style="margin-left: 60px;"></h5>
-                                Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
-                            </div>
-                          </div>   
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
-                    </div>
+        <div class="modal-dialog modal-dialog-centered modal-l">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Office Information</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <div class="card" style="margin: 10px;">
+                  <div class="card-body">
+                    <h5 class="card-title">Office Details</h5>
+                      Office Code: <h5 id="view_code" style="margin-left: 60px;"></h5>
+                      Office Name: <h5 id="view_name" style="margin-left: 60px;"></h5>
+                      Location: <h5 id="view_loc" style="margin-left: 60px;"></h5>
+                      Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
                   </div>
+                </div>   
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
         </div>
+      </div>
       <!-- End View office Modal-->
 
       <!-- Received Office Modal -->
       <div class="modal fade" id="ReceivedModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Document Received</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                          <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h2 class="card-title">Received this document?</h2>
-                                <!-- Fill out Form -->
-                                <div class="row g-3" >
-                                  <input type="hidden" class="form-control" id="doc_id" readonly>
-                                      <input type="hidden" class="form-control" id="doc_code" readonly>                  
-                                      <input type="hidden" class="form-control" id="doc_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
-                                      <input type="hidden" class="form-control" id="doc_off2" value="<?php echo $verified_session_office?>" readonly> 
-                                      <h5 id="doc_fileN" style="text-align: end; color:black"></h5>   
-                                </div>
-                              
-                            </div>
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                              <button class="btn btn-success" name="save" id="received" >Received</button>
-                            </div>
-                        <!-- End Form -->
-                    </div>
+        <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Document Received</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                  <div class="card" style="margin: 10px;">
+                    <div class="card-body">
+                      <h2 class="card-title">Received this document?</h2>
+                        <!-- Fill out Form -->
+                        <div class="row g-3" >
+                          <input type="hidden" class="form-control" id="doc_id" readonly>
+                              <input type="hidden" class="form-control" id="doc_code" readonly>                  
+                              <input type="hidden" class="form-control" id="doc_act2" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
+                              <input type="hidden" class="form-control" id="doc_off2" value="<?php echo $verified_session_office?>" readonly> 
+                              <h5 id="doc_fileN" style="text-align: end; color:black"></h5>   
+                        </div>
+                      
+                    </div>
+                  </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button class="btn btn-success" name="save" id="received" >Received</button>
+                    </div>
+                <!-- End Form -->
+            </div>
         </div>
+      </div>
       <!-- End Received Office Modal-->
 
       <!-- Delete Office Modal -->
       <div class="modal fade" id="DeleteModal" tabindex="-1">
-              <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">DELETE OFFICE</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                        <div class="card" style="margin: 10px;">
-                          <div class="card-body">                
-                            <br>
-                            <input type="hidden"  name="delete_id" id="delete_id" readonly>
-                            <center>
-                              <h5>Are you sure you want to delete these Office?</h5>
-                              <h5 class="text-danger">This action cannot be undone.</h5>   
-                            </center>                
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Office</button>
-                        </div>
-                      <!-- End Form -->
+        <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">DELETE OFFICE</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                  <div class="card" style="margin: 10px;">
+                    <div class="card-body">                
+                      <br>
+                      <input type="hidden"  name="delete_id" id="delete_id" readonly>
+                      <center>
+                        <h5>Are you sure you want to delete these Office?</h5>
+                        <h5 class="text-danger">This action cannot be undone.</h5>   
+                      </center>                
+                    </div>
                   </div>
-              </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Office</button>
+                  </div>
+                <!-- End Form -->
+            </div>
         </div>
+      </div>
       <!-- End delete Office Modal -->
   <!-- End of Office Modals -->
 
@@ -364,85 +369,84 @@ include('session.php');
         $(document).ready(function () {
 
               // View Function
-              $('#incomingTable').on('click','.remarksbtn', function () {
+                $('#ReqTable').on('click','.remarksbtn', function () {
 
-                      $('#RemarksModal').modal('show');
+                  $('#RemarksModal').modal('show');
 
-                      $tr = $(this).closest('tr');
+                  $tr = $(this).closest('tr');
 
-                      var data = $tr.children("td").map(function () {
-                          return $(this).text();
-                      }).get();
+                  var data = $tr.children("td").map(function () {
+                      return $(this).text();
+                  }).get();
 
-                      console.log(data); 
-                      $('#remarks').text(data[18]);
-                    });
+                  console.log(data); 
+                  $('#remarks').text(data[18]);
+                });
               // End of View function 
 
               // Received modal calling
-                $('#incomingTable').on('click','.receivedbtn', function () {
+                $('#ReqTable').on('click','.receivedbtn', function () {
 
-                    $('#ReceivedModal').modal('show');
+                  $('#ReceivedModal').modal('show');
 
-                    $tr = $(this).closest('tr');
+                  $tr = $(this).closest('tr');
 
-                    var data = $tr.children("td").map(function () {
-                        return $(this).text();
-                    }).get();
+                  var data = $tr.children("td").map(function () {
+                      return $(this).text();
+                  }).get();
 
-                    console.log(data);      
-                        $('#doc_fileN').text(data[9]);  
-                        $('#doc_id').val(data[0]);
-                        $('#doc_code').val(data[1]); 
-                  });
+                  console.log(data);      
+                      $('#doc_fileN').text(data[9]);  
+                      $('#doc_id').val(data[0]);
+                      $('#doc_code').val(data[1]); 
+                });
               // End of Received modal calling 
 
               // Received function
-              $('#received').click(function(d){ 
-                    d.preventDefault();
-                      if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
-                        $.post("function/received_func.php", {
-                          docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
-                          docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
-                          },function(data){
-                            if (data.trim() == "Val30"){
-                            $('#EditModal').modal('hide');
-                            Swal.fire("No data stored in our database","","error");//response message
-                            // Empty test field
-                          }else if(data.trim() == "success"){
-                            $('#ReceivedModal').modal('hide');
-                                  //success message
-                                  const Toast = Swal.mixin({
-                                  toast: true,
-                                  position: "top-end",
-                                  showConfirmButton: false,
-                                  timer: 2000,
-                                  timerProsressBar: true,
-                                  didOpen: (toast) => {
-                                  toast.addEventListener("mouseenter", Swal.stopTimer)
-                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                  }
-                                  })
-                                  Toast.fire({
-                                  icon: "success",
-                                  title:"Document is Successfully Received"
-                                  }).then(function(){
-                                    document.location.reload(true)//refresh pages
-                                  });              
-                                    $('#doc_code').val("")
-                                    $('#doc_act2').val("")
-                                    $('#doc_off2').val("")
-                            }else{
-                              Swal.fire("There is somthing wrong","","error");
-                              // Swal.fire(data);
-                          }
-                        })
-                      }else{
-                        Swal.fire("You must fill out every field","","warning");
-                      }
-                  })
+                $('#received').click(function(d){ 
+                  d.preventDefault();
+                    if($('#doc_id').val()!="" && $('#doc_code').val()!="" && $('#doc_act2').val()!="" && $('#doc_off2').val()!="" ){
+                      $.post("function/received_func.php", {
+                        docs_id:$('#doc_id').val(), docs_code:$('#doc_code').val(),
+                        docs_act2:$('#doc_act2').val(), docs_off2:$('#doc_off2').val()
+                        },function(data){
+                          if (data.trim() == "Val30"){
+                          $('#EditModal').modal('hide');
+                          Swal.fire("No data stored in our database","","error");//response message
+                          // Empty test field
+                        }else if(data.trim() == "success"){
+                          $('#ReceivedModal').modal('hide');
+                                //success message
+                                const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProsressBar: true,
+                                didOpen: (toast) => {
+                                toast.addEventListener("mouseenter", Swal.stopTimer)
+                                toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                }
+                                })
+                                Toast.fire({
+                                icon: "success",
+                                title:"Document is Successfully Received"
+                                }).then(function(){
+                                  document.location.reload(true)//refresh pages
+                                });              
+                                  $('#doc_code').val("")
+                                  $('#doc_act2').val("")
+                                  $('#doc_off2').val("")
+                          }else{
+                            Swal.fire("There is somthing wrong","","error");
+                            // Swal.fire(data);
+                        }
+                      })
+                    }else{
+                      Swal.fire("You must fill out every field","","warning");
+                    }
+                })
               // End Received function
-        
 
           });
 

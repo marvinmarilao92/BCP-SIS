@@ -38,6 +38,7 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
+
     <?php
       if(isset($_SESSION['alert'])) 
       {
@@ -51,6 +52,7 @@
         unset($_SESSION['alert']);
       }
       ?>
+
     <section class="section profile">
       <div class="row">
         <div class="col-xl-4">
@@ -293,50 +295,43 @@
   <?php include('includes/footer.php'); ?>
  
 
-   <!-- ======= script ======= -->
-
-    //
-
+  <!-- ======= script ======= -->
   <script type="text/javascript">
 
-    // function directory/ file name 
+      // function directory/ file name 
+      function getImage(imagename)
+      {
+        var newimg=imagename.replace(/^.*\\/,"");
+          $('#display-name').html(newimg);
+      }
 
-    function getImage(imagename)
-    {
-      var newimg=imagename.replace(/^.*\\/,"");
-        $('#display-name').html(newimg);
-    }
+      // function image reader/ validate file type
+        var file = document.getElementById('img3');
 
-    // function image reader/ validate file type
+        file.onchange = function(e) {
+          var ext = this.value.match(/\.([^\.]+)$/)[1];
+          switch (ext) {
+            case 'jpg':
+            case 'jpeg':
+            case 'png':
+          
+                if (file.files && file.files[0]) {
+                  var reader = new FileReader();
 
-   
+                  reader.onload = function (e) {
+                    $('#cPhoto').attr('src', e.target.result);
+                  };
 
-var file = document.getElementById('img3');
-
-file.onchange = function(e) {
-  var ext = this.value.match(/\.([^\.]+)$/)[1];
-  switch (ext) {
-    case 'jpg':
-    case 'jpeg':
-    case 'png':
-   
-        if (file.files && file.files[0]) {
-          var reader = new FileReader();
-
-          reader.onload = function (e) {
-            $('#cPhoto').attr('src', e.target.result);
-          };
-
-          reader.readAsDataURL(file.files[0]);
-        }
-      
-      break;
-    default:
-      alert('Not allowed');
-      this.value = '';
-  }
-};
-</script>
+                  reader.readAsDataURL(file.files[0]);
+                }
+              
+              break;
+            default:
+              alert('Not allowed');
+              this.value = '';
+          }
+        };
+  </script>
 
 
   <!-- End Footer -->

@@ -111,6 +111,7 @@
                     <table class="table table-hover datatable" id="DocuTable">
                     <thead>
                       <tr>
+                        <th WIDTH="1%"></th>
                         <th scope="col">DocCode</th>
                         <th scope="col" >Requested By</th>
                         <!-- <th scope="col">Filesize</th>    -->
@@ -138,8 +139,7 @@
                       ?>
                       <tr>
                         <td style="display:none"><?php echo $docId?></td>
-                        <td data-label="Code:">
-                        <?php 
+                        <td ><?php
                         date_default_timezone_set("asia/manila");
                         $today = date("Y-m-d",strtotime("+0 HOURS"));
                         $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
@@ -151,8 +151,8 @@
                         }else{
                           $badge='<span style=" color: gray;">●</span>';
                         }
-                        echo $badge.' '.$docCode;?>
-                        </td>
+                        echo $badge?></td>
+                        <td data-label="Code:"><?php echo $docCode;?></td>
                         <td data-label="Requested By:" ><?php echo $docTitle; ?></td>
                         <td data-label="Tracker:"><?php echo $docAct3; ?></td>
                         <td data-label="Date:"><?php echo $docDate3; ?></td>

@@ -39,8 +39,8 @@
 
         <li class="nav-item">
           <a href="request?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='temp'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-            <i class="ri-folder-5-line"></i>
-            <span>Requirements &nbsp;</span>
+            <i class="ri-file-edit-line"></i>
+            <span>Template Requests &nbsp;</span>
           </a>
         </li><!-- All docs Nav -->
 
