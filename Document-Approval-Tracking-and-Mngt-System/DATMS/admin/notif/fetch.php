@@ -8,10 +8,10 @@ if(isset($_POST["view"]))
  include("../include/conn.php");
  if($_POST["view"] != '')
  {
-  $update_query = "UPDATE datms_notification SET stat1 = 1 WHERE act1 = '$verified_session_firstname $verified_session_lastname' AND stat1 = 0";
+  $update_query = "UPDATE datms_notification SET stat1 = 1 WHERE act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department' AND stat1 = 0";
   mysqli_query($conn, $update_query);
  }
- $query = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' ORDER BY date DESC LIMIT 10";
+ $query = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department' ORDER BY date DESC LIMIT 10";
  $result = mysqli_query($conn, $query);
  $output = '';
  
@@ -162,7 +162,7 @@ if(isset($_POST["view"]))
   ';
  }
  
- $query_1 = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' AND stat1 = 0";
+ $query_1 = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department' AND stat1 = 0";
  $result_1 = mysqli_query($conn, $query_1);
  $count = mysqli_num_rows($result_1);
  $data = array(

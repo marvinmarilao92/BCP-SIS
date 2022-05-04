@@ -145,7 +145,7 @@
                                         </thead>
                                         <tbody>
                                           <?php
-                                            require_once("include/conn.php");
+                                            require_once("include/conn.php");                                            
                                             $query="SELECT * FROM datms_documents WHERE (`doc_actor3`='$verified_session_firstname $verified_session_lastname' OR  `doc_off3` = '$verified_session_office') AND `doc_status` NOT IN ('Deleted') ORDER BY doc_date1 DESC ";
                                             $result=mysqli_query($conn,$query);
                                             while($rs=mysqli_fetch_array($result)){
@@ -159,7 +159,19 @@
                                           ?>
                                           <tr>
                                             <td style="display:none"><?php echo $docId?></td>
-                                            <td data-label="Code:"><?php echo $docCode; ?></td>
+                                            <td data-label="Code:"><?php 
+                                            date_default_timezone_set("asia/manila");
+                                            $today = date("Y-m-d",strtotime("+0 HOURS"));
+                                            $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
+                                            $result_2 = mysqli_query($conn, $query_2);
+                                            $count1 = mysqli_num_rows($result_2);
+                        
+                                            if($count1!=0){
+                                              $badge='<span style=" color: green;">●</span>';
+                                            }else{
+                                              $badge='<span style=" color: gray;">●</span>';
+                                            }
+                                            echo $badge.' '.$docCode; ?></td>
                                             <td data-label="Requested By:"><?php echo $docTitle; ?></td>
                                             <td data-label="Tracker:"><?php echo $docAct3; ?></td>
                                             <td data-label="Date:"><?php echo $docDate3; ?></td>
@@ -520,7 +532,7 @@
                     $random_num= rand(1000,9999);
                     $doc_code =  "doc".$year.$random_num;
 
-                    $query  = "SELECT *,LEFT(middlename,1) as MI FROM student_information WHERE `account_status` NOT IN ('Unofficial') AND id_number = '".$doc_title."'";
+                    $query  = "SELECT *,LEFT(middlename,1) as MI FROM student_information WHERE id_number = '".$doc_title."'";
                     $result = mysqli_query($conn, $query);
                     if(mysqli_num_rows($result) > 0){
                       if (!in_array($extension, ['pdf'])) {
@@ -587,8 +599,9 @@
                                     VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
 
                                     if (mysqli_query($conn, $sql1)) {
+                                      
                                       $notif_sql = "INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                      VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'$doc_title','0','Created Document','You successfully created tracking document','$verified_session_office','Active','$date')";
+                                      VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Created Document','You successfully created tracking document','$verified_session_office','Active','$date')";
                                       if(mysqli_query($conn, $notif_sql)){                                 
                                         //create audit trail record                                               
                                         $fname=$verified_session_role; 
@@ -601,7 +614,10 @@
                                           $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                                           $remarks="Tracking document is successfully created";  
                                           //save to the audit trail table
-                                          mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$doc_code','$ip','$host','$date')")or die(mysqli_error($conn));                      
+                                          mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$doc_code','$ip','$host','$date')")or die(mysqli_error($conn)); 
+                                          //notif of students              
+                                          $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                          VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$d_off1','Active','$date')") or die(mysqli_error($conn));       
                                           // message 
                                           echo'<script type = "text/javascript">
                                               //success message
@@ -627,8 +643,7 @@
                                       //end of audit trail                                        
                                       }else{
                                         echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
-                                      }
-                                      
+                                      }                                  
                                     
                                     }else{
                                       echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
@@ -707,27 +722,52 @@
                                       VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
 
                                       if (mysqli_query($conn, $sql1)) {
-                                        echo'<script type = "text/javascript">
-                                          //success message
-                                          const Toast = Swal.mixin({
-                                          toast: true,
-                                          position: "top-end",
-                                          showConfirmButton: false,
-                                          timer: 2000,
-                                          timerProsressBar: true,
-                                          didOpen: (toast) => {
-                                          toast.addEventListener("mouseenter", Swal.stopTimer)
-                                          toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+
+                                        $notif_sql = "INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                        VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Created Document','You successfully created tracking document','$verified_session_office','Active','$date')";
+                                        if(mysqli_query($conn, $notif_sql)){                                 
+                                          //create audit trail record                                               
+                                          $fname=$verified_session_role; 
+                                          if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                                            $ip = $_SERVER["HTTP_CLIENT_IP"];
+                                          }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                                            $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                                          }else{
+                                            $ip = $_SERVER["REMOTE_ADDR"];
+                                            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                            $remarks="Tracking document is successfully created";  
+                                            //save to the audit trail table
+                                            mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$doc_code','$ip','$host','$date')")or die(mysqli_error($conn)); 
+                                            //notif of students              
+                                            $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                            VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$d_off1','Active','$date')") or die(mysqli_error($conn));       
+                                            // message 
+                                            echo'<script type = "text/javascript">
+                                                //success message
+                                                const Toast = Swal.mixin({
+                                                toast: true,
+                                                position: "top-end",
+                                                showConfirmButton: false,
+                                                timer: 2000,
+                                                timerProsressBar: true,
+                                                didOpen: (toast) => {
+                                                toast.addEventListener("mouseenter", Swal.stopTimer)
+                                                toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                                }
+                                                })
+                                                Toast.fire({
+                                                icon: "success",
+                                                title:"Document to track Successfully Created"
+                                                }).then(function(){
+                                                  window.location = "documents_list?id='.$key.'";//refresh pages
+                                                });
+                                            </script>';
                                           }
-                                          })
-                                          Toast.fire({
-                                          icon: "success",
-                                          title:"Document to track Successfully Created"
-                                          }).then(function(){
-                                            window.location = "documents_list?id='.$key.'";//refresh pages
-                                          });
-                                      </script>';
-                                      
+                                        //end of audit trail                                        
+                                        }else{
+                                          echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
+                                        }      
+
                                       }else{
                                         echo "Failed Upload files!"; 
                                       }                       
@@ -805,26 +845,51 @@
                                           VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
     
                                           if (mysqli_query($conn, $sql1)) {
-                                            echo'<script type = "text/javascript">
-                                              //success message
-                                              const Toast = Swal.mixin({
-                                              toast: true,
-                                              position: "top-end",
-                                              showConfirmButton: false,
-                                              timer: 2000,
-                                              timerProsressBar: true,
-                                              didOpen: (toast) => {
-                                              toast.addEventListener("mouseenter", Swal.stopTimer)
-                                              toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-                                              }
-                                              })
-                                              Toast.fire({
-                                              icon: "success",
-                                              title:"Document to track Successfully Created"
-                                              }).then(function(){
-                                                window.location = "documents_list?id='.$key.'";//refresh pages
-                                              });
-                                          </script>';
+                                            
+                                              $notif_sql = "INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                              VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Created Document','You successfully created tracking document','$verified_session_office','Active','$date')";
+                                              if(mysqli_query($conn, $notif_sql)){                                 
+                                                //create audit trail record                                               
+                                                $fname=$verified_session_role; 
+                                                if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                                                  $ip = $_SERVER["HTTP_CLIENT_IP"];
+                                                }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                                                  $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                                                }else{
+                                                  $ip = $_SERVER["REMOTE_ADDR"];
+                                                  $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                                  $remarks="Tracking document is successfully created";  
+                                                  //save to the audit trail table
+                                                  mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$doc_code','$ip','$host','$date')")or die(mysqli_error($conn)); 
+                                                  //notif of students              
+                                                  $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                                  VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$d_off1','Active','$date')") or die(mysqli_error($conn));       
+                                                  // message 
+                                                  echo'<script type = "text/javascript">
+                                                      //success message
+                                                      const Toast = Swal.mixin({
+                                                      toast: true,
+                                                      position: "top-end",
+                                                      showConfirmButton: false,
+                                                      timer: 2000,
+                                                      timerProsressBar: true,
+                                                      didOpen: (toast) => {
+                                                      toast.addEventListener("mouseenter", Swal.stopTimer)
+                                                      toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                                      }
+                                                      })
+                                                      Toast.fire({
+                                                      icon: "success",
+                                                      title:"Document to track Successfully Created"
+                                                      }).then(function(){
+                                                        window.location = "documents_list?id='.$key.'";//refresh pages
+                                                      });
+                                                  </script>';
+                                                }
+                                              //end of audit trail                                        
+                                              }else{
+                                                echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
+                                              } 
                                           
                                           }else{
                                             echo "Failed Upload files!"; 

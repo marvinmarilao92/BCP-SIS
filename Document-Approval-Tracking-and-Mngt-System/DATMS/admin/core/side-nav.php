@@ -38,7 +38,7 @@
 
 
         <li class="nav-item">
-          <a href="requirements?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='req'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="request?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='temp'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="ri-folder-5-line"></i>
             <span>Requirements &nbsp;</span>
           </a>
@@ -55,8 +55,8 @@
 
         <li class="nav-item">
           <a href="incoming_docs?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='incoming'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-            <i class="ri-mail-check-line"></i>
-            <span>Received &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <i class="ri-download-fill"></i>
+            <span>Incoming &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span class="badge bg-warning badge-number text-dark incoming_count"></span>
           </a>
         </li><!-- Incoming item Nav -->
@@ -99,7 +99,14 @@
             <span>Track Douments</span>
           </a>
         </li><!-- tracking item Nav -->
-        
+
+        <li class="nav-item">
+          <a href="requirements?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='req'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+            <i class="ri-folder-5-line"></i>
+            <span>Requirements &nbsp;</span>
+          </a>
+        </li><!-- All docs Nav -->
+
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#clearance-students-nav" data-bs-toggle="collapse" href="#">
               <i class="bi bi-card-checklist"></i><span>Registrar Clearance</span><i class="bi bi-chevron-down ms-auto"></i>

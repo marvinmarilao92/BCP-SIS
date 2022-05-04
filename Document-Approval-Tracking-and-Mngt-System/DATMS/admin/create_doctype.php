@@ -118,15 +118,17 @@ include('session.php');
                     while($rs=mysqli_fetch_array($result)){
                       $dtid =$rs['dt_id'];
                       $dtCode = $rs['dt_code'];
-                      $dtName = $rs['dt_name'];        
-                      $dtDesc = $rs['dt_desc'];
+                      $dtName = $rs['dt_name']; 
+                      $dtKind = $rs['dt_kind'];       
+                      $dtAcc = $rs['dt_desc'];
                       $dtDate = $rs['dt_date'];
                   ?>
                   <tr>
                     <td style="display:none"><?php echo $dtid; ?></td>
                     <td style="display:none"><?php echo $dtCode; ?></td>
                     <td data-label="DocType"><?php echo $dtName; ?></td>
-                    <td style="display:none"><?php echo $dtDesc?></td>
+                    <td style="display:none"><?php echo $dtAcc?></td>
+                    <td style="display:none"><?php echo $dtKind?></td>
                     <td data-label="Date"><?php echo $dtDate?></td>
                   
                     <td>      
@@ -177,15 +179,25 @@ include('session.php');
                                   <br>
                                   <div class="col-12">                                
                                     <div class="form-floating">
-                                      <select class="form-select" name="dtdesc" id="dtdesc" aria-label="State" required>
+                                      <select class="form-select" name="dtacc" id="dtacc" aria-label="State" required>
                                         <option value="" selected disabled>Select type of account</option>
                                         <option value="Students">Students</option>
                                         <option value="Teachers">Teachers</option>
                                         <option value="Employee">Employee</option>                                  
                                       </select>
-                                      <label for="floatingSelect">Year Level</label>
+                                      <label for="floatingSelect">Type of account</label>
                                     </div>                                   
-                                  </div>        
+                                  </div>   
+                                  <div class="col-12">                                
+                                    <div class="form-floating">
+                                      <select class="form-select" name="dtkind" id="dtkind" aria-label="State" required>
+                                        <option value="" selected disabled>Select identification</option>
+                                        <option value="Softcopy">Softcopy</option>
+                                        <option value="Hardcopy">Hardcopy</option>                              
+                                      </select>
+                                      <label for="floatingSelect">Kind of document</label>
+                                    </div>                                   
+                                  </div>      
                                 </div>
                                             
                             </div>
@@ -214,7 +226,8 @@ include('session.php');
                               <h5 class="card-title">DocType Details</h5>
                                 DocType Code: <h5 id="view_code" style="margin-left: 60px;"></h5>
                                 DocType Name: <h5 id="view_name" style="margin-left: 60px;"></h5>
-                                Type of Account: <h5 id="view_loc" style="margin-left: 60px;"></h5>
+                                Type of Account: <h5 id="view_acc" style="margin-left: 60px;"></h5>
+                                Identification: <h5 id="view_iden" style="margin-left: 60px;"></h5>
                                 Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
                             </div>
                           </div>   
@@ -252,7 +265,7 @@ include('session.php');
                                   </div>
                                   <div class="col-12">                                
                                     <div class="form-floating">
-                                      <select class="form-select" name="dt_descE" id="dt_descE" aria-label="State" required>
+                                      <select class="form-select" name="dt_accE" id="dt_accE" aria-label="State" required>
                                         <option value="" selected disabled>Select type of account</option>
                                         <option value="Students">Students</option>
                                         <option value="Teachers">Teachers</option>
@@ -260,7 +273,17 @@ include('session.php');
                                       </select>
                                       <label for="floatingSelect">Year Level</label>
                                     </div>                                   
-                                  </div>         
+                                  </div>    
+                                  <div class="col-12">                                
+                                    <div class="form-floating">
+                                      <select class="form-select" name="dtkindE" id="dt_kindE" aria-label="State" required>
+                                        <option value="" selected disabled>Select identification</option>
+                                        <option value="Softcopy">Softcopy</option>
+                                        <option value="Hardcopy">Hardcopy</option>                              
+                                      </select>
+                                      <label for="floatingSelect">Kind of document</label>
+                                    </div>                                   
+                                  </div>      
                                 </div>
                               
                             </div>
@@ -384,20 +407,20 @@ include('session.php');
               // Save function
                 $('#save').click(function(a){ 
                   a.preventDefault();
-                    if($('#dtname').val()!="" && $('#dtdesc').val()!=""){
+                    if($('#dtname').val()!="" && $('#dtacc').val()!=""&& $('#dtkind').val()!=""){
                       $.post("function/add_doctype.php", {
                         dtname:$('#dtname').val(),
-                        dtdesc:$('#dtdesc').val()
+                        dtacc:$('#dtacc').val(),
+                        dtkind:$('#dtkind').val()
                         },function(data){
                         if (data.trim() == "failed"){
                           $('#AddModal').modal('hide');
                           //response message
-                          Swal.fire("DocType is already in server","","error");
-                          
+                          Swal.fire("DocType is already in server","","error");                          
                           // Empty test field
                           $('#dtcode').val("")
                           $('#dtname').val("")
-                          $('#dtdesc').val("")
+                          $('#dtacc').val("")
                         }else if(data.trim() == "success"){
                           $('#AddModal').modal('hide');
                                 //success message
@@ -420,7 +443,7 @@ include('session.php');
                               });
                                 $('#dtcode').val("")
                                 $('#dtname').val("")
-                                $('#dtdesc').val("")
+                                $('#dtacc').val("")
                           }else{
                             Swal.fire(data);
                         }
@@ -446,21 +469,23 @@ include('session.php');
                         $('#dt_idE').val(data[0]);
                         $('#dt_codeE').val(data[1]);
                         $('#dt_nameE').val(data[2]);
-                        $("#dt_descE").val(data[3]).change();
+                        $("#dt_accE").val(data[3]).change();
+                        $("#dt_kindE").val(data[4]).change();
                         // document.getElementById("dt_nameE") = data[2];
-                        // document.getElementById("dt_descE").placeholder = data[3];  
+                        // document.getElementById("dt_accE").placeholder = data[3];  
                   });
               // End of edit modal calling 
 
               // Edit function
               $('#edit').click(function(d){ 
                     d.preventDefault();
-                      if($('#dt_idE').val()!="" && $('#dt_codeE').val()!="" && $('#dt_nameE').val()!="" && $('#dt_descE').val()!=""){
+                      if($('#dt_idE').val()!="" && $('#dt_codeE').val()!="" && $('#dt_nameE').val()!="" && $('#dt_accE').val()!=""&& $('#dt_kindE').val()!=""){
                         $.post("function/update_doctype.php", {
                           dtid:$('#dt_idE').val(),
                           dtcode:$('#dt_codeE').val(),
                           dtname:$('#dt_nameE').val(),
-                          dtdesc:$('#dt_descE').val()
+                          dtkind:$('#dt_kindE').val(),
+                          dtacc:$('#dt_accE').val()
                           },function(data){
                             if (data.trim() == "failed"){
                             $('#EditModal').modal('hide');
@@ -468,7 +493,8 @@ include('session.php');
                             // Empty test field
                             $('#dt_codeE').val("")
                             $('#dt_nameE').val("")
-                            $('#dt_descE').val("")
+                            $('#dt_accE').val("")
+                            $('#dt_kindE').val("")
                           }else if(data.trim() == "success"){
                             $('#EditModal').modal('hide');
                                   //success message                                    
@@ -491,9 +517,10 @@ include('session.php');
                                     }); 
                                     $('#dt_codeE').val("")
                                     $('#dt_nameE').val("")
-                                    $('#dt_descE').val("")
+                                    $('#dt_accE').val("")
+                                    $('#dt_kindE').val("")
                             }else{
-                              Swal.fire("There is somthing wrong","","error");
+                              Swal.fire(data);
                           }
                         })
                       }else{
@@ -516,8 +543,9 @@ include('session.php');
                     console.log(data);        
                     $('#view_code').text(data[1]);
                     $('#view_name').text(data[2]);
-                    $('#view_loc').text(data[3]);
-                    $('#view_date').text(data[4]);
+                    $('#view_acc').text(data[3]);
+                    $('#view_iden').text(data[4]);
+                    $('#view_date').text(data[5]);
                   });
               // End of View function 
 

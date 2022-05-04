@@ -136,7 +136,21 @@ include('includes/session.php');
                       ?>
                       <tr>
                         <td style="display:none"><?php echo $docId?></td>
-                        <td data-label="Code:"><?php echo $docCode; ?></td>
+                        <td data-label="Code:">
+                        <?php 
+                        date_default_timezone_set("asia/manila");
+                        $today = date("Y-m-d",strtotime("+0 HOURS"));
+                        $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
+                        $result_2 = mysqli_query($conn, $query_2);
+                        $count1 = mysqli_num_rows($result_2);
+
+                        if($count1!=0){
+                          $badge='<span style=" color: green;">●</span>';
+                        }else{
+                          $badge='<span style=" color: gray;">●</span>';
+                        }
+                        echo $badge.' '.$docCode;?>
+                        </td>
                         <td data-label="Req By:" ><?php echo $docTitle; ?></td>
                         <td data-label="Document:"><?php echo $docType; ?></td>
                         <td data-label="Date:"><?php echo $docDate3; ?></td>

@@ -37,8 +37,8 @@
 
   <li class="nav-item">
     <a href="incoming_docs?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='incoming'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-      <i class="ri-mail-check-line"></i>
-      <span>Received &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <i class="ri-download-fill"></i>
+      <span>Incoming &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <span class="badge bg-warning badge-number text-dark incoming_count"></span>
     </a>
   </li><!-- Incoming item Nav -->

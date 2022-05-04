@@ -13,7 +13,6 @@ include('includes/session.php');
                     display: none;
                 }
               }
-
               @media print {
                 body * {
                   visibility:hidden;
@@ -102,8 +101,8 @@ include('includes/session.php');
                   <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
                       <h4>Requested List</h4>
                   </div>
-                  <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                      <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#AddModal" >
+                  <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#SendModal" style="float: right; padding:20px;">
+                      <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#SendModal" >
                       Request Document
                       </button>
                   </div> 
@@ -111,11 +110,12 @@ include('includes/session.php');
                 <div class="card-body" >           
                   <!-- Table for Document List records -->
                   <form method="POST">
-                    <table class="table table-hover datatable" id="DocuTable">
+                    <table class="table table-hover datatable" id="ReqTable">
                     <thead>
                       <tr>
-                        <th scope="col" WIDTH="12%">Student No.</th>
-                        <th scope="col" >Porgram</th>  
+                        <th scope="col" WIDTH="12%">Code</th>
+                        <th scope="col" style="display:none" WIDTH="12%">Student No.</th>
+                        <th scope="col" style="display:none" >Porgram</th>  
                         <th scope="col">Document</th>   
                         <th scope="col">Date</th>    
                         <th scope="col">Status</th>                    
@@ -130,21 +130,38 @@ include('includes/session.php');
                         while($rs=mysqli_fetch_array($result)){
                           $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
                           $doctype =$rs['docu']; $stat = $rs['status']; $remarks = $rs['remarks']; 
-                          $date =$rs['date']; $fname = $rs['file_name'];
+                          $date =$rs['date']; $fname = $rs['file_name'];$docCode =$rs['req_code'];
                       ?>
                       <tr>
                         <td style="display:none"><?php echo $docId?></td> 
-                        <td data-label="No:"><?php echo $stud_no; ?></td>
-                        <td data-label="Prog:" ><?php echo $prog; ?></td>                    
+                        <td data-label="Code:">
+                        <?php 
+                        date_default_timezone_set("asia/manila");
+                        $today = date("Y-m-d",strtotime("+0 HOURS"));
+                        $query_2 = "SELECT * FROM datms_tempreq WHERE date = '$date' AND date LIKE '%$today%'";
+                        $result_2 = mysqli_query($conn, $query_2);
+                        $count1 = mysqli_num_rows($result_2);
+
+                        if($count1!=0){
+                          $badge='<span style=" color: green;">●</span>';
+                        }else{
+                          $badge='<span style=" color: gray;">●</span>';
+                        }
+                        echo $badge.' '.$docCode;?>
+                        </td>
+                        <td data-label="No:" style="display:none"><?php echo $stud_no; ?></td>
+                        <td data-label="Prog:" style="display:none"><?php echo $prog; ?></td>                    
                         <td data-label="Docu:"><?php echo $doctype?></td>                        
                         <td data-label="Date:"><?php echo $date; ?></td>
                         <td data-label="Status:">
                         <?php 
-                        if($adm_as=='Approved'){
+                        if($stat=='Approved'){
                           echo '<span class="badge bg-success">'.$stat.'</span>';
-                        }else{
+                        }else if($stat=='Rejected'){
                           echo '<span class="badge bg-danger">'.$stat.'</span>';
-                        }                  
+                        }else{
+                          echo '<span class="badge bg-primary">'.$stat.'</span>';
+                        }                 
                         ?>  
                         <a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>   
                         <td style="display:none"><?php echo $fname; ?></td>               
@@ -178,11 +195,11 @@ include('includes/session.php');
           <!-- Document List Modals -->
 
             <!-- Create Document Modal -->
-            <div class="modal fade" id="AddModal" tabindex="-1">
+            <div class="modal fade" id="SendModal" tabindex="-1">
                 <div class="modal-dialog  modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">CREATE TRACKING DOCUMENT</h5>
+                          <h5 class="modal-title">REQUEST FOR TEMPLATE</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form method="post" enctype="multipart/form-data">
@@ -191,28 +208,22 @@ include('includes/session.php');
                               <h2 class="card-title">Fill all neccessary info</h2>
                                 <!-- Fill out Form -->
                                 
-                                <div class="row g-3" >
-                                <input type="hidden" id="doccreator" name="doccreator" class="form-control"  value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
-                                <input type="hidden" id="docoffice" name="docoffice" class="form-control"  value="<?php echo $verified_session_office?>" readonly>        
+                                <div class="row g-3" >                              
+                                <input type="hidden" id="reqprog" name="reqprog" class="form-control"  value="<?php echo $verified_session_course?>" readonly>        
                                                         
-                                    <div class="col-md-12" >
+                                    <div class="col-md-12" style="display: none;">
                                       <div class="form-floating">
-                                        <input type="text" class="form-control" id="docname" name="docname" onChange="fetchTracking(this.value);" placeholder="Your Name" autofocus>
+                                        <input type="text" class="form-control" id="acc_no" name="acc_no" value="<?php echo $verified_session_username ?>" onChange="fetchTracking(this.value);" placeholder="Your Name">
                                         <label for="floatingName">Account No.</label>
                                       </div>
-                                    </div>                                  
-                                  <!-- Account Information -->
-                                    <div class="activity">                                         
-                                    </div>
-                                  <!-- End Account Information --> 
-
+                                    </div>                                
                                   <div class="col-md-12">
                                     <div class="form-floating">
-                                      <select class="form-select" name="doctype" id="doctype" aria-label="State" Required onchange="oncollapse()">
-                                        <option value="" selected="selected" disabled="disabled">Select DocType</option>
+                                      <select class="form-select" name="document" id="document" aria-label="State" Required onchange="oncollapse()">
+                                        <option value="" selected="selected" disabled="disabled">Select Document</option>
                                         <?php
                                             require_once("includes/conn.php");
-                                            $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC ";
+                                            $query="SELECT * FROM datms_doctype WHERE dt_desc = 'Students' ORDER BY dt_date DESC ";
                                             $result=mysqli_query($conn,$query);
                                             while($rs=mysqli_fetch_array($result)){
                                               $dtid =$rs['dt_id'];                                    
@@ -221,15 +232,11 @@ include('includes/session.php');
                                             <option><?php echo $dtName;?></option>
                                         <?php }?>
                                       </select>
-                                      <label for="floatingSelect">DocType</label>
+                                      <label for="floatingSelect">Document</label>
                                     </div>
                                   </div>  
-                                  <div class="col-md-12">                                    
-                                    <input class="form-control"  type="file" id="docfile" name="docfile" accept="application/pdf" >                                    
-                                  </div>
-
                                   <div class="col-12">
-                                      <textarea class="form-control" style="height: 80px" placeholder="Description" name="docdesc" id="docdesc" required></textarea>
+                                      <textarea class="form-control" style="height: 80px" placeholder="Reason of request" name="reason" id="reason" required autofocus></textarea>
                                   </div>        
                                 </div>
                                             
@@ -237,7 +244,7 @@ include('includes/session.php');
                           </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button class="btn btn-primary" name="save">Create Document</button>
+                              <button class="btn btn-primary" name="send" id="send">Send Request</button>
                             </div>
                         </form>
                         <!-- End Form -->
@@ -246,48 +253,12 @@ include('includes/session.php');
             </div>
             <!-- End Create Document Modal-->
 
-            <!-- View Document modal -->
-            <div class="modal fade" id="ViewModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-l">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Document to Track</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" >
-                      <div class="card" style="margin: 10px;">
-                        <form method="post">
-                          <div class="card-body" id="printcode">
-                              <h5 class="card-title">Document Information</h5>
-                              Filename: <h5 id="view_filename" style="margin-left: 60px;"></h5>
-                              Creator: <h5 id="view_creator" style="margin-left: 60px;"></h5>
-                              Date Created: <h5 id="view_date" style="margin-left: 60px;"></h5>                
-                              <input type="hidden" id="view_code" name="view_code" class="form-control" placeholder="Title" readonly>
-                              <input type="hidden" id="view_title" name="view_title" class="form-control" placeholder="Title" readonly>
-                              <input type="hidden" id="view_filename" name="view_filename" class="form-control" placeholder="Title" readonly>
-                              <!-- Barcode -->
-                              <div class="col-12" style="text-align: center;">
-                                <svg id="barcode"></svg>
-                              </div>
-                          </div>
-                          </form>
-                        </div>   
-                    </div>
-                    <div class="modal-footer">
-                      <!-- <button class="btn btn-primary" name="print" id="print" >Print</button> -->
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <!-- End View office Modal-->
-
             <!-- Desc Document modal -->
             <div class="modal fade" id="RemarksModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered modal-l">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">DOCUMENT DESCRIPTION</h5>
+                      <h5 class="modal-title">REMARKS</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -321,38 +292,10 @@ include('includes/session.php');
             
               // this script will execute as soon a the website runs
               $(document).ready(function () {    
-                   // View Function
-                    $('#DocuTable').on('click','.viewbtn', function () {
+                // View Function
+                $('#ReqTable').on('click','.viewbtn', function () {
 
-                          $('#ViewModal').modal('show');
-
-                          $tr = $(this).closest('tr');
-
-                          var data = $tr.children("td").map(function () {
-                              return $(this).text();
-                          }).get();
-
-                          console.log(data); 
-                          document.getElementById("view_code").placeholder = data[1];      
-                          document.getElementById("view_title").placeholder = data[8];   
-                          document.getElementById("view_filename").placeholder = data[9];   
-                          $('#view_filename').text(data[9]);
-                          $('#view_creator').text(data[3]);
-                          $('#view_date').text(data[4]);
-                          // JsBarcode("#barcode", data[1]);
-                          JsBarcode("#barcode", data[1], {
-                            format: "CODE128",
-                            lineColor: "#000",
-                            width: 3,
-                            height: 150,
-                            textAlign: "center",
-                            displayValue: true
-                          });
-                        });
-                  // Remarks Function
-            $('#DocuTable').on('click','.remarksbtn', function () {
-
-                    $('#RemarksModal').modal('show');
+                    $('#ViewModal').modal('show');
 
                     $tr = $(this).closest('tr');
 
@@ -361,70 +304,89 @@ include('includes/session.php');
                     }).get();
 
                     console.log(data); 
-                    if(data[18]==""){
-                      $('#remarks').text(data[11]);
-                    }else{
-                        $('#remarks').text(data[18]);
-                    }
-                    
-                  });
-            // End of View function 
-
-                  // Providing Overall tracking history
-                    // load_data();
-                    // function load_data(query)
-                    // {
-                    //   $.ajax({
-                    //   url:"function/history.php",
-                    //   method:"POST",
-                    //   data:{query:query},
-                    //   success:function(data)
-                    //   {
-                    //     $('.activity').html(data);
-                    //   }
-                    //   });
-                    // }
-                    // $('#search_text').keyup(function(){
-                    //   var search = $(this).val();
-                    //   if(search != '')
-                    //   {
-                    //   load_data(search);
-                    //   }
-                    //   else
-                    //   {
-                    //     $('.activity').html('');
-                    //   }
-                    // });
-                  //end of tracking history
-
-                //
-                  function load_data(query)
-                    {
-                      $.ajax({
-                      url:"function/view_studinfo.php",
-                      method:"POST",
-                      data:{query:query},
-                      success:function(data)
-                      {
-                        $('.activity').html(data);
-                      }
-                      });
-                    }
-                    $('#docname').keyup(function(){
-                      var search = $(this).val();
-                      if(search != '')
-                      {
-                      load_data(search);
-                      }
-                      else
-                      {
-                        $('.activity').html('');
-                      }
+                    document.getElementById("view_code").placeholder = data[1];      
+                    document.getElementById("view_title").placeholder = data[8];   
+                    document.getElementById("view_filename").placeholder = data[9];   
+                    $('#view_filename').text(data[9]);
+                    $('#view_creator').text(data[3]);
+                    $('#view_date').text(data[4]);
+                    // JsBarcode("#barcode", data[1]);
+                    JsBarcode("#barcode", data[1], {
+                      format: "CODE128",
+                      lineColor: "#000",
+                      width: 3,
+                      height: 150,
+                      textAlign: "center",
+                      displayValue: true
                     });
+                  });
+                // Remarks Function
+                $('#ReqTable').on('click','.remarksbtn', function () {
 
-                });
+                      $('#RemarksModal').modal('show');
+
+                      $tr = $(this).closest('tr');
+
+                      var data = $tr.children("td").map(function () {
+                          return $(this).text();
+                      }).get();
+
+                      console.log(data); 
+                      $('#remarks').text(data[8]);                     
+                      
+                    });            
+
+                    // Request Document function
+                    $('#send').click(function(a){ 
+                      a.preventDefault();
+                      if($('#acc_no').val()!="" && $('#reqprog').val()!=""&& $('#document').val()!=""&& $('#reason').val()!=""){
+                        $.post("function/send_req.php", {
+                          id_no:$('#acc_no').val(),
+                          prog:$('#reqprog').val(),
+                          reason:$('#reason').val(),
+                          docs:$('#document').val()
+                          },function(data){
+                          if (data.trim() == "failed"){
+                            $('#SendModal').modal('hide');
+                            Swal.fire("Request this document is already submitted","","error");//response message
+                            // Empty test field
+                            $('#document').val("")
+                            $('#reason').val("")
+                          }else if(data.trim() == "success"){
+                            $('#SendModal').modal('hide');
+                                  //success message
+                                  const Toast = Swal.mixin({
+                                  toast: true,
+                                  position: 'top-end',
+                                  showConfirmButton: false,
+                                  timer: 1100,
+                                  timerProsressBar: true,
+                                  didOpen: (toast) => {
+                                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                  
+                                  }
+                                  })
+                                Toast.fire({
+                                icon: 'success',
+                                title:'You successfully sent your request'
+                                }).then(function(){
+                                  document.location.reload(true)//refresh pages
+                                });
+                                $('#document').val("")
+                                $('#reason').val("")
+                            }else{
+                              Swal.fire(data);
+                          }
+                        })
+                      }else{
+                        Swal.fire("You must fill out every field","","warning");
+                      }
+                    })
+                    // End Request Document function
+                
+              });
 
           </script>
-
         </body>
   </html>

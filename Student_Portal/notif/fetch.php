@@ -119,6 +119,8 @@ if(isset($_POST["view"]))
         $links='docu_template?id='.$_SESSION["login_key"].'';        
        }else if ($doc_status =='Request Approved'){
         $links='docu_template?id='.$_SESSION["login_key"].'';        
+       }else if ($doc_status =='Request Submitted'){
+        $links='docu_template?id='.$_SESSION["login_key"].'';        
        }else{
         $links='docu_req?id='.$_SESSION["login_key"].'';
        }
@@ -129,7 +131,7 @@ if(isset($_POST["view"]))
         <a href="'.$links.'" style="color: rgb(33, 37, 41);">
         <div>
           <h4>'.$row["subject"].'</h4>
-          <p>'.$row["notif"].' <br>From: '.$row["dept"].' </p>
+          <p>'.$row["notif"].'</p>
           <p>'.$duration.' ago '.$badge.'</p>
         </div>
         </a>
