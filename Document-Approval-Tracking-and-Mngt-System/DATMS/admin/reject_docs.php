@@ -89,6 +89,7 @@ include('session.php');
               <table class="table table-hover datatable" id="rejectTable">
                 <thead>
                   <tr>
+                    <th WIDTH="1%"></th>
                     <th scope="col">DocCode</th>
                     <th scope="col" >Filename</th>
                     <!-- <th scope="col">Filesize</th>    -->
@@ -116,10 +117,23 @@ include('session.php');
                   ?>
                   <tr>
                     <td style="display:none"><?php echo $docId?></td>
-                    <td data-label="Code:"><?php echo $docCode; ?>
-                    <td data-label="Filename:"><?php echo $docTitle; ?>
-                    <td data-label="Actor:"><?php echo $docAct2; ?>
-                    <td data-label="Date&T:"><?php echo $docDate2; ?>
+                    <td ><?php
+                    date_default_timezone_set("asia/manila");
+                    $today = date("Y-m-d",strtotime("+0 HOURS"));
+                    $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
+                    $result_2 = mysqli_query($conn, $query_2);
+                    $count1 = mysqli_num_rows($result_2);
+
+                    if($count1!=0){
+                      $badge='<span style=" color: green;">●</span>';
+                    }else{
+                      $badge='<span style=" color: gray;">●</span>';
+                    }
+                    echo $badge?></td>
+                    <td data-label="Code:"><?php echo $docCode?></td>
+                    <td data-label="Filename:"><?php echo $docTitle; ?></td>
+                    <td data-label="Actor:"><?php echo $docAct2; ?></td>
+                    <td data-label="Date&T:"><?php echo $docDate2; ?></td>
                     <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
                     <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
                     <td style="display:none"><?php echo $docDl; ?>
@@ -325,13 +339,13 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#send_act1').val(data[15]);  
-                      $('#send_off1').val(data[16]);
-                      $('#send_date1').val(data[17]); 
+                      $('#send_act1').val(data[16]);  
+                      $('#send_off1').val(data[17]);
+                      $('#send_date1').val(data[18]); 
 
-                      $('#doc_fileN1').text(data[9]);  
+                      $('#doc_fileN1').text(data[10]);  
                       $('#send_id').val(data[0]);
-                      $('#send_code').val(data[1]); 
+                      $('#send_code').val(data[2]); 
                 });
               // End of Send modal calling 
 
@@ -397,9 +411,9 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#delete_fileN').text(data[9]);  
+                      $('#delete_fileN').text(data[10]);  
                       $('#delete_id').val(data[0]);
-                      $('#delete_code').val(data[1]); 
+                      $('#delete_code').val(data[2]); 
                 });
               // End of Delete modal calling 
 

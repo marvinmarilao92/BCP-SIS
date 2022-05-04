@@ -2,7 +2,7 @@
 include_once 'config.php';
 
 if($_POST['department_id']){
-  
+
 
   // Attempt select query execution
               $sql2 = "SELECT * FROM roles where department_id = " . $_POST['department_id'] . "";

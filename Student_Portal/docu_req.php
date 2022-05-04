@@ -109,6 +109,7 @@ include('includes/session.php');
                     <table class="table table-hover datatable" id="DocuTable">
                     <thead>
                       <tr>
+                        <th WIDTH="1%"></th>
                         <th scope="col">DocCode</th>
                         <th scope="col" >Requested By</th>
                         <!-- <th scope="col">Filesize</th>    -->
@@ -136,7 +137,20 @@ include('includes/session.php');
                       ?>
                       <tr>
                         <td style="display:none"><?php echo $docId?></td>
-                        <td data-label="Code:"><?php echo $docCode; ?></td>
+                        <td ><?php
+                        date_default_timezone_set("asia/manila");
+                        $today = date("Y-m-d",strtotime("+0 HOURS"));
+                        $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
+                        $result_2 = mysqli_query($conn, $query_2);
+                        $count1 = mysqli_num_rows($result_2);
+
+                        if($count1!=0){
+                          $badge='<span style=" color: green;">●</span>';
+                        }else{
+                          $badge='<span style=" color: gray;">●</span>';
+                        }
+                        echo $badge?></td>
+                        <td data-label="Code:"><?php echo $docCode;?></td>
                         <td data-label="Req By:" ><?php echo $docTitle; ?></td>
                         <td data-label="Document:"><?php echo $docType; ?></td>
                         <td data-label="Date:"><?php echo $docDate3; ?></td>
@@ -343,11 +357,11 @@ include('includes/session.php');
                           document.getElementById("view_code").placeholder = data[1];      
                           document.getElementById("view_title").placeholder = data[8];   
                           document.getElementById("view_filename").placeholder = data[9];   
-                          $('#view_filename').text(data[9]);
-                          $('#view_creator').text(data[3]);
-                          $('#view_date').text(data[4]);
+                          $('#view_filename').text(data[10]);
+                          $('#view_creator').text(data[4]);
+                          $('#view_date').text(data[5]);
                           // JsBarcode("#barcode", data[1]);
-                          JsBarcode("#barcode", data[1], {
+                          JsBarcode("#barcode", data[2], {
                             format: "CODE128",
                             lineColor: "#000",
                             width: 3,
@@ -368,10 +382,10 @@ include('includes/session.php');
                     }).get();
 
                     console.log(data); 
-                    if(data[18]==""){
-                      $('#remarks').text(data[11]);
+                    if(data[19]==""){
+                      $('#remarks').text(data[12]);
                     }else{
-                        $('#remarks').text(data[18]);
+                        $('#remarks').text(data[19]);
                     }
                     
                   });

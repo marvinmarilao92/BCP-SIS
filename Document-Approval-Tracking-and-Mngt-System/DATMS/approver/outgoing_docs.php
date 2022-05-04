@@ -88,6 +88,7 @@ include('session.php');
               <table class="table table-hover datatable" id="outgoingTable">
                 <thead>
                   <tr>
+                    <th WIDTH="1%"></th>
                     <th scope="col">DocCode</th>
                     <th scope="col" >Requested By</th>
                     <!-- <th scope="col">Filesize</th>    -->
@@ -115,13 +116,26 @@ include('session.php');
                   ?>
                   <tr>
                     <td style="display:none"><?php echo $docId?></td>
-                    <td data-label="Code:"><?php echo $docCode; ?>
-                    <td data-label="Requested By:"><?php echo $docTitle; ?>
-                    <td data-label="Actor:"><?php echo $docAct2; ?>
-                    <td data-label="Date:"><?php echo $docDate2; ?>
+                    <td ><?php
+                    date_default_timezone_set("asia/manila");
+                    $today = date("Y-m-d",strtotime("+0 HOURS"));
+                    $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
+                    $result_2 = mysqli_query($conn, $query_2);
+                    $count1 = mysqli_num_rows($result_2);
+
+                    if($count1!=0){
+                      $badge='<span style=" color: green;">●</span>';
+                    }else{
+                      $badge='<span style=" color: gray;">●</span>';
+                    }
+                    echo $badge?></td>
+                    <td data-label="Code:"><?php echo $docCode;?></td>
+                    <td data-label="Requested By:"><?php echo $docTitle; ?></td>
+                    <td data-label="Actor:"><?php echo $docAct2; ?></td>
+                    <td data-label="Date:"><?php echo $docDate2; ?></td>
                     <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
-                    <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?>
-                    <td style="display:none"><?php echo $docDl; ?>
+                    <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
+                    <td style="display:none"><?php echo $docDl; ?></td>
                     <td style="display:none"><?php echo $docName?></td>
                     <td style="display:none"><?php echo $docType?></td>
                     <td style="display:none"><?php echo $docDesc?></td>
@@ -243,7 +257,7 @@ include('session.php');
                       }).get();
 
                       console.log(data); 
-                      $('#remarks').text(data[18]);
+                      $('#remarks').text(data[19]);
                     });
               // End of View function 
 
@@ -259,9 +273,9 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#doc_fileN').text(data[9]);  
+                      $('#doc_fileN').text(data[10]);  
                       $('#doc_id').val(data[0]);
-                      $('#doc_code').val(data[1]); 
+                      $('#doc_code').val(data[2]); 
                 });
               // End of Received modal calling 
 

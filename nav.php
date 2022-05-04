@@ -1,12 +1,46 @@
 <!-- Navigation bar -->
+<style>
+    .bcpname{
+        display:none;
+      }
+    /*responsive*/
+    @media(max-width: 550px){
+      #bcplogo {
+        display: none;
+      }
+      #logo{
+        margin-top: 40px;
+        margin-left: 10px;
+      }
+      .bcpname{
+        margin-top: 30px;
+        padding-left: 50px;
+        position: absolute;
+        display:block;
+        font-weight: bolder;
+        font-size: 30px;
+        
+      }
+      #fh5co-offcanvas{
+        opacity: 0.8;
+        /* border-radius: 10px; */
+       position: absolute;
+      }
+ 
+    }
+</style>
 <nav class="fh5co-nav" role="navigation">
     <div class="top-menu">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-6">
-                
-                <div id="fh5co-logo"><img src="assets/img/BCPlogo.png" width="33px" height="35px"><a href="index" style="color: rgb(29, 70, 146);"><i></i>Bestlink College of the Philippines</a></div>
+            <!-- <div style="background-color: black; height: 50px;"></div> -->
+            <center><a href="index" class="bcpname"  style="color: rgb(29, 70, 146);">BCP</a></center>
+            <div class="row">              
+                <div class="col-xs-6">                
+                <div id="fh5co-logo"><img src="assets/img/BCPlogo.png" id="logo" width="33px" height="35px"><a href="index" id="bcplogo" style="color: rgb(29, 70, 146);">Bestlink College of the Philippines</a></div>
                 </div>
+                <!-- <div class="col-xs-2">
+                    <div id="fh5co-logo"><a href="index.html"><i class=""></i>BCP</a></div>
+                </div> -->
                 <div class="col-xs-6 text-right menu-1">
                     <ul>
                         <li class="<?php if($page=='home'){echo 'active';}?>"><a href="Index">Home</a></li>

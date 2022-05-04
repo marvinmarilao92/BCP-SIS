@@ -4,7 +4,7 @@
 <ul class="sidebar-nav" id="sidebar-nav">
 
   <li class="nav-item">
-    <a class="<?php if($page=='dash'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="index.php">
+    <a class="<?php if($page=='dash'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="index">
       <i class="bi bi-grid"></i>
       <span>News Feed</span>
     </a>
@@ -19,7 +19,7 @@
       </a>
       <ul id="components-nav" class="<?php if($col=='Clearance'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
       <li>
-          <a href="clearance-status.php" class="<?php if($page=='clr'){echo 'active';}?>">
+          <a href="clearance-status" class="<?php if($page=='clr'){echo 'active';}?>">
             <i class="bi bi-circle"></i><span>Clearance Status</span>
           </a>
         </li>
@@ -29,14 +29,14 @@
 <li class="nav-heading">Document Tracking</li>
 
   <li class="nav-item">
-    <a class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="docu_req.php">
+    <a class="<?php if($page=='docs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="docu_req">
       <i class="bi bi-folder"></i>
       <span>Tracked Files</span>
     </a>
   </li><!-- End Dashboard Nav -->
 
   <li class="nav-item">
-    <a class="<?php if($page=='req'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="docu_template.php">
+    <a class="<?php if($page=='req'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="docu_template">
       <i class="bi bi-file-earmark-text"></i>
       <span>Request Document</span>
     </a>
@@ -49,7 +49,7 @@
     </a>
     <ul id="clearance-students-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
       <li>
-        <a href="clearance-status.php">
+        <a href="clearance-status">
           <i class="bi bi-circle"></i><span>Clearance Status</span>
         </a>
       </li>
@@ -58,7 +58,7 @@
   <!-- End clearance-students Nav -->
 
   <li class="nav-item">
-      <a href="tracking_docs.php" class="<?php if($page=='track'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+      <a href="tracking_docs" class="<?php if($page=='track'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
         <i class="bi bi-geo"></i>
         <span>Track Douments</span>
       </a>
@@ -68,7 +68,7 @@
     <li class="nav-heading">Help Desk</li>
 
     <li class="nav-item">
-  <a href="pages-faq.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='faqs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+  <a href="pages-faq?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='faqs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
     <i class="bi bi-question-circle"></i>
       <span>F.A.Q.S</span>
     </a>
