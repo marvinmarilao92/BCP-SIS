@@ -55,6 +55,7 @@
             //password checking
             if(password_verify($mypassword, $row["password"])){
               //Check department and role
+               $_SESSION['session_pass'] = $mypassword;
             $sql1 = "SELECT * FROM user_information WHERE id_number = '$myusername' AND account_status='Active'";
             if($result1 = mysqli_query($link, $sql1)){
               if(mysqli_num_rows($result1) > 0){
