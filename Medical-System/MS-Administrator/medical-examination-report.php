@@ -7,12 +7,43 @@
 <head>
 <?php include ('includes/head_ext.php');?>
 <script>
+  
+  function viewContent(viewID, viewresult) {
+
+    $.ajax({
+    url: 'resources/ajax/Msview.php?viewID='+viewID,
+    success: function(html) {
+        var ajaxDisplay = document.getElementById(viewresult);
+        ajaxDisplay.innerHTML = html;
+        $("#viewModal").modal("show");
+        
+      }
+    });
+
+  }
+  function editContent(editresult) {
+    var editID = document.getElementById("id").value;
+    $.ajax({
+    url: 'resources/ajax/Msedit.php?editID='+editID,
+    success: function(html) {
+        var ajaxDisplay = document.getElementById(editresult);
+        ajaxDisplay.innerHTML = html;
+        $("#viewModal").modal("hide");
+        $("#editModal").modal("show");
+        
+      }
+    });
+}
+
+</script>
+
+<!-- <script>
   $(document).ready(function(){
     $("button").click (function(){
        $ ("#ShowTableResult").load("labtest-table.php");
     });
 });
-</script>
+</script> -->
 </head>
 
 <body>
@@ -30,8 +61,10 @@
       </ol>
     </nav>
   </div>
-  
+
+
 <section class="section2">
+<div class="container">
   <div class="row">
     <div class="col-lg-12">
       <div class="card border border-danger">
@@ -45,6 +78,7 @@
                 $query = "SELECT * FROM ms_labtest ORDER BY id ASC";
                 $query_run = mysqli_query($conn, $query);
                 date_default_timezone_set("asia/manila");
+                $tablename = "ms_labtest";
               ?>
                     <!-- Table Head -->
                 <thead style="background-color:whitesmoke;">
@@ -77,9 +111,9 @@
                     <td onclick = "edit();" id="editID" title = "edit" style = "cursor:pointer;" value="<?php echo $row['id']?>"><?php echo $row['yr_lvl'];?></td>
                     <td onclick = "edit();" id="editID" title = "edit" style = "cursor:pointer;" value="<?php echo $row['id']?>"><?php echo $row['contact'];?></td>
                     <td>
-                        <button class= "btn btn-warning btn-sm" name ="id_view" onclick="view()" title="View" href="#" id ="veiw" value ="<?php echo $row['id']; ?>"><i class="bx bxs-bullseye"></i></button>
-                        <a class= "btn btn-secondary btn-sm " title="Download" href="../assets/img/BCPlogo.png" id ="download"  download><i class="bx bxs-download"></i></a>
-                        <button class= "btn btn-danger btn-sm" name ="id_trash" onclick="deleteID()" title="Delete" href="#" id ="deleteID" value ="<?php echo $row['id']; ?>"><i class="bx bxs-trash-alt"></i></button>
+                        <a href="#" class= "btn btn-warning btn-sm" onclick="viewContent(<?php echo $row['id'];?>, 'viewresult');" title="View" href="#" id ="veiwID" ><i class="bx bxs-bullseye"></i>View</a>
+                        <a title = "view" class="btn btn-secondary btn-sm" href ="resources/viewPDF.php?file=<?= $row['file_name'];?>&tablename=<?= $tablename ?>"><i class="bx bxs-file-pdf"></i>PDF</a>
+                        <a class= "btn btn-danger btn-sm" name ="id_trash" onclick="deleteID()" title="Delete" href="#" id ="deleteID" value ="<?php echo $row['id']; ?>"><i class="bx bxs-trash-alt"></i>Delete</a>
                     </td>
                   </tr>
                 <?php } 
@@ -92,9 +126,47 @@
       </div>
     </div>
   </div>
-
-
+</div>
+<div class="modal fade" id="viewModal" aria-hidden="true" aria-labelledby="viewModalLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewModalLabel">Student Information</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="viewresult"></div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class= "btn btn-danger btn-sm" onclick="editContent('editresult');" title="Edit" ><i class="bx bxs-pencil"></i>Edit</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="editModal" aria-hidden="true" aria-labelledby="editModalLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel2">Modal 2</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="editresult"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" data-mdb-target="#viewModal" data-mdb-toggle="modal" data-mdb-dismiss="modal">Cancel Editing</button>
+        <button class="btn btn-danger" onclick="saveChanges()" data-mdb-dismiss="modal">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 </section>
+</main>
+
+
+<?php   
+include('includes/footer.php'); 
+?>
 <!-- Dynamic Table Function -->
 <!-- <script>
   function loadXMLDoc(){
@@ -114,6 +186,11 @@ setInterval(function(){
 window.onload = loadXMLDoc;
 
 </script> -->
+<script>
+  function myFunction() {
+    window.print();
+}  
+</script>
 <!-- crud function -->
 <script>
 function deleteID(){
@@ -183,7 +260,33 @@ function edit(){
   })
 }
 
+function saveChanges(){
+  Swal.fire({
+          allowOutsideClick: true,
+          icon: 'question',
+          title: 'Do you want to Save Changes ?',
+          showConfirmButton: true,
+          showCancelButton: true,
+        }).then((result) => {
+          if (result.isConfirmed) { 
+
+            var id_number  = document.getElementById("id_number").value;
+            var full_name  = document.getElementById("full_name").value;
+            var start  = document.getElementById("start").value;
+            var end  = document.getElementById("end").value;
+
+            var takeDataintoArray = 
+              'course='  + course + 
+              '&yr_lvl=' + yr_lvl + 
+              '&start=' + start + 
+              '&end=' + end ;
+          }
+        })
+
+}
+
 </script>
+
 <script>
   
 function insertSched(){
@@ -253,9 +356,6 @@ function insertSched(){
 }
 
 </script>
-</main>
-<?php 
-include('includes/footer.php'); 
-?>
+
 </body>
 </html>

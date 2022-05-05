@@ -167,8 +167,13 @@
       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
 
           <?php 
-            $result = displayProfile($verified_session_img, "imgSmall");
-            echo $result;
+            // $result = displayProfile($verified_session_img, "imgSmall");
+            // echo $result;
+            if($verified_session_img > 0 ){
+              echo '<img src="../../assets/users/' .$verified_session_img. '" alt="Profile" class="rounded-circle m-2 w-25 h-25">';
+            } else {
+              echo '<img src="../../assets/users/person-circle.svg" alt="Profile" class="rounded-circle m-2 w-25 h-25">';
+            }
           ?>
         <!-- class="rounded-circle" -->
         <span class="d-none d-md-block dropdown-toggle ps-2 text-light"><?php echo $verified_session_firstname . " " . $verified_session_lastname ?></span>

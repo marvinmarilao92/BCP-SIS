@@ -54,8 +54,15 @@ include_once('security/newsource.php');
             <div class="col">
               <div class="form-group">
                 <div class="form-outline">
-                  <input type="text" class="form-control" id="course">
-                  <label for="course" class="form-label">Course</label>
+                <?php 
+                  $sql = $db->query("SELECT * FROM datms_program")->fetchAll();
+                ?>
+                  <select class="form-select" aria-label="Default select example" id="course" name="course">
+                    <option selected disabled hidden>Select Course</option>
+                  <?php foreach($sql as $row){ ?>
+                    <option value="<?php echo $row['p_code']?>"><?php echo $row['p_name']?></option>
+                  <?php } ?>
+                  </select>
                 </div>
               </div>
             </div>
@@ -74,17 +81,13 @@ include_once('security/newsource.php');
             </div>
             <div class="col">
               <div class="form-group">
-                <div class="form-outline ">
-                  <input type="datetime-local" class="form-control" id="start">
-                </div>
+                <input type="datetime-local" class="form-control" id="start">
                 <small id="emailHelp" class="form-text text-muted">Date Start</small>
               </div>
             </div>
             <div class="col">
               <div class="form-group">
-                <div class="form-outline ">
-                  <input type="datetime-local" class="form-control" id="end">
-                </div>
+                <input type="datetime-local" class="form-control" id="end">
                 <small id="emailHelp" class="form-text text-muted">Date Ends</small>
               </div>
             </div>
@@ -136,11 +139,9 @@ include_once('security/newsource.php');
                         <td onclick = "edit();" id="editID" title = "edit" style = "cursor:pointer;" value="<?php echo $row['id']?>"><?php echo $newDate2;?></td>
                         <td onclick = "edit();" id="editID" title = "edit" style = "cursor:pointer;" value="<?php echo $row['id']?>"><?php echo $row['creator'];?></td>
                         <td>
-                          <div class="input-group">
-                            <button class= "btn btn-warning" name ="id_view" onclick="view()" title="View" href="#" id ="veiw" value ="<?php echo $row['id']; ?>"><i class="bx bxs-bullseye"></i></button>
-                            <button class= "btn btn-secondary" name ="id_edit" onclick="edit()" title="Edit" href="#" id ="edit" value ="<?php echo $row['id']; ?>"><i class="bx bxs-calendar-edit"></i></button>
-                            <button class= "btn btn-danger" name ="id_trash" onclick="deleteID()" title="Delete" href="#" id ="deleteID" value ="<?php echo $row['id']; ?>"><i class="bx bxs-trash-alt"></i></button>
-                          </div>
+                          <button class= "btn btn-warning" name ="id_view" onclick="view()" title="View" href="#" id ="veiw" value ="<?php echo $row['id']; ?>"><i class="bx bxs-bullseye"></i></button>
+                          <button class= "btn btn-secondary" name ="id_edit" onclick="edit()" title="Edit" href="#" id ="edit" value ="<?php echo $row['id']; ?>"><i class="bx bxs-calendar-edit"></i></button>
+                          <button class= "btn btn-danger" name ="id_trash" onclick="deleteID()" title="Delete" href="#" id ="deleteID" value ="<?php echo $row['id']; ?>"><i class="bx bxs-trash-alt"></i></button>
                         </td>
                       </tr>
                     <?php } 
@@ -179,7 +180,7 @@ function deleteID(){
           icon: 'success',
           title: 'You Have Deleted a Schedule',
           text: 'Please be careful to delete next time',
-          timer: 4000,
+          timer: 2000,
           timerProgressBar: true,
         }).then(() => {
           location.href = 'resources/trash.php?id='+deleteID+'&table='+table;
@@ -266,7 +267,6 @@ function insertSched(){
               text: 'Wait for a Bit',
               timer: 4000,
               timerProgressBar: true,
-              backdrop: `rgba(255,0,0,0.3) left top no-repeat`
             }).then(() => {
               $.ajax({
               type: "POST",
