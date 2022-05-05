@@ -5,7 +5,7 @@
    if(isset($_POST['id_no'])&&isset($_POST['prog'])&&isset($_POST['docs'])&&isset($_POST['reason'])){
     // Object Connection
 		date_default_timezone_set("asia/manila");
-		$date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+		$date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
 
 		$stud_id = mysqli_real_escape_string($conn,$_POST['id_no']);
 		$program = mysqli_real_escape_string($conn,$_POST['prog']);

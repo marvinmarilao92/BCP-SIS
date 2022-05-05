@@ -22,7 +22,7 @@
     }else{
         // username and password sent from form 
         date_default_timezone_set("asia/manila");
-        $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+        $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
         $myusername = mysqli_real_escape_string($link,$_POST['username']);
         $mypassword = mysqli_real_escape_string($link,$_POST['password']); 
 
@@ -263,7 +263,7 @@
                             }
                           
                           break;
-                        case "DATMS Approver":
+                        case "Registrar Approver":
                           //statement
                           $_SESSION['session_username'] = $myusername;
                           $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index?id=".$_SESSION["login_key"]."";

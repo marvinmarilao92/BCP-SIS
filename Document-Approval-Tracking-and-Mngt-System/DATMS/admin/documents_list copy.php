@@ -411,7 +411,7 @@ include('session.php');
         if (isset($_POST['save'])) { // if save button on the form is clicked
               // name of the uploaded file
               date_default_timezone_set("asia/manila");
-              $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+              $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
               $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
               // $doc_user = $_POST['doccreator'];
               // $doc_office = $_POST['docoffice'];

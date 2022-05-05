@@ -141,7 +141,7 @@
                                           <tbody>
                                             <?php
                                               require_once("include/conn.php");
-                                              $query="SELECT * FROM datms_tempreq WHERE status='Approved'  ORDER BY date DESC ";
+                                              $query="SELECT * FROM datms_tempreq WHERE actor='$verified_session_firstname $verified_session_lastname' AND status='Approved'  ORDER BY date DESC ";
                                               $result=mysqli_query($conn,$query);
                                               while($rs=mysqli_fetch_array($result)){
                                                 $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
@@ -236,7 +236,7 @@
                                           <tbody>
                                             <?php
                                               require_once("include/conn.php");
-                                              $query="SELECT * FROM datms_tempreq WHERE status='Rejected'  ORDER BY date DESC ";
+                                              $query="SELECT * FROM datms_tempreq WHERE actor='$verified_session_firstname $verified_session_lastname' AND status='Rejected'  ORDER BY date DESC ";
                                               $result=mysqli_query($conn,$query);
                                               while($rs=mysqli_fetch_array($result)){
                                                 $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
@@ -248,16 +248,86 @@
                                               <td ><?php
                                               date_default_timezone_set("asia/manila");
                                               $today = date("Y-m-d",strtotime("+0 HOURS"));
-                                              $query_2 = "SELECT * FROM datms_tempreq WHERE date = '$date' AND date LIKE '%$today%'";
+                                              $query_2 = "SELECT * FROM datms_tempreq WHERE date = '$req_date' AND date LIKE '%$today%'";
                                               $result_2 = mysqli_query($conn, $query_2);
                                               $count1 = mysqli_num_rows($result_2);
+
+                                              $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
+                                              $d1 = $req_date;
+                                              $today = date("Y-m-d",strtotime("+0 HOURS"));
+                                              $d2 = $date;
+                                              // Declare and define two dates
+                                              $date1 = strtotime("$d1");
+                                              $date2 = strtotime("$d2");
+
+                                              // Formulate the Difference between two dates
+                                              $diff = abs($date2 - $date1);
+                                            
+                                              // To get the year divide the resultant date into
+                                              // total seconds in a year (365*60*60*24)
+                                              $years = floor($diff / (365*60*60*24));
+                                            
+                                              // To get the month, subtract it with years and
+                                              // divide the resultant date into
+                                              // total seconds in a month (30*60*60*24)
+                                              $months = floor(($diff - $years * 365*60*60*24)
+                                                                            / (30*60*60*24));
+                                            
+                                              // To get the day, subtract it with years and
+                                              // months and divide the resultant date into
+                                              // total seconds in a days (60*60*24)
+                                              $days = floor(($diff - $years * 365*60*60*24 -
+                                                          $months*30*60*60*24)/ (60*60*24));
+                                            
+                                              // To get the hour, subtract it with years,
+                                              // months & seconds and divide the resultant
+                                              // date into total seconds in a hours (60*60)
+                                              $hours = floor(($diff - $years * 365*60*60*24
+                                                    - $months*30*60*60*24 - $days*60*60*24)
+                                                                                / (60*60));
+                                            
+                                              // To get the minutes, subtract it with years,
+                                              // months, seconds and hours and divide the
+                                              // resultant date into total seconds i.e. 60
+                                              $minutes = floor(($diff - $years * 365*60*60*24
+                                                      - $months*30*60*60*24 - $days*60*60*24
+                                                                        - $hours*60*60)/ 60);
+                                            
+                                              // To get the minutes, subtract it with years,
+                                              // months, seconds, hours and minutes
+                                              $seconds = floor(($diff - $years * 365*60*60*24
+                                                      - $months*30*60*60*24 - $days*60*60*24
+                                                              - $hours*60*60 - $minutes*60));
+                                                    
+                                              if($years !=0 ){
+                                                // Print the result
+                                                $duration = "$years"." yr,";
+                                              }else if($months != 0 ){
+                                                $duration = "$months"." mos";
+                                              }else if($days > 1 ){
+                                                $duration = "$days"." days";
+                                              }else if($days == 1 ){
+                                                $duration = "$days"." day";
+                                              }else if($hours > 1){
+                                                $duration = "$hours"." hrs";
+                                              }else if($hours == 1){
+                                                $duration = "$hours"." hr";
+                                              }else if($minutes != 0 ){
+                                                $duration = "$minutes"." min";
+                                              }else if($seconds != 0 ){
+                                                $duration = "$seconds"." sec";
+                                              }else if($seconds == 0 ){
+                                                $duration = "1"." sec";
+                                              }else{
+                                                $duration = "2";
+                                              }
 
                                               if($count1!=0){
                                                 $badge='<span style=" color: green;">●</span>';
                                               }else{
                                                 $badge='<span style=" color: gray;">●</span>';
                                               }
-                                              echo $badge?></td>
+                                              echo $duration.' ago '.$badge?></td>
                                               <td data-label="Code:"><?php echo $docCode;?></td>
                                               <td data-label="No:" ><?php echo $stud_no; ?></td>
                                               <td data-label="Prog:"><?php echo $prog; ?></td>                    
@@ -491,7 +561,7 @@
                     // name of the uploaded file
                     date_default_timezone_set("asia/manila");
                     $key = $_SESSION["login_key"];
-                    $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+                    $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
                     // $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
                     // $doc_user = $_POST['doccreator'];
                     // $doc_office = $_POST['docoffice'];

@@ -7,7 +7,7 @@ if (isset($_POST['doccreator'])&&isset($_POST['docoffice'])&&isset($_POST['docti
 isset($_POST['doctype'])&&isset($_POST['docdesc'])&&isset($_POST['docfile'])) { // if save button on the form is clicked
     // name of the uploaded file
     date_default_timezone_set("asia/manila");
-    $time = date("Y-m-d h:i A",strtotime("+0 HOURS"));
+    $time = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
     $doc_user = mysqli_real_escape_string($conn,$_POST['doccreator']);
     $doc_office = mysqli_real_escape_string($conn,$_POST['docoffice']);
     $doc_title = mysqli_real_escape_string($conn,$_POST['doctitle']);

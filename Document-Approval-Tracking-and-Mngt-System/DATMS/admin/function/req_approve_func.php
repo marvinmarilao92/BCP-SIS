@@ -5,7 +5,7 @@
    if(isset($_POST['remarksA'])&&isset($_POST['req_codeA'])&&isset($_POST['docuA'])&&isset($_POST['studidA'])&&isset($_POST['req_actA'])){
     // Object Connection
 		 date_default_timezone_set("asia/manila");
-		 $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+		 $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
         //  $Dt_code = mysqli_real_escape_string($conn,$_POST['dtcode']);
          $R_remarks = mysqli_real_escape_string($conn,$_POST['remarksA']);
          $R_code = mysqli_real_escape_string($conn,$_POST['req_codeA']);

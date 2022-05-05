@@ -295,9 +295,10 @@ include('session.php');
                                                   $dtid =$rs['id'];    
                                                   $dtno =$rs['id_number'];                                  
                                                   $dtFName = $rs['firstname'];    
-                                                  $dtLName = $rs['lastname'];    
+                                                  $dtLName = $rs['lastname']; 
+                                                  $dtrole = $rs['role'];    
                                                 
-                                                  echo '<option value = "' . $dtid . '">' . $rs["firstname"] . " " . $rs["lastname"] .'</option>';
+                                                  echo '<option value = "' . $dtid . '">' . $rs["firstname"] . " " . $rs["lastname"] ." (".$dtrole.")".'</option>';
                                                 }
                                             ?>
                                         </select>

@@ -8,7 +8,7 @@
     // Processing form data when form is submitted
     if(isset($_POST['Tfname'])&&isset($_POST['Tlname'])&&(isset($_POST['Tmname'])||!isset($_POST['Tmname']))){
       date_default_timezone_set("asia/manila");
-      $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+      $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
       //agun implementation for student number
       $sqll = "SELECT id FROM student_information ORDER BY id DESC Limit 1";
       if($resultt = mysqli_query($link, $sqll)){

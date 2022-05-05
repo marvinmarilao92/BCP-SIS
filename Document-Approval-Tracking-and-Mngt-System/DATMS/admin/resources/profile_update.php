@@ -4,7 +4,7 @@ include_once('../include/conn.php');
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
   date_default_timezone_set("asia/manila");
-  $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+  $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
   $office = "User Profile"; 
   $about = mysqli_real_escape_string($conn,$_POST['about']); 
   $address = mysqli_real_escape_string($conn,$_POST['address']); 
@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     }else{
       date_default_timezone_set("asia/manila");
-      $audit_date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+      $audit_date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
       $ip = $_SERVER["REMOTE_ADDR"];
       $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
       $remarks= "User Profile has been updated";  

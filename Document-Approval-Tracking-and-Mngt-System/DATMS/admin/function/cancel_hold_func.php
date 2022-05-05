@@ -6,7 +6,7 @@ $db = mysqli_select_db($conn, 'sis_db');
     if(isset($_POST['docs_id'])&&isset($_POST['docs_code'])&&isset($_POST['docs_act2']) && isset($_POST['docs_off2'])){
         // Object Connection
              date_default_timezone_set("asia/manila");
-             $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+             $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
              $id = mysqli_real_escape_string($conn,$_POST['docs_id']);
              $doc_code = mysqli_real_escape_string($conn,$_POST['docs_code']);
              $d_act2 = mysqli_real_escape_string($conn,$_POST['docs_act2']);

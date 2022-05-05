@@ -82,7 +82,7 @@ include('session.php');
                   <h4>Requests List</h4>
               </div>
               <div class="form-group col-md-1.5 btn-lg" style="float: right; padding:20px;">
-                  <a type="button" class="btn btn-primary form-control" href="request_req?id=<?php echo $_SESSION["login_key"];?>" >
+                  <a type="button" class="btn btn-primary form-control" href="request_record?id=<?php echo $_SESSION["login_key"];?>" >
                   Status Records
                   </a>
               </div> 
@@ -94,7 +94,7 @@ include('session.php');
               <table class="table table-hover datatable" id="ReqTable">
                 <thead>
                   <tr>
-                    <th WIDTH="1%"></th>
+                    <th WIDTH="9%"></th>
                     <th scope="col" WIDTH="12%">Code</th>
                     <th scope="col" WIDTH="12%">Student No.</th>
                     <th scope="col" >Porgram</th>  
@@ -112,28 +112,98 @@ include('session.php');
                     while($rs=mysqli_fetch_array($result)){
                       $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
                       $doctype =$rs['docu']; $stat = $rs['status']; $remarks = $rs['remarks']; 
-                      $date =$rs['date']; $fname = $rs['file_name'];$docCode =$rs['req_code'];
+                      $req_date =$rs['date']; $fname = $rs['file_name'];$docCode =$rs['req_code'];
                   ?>
                   <tr>
                     <td style="display:none"><?php echo $docId?></td>
                     <td ><?php
                     date_default_timezone_set("asia/manila");
                     $today = date("Y-m-d",strtotime("+0 HOURS"));
-                    $query_2 = "SELECT * FROM datms_tempreq WHERE date = '$date' AND date LIKE '%$today%'";
+                    $query_2 = "SELECT * FROM datms_tempreq WHERE date = '$req_date' AND date LIKE '%$today%'";
                     $result_2 = mysqli_query($conn, $query_2);
                     $count1 = mysqli_num_rows($result_2);
+
+                    $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
+                    $d1 = $req_date;
+                    $today = date("Y-m-d",strtotime("+0 HOURS"));
+                    $d2 = $date;
+                    // Declare and define two dates
+                    $date1 = strtotime("$d1");
+                    $date2 = strtotime("$d2");
+
+                    // Formulate the Difference between two dates
+                    $diff = abs($date2 - $date1);
+                  
+                    // To get the year divide the resultant date into
+                    // total seconds in a year (365*60*60*24)
+                    $years = floor($diff / (365*60*60*24));
+                  
+                    // To get the month, subtract it with years and
+                    // divide the resultant date into
+                    // total seconds in a month (30*60*60*24)
+                    $months = floor(($diff - $years * 365*60*60*24)
+                                                  / (30*60*60*24));
+                  
+                    // To get the day, subtract it with years and
+                    // months and divide the resultant date into
+                    // total seconds in a days (60*60*24)
+                    $days = floor(($diff - $years * 365*60*60*24 -
+                                $months*30*60*60*24)/ (60*60*24));
+                  
+                    // To get the hour, subtract it with years,
+                    // months & seconds and divide the resultant
+                    // date into total seconds in a hours (60*60)
+                    $hours = floor(($diff - $years * 365*60*60*24
+                          - $months*30*60*60*24 - $days*60*60*24)
+                                                      / (60*60));
+                  
+                    // To get the minutes, subtract it with years,
+                    // months, seconds and hours and divide the
+                    // resultant date into total seconds i.e. 60
+                    $minutes = floor(($diff - $years * 365*60*60*24
+                            - $months*30*60*60*24 - $days*60*60*24
+                                              - $hours*60*60)/ 60);
+                  
+                    // To get the minutes, subtract it with years,
+                    // months, seconds, hours and minutes
+                    $seconds = floor(($diff - $years * 365*60*60*24
+                            - $months*30*60*60*24 - $days*60*60*24
+                                    - $hours*60*60 - $minutes*60));
+                          
+                    if($years !=0 ){
+                      // Print the result
+                      $duration = "$years"." yr,";
+                    }else if($months != 0 ){
+                      $duration = "$months"." mos";
+                    }else if($days > 1 ){
+                      $duration = "$days"." days";
+                    }else if($days == 1 ){
+                      $duration = "$days"." day";
+                    }else if($hours > 1){
+                      $duration = "$hours"." hrs";
+                    }else if($hours == 1){
+                      $duration = "$hours"." hr";
+                    }else if($minutes != 0 ){
+                      $duration = "$minutes"." min";
+                    }else if($seconds != 0 ){
+                      $duration = "$seconds"." sec";
+                    }else if($seconds == 0 ){
+                      $duration = "1"." sec";
+                    }else{
+                      $duration = "2";
+                    }
 
                     if($count1!=0){
                       $badge='<span style=" color: green;">●</span>';
                     }else{
                       $badge='<span style=" color: gray;">●</span>';
                     }
-                    echo $badge?></td>
+                    echo $duration.' ago '.$badge?></td>
                     <td data-label="Code:"><?php echo $docCode;?></td>
                     <td data-label="No:" ><?php echo $stud_no; ?></td>
                     <td data-label="Prog:"><?php echo $prog; ?></td>                    
                     <td data-label="Docu:"><?php echo $doctype?></td>                        
-                    <td data-label="Date:"><?php echo $date; ?></td>
+                    <td data-label="Date:"><?php echo $req_date; ?></td>
                     <td data-label="Status:">
                     <?php 
                     if($stat=='Approved'){
@@ -261,7 +331,7 @@ include('session.php');
                   </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button class="btn btn-primary" name="save">Create Document</button>
+                      <button class="btn btn-primary" name="">Create Document</button>
                     </div>
                 </form>
                 <!-- End Form -->
@@ -296,7 +366,44 @@ include('session.php');
                   </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button class="btn btn-success" name="save" id="decline_btn" >Approve Request</button>
+                      <button class="btn btn-success" name="" id="approved_btn" >Approve Request</button>
+                    </div>
+                <!-- End Form -->
+            </div>
+        </div>
+      </div>
+      <!-- End Received Office Modal-->
+      
+      <!-- Received Office Modal -->
+      <div class="modal fade" id="ApproveModal1" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Approve Request</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                  <div class="card" style="margin: 10px;">
+                    <div class="card-body">
+                        <!-- Fill out Form -->
+                        <div class="row g-3" >
+                              <input type="hidden" class="form-control" id="req_docuB" readonly> 
+                              <input type="hidden" class="form-control" id="req_studidB" readonly> 
+                              <input type="hidden" class="form-control" id="req_codeB" readonly>                  
+                              <input type="hidden" class="form-control" id="req_actB" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>                            
+                              <h6 id="req_reasonB" style="margin-top: 30px; color:black"></h6>  
+                              <div class="col-md-12">
+                                <input class="form-control" type="file" id="docfile" name="docfile">
+                              </div>
+                              <div class="col-12">
+                                  <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="docremarks" id="approve_remarkB" required></textarea>
+                              </div>   
+                        </div>
+                      
+                    </div>
+                  </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button class="btn btn-success" name="approved" id="approved_btn1" >Approve Request</button>
                     </div>
                 <!-- End Form -->
             </div>
@@ -330,7 +437,7 @@ include('session.php');
                   </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button class="btn btn-danger" name="save" id="decline_btn" >Reject Request</button>
+                      <button class="btn btn-danger" id="decline_btn" >Reject Request</button>
                     </div>
                 <!-- End Form -->
             </div>
@@ -376,6 +483,142 @@ include('session.php');
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
+
+  <!-- Create Document to Track -->
+    <?php
+        // connect to the database
+        require_once("include/conn.php");
+        
+        // Uploads files
+        if (isset($_POST['save'])) { // if save button on the form is clicked
+              // name of the uploaded file
+              $key = $_SESSION["login_key"];
+              date_default_timezone_set("asia/manila");
+              $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
+              $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));          
+              $doc_user = mysqli_real_escape_string($conn,$_POST['doccreator']);
+              $doc_office = mysqli_real_escape_string($conn,$_POST['docoffice']);
+              $doc_title = mysqli_real_escape_string($conn,$_POST['docname']);
+              $doc_type = mysqli_real_escape_string($conn,$_POST['doctype']);
+              $doc_desc = mysqli_real_escape_string($conn,$_POST['docdesc']);
+              
+              $filename = $_FILES['docfile']['name'];
+
+              // $Admin = $_FILES['admin']['name'];
+              // destination of the file on the server
+              $destination = '../../../assets/uploads/' . $filename;
+
+              // get the file extension
+              $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+              // the physical file on a temporary uploads directory on the server
+              $file = $_FILES['docfile']['tmp_name'];
+              $size = $_FILES['docfile']['size'];
+
+              $isExist = true;
+              //checking if there's a duplicate number because we use random number for id numbers to prevent errors (NOTE PARTILLY TESTED)
+              date_default_timezone_set("asia/manila");
+              $year = date("Y",strtotime("+0 HOURS"));
+              $random_num= rand(1000,9999);
+              $doc_code =  "doc".$year.$random_num;
+
+            if (!in_array($extension, ['pdf'])) {
+                    echo'<script type = "text/javascript">
+                          //success message
+                          const Toast = Swal.mixin({
+                          toast: true,
+                          position: "top-end",
+                          showConfirmButton: false,
+                          timer: 2000,
+                          timerProsressBar: true,
+                          didOpen: (toast) => {
+                          toast.addEventListener("mouseenter", Swal.stopTimer)
+                          toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                          }
+                          })
+                          Toast.fire({
+                          icon: "error",
+                          title:"File extension must be: .pdf"
+                          }).then(function(){
+                            window.location = "request?id='.$key.'";//refresh pages
+                          });
+                      </script>
+                  ';
+                                  
+            } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
+                        echo "File too large!";
+            } else{
+              $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
+              $counter=mysqli_num_rows($query);
+              
+              if ($counter == 1) 
+                { 
+                  echo'<script type = "text/javascript">
+                          //success message
+                          const Toast = Swal.mixin({
+                          toast: true,
+                          position: "top-end",
+                          showConfirmButton: false,
+                          timer: 3000,
+                          timerProsressBar: true,
+                          didOpen: (toast) => {
+                          toast.addEventListener("mouseenter", Swal.stopTimer)
+                          toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                          }
+                          })
+                          Toast.fire({
+                          icon: "warning",
+                          title:"File name already taken<br>You have to change the name of file"
+                          }).then(function(){
+                            window.location = "request?id='.$key.'";//refresh pages
+                          });
+                      </script>
+                ';
+                }else{
+              // move the uploaded (temporary) file to the specified destination
+                if (move_uploaded_file($file, $destination)) {
+                    $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
+                    VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
+                  
+                    if (mysqli_query($conn, $sql)) {
+
+                      $sql1 = "INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
+                      VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
+
+                      if (mysqli_query($conn, $sql1)) {
+                        echo'<script type = "text/javascript">
+                          //success message
+                          const Toast = Swal.mixin({
+                          toast: true,
+                          position: "top-end",
+                          showConfirmButton: false,
+                          timer: 2000,
+                          timerProsressBar: true,
+                          didOpen: (toast) => {
+                          toast.addEventListener("mouseenter", Swal.stopTimer)
+                          toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                          }
+                          })
+                          Toast.fire({
+                          icon: "success",
+                          title:"Document to track Successfully Created"
+                          }).then(function(){
+                            window.location = "request?id='.$key.'";//refresh pages
+                          });
+                      </script>';
+                      
+                      }else{
+                        echo "Failed Upload files!"; 
+                      }                       
+                    }
+                } else {
+                    echo "Failed Upload files!";
+                }
+                }         
+          }
+      //file uploading
+        }
+    ?>
 
   <!-- JS Scripts -->
     <script>
@@ -492,7 +735,7 @@ include('session.php');
               // End of Decline modal calling 
 
               // Received function
-                $('#decline_btn').click(function(d){ 
+                $('#approved_btn').click(function(d){ 
                   d.preventDefault();
                     if($('#approve_remarksA').val()!="" && $('#req_codeA').val()!="" && $('#req_actA').val()!=""&& $('#req_docuA').val()!="" && $('#req_studidA').val()!=""){
                       $.post("function/req_approve_func.php", {
@@ -544,6 +787,25 @@ include('session.php');
                     }
                 })
               // End Received function
+
+              // Softcopy modal calling
+                $('#ReqTable').on('click','.softcopy_file', function () {
+
+                  $('#ApproveModal1').modal('show');
+
+                  $tr = $(this).closest('tr');
+
+                  var data = $tr.children("td").map(function () {
+                      return $(this).text();
+                  }).get();
+
+                  console.log(data);      
+                      $('#req_reasonB').text('Reason for request: '+data[9]);  
+                      $('#req_studidB').val(data[3]); 
+                      $('#req_docuB').val(data[5]); 
+                      $('#req_codeB').val(data[2]); 
+                });
+              // End of Decline modal calling 
 
           });
 
