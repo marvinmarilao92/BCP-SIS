@@ -1,14 +1,13 @@
 <?php
 include('session.php');
+// $_SESSION["USER_NEW_PASSOWORD"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
  <!-- Link conncetions -->
- <?php include ("includes/head.php");?> 
+ <?php include ("includes/head.php");?>
 </head>
-
 <body>
 
     <!-- Top and side navigation menu -->
@@ -229,33 +228,46 @@ include('session.php');
                 </div>
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
-                  <!-- Change Password Form -->
+
                   <form>
 
                     <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label" id="">Current Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
+                        <div id="disabled">
+                          <input name="password" type="password" oninput="verifyOldPassword(this.value, 'messCurrentPassword', 'cp', 'disabled');" class="form-control" id="currentPassword">
+                        </div>
+                        <small id="messCurrentPassword" class="form-text text-muted"></small>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                          <input name="newpassword" type="password" class="form-control" oninput="validateNewPassword(this.value, 'showValidate', 'cp', 'ConfirmedPassword');" id="newPassword">
+                        <div id="showValidate">
+                          <small  class="form-text text-muted"><i class="bi bi-exclamation-circle"></i> Lowercase & Uppercase</small><br>
+                          <small  class="form-text text-muted"><i class="bi bi-exclamation-circle"></i> Number (0-9)</small><br>
+                          <small  class="form-text text-muted"><i class="bi bi-exclamation-circle"></i> Special Character (!@#$%^&*)</small><br>
+                          <small  class="form-text text-muted"><i class="bi bi-exclamation-circle"></i> Atleast 8 Character</small>
+                        </div>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                        <input name="renewpassword" type="password" oninput="NewPassswordConfirmed(this.value,'ConfirmedPassword', 'cp');" class="form-control" id="confirmPass">
+                        <div id="ConfirmedPassword">
+                          <small  class="form-text text-muted"></small><br>
+                        </div>
                       </div>
                     </div>
 
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
-                    </div>
+                    <div  class="text-center" ><div id="cp">
+                      <button type="submit" disabled class="btn btn-primary">Change Password</button>
+                    </div></div>
                   </form><!-- End Change Password Form -->
 
                 </div>
