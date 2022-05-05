@@ -1,6 +1,8 @@
 
   function verifyOldPassword(oldpass, messCurrentPassword, open, locked)
   {
+
+
     $.ajax({
       url: 'changePassword/verifypass.php?check=' + oldpass,
       success: function(html)
