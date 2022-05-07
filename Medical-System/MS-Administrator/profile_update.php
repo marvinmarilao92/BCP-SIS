@@ -1,7 +1,7 @@
 <?php 
-include('security/sec-conn.php');
+include('security/newsource.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" ){
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 
   $about = $_POST['about'];
   $address = $_POST['address'];
@@ -14,13 +14,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ){
               `contact` = '{$phone}',
               `email` = '{$email}'
           WHERE `id_number` = '$verified_session_username'";
-  $sql_run = mysqli_query($conn2, $sql);
+  $sql_run = mysqli_query($conn, $sql);
 
   if(!$sql_run){
     echo "Error";
   } else {
     echo "Success";
-    header("location:". $SERVER['HTTP_REFERER']);
+    header("location:". $_SERVER['HTTP_REFERER']);
   }
 
 }

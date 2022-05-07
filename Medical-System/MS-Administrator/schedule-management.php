@@ -31,6 +31,7 @@ include_once('security/newsource.php');
   </div>
   
 <section class="section2">
+<div class="container">
   <div class="row">
     <div class="col-lg-12">
       <?php
@@ -140,8 +141,8 @@ include_once('security/newsource.php');
                         <td onclick = "edit();" id="editID" title = "edit" style = "cursor:pointer;" value="<?php echo $row['id']?>"><?php echo $row['creator'];?></td>
                         <td>
                           <button class= "btn btn-warning" name ="id_view" onclick="view()" title="View" href="#" id ="veiw" value ="<?php echo $row['id']; ?>"><i class="bx bxs-bullseye"></i></button>
-                          <button class= "btn btn-secondary" name ="id_edit" onclick="edit()" title="Edit" href="#" id ="edit" value ="<?php echo $row['id']; ?>"><i class="bx bxs-calendar-edit"></i></button>
-                          <button class= "btn btn-danger" name ="id_trash" onclick="deleteID()" title="Delete" href="#" id ="deleteID" value ="<?php echo $row['id']; ?>"><i class="bx bxs-trash-alt"></i></button>
+                          <button class= "btn btn-secondary" name ="id_edit" onclick="edit(<?php echo $row['id']; ?>)" title="Edit" href="#" id ="editID"><i class="bx bxs-calendar-edit"></i></button>
+                          <button class= "btn btn-danger" name ="id_trash" onclick="deleteID(<?php echo $row['id']; ?>)" title="Delete" href="#" id ="deleteID"><i class="bx bxs-trash-alt"></i></button>
                         </td>
                       </tr>
                     <?php } 
@@ -156,13 +157,12 @@ include_once('security/newsource.php');
       </div>
     </div>
   </div>
+</div>
 </section> <!-- End -->
 <script>
-function deleteID(){
-  var deleteID  = document.getElementById("deleteID").value;
+function deleteID(deleteID){
   var table = "ms_schedule";
-  var takeDataintoArray =
-    'deleteID='     + deleteID + '&table=' + table ;
+  var takeDataintoArray = '&table=' + table ;
   Swal.fire({
   toast: true,
   allowOutsideClick: false,
@@ -191,10 +191,7 @@ function deleteID(){
 }
 
 
-function edit(){
-  var editID  = document.getElementById("editID").value;
-  var takeDataintoArray =
-    'editID='     + editID;
+function edit(editID){
     Swal.fire({
     toast: true,
     allowOutsideClick: false,

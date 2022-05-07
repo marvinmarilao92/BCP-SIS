@@ -35,6 +35,9 @@
     });
 }
 
+function addRecord(){
+  $("#addModal").modal("show");
+}
 </script>
 
 <!-- <script>
@@ -69,13 +72,16 @@
     <div class="col-lg-12">
       <div class="card border border-danger">
         <div class="card-body" >
-          <h1 class="card-title">Result</h1>
+          <div class="d-flex bd-highlight mb-3">
+            <h1 class="card-title me-auto me-auto p-2 bd-highlight">Result</h1>
+            <div class="btn btn-danger p-2 bd-highlight" onclick="addRecord()" >Add Record</div>
+          </div>
           <!-- <div id="ShowTableResult"></div> -->
           <div class="table-responsive">
             <table class="table table-hover datatable">
               <?php
               require_once "security/newsource.php";
-                $query = "SELECT * FROM ms_labtest ORDER BY id ASC";
+                $query = "SELECT ms_labtest.*, student_information.email FROM ms_labtest LEFT JOIN student_information ON ms_labtest.id_number = student_information.id_number ORDER BY id ASC";
                 $query_run = mysqli_query($conn, $query);
                 date_default_timezone_set("asia/manila");
                 $tablename = "ms_labtest";
@@ -89,6 +95,7 @@
                         <th scope="col">Course</th>
                         <th scope="col">Year Level</th>
                         <th scope="col">Phone #</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -110,6 +117,7 @@
                     <td onclick = "edit();" id="editID" title = "edit" style = "cursor:pointer;" value="<?php echo $row['id']?>"><?php echo $row['course'];?></td>
                     <td onclick = "edit();" id="editID" title = "edit" style = "cursor:pointer;" value="<?php echo $row['id']?>"><?php echo $row['yr_lvl'];?></td>
                     <td onclick = "edit();" id="editID" title = "edit" style = "cursor:pointer;" value="<?php echo $row['id']?>"><?php echo $row['contact'];?></td>
+                    <td id="Send" title = "edit" style = "cursor:pointer;" value="<?php echo $row['id']?>"><?php echo $row['email'];?><a title = "send" class="btn btn-secondary btn-sm" href ="#"><i class="bx bx-send"></i></a></td>
                     <td>
                         <a href="#" class= "btn btn-warning btn-sm" onclick="viewContent(<?php echo $row['id'];?>, 'viewresult');" title="View" href="#" id ="veiwID" ><i class="bx bxs-bullseye"></i>View</a>
                         <a title = "view" class="btn btn-secondary btn-sm" href ="resources/viewPDF.php?file=<?= $row['file_name'];?>&tablename=<?= $tablename ?>"><i class="bx bxs-file-pdf"></i>PDF</a>
@@ -160,8 +168,39 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="addModal" aria-hidden="true" aria-labelledby="addModalLabel2" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-light">
+        <h5 class="modal-title" id="addModalLabel2">Add Record</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="row g-4">
+          <div class="col p-3">
+            <div class="input-group">
+              <input type="text" placeholder="Search Student Number" id="quickSearch" class="form-control" name="search" onchange="searchInfo('showStudentResult');">
+              <label for="sub"><i class="btn btn-danger ri-search-eye-line" style="cursor: pointer;">&nbspSearch</i></label> 
+              <a href="#" id ="sub" onclick="searchInfo('showStudentResult');" name="submit" style="display: none; visibility: none;"></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="container">
+            <div id="showStudentResult"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-mdb-toggle="close" data-mdb-dismiss="modal">Cancel</button>
+        <button class="btn btn-danger" onclick="addNow()">Add Now</button>
+      </div>
+    </div>
+  </div>
+</div>
 </section>
 </main>
+
 
 
 <?php   
@@ -187,6 +226,16 @@ window.onload = loadXMLDoc;
 
 </script> -->
 <script>
+  function addNow(){
+    var id_number  = document.getElementById("id_number").value;
+    var course  = document.getElementById("course").value;
+    var name  = document.getElementById("name").value;
+    var id_number  = document.getElementById("id_number").value;
+    alert(id_number)
+  }
+</script>
+
+<script>
   function myFunction() {
     window.print();
 }  
@@ -194,7 +243,7 @@ window.onload = loadXMLDoc;
 <!-- crud function -->
 <script>
 function deleteID(){
-  var deleteID  = document.getElementById("deleteID").value;
+  var deleteID  = document.getElementById(deleteID).value;
   var table = "ms_labtest";
   var takeDataintoArray =
     'deleteID='     + deleteID + '&table=' + table ;
@@ -354,6 +403,32 @@ function insertSched(){
     })
   }
 }
+
+
+  function searchInfo(showStudentResult)
+  {
+    var quickSearch  = document.getElementById("quickSearch").value;
+    var takeDataintoArray =
+    'quickSearch='     + quickSearch;
+    if (quickSearch != '')
+    {
+      $.ajax({
+          type: "GET",
+          url: 'resources/ajax/MSrecord.php',
+          data: takeDataintoArray,
+          cache: false,
+          success: function(html)
+          {
+            var ajaxDisplay = document.getElementById(showStudentResult);
+            ajaxDisplay.innerHTML = html;
+          }});
+    }
+    else
+    {
+     alert('Asd')
+    }
+  }
+
 
 </script>
 

@@ -27,6 +27,11 @@
                 <?php 
                   require_once "timezone.php";
                   $result2 = $db->query('SELECT * FROM ms_schedule WHERE course = ?', $result['course'])->fetchArray();
+                  if(!$result2) { ?>
+                
+                      <div class="alert alert-danger">No Schedule yet.</div>
+                 
+                  <?php } else { 
                   $to = date("Y-m-d H:i:s", strtotime($result2['sched_to']));
                   $from = date("Y-m-d H:i:s", strtotime($result2['sched_from']));
                   $newDatefrom = date("F j, Y g:i a", strtotime($result2['sched_from']));
@@ -55,7 +60,9 @@
             </div>
           </div> 
         </form>
-<?php } else { ?>
+        
+<?php } 
+} else { ?>
       <div class="row p-4">
       <div class="alert alert-danger">No Records Found</div>
       </div>

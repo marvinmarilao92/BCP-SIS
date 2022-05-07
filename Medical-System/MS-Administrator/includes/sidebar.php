@@ -81,6 +81,14 @@
         <span>Medical Examination Results&nbsp;</span>
       </a>
     </li>
+
+    <li class="nav-item">
+      <a href="for-ticket.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='Records-Validation'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>">
+        <i class="bi bi-folder-plus"></i>
+        <span>Medical Examination Results&nbsp;</span>
+      </a>
+    </li>
+    
     
    
     <li class="nav-heading text-danger">Monitor</li>

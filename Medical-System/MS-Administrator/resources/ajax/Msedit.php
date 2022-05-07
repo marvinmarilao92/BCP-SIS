@@ -43,11 +43,11 @@
       <h5 class = "text-danger" >Schedule</h5>
       <div class="col">
         <small for="date">Date</small>
-        <input type="text" class = "form-control" id="date" value = "<?php echo $newDate; ?>">
+        <input type="date" class = "form-control" id="date" value = "<?php echo $newDate; ?>">
       </div>
       <div class="col">
         <small for="date">Time</small>
-        <input type="text" class = "form-control" id="date" value = "<?php echo $newTime; ?>">
+        <input type="time" class = "form-control" id="date" value = "<?php echo $newTime; ?>">
       </div>
     </div>
     <div class="row pt-4">

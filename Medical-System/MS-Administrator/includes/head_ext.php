@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Favicons -->
-  <link href="../../assets/img/BCPlogo.png" rel="icon">
+  <link href="../assets/img/pulse-svgrepo-com.svg" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.gstatic.com" rel="preconnect">

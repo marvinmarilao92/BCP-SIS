@@ -238,7 +238,7 @@ img {
                     </div>
 
                     <div class="text-center">
-                      <a class="btn btn-primary" onclick="updateProfile();" id = "updateProfile">Save Changes</a>
+                      <button class="btn btn-danger" name= "submit" type="submit"  id = "updateProfile">Save Changes</button>
                     </div><!-- End Profile Edit Form -->
                   </form>
                   
