@@ -26,7 +26,7 @@
 	<link href="../../assets/css/cropper.css" rel="stylesheet"/> -->
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.css">
-  <!-- Selector search -->
+  <!-- Selector search -->m
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link href="cropperjs/cropper.min.css" rel="stylesheet" type="text/css"/>
   <style>

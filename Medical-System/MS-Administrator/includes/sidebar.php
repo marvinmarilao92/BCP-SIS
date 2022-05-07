@@ -31,7 +31,7 @@
     </li>
     
     <li class="nav-item">
-      <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='Dashboard'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>">
+      <a href="post.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='post'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>">
         <i class="bi bi-globe2"></i>
         <span>Posting</span>
       </a>
