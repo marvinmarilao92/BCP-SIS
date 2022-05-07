@@ -65,7 +65,7 @@ include_once 'security/newsource.php';
               <div class="card mb-3">
                 <div class="row g-0">
                   <div class="col-md-4">
-                    <div class="container d-flex p-4 justify-content-center rounded">
+                    <div class="container d-flex p-4 justify-content-center">
                       <img src="../assets/img/admission.png" class="img-fluid rounded-start p-2 shadow-sm" alt="..."
                         width="128px" height="128px">
                     </div>
