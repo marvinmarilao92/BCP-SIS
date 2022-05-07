@@ -1,12 +1,12 @@
 <?php
-include_once('security/newsource.php');
+include_once 'security/newsource.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <title>Annual Medical Reports</title>
 
 <head>
-  <?php include('includes/head_ext.php'); ?>
+  <?php include 'includes/head_ext.php'; ?>
   <script>
   function viewContent(viewID, viewresult) {
 
@@ -64,16 +64,17 @@ include_once('security/newsource.php');
 </head>
 
 <body>
-  <?php $page = "daily-logs" ?>
-  <?php include('includes/header.php'); ?>
-  <?php include('includes/sidebar.php'); ?>
+  <?php $page = 'daily-logs'; ?>
+  <?php include 'includes/header.php'; ?>
+  <?php include 'includes/sidebar.php'; ?>
   <main id="main" class="main">
     <!-- Page Title -->
     <div class="pagetitle">
       <h1>Annual Medical Reports</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a>
+          </li>
           <li class="breadcrumb-item active">Annual Medical Reports</li>
         </ol>
       </nav>
@@ -84,28 +85,27 @@ include_once('security/newsource.php');
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <div class="card border border-danger">
+            <div class="card border border-primary">
               <div class="card-body">
                 <div class="d-flex bd-highlight mb-3">
-                  <h1 class="card-title me-auto me-auto p-2 bd-highlight">Result</h1>
-                  <div class="btn btn-danger p-2 bd-highlight" onclick="addRecord()">Add Record</div>
+                  <h1 class="card-title me-auto me-auto p-2 bd-highlight">Recent</h1>
+                  <div class="btn btn-primary p-2 bd-highlight" onclick="addRecord()">Add Record</div>
                 </div>
                 <!-- <div id="ShowTableResult"></div> -->
                 <div class="table-responsive">
                   <table class="table table-hover datatable">
                     <?php
-                    require_once "security/newsource.php";
-                    $query = "SELECT ms_labtest.*, student_information.email FROM ms_labtest LEFT JOIN student_information ON ms_labtest.id_number = student_information.id_number ORDER BY id ASC";
+                    require_once 'security/newsource.php';
+                    $query = 'SELECT ms_labtest.*, student_information.email FROM ms_labtest LEFT JOIN student_information ON ms_labtest.id_number = student_information.id_number ORDER BY id ASC LIMIT 10';
                     $query_run = mysqli_query($conn, $query);
-                    date_default_timezone_set("asia/manila");
-                    $tablename = "ms_labtest";
+                    date_default_timezone_set('asia/manila');
+                    $tablename = 'ms_labtest';
                     ?>
                     <!-- Table Head -->
                     <thead style="background-color:whitesmoke;">
                       <tr>
                         <th scope="col">ID Number</th>
                         <th scope="col">Full Name</th>
-                        <th scope="col">Date</th>
                         <th scope="col">Course</th>
                         <th scope="col">Year Level</th>
                         <th scope="col">Phone #</th>
@@ -116,40 +116,51 @@ include_once('security/newsource.php');
                     <tbody>
                       <?php
                       if (mysqli_num_rows($query_run) > 0) {
-                        while ($row = mysqli_fetch_assoc($query_run)) {
-                          // $date1 = $row['sched_from'];
-                          // $date2 = $row['sched_to'];
-                          // $newDate1 = date("F j, Y", strtotime($date1));
-                          // $newDate2 = date("F j, Y", strtotime($date2));
-                      ?>
+                          while ($row = mysqli_fetch_assoc($query_run)) {
+                              // $date1 = $row['sched_from'];
+                              // $date2 = $row['sched_to'];
+                              // $newDate1 = date("F j, Y", strtotime($date1));
+                              // $newDate2 = date("F j, Y", strtotime($date2));?>
                       <tr>
-                        <td onclick="edit();" id="editID" title="edit" style="cursor:pointer;"
-                          value="<?php echo $row['id'] ?>"><?php echo $row['id_number']; ?></td>
-                        <td onclick="edit();" id="editID" title="edit" style="cursor:pointer;"
-                          value="<?php echo $row['id'] ?>"><?php echo $row['full_n']; ?></td>
-                        <td onclick="edit();" id="editID" title="edit" style="cursor:pointer;"
-                          value="<?php echo $row['id'] ?>"><?php echo $row['datetime']; ?></td>
-                        <td onclick="edit();" id="editID" title="edit" style="cursor:pointer;"
-                          value="<?php echo $row['id'] ?>"><?php echo $row['course']; ?></td>
-                        <td onclick="edit();" id="editID" title="edit" style="cursor:pointer;"
-                          value="<?php echo $row['id'] ?>"><?php echo $row['yr_lvl']; ?></td>
-                        <td onclick="edit();" id="editID" title="edit" style="cursor:pointer;"
-                          value="<?php echo $row['id'] ?>"><?php echo $row['contact']; ?></td>
-                        <td id="Send" title="edit" style="cursor:pointer;" value="<?php echo $row['id'] ?>">
-                          <?php echo $row['email']; ?><a title="send" class="btn btn-secondary btn-sm" href="#"><i
-                              class="bx bx-send"></i></a></td>
+                        <td onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');" id="editID" title="View"
+                          style="cursor:pointer;" value="<?php echo $row['id']; ?>">
+                          <?php echo $row['id_number']; ?>
+                        </td>
+                        <td onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');;" id="editID" title="View"
+                          style="cursor:pointer;" value="<?php echo $row['id']; ?>">
+                          <?php echo $row['full_n']; ?>
+                        </td>
+                        <td onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');;" id="editID" title="View"
+                          style="cursor:pointer;" value="<?php echo $row['id']; ?>">
+                          <?php echo $row['course']; ?>
+                        </td>
+                        <td onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');;" id="editID" title="View"
+                          style="cursor:pointer;" value="<?php echo $row['id']; ?>">
+                          <?php echo $row['yr_lvl']; ?>
+                        </td>
+                        <td onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');;" id="editID" title="View"
+                          style="cursor:pointer;" value="<?php echo $row['id']; ?>">
+                          <?php echo $row['contact']; ?>
+                        </td>
+                        <td id="Send" title="Send" style="cursor:pointer;" value="<?php echo $row['id']; ?>">
+                          <?php echo $row['email']; ?><i class="bx bx-send" onclick="sendNow();"></i>
+                        </td>
                         <td>
-                          <a href="#" class="btn btn-warning btn-sm"
-                            onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');" title="View" href="#"
-                            id="veiwID"><i class="bx bxs-bullseye"></i>View</a>
-                          <a title="view" class="btn btn-secondary btn-sm"
-                            href="resources/viewPDF.php?file=<?= $row['file_name']; ?>&tablename=<?= $tablename ?>"><i
-                              class="bx bxs-file-pdf"></i>PDF</a>
-                          <a class="btn btn-danger btn-sm" name="id_trash" onclick="deleteID()" title="Delete" href="#"
-                            id="deleteID" value="<?php echo $row['id']; ?>"><i class="bx bxs-trash-alt"></i>Delete</a>
+                          <div class="container">
+                            <a href="#" class="btn btn-warning btn-sm"
+                              onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');" title="View" href="#"
+                              id="veiwID"><i class="bx bxs-bullseye"></i></a>
+                            <a title="view" class="btn btn-secondary btn-sm"
+                              href="resources/viewPDF.php?file=<?php echo $row['file_name']; ?>&tablename=<?php echo $tablename; ?>"><i
+                                class="bx bxs-file-pdf"></i></a>
+                            <a class="btn btn-danger btn-sm" name="id_trash" onclick="deleteID()" title="Delete"
+                              href="#" id="deleteID" value="<?php echo $row['id']; ?>"><i
+                                class="bx bxs-trash-alt"></i></a>
+                          </div>
                         </td>
                       </tr>
-                      <?php }
+                      <?php
+                          }
                       }
                       ?>
                     </tbody>
@@ -160,7 +171,8 @@ include_once('security/newsource.php');
           </div>
         </div>
       </div>
-      <div class="modal fade" id="viewModal" aria-hidden="true" aria-labelledby="viewModalLabel" tabindex="-1">
+      <div class="modal fade" id="viewModal" data-mdb-backdrop="static" aria-hidden="true"
+        aria-labelledby="viewModalLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -177,7 +189,8 @@ include_once('security/newsource.php');
           </div>
         </div>
       </div>
-      <div class="modal fade" id="editModal" aria-hidden="true" aria-labelledby="editModalLabel2" tabindex="-1">
+      <div class="modal fade" id="editModal" data-mdb-backdrop="static" aria-hidden="true"
+        aria-labelledby="editModalLabel2" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -195,7 +208,8 @@ include_once('security/newsource.php');
           </div>
         </div>
       </div>
-      <div class="modal fade" id="addModal" aria-hidden="true" aria-labelledby="addModalLabel2" tabindex="-1">
+      <div class="modal fade" id="addModal" data-mdb-backdrop="static" aria-hidden="true"
+        aria-labelledby="addModalLabel2" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header bg-primary text-light">
@@ -208,7 +222,7 @@ include_once('security/newsource.php');
                   <div class="input-group">
                     <input type="text" placeholder="Search Student Number" id="quickSearch" class="form-control"
                       name="search" onchange="searchInfo('showStudentResult');">
-                    <label for="sub"><i class="btn btn-danger ri-search-eye-line"
+                    <label for="sub"><i class="btn btn-primary ri-search-eye-line"
                         style="cursor: pointer;">&nbspSearch</i></label>
                     <a href="#" id="sub" onclick="searchInfo('showStudentResult');" name="submit"
                       style="display: none; visibility: none;"></a>
@@ -223,7 +237,7 @@ include_once('security/newsource.php');
             </div>
             <div class="modal-footer">
               <button class="btn btn-secondary" data-mdb-toggle="close" data-mdb-dismiss="modal">Cancel</button>
-              <button class="btn btn-danger" onclick="addNow()">Add Now</button>
+              <button class="btn btn-danger" onclick="addNow();">Add Now</button>
             </div>
           </div>
         </div>
@@ -234,7 +248,7 @@ include_once('security/newsource.php');
 
 
   <?php
-  include('includes/footer.php');
+  include 'includes/footer.php';
   ?>
   <!-- Dynamic Table Function -->
   <!-- <script>
@@ -256,12 +270,18 @@ window.onload = loadXMLDoc;
 
 </script> -->
   <script>
+  function sendNow() {
+
+  }
+  </script>
+  <script>
   function addNow() {
     var id_number = document.getElementById("id_number").value;
     var course = document.getElementById("course").value;
     var name = document.getElementById("name").value;
-    var id_number = document.getElementById("id_number").value;
-    alert(id_number)
+    var yr_lvl = document.getElementById("yr_lvl").value;
+    var takeDataintoArray =
+      'id_number=' + id_number + '&course=' + course + '&name=' + name + '&table=' + table;
   }
   </script>
 
