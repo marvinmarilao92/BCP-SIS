@@ -61,7 +61,7 @@
                 $gentitle = "Ms.";
               }else if($gen =='Male' && $CS =='Married' || $CS =='Widowed '){
                 $gentitle = "Mr.";
-              }else if($gen =='Female' && $CS =='Single' || $CS =='Divorced'){
+              }else if($gender =='Female' && $civil_status =='Married' || $civil_status =='Widowed'){
                 $gentitle = "Mrs.";
               }
               
