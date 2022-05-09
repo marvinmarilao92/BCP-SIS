@@ -13,7 +13,10 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
     <i class="bi bi-arrow-up-short"></i></a>
+  <!-- <script src="../assets/js/dropzone.js"></script>
+  <script src="../assets/js/cropper.js"></script> -->
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.js"></script>
 <!-- Vendor JS Files -->
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="../assets/vendor/php-email-form/validate.js"></script>
