@@ -99,7 +99,7 @@
       $religion = mysqli_real_escape_string($link,trim($_POST["Treligion"]));
       $civil_status = mysqli_real_escape_string($link,trim($_POST["Tcs"]));
       $account_status = mysqli_real_escape_string($link,trim($_POST["Tstat"]));
-      $password = password_hash("@ChangeMe01!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
+      $password = password_hash("@ChangeMe01".substr($last_name,0,2)."!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
       
       //Check if the student number is not existing in the database
       $sql1 = "SELECT id FROM student_information WHERE id_number = '$student_number'";
@@ -157,7 +157,7 @@
                       }
                         //email sending 
                         $db=new DB();
-                        $message = "You have successfully enrolled in Bestlink College of the Philipines all the neccessary information to access your account is listed down below. Username:$student_number Default Password:@ChangeMe01! we highly suggest to change your default password as soon as you received this message.";
+                        $message = "You have successfully enrolled in Bestlink College of the Philipines all the neccessary information to access your account is listed down below. Username:$student_number Default Password:@ChangeMe01".substr($last_name,0,2)."! we highly suggest to change your default password as soon as you received this message.";
                         
                           $sql="INSERT INTO datms_emails (acc_id,email,subject,message,status) 
                           VALUES ('$student_number','$email','Enrolled Sucessfully','$message','Sent')" or die("<script>alert('Error');</script>");
@@ -191,7 +191,7 @@
                                     information to access your account is listed down below.<br>
                                     Enrollment Status:".$account_status."<br>
                                     Username: ".$student_number."<br> 
-                                    Default Password: @ChangeMe01!<br><br>
+                                    Default Password: @ChangeMe01".substr($last_name,0,2)."!<br><br>
                                     if your enrollment status is Temporarily Enrolled you must sumbit first all the necessary <br>
                                     requiremts in order to access your account.<br> 
                                     if you can already access your account we highly suggest to change your default password as soon as you<br>
