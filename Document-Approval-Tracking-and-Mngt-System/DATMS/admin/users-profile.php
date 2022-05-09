@@ -262,7 +262,7 @@ include('session.php');
                     </div>
 
                     <div  class="text-center" ><div id="cp">
-                      <button type="submit" id="save" class="btn btn-primary">Change Password</button>
+                      <button type="submit" id="save" disabled class="btn btn-primary">Change Password</button>
                     </div></div>
 
                 </div>
