@@ -1,7 +1,7 @@
 <?php
 
  require_once("../includes/conn.php");
-   
+ include('../includes/session.php');
    if(isset($_POST['id_no'])&&isset($_POST['prog'])&&isset($_POST['docs'])&&isset($_POST['reason'])){
     // Object Connection
 		date_default_timezone_set("asia/manila");
@@ -15,14 +15,14 @@
 		$random_num= rand(10000000,99999999);
 		$req_code =  "req".$random_num;
 				 
-		$q_checkcode = $conn->query("SELECT * FROM `datms_tempreq` WHERE `docu` = '$docu' AND status = 'Sent'") or die(mysqli_error($conn));
+		$q_checkcode = $conn->query("SELECT * FROM `datms_tempreq` WHERE id_number='$verified_session_username' AND `docu` = '$docu' AND status = 'Sent'") or die(mysqli_error($conn));
 		$v_checkcode = $q_checkcode->num_rows;
 		if($v_checkcode == 1){
 			echo ('failed');
 		}else {
 		//create audit trail record
 			//add session conncetion
-			include('../includes/session.php');
+			
 			$fname='Student'; 
 			if (!empty($_SERVER["HTTP_CLIENT_IP"])){
 				$ip = $_SERVER["HTTP_CLIENT_IP"];

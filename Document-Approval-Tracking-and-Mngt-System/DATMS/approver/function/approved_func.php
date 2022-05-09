@@ -41,7 +41,7 @@ $db = mysqli_select_db($conn, 'sis_db');
 
                             //create audit trail record
                                 //add session conncetion
-                                include('../session.php');
+                                include('../session.php'); 
                                 $fname=$verified_session_role; 
                                 if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                     $ip = $_SERVER["HTTP_CLIENT_IP"];

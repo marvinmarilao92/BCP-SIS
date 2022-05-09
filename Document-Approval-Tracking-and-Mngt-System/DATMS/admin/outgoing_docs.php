@@ -130,6 +130,7 @@ include('session.php');
                       $badge='<span style=" color: gray;">●</span>';
                     }
                     echo $badge?></td>
+                    <td data-label="Code:"><?php echo $docCode?></td>
                     <td data-label="Requested By:"><?php echo $docTitle; ?></td>
                     <td data-label="Receiver:"><?php echo $docAct1; ?></td>
                     <td data-label="Date&T:"><?php echo $docDate1; ?></td>
@@ -257,7 +258,7 @@ include('session.php');
                       }).get();
 
                       console.log(data); 
-                      $('#remarks').text(data[18]);
+                      $('#remarks').text(data[19]);
                     });
               // End of View function 
 
@@ -273,9 +274,9 @@ include('session.php');
                   }).get();
 
                   console.log(data);      
-                      $('#doc_fileN').text(data[9]);  
+                      $('#doc_fileN').text(data[10]);  
                       $('#doc_id').val(data[0]);
-                      $('#doc_code').val(data[1]); 
+                      $('#doc_code').val(data[2]); 
                 });
               // End of Received modal calling 
 
@@ -292,35 +293,36 @@ include('session.php');
                             Swal.fire("No data stored in our database","","error");//response message
                             // Empty test field
                           }else if(data.trim() == "success"){
-                            $('#ReceivedModal').modal('hide');
+                            $('#ReceivedModal').modal('hide');                  
                                   //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
+                                  const Toast = Swal.mixin({
+                                  toast: true,
+                                  position: "top-end",
+                                  showConfirmButton: false,
+                                  timer: 2000,
+                                  timerProsressBar: true,
+                                  didOpen: (toast) => {
+                                  toast.addEventListener("mouseenter", Swal.stopTimer)
+                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
                                   }
                                   })
-                                    Toast.fire({
-                                    icon: 'Success',
-                                    title:'Document Returned Successfully '
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
+                                  Toast.fire({
+                                  icon: "success",
+                                  title:"Document Returned Successfully"
+                                  }).then(function(){
+                                    document.location.reload(true)//refresh pages
+                                  });                                  
                                     $('#doc_code').val("")
                                     $('#doc_act2').val("")
                                     $('#doc_off2').val("")
                             }else{
-                              Swal.fire("There is somthing wrong","","error");
-                              // Swal.fire(data);
+                              // Swal.fire("There is somthing wrong","","error");
+                              Swal.fire(data);
                           }
                         })
                       }else{
-                        Swal.fire("You must fill out every field","","warning");
+                        // Swal.fire("You must fill out every field","","warning");
+                        Swal.fire(data);
                       }
                   })
               // End Received function

@@ -72,8 +72,8 @@ $db = mysqli_select_db($conn, 'sis_db');
                                     VALUES ('$d_actor3', '0' ,'','0','Submitted Document','You have incoming document','$d_off1','Active','$date')") or die(mysqli_error($conn));
 
                                      //notif of students              
-                                     $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                     VALUES ('', '0' ,'$doc_title','0','Submitted Document','Your $doc_type is submitted to $d_actor3','$d_off1','Active','$date')") or die(mysqli_error($conn));   
+                                    //  $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                    //  VALUES ('', '0' ,'$doc_title','0','Submitted Document','Your $doc_type is submitted to $d_actor3','$d_off1','Active','$date')") or die(mysqli_error($conn));   
 
                                     echo ('success');
                                 }

@@ -94,7 +94,7 @@ include('session.php');
               <table class="table table-hover datatable" id="ReqTable">
                 <thead>
                   <tr>
-                    <th WIDTH="9%"></th>
+                    <th WIDTH="9%">Duration</th>
                     <th scope="col" WIDTH="12%">Code</th>
                     <th scope="col" WIDTH="12%">Student No.</th>
                     <th scope="col" >Porgram</th>  
@@ -377,36 +377,38 @@ include('session.php');
       <!-- Received Office Modal -->
       <div class="modal fade" id="ApproveModal1" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Approve Request</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                  <div class="card" style="margin: 10px;">
-                    <div class="card-body">
-                        <!-- Fill out Form -->
-                        <div class="row g-3" >
-                              <input type="hidden" class="form-control" id="req_docuB" readonly> 
-                              <input type="hidden" class="form-control" id="req_studidB" readonly> 
-                              <input type="hidden" class="form-control" id="req_codeB" readonly>                  
-                              <input type="hidden" class="form-control" id="req_actB" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>                            
-                              <h6 id="req_reasonB" style="margin-top: 30px; color:black"></h6>  
-                              <div class="col-md-12">
-                                <input class="form-control" type="file" id="docfile" name="docfile">
-                              </div>
-                              <div class="col-12">
-                                  <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="docremarks" id="approve_remarkB" required></textarea>
-                              </div>   
-                        </div>
-                      
-                    </div>
+          <form method="post" enctype="multipart/form-data">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Approve Request</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>                
+                <div class="card" style="margin: 10px;">
+                  <div class="card-body">
+                      <!-- Fill out Form -->
+                      <div class="row g-3" >
+                            <input type="hidden" class="form-control" id="req_docuB" name="req_docuB" readonly> 
+                            <input type="hidden" class="form-control" id="req_studidB" name="req_studidB" readonly> 
+                            <input type="hidden" class="form-control" id="req_codeB" name="req_codeB" readonly>                  
+                            <input type="hidden" class="form-control" id="req_actB" value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" name="req_actB" readonly>                            
+                            <h6 id="req_reasonB" style="margin-top: 30px; color:black"></h6>  
+                            <div class="col-md-12">
+                              <input class="form-control"  type="file" id="docfile" name="docfile" accept="application/pdf" >  
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="remarksB" id="remarksB" required></textarea>
+                            </div>   
+                      </div>
+                    
                   </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button class="btn btn-success" name="approved" id="approved_btn1" >Approve Request</button>
-                    </div>
-                <!-- End Form -->
+                </div>                
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-success" name="approved" id="approved" >Approve Request</button>
+              </div>
+              <!-- End Form -->
             </div>
+          </form>
         </div>
       </div>
       <!-- End Received Office Modal-->
@@ -486,27 +488,25 @@ include('session.php');
 
   <!-- Create Document to Track -->
     <?php
-        // connect to the database
-        require_once("include/conn.php");
         
         // Uploads files
-        if (isset($_POST['save'])) { // if save button on the form is clicked
+        if (isset($_POST['approved'])) { // if save button on the form is clicked
               // name of the uploaded file
               $key = $_SESSION["login_key"];
               date_default_timezone_set("asia/manila");
               $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
               $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));          
-              $doc_user = mysqli_real_escape_string($conn,$_POST['doccreator']);
-              $doc_office = mysqli_real_escape_string($conn,$_POST['docoffice']);
-              $doc_title = mysqli_real_escape_string($conn,$_POST['docname']);
-              $doc_type = mysqli_real_escape_string($conn,$_POST['doctype']);
-              $doc_desc = mysqli_real_escape_string($conn,$_POST['docdesc']);
+              $R_remarks = mysqli_real_escape_string($conn,$_POST['remarksB']);
+              $R_code = mysqli_real_escape_string($conn,$_POST['req_codeB']);
+              $R_docu = mysqli_real_escape_string($conn,$_POST['req_docuB']);
+              $R_studid = mysqli_real_escape_string($conn,$_POST['req_studidB']);
+              $R_actor = mysqli_real_escape_string($conn,$_POST['req_actB']);
               
               $filename = $_FILES['docfile']['name'];
 
               // $Admin = $_FILES['admin']['name'];
               // destination of the file on the server
-              $destination = '../../../assets/uploads/' . $filename;
+              $destination = '../../../assets/uploads/request/' . $filename;
 
               // get the file extension
               $extension = pathinfo($filename, PATHINFO_EXTENSION);
@@ -518,9 +518,9 @@ include('session.php');
               $isExist = true;
               //checking if there's a duplicate number because we use random number for id numbers to prevent errors (NOTE PARTILLY TESTED)
               date_default_timezone_set("asia/manila");
-              $year = date("Y",strtotime("+0 HOURS"));
+              $year = date("y",strtotime("+0 HOURS"));
               $random_num= rand(1000,9999);
-              $doc_code =  "doc".$year.$random_num;
+              $doc_code =  "req".$year.$random_num;
 
             if (!in_array($extension, ['pdf'])) {
                     echo'<script type = "text/javascript">
@@ -545,15 +545,60 @@ include('session.php');
                       </script>
                   ';
                                   
-            } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
-                        echo "File too large!";
+            } elseif ($_FILES['docfile']['size'] > 5000000) { // file shouldn't be larger than 5 Megabyte
+              echo'<script type = "text/javascript">
+                  //success message
+                  const Toast = Swal.mixin({
+                  toast: true,
+                  position: "top-end",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  timerProsressBar: true,
+                  didOpen: (toast) => {
+                  toast.addEventListener("mouseenter", Swal.stopTimer)
+                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                  }
+                  })
+                  Toast.fire({
+                  icon: "error",
+                  title:"File too large! file size must be 5mb below"
+                  }).then(function(){
+                    window.location = "request?id='.$key.'";//refresh pages
+                  });
+                </script>
+              ';
             } else{
-              $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
+              $query=mysqli_query($conn,"SELECT * FROM `datms_tempreq` WHERE `file_name` = '$filename'")or die(mysqli_error($conn));
               $counter=mysqli_num_rows($query);
               
               if ($counter == 1) 
                 { 
-                  echo'<script type = "text/javascript">
+
+                  //create audit trail record            
+                    $fname=$verified_session_role; 
+                    if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                      $ip = $_SERVER["HTTP_CLIENT_IP"];
+                    }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                      $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                    }else{
+                      $ip = $_SERVER["REMOTE_ADDR"];
+                      $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                      $remarks="Request for $R_docu has been approved";  
+                      //save to the audit trail table
+                      mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$R_studid','$ip','$host','$date')")or die(mysqli_error($link));
+              
+                      //save doctype to the database
+                      $conn->query("UPDATE datms_tempreq SET status='Approved', remarks='$R_remarks', actor='$R_actor',file_name='$filename', date='$date' WHERE req_code='$R_code'") or die(mysqli_error($conn));
+              
+                      $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                      VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Request Approved','You approved request for $R_docu','$verified_session_office','Active','$date')") or die(mysqli_error($conn));
+              
+                      //notif of students              
+                      $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                      VALUES ('', '0' ,'$R_studid','0','Request Approved','Your $R_docu is Approved by $verified_session_firstname $verified_session_lastname','$verified_session_office','Active','$date')") or die(mysqli_error($conn)); 
+
+                      //messasge
+                      echo'<script type = "text/javascript">
                           //success message
                           const Toast = Swal.mixin({
                           toast: true,
@@ -567,25 +612,30 @@ include('session.php');
                           }
                           })
                           Toast.fire({
-                          icon: "warning",
-                          title:"File name already taken<br>You have to change the name of file"
+                          icon: "success",
+                          title:"Document Request is Successfully Approved"
                           }).then(function(){
                             window.location = "request?id='.$key.'";//refresh pages
                           });
                       </script>
-                ';
+                      ';  
+              }
+ 
+                  
                 }else{
               // move the uploaded (temporary) file to the specified destination
                 if (move_uploaded_file($file, $destination)) {
-                    $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
-                    VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
+                    $sql = "UPDATE datms_tempreq SET status='Approved', remarks='$R_remarks', actor='$R_actor',file_name='$filename', date='$date' WHERE req_code='$R_code'";
                   
                     if (mysqli_query($conn, $sql)) {
 
-                      $sql1 = "INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
-                      VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
+                      $sql1 = "INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                      VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Request Approved','You approved request for $R_docu','$verified_session_office','Active','$date')";
 
                       if (mysqli_query($conn, $sql1)) {
+                        //notif of students              
+                        $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                        VALUES ('', '0' ,'$R_studid','0','Request Approved','Your $R_docu is Approved by $verified_session_firstname $verified_session_lastname','$verified_session_office','Active','$date')") or die(mysqli_error($conn)); 
                         echo'<script type = "text/javascript">
                           //success message
                           const Toast = Swal.mixin({
@@ -601,7 +651,7 @@ include('session.php');
                           })
                           Toast.fire({
                           icon: "success",
-                          title:"Document to track Successfully Created"
+                          title:"Document Request is Successfully Approved"
                           }).then(function(){
                             window.location = "request?id='.$key.'";//refresh pages
                           });
@@ -694,7 +744,7 @@ include('session.php');
                                 })
                                 Toast.fire({
                                 icon: "success",
-                                title:"Document is Successfully Received"
+                                title:"Document is Successfully Rejected"
                                 }).then(function(){
                                   document.location.reload(true)//refresh pages
                                 });              
@@ -744,7 +794,7 @@ include('session.php');
                         req_actA:$('#req_actA').val()
                         },function(data){
                           if (data.trim() == "failed"){
-                          $('#DeclineModal').modal('hide');
+                          $('#ApproveModal').modal('hide');
                           Swal.fire("No data stored in our database","","error");//response message
                             $('#req_studidA').val("")
                             $('#req_docuA').val("")
@@ -753,7 +803,7 @@ include('session.php');
                             $('#approve_remarksA').val("")
                           // Empty test field
                         }else if(data.trim() == "success"){
-                          $('#DeclineModal').modal('hide');
+                          $('#ApproveModal').modal('hide');
                                 //success message
                                 const Toast = Swal.mixin({
                                 toast: true,
@@ -768,7 +818,7 @@ include('session.php');
                                 })
                                 Toast.fire({
                                 icon: "success",
-                                title:"Document is Successfully Received"
+                                title:"Document Request is Successfully Approved"
                                 }).then(function(){
                                   document.location.reload(true)//refresh pages
                                 });              
@@ -778,12 +828,12 @@ include('session.php');
                                   $('#req_actA').val("")
                                   $('#approve_remarksA').val("")
                           }else{
-                            Swal.fire("There is somthing wrong","","error");
-                            // Swal.fire(data);
+                            Swal.fire("There is somthing wrong1","","error");
+                            Swal.fire(data);
                         }
                       })
                     }else{
-                      Swal.fire("You must fill out every field","","warning");
+                      Swal.fire("You must fill out every field2","","warning");
                     }
                 })
               // End Received function

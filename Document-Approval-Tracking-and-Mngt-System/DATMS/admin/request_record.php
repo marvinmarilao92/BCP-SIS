@@ -147,6 +147,7 @@
                                                 $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
                                                 $doctype =$rs['docu']; $stat = $rs['status']; $remarks = $rs['remarks']; 
                                                 $date =$rs['date']; $fname = $rs['file_name'];$docCode =$rs['req_code'];
+                                                $filename =$rs['file_name'];
                                             ?>
                                             <tr>
                                               <td style="display:none"><?php echo $docId?></td>
@@ -182,8 +183,9 @@
                                               <td style="display:none"><?php echo $fname; ?></td>               
                                               <td style="display:none"><?php echo $remarks; ?></td>             
                                               <td WIDTH="6%">
-                                              <div class="btn-group" role="group" aria-label="Basic mixed styles example">                       
-                                                <a  class="btn btn-primary remarks"><i class="bi bi-eye"></i></a>                      
+                                              <div class="btn-group" role="group" aria-label="Basic mixed styles example">       
+                                              <a class="btn btn-primary " href='function/view_template?id=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri ri-eye-line"></i></a>      
+                                                <!-- <a  class="btn btn-primary remarks"><i class="bi bi-eye"></i></a>                       -->
                                               </div>
                                               </td>
                                             </tr>

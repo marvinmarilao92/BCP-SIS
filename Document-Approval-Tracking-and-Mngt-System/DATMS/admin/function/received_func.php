@@ -56,8 +56,8 @@ $db = mysqli_select_db($conn, 'sis_db');
                                     VALUES ('$d_act1', '0' ,'','0','Received Document','You successfully received the document','$d_off2','Active','$date')") or die(mysqli_error($conn));
 
                                      //notif of students              
-                                     $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                     VALUES ('', '0' ,'$doc_title','0','Received Document','Your $doc_type is received by $verified_session_firstname $verified_session_lastname','$d_off1','Active','$date')") or die(mysqli_error($conn));   
+                                    //  $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                    //  VALUES ('', '0' ,'$doc_title','0','Received Document','Your $doc_type is received by $verified_session_firstname $verified_session_lastname','$d_off1','Active','$date')") or die(mysqli_error($conn));   
 
                                     echo ('success');
                                 }

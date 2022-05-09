@@ -629,8 +629,8 @@
                         if($rem_attm==0){
                           $error="To many failed login attempts. Please login after 60 sec.";
                         }else{
-                          // $error="Please enter valid login details. $rem_attm attempts remaining";
-                          $error="Your Username or Password is invalid.";
+                          $error="Please enter valid login details. $rem_attm attempts remaining";
+                          // $error="Your Username or Password is invalid.";
                         }
                         $try_time=time();
                         mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
@@ -645,8 +645,8 @@
                     if($rem_attm==0){
                       $error="To many failed login attempts. Please login after 60 sec.";
                     }else{
-                      // $error="Please enter valid login details. $rem_attm attempts remaining";
-                      $error="Your Username or Password is invalid.";
+                      $error="Please enter valid login details. $rem_attm attempts remaining";
+                      // $error="Your Username or Password is invalid.";
                     }
                     $try_time=time();
                     mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
@@ -662,8 +662,8 @@
                 if($rem_attm==0){
                   $error="To many failed login attempts. Please login after 60 sec.";
                 }else{
-                  // $error="Please enter valid login details. $rem_attm attempts remaining";
-                  $error="Your Username or Password is invalid.";
+                  $error="Please enter valid login details. $rem_attm attempts remaining";
+                  // $error="Your Username or Password is invalid.";
                 }
                 $try_time=time();
                 mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
@@ -730,11 +730,11 @@
 
                     <div class="col-12">
                       <div class="form-floating">
-                        <input type="password" class="form-control" name="password" id="password" placeholder="first name" Required >
+                        <input type="password" class="form-control" name="password" id="password"  placeholder="first name" Required >
                         <label for="floatingName">Password</label>
                       </div>
                     </div>
-                    <!-- Error Message -->
+                    <!-- Error Message onpaste="return false;"-->
                     <?php
                       if(!$error==""){
                         echo "<div class='alert alert-danger alert-dismissible fade show' role='alert' id='msg'>";

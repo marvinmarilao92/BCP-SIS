@@ -672,9 +672,9 @@
 
                                     if (mysqli_query($conn, $sql1)) {
                                       
-                                      $notif_sql = "INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                      VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Created Document','You successfully created tracking document','$verified_session_office','Active','$date')";
-                                      if(mysqli_query($conn, $notif_sql)){                                 
+                                      // $notif_sql = "INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                      // VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Created Document','You successfully created tracking document','$verified_session_office','Active','$date')";
+                                      // if(mysqli_query($conn, $notif_sql)){                                 
                                         //create audit trail record                                               
                                         $fname=$verified_session_role; 
                                         if (!empty($_SERVER["HTTP_CLIENT_IP"])){
@@ -713,9 +713,9 @@
                                           </script>';
                                         }
                                       //end of audit trail                                        
-                                      }else{
-                                        echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
-                                      }                                  
+                                      // }else{
+                                      //   echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
+                                      // }                                  
                                     
                                     }else{
                                       echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
@@ -795,9 +795,9 @@
 
                                       if (mysqli_query($conn, $sql1)) {
 
-                                        $notif_sql = "INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                        VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Created Document','You successfully created tracking document','$verified_session_office','Active','$date')";
-                                        if(mysqli_query($conn, $notif_sql)){                                 
+                                        // $notif_sql = "INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                        // VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Created Document','You successfully created tracking document','$verified_session_office','Active','$date')";
+                                        // if(mysqli_query($conn, $notif_sql)){                                 
                                           //create audit trail record                                               
                                           $fname=$verified_session_role; 
                                           if (!empty($_SERVER["HTTP_CLIENT_IP"])){
@@ -836,9 +836,9 @@
                                             </script>';
                                           }
                                         //end of audit trail                                        
-                                        }else{
-                                          echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
-                                        }      
+                                        // }else{
+                                        //   echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
+                                        // }      
 
                                       }else{
                                         echo "Failed Upload files!"; 
@@ -918,9 +918,9 @@
     
                                           if (mysqli_query($conn, $sql1)) {
                                             
-                                              $notif_sql = "INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                              VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Created Document','You successfully created tracking document','$verified_session_office','Active','$date')";
-                                              if(mysqli_query($conn, $notif_sql)){                                 
+                                              // $notif_sql = "INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                              // VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Created Document','You successfully created tracking document','$verified_session_office','Active','$date')";
+                                              // if(mysqli_query($conn, $notif_sql)){                                 
                                                 //create audit trail record                                               
                                                 $fname=$verified_session_role; 
                                                 if (!empty($_SERVER["HTTP_CLIENT_IP"])){
@@ -959,9 +959,9 @@
                                                   </script>';
                                                 }
                                               //end of audit trail                                        
-                                              }else{
-                                                echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
-                                              } 
+                                              // }else{
+                                              //   echo '<script type = "text/javascript">Swal.fire(data);</script>'; 
+                                              // } 
                                           
                                           }else{
                                             echo "Failed Upload files!"; 
@@ -1078,10 +1078,10 @@
                           }).get();
 
                           console.log(data); 
-                          if(data[18] ==""){
-                            $('#remarks').text(data[11]);
+                          if(data[19] ==""){
+                            $('#remarks').text(data[12]);
                           }else{
-                            $('#remarks').text(data[18]);
+                            $('#remarks').text(data[19]);
                           }
                         
                         });

@@ -149,7 +149,7 @@ include('session.php');
                     <td style="display:none"><?php echo $docRemarks?></td>
                   </td>
                     <td>                      
-                     <a class="btn btn-danger cancelbtn"><i class="bi bi-x-lg"></i></a>
+                     <!-- <a class="btn btn-danger cancelbtn"><i class="bi bi-x-lg"></i></a> -->
                       <a class="btn btn-primary " href='function/view_docu.php?ID=<?php echo $docId; ?>' target="_blank"><i class="bi bi-eye-fill"></i></a>
                     </td>
                   </tr>
@@ -275,7 +275,7 @@ include('session.php');
                   console.log(data);      
                       $('#doc_fileN').text(data[10]);  
                       $('#doc_id').val(data[0]);
-                      $('#doc_code').val(data[2]); 
+                      $('#doc_code').val(data[3]); 
                 });
               // End of Received modal calling 
 
@@ -294,33 +294,34 @@ include('session.php');
                           }else if(data.trim() == "success"){
                             $('#ReceivedModal').modal('hide');
                                   //success message
-                                    const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 1100,
-                                    timerProsressBar: true,
-                                    didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)                                   
+                                  const Toast = Swal.mixin({
+                                  toast: true,
+                                  position: "top-end",
+                                  showConfirmButton: false,
+                                  timer: 2000,
+                                  timerProsressBar: true,
+                                  didOpen: (toast) => {
+                                  toast.addEventListener("mouseenter", Swal.stopTimer)
+                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
                                   }
                                   })
-                                    Toast.fire({
-                                    icon: 'Success',
-                                    title:'Document Returned Successfully '
-                                }).then(function(){
-                                  document.location.reload(true)//refresh pages
-                                });
+                                  Toast.fire({
+                                  icon: "success",
+                                  title:"Document Returned Successfully"
+                                  }).then(function(){
+                                    document.location.reload(true)//refresh pages
+                                  });                     
                                     $('#doc_code').val("")
                                     $('#doc_act2').val("")
                                     $('#doc_off2').val("")
                             }else{
-                              Swal.fire("There is somthing wrong","","error");
-                              // Swal.fire(data);
+                              // Swal.fire("There is somthing wrong","","error");
+                              Swal.fire(data);
                           }
                         })
                       }else{
-                        Swal.fire("You must fill out every field","","warning");
+                        // Swal.fire("You must fill out every field","","warning");
+                        Swal.fire(data);
                       }
                   })
               // End Received function

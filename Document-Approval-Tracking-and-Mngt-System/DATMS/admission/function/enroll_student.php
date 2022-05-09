@@ -76,7 +76,7 @@
       $religion = mysqli_real_escape_string($link,trim($_POST["Treligion"]));
       $civil_status = mysqli_real_escape_string($link,trim($_POST["Tcs"]));
       $account_status = mysqli_real_escape_string($link,trim($_POST["Tstat"]));
-      $password = password_hash("#ChangeMe01!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
+      $password = password_hash("@ChangeMe01!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
       
       //Check if the student number is not existing in the database
       $sql1 = "SELECT id FROM student_information WHERE id_number = '$student_number'";
