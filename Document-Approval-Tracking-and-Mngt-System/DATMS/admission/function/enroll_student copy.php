@@ -8,7 +8,7 @@
     // Processing form data when form is submitted
     if(isset($_POST['Tfname'])&&isset($_POST['Tlname'])&&(isset($_POST['Tmname'])||!isset($_POST['Tmname']))){
       date_default_timezone_set("asia/manila");
-      $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+      $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
       //agun implementation for student number
       $sqll = "SELECT id FROM student_information ORDER BY id DESC Limit 1";
       if($resultt = mysqli_query($link, $sqll)){
@@ -77,7 +77,7 @@
       $civil_status = mysqli_real_escape_string($link,trim($_POST["Tcs"]));     
       $req = mysqli_real_escape_string($link,trim($_POST["Treq"]));
       $account_status = mysqli_real_escape_string($link,trim($_POST["Tstat"]));
-      $password = password_hash("#ChangeMe01!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
+      $password = password_hash("@ChangeMe01!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
       
       //Check if the student number is not existing in the database
       $sql1 = "SELECT id FROM student_information WHERE id_number = '$student_number'";

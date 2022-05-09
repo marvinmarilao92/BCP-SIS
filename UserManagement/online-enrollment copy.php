@@ -27,7 +27,7 @@
         if($_SERVER["REQUEST_METHOD"] == "POST"){
 
           date_default_timezone_set("asia/manila");
-          $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+          $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
           $year = date("Y",strtotime("+0 HOURS"));
           $random_num= rand(10000000,99999999);
           $student_number =  $random_num;

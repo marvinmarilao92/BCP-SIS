@@ -6,7 +6,7 @@ $db = mysqli_select_db($conn, 'sis_db');
     if(isset($_POST['offid'])&&isset($_POST['offcode'])&&isset($_POST['offname'])&&isset($_POST['offloc'])){
         // Object Connection
              date_default_timezone_set("asia/manila");
-             $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+             $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
              $id = mysqli_real_escape_string($conn,$_POST['offid']);
              $Off_code = mysqli_real_escape_string($conn,$_POST['offcode']);
              $Off_name = mysqli_real_escape_string($conn,$_POST['offname']);

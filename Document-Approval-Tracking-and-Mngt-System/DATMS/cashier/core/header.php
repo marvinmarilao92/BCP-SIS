@@ -36,6 +36,17 @@
             <span>Cashier</span>
           </a>
         </li>
+        
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+
+        <li>
+          <a class="dropdown-item d-flex align-items-center" href="ame-payment.php?id=<?php echo $_SESSION["login_key"];?>">
+            <i class="ri ri-syringe-line"></i>
+            <span>(A.M.E) Payment</span>
+          </a>
+        </li>
 
         <li>
           <hr class="dropdown-divider">

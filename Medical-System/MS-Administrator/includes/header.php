@@ -1,5 +1,5 @@
 <!-- ======= Header ======= -->
-<header id="header" class="header fixed-top d-flex align-items-center" style="background-color:#960a0a;">
+<header id="header" class="header fixed-top d-flex align-items-center bg-primary">
 <?php include "key_checker.php";?>
 <div class="d-flex align-items-center justify-content-between">
   <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="logo d-flex align-items-center">
@@ -9,12 +9,6 @@
 
   <i class="bi bi-list toggle-sidebar-btn text-light"></i>
 
-</div>
-<div class="search-bar">
-  <form class="search-form d-flex align-items-center" method="POST" action="#">
-    <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-    <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-  </form>
 </div><!-- End Logo -->
 
 <nav class="header-nav ms-auto">
@@ -24,7 +18,7 @@
 
       <a class="nav-link nav-icon text-light" href="#" data-bs-toggle="dropdown">
         <i class="bi bi-bell"></i>
-        <span class="badge bg-primary badge-number">1</span>
+        <span class="badge bg-danger badge-number">1</span>
       </a><!-- End Notification Icon -->
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
@@ -100,7 +94,7 @@
 
       <a class="nav-link nav-icon text-light" href="#" data-bs-toggle="dropdown">
         <i class="bi bi-chat-left-text"></i>
-        <span class="badge bg-primary badge-number">3</span>
+        <span class="badge bg-danger badge-number">3</span>
       </a><!-- End Messages Icon -->
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
@@ -167,8 +161,13 @@
       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
 
           <?php 
-            $result = displayProfile($verified_session_img, "imgSmall");
-            echo $result;
+            // $result = displayProfile($verified_session_img, "imgSmall");
+            // echo $result;
+            if($verified_session_img > 0 ){
+              echo '<img src="../../assets/users/' .$verified_session_img. '" alt="Profile" class="rounded-circle m-2 w-25 h-25">';
+            } else {
+              echo '<img src="../../assets/users/person-circle.svg" alt="Profile" class="rounded-circle m-2 w-25 h-25">';
+            }
           ?>
         <!-- class="rounded-circle" -->
         <span class="d-none d-md-block dropdown-toggle ps-2 text-light"><?php echo $verified_session_firstname . " " . $verified_session_lastname ?></span>

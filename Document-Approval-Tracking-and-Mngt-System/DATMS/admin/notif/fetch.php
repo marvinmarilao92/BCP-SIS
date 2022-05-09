@@ -11,7 +11,7 @@ if(isset($_POST["view"]))
   $update_query = "UPDATE datms_notification SET stat1 = 1 WHERE (act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department') AND stat1 = 0";
   mysqli_query($conn, $update_query);
  }
- $query = "SELECT * FROM datms_notification WHERE (act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department') ORDER BY date DESC LIMIT 10";
+ $query = "SELECT * FROM datms_notification WHERE (act1 = '$verified_session_firstname $verified_session_lastname' OR act1 = 'Registrar Department') ORDER BY date desc LIMIT 10";
  $result = mysqli_query($conn, $query);
  $output = '';
  
@@ -20,7 +20,7 @@ if(isset($_POST["view"]))
   while($row = mysqli_fetch_array($result))
   {
       date_default_timezone_set("asia/manila");
-      $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+      $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
       $d1 = $row["date"];
       $doc_status = $row["subject"];
       $today = date("Y-m-d",strtotime("+0 HOURS"));
@@ -130,9 +130,9 @@ if(isset($_POST["view"]))
        }
        
        if ($doc_status =='Request Rejected'){
-        $links='request_req?id='.$_SESSION["login_key"].'';        
+        $links='request_record?id='.$_SESSION["login_key"].'';        
        }else if ($doc_status =='Request Approved'){
-        $links='request_req?id='.$_SESSION["login_key"].'';        
+        $links='request_record?id='.$_SESSION["login_key"].'';        
        }else if ($doc_status =='Incoming Request'){
         $links='request?id='.$_SESSION["login_key"].'';        
        }

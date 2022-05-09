@@ -188,7 +188,7 @@ include('session.php');
                       <h6 id="req_receiver" style="color:black"><?php echo "Receiver: ".$verified_session_firstname." ".$verified_session_lastname;?></h6>
                       <h6 style="color:black"><?php 
                       date_default_timezone_set("asia/manila");
-		                  $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+		                  $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
                       echo "Date: ".$date;?></h6> 
                         <!-- Fill out Form -->
                         <div class="row g-3" >                                

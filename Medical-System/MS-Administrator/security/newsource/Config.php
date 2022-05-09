@@ -89,8 +89,8 @@ $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
 //include 'Forms/timezone.php';
 ////////This Query use for Update some record on DB table
-//$udpate = $db->query('UPDATE usermanagements SET updated_at=? WHERE ID=1', $dt->format('Y-m-d H:i:s'));
-////echo $udpate->affectedRows();
+// $udpate = $db->query('UPDATE usermanagements SET updated_at=? WHERE ID=1', $dt->format('Y-m-d H:i:s'));
+// echo $udpate->affectedRows();
 
 
 ////This Query use for Update some record on DB table
