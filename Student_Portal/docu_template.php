@@ -361,6 +361,43 @@ include('includes/session.php');
             </div>
             <!-- End Desc office Modal-->
 
+            
+            <!-- View Document modal -->
+            <div class="modal fade" id="ViewModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-l">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">TEMPLATE REQUESTED</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" >
+                      <div class="card" style="margin: 10px;">
+                        <form method="post">
+                          <div class="card-body" id="printcode">
+                              <h5 class="card-title">Request Information</h5>
+                              Requested File: <h5 id="view_filename" style="margin-left: 60px;"></h5>
+                              Reason for request: <h5 id="view_creator" style="margin-left: 60px;"></h5>
+                              Date Requested: <h5 id="view_date" style="margin-left: 60px;"></h5>                
+                              <input type="hidden" id="view_code" name="view_code" class="form-control" placeholder="Title" readonly>
+                              <input type="hidden" id="view_title" name="view_title" class="form-control" placeholder="Title" readonly>
+                              <input type="hidden" id="view_filename" name="view_filename" class="form-control" placeholder="Title" readonly>
+                              <!-- Barcode -->
+                              <div class="col-12" style="text-align: center;">
+                                <svg id="barcode"></svg>
+                              </div>
+                          </div>
+                          </form>
+                        </div>   
+                    </div>
+                    <div class="modal-footer">
+                      <!-- <button class="btn btn-primary" name="print" id="print" >Print</button> -->
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- End View office Modal-->
+
           <!-- End of Document List Modals -->
           
          <!-- Vendor JS Files/ Template main js file -->
@@ -388,11 +425,11 @@ include('includes/session.php');
                     document.getElementById("view_code").placeholder = data[1];      
                     document.getElementById("view_title").placeholder = data[8];   
                     document.getElementById("view_filename").placeholder = data[9];   
-                    $('#view_filename').text(data[9]);
-                    $('#view_creator').text(data[3]);
-                    $('#view_date').text(data[4]);
+                    $('#view_filename').text(data[5]);
+                    $('#view_creator').text(data[9]);
+                    $('#view_date').text(data[6]);
                     // JsBarcode("#barcode", data[1]);
-                    JsBarcode("#barcode", data[1], {
+                    JsBarcode("#barcode", data[2], {
                       format: "CODE128",
                       lineColor: "#000",
                       width: 3,
