@@ -4,7 +4,7 @@ include_once('../include/conn.php');
 if(isset($_POST['up_img'])) {
   
   date_default_timezone_set("asia/manila");
-  $date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+  $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
 
   $img = rand(10000,100000).'-'.$_FILES['file']['name'];
   $targetDir = '../../../assets/users/'. $img;
@@ -50,7 +50,7 @@ if(isset($_POST['up_img'])) {
     
         }else{
           date_default_timezone_set("asia/manila");
-          $audit_date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+          $audit_date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
           $ip = $_SERVER["REMOTE_ADDR"];
           $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
           $remarks= "User Profile has been updated";  

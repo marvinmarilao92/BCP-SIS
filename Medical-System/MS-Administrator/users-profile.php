@@ -3,16 +3,34 @@
 ?>
 
 <!DOCTYPE html>
-  <html lang="en">
-  <title>Account</title>
-  <head>
-    <?php include ('includes/head_ext.php');?>
-    <style>
+<html lang="en">
+<title>Account</title>
+<head>
+  <?php include ('includes/head_ext.php');?>
+<style>
 
-    </style>
-  </head>
+img {
+  display: block;
+  max-width: 100%;
+}
 
-  <body>
+.preview {
+    overflow: hidden;
+    width: 160px; 
+    height: 160px;
+    margin: 10px;
+    border: 1px solid red;
+}
+
+.modal-lg {
+  max-width: 1000px !important;
+}
+
+</style>
+
+</head>
+
+<body>
 
   <?php $page = "Profile"?>
   <?php include ('includes/header.php');?>
@@ -38,7 +56,6 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
-
     <?php
       if(isset($_SESSION['alert'])) 
       {
@@ -52,17 +69,18 @@
         unset($_SESSION['alert']);
       }
       ?>
-
     <section class="section profile">
       <div class="row">
         <div class="col-xl-4">
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
               <?php 
-                $result = displayProfile($verified_session_img, "imgLarge");
-                echo $result;
+                  if($verified_session_img > 0 ){
+                    echo '<img src="../../assets/users/' .$verified_session_img. '" alt="Profile" class="rounded-circle m-2 w-100 h-100">';
+                  } else {
+                    echo '<img src="../../assets/users/person-circle.svg" alt="Profile" class="rounded-circle m-2 w-100 h-100">';
+                  }
               ?>
-
               <h2><?php echo $verified_session_firstname . ", " . $verified_session_lastname ?></h2>
               <small><?php echo $verified_session_role?></small>
               <div class="social-links mt-2">
@@ -149,21 +167,27 @@
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form action = "resources/profile_update.php" method = "POST">
+                  <form method="POST" enctype="multipart/form-data">
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
-                      <div class="col-md-8 col-lg-9">
-                        <div class="d-flex flex-row align-items-center">
-                          <?php 
-                            $result = displayProfile($verified_session_img, "imgMedium");
-                            echo $result;
-                          ?>
-                          <a type="button" class="btn btn-primary btn-sm m-2" data-bs-toggle="modal" data-bs-target="#myModal"><i class="bi bi-upload"></i></a>
+                      <?php 
+                          if($verified_session_img > 0 ){
+                          echo '<img src="../../assets/users/' .$verified_session_img. '" alt="Profile" class="rounded-circle m-2 w-25 h-25">';
+                        } else {
+                          echo '<img src="../../assets/users/person-circle.svg" alt="Profile" class="rounded-circle m-2 w-25 h-25">';
+                        }
+                      ?>
+                      <div class="col-md-8">
+                        <div class="d-flex flex-row align-items-center justify-content-center">
+                          <label for="upload_image"><a class = "bi bi-arrow-up btn btn-primary btn-sm m-2" ></a></label>
+                          <input type="file" name="crop_image" class="crop_image" accept="image/png" id="upload_image" style = "display:none;">
                           <a href="resources/profileimg_delete.php" class="btn btn-danger btn-sm m-2" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                         </div>
                       </div>
                     </div>
+                  </form>
 
+                  <form action="profile_update.php" method = "POST" >
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                       <div class="col-md-8 col-lg-9">
@@ -193,31 +217,31 @@
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+                      <label for="address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="<?php echo $verified_session_address?>">
+                        <input name="address" type="text" class="form-control" id="address" value="<?php echo $verified_session_address?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
+                      <label for="email" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="<?php echo $verified_session_contact?>">
+                        <input name="phone" type="text" class="form-control" id="phone" value="<?php echo $verified_session_contact?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                      <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="<?php echo $verified_session_email?>">
+                        <input name="email" type="email" class="form-control" id="email" value="<?php echo $verified_session_email?>">
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                  </form><!-- End Profile Edit Form -->
-
+                      <button class="btn btn-danger" name= "submit" type="submit"  id = "updateProfile">Save Changes</button>
+                    </div><!-- End Profile Edit Form -->
+                  </form>
+                  
                 </div>
 
                 <div class="tab-pane fade pt-3" id="profile-settings">
@@ -262,76 +286,112 @@
 
         </div>
       </div>
-      <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+      <div class="modal fade" id="modal_crop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header bg-primary ">
-              <h5 class="modal-title text-light" id="exampleModalLabel">Edit-Profile</h5>
-              <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h5 class="modal-title text-light" id="exampleModalLabel">Crop Image</h5>
+              <button type="button" class="btn-close bg-light" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="resources/profileimg_upload.php" method ="POST" enctype="multipart/form-data">
-              <div class="modal-body d-flex justify-content-center " style = "background-color:whitesmoke;">
-                <div class="card d-flex justify-content-center" style="height:50vh; width:50vw;">
-                    <label for="img3" class="d-flex justify-content-center p-4">
-                      <img src ="../assets/img/cloud.png" id="cPhoto" width='100px' height='100px'></img>
-                    </label>
-                    <input type="file" name="file" id="img3" accept="image" onchange="readURL(this)" style="display: none; visibility: none;">
+            <div class="modal-body">
+              <div class="img-container">
+                <div class="row">
+                  <div class="col-md-8">
+                      <img src="" id="sample_image" />
+                  </div>
+                  <div class="col-md-4">
+                      <div class="preview"></div>
+                  </div>
                 </div>
-              </div> 
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="up_img" class="btn btn-primary">Save changes</button>
               </div>
-            </form>  
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="crop_and_upload" class="btn btn-primary">Crop</button>
+              <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
+            </div>
           </div>
         </div>
       </div>
-
-    </section>
+</section>
 
   </main><!-- End #main -->
-
   <!-- ======= Footer ======= -->
   <?php include('includes/footer.php'); ?>
- 
-
-  <!-- ======= script ======= -->
-  <script type="text/javascript">
-
-      // function directory/ file name 
-      function getImage(imagename)
-      {
-        var newimg=imagename.replace(/^.*\\/,"");
-          $('#display-name').html(newimg);
-      }
-
-      // function image reader/ validate file type
-        var file = document.getElementById('img3');
-
-        file.onchange = function(e) {
-          var ext = this.value.match(/\.([^\.]+)$/)[1];
-          switch (ext) {
-            case 'jpg':
-            case 'jpeg':
-            case 'png':
+  <script>
+   
+   $(document).ready(function(){
+    var $modal = $('#modal_crop');
+    var crop_image = document.getElementById('sample_image'); 
+    
+        $('#upload_image').change(function(event){
           
-                if (file.files && file.files[0]) {
-                  var reader = new FileReader();
 
-                  reader.onload = function (e) {
-                    $('#cPhoto').attr('src', e.target.result);
-                  };
+          var files = event.target.files;
+          var done = function(url) {
+          crop_image.src = url;
+          $modal.modal('show');
+                      
+          };
 
-                  reader.readAsDataURL(file.files[0]);
-                }
-              
-              break;
-            default:
-              alert('Not allowed');
-              this.value = '';
+          if(files && files.length > 0){
+
+            reader=new FileReader();
+            reader.onload = function(event)
+            {
+              done (reader.result);
+            };
+            reader.readAsDataURL (files[0]);
           }
-        };
-  </script>
+
+        });
+        $modal.on('shown.bs.modal', function(){
+              cropper=new Cropper(crop_image,{
+                  aspectRatio: 1,
+                  viewMode: 3,
+                  preview:'.preview'
+              });
+          }).on('hidden.bs.modal', function(){
+              cropper.destroy();
+              cropper = null;
+          });
+
+        $('#crop_and_upload').click(function(){
+          canvas = cropper.getCroppedCanvas ({
+              width:400,
+              height:400
+          });
+          canvas.toBlob(function(blob){
+            url = URL.createObjectURL(blob);
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function(){
+                var base64data = reader.result; 
+                $.ajax({
+                  url:'profileIMG_upload.php',
+                  method: 'POST',
+                  data:{crop_image:base64data},
+                  success:function(data)
+                  {
+                    Swal.fire({
+                      allowOutsideClick: true,
+                      icon: 'success',
+                      title: 'Profile Picture Updated',
+                      showConfirmButton: true,
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                      $modal.modal('hide');
+                      location.reload();
+                    }
+                  })
+                }
+              });
+            };
+          });
+        }); 
+    });
+</script>
+
+
 
 
   <!-- End Footer -->

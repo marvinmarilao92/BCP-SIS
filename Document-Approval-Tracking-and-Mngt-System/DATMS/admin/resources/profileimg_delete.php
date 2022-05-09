@@ -17,10 +17,10 @@ include_once('../include/conn.php');
   
       }else{
         date_default_timezone_set("asia/manila");
-        $audit_date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+        $audit_date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
         $fname= $verified_session_role;
         date_default_timezone_set("asia/manila");
-        $audit_date = date("M-d-Y h:i:s A",strtotime("+0 HOURS"));
+        $audit_date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
         $ip = $_SERVER["REMOTE_ADDR"];
         $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
         $remarks= "User Profile has been Deleted";  

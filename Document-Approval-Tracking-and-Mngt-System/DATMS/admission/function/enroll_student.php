@@ -1,7 +1,30 @@
 <?php
-    include('../session.php');
-    // database configuration
-    require_once("../include/config.php");
+    //Import PHPMailer classes into the global namespace
+    //These must be at the top of your script, not inside a function
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    //Load Composer's autoloader
+    require '../vendor/autoload.php';
+
+    //set the correct timezone
+    date_default_timezone_set('Asia/Manila');
+		$date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
+
+    $success=false;
+    $error=false;
+
+
+    //include the new connection
+    include "../include/new_db.php";
+    include '../include/conn.php';
+    include '../session.php';
+
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     // Define variables and initialize with empty values
     $status = "Enrolled";
     // agon date
@@ -76,7 +99,7 @@
       $religion = mysqli_real_escape_string($link,trim($_POST["Treligion"]));
       $civil_status = mysqli_real_escape_string($link,trim($_POST["Tcs"]));
       $account_status = mysqli_real_escape_string($link,trim($_POST["Tstat"]));
-      $password = password_hash("#ChangeMe01!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
+      $password = password_hash("@ChangeMe01!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
       
       //Check if the student number is not existing in the database
       $sql1 = "SELECT id FROM student_information WHERE id_number = '$student_number'";
@@ -122,7 +145,89 @@
                     if($query_run = mysqli_query($link, $query)){
                       // unset($_SESSION['status']);
                       $_SESSION['studnum'] = $student_number;
-                      echo ('success');
+                      
+                      if($gender =='Male' && $civil_status =='Single' || $civil_status =='Divorced'){
+                        $gentitle = "Mr.";
+                      }else if($gender =='Female' && $civil_status =='Single' || $civil_status =='Divorced'){
+                        $gentitle = "Ms.";
+                      }else if($gender =='Male' && $civil_status =='Married' || $civil_status =='Widowed '){
+                        $gentitle = "Mr.";
+                      }else if($gender =='Female' && $civil_status =='Married' || $civil_status =='Widowed'){
+                        $gentitle = "Mrs.";
+                      }
+                        //email sending 
+                        $db=new DB();
+                        $message = "You have successfully enrolled in Bestlink College of the Philipines all the neccessary information to access your account is listed down below. Username:$student_number Default Password:@ChangeMe01! we highly suggest to change your default password as soon as you received this message.";
+                        
+                          $sql="INSERT INTO datms_emails (acc_id,email,subject,message,status) 
+                          VALUES ('$student_number','$email','Enrolled Sucessfully','$message','Sent')" or die("<script>alert('Error');</script>");
+                          
+                          $inset=$db->conn->query($sql);
+                          if($inset){
+                                // $success='Your ticket has been created. Make sure to check your email inbox for ticket ID';
+                                $mail = new PHPMailer;
+                                $mail->isSMTP();
+                                $mail->SMTPDebug = 0;                                       //Send using SMTP
+                                $mail->Host       = 'smtp.hostinger.com';                   //Set the SMTP server to send through
+                                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                                $mail->Username   = 'registrar_datms@bcp-sis.ga';           //SMTP username
+                                $mail->Password   = '#Registrar01!';                         //SMTP password
+                                $mail->SMTPSecure = 'TLS';                                  //Enable implicit TLS encryption
+                                $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                        
+                                //Recipients
+                                $mail->setFrom('registrar_datms@bcp-sis.ga', 'Registrar Department Support');
+                                $mail->addAddress($email);//Add a recipient
+                                $mail->AddReplyTo('registrar_datms@bcp-sis.ga', "No Reply"); // indicates ReplyTo headers
+                              
+                              $body = 
+                                "<div class='card'>          
+                                  <div class='card-body'>
+                                    <h5 class='card-title'></h5>
+                                    <p class='card-text'>This is direct message from Registrar Department<br>
+                                    <br>Hello ".$gentitle." ".$last_name."
+                                    <br><br>
+                                    You have successfully enrolled in Bestlink College of the Philipines all the neccessary <br>
+                                    information to access your account is listed down below.<br>
+                                    Enrollment Status:".$account_status."<br>
+                                    Username: ".$student_number."<br> 
+                                    Default Password: @ChangeMe01!<br><br>
+                                    if your enrollment status is Temporarily Enrolled you must sumbit first all the necessary <br>
+                                    requiremts in order to access your account.<br> 
+                                    if you can already access your account we highly suggest to change your default password as soon as you<br>
+                                    received this message.
+                                    <br><br>
+                                    This email is sent from an account we use for sending messages only. So if<br>
+                                    you want to contact us, don't reply to this email-we won't get your response.<br>
+                                    Instead, Go to Registrar office to inquire.<br>
+                                    <br>Thank you! and welcome to Bestlink College of the Philippines.</p>
+                                  </div>
+                                </div>
+                                
+                                <div class='alert alert-light bg-light border-0 alert-dismissible fade show' role='alert'>
+                                  © Copyright Bestlink College of the Philippines. All Rights Reserved.
+                                </div>             
+                              ";
+                                
+                                //Content
+                                $mail->isHTML(true); //Set email format to HTML
+                                $mail->Subject = 'Enrolled Sucessfully';
+                                $mail->Body    = $body;
+                                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                                
+                                
+                                if($mail->send()){
+                                  echo ('success');
+                                }else{
+                                  echo ('failed');
+                                }
+                                  //echo "Dear Student your tickets has been sent to our help desk support team and we will back to you shortly. and here is your ticket id $unid please keep your ticket id";
+                          }
+                          else {
+                            echo ('failed');
+                            // $error = "Ticket did not send!";
+                          }
+                        //end of email sending
                     }else{
                       echo ('failed');
                     }

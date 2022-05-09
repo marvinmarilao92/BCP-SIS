@@ -6,7 +6,7 @@
    if(isset($_POST['dtname'])&&isset($_POST['dtacc'])&&isset($_POST['dtkind'])){
     // Object Connection
 		 date_default_timezone_set("asia/manila");
-		 $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+		 $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
         //  $Dt_code = mysqli_real_escape_string($conn,$_POST['dtcode']);
          $Dt_name = mysqli_real_escape_string($conn,$_POST['dtname']);
          $Dt_acc = mysqli_real_escape_string($conn,$_POST['dtacc']);

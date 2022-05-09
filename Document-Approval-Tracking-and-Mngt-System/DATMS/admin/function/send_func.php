@@ -6,7 +6,7 @@ $db = mysqli_select_db($conn, 'sis_db');
     if(isset($_POST['docs_id'])&&isset($_POST['docs_code'])&&isset($_POST['docs_act1'])  && isset($_POST['docs_off1'])&& isset($_POST['docs_date1']) && isset($_POST['docs_act2']) && isset($_POST['docs_off2'])&& isset($_POST['docs_remarks'])){
         // Object Connection
              date_default_timezone_set("asia/manila");
-             $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+             $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
              $id = mysqli_real_escape_string($conn,trim($_POST['docs_id']));
              $doc_code = mysqli_real_escape_string($conn,trim($_POST['docs_code']));
 
@@ -72,8 +72,8 @@ $db = mysqli_select_db($conn, 'sis_db');
                                     VALUES ('$d_actor3', '0' ,'','0','Submitted Document','You have incoming document','$d_off1','Active','$date')") or die(mysqli_error($conn));
 
                                     //notif of students              
-                                    $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                    VALUES ('', '0' ,'$doc_title','0','Submitted Document','Your $doc_type is submitted to $d_actor3','$d_off1','Active','$date')") or die(mysqli_error($conn));   
+                                    // $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                    // VALUES ('', '0' ,'$doc_title','0','Submitted Document','Your $doc_type is submitted to $d_actor3','$d_off1','Active','$date')") or die(mysqli_error($conn));   
 
                                     echo ('success');
                                 }

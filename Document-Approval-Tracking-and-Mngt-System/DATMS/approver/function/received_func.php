@@ -6,7 +6,7 @@ $db = mysqli_select_db($conn, 'sis_db');
     if(isset($_POST['docs_id'])&&isset($_POST['docs_code'])&&isset($_POST['docs_act2']) && isset($_POST['docs_off2'])){
         // Object Connection
              date_default_timezone_set("asia/manila");
-             $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+             $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
              $id = mysqli_real_escape_string($conn,$_POST['docs_id']);
              $doc_code = mysqli_real_escape_string($conn,$_POST['docs_code']);
              $d_act2 = mysqli_real_escape_string($conn,$_POST['docs_act2']);
@@ -58,8 +58,8 @@ $db = mysqli_select_db($conn, 'sis_db');
                                     VALUES ('$d_act1', '0' ,'','0','Received Document','You successfully received the document','$d_off2','Active','$date')") or die(mysqli_error($conn));
 
                                      //notif of students              
-                                     $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                     VALUES ('', '0' ,'$doc_title','0','Received Document','Your $doc_type is received by $verified_session_firstname $verified_session_lastname','$d_off1','Active','$date')") or die(mysqli_error($conn));   
+                                    //  $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                    //  VALUES ('', '0' ,'$doc_title','0','Received Document','Your $doc_type is received by $verified_session_firstname $verified_session_lastname','$d_off1','Active','$date')") or die(mysqli_error($conn));   
 
                                     echo ('success');
                                 }

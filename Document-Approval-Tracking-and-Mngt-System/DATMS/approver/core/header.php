@@ -32,7 +32,7 @@
         <li>
           <hr class="dropdown-divider">
         </li>
-        <div style="overflow-y: scroll; height:370px;">
+        <div style="overflow-y: scroll; max-height:370px;">
           <li class="notification">
           </li>
         </div>
@@ -215,7 +215,7 @@
                 $result=mysqli_query($conn,$query);
                 while($rs=mysqli_fetch_array($result)){
                   date_default_timezone_set("asia/manila");
-                  $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+                  $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
                   $d1 = $rs["date"];
                   $doc_status = $rs["subject"];
                   $today = date("Y-m-d",strtotime("+0 HOURS"));

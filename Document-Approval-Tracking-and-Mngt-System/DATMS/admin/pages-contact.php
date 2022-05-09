@@ -3,13 +3,14 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>DATMS | Contact</title>
+<title>DATMS | Direct Email</title>
 <head>
   <?php include ('core/css-links.php');//css connection?>
   <?php  include "core/key_checker.php"; ?>
 </head>
 
 <body>
+<div id="loader" class="center"></div>
  <!-- Header -->
 <?php include ('core/header.php');//Design for  Header?>
 <!-- end of header -->
@@ -22,12 +23,12 @@ include('session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Contact</h1>
+      <h1>Direct Email</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">Contact</li>
+          <li class="breadcrumb-item">Setting</li>
+          <li class="breadcrumb-item active">Direct Email</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -73,31 +74,32 @@ include('session.php');
 
         <div class="col-xl-6">
           <div class="card p-4">
-            <form action="forms/contact.php" method="post" class="php-email-form">
+            <form action="" method="post" >
               <div class="row gy-4">
 
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
-                </div>
+                <div class="col-md-12">
+                    <div class="form-floating">
+                    <input type="text" class="form-control" name="acc_no" id="acc_no" placeholder="Account No." required>
+                      <label for="floatingName">Account No.</label>
+                    </div>
+                </div>                 
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                    <div class="form-floating">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                      <label for="floatingName">Subject</label>
+                    </div>
+                </div>                                  
+
+                <div class="col-12" >
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="message" name="message" id="message" style="height: 200px;"></textarea>
+                    <label for="message">Message</label>
+                  </div>
                 </div>
 
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
+                <div class="col-md-12 text-center">                
+                  <button class="btn btn-primary btn-lg"  id="submit">Send Message</button>
                 </div>
 
               </div>
@@ -120,7 +122,72 @@ include('session.php');
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
-
+ 
 </body>
-
+  <script type="text/javascript">
+    // modal JS and ajax function
+    $(document).ready(function () {
+      $('#submit').click(function(a){ 
+        a.preventDefault();
+        if($('#acc_no').val()!="" && $('#subject').val()!=""&& $('#message').val()!=""){
+          $.post("email/direct_email.php", {
+            accNumber:$('#acc_no').val(),
+            emailSubject:$('#subject').val(),
+            emailMessage:$('#message').val()
+            },function(data){
+            if (data.trim() == "failed"){
+              Swal.fire("Failed to submit your email","","error");//response message
+              // Empty test field
+              $('#acc_no').val("")
+              $('#subject').val("")
+              $('#message').val("")
+            }else if(data.trim() == "success"){
+                    //success message
+                    const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1100,
+                    timerProsressBar: true,
+                    didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                    })
+                  Toast.fire({
+                  icon: 'success',
+                  title:'Direct email is successfully submitted'
+                  }).then(function(){
+                    // document.location.reload(true)//refresh pages
+                  
+                  });
+                  $('#acc_no').val("")
+                  $('#subject').val("")
+                  $('#message').val("")
+              }else{
+                Swal.fire(data);
+            }
+          })
+        }else{
+          Swal.fire("You must fill out every field","","warning");
+        }
+      })
+      
+    });
+    //loding effect
+    document.onreadystatechange = function() {
+      if (document.readyState !== "complete") {
+          document.querySelector(
+            "body").style.visibility = "hidden";
+          document.querySelector(
+            "#loader").style.visibility = "visible";
+      } else {
+          document.querySelector(
+            "#loader").style.display = "none";
+          document.querySelector(
+            "body").style.visibility = "visible";
+      }
+    };
+    // End ajax function
+  </script>
 </html>

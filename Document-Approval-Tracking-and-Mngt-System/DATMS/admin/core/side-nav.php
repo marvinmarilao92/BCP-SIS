@@ -261,7 +261,7 @@
         <li class="nav-item">
           <a href="pages-contact?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='contact'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="bi bi-envelope"></i>
-            <span>Contact</span>
+            <span>Direct Email</span>
           </a>
         </li><!-- End Contact Page Nav -->
 
