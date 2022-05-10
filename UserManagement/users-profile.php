@@ -1,6 +1,6 @@
 <?php
 include('session.php');
-// $_SESSION["USER_NEW_PASSOWORD"];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +21,8 @@ include('session.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Users</li>
-          <li class="breadcrumb-item active">Profile</li>
+          <li class="breadcrumb-item active"  id="testing"
+          >Profile</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
