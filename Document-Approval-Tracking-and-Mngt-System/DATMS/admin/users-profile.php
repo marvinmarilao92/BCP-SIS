@@ -264,7 +264,7 @@ include('session.php');
                     <div  class="text-center" ><div id="cp">
                       <button type="submit" id="save" class="btn btn-primary">Change Password</button>
                     </div></div>
-                
+
                 </div>
 
               </div><!-- End Bordered Tabs -->
@@ -291,7 +291,7 @@ include('session.php');
     // this script will execute as soon a the website runs
     $(document).ready(function () {
       // Save function
-        $('#submit').click(function(a){ 
+        $('#submit').click(function(a){
           a.preventDefault();
           if($('#currentPassword').val()!="" && $('#newPassword').val()!=""&& $('#confirmPass').val()!=""){
             $.post("changePassword/update_pass.php", {
@@ -301,7 +301,7 @@ include('session.php');
               },function(data){
               if (data.trim() == "failed"){
                 //response message
-                Swal.fire("Your password is already used by this account, enter another one","","error");                          
+                Swal.fire("Your password is already used by this account, enter another one","","error");
                 // Empty test field
                 // $('#currentPassword').val("")
                 $('#newPassword').val("")
@@ -316,7 +316,7 @@ include('session.php');
                       timerProsressBar: true,
                       didOpen: (toast) => {
                       toast.addEventListener('mouseenter', Swal.stopTimer)
-                      toast.addEventListener('mouseleave', Swal.resumeTimer)                  
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
                       }
                       })
                     Toast.fire({
