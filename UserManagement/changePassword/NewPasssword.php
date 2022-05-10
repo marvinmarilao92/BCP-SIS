@@ -1,19 +1,24 @@
 <?php $upper_lower = $number = $specialchar = $passLen = false; session_start();
 
 
-  // require_once 'localConfig.php';
-  // $used = $db->query('SELECT * FROM used_password WHERE account_id=? AND old_pass=?',
-  // $_SESSION['session_username'], $_GET["npas"]);
-  //  if ($used->numRows() ==1)
-  //  {
-  //    $_SESSION["used_password"] = false;
-  //  }
+  require_once 'localConfig.php';
+  $used = $db->query('SELECT * FROM used_password WHERE account_id=? AND old_pass=?',
+  $_SESSION['session_username'], $_GET["npas"]);
+   if ($used->numRows() ==1)
+   {
+     $_SESSION["used_password"] = true;
+   }
+   else
+   {
+     $_SESSION["used_password"] = false;
+   }
 
 
 
 
 
-if ($_GET["npas"] != $_SESSION['session_pass'] || $_SESSION["used_password"] == true){
+
+if ($_GET["npas"] != $_SESSION['session_pass'] && $_SESSION["used_password"] != true){
 $_SESSION["conpass"] = false;
 if(preg_match('/[A-Z]/', $_GET["npas"]) && preg_match('/[a-z]/', $_GET["npas"])) { $upper_lower = true; }
 if(preg_match('/[0-9]/', $_GET["npas"]) ) { $number = true; }
