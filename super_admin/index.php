@@ -545,16 +545,6 @@ include('session.php');
                       </div>
                     </div>
                     <!-- End Insert your Module here -->                    
-                    <!-- Insert your Module here -->
-                    <div class="col-lg-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <a href="#"> <h5 class="card-title">REGISTRAR OFFICER</h5></a>
-                          <p class="card-text">Subsystem Description insert here...</p>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End Insert your Module here -->
                   </div>
                 </div>
               <div class="modal-footer">

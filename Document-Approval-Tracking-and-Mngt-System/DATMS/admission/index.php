@@ -380,7 +380,7 @@ include('session.php');
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="form-floating">
             <select class="form-select" name="status" id="status" aria-label="State" required>
               <option selected disabled value="">Select Status</option>
@@ -393,7 +393,7 @@ include('session.php');
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="form-floating">
             <select class="form-select" name="year_level" id="year_level" aria-label="State" required>
               <option value="" selected disabled>Select Year Level</option>
@@ -406,16 +406,16 @@ include('session.php');
           </div>
         </div>
 
-        <div class="col-md-4" style="display: none;">
+        <div class="col-md-6" style="display: none;">
           <div class="form-floating">
             <input type="text" class="form-control school_year" id="school_year" name="school_year" value="<?php $currentYear = date("Y"); $previousYear = $currentYear-1; $SY = $previousYear.'-'. $currentYear; echo $SY;?>"  id="school_year" required >
             <label for="floatingName" required>School Year</label>
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4" style="display:none;">
           <div class="form-floating">
-            <input type="text" class="form-control" name="section" id="section" placeholder="Section" required>
+            <input type="hidden"  class="form-control" name="section" id="section" placeholder="Section">
             <label for="floatingName">Section</label>
           </div>
         </div>
@@ -569,7 +569,7 @@ include('session.php');
       // Save function
         $('#enroll').click(function(a){ 
           a.preventDefault();
-            if($('#application_code').val()!="" &&$('#first_name').val()!="" && $('#last_name').val()!=""&& $('#course').val()!=""&& $('#year_level').val()!=""&& $('#section').val()!=""&& $('#school_year').val()!=""&& $('#address').val()!=""&& $('#email').val()!=""&& $('#contact').val()!=""&& $('#gender').val()!=""&& $('#birthdate').val()!=""&& $('#nationality').val()!=""&& $('#religion').val()!=""&& $('#civil_status').val()!=""){
+            if($('#application_code').val()!="" &&$('#first_name').val()!="" && $('#last_name').val()!=""&& $('#course').val()!=""&& $('#year_level').val()!=""&& $('#school_year').val()!=""&& $('#address').val()!=""&& $('#email').val()!=""&& $('#contact').val()!=""&& $('#gender').val()!=""&& $('#birthdate').val()!=""&& $('#nationality').val()!=""&& $('#religion').val()!=""&& $('#civil_status').val()!=""){
               $.post("function/enroll_student.php", {
                 Tcode:$('#application_code').val(),
                 Tfname:$('#first_name').val(),
