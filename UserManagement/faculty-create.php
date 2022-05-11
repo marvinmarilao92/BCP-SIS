@@ -160,8 +160,8 @@
 
 <?php
 include ("includes/nav.php");
-include ("includes/sidebar.php");
 ?>
+<?php $page = 'fac'; include ('includes/sidebar.php');//Design for sidebar?>
 
 <main id="main" class="main">
 
