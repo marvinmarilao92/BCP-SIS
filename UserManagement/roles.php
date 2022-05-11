@@ -179,7 +179,7 @@ include ("includes/sidebar.php");
                           </div>  
                           <div class="col-md-12">
                                 <select class="form-select" id="roledept" name="roledept">
-                                <option selected="selected" disabled="disabled">Document Type</option>
+                                <option selected="selected" disabled="disabled">Subsystem</option>
                                   <?php
                                     require_once("includes/conn.php");
                                     $query="SELECT * FROM department ORDER BY id DESC ";
