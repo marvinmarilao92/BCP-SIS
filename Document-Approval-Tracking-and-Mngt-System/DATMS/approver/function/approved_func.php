@@ -128,7 +128,7 @@
           
         
                                        
-                                        $message = "Your $doc_type is Approved by $verified_session_firstname $verified_session_lastname from Registrar Department Present your self to the registrar bring your bestlink school id and screenshot of your request barcode to claim your template Registrar is open from Monday to Friday Excluding non-working holidays From 8am to 5pm.";
+                                        $message = "Your $doc_type is Approved by $verified_session_firstname $verified_session_lastname from Registrar Department Present your self to the registrar bring your bestlink school id and screenshot of your request barcode to claim your document Registrar is open from Monday to Friday Excluding non-working holidays From 8am to 5pm.";
 
                                         //email sending 
                                             $sql="INSERT INTO datms_emails (acc_id,email,subject,message,status) 
@@ -160,7 +160,7 @@
                                                     <br>Dear ".$gentitle." ".$lname."<br><br>
 													Your ".$doc_type." is Approved by ".$verified_session_firstname." ".$verified_session_lastname." from <br>
 													Registrar Department Present your self to the registrar bring bestlink school id and <br>
-													screenshot of your request barcode to claim your template.<br>
+													screenshot of your request barcode to claim your document.<br>
 													<br> Remarks: ".$d_remarks.".<br><br>
 													Registrar is open from Monday to Friday Excluding non-working holidays 
 													From 8am to 5pm.
@@ -285,7 +285,7 @@
                                                 VALUES ('', '0' ,'$doc_title','0','Approved Document','Your $doc_type is approved by $d_act2','$d_off2','Active','$date')") or die(mysqli_error($conn));   
                                             }  
             
-                                            $message = "Your $doc_type is Approved by $verified_session_firstname $verified_session_lastname from Registrar Department Present your self to the registrar bring your bestlink school id and screenshot of your request barcode to claim your template Registrar is open from Monday to Friday Excluding non-working holidays From 8am to 5pm.";
+                                            $message = "Your $doc_type is Approved by $verified_session_firstname $verified_session_lastname from Registrar Department Present your self to the registrar bring your bestlink school id and screenshot of your request barcode to claim your document Registrar is open from Monday to Friday Excluding non-working holidays From 8am to 5pm.";
     
                                             //email sending 
                                                 $sql="INSERT INTO datms_emails (acc_id,email,subject,message,status) 
@@ -317,7 +317,7 @@
                                                         <br>Dear ".$gentitle." ".$lname."<br><br>
                                                         Your ".$doc_type." is Approved by ".$verified_session_firstname." ".$verified_session_lastname." from <br>
                                                         Registrar Department Present your self to the registrar bring bestlink school id and <br>
-                                                        screenshot of your request barcode to claim your template.<br>
+                                                        screenshot of your request barcode to claim your document.<br>
                                                         <br> Remarks: ".$d_remarks.".<br><br>
                                                         Registrar is open from Monday to Friday Excluding non-working holidays 
                                                         From 8am to 5pm.
@@ -441,7 +441,7 @@
                                                     $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
                                                     VALUES ('', '0' ,'$doc_title','0','Approved Document','Your $doc_type is approved by $d_act2','$d_off2','Active','$date')") or die(mysqli_error($conn));   
                                                 }  
-                                                $message = "Your $doc_type is Approved by $verified_session_firstname $verified_session_lastname from Registrar Department Present your self to the registrar bring your bestlink school id and screenshot of your request barcode to claim your template Registrar is open from Monday to Friday Excluding non-working holidays From 8am to 5pm.";
+                                                $message = "Your $doc_type is Approved by $verified_session_firstname $verified_session_lastname from Registrar Department Present your self to the registrar bring your bestlink school id and screenshot of your request barcode to claim your document Registrar is open from Monday to Friday Excluding non-working holidays From 8am to 5pm.";
         
                                                 //email sending 
                                                     $sql="INSERT INTO datms_emails (acc_id,email,subject,message,status) 
@@ -474,7 +474,7 @@
                                                             <br><br>
                                                             Your ".$doc_type." is Approved by ".$verified_session_firstname." ".$verified_session_lastname." from <br>
                                                             Registrar Department Present your self to the registrar bring bestlink school id and <br>
-                                                            screenshot of your request barcode to claim your template.<br>
+                                                            screenshot of your request barcode to claim your document.<br>
                                                             <br> Remarks: ".$d_remarks.".
                                                             <br><br>
                                                             Registrar is open from Monday to Friday Excluding non-working holidays 
