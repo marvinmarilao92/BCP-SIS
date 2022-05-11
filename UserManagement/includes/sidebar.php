@@ -52,9 +52,9 @@
       </li><!-- End Employee Page Nav -->
 
       <li class="nav-item">
-        <a class="<?php if($page=='fac'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="faculty?id=<?php echo $_SESSION["login_key"];?>">
-          <i class="ri ri-parent-fill"></i>
-          <span>Faculty Staff</span>
+        <a class="<?php if($page=='fac'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" href="faculty-create?id=<?php echo $_SESSION["login_key"];?>">
+          <i class="ri ri-contacts-line"></i>
+          <span>Add Faculty Staff</span>
         </a>
       </li><!-- End Teacher Page Nav -->
 
