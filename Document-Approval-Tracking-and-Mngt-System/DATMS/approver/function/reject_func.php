@@ -97,10 +97,10 @@
                                 //create audit trail record
                                     //add session connceti 
                                     $fname=$verified_session_role; 
-                                    if (!empty($_SERVER["HTTP_CLIENT_IP"])){
-                                        $ip = $_SERVER["HTTP_CLIENT_IP"];
-                                    }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
-                                        $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                                    if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
+                                        $ip = $_SERVER["HTTPS_CLIENT_IP"];
+                                    }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
+                                        $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
                                     }else{
                                         $ip = $_SERVER["REMOTE_ADDR"];
                                         $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
@@ -254,10 +254,10 @@
                                     //create audit trail record
                                         //add session conncetio 
                                         $fname=$verified_session_role; 
-                                        if (!empty($_SERVER["HTTP_CLIENT_IP"])){
-                                            $ip = $_SERVER["HTTP_CLIENT_IP"];
-                                        }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
-                                            $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                                        if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
+                                            $ip = $_SERVER["HTTPS_CLIENT_IP"];
+                                        }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
+                                            $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
                                         }else{
                                             $ip = $_SERVER["REMOTE_ADDR"];
                                             $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
@@ -412,10 +412,10 @@
                                         //create audit trail record
                                             //add session conncetion 
                                             $fname=$verified_session_role; 
-                                            if (!empty($_SERVER["HTTP_CLIENT_IP"])){
-                                                $ip = $_SERVER["HTTP_CLIENT_IP"];
-                                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
-                                                $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                                            if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
+                                                $ip = $_SERVER["HTTPS_CLIENT_IP"];
+                                            }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
+                                                $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
                                             }else{
                                                 $ip = $_SERVER["REMOTE_ADDR"];
                                                 $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
