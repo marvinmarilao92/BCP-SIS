@@ -429,7 +429,7 @@
                             case "SuperAdmin":
                               //statement
                               $_SESSION['session_username'] = $myusername;
-                              $_SESSION['session_url'] = "super_admin/.php?id=".$_SESSION["login_key"]."";
+                              $_SESSION['session_url'] = "super_admin/index.php?id=".$_SESSION["login_key"]."";
                               if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                   $ip = $_SERVER["HTTP_CLIENT_IP"];
                                 }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
