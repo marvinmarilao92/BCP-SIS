@@ -16,9 +16,9 @@
        $remarks="account has been logged out";  
        mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$user_id_checker','$verified_session_username','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
       // header("Location: ../../../../");
-      ?>
-      <script>location.href = 'https://www.facebook.com';</script>
-      <?php
+    
+      echo "<script>location.href = 'https://www.facebook.com';</script>";
+      
     }
       
   }
