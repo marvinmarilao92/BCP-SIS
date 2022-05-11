@@ -9,7 +9,7 @@ $d2;
 if(isset($_POST["query"]))
 {
  $search = mysqli_real_escape_string($conn, $_POST["query"]);
- $query = " SELECT * FROM datms_tracking WHERE doc_code = '".$search."'";
+ $query = "SELECT * FROM datms_tracking WHERE doc_code = '".$search."'";
 }
 else
 {
