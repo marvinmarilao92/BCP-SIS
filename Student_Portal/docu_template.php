@@ -245,11 +245,12 @@ include('includes/session.php');
                           <?php 
                           if($filename!='' && $stat=='Approved'){
                             ?>
-                            <a class="btn btn-primary " href='function/view_template?id=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri-eye"></i></a> 
+                            <a class="btn btn-primary " href='function/view_template?id=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri-eye-line"></i></a> 
                             <?php
                           }                
                           ?>  
                             <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>                      
+             
                           </td>
                         </tr>
 
