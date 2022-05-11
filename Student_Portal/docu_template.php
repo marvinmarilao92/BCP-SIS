@@ -245,7 +245,7 @@ include('includes/session.php');
                           <?php 
                           if($filename!='' && $stat=='Approved'){
                             ?>
-                            <a class="btn btn-success " href='function/view_template?id=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri-download-2-fill"></i></a> 
+                            <a class="btn btn-primary " href='function/view_template?id=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri-eye-fill"></i></a> 
                             <?php
                           }                
                           ?>  
