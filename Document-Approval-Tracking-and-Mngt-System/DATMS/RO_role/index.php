@@ -506,7 +506,7 @@ include('session.php');
 
               // $Admin = $_FILES['admin']['name'];
               // destination of the file on the server
-              $destination = '../../../assets/uploads/request/' . $filename;
+              $destination = '../../../assets/request/' . $filename;
 
               // get the file extension
               $extension = pathinfo($filename, PATHINFO_EXTENSION);

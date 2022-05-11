@@ -141,7 +141,7 @@
                                           <tbody>
                                             <?php
                                               require_once("include/conn.php");
-                                              $query="SELECT * FROM datms_tempreq WHERE actor='$verified_session_firstname $verified_session_lastname' AND status='Approved'  ORDER BY date DESC ";
+                                              $query="SELECT * FROM datms_tempreq WHERE actor='$verified_session_firstname $verified_session_lastname' AND status='Approved' OR status='Downloaded'  ORDER BY date DESC ";
                                               $result=mysqli_query($conn,$query);
                                               while($rs=mysqli_fetch_array($result)){
                                                 $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
@@ -183,9 +183,10 @@
                                               <td style="display:none"><?php echo $fname; ?></td>               
                                               <td style="display:none"><?php echo $remarks; ?></td>             
                                               <td WIDTH="6%">
-                                              <div class="btn-group" role="group" aria-label="Basic mixed styles example">       
+                                              <div class="btn-group" role="group" aria-label="Basic mixed styles example">    
+                                              <?php if($filename !=''){?>  
                                               <a class="btn btn-primary " href='function/view_template?id=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri ri-eye-line"></i></a>      
-                                                <!-- <a  class="btn btn-primary remarks"><i class="bi bi-eye"></i></a>                       -->
+                                              <?php }?>
                                               </div>
                                               </td>
                                             </tr>
