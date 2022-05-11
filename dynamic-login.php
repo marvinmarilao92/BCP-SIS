@@ -289,7 +289,7 @@
                         case "Assistant Registrar":
                             //statement
                             $_SESSION['session_username'] = $myusername;
-                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index?id=".$_SESSION["login_key"]."";
+                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/assistant/index?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -305,14 +305,14 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index?id=".$_SESSION["login_key"]."");
+                                header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/assistant/index?id=".$_SESSION["login_key"]."");
                             }
 
                             break;
                         case "Registrar Officer":
                             //statement
                             $_SESSION['session_username'] = $myusername;
-                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index?id=".$_SESSION["login_key"]."";
+                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/officer/index?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -328,7 +328,7 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                              header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index?id=".$_SESSION["login_key"]."");
+                              header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/officer/index?id=".$_SESSION["login_key"]."");
                             }
                             break;
 
@@ -377,6 +377,50 @@
                                  header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index?id=".$_SESSION["login_key"]."");
                               }
                             break;
+                            default:
+                            $role =$row1["role"];
+                            $query="SELECT * FROM role_config WHERE `role`='$role'";
+                            $result=mysqli_query($link,$query);
+                            while($rs=mysqli_fetch_array($result)){
+                              $type = $rs['	role_type']; 
+                              if($type='RO'){
+                                //statement
+                                $_SESSION['session_username'] = $myusername;
+                                $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/RO_role/index?id=".$_SESSION["login_key"]."";
+                                if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                                    $ip = $_SERVER["HTTP_CLIENT_IP"];
+                                  }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                                    $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                                  }else{
+                                    $ip = $_SERVER["REMOTE_ADDR"];
+                                    $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                    $remarks="account has been logged in";
+                                    mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                                    //used to delete ip address record for login attempts
+                                    mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
+                                    //calling php file for new login_key
+                                    require_once "core/update_key.php";
+                                    //update login key
+                                    $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                                    header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/RO_role/index?id=".$_SESSION["login_key"]."");
+                                  }
+                              }else{
+                                //this is used to identify the numbers of attempts
+                                $total_count++;
+                                $rem_attm=3-$total_count;
+                                if($rem_attm==0){
+                                  $error="To many failed login attempts. Please login after 60 sec.";
+                                }else{
+                                  $error="Please enter valid login details. $rem_attm attempts remaining";
+                                  // $error="Your Username or Password is invalid.";
+                                }
+                                $try_time=time();
+                                mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
+                              }
+                            }
+                              
+                            break;
+
                       }
                       break;
                     case "SuperUser":

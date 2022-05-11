@@ -129,7 +129,7 @@
               // Attempt to execute the prepared statement
               if(mysqli_stmt_execute($stmt1)){
                   // Records created successfully. Redirect to landing page
-                  header("location: admin.php?id='.$key.'");
+                  header("location: index?id='.$key.'");
                   exit();
               } else{
                   echo "Oops! Something went wrong. Please try again later.";
@@ -170,7 +170,7 @@ include ("includes/sidebar.php");
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.php?id=<?php echo $_SESSION["login_key"];?>">Home</a></li>
-        <li class="breadcrumb-item"><a href="admin.php?id=<?php echo $_SESSION["login_key"];?>">Employees</a></li>
+        <li class="breadcrumb-item"><a href="index?id=<?php echo $_SESSION["login_key"];?>">Employees</a></li>
         <li class="breadcrumb-item">Add New Employee</li>
       </ol>
     </nav>
