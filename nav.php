@@ -36,7 +36,7 @@
             <center><a href="index" class="bcpname"  style="color: rgb(29, 70, 146);">BCP</a></center>
             <div class="row">              
                 <div class="col-xs-6">                
-                <div id="fh5co-logo"><img src="assets/img/BCPlogo.png" id="logo" width="33px" height="35px"><a href="index" id="bcplogo" style="color: rgb(29, 70, 146);">Bestlink College of the Philippines</a></div>
+                <div id="fh5co-logo"><img src="assets/img/BCPlogo.png" id="logo" width="33px" height="35px"><a href="Index" id="bcplogo" style="color: rgb(29, 70, 146);">Bestlink College of the Philippines</a></div>
                 </div>
                 <!-- <div class="col-xs-2">
                     <div id="fh5co-logo"><a href="index.html"><i class=""></i>BCP</a></div>
