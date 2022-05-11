@@ -1,29 +1,3 @@
-<?php 
-
-// require_once("../includes/conn.php");
-
-// if (isset($_GET['id'])) {
-//     $id = mysqli_real_escape_string($conn,$_GET['id']);
-    
-//     // fetch file to download from database
-//     $sql = "SELECT * FROM  datms_tempreq WHERE id = $id";
-//     $result = mysqli_query($conn, $sql);
-
-//     $file = mysqli_fetch_assoc($result);
-//     $filepath = '../../assets/uploads/request/' . $file['file_name'];
-
-//     if (file_exists($filepath)) {
-//         header('Content-Type: application/pdf');
-//         readfile('../../assets/uploads/request/' . $file['file_name']);
-
-//         mysqli_query($conn, $updateQuery);
-//         exit;
-//     }
-
-// }
-
-
-?>
 
 <?php 
 
@@ -37,7 +11,7 @@ if (isset($_GET['id'])) {
     $result = mysqli_query($conn, $sql);
 
     $file = mysqli_fetch_assoc($result);
-    $filepath = '../../assets/uploads/request/' . $file['file_name'];
+    $filepath = '../../assets/request/' . $file['file_name'];
 
     if (file_exists($filepath)) {
         header('Content-Description: File Transfer');
@@ -46,8 +20,8 @@ if (isset($_GET['id'])) {
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
-        header('Content-Length: ' . filesize('../../assets/uploads/request/' . $file['file_name']));
-        readfile('../../assets/uploads/request/' . $file['file_name']);
+        header('Content-Length: ' . filesize('../../assets/request/' . $file['file_name']));
+        readfile('../../assets/request/' . $file['file_name']);
 
         // Now update downloads count        
         $updateQuery = "UPDATE datms_tempreq SET status='Downloaded' WHERE id=$id";
