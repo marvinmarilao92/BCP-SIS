@@ -429,7 +429,7 @@
                             case "SuperAdmin":
                               //statement
                               $_SESSION['session_username'] = $myusername;
-                              $_SESSION['session_url'] = "super_admin/index.php?id=".$_SESSION["login_key"]."";
+                              $_SESSION['session_url'] = "super_admin/index?id=".$_SESSION["login_key"]."";
                               if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                   $ip = $_SERVER["HTTP_CLIENT_IP"];
                                 }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -445,7 +445,7 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: super_admin/index.php?id=".$_SESSION["login_key"]."");
+                                header("location: super_admin/index?id=".$_SESSION["login_key"]."");
                                 }
                               break;
                           }
