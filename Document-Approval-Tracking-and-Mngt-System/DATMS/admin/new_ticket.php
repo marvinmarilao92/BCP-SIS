@@ -83,10 +83,10 @@ include('includes/session.php');
           
             //create audit trail record
       $fname= $_SESSION['session_department'] = "Student";
-      if (!empty($_SERVER["HTTP_CLIENT_IP"])){
-        $ip = $_SERVER["HTTP_CLIENT_IP"];
-      }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
-        $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+      if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
+        $ip = $_SERVER["HTTPS_CLIENT_IP"];
+      }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
+        $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
       }else{
         $ip = $_SERVER["REMOTE_ADDR"];
         $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
@@ -147,7 +147,7 @@ include('includes/session.php');
       else {
         $error = "Ticket did not send!";
       } 
-      //echo '<script>showAlert();window.setTimeout(function () {HideAlert();},3000);</script>';  echo "<meta http-equiv='refresh' content='0;url=view_ticket.php'>";
+      //echo '<script>showAlert();window.setTimeout(function () {HideAlert();},3000);</script>';  echo "<meta HTTPS-equiv='refresh' content='0;url=view_ticket.php'>";
 
       }		
                 
