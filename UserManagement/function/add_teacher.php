@@ -69,7 +69,7 @@
     $religion = mysqli_real_escape_string($conn,trim($_POST["Treligion"]));
     $civil_status = mysqli_real_escape_string($conn,trim($_POST["Tstat"]));
     $account_status = "Active";
-    $password = password_hash("@ChangeMe01!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
+    $password = password_hash("@ChangeMe01".substr($last_name,0,2)."!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
     //Check if the id number is not existing in the database
     $sql1 = "SELECT id FROM teacher_information WHERE id_number = '$userid'";
     $result = mysqli_query($conn,$sql1);
