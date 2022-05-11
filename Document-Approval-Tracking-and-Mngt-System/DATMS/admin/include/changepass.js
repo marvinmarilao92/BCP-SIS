@@ -67,3 +67,20 @@
       }
     });
   }
+
+
+
+  function submitNewPass(testValue)
+  {
+    $.ajax({
+
+      url: 'changePassword/submitNewPassword.php', 
+      success: function(html)
+      {
+
+        var test = document.getElementById(testValue);
+        test.innerHTML = html;
+        
+      }
+    });
+  }

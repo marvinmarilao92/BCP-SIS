@@ -39,12 +39,12 @@
 				 $conn->query("INSERT INTO `datms_tempreq` VALUES('','$req_code', '$verified_session_username', '$program','$docu','Sent','$res','','$date','')") or die(mysqli_error($conn));
 
 					//notif of students  
-					$conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-					VALUES ('', '0' ,'$verified_session_username','0','Request Submitted','You successfully Submit your request for $docu','$program','Active','$date')") or die(mysqli_error($conn));
+					$conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date, affected)
+					VALUES ('', '0' ,'$verified_session_username','0','Request Submitted','You successfully Submit your request for $docu','$program','Active','$date','$req_code')") or die(mysqli_error($conn));
 
 					//notif of employee              
-					$conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-					VALUES ('Registrar Department', '0' ,'','0','Incoming Request','You have incoming request for $docu','$program','Active','$date')") or die(mysqli_error($conn));  
+					$conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date, affected)
+					VALUES ('Registrar Department', '0' ,'','0','Incoming Request','You have incoming request for $docu','$program','Active','$date','$req_code')") or die(mysqli_error($conn));  
 				 echo ('success');
 			}
 		//end of audit trail

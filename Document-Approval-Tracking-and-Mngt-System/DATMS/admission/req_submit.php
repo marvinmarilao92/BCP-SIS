@@ -114,28 +114,6 @@ include('session.php');
 
         }
       
-      // if($row1['status']=='Received'){
-      //       echo'<script type = "text/javascript">
-      //           //success message
-      //           const Toast = Swal.mixin({
-      //           toast: true,
-      //           position: "top-end",
-      //           showConfirmButton: false,
-      //           timer: 2000,
-      //           timerProsressBar: true,
-      //           didOpen: (toast) => {
-      //           toast.addEventListener("mouseenter", Swal.stopTimer)
-      //           toast.addEventListener("mouseleave", Swal.resumeTimer)                  
-      //           }
-      //           })
-      //           Toast.fire({
-      //           icon: "error",
-      //           title:"Your requirements is already submitted to registrar"               
-      //           }).then(function(){
-      //             window.location = "req_submit.php?id='.$key.'";//refresh pages
-      //           });
-      //       </script>';
-      // }else 
       if($count!=0){
           echo'<script type = "text/javascript">
                 //success message

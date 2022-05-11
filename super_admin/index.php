@@ -509,8 +509,8 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <a href="#"> <h5 class="card-title">ASSISTANT REGISTRAR</h5></a>
-                          <p class="card-text">Subsystem Description insert here...</p>
+                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/assistant/index?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">ASSISTANT REGISTRAR</h5></a>
+                          <p class="card-text">Click here to access module</p>
                         </div>
                       </div>
                     </div>

@@ -14,15 +14,15 @@ include('session.php');
       </script>
     <!-- Top and side navigation menu -->
     <?php include ("includes/nav.php"); include ("includes/sidebar.php");?>
-    <?php $page = 'EI'; include ('includes/sidebar.php');//Design for sidebar?>
+    <?php $page = 'fac'; include ('includes/sidebar.php');//Design for sidebar?>
 
     <main id="main" class="main">
             <div class="pagetitle">
-              <h1>Employee</h1>
+              <h1>Faculty Staff</h1>
               <nav>
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                  <li class="breadcrumb-item">Employee</li>
+                  <li class="breadcrumb-item">Faculty Staff</li>
                 </ol>
               </nav>
             </div><!-- End Page Title -->
@@ -32,10 +32,10 @@ include('session.php');
                 <div class="card">
                   <div class="col-lg-12">
                       <div class="form-group col-md-2 btn-lg"  style="float: left; padding:20px;">
-                          <h4>List of Employee</h4>
+                          <h4>List of Faculty Staff</h4>
                       </div>
                       <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-                        <a href="admin-create.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary pull-right">Add New User</a>
+                        <a href="faculty-create.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-primary pull-right">Add New Faculty</a>
                       </div> 
                     </div>
                   <div class="card-body">
@@ -49,7 +49,7 @@ include('session.php');
                                   echo '<table class="table datatable">';
                                       echo "<thead>";
                                           echo "<tr>";
-                                              echo "<th scope='col'>Employee No.</th>";
+                                              echo "<th scope='col'>Faculty No.</th>";
                                               echo "<th scope='col'>Full Name</th>";
                                               echo "<th scope='col'>Subsystem</th>";
                                               echo "<th scope='col'>Position</th>";  
