@@ -688,8 +688,8 @@
                                           //save to the audit trail table
                                           mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$doc_code','$ip','$host','$date')")or die(mysqli_error($conn)); 
                                           //notif of students              
-                                          $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                          VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$verified_session_office','Active','$date')") or die(mysqli_error($conn));       
+                                          $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date,affected)
+                                          VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$verified_session_office','Active','$date','$doc_code')") or die(mysqli_error($conn));       
                                           // message 
                                           echo'<script type = "text/javascript">
                                               //success message
@@ -811,8 +811,8 @@
                                             //save to the audit trail table
                                             mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$doc_code','$ip','$host','$date')")or die(mysqli_error($conn)); 
                                             //notif of students              
-                                            $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                            VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$verified_session_office','Active','$date')") or die(mysqli_error($conn));       
+                                            $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date,affected)
+                                            VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$verified_session_office','Active','$date','$doc_code')") or die(mysqli_error($conn));      
                                             // message 
                                             echo'<script type = "text/javascript">
                                                 //success message
@@ -934,8 +934,8 @@
                                                   //save to the audit trail table
                                                   mysqli_query($conn,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$doc_code','$ip','$host','$date')")or die(mysqli_error($conn)); 
                                                   //notif of students              
-                                                  $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                                  VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$verified_session_office','Active','$date')") or die(mysqli_error($conn));       
+                                                  $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date,affected)
+                                                  VALUES ('', '0' ,'$doc_title','0','Created Document','Your Tracking for $doc_type is successfully created by $verified_session_firstname $verified_session_lastname','$verified_session_office','Active','$date','$doc_code')") or die(mysqli_error($conn));          
                                                   // message 
                                                   echo'<script type = "text/javascript">
                                                       //success message

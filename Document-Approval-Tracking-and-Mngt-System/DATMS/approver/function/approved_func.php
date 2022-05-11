@@ -110,17 +110,24 @@
                                         // query
                                         $conn->query("INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
                                         VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type','Approved','$doc_desc','$d_act2','$d_off2','$date','$d_act1','$d_off1','$d_date1','Document is Approved by')") or die(mysqli_error($conn));
+
+                                        $update_notif = $conn->query("UPDATE datms_notification SET act1 = '', act2 = '', date = '$date' WHERE affected = '".$doc_code."'") or die(mysqli_error($conn));
+                                        if($update_notif){
+                                        $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date, affected)
+                                        VALUES ('$d_act1', '0' ,'','0','Received Document','You successfully received the document','$d_off2','Active','$date','$doc_code')") or die(mysqli_error($conn));
+                                            $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                            VALUES ('$tracker', '0' ,'','0','Approved Document','Your document has been approved','$d_off2','Active','$date')") or die(mysqli_error($conn));
+                                            // Self notifier
+                                            $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                            VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Approved Document','You approved $doc_type of $doc_title','$d_off2','Active','$date')") or die(mysqli_error($conn));
+            
+                                            //notif of students              
+                                            $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                            VALUES ('', '0' ,'$doc_title','0','Approved Document','Your $doc_type is approved by $d_act2','$d_off2','Active','$date')") or die(mysqli_error($conn));   
+                                        }  
+          
         
-                                        $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                        VALUES ('$tracker', '0' ,'','0','Approved Document','Your document has been approved','$d_off2','Active','$date')") or die(mysqli_error($conn));
-                                        // Self notifier
-                                        $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                        VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Approved Document','You approved $doc_type of $doc_title','$d_off2','Active','$date')") or die(mysqli_error($conn));
-        
-                                        //notif of students              
-                                        $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                        VALUES ('', '0' ,'$doc_title','0','Approved Document','Your $doc_type is approved by $d_act2','$d_off2','Active','$date')") or die(mysqli_error($conn));   
-        
+                                       
                                         $message = "Your $doc_type is Approved by $verified_session_firstname $verified_session_lastname from Registrar Department Present your self to the registrar bring your bestlink school id and screenshot of your request barcode to claim your template Registrar is open from Monday to Friday Excluding non-working holidays From 8am to 5pm.";
 
                                         //email sending 
@@ -263,15 +270,20 @@
                                             $conn->query("INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
                                             VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type','Approved','$doc_desc','$d_act2','$d_off2','$date','$d_act1','$d_off1','$d_date1','Document is Approved by')") or die(mysqli_error($conn));
             
-                                            $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                            VALUES ('$tracker', '0' ,'','0','Approved Document','Your document has been approved','$d_off2','Active','$date')") or die(mysqli_error($conn));
-                                            // Self notifier
-                                            $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                            VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Approved Document','You approved $doc_type of $doc_title','$d_off2','Active','$date')") or die(mysqli_error($conn));
-            
-                                            //notif of students              
-                                            $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                            VALUES ('', '0' ,'$doc_title','0','Approved Document','Your $doc_type is approved by $d_act2','$d_off2','Active','$date')") or die(mysqli_error($conn));   
+                                           $update_notif = $conn->query("UPDATE datms_notification SET act1 = '', act2 = '', date = '$date' WHERE affected = '".$doc_code."'") or die(mysqli_error($conn));
+                                            if($update_notif){
+                                            $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date, affected)
+                                            VALUES ('$d_act1', '0' ,'','0','Received Document','You successfully received the document','$d_off2','Active','$date','$doc_code')") or die(mysqli_error($conn));
+                                                $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                                VALUES ('$tracker', '0' ,'','0','Approved Document','Your document has been approved','$d_off2','Active','$date')") or die(mysqli_error($conn));
+                                                // Self notifier
+                                                $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                                VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Approved Document','You approved $doc_type of $doc_title','$d_off2','Active','$date')") or die(mysqli_error($conn));
+                
+                                                //notif of students              
+                                                $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                                VALUES ('', '0' ,'$doc_title','0','Approved Document','Your $doc_type is approved by $d_act2','$d_off2','Active','$date')") or die(mysqli_error($conn));   
+                                            }  
             
                                             $message = "Your $doc_type is Approved by $verified_session_firstname $verified_session_lastname from Registrar Department Present your self to the registrar bring your bestlink school id and screenshot of your request barcode to claim your template Registrar is open from Monday to Friday Excluding non-working holidays From 8am to 5pm.";
     
@@ -415,16 +427,20 @@
                                                 $conn->query("INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
                                                 VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type','Approved','$doc_desc','$d_act2','$d_off2','$date','$d_act1','$d_off1','$d_date1','Document is Approved by')") or die(mysqli_error($conn));
                 
-                                                $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                                VALUES ('$tracker', '0' ,'','0','Approved Document','Your document has been approved','$d_off2','Active','$date')") or die(mysqli_error($conn));
-                                                // Self notifier
-                                                $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                                VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Approved Document','You approved $doc_type of $doc_title','$d_off2','Active','$date')") or die(mysqli_error($conn));
-                
-                                                //notif of students              
-                                                $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                                VALUES ('', '0' ,'$doc_title','0','Approved Document','Your $doc_type is approved by $d_act2','$d_off2','Active','$date')") or die(mysqli_error($conn));   
-                
+                                                 $update_notif = $conn->query("UPDATE datms_notification SET act1 = '', act2 = '', date = '$date' WHERE affected = '".$doc_code."'") or die(mysqli_error($conn));
+                                                if($update_notif){
+                                                $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date, affected)
+                                                VALUES ('$d_act1', '0' ,'','0','Received Document','You successfully received the document','$d_off2','Active','$date','$doc_code')") or die(mysqli_error($conn));
+                                                    $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                                    VALUES ('$tracker', '0' ,'','0','Approved Document','Your document has been approved','$d_off2','Active','$date')") or die(mysqli_error($conn));
+                                                    // Self notifier
+                                                    $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                                    VALUES ('$verified_session_firstname $verified_session_lastname', '0' ,'','0','Approved Document','You approved $doc_type of $doc_title','$d_off2','Active','$date')") or die(mysqli_error($conn));
+                    
+                                                    //notif of students              
+                                                    $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                                    VALUES ('', '0' ,'$doc_title','0','Approved Document','Your $doc_type is approved by $d_act2','$d_off2','Active','$date')") or die(mysqli_error($conn));   
+                                                }  
                                                 $message = "Your $doc_type is Approved by $verified_session_firstname $verified_session_lastname from Registrar Department Present your self to the registrar bring your bestlink school id and screenshot of your request barcode to claim your template Registrar is open from Monday to Friday Excluding non-working holidays From 8am to 5pm.";
         
                                                 //email sending 

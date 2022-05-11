@@ -68,8 +68,8 @@ $db = mysqli_select_db($conn, 'sis_db');
                                     $conn->query("INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
                                     VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type','Outgoing','$doc_desc','$d_actor3','$d_off2','$date','$act1','$off1','$date1','Document is submitted to')") or die(mysqli_error($conn));
 
-                                    $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                    VALUES ('$d_actor3', '0' ,'','0','Submitted Document','You have incoming document','$d_off1','Active','$date')") or die(mysqli_error($conn));
+                                    $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date,affected)
+                                    VALUES ('$d_actor3', '0' ,'','0','Submitted Document','You have incoming document','$d_off1','Active','$date','$doc_code')") or die(mysqli_error($conn));
 
                                      //notif of students              
                                     //  $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
