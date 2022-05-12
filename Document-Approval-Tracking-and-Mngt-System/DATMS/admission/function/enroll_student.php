@@ -193,7 +193,7 @@
                                       Username: ".$student_number."<br> 
                                       Default Password: @ChangeMe01".substr($last_name,0,2)."!<br><br>
                                       if your enrollment status is Temporarily Enrolled you must sumbit first all the necessary <br>
-                                      requiremts in order to access your account.<br> 
+                                      requiremets in order to access your account.<br> 
                                       if you can already access your account we highly suggest to change your default password as soon as you<br>
                                       received this message.
                                       <br><br>
