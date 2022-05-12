@@ -283,7 +283,7 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
+                        <a href="../Internship/Internship-Administrator/index?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">INTERNSHIP ADMINISTRATOR</h5></a>
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>
@@ -293,7 +293,7 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
+                        <a href="../Internship/Internship-Coordinator/index?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">INTERNSHIP COORDINATOR</h5></a>
                           <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>

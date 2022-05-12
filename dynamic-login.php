@@ -133,8 +133,62 @@
                       //statement
                       break;
 
-                    case "Internship System":
+                    case "OJT System":
                       //statement
+                      switch($row1["role"]){
+                        case "Internship Administrator":
+                          //statement
+                          $_SESSION['session_username'] = $myusername;
+                          $_SESSION['session_url'] = "Internship/Internship-Administrator/index.id=".$_SESSION["login_key"]."";
+                          if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                              $ip = $_SERVER["HTTP_CLIENT_IP"];
+                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                              $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                            }else{
+                              $ip = $_SERVER["REMOTE_ADDR"];
+                              $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                $remarks="account has been logged in";  
+                                mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                                //used to delete ip address record for login attempts
+                                mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
+                                //calling php file for new login_key
+                                require_once "core/update_key.php";
+                                //update login key
+                                $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                                header("location: Internship/Internship-Administrator/index?id=".$_SESSION["login_key"]."");
+                                
+                            }
+                          
+                          break;
+                        case "Internship Coordinator":
+                          //statement
+                          $_SESSION['session_username'] = $myusername;
+                          $_SESSION['session_url'] = "Internship/Internship-Coordinator/index?id=".$_SESSION["login_key"]."";
+                          if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                              $ip = $_SERVER["HTTP_CLIENT_IP"];
+                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                              $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                            }else{
+                              $ip = $_SERVER["REMOTE_ADDR"];
+                              $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                $remarks="account has been logged in";  
+                                mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                                //used to delete ip address record for login attempts
+                                mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
+                                //calling php file for new login_key
+                                require_once "core/update_key.php";
+                                //update login key
+                                $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                                header("location: Internship/Internship-Coordinator/index?id=".$_SESSION["login_key"]."");
+                            }
+                          
+                          break;
+                  
+                          
+
+                                                  
+                      }
+                      
                       break;
 
                     case "Help Desk System":

@@ -78,7 +78,7 @@
                     </div>
 
                     <div class="col-12">
-                      <a href = "dynamic-login" style="float: right;">Return to Login</a>
+                      <a href = "dynamic-login" style="float: right;">Back to Login</a>
                     </div>
                     
                 

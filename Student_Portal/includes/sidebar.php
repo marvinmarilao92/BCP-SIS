@@ -1,3 +1,47 @@
+
+
+<div class="modal fade" id="basicModal" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Add Professional Qualifications</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    
+                    
+                    <form class="row g-3">
+                    <div class="col-12">
+                    <label for="inputNanme4" class="form-label">Course Title</label>
+                    <select id="inputState" class="form-select">
+                    <option selected>BSIT</option>
+                    <option>BSHRM</option>
+                    <option>BSCRIM</option>
+                    <option>BSEDUC</option>
+                    <option>BSPSY</option>
+                  </select>
+                </div>
+                
+                <div class="col-12">
+                  <label for="inputPassword4" class="form-label">Skills</label>
+                  <input type="text" class="form-control" id="inputPassword4">
+                </div>
+                <hr>
+                <div class="form-group"> 
+                    
+								    <h4>Attach your certificate ( Optional )</h4> <br>
+								    <input class="form-control" accept="application/pdf/docx" type="file" name="certificate" required=""> 
+							  </div>
+  
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
@@ -74,6 +118,63 @@
  </a>
 
   </li>
+  <li class="nav-heading">Internship</li>
+
+    
+  <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-bookmark-fill"></i><span>My Task</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="#task">
+              <i class="bi bi-journal-bookmark-fill"></i><span>Tasks</span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="announcement.php">
+              <i class="bi bi-calendar-event-fill"></i><span> My Calendar</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    
+<li class="nav-item">
+  <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+    <i class="bi bi-bookmark-fill"></i><span>Site pages</span><i class="bi bi-chevron-down ms-auto"></i>
+  </a>
+  <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">  
+  <li>
+      <a href="announcement.php">
+        <i class="bi bi-circle"></i><span> Site Announcement</span>
+      </a>
+    </li>
+
+  </ul>
+</li>
+<li class="nav-item">
+  <a class="nav-link collapsed" href="pages-contact.html">
+    <i class="bi bi-chat-right-text-fill"></i>
+    <span>Contact</span>
+  </a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link collapsed">
+    <i class="bi bi-chat-right-text-fill"></i>
+    <span data-bs-toggle="modal" data-bs-target="#basicModal">Professional Qualifications</Q></span>
+  </a>
+</li>
+
+
+
+<li class="nav-item">
+  <a class="nav-link collapsed" href="forums.php">
+    <i class="bi bi-bookmarks-fill"></i>
+    <span>Forums</span>
+  </a>
+</li>
 
 
  
