@@ -155,16 +155,7 @@
               // Attempt to execute the prepared statement
               if(mysqli_stmt_execute($stmt1)){
                   // Records created successfully. Redirect to landing page
-                   //email sending 
-                    if($gender =='Male' && $civil_status =='Single' || $civil_status =='Divorced'){
-                      $gentitle = "Mr.";
-                    }else if($gender =='Female' && $civil_status =='Single' || $civil_status =='Divorced'){
-                      $gentitle = "Ms.";
-                    }else if($gender =='Male' && $civil_status =='Married' || $civil_status =='Widowed '){
-                      $gentitle = "Mr.";
-                    }else if($gender =='Female' && $civil_status =='Married' || $civil_status =='Widowed'){
-                      $gentitle = "Mrs.";
-                    }
+                   //email sending                     
                     $db=new DB();
                     $message = "You have successfully Created an account in Bestlink College of the Philipines all the neccessary information to access your account is listed down below. Username:$student_number Default Password:@ChangeMe01".substr($last_name,0,2)."! we highly suggest to change your default password as soon as you received this message.";
                    
@@ -193,8 +184,7 @@
                            "<div class='card'>          
                              <div class='card-body'>
                                <h5 class='card-title'></h5>
-                               <p class='card-text'>This is direct message from System Admin Department<br>
-                               <br>Hello ".$gentitle." ".$last_name."
+                               <p class='card-text'>This is direct message from System Admin Department                      
                                <br><br>
                                You account is successfully registerd in Bestlink College of the Philipines all the neccessary <br>
                                information to access your account is listed down below.<br>
