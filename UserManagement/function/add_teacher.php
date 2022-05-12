@@ -140,7 +140,7 @@
                   $gentitle = "Mrs.";
                 }
                 $db=new DB();
-                $message = "You have successfully Created an account in Bestlink College of the Philipines all the neccessary information to access your account is listed down below. Username:$id_number Default Password:@ChangeMe01".substr($last_name,0,2)."! we highly suggest to change your default password as soon as you received this message.";
+                $message = "You have successfully Created an account in Bestlink College of the Philipines all the neccessary information to access your account is listed down below. Username:$userid Default Password:@ChangeMe01".substr($last_name,0,2)."! we highly suggest to change your default password as soon as you received this message.";
                
                  $sql="INSERT INTO datms_emails (acc_id,email,subject,message,status) 
                  VALUES ('$id_number','$email','Created Sucessfully','$message','Sent')" or die("<script>alert('Error');</script>");
@@ -173,7 +173,7 @@
                            You account is successfully registerd in Bestlink College of the Philipines all the neccessary <br>
                            information to access your account is listed down below.<br>
                            Account Status:".$account_status."<br>
-                           Username: ".$id_number."<br> 
+                           Username: ".$userid."<br> 
                            Default Password: @ChangeMe01".substr($last_name,0,2)."!<br><br>
                            if your Account status is Deactivated you must sumbit first all the necessary <br>
                            requiremts in order to access your account.<br> 
