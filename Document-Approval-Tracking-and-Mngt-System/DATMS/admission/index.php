@@ -550,7 +550,7 @@ include('session.php');
                   $(".civil_status").val(jsonObj['data'][0].adm_cs).change();
                   
               }else{
-                Swal.fire ("No data has been retreive","","error").then(function(){
+                Swal.fire ("No data has been retrieve","","error").then(function(){
                 document.location.reload(true)//refresh pages
                 });
               }
