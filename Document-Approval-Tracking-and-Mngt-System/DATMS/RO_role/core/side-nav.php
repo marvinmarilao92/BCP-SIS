@@ -8,7 +8,7 @@
           <li class="nav-item">
             <a href="index?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='temp'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
               <i class="ri-file-edit-line"></i>
-              <span>Template Requests &nbsp;</span>
+              <span>Form Requests &nbsp;</span>
             </a>
           </li><!-- All docs Nav -->
         <?php
