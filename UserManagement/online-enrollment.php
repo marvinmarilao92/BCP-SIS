@@ -518,7 +518,7 @@
                           <!-- third accordion button  -->
                           <a class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="pointer-events: none;"> 
                             <div class="icon">
-                              <h6 id="text3" style="color: rgb(1, 41, 112); font-weight: bold;"><i class="" id="icon3"></i>Contact Infomration</h6>
+                              <h6 id="text3" style="color: rgb(1, 41, 112); font-weight: bold;"><i class="" id="icon3"></i>Contact Information</h6>
                             </div>                   
                           </a>
                           <!-- End of button -->
