@@ -73,12 +73,12 @@ include('includes/session.php');
       <main id="main" class="main">
 
         <div class="pagetitle">
-          <h1>Document Request</h1>
+          <h1>Document Form Request</h1>
           <nav>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
               <li class="breadcrumb-item">Module</li>
-              <li class="breadcrumb-item active">Document Request</li>
+              <li class="breadcrumb-item active">Document Form Request</li>
             </ol>
           </nav>
         </div><!-- End Page Title -->
@@ -103,7 +103,7 @@ include('includes/session.php');
                   </div>
                   <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#SendModal" style="float: right; padding:20px;">
                       <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#SendModal" >
-                      Request Document
+                      Request Form 
                       </button>
                   </div> 
                 </div>
@@ -118,7 +118,7 @@ include('includes/session.php');
                           <th scope="col" WIDTH="12%">Code</th>
                           <th scope="col" style="display:none" WIDTH="12%">Student No.</th>
                           <th scope="col" style="display:none" >Porgram</th>  
-                          <th scope="col">Document</th>   
+                          <th scope="col">Form</th>   
                           <th scope="col">Date</th>    
                           <th scope="col">Status</th>                    
                           <th scope="col" WIDTH="8%">Action</th>          
@@ -280,7 +280,7 @@ include('includes/session.php');
                 <div class="modal-dialog  modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">REQUEST FOR TEMPLATE</h5>
+                          <h5 class="modal-title">REQUEST FOR DOCUMENT FORM</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form method="post" enctype="multipart/form-data">
@@ -367,7 +367,7 @@ include('includes/session.php');
                 <div class="modal-dialog modal-dialog-centered modal-l">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">TEMPLATE REQUESTED</h5>
+                      <h5 class="modal-title">DOCUMENT FORM REQUESTED</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" >
@@ -376,7 +376,7 @@ include('includes/session.php');
                           <div class="card-body" id="printcode">
                               <h5 class="card-title">Request Information</h5>
                               Requested File: <h5 id="view_filename" style="margin-left: 60px;"></h5>
-                              Reason for request: <h5 id="view_creator" style="margin-left: 60px;"></h5>
+                              Note: <h5 id="view_creator" style="margin-left: 60px;"></h5>
                               Date Requested: <h5 id="view_date" style="margin-left: 60px;"></h5>                
                               <input type="hidden" id="view_code" name="view_code" class="form-control" placeholder="Title" readonly>
                               <input type="hidden" id="view_title" name="view_title" class="form-control" placeholder="Title" readonly>

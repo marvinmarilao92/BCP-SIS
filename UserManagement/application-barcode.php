@@ -58,7 +58,7 @@
               <br>
               <h5 style="margin-top: 10px; color:black;"><solid style="font-weight: bolder;">BCP Admission</solid> confirms that the student data below applied through online admission.
               </h5>
-                <p style="margin-left: 30px;">Appliaction Details: <br>
+                <p style="margin-left: 30px;">Application Details: <br>
                       <l>
                         <ol style="margin-left: 20px;">Student Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<?php echo $verified_session_firstname . " " . $verified_session_mname . "." ." " . $verified_session_lastname ?> </ol>
                         <ol style="margin-left: 20px;">Date of Application :&nbsp;<?php echo $verified_session_date?></ol>
@@ -68,7 +68,7 @@
                     <div class="col-12" style="text-align: center;">
                       <svg id="barcode"></svg>
                     </div>
-                    <p>Take a screenshot of this confiramtion slip. Show this to the admission and submit your requirements to proceed to the next step.</p>
+                    <p>Take a screenshot of this Confirmation slip. Show this to the admission and submit your requirements to proceed to the next step.</p>
               </div>
               <div class="card-footer">
                 <nav class="justify-content-center d-flex">

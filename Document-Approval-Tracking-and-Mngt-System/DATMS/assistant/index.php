@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>DATMS | Template Requests</title>
+<title>DATMS | Form Requests</title>
 <head>
 <?php  include "core/key_checker.php"; ?>
 <?php include ('core/css-links.php');//css connection?>
@@ -53,12 +53,12 @@ include('session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Template Requests</h1>
+      <h1>Form Requests</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Module</li>
-          <li class="breadcrumb-item active">Template Requests</li>
+          <li class="breadcrumb-item active">Form Requests</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -483,7 +483,7 @@ include('session.php');
   <!-- Back to top Button -->
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center" style="background-color: rgb(13, 110, 253);"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files/ Template main js file -->
+  <!-- Vendor JS Files/ Form main js file -->
   <?php include ('core/js.php');//css connection?>
 
   <!-- Create Document to Track -->
