@@ -231,15 +231,15 @@ include('session.php');
                 <canvas id="accountChart" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
                     <?php
                       require_once("include/conn.php");
-                        $sql1 ="SELECT *,count(office) as count1 FROM user_information WHERE department='DATMS' group by office;";
+                        $sql1 ="SELECT *,count(role) as count1 FROM user_information WHERE department='DATMS' group by role;";
                         $result1 = mysqli_query($conn,$sql1);                    
                         $chart_data="";
                         while ($row1 = mysqli_fetch_array($result1)) { 
                 
-                            $name1[]  = $row1['office']  ;
+                            $name1[]  = $row1['role']  ;
                             $counts1[] = $row1['count1'];
                         }
-                        $sql11 ="SELECT office FROM user_information WHERE department='DATMS' ";
+                        $sql11 ="SELECT role FROM user_information WHERE department='DATMS' ";
                         $result11 = mysqli_query($conn,$sql11);
                         $total1 = mysqli_num_rows($result11);
                         $overall1[] = $total1;
