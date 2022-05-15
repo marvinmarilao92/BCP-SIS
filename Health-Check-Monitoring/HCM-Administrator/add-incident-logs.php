@@ -10,17 +10,6 @@ include_once 'security/newsource.php';
 </head>
 
 <style>
-.form-wrapper {
-  border: solid 1px #cccccc;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
-  ;
-}
-
-textarea {
-  min-height: 100px;
-  max-height: 100px;
-  resize: none;
-}
 </style>
 
 <body>
@@ -40,8 +29,7 @@ textarea {
         </ol>
       </nav>
     </div>
-
-    <div class="form-wrapper p-3">
+    <div class="card p-4">
       <form action="resources/add_incident_reports.php" method="post" class="row g-3">
         <div class="col-12 col-md-4">
           <div class="form-floating">
@@ -106,5 +94,3 @@ textarea {
       </form><!-- End No Labels Form -->
     </div>
   </main>
-
-  <?php include 'includes/footer.php';

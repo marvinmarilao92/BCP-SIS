@@ -73,7 +73,9 @@ include_once('security/newsource.php');
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
               <?php
-              if ($verified_session_img > 0) {
+              // $result = displayProfile($verified_session_img, "imgSmall");
+              // echo $result;
+              if (file_exists('../../assets/users/' . $verified_session_img) && ($verified_session_img > 0)) {
                 echo '<img src="../../assets/users/' . $verified_session_img . '" alt="Profile" class="rounded-circle m-2 w-100 h-100">';
               } else {
                 echo '<img src="../../assets/users/person-circle.svg" alt="Profile" class="rounded-circle m-2 w-100 h-100">';
@@ -172,16 +174,19 @@ include_once('security/newsource.php');
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <?php
-                      if ($verified_session_img > 0) {
-                        echo '<img src="../../assets/users/' . $verified_session_img . '" alt="Profile" class="rounded-circle m-2 w-25 h-25">';
+                      // $result = displayProfile($verified_session_img, "imgSmall");
+                      // echo $result;
+                      if (file_exists('../../assets/users/' . $verified_session_img) && ($verified_session_img > 0)) {
+                        echo '<img src="../../assets/users/' . $verified_session_img . '" alt="Profile" class="rounded-circle m-2 w-100 h-100">';
                       } else {
-                        echo '<img src="../../assets/users/person-circle.svg" alt="Profile" class="rounded-circle m-2 w-25 h-25">';
+                        echo '<img src="../../assets/users/person-circle.svg" alt="Profile" class="rounded-circle m-2 w-100 h-100">';
                       }
                       ?>
                       <div class="col-md-8">
                         <div class="d-flex flex-row align-items-center justify-content-center">
                           <label for="upload_image"><a class="bi bi-arrow-up btn btn-primary btn-sm m-2"></a></label>
-                          <input type="file" name="crop_image" class="crop_image" accept="image/png" id="upload_image"
+                          <input type="file" name="crop_image" class="crop_image"
+                            accept="image/png image/gif, image/jpeg image/jpg image/webp" id="upload_image"
                             style="display:none;">
                           <a href="resources/profileimg_delete.php" class="btn btn-danger btn-sm m-2"
                             title="Remove my profile image"><i class="bi bi-trash"></i></a>

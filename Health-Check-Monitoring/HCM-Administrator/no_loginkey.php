@@ -1,18 +1,20 @@
 <?php
- include_once('security/newsource.php');
+include_once('security/newsource.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Super Admin</title>
+<title>HCM | Dashboard</title>
+
 <head>
-<?php include ('core/css-links.php');//css connection?>
+  <?php include('includes/head_ext.php'); ?>
+
 </head>
 
 <body>
-<?php include ('core/header.php');//Design for  Header?>
+  <?php include('includes/header.php'); ?>
 
   <main style="padding: 20px;">
-    
+
     <div class="pagetitle">
       <h1>Dashboard</h1>
       <nav>
@@ -33,34 +35,36 @@
     <section class="section dashboard">
       <div class="alert alert-danger alert-dismissible fade show " role="alert">
         <h4 class="alert-heading">You used invalid login key</h4>
-        <p>keep the url integrity to prevent the termination of the session all the the trasaction that you left before the termination of session will be forfeited.</p>
+        <p>keep the url integrity to prevent the termination of the session all the the trasaction that you left before
+          the termination of session will be forfeited.</p>
         <hr>
         <p class="mb-0">in oreder to return to your default page press the button below.</p>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       <center>
-        <a type="button" href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-outline-primary btn-lg">Continue</a>
+        <a type="button" href="index.php?id=<?php echo $_SESSION["login_key"]; ?>"
+          class="btn btn-outline-primary btn-lg">Continue</a>
       </center>
     </section>
 
   </main><!-- End #main -->
 
-    <!-- ======= Footer ======= -->
-    <footer class="footer">
-      <div class="copyright" style="margin-bottom: 30px;">
-        <center>
-          &copy;Copyright <a href="https://bcp.edu.ph/home" target="_blank " data-bs-toggle="tooltip" data-bs-placement="top" 
-          title="Access BCP Website">Bestlink College of the Philippines</a> All Rights Reserved
-        </center>                 
-      </div>
-    </footer>
-    <!-- End Footer -->
+  <!-- ======= Footer ======= -->
+  <footer class="footer">
+    <div class="copyright" style="margin-bottom: 30px;">
+      <center>
+        &copy;Copyright <a href="https://bcp.edu.ph/home" target="_blank " data-bs-toggle="tooltip"
+          data-bs-placement="top" title="Access BCP Website">Bestlink College of the Philippines</a> All Rights Reserved
+      </center>
+    </div>
+  </footer>
+  <!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files/ Template main js file -->
-  <?php include ('core/js.php');//css connection?>
-<!-- Charts -->
+  <!-- Charts -->
 
 </body>
 
