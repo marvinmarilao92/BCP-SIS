@@ -16,7 +16,7 @@ $db = mysqli_select_db($conn, 'sis_db');
             if($v_checkcode == 0){
                 echo ('failed');
             }else {
-                $conn->query("UPDATE datms_studreq SET `status`='Received By: $verified_session_firstname $verified_session_lastname',`date` = '$date' WHERE `id_number`='$id'") or die(mysqli_error($conn));
+                $conn->query("UPDATE datms_studreq SET `status`='Received and Verified By: $verified_session_firstname $verified_session_lastname',`date` = '$date' WHERE `id_number`='$id'") or die(mysqli_error($conn));
                 echo ('success');
             }
         }
