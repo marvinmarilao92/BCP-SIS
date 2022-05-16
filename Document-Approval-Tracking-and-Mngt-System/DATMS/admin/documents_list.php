@@ -413,7 +413,7 @@
                                     <div class="col-md-12" >
                                       <div class="form-floating">
                                         <input type="text" class="form-control" id="docname" name="docname" onChange="fetchDoctype(this.value);" placeholder="Your Name" autofocus>
-                                        <label for="floatingName">Account No.</label>
+                                        <label for="floatingName">Student No.</label>
                                       </div>
                                     </div>                                  
                                   <!-- Account Information -->

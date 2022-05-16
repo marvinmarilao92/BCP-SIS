@@ -114,7 +114,7 @@ include('session.php');
                   ?>
                   <tr>
                     <td data-label="Student No."><?php echo $adm_no; ?></td>
-                    <td data-label="Name" WIDTH="50%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
+                    <td data-label="Name" WIDTH="50%"><?php echo $adm_lname.', '.$adm_fname.' '.$adm_mname.'.'; ?></td>
                     <td data-label="Program"><?php echo $adm_program; ?></td>
                     <td data-label="Status"><?php echo $adm_as?></td>
                     <td data-label="Status" style="display: none;"><?php echo $date?></td>

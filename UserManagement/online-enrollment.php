@@ -444,14 +444,14 @@
                                 </div>  
                                 <div class="col-md-12">
                                   <div class="form-floating">
-                                    <input type="Date" class="form-control" name="birthdate" id="birthdate" onkeydown="return false" min="1988-12-31" max="<?php $currentYear = date("Y"); $previousYear = $currentYear-18; echo $previousYear;?>-12-31"  placeholder="birthday" Required onchange="oncollapse()">
+                                    <input type="Date" class="form-control" name="birthdate" id="birthdate" onkeydown="return false" min="1988-12-31" max="<?php $currentYear = date("Y"); $previousYear = $currentYear-12; echo $previousYear;?>-12-31"  placeholder="birthday" Required onchange="oncollapse()">
                                     <label for="floatingName">Birthdate</label>
                                   </div>
-                                  <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                  <!-- <div class="alert alert-info alert-dismissible fade show" role="alert">
                                     <i class="bi bi-info-circle me-1"></i>
                                     if you are 18 years old below just inform the admission personnel to change your birth year
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                  </div>
+                                  </div> -->
                                 </div>      
                                 <div class="text-right">                          
                                   <a class="btn btn-primary collapsed" type="button" id="next" onclick="nextFunction()" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="margin-top: 10px;">NEXT</a>           

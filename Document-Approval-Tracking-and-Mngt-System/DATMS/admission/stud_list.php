@@ -5,6 +5,7 @@ include('session.php');
 <html lang="en">
 <title>DATMS | Student List</title>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
 <?php include ('core/css-links.php');//css connection?>
 <?php  include "core/key_checker.php"; ?>
 <style>
@@ -43,6 +44,9 @@ include('session.php');
             text-align: left;
           }
         }
+        .table > :not(:first-child) {
+            border-top: 0;
+        }
       </style>
 </head>
 <body>
@@ -67,23 +71,36 @@ include('session.php');
       <div class="row">        
         <div class="col-lg-12">
           <div class="card">
-            <div class="col-lg-12">
-              <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                  <h4>Student Records</h4>
-              </div>
-              <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#AddModal" style="float: right; padding:20px;">
-              </div> 
+            <div class="col-lg-12 row justify-content-center" style="padding:10px ;">
+            <div class="col-md-1">
+              <a type="button" class="btn btn-success" href="stud_list?id=<?php echo $_SESSION["login_key"];?>">
+                Referesh
+              </a>
             </div>
-            <div class="card-body" >           
+            <div class="col-md-2">
+               <input type="text" name="From" id="From" class="form-control" placeholder="From Date (Start)"/>
+            </div>
+            <div class="col-md-2">
+              <input type="text" name="to" id="to" class="form-control" placeholder="To Date (End)" onChange="fetchRole(this.value);"/>
+            </div>
+            <div class="col-md-1">
+              <button type="button" class="btn btn-primary form-control" onclick="ExportToExcel('xlsx')" >
+                Export
+              </button>
+            </div>
+            </div>
+            <div class="card-body" id="student_table">           
                <!-- Table for Students records -->
-               <table class="row-border hover datatable table" id="StudentsTable">
+               <table class="table table-bordered" id="StudentsTable">
                 <thead>
                   <tr>
                     <th WIDTH="10%">Student No.</th>
-                    <th >Name</th>
+                    <th WIDTH="20%">Name</th>
                     <th scope="col">Program</th>                    
                     <th >Status</th>
-                    <th scope="col" WIDTH="7%">Action</th>
+                    <th scope="col">Phone No.</th>
+                    <th scope="col">Email</th>
+                    <th scope="col" WIDTH="15%">Date Enrolled</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -98,40 +115,24 @@ include('session.php');
                       $adm_lname = $rs['lastname'];        
                       $adm_mname = $rs['LEFT(middlename,1)'];
                       $adm_program = $rs['course'];
+                      $adm_contact = $rs['contact'];
+                      $adm_email = $rs['email'];
                       $date = $rs['stud_date'];
                       $adm_as = $rs['account_status'];
 
                   ?>
                   <tr>
                     <td data-label="Student No."><?php echo $adm_no; ?></td>
-                    <td data-label="Name" WIDTH="50%"><?php echo $adm_lname.', '.$adm_fname.' '.$adm_mname.'.'; ?></td>
+                    <td data-label="Name" WIDTH="20%"><?php echo $adm_lname.', '.$adm_fname.' '.$adm_mname.'.'; ?></td>
                     <td data-label="Program"><?php echo $adm_program; ?></td>
                     <td data-label="Status"><?php echo $adm_as?></td>
-                    <td data-label="Status" style="display: none;"><?php echo $date?></td>
-                    <td WIDTH="10%">      
-                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal<?php echo $adm_id;?>" title="View Info"><i class="bi bi-eye"></i></button> 
-                        <?php
-                        if($adm_as=='Temporarily Enrolled'){?>                                  
-                            <button class="btn btn-success updatebtn" title="Enroll"><i class="bi bi-check-lg"></i></button>                       
-                         <?php
-                        }elseif($adm_as=='Deactivated'){
-                          ?>
-                          <!-- <button class="btn btn-success activatebtn" title="Activate"><i class="bi bi-check-lg"></i></button>  -->
-                          <?php
-                        }else{
-                          ?>
-                            <button class="btn btn-danger dropbtn" title="Drop Student"><i class="bi bi-trash-fill"></i></button> 
-                            <button class="btn btn-warning deactbtn" title="Deactivate"><i class="bi bi-x-lg"></i></button> 
-                          <?php
-                        }
-                        ?>                      
-                      </div>
-                    </td>
+                    <td data-label="No."><?php echo $adm_contact; ?></td>
+                    <td data-label="Email"><?php echo $adm_email?></td>
+                    <td data-label="Date:"><?php echo $date?></td>
                   </tr>
 
                   <?php 
-                  include 'modals/stud_modals.php';
+                  // include 'modals/stud_modals.php';
                   } ?>
                   
                 </tbody>
@@ -149,98 +150,6 @@ include('session.php');
 
   </main><!-- End #main -->
 
-   <!-- Edit Students Modal -->
-   <div class="modal fade" id="UpdateModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">UPDATE STUDENT STATUS</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                  <div class="card" style="margin: 10px;">
-                    <div class="card-body">
-                      <h2 class="card-title">Update Student status as Officially Enrolled</h2>
-                      <h5 id="stud_num" style="text-align: end; color:black"></h5> 
-                        <!-- Fill out Form -->
-                        <div class="row g-3" >                                
-                          <input type="hidden" class="form-control" id="dt_idE" readonly>                              
-                        </div>
-                    </div>
-                  </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button class="btn btn-primary" name="save" id="save" >Save Changes</button>
-                    </div>
-                <!-- End Form -->
-            </div>
-        </div>
-      </div>
-      <!-- End Edit Students Modal-->
-
-  <!-- End of Office Modals -->
-
-  <!-- Edit Students Modal -->
-  <div class="modal fade" id="DropModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">DROP STUDENT</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                  <div class="card" style="margin: 10px;">
-                    <div class="card-body">
-                      <h5 style="color: rgb(1, 41, 135);">Are you sure you want to drop this student?<small style="color: rgb(187, 45, 59);"><br>(This transaction is Irreversible)</small></h4>
-                      
-                      <h5 id="stud_num1" style="text-align: end; color:black"></h5> 
-                        <!-- Fill out Form -->
-                        <div class="row g-3" >                                
-                          <input type="hidden" class="form-control" id="dt_idE1" readonly>                              
-                        </div>
-                    </div>
-                  </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
-                      <button class="btn btn-danger" name="drop" id="drop" >YES</button>
-                    </div>
-                <!-- End Form -->
-            </div>
-        </div>
-      </div>
-      <!-- End Edit Students Modal-->
-
-  <!-- End of Office Modals -->
-
-  <!-- Edit Students Modal -->
-  <div class="modal fade" id="StopModal" tabindex="-1"> 
-        <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">INACTIVATE STUDENT</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                  <div class="card" style="margin: 10px;">
-                    <div class="card-body">
-                      <h5 style="color: rgb(1, 41, 135);">Deactivate this account?<small style="color: rgb(25, 135, 84);"><br>(You can activiate this accoun at the admission)</small></h5>
-                      
-                      <h5 id="stud_num2" style="text-align: end; color:black"></h5> 
-                        <!-- Fill out Form -->
-                        <div class="row g-3" >                                
-                          <input type="hidden" class="form-control" id="dt_idE2" readonly>                              
-                        </div>
-                    </div>
-                  </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
-                      <button class="btn btn-primary" name="deact" id="deact" >YES</button>
-                    </div>
-                <!-- End Form -->
-            </div>
-        </div>
-      </div>
-      <!-- End Edit Students Modal-->
-
-  <!-- End of Office Modals -->
-  
   <!-- ======= Footer ======= -->
     <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
@@ -250,14 +159,29 @@ include('session.php');
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
-
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
    <!-- JS Scripts -->
    <script> 
-     
+     //excel
+     var utc = new Date().toJSON().slice(0,10).replace(/-/g,'-');
+     function ExportToExcel(type, fn, dl) {
+        var elt = document.getElementById('StudentsTable');
+        var wb = XLSX.utils.table_to_book(elt, { sheet: "Students Info" });
+        return dl ?
+            XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+            XLSX.writeFile(wb, fn || ('Student_Reports('+utc+').'+ (type || 'xlsx')));
+        }
      // this script will execute as soon a the website runs
      $(document).ready(function () {
-
-
+     
+          $.datepicker.setDefaults({
+                dateFormat: 'yy-mm-dd'
+            });
+            $(function(){
+                $("#From").datepicker();
+                $("#to").datepicker();
+            });
            // Enroll modal calling
            $('#StudentsTable').on('click','.updatebtn', function () {
 
@@ -438,6 +362,28 @@ include('session.php');
 
 
        });
+
+       function fetchRole(id){
+        var From = $('#From').val();
+            // var to = $('#to').val();
+            if(From != '' && to != '')
+            {
+                $.ajax({
+                    url:"function/fetch_stud.php",
+                    method:"POST",
+                    data:{From:From, to:id},
+                    success:function(data)
+                    {
+                        $('#student_table').html(data);
+                        $('#student_table').append(data.htmlresponse);
+                    }
+                });
+            }
+            else
+            {
+                alert("Please Select the Date");
+            }
+        }
 
  </script>
 

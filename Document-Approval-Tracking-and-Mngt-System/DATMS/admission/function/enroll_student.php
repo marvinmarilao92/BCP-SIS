@@ -197,6 +197,8 @@
                                       if you can already access your account we highly suggest to change your default password as soon as you<br>
                                       received this message.
                                       <br><br>
+                                      Access BCP Website: <a href='https://sis-bcp.com/'>Bestlink College of the Philippines</a>
+                                      <br><br>
                                       This email is sent from an account we use for sending messages only. So if<br>
                                       you want to contact us, don't reply to this email-we won't get your response.<br>
                                       Instead, Go to Registrar office to inquire.<br>
