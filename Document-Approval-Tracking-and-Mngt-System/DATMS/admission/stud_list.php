@@ -91,7 +91,7 @@ include('session.php');
             </div>
             <div class="card-body" id="student_table">           
                <!-- Table for Students records -->
-               <table class="table table-bordered" id="StudentsTable">
+               <table class="table datatable" id="StudentsTable">
                 <thead>
                   <tr>
                     <th WIDTH="10%">Student No.</th>
