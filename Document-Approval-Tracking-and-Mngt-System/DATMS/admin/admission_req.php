@@ -100,7 +100,7 @@ include('session.php');
                 <tbody>
                   <?php
                     require_once("include/conn.php");
-                    $student_id = trim($_GET["id"]);
+                    // $student_id = trim($_GET["id"]);
                     $query="SELECT *,LEFT(middlename,1) FROM student_information ORDER BY stud_date DESC ";
                     $result=mysqli_query($conn,$query);
                     while($rs=mysqli_fetch_array($result)){
@@ -137,7 +137,7 @@ include('session.php');
                             mysqli_free_result($result1);
                           }
                         }
-                    ?>
+                    ?>              
                     <td data-label="Status" style="display: none;"><?php echo $id?></td>   
                         <?php
                         if($stat2=='Onhold'){?>
@@ -176,7 +176,7 @@ include('session.php');
       <!-- Edit Students Modal -->
       <div class="modal fade" id="RecievedModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
+              <form class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Received Requirements</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -192,9 +192,36 @@ include('session.php');
                       echo "Date: ".$date;?></h6> 
                         <!-- Fill out Form -->
                         <div class="row g-3" >                                
-                          <input type="hidden" class="form-control" id="dt_idE" readonly>                              
+                          <input type="hidden" class="form-control" name="dt_idE" id="dt_idE" readonly>                              
                         </div>
-                      
+                        <br>
+                        <h6 style="color:black"> Requirements: </h6> 
+                        <?php 
+                            // $adm_no = mysqli_real_escape_string($link,trim($_POST["dt_idE"]));
+                          $requirments ='';
+                            $sql1 = " SELECT * FROM datms_studreq WHERE id_number = " . $adm_no . "";
+                            if($result1 = mysqli_query($link, $sql1)){
+                              if(mysqli_num_rows($result1) > 0){
+                                while($row1 = mysqli_fetch_array($result1)){
+                                  $id = $row1["id"];                    
+                                  $stat2 = $row1["status"];
+                                  // $adm_DP = $row1['date'];
+                                  $requirments .='<td  WIDTH="40%">
+                                  <div class="form-check">                      
+                                    <input class="form-check-input " type="checkbox" id="req_item"  value="'.$row1["req"].'" required>
+                                    <label class="form-check-label" for="gridCheck1">
+                                    '.$row1["req"].'
+                                    </label>
+                                  </div>
+                                  </td>';
+                                                                    
+                                }
+                                echo $requirments;   
+                                // Free result set
+                                mysqli_free_result($result1);
+                              }
+                            }
+                        ?>
                     </div>
                   </div>
                     <div class="modal-footer">
@@ -202,7 +229,7 @@ include('session.php');
                       <button class="btn btn-primary" name="save" id="received" >Yes</button>
                     </div>
                 <!-- End Form -->
-            </div>
+            </form>
         </div>
       </div>
       <!-- End Edit Students Modal-->
@@ -236,15 +263,18 @@ include('session.php');
                     var data = $tr.children("td").map(function () {
                         return $(this).text();
                     }).get();
-
+                    var stud_id = data[0];
                     console.log(data);     
                     $('#stud_num').text("Submitted by: "+data[1]);   
-                        $('#dt_idE').val(data[0]);
+                    $('#dt_idE').val(data[0]);
+                    
+         
                   });
               // End of Received modal calling 
 
-              // Received function
+              // Received function       
               $('#received').click(function(d){ 
+                // var x = document.getElementById("myCheck").required;
                     d.preventDefault();
                       if($('#dt_idE').val()!=""){
                         $.post("function/admission_received.php", {
