@@ -113,7 +113,7 @@ include('session.php');
                   ?>
                   <tr>
                     <td data-label="Application Code"><?php echo $adm_no; ?></td>
-                    <td data-label="Name" WIDTH="50%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
+                    <td data-label="Name" WIDTH="50%"><?php echo $adm_lname.', '.$adm_fname.' '.$adm_mname.'.'; ?></td>
                     <td data-label="Program"><?php echo $adm_program; ?></td>
                     <td data-label="Status"><?php 
                     if($adm_as=='Paid'){
