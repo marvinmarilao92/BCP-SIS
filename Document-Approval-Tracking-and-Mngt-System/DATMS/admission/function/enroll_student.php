@@ -31,7 +31,7 @@
     $current_year = date("y");
     // Processing form data when form is submitted
     if(isset($_POST['Tfname'])&&isset($_POST['Tlname'])&&(isset($_POST['Tmname'])||!isset($_POST['Tmname']))){
-      
+      $std_no = mysqli_real_escape_string($link,trim($_POST["TstudNo"]));
       //agun implementation for student number
       $sqll = "SELECT id FROM student_information ORDER BY id DESC Limit 1";
       if($resultt = mysqli_query($link, $sqll)){
@@ -66,18 +66,20 @@
               $student_number = "" . $current_year . "01" . $new_id;
             }
             else if ($roww['id'] == 9999){
-              $student_number = "" . $current_year . "010000";
+              // $student_number = "" . $current_year . "010000";
+              $student_number = $std_no;
             }
             else if ($roww['id'] < 99999){
-              $new_id = $roww['id'] + 1;
-              $student_number = "" . $current_year . "0" . $new_id;
+              // $new_id = $roww['id'] + 1;
+              // $student_number = "" . $current_year . "0" . $new_id;
+              $student_number = $std_no;
             }
             else if ($roww['id'] == 99999){
-              $student_number = "" . $current_year . "100000";
+              $student_number = $std_no;
             }
-            else if ($roww['id'] < 999999){
-              $new_id = $roww['id'] + 1;
-              $student_number = "" . $current_year . "" . $new_id;
+            else if ($roww['id'] > 999999){
+              // $new_id = $roww['id'] + 1;
+              $student_number = $std_no;
             }
           }
         }
