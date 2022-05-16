@@ -317,7 +317,7 @@ include('includes/session.php');
                                     </div>
                                   </div>  
                                   <div class="col-12">
-                                      <textarea class="form-control" style="height: 80px" placeholder="Reason of request" name="reason" id="reason" required autofocus></textarea>
+                                      <textarea class="form-control" style="height: 200px" placeholder="Reason of request" name="reason" id="reason" required autofocus></textarea>
                                   </div>        
                                 </div>
                                             
@@ -461,7 +461,7 @@ include('includes/session.php');
                         $.post("function/send_req.php", {
                           id_no:$('#acc_no').val(),
                           prog:$('#reqprog').val(),
-                          reason:$('#reason').val(),
+                          reason:$("#hiddenArea").val($("#quillArea").html()),
                           docs:$('#document').val()
                           },function(data){
                           if (data.trim() == "failed"){
