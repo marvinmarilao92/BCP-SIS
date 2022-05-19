@@ -38,18 +38,33 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="student-clearance.php">
+          <i class="bi bi-person"></i>
+          <span>Students Clearance</span>
+        </a>
+      </li><!-- End Students Clearance Nav -->
+
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="teacher-clearance.php">
+          <i class="bi bi-person"></i>
+          <span>Teachers Clearance</span>
+        </a>
+      </li><!-- End Teachers Clearance Nav -->
+
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="student-clearance-status.php">
           <i class="bi bi-person"></i>
           <span>Students Clearance Status</span>
         </a>
-      </li><!-- End Students Clearance Status Nav -->
+      </li>End Students Clearance Status Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="teacher-clearance-status.php">
           <i class="bi bi-person"></i>
           <span>Teachers Clearance Status</span>
         </a>
-      </li><!-- End Teachers Clearance Status Nav -->
+      </li>End Teachers Clearance Status Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="clearance-departments.php">
