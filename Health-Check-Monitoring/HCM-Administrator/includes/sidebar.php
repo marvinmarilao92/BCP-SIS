@@ -58,20 +58,11 @@
            </a>
          </li>
 
-         <li>
-           <a href="monitoring.php?id=<?php echo $_SESSION['login_key']; ?>" class="
-           
-           <?php if ('monitoring' == $page) {
-              echo 'active';
-            } ?>">
-             <i class="bi bi-circle"></i><span>Monitoring</span>
-           </a>
-         </li>
 
          <li>
-           <a href="#?id=<?php echo $_SESSION['login_key']; ?>" class="
+           <a href="contact-tracing.php?id=<?php echo $_SESSION['login_key']; ?>" class="
            
-           <?php if ('equipments' == $page) {
+           <?php if ('contact-tracing' == $page) {
               echo 'active';
             } ?>">
              <i class="bi bi-circle"></i><span>Contact Tracing</span>
@@ -80,17 +71,6 @@
        </ul>
      </li>
 
-     <li class="nav-item">
-       <a href="add-incident-logs.php?id=<?php echo $_SESSION['login_key']; ?>" class="
-       <?php if ('log' == $page) {
-          echo 'nav-link';
-        } else {
-          echo 'nav-link collapsed';
-        } ?>">
-         <i class="bi bi-file-text"></i>
-         <span>Log</span>
-       </a>
-     </li>
 
      <li class="nav-item">
        <a class="nav-link collapsed" data-bs-target="#inventory-nav" data-bs-toggle="collapse" href="#">
