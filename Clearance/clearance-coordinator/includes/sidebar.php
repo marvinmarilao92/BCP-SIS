@@ -2,13 +2,13 @@
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-    <!-- Adding return nav item for super admin -->
-    <?php 
+         <!-- Adding return nav item for super admin -->
+     <?php 
           $output = '';
           $key = $_SESSION["login_key"];
           if(isset($verified_session_department) && ($verified_session_username)){
-            switch($verified_session_role){
-              case "SuperAdmin":
+            switch($verified_session_department){
+              case "SuperUser":
                 //statement
                 $output .= '
                 <li class="nav-item" >
