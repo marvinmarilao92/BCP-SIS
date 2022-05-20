@@ -115,7 +115,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                       if($stmt1 = mysqli_prepare($link, $sql)){
                         // Bind variables to the prepared statement as parameters
-                        $action = "Start new clearance for teacgers named: '" . $semester . " SY: " . $school_year . "'";
+                        $action = "Start new clearance for teachers named: '" . $semester . " SY: " . $school_year . "'";
                         $date = date('Y-m-d H:i:s');
                         mysqli_stmt_bind_param($stmt1, "ssss", $verified_session_username, $action, $date, $verified_session_role);
 
