@@ -45,15 +45,17 @@ include ("includes/sidebar.php");
                                         echo "<th scope='col'>ID Number</th>";
                                         echo "<th scope='col'>Full Name</th>";
                                         echo "<th scope='col'>Course</th>";
+                                        echo "<th scope='col'>Section</th>";
                                         echo "<th scope='col'>Action</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . $row['id_number'] . "</td>";
-                                        echo "<td>" . $row['firstname'] . " " . $row['lastname'] . "</td>";
+                                        echo "<td style='width:10%;'>" . $row['id_number'] . "</td>";
+                                        echo "<td style='width:30%;'>" . $row['firstname'] . " " . $row['lastname'] . "</td>";
                                         echo "<td>" . $row['course'] . "</td>";
+                                        echo "<td>" . $row['section'] . "</td>";
                                         echo "<td>";
                                         echo '<a href="teacher-clearance-status-view.php?id='.$row['id_number'].'&name='.$row['firstname'].' '.$row['lastname'].'" target="" class="m-1 btn btn-primary" title="View Clearance" data-toggle="tooltip"><span class="bi bi-info-lg"></span></a>';
                                         echo "</td>";
@@ -73,7 +75,8 @@ include ("includes/sidebar.php");
                     mysqli_close($link);
                     ?>
               <div class="float-end">
-                <a href="reset-clearance-teacher.php"><button type="button" class="btn btn-danger">Reset Clearance of Teachers</button></a>
+                <a href="previous-clearance-teacher.php"><button type="button" class="btn btn-info">View Previous Version</button></a>
+                <a href="reset-clearance-teacher.php"><button type="button" class="btn btn-danger">Reset Clearance of teachers</button></a>
               </div>
             </div>
           </div>
