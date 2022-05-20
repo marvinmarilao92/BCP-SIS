@@ -1,5 +1,5 @@
 <?php
-  include 'admin-security-code.php';
+  include 'Config.php';
   session_start();
   if(isset($_SESSION['session_username'])){
     $user_id_checker = $_SESSION['session_username'];
@@ -48,4 +48,3 @@
     header("location:../../index.php");
     die();
   }
-?>

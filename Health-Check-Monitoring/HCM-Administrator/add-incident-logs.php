@@ -24,7 +24,7 @@ textarea {
 </style>
 
 <body>
-  <?php $page = 'log'; $nav = 'incident-logs'; ?>
+  <?php $page = 'log'; ?>
   <?php include 'includes/header.php'; ?>
   <?php include 'includes/sidebar.php'; ?>
   <main id="main" class="main">
@@ -77,15 +77,15 @@ textarea {
           <select id="prod_name" name="prod_name" class="form-select form-select-lg">
             <option value="" selected="selected" disabled="disabled">Item</option>
             <?php
-              $sql2 = 'SELECT * FROM ms_items ORDER BY prod_id';
-              $result2 = mysqli_query($conn, $sql2);
-                  if (mysqli_num_rows($result2) > 0) {
-                      while ($row2 = mysqli_fetch_array($result2)) {
-                          echo '<option value = "'.$row2['med_name'].'">'.$row2['med_name'].'</option>';
-                      }
-                      // Free result set
-                      mysqli_free_result($result2);
-                  }
+            $sql2 = 'SELECT * FROM hcms_items ORDER BY prod_id';
+            $result2 = mysqli_query($conn, $sql2);
+            if (mysqli_num_rows($result2) > 0) {
+              while ($row2 = mysqli_fetch_array($result2)) {
+                echo '<option value = "' . $row2['med_name'] . '">' . $row2['med_name'] . '</option>';
+              }
+              // Free result set
+              mysqli_free_result($result2);
+            }
             ?>
           </select>
         </div>

@@ -49,7 +49,7 @@
                       } else { ?>
             <input type="hidden" name="power" id="power" value="unable">
             <?php } ?>
-            <input type="hidden" name="date" id="date" value="<?php echo $result['date']; ?>">
+            <input type="hidden" name="pay_date" id="pay_date" value="<?php echo $result['create_at']; ?>">
           </div>
           <div class="col">
             <p class="text-end">From : <?php echo $newDatefrom; ?>
@@ -57,6 +57,12 @@
             <p class="text-end">To : <?php echo $newDateto; ?>
             </p>
           </div>
+          <?php $ifValidated = $db->query('SELECT * FROM ms_valid WHERE id_number = ? AND course = ?', $result['id_number'], $result['course'])->fetchArray();
+                if (isset($ifValidated['payment_date'])) { ?>
+          <input type="hidden" name="status" id="status" value="Yval">
+          <?php } else { ?>
+          <input type="hidden" name="status" id="status" value="Nval">
+          <?php } ?>
         </div>
       </div>
     </div>

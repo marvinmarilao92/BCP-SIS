@@ -299,80 +299,88 @@ function searchstdID(showStudentInformation) {
  </script>
  <script>
 function validate() {
-  var id_number = document.getElementById("id_number").value;
-  var course = document.getElementById("course").value;
-  var name = document.getElementById("name").value;
-  var date = document.getElementById("date").value;
-  var payment = document.getElementById("payment").value;
-  var power = document.getElementById("power").value;
+  var status = document.getElementById("status").value;
+  if (status == 'Nval') {
+    var id_number = document.getElementById("id_number").value;
+    var course = document.getElementById("course").value;
+    var name = document.getElementById("name").value;
+    var pay_date = document.getElementById("pay_date").value;
+    var power = document.getElementById("power").value;
 
-  var takeDataintoArray = 'id_number=' + id_number + '&course=' + course + '&name=' + name + '&date=' + date +
-    '&payment=' + payment + '&power=' + power;
-  if (id_number == '' || course == '' || name == '' || date == '' || payment == '') {
-    alert('Error Credential may not be paid')
+    var takeDataintoArray = 'id_number=' + id_number + '&course=' + course + '&name=' + name + '&pay_date=' +
+      pay_date + '&power=' + power;
+    if (id_number == '' && course == '' && name == '' && date == '' && payment == '') {
+      alert('Error Credential may not be paid')
 
-  } else if (power == "unable") {
+    } else if (power == "unable") {
 
-    Swal.fire({
-      toast: true,
-      allowOutsideClick: false,
-      icon: 'question',
-      title: 'Do you want to Assess this even if Not in Schedule?',
-      text: 'Note: This wiil write the record in advance',
-      confirmButtonText: 'Overwrite',
-      confirmButtonColor: '#f93154',
-      cancelButtonColor: '#B23CFD',
-      showCancelButton: true,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Inserting Record',
-          text: 'You have overwrite record',
-          showConfirmButton: false,
-          timer: 4000,
-          timerProgressBar: true,
-        }).then(() => {
-          $.ajax({
-            type: "POST",
-            url: 'resources/ajax/MSvalid.php',
-            data: takeDataintoArray,
-            cache: false,
-            success: function(result) {
-              Swal.fire({
-                allowOutsideClick: true,
-                toast: true,
-                icon: 'success',
-                title: 'Successfully Inserted',
-                showConfirmButton: true,
-              })
-
-            }
-          });
-        })
-      }
-    })
-
-  } else {
-    {
-      $.ajax({
-        type: "POST",
-        url: 'resources/ajax/MSvalid.php',
-        data: takeDataintoArray,
-        cache: false,
-        success: function(result) {
+      Swal.fire({
+        toast: true,
+        allowOutsideClick: false,
+        icon: 'question',
+        title: 'Do you want to Assess this even if Not in Schedule?',
+        text: 'Note: This wiil write the record in advance',
+        confirmButtonText: 'Overwrite',
+        confirmButtonColor: '#f93154',
+        cancelButtonColor: '#B23CFD',
+        showCancelButton: true,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
           Swal.fire({
-            allowOutsideClick: true,
-            toast: true,
             icon: 'success',
-            title: 'Successfully Inserted',
-            showConfirmButton: true,
-          })
+            title: 'Inserting Record',
+            text: 'You have overwrite record',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+          }).then(() => {
+            $.ajax({
+              type: "POST",
+              url: 'resources/ajax/MSvalid.php',
+              data: takeDataintoArray,
+              cache: false,
+              success: function(result) {
+                Swal.fire({
+                  allowOutsideClick: true,
+                  toast: true,
+                  icon: 'success',
+                  title: 'Successfully Inserted',
+                  showConfirmButton: true,
+                })
 
+              }
+            });
+          })
         }
-      });
+      })
+
+    } else {
+      {
+        $.ajax({
+          type: "POST",
+          url: 'resources/ajax/MSvalid.php',
+          data: takeDataintoArray,
+          cache: false,
+          success: function(result) {
+            Swal.fire({
+              allowOutsideClick: true,
+              toast: true,
+              icon: 'success',
+              title: 'Successfully Inserted',
+              showConfirmButton: true,
+            })
+
+          }
+        });
+      }
     }
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Already Validated',
+      text: "Sorry cannot validate this record",
+    })
   }
 }
  </script>
