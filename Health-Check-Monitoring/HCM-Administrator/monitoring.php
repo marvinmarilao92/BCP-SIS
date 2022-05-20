@@ -11,7 +11,8 @@ include_once('security/newsource.php');
 </head>
 
 <body>
-  <?php $page = "health-services"; ?>
+  <?php $page = "monitoring";
+  $nav = "health-monitoring"; ?>
   <?php include('includes/header.php'); ?>
   <?php include('includes/sidebar.php'); ?>
   <main id="main" class="main">
@@ -31,7 +32,10 @@ include_once('security/newsource.php');
       <div class="row">
         <div class="card p-4">
           <div class="col-lg-12">
-            <h1 class="card-title">Serach user</h1>
+            <div class="alert alert-info text-center" role="alert">
+              <h4 class="alert-heading">Monitoring</h4>
+              <p class="mb-0">Search Here to Monitor</p>
+            </div>
             <div class="col-12 col-md-4 input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text p-3" id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -44,64 +48,54 @@ include_once('security/newsource.php');
                 placeholder="ID Number" style="text-transform:capitalize;" onchange="searchthis('showResult');"
                 required>
             </div>
-
-            <!-- End No Labels Form -->
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="card">
-          <div id="showResult"></div>
-        </div>
-      </div>
-      <div class="row">
+        <div id="showResult"></div>
         <div class="card p-4">
           <div class="col-lg-12">
-
-            <h1 class="card-title">Recently Added</h1>
             <!-- Table Starts -->
-            <div class="table-responsive">
-              <table class="table table-hover datatable">
+            <table class="table table-hover datatable">
+              <?php
+              $deptStudent = "Student";
+              $query = "SELECT * FROM hcms_health_services ORDER BY id ASC";
+              $query_run = mysqli_query($conn, $query);
+              ?>
+              <!-- Table Head -->
+              <thead style="background-color:whitesmoke;">
+                <tr>
+                  <th scope="col">ID Number</th>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">Check UP</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
                 <?php
-                $deptStudent = "Student";
-                $query = "SELECT * FROM hcms_health_services ORDER BY id ASC LIMIT 7";
-                $query_run = mysqli_query($conn, $query);
+                if (mysqli_num_rows($query_run) > 0) {
+                  while ($row = mysqli_fetch_assoc($query_run)) {
                 ?>
-                <!-- Table Head -->
-                <thead style="background-color:whitesmoke;">
-                  <tr>
-                    <th scope="col">ID Number</th>
-                    <th scope="col">Full Name</th>
-                    <th scope="col">Day 1</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  if (mysqli_num_rows($query_run) > 0) {
-                    while ($row = mysqli_fetch_assoc($query_run)) {
-                  ?>
-                  <tr>
-                    <td><?php echo $row['id_number']; ?></td>
-                    <td><?php echo $row['full_n']; ?></td>
-                    <td><?php echo $row['date']; ?></td>
-                    <td>
+                <tr>
+                  <td><?php echo $row['id_number']; ?></td>
+                  <td><?php echo $row['full_n']; ?></td>
+                  <td><?php echo $row['date']; ?></td>
+                  <td>
 
-                      <a class="btn btn-secondary"><i class="ri-eye-2-line"></i></a>
-                      <a class="btn btn-warning" title="Edit"><i class="ri-edit-2-fill"></i></a>
-                      <a class="btn btn-danger" href="resources/delete.php?req_id=<?= $row['id'] ?>"><i
-                          class="ri-delete-bin-6-fill"></i></a>
-                    </td>
-                  </tr>
-                  <?php }
-                  }
-                  ?>
-                </tbody>
-              </table>
-            </div>
+                    <a class="btn btn-primary" title="Monitor"><i class="ri-eye-2-line"></i>Monitor</a>
+                    <a class="btn btn-success" title="Edit"><i class="ri-edit-2-fill"></i></a>
+                    <a class="btn btn-warning" title="view"><i class="ri-eye-fill"></i></a>
+                    <a class="btn btn-danger" title="Delete"><i class="ri-delete-bin-7-fill"></i></a>
+                  </td>
+                </tr>
+                <?php }
+                }
+                ?>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
+
+
     </section> <!-- End -->
 
 
@@ -114,7 +108,7 @@ include_once('security/newsource.php');
     if (id_number != '') {
       $.ajax({
         type: "GET",
-        url: 'ajax/searchID.php',
+        url: 'ajax/searchID2.php',
         data: takeDataintoArray,
         cache: false,
         success: function(html) {

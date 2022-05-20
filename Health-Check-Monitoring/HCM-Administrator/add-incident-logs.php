@@ -33,6 +33,13 @@ include_once 'security/newsource.php';
       <form action="resources/add_incident_reports.php" method="post" class="row g-3">
         <div class="col-12 col-md-4">
           <div class="form-floating">
+            <input type="text" class="form-control form-control-lg" name="id_number" id="id_number"
+              placeholder="ID Number" style="text-transform:capitalize;" required>
+            <label for="floatingName">ID Number</label>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="form-floating">
             <input type="text" class="form-control form-control-lg" name="fullname" id="fullname"
               placeholder="Full Name" style="text-transform:capitalize;" required>
             <label for="floatingName">Full Name</label>
@@ -40,18 +47,10 @@ include_once 'security/newsource.php';
         </div>
         <div class="col-12 col-md-4">
           <div class="form-floating">
-            <input type="text" class="form-control form-control-lg" name="id_number" id="id_number"
-              placeholder="ID Number" style="text-transform:capitalize;" required>
-            <label for="floatingName">ID Number</label>
+            <input type="text" class="form-control form-control-lg" name="specify" id="specify" placeholder="Role"
+              style="text-transform:capitalize;" required>
+            <label for="floatingName">Role</label>
           </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <select type="text" class="form-select form-select-lg" name="personnel" id="personnel">
-            <option value="" selected="selected" disabled="disabled">Select personnel</option>
-            <option value="Student">Student</option>
-            <option value="Faculty">Faculty</option>
-            <option value="Non Teaching Staff">Non Teaching Staff</option>
-          </select>
         </div>
 
         <div class="col-12 col-md-4">
@@ -93,4 +92,9 @@ include_once 'security/newsource.php';
         </div>
       </form><!-- End No Labels Form -->
     </div>
+
   </main>
+  <?php include('includes/footer.php') ?>
+</body>
+
+</html>
