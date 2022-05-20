@@ -34,19 +34,50 @@
      </li><!-- End Dashboard Nav -->
 
 
-
      <li class="nav-heading text-primary">Module</li>
 
      <li class="nav-item">
-       <a href="health-monitoring.php?id=<?php echo $_SESSION['login_key']; ?>" class="
-       <?php if ('health-services' == $page) {
-          echo 'nav-link';
-        } else {
-          echo 'nav-link collapsed';
-        } ?>">
-         <i class="bi bi-shield-plus"></i>
-         <span>Health Monitoring</span>
+       <a class="nav-link collapsed" data-bs-target="#hs-nav" data-bs-toggle="collapse" href="#">
+         <i class="bi bi-shield-plus"></i><span>Health Monitoring</span><i class="bi bi-chevron-down ms-auto"></i>
        </a>
+       <ul id="hs-nav" class="
+       
+       <?php if ('health-monitoring' == $nav) {
+          echo 'nav-content collapse show';
+        } else {
+          echo 'nav-content collapse';
+        } ?> " data-bs-parent="#sidebar-nav">
+
+         <li>
+           <a href="check-up.php?id=<?php echo $_SESSION['login_key']; ?>" class="
+           
+           <?php if ('check-up' == $page) {
+              echo 'active';
+            } ?>">
+             <i class="bi bi-circle"></i><span>Check-up</span>
+           </a>
+         </li>
+
+         <li>
+           <a href="monitoring.php?id=<?php echo $_SESSION['login_key']; ?>" class="
+           
+           <?php if ('monitoring' == $page) {
+              echo 'active';
+            } ?>">
+             <i class="bi bi-circle"></i><span>Monitoring</span>
+           </a>
+         </li>
+
+         <li>
+           <a href="#?id=<?php echo $_SESSION['login_key']; ?>" class="
+           
+           <?php if ('equipments' == $page) {
+              echo 'active';
+            } ?>">
+             <i class="bi bi-circle"></i><span>Contact Tracing</span>
+           </a>
+         </li>
+       </ul>
      </li>
 
      <li class="nav-item">

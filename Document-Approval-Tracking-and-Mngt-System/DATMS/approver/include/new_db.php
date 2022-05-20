@@ -15,7 +15,7 @@ class DB{
            die('Database error');
       }
    }
-}//
+}
 
 // local config
 //  class DB{

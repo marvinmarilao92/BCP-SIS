@@ -161,10 +161,10 @@
           <?php
           // $result = displayProfile($verified_session_img, "imgSmall");
           // echo $result;
-          if ($verified_session_img > 0) {
-            echo '<img src="../../assets/users/' . $verified_session_img . '" alt="Profile" class="rounded-circle m-2 w-25 h-25">';
+          if (file_exists('../../assets/users/' . $verified_session_img) && ($verified_session_img > 0)) {
+            echo '<img src="../../assets/users/' . $verified_session_img . '" alt="Profile" class="rounded-circle m-2 w-100 h-100">';
           } else {
-            echo '<img src="../../assets/users/person-circle.svg" alt="Profile" class="rounded-circle m-2 w-25 h-25">';
+            echo '<img src="../../assets/users/person-circle.svg" alt="Profile" class="rounded-circle m-2 w-100 h-100">';
           }
           ?>
           <!-- class="rounded-circle" -->

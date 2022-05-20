@@ -21,7 +21,9 @@
             }
     
     if(isset($verified_session_department) && (($verified_session_department == 'Clearance System')||($verified_session_department == 'SuperUser') )){
-        
+        if($verified_session_department == 'SuperUser'){
+          $verified_session_role = $_SESSION['session_temp_role'];
+        }
     }else{
         header("location:../../login.php");
         die();
