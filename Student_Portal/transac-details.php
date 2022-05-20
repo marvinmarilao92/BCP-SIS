@@ -74,185 +74,89 @@ include('includes/session.php');
       <main id="main" class="main">
 
         <div class="pagetitle">
-          <h1>Documents</h1>
+          <h1>Transaction History</h1>
           <nav>
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item">Module</li>
-              <li class="breadcrumb-item active">Documents</li>
+              <li class="breadcrumb-item"><a href="CASHIER/..">Home</a></li>
+              <li class="breadcrumb-item">Transaction</li>
+              <li class="breadcrumb-item active">History</li>
             </ol>
           </nav>
         </div><!-- End Page Title -->
-        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-          <h4 class="alert-heading">READ CAREFULLY</h4>
-          <p>
-            You may use the service and the contents contained in the Services solely for your own individual non-commercial and informational purpose
-            only. Any other use, including for any commercial purposes, is strictly prohibited without our express prior witten or verbal consent.
-          </p>
-          <hr>
-          <p class="mb-0">© Copyright Bestlink College of the Philippines. All Rights Reserved.</p>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <div class="">
+
+        <section class="section">
+          <div class="row">
+            <div class="col-lg-12">
+            
+        
+                <div class="card-body">
+                  
+                  <p></p>
+
+                  <!-- Table with stripped rows -->
+                  
+                  <!-- End Table with stripped rows -->
+
+                </div>
+              
+
+            </div>
+          </div>
+        </section>
         <section class="section">
           <div class="row">        
             <div class="col-lg-12">
               <div class="card">
                 <div class="col-lg-12">
                   <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                      <h4>Document List</h4>
+                      <h4>Personal Payment</h4>
                   </div>
                 </div>
                 <div class="card-body">           
                   <!-- Table for Document List records -->
-                  <form method="POST">
-                    <table class="table table-hover datatable" id="DocuTable">
-                    <thead>
-                      <tr>
-                        <th WIDTH="8%">Duration</th>
-                        <th scope="col">DocCode</th>
-                        <th scope="col" >Requested By</th>
-                        <!-- <th scope="col">Filesize</th>    -->
-                        <th scope="col">Document</th>   
-                        <th scope="col">Tracking Date</th>    
-                        <th scope="col">Current Actor</th>    
-                        <th scope="col">Current Status</th>  
-                        <!-- <th scope="col">Downloads</th>    -->
-                        <th scope="col" WIDTH="5%">Action</th>          
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                        require_once("includes/conn.php");
-                        $query="SELECT * FROM datms_documents WHERE `doc_title`='$verified_session_username' ORDER BY doc_date1 DESC ";
-                        $result=mysqli_query($conn,$query);
-                        while($rs=mysqli_fetch_array($result)){
-                          $docId =$rs['doc_id']; $docCode = $rs['doc_code']; $docTitle = $rs['doc_title'];      
-                          $docName =$rs['doc_name']; $docSize = $rs['doc_size']; $docDl = $rs['doc_dl']; 
-                          $docType =$rs['doc_type']; $docStat = $rs['doc_status']; $docDesc = $rs['doc_desc'];   
-                          $docAct1 =$rs['doc_actor1']; $docOff1 = $rs['doc_off1']; $docDate1 = $rs['doc_date1']; 
-                          $docAct2 =$rs['doc_actor2']; $docOff2 = $rs['doc_off2']; $docDate2 = $rs['doc_date2']; 
-                          $docAct3 =$rs['doc_actor3']; $docOff3 = $rs['doc_off3']; $docDate3 = $rs['doc_date3'];  
-                          $docRemarks = $rs['doc_remarks'];  
-                      ?>
-                      <tr>
-                        <td style="display:none"><?php echo $docId?></td>
-                        <td ><?php
-                        date_default_timezone_set("asia/manila");
-                        $today = date("Y-m-d",strtotime("+0 HOURS"));
-                        $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
-                        $result_2 = mysqli_query($conn, $query_2);
-                        $count1 = mysqli_num_rows($result_2);
-
-                        $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
-                        $d1 = $docDate1;
-                        $today = date("Y-m-d",strtotime("+0 HOURS"));
-                        $d2 = $date;
-                        // Declare and define two dates
-                        $date1 = strtotime("$d1");
-                        $date2 = strtotime("$d2");
-
-                        // Formulate the Difference between two dates
-                        $diff = abs($date2 - $date1);
-                      
-                        // To get the year divide the resultant date into
-                        // total seconds in a year (365*60*60*24)
-                        $years = floor($diff / (365*60*60*24));
-                      
-                        // To get the month, subtract it with years and
-                        // divide the resultant date into
-                        // total seconds in a month (30*60*60*24)
-                        $months = floor(($diff - $years * 365*60*60*24)
-                                                      / (30*60*60*24));
-                      
-                        // To get the day, subtract it with years and
-                        // months and divide the resultant date into
-                        // total seconds in a days (60*60*24)
-                        $days = floor(($diff - $years * 365*60*60*24 -
-                                    $months*30*60*60*24)/ (60*60*24));
-                      
-                        // To get the hour, subtract it with years,
-                        // months & seconds and divide the resultant
-                        // date into total seconds in a hours (60*60)
-                        $hours = floor(($diff - $years * 365*60*60*24
-                              - $months*30*60*60*24 - $days*60*60*24)
-                                                          / (60*60));
-                      
-                        // To get the minutes, subtract it with years,
-                        // months, seconds and hours and divide the
-                        // resultant date into total seconds i.e. 60
-                        $minutes = floor(($diff - $years * 365*60*60*24
-                                - $months*30*60*60*24 - $days*60*60*24
-                                                  - $hours*60*60)/ 60);
-                      
-                        // To get the minutes, subtract it with years,
-                        // months, seconds, hours and minutes
-                        $seconds = floor(($diff - $years * 365*60*60*24
-                                - $months*30*60*60*24 - $days*60*60*24
-                                        - $hours*60*60 - $minutes*60));
+                  <?php
+                        // Attempt select query execution
+                        $sql = "SELECT * FROM `ims_dummy_cashier_transc` 
+                        where s_id = '$verified_session_username'ORDER BY p_date DESC";
+                        if($result = mysqli_query($link, $sql)){
+                            if(mysqli_num_rows($result) > 0){
+                            echo'<table class="table datatable">';
+                            echo"<thead>";
+                              echo"<tr>";
+                                echo "<th>Ref NO.</th>";
+                                echo "<th>Payee</th>";
+                                echo "<th>Payment For</th>";
+                                echo "<th>Amount</th>";
+                                echo "<th>Date | Time</th>";
                               
-                        if($years !=0 ){
-                          // Print the result
-                          $duration = "$years"." yr,";
-                        }else if($months != 0 ){
-                          $duration = "$months"." mos";
-                        }else if($days > 1 ){
-                          $duration = "$days"." days";
-                        }else if($days == 1 ){
-                          $duration = "$days"." day";
-                        }else if($hours > 1){
-                          $duration = "$hours"." hrs";
-                        }else if($hours == 1){
-                          $duration = "$hours"." hr";
-                        }else if($minutes != 0 ){
-                          $duration = "$minutes"." min";
-                        }else if($seconds != 0 ){
-                          $duration = "$seconds"." sec";
-                        }else if($seconds == 0 ){
-                          $duration = "1"." sec";
-                        }else{
-                          $duration = "2";
-                        }
+                                echo "<th colspan='3'><center>Action</center></th>";
+                              echo "</tr>";
+                            echo "</thead>";
+                            echo "<tbody>";
+                            while($row = mysqli_fetch_array($result)){
+                              echo "<tr>";
+                                  echo "<td>" . $row['py_ref_no'] . "</td>";
 
-                        if($count1!=0){
-                          $badge='<span style=" color: green;">●</span>';
-                        }else{
-                          $badge='<span style=" color: gray;">●</span>';
-                        }
-                        echo $duration.' ago '.$badge?></td>
-                        <td data-label="Code:"><?php echo $docCode;?></td>
-                        <td data-label="Req By:" ><?php echo $docTitle; ?></td>
-                        <td data-label="Document:"><?php echo $docType; ?></td>
-                        <td data-label="Date:"><?php echo $docDate1; ?></td>
-                        <td data-label="Actor:"><?php echo $docAct2?></td>
-                        <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
-                        <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
-                        <td style="display:none"><?php echo $docDl; ?></td>
-                        <td style="display:none"><?php echo $docName?></td>
-                        <td style="display:none"><?php echo $docAct3?></td>
-                        <td style="display:none"><?php echo $docDesc?></td>
-                        <td style="display:none"><?php echo $docOff1?></td>
-                        <td style="display:none"><?php echo $docAct1?></td>
-                        <td style="display:none"><?php echo $docOff1?></td>
-                        <td style="display:none"><?php echo $docDate2?></td>                    
-                        <td style="display:none"><?php echo $docOff3?></td>
-                        <td style="display:none"><?php echo $docDate3?></td>
-                        <td style="display:none"><?php echo $docRemarks?></td>
-
-                        <td WIDTH="5%">
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
-                          <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>                         
-                          <!-- <a class="btn btn-dark " ><i class="ri ri-history-line" ></i></a> -->
-                        </div>
-                        </td>
-                      </tr>
-
-                      <?php } ?>
-                      
-                    </tbody>
-                    </table>
-                  
-                  </form>
+                                  echo "<td>" . $row['py_payee'] . "</td>";
+                                  echo "<td>" . $row['p_desc'] . "</td>";
+                                  echo "<td>" . $row['p_amount'] . "</td>";
+                                  echo "<td>" . $row['p_date'] . "</td>";
+                                  
+                                  echo "<td>";
+                                
+                              echo '<i type = button class="ri-user-fill viewbtn" data-bs-toggle="modal" data-bs-target="#paymentModal"> </i>';
+                                echo "<td>";                 
+                              echo "</td>";
+                              echo "</tr>";}
+                              echo "</tbody>";                            
+                              echo "</table>";
+                            }
+                            }else{
+                                echo "Oops! Something went wrong. Please try again later.";
+                            }
+                          // Close connection
+                          mysqli_close($link);
+                  ?>
                   <!-- End of Document table record -->
                 </div>
               </div>
@@ -447,6 +351,6 @@ include('includes/session.php');
                 });
 
           </script>
-
+        <?php require 'includes/jss.php' ?>
         </body>
   </html>
