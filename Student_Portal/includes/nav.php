@@ -31,7 +31,7 @@
               <hr class="dropdown-divider">
             </li>
 
-            <div style="overflow-y: scroll; height:370px;">
+            <div style="overflow-y: scroll; max-height:370px;">
               <li class="notification">
               </li>
             </div>

@@ -38,6 +38,53 @@ include('session.php');
       <!-- No Labels Form -->
       <div class="row g-3">
        <label class="req"></label>
+
+       <?php 
+        $sqll = "SELECT id FROM student_information ORDER BY id DESC Limit 1";
+        $resultt = mysqli_query($link, $sqll);
+        if(mysqli_num_rows($resultt) == 0){
+          ?>
+       <div class="col-md-2">
+         <div class="form-floating">
+           <input type="text" class="form-control" name="application_code" id="application_code" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="middle name" onChange="fetchStudInfo(this.value);"  Required autofocus>
+           <label for="floatingName">Application Code</label>
+         </div>
+       </div>
+
+       <div class="col-md-2" style="display:none ;">
+          <div class="form-floating">
+            <input type="text" class="form-control"  value="" name="stud_num" id="stud_num" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="Student No." >
+            <label for="floatingName">Student No.</label>
+          </div>
+        </div>
+      
+       <div class="col-md-4">
+         <div class="form-floating" >
+           <input type="text" class="form-control first_name" name="first_name" id="first_name" onkeypress="return isTextKey(event)" placeholder="first name" Required readonly>
+           <label for="floatingName">First Name</label>
+         </div>
+       </div>
+
+       <div class="col-md-4">
+         <div class="form-floating" >
+           <input type="text" class="form-control last_name" name="last_name" id="last_name" onkeypress="return isTextKey(event)" placeholder="last name" Required readonly>
+           <label for="floatingName">Last Name</label>
+         </div>
+       </div>
+       
+       <div class="col-md-2">
+         <div class="form-floating" >
+           <input type="text" class="form-control middle_name" name="middle_name" id="middle_name" maxlength="1" onkeypress="return isTextKey(event)" placeholder="middle name" Required readonly>
+           <label for="floatingName">Middle Initial (Optional)</label>
+         </div>
+       </div>
+          <?php
+         }
+       else if(mysqli_num_rows($resultt) > 0){
+          
+          while($roww = mysqli_fetch_array($resultt)){
+            if($roww['id'] >= 9999){ 
+       ?>
         <div class="col-md-2">
           <div class="form-floating">
             <input type="text" class="form-control" name="application_code" id="application_code" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="middle name" onChange="fetchStudInfo(this.value);"  Required autofocus>
@@ -45,27 +92,75 @@ include('session.php');
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-2">
+          <div class="form-floating" >
+            <input type="text" class="form-control" name="stud_num" id="stud_num" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="Student No."  Required>
+            <label for="floatingName">Student No.</label>
+          </div>
+        </div>
+
+        <div class="col-md-3">
           <div class="form-floating" >
             <input type="text" class="form-control first_name" name="first_name" id="first_name" onkeypress="return isTextKey(event)" placeholder="first name" Required readonly>
             <label for="floatingName">First Name</label>
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="form-floating" >
             <input type="text" class="form-control last_name" name="last_name" id="last_name" onkeypress="return isTextKey(event)" placeholder="last name" Required readonly>
             <label for="floatingName">Last Name</label>
           </div>
         </div>
-
+        
         <div class="col-md-2">
           <div class="form-floating" >
             <input type="text" class="form-control middle_name" name="middle_name" id="middle_name" maxlength="1" onkeypress="return isTextKey(event)" placeholder="middle name" Required readonly>
             <label for="floatingName">Middle Initial (Optional)</label>
           </div>
         </div>
+      <?php 
+            }else{
+              ?>
+                <div class="col-md-2">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="application_code" id="application_code" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="middle name" onChange="fetchStudInfo(this.value);"  Required autofocus>
+                    <label for="floatingName">Application Code</label>
+                  </div>
+                </div>
 
+                <div class="col-md-2" style="display:none ;">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="stud_num" id="stud_num" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="Student No." value="" >
+                    <label for="floatingName">Student No.</label>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-floating" >
+                    <input type="text" class="form-control first_name" name="first_name" id="first_name" onkeypress="return isTextKey(event)" placeholder="first name" Required readonly>
+                    <label for="floatingName">First Name</label>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-floating" >
+                    <input type="text" class="form-control last_name" name="last_name" id="last_name" onkeypress="return isTextKey(event)" placeholder="last name" Required readonly>
+                    <label for="floatingName">Last Name</label>
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <div class="form-floating" >
+                    <input type="text" class="form-control middle_name" name="middle_name" id="middle_name" maxlength="1" onkeypress="return isTextKey(event)" placeholder="middle name" Required readonly>
+                    <label for="floatingName">Middle Initial (Optional)</label>
+                  </div>
+                </div>
+              <?php
+            }
+          }
+        }
+      ?>
         <div class="col-md-3" id="divcourse" style="display: none;">
           <div class="form-floating">
               <select class="form-select course" name="course" id="course" aria-label="State" Required>
@@ -380,7 +475,7 @@ include('session.php');
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="form-floating">
             <select class="form-select" name="status" id="status" aria-label="State" required>
               <option selected disabled value="">Select Status</option>
@@ -393,7 +488,7 @@ include('session.php');
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="form-floating">
             <select class="form-select" name="year_level" id="year_level" aria-label="State" required>
               <option value="" selected disabled>Select Year Level</option>
@@ -406,16 +501,16 @@ include('session.php');
           </div>
         </div>
 
-        <div class="col-md-4" style="display: none;">
+        <div class="col-md-6" style="display: none;">
           <div class="form-floating">
             <input type="text" class="form-control school_year" id="school_year" name="school_year" value="<?php $currentYear = date("Y"); $previousYear = $currentYear-1; $SY = $previousYear.'-'. $currentYear; echo $SY;?>"  id="school_year" required >
             <label for="floatingName" required>School Year</label>
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4" style="display:none;">
           <div class="form-floating">
-            <input type="text" class="form-control" name="section" id="section" placeholder="Section" required>
+            <input type="hidden"  class="form-control" name="section" id="section" placeholder="Section">
             <label for="floatingName">Section</label>
           </div>
         </div>
@@ -550,7 +645,7 @@ include('session.php');
                   $(".civil_status").val(jsonObj['data'][0].adm_cs).change();
                   
               }else{
-                Swal.fire ("No data has been retreive","","error").then(function(){
+                Swal.fire ("No data has been retrieve","","error").then(function(){
                 document.location.reload(true)//refresh pages
                 });
               }
@@ -569,9 +664,10 @@ include('session.php');
       // Save function
         $('#enroll').click(function(a){ 
           a.preventDefault();
-            if($('#application_code').val()!="" &&$('#first_name').val()!="" && $('#last_name').val()!=""&& $('#course').val()!=""&& $('#year_level').val()!=""&& $('#section').val()!=""&& $('#school_year').val()!=""&& $('#address').val()!=""&& $('#email').val()!=""&& $('#contact').val()!=""&& $('#gender').val()!=""&& $('#birthdate').val()!=""&& $('#nationality').val()!=""&& $('#religion').val()!=""&& $('#civil_status').val()!=""){
+            if($('#application_code').val()!="" &&$('#first_name').val()!="" && $('#last_name').val()!=""&& $('#course').val()!=""&& $('#year_level').val()!=""&& $('#school_year').val()!=""&& $('#address').val()!=""&& $('#email').val()!=""&& $('#contact').val()!=""&& $('#gender').val()!=""&& $('#birthdate').val()!=""&& $('#nationality').val()!=""&& $('#religion').val()!=""&& $('#civil_status').val()!=""){
               $.post("function/enroll_student.php", {
                 Tcode:$('#application_code').val(),
+                TstudNo:$('#stud_num').val(),
                 Tfname:$('#first_name').val(),
                 Tlname:$('#last_name').val(),
                 Tmname:$('#middle_name').val(),

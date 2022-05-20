@@ -109,6 +109,7 @@ include('includes/session.php');
                     <table class="table table-hover datatable" id="DocuTable">
                     <thead>
                       <tr>
+                        <th WIDTH="8%">Duration</th>
                         <th scope="col">DocCode</th>
                         <th scope="col" >Requested By</th>
                         <!-- <th scope="col">Filesize</th>    -->
@@ -136,24 +137,93 @@ include('includes/session.php');
                       ?>
                       <tr>
                         <td style="display:none"><?php echo $docId?></td>
-                        <td data-label="Code:">
-                        <?php 
+                        <td ><?php
                         date_default_timezone_set("asia/manila");
                         $today = date("Y-m-d",strtotime("+0 HOURS"));
                         $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
                         $result_2 = mysqli_query($conn, $query_2);
                         $count1 = mysqli_num_rows($result_2);
 
+                        $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+                        $d1 = $docDate1;
+                        $today = date("Y-m-d",strtotime("+0 HOURS"));
+                        $d2 = $date;
+                        // Declare and define two dates
+                        $date1 = strtotime("$d1");
+                        $date2 = strtotime("$d2");
+
+                        // Formulate the Difference between two dates
+                        $diff = abs($date2 - $date1);
+                      
+                        // To get the year divide the resultant date into
+                        // total seconds in a year (365*60*60*24)
+                        $years = floor($diff / (365*60*60*24));
+                      
+                        // To get the month, subtract it with years and
+                        // divide the resultant date into
+                        // total seconds in a month (30*60*60*24)
+                        $months = floor(($diff - $years * 365*60*60*24)
+                                                      / (30*60*60*24));
+                      
+                        // To get the day, subtract it with years and
+                        // months and divide the resultant date into
+                        // total seconds in a days (60*60*24)
+                        $days = floor(($diff - $years * 365*60*60*24 -
+                                    $months*30*60*60*24)/ (60*60*24));
+                      
+                        // To get the hour, subtract it with years,
+                        // months & seconds and divide the resultant
+                        // date into total seconds in a hours (60*60)
+                        $hours = floor(($diff - $years * 365*60*60*24
+                              - $months*30*60*60*24 - $days*60*60*24)
+                                                          / (60*60));
+                      
+                        // To get the minutes, subtract it with years,
+                        // months, seconds and hours and divide the
+                        // resultant date into total seconds i.e. 60
+                        $minutes = floor(($diff - $years * 365*60*60*24
+                                - $months*30*60*60*24 - $days*60*60*24
+                                                  - $hours*60*60)/ 60);
+                      
+                        // To get the minutes, subtract it with years,
+                        // months, seconds, hours and minutes
+                        $seconds = floor(($diff - $years * 365*60*60*24
+                                - $months*30*60*60*24 - $days*60*60*24
+                                        - $hours*60*60 - $minutes*60));
+                              
+                        if($years !=0 ){
+                          // Print the result
+                          $duration = "$years"." yr,";
+                        }else if($months != 0 ){
+                          $duration = "$months"." mos";
+                        }else if($days > 1 ){
+                          $duration = "$days"." days";
+                        }else if($days == 1 ){
+                          $duration = "$days"." day";
+                        }else if($hours > 1){
+                          $duration = "$hours"." hrs";
+                        }else if($hours == 1){
+                          $duration = "$hours"." hr";
+                        }else if($minutes != 0 ){
+                          $duration = "$minutes"." min";
+                        }else if($seconds != 0 ){
+                          $duration = "$seconds"." sec";
+                        }else if($seconds == 0 ){
+                          $duration = "1"." sec";
+                        }else{
+                          $duration = "2";
+                        }
+
                         if($count1!=0){
                           $badge='<span style=" color: green;">●</span>';
                         }else{
                           $badge='<span style=" color: gray;">●</span>';
                         }
-                        echo $badge.' '.$docCode;?>
-                        </td>
+                        echo $duration.' ago '.$badge?></td>
+                        <td data-label="Code:"><?php echo $docCode;?></td>
                         <td data-label="Req By:" ><?php echo $docTitle; ?></td>
                         <td data-label="Document:"><?php echo $docType; ?></td>
-                        <td data-label="Date:"><?php echo $docDate3; ?></td>
+                        <td data-label="Date:"><?php echo $docDate1; ?></td>
                         <td data-label="Actor:"><?php echo $docAct2?></td>
                         <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
                         <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
@@ -197,75 +267,6 @@ include('includes/session.php');
 
         
           <!-- Document List Modals -->
-
-            <!-- Create Document Modal -->
-            <div class="modal fade" id="AddModal" tabindex="-1">
-                <div class="modal-dialog  modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">CREATE TRACKING DOCUMENT</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form method="post" enctype="multipart/form-data">
-                          <div class="card" style="margin: 10px;">
-                            <div class="card-body">
-                              <h2 class="card-title">Fill all neccessary info</h2>
-                                <!-- Fill out Form -->
-                                
-                                <div class="row g-3" >
-                                <input type="hidden" id="doccreator" name="doccreator" class="form-control"  value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
-                                <input type="hidden" id="docoffice" name="docoffice" class="form-control"  value="<?php echo $verified_session_office?>" readonly>        
-                                                        
-                                    <div class="col-md-12" >
-                                      <div class="form-floating">
-                                        <input type="text" class="form-control" id="docname" name="docname" onChange="fetchTracking(this.value);" placeholder="Your Name" autofocus>
-                                        <label for="floatingName">Account No.</label>
-                                      </div>
-                                    </div>                                  
-                                  <!-- Account Information -->
-                                    <div class="activity">                                         
-                                    </div>
-                                  <!-- End Account Information --> 
-
-                                  <div class="col-md-12">
-                                    <div class="form-floating">
-                                      <select class="form-select" name="doctype" id="doctype" aria-label="State" Required onchange="oncollapse()">
-                                        <option value="" selected="selected" disabled="disabled">Select DocType</option>
-                                        <?php
-                                            require_once("includes/conn.php");
-                                            $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC ";
-                                            $result=mysqli_query($conn,$query);
-                                            while($rs=mysqli_fetch_array($result)){
-                                              $dtid =$rs['dt_id'];                                    
-                                              $dtName = $rs['dt_name'];       
-                                          ?>
-                                            <option><?php echo $dtName;?></option>
-                                        <?php }?>
-                                      </select>
-                                      <label for="floatingSelect">DocType</label>
-                                    </div>
-                                  </div>  
-                                  <div class="col-md-12">                                    
-                                    <input class="form-control"  type="file" id="docfile" name="docfile" accept="application/pdf" >                                    
-                                  </div>
-
-                                  <div class="col-12">
-                                      <textarea class="form-control" style="height: 80px" placeholder="Description" name="docdesc" id="docdesc" required></textarea>
-                                  </div>        
-                                </div>
-                                            
-                            </div>
-                          </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button class="btn btn-primary" name="save">Create Document</button>
-                            </div>
-                        </form>
-                        <!-- End Form -->
-                    </div>
-                </div>     
-            </div>
-            <!-- End Create Document Modal-->
 
             <!-- View Document modal -->
             <div class="modal fade" id="ViewModal" tabindex="-1">
@@ -357,11 +358,11 @@ include('includes/session.php');
                           document.getElementById("view_code").placeholder = data[1];      
                           document.getElementById("view_title").placeholder = data[8];   
                           document.getElementById("view_filename").placeholder = data[9];   
-                          $('#view_filename').text(data[9]);
-                          $('#view_creator').text(data[3]);
-                          $('#view_date').text(data[4]);
+                          $('#view_filename').text(data[10]);
+                          $('#view_creator').text(data[4]);
+                          $('#view_date').text(data[5]);
                           // JsBarcode("#barcode", data[1]);
-                          JsBarcode("#barcode", data[1], {
+                          JsBarcode("#barcode", data[2], {
                             format: "CODE128",
                             lineColor: "#000",
                             width: 3,
@@ -382,10 +383,10 @@ include('includes/session.php');
                     }).get();
 
                     console.log(data); 
-                    if(data[18]==""){
-                      $('#remarks').text(data[11]);
+                    if(data[19]==""){
+                      $('#remarks').text(data[12]);
                     }else{
-                        $('#remarks').text(data[18]);
+                        $('#remarks').text(data[19]);
                     }
                     
                   });

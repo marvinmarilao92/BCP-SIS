@@ -1,6 +1,6 @@
 <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
-  <?php 
+  <?php
   // include "key_checker.php";?>
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.php?id=<?php echo $_SESSION["login_key"];?>" class="logo d-flex align-items-center">
@@ -50,7 +50,7 @@
             </li>
 
             <!-- Adding return nav item for super admin -->
-            <?php 
+            <?php
               $output = '';
               $key = $_SESSION["login_key"];
               if(isset($verified_session_department) && ($verified_session_username)){
@@ -63,9 +63,9 @@
                           <i class="bi bi-box-arrow-right"></i>
                           <span>Sign Out</span>
                         </a>
-                      </li>    
+                      </li>
                     ';
-                  break;  
+                  break;
 
                   default:
                   //statement
@@ -75,7 +75,7 @@
                           <i class="bi bi-box-arrow-right"></i>
                           <span>Sign Out</span>
                         </a>
-                      </li>    
+                      </li>
                     ';
                 }
                 echo $output;

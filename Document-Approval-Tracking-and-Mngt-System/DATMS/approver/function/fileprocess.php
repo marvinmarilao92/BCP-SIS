@@ -8,7 +8,7 @@
     if (isset($_POST['save'])) { // if save button on the form is clicked
           // name of the uploaded file
           date_default_timezone_set("asia/manila");
-          $time = date("Y-m-d h:i A",strtotime("+0 HOURS"));
+          $time = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
           // $doc_user = $_POST['doccreator'];
           // $doc_office = $_POST['docoffice'];
           // $doc_title = $_POST['docname'];

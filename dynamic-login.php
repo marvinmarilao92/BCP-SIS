@@ -8,7 +8,7 @@
   }
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     $time=time()-70;
     $ip_address=getIpAddr();
     // Getting total count of hits on the basis of IP
@@ -20,21 +20,21 @@
 	  if($total_count==3){
       $error = "To many failed login attempts. Please login after 60 sec.";
     }else{
-        // username and password sent from form 
+        // username and password sent from form
         date_default_timezone_set("asia/manila");
-        $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+        $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
         $myusername = mysqli_real_escape_string($link,$_POST['username']);
-        $mypassword = mysqli_real_escape_string($link,$_POST['password']); 
+        $mypassword = mysqli_real_escape_string($link,$_POST['password']);
 
           $sql=mysqli_query($link,"SELECT * FROM users WHERE id_number = '$myusername'")or die(mysqli_error($link));
-          //used to retreive login key form user table          
-          
+          //used to retreive login key form user table
+
           if($row=mysqli_fetch_array($sql)){
             $_SESSION['login_key'] = $row["login_key"];
           }else{
             $error="No login key registered";
           }
-          
+
           $count = mysqli_num_rows($sql);
           // If result matched $myusername and $mypassword, table row must be 1 row
           if($count == 0) {
@@ -50,18 +50,19 @@
               $try_time=time();
               //used to adding ip address record for login attempts
               mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
-           
+
           }else {
             //password checking
             if(password_verify($mypassword, $row["password"])){
               //Check department and role
+               $_SESSION['session_pass'] = $mypassword;
             $sql1 = "SELECT * FROM user_information WHERE id_number = '$myusername' AND account_status='Active'";
             if($result1 = mysqli_query($link, $sql1)){
               if(mysqli_num_rows($result1) > 0){
                 while($row1 = mysqli_fetch_array($result1)){
                   $id=$row1['id'];
                   $admin=$row1['id_number'];
-                  $fname=$row1['role'];     
+                  $fname=$row1['role'];
                   switch($row1["department"]){
                     case "Clearance System":
                       //statement
@@ -77,7 +78,7 @@
                             }else{
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
+                                $remarks="account has been logged in";
                                 mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -86,17 +87,17 @@
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                 header("location: Clearance/clearance-administrator/index?id=".$_SESSION["login_key"]."");
-                                
+
                             }
                           break;
-                        
+
                           default:
                           //statement
                           // Attempt select query execution
                             $sqll = "SELECT * FROM roles WHERE department_id = 4";
                             if($resultt = mysqli_query($link, $sqll)){
                                 if(mysqli_num_rows($resultt) > 0){
-                                    
+
                                         while($roww = mysqli_fetch_array($resultt)){
                                             if($row1["role"] == $roww["role"]){
                                               $_SESSION['session_username'] = $myusername;
@@ -108,7 +109,7 @@
                                                 }else{
                                                   $ip = $_SERVER["REMOTE_ADDR"];
                                                   $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                                    $remarks="account has been logged in";  
+                                                    $remarks="account has been logged in";
                                                     mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                                     //used to delete ip address record for login attempts
                                                     mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -117,9 +118,7 @@
                                                     //update login key
                                                     $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                                     header("location: Clearance/clearance-coordinator/index?id=".$_SESSION["login_key"]."");
-                                                    
                                                 }
-                                                                                           
                                             }
                                         }
                                     // Free result set
@@ -133,8 +132,58 @@
                       //statement
                       break;
 
-                    case "Internship System":
+                    case "OJT System":
                       //statement
+                      switch($row1["role"]){
+                        case "Internship Admin":
+                          //statement
+                          $_SESSION['session_username'] = $myusername;
+                          $_SESSION['session_url'] = "Internship/coordinator/index?id=".$_SESSION["login_key"]."";
+                          if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                              $ip = $_SERVER["HTTP_CLIENT_IP"];
+                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                              $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                            }else{
+                              $ip = $_SERVER["REMOTE_ADDR"];
+                              $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                $remarks="account has been logged in";
+                                mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                                //used to delete ip address record for login attempts
+                                mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
+                                //calling php file for new login_key
+                                require_once "core/update_key.php";
+                                //update login key
+                                $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                                header("location: Internship/coordinator/index?id=".$_SESSION["login_key"]."");
+
+                            }
+
+                          break;
+                        case "Internship Secretary":
+                          //statement
+                          $_SESSION['session_username'] = $myusername;
+                          $_SESSION['session_url'] = "Internship/coordinator/index?id=".$_SESSION["login_key"]."";
+                          if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                              $ip = $_SERVER["HTTP_CLIENT_IP"];
+                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                              $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                            }else{
+                              $ip = $_SERVER["REMOTE_ADDR"];
+                              $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                $remarks="account has been logged in";
+                                mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                                //used to delete ip address record for login attempts
+                                mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
+                                //calling php file for new login_key
+                                require_once "core/update_key.php";
+                                //update login key
+                                $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                                header("location: Internship/coordinator/index?id=".$_SESSION["login_key"]."");
+                            }
+
+                          break;                     
+                       
+                      }
                       break;
 
                     case "Help Desk System":
@@ -151,7 +200,7 @@
                               }else{
                                 $ip = $_SERVER["REMOTE_ADDR"];
                                 $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                  $remarks="account has been logged in";  
+                                  $remarks="account has been logged in";
                                   mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                   //used to delete ip address record for login attempts
                                   mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -160,9 +209,9 @@
                                   //update login key
                                   $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                   header("location: Help-Desk-System/Admin/index?id=".$_SESSION["login_key"]."");
-                                  
+
                               }
-                            
+
                             break;
                           case "Staff":
                             //statement
@@ -175,7 +224,7 @@
                               }else{
                                 $ip = $_SERVER["REMOTE_ADDR"];
                                 $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                  $remarks="account has been logged in";  
+                                  $remarks="account has been logged in";
                                   mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                   //used to delete ip address record for login attempts
                                   mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -185,9 +234,9 @@
                                   $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                   header("location: Help-Desk-System/Staff/index?id=".$_SESSION["login_key"]."");
                               }
-                            
+
                             break;
-                    
+
                             case "HDMS Department":
                               //statement
                               $_SESSION['session_username'] = $myusername;
@@ -199,7 +248,7 @@
                                 }else{
                                   $ip = $_SERVER["REMOTE_ADDR"];
                                   $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                  $remarks="account has been logged in";  
+                                  $remarks="account has been logged in";
                                   mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                   //used to delete ip address record for login attempts
                                   mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -208,9 +257,9 @@
                                   //update login key
                                   $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                   header("location: Help-Desk-System/Department/index?id=".$_SESSION["login_key"]."");
-                                }                            
+                                }
                               break;
-  
+
                             case "HDMS Program":
                               //statement
                               $_SESSION['session_username'] = $myusername;
@@ -222,17 +271,17 @@
                                 }else{
                                   $ip = $_SERVER["REMOTE_ADDR"];
                                   $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                  $remarks="account has been logged in";  
-                                  mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));  
+                                  $remarks="account has been logged in";
+                                  mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                   //used to delete ip address record for login attempts
                                   mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
                                   //calling php file for new login_key
                                   require_once "core/update_key.php";
                                   //update login key
                                   $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                   header("location: Help-Desk-System/Program/index?id=".$_SESSION["login_key"]."");                         
-                                }                            
-                              break;                        
+                                   header("location: Help-Desk-System/Program/index?id=".$_SESSION["login_key"]."");
+                                }
+                              break;
                         }
                         break;
                     case "DATMS":
@@ -249,7 +298,7 @@
                             }else{
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
+                                $remarks="account has been logged in";
                                 mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -258,11 +307,11 @@
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                 header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/admin/index?id=".$_SESSION["login_key"]."");
-                                
+
                             }
-                          
+
                           break;
-                        case "DATMS Approver":
+                        case "Registrar Approver":
                           //statement
                           $_SESSION['session_username'] = $myusername;
                           $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index?id=".$_SESSION["login_key"]."";
@@ -273,7 +322,7 @@
                             }else{
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
+                                $remarks="account has been logged in";
                                 mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -283,12 +332,12 @@
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                 header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/approver/index?id=".$_SESSION["login_key"]."");
                             }
-                          
+
                           break;
                         case "Assistant Registrar":
                             //statement
                             $_SESSION['session_username'] = $myusername;
-                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index?id=".$_SESSION["login_key"]."";
+                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/assistant/index?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -296,7 +345,7 @@
                             }else{
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
+                                $remarks="account has been logged in";
                                 mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -304,14 +353,14 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/secretary/index?id=".$_SESSION["login_key"]."");
+                                header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/assistant/index?id=".$_SESSION["login_key"]."");
                             }
-                            
+
                             break;
                         case "Registrar Officer":
                             //statement
                             $_SESSION['session_username'] = $myusername;
-                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index?id=".$_SESSION["login_key"]."";
+                            $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/officer/index?id=".$_SESSION["login_key"]."";
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -319,7 +368,7 @@
                             }else{
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
+                                $remarks="account has been logged in";
                                 mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -327,8 +376,8 @@
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                              header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/faculty/index?id=".$_SESSION["login_key"]."");
-                            }                          
+                              header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/officer/index?id=".$_SESSION["login_key"]."");
+                            }
                             break;
 
                           case "Cashier":
@@ -342,7 +391,7 @@
                               }else{
                                 $ip = $_SERVER["REMOTE_ADDR"];
                                 $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
+                                $remarks="account has been logged in";
                                 mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -351,7 +400,7 @@
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                 header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/cashier/index?id=".$_SESSION["login_key"]."");
-                              }                            
+                              }
                             break;
 
                           case "Admission":
@@ -365,17 +414,61 @@
                               }else{
                                 $ip = $_SERVER["REMOTE_ADDR"];
                                 $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
-                                mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));  
+                                $remarks="account has been logged in";
+                                mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
                                 //calling php file for new login_key
                                 require_once "core/update_key.php";
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                                 header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index?id=".$_SESSION["login_key"]."");                         
-                              }                            
-                            break;                        
+                                 header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/admission/index?id=".$_SESSION["login_key"]."");
+                              }
+                            break;
+                            default:
+                            $role =$row1["role"];
+                            $query="SELECT * FROM role_config WHERE `role`='$role'";
+                            $result=mysqli_query($link,$query);
+                            while($rs=mysqli_fetch_array($result)){
+                              $type = $rs['	role_type']; 
+                              if($type='RO'){
+                                //statement
+                                $_SESSION['session_username'] = $myusername;
+                                $_SESSION['session_url'] = "Document-Approval-Tracking-and-Mngt-System/DATMS/RO_role/index?id=".$_SESSION["login_key"]."";
+                                if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+                                    $ip = $_SERVER["HTTP_CLIENT_IP"];
+                                  }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+                                    $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                                  }else{
+                                    $ip = $_SERVER["REMOTE_ADDR"];
+                                    $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                                    $remarks="account has been logged in";
+                                    mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+                                    //used to delete ip address record for login attempts
+                                    mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
+                                    //calling php file for new login_key
+                                    require_once "core/update_key.php";
+                                    //update login key
+                                    $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                                    header("location: Document-Approval-Tracking-and-Mngt-System/DATMS/RO_role/index?id=".$_SESSION["login_key"]."");
+                                  }
+                              }else{
+                                //this is used to identify the numbers of attempts
+                                $total_count++;
+                                $rem_attm=3-$total_count;
+                                if($rem_attm==0){
+                                  $error="To many failed login attempts. Please login after 60 sec.";
+                                }else{
+                                  $error="Please enter valid login details. $rem_attm attempts remaining";
+                                  // $error="Your Username or Password is invalid.";
+                                }
+                                $try_time=time();
+                                mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
+                              }
+                            }
+                              
+                            break;
+
                       }
                       break;
                     case "SuperUser":
@@ -383,7 +476,7 @@
                           switch($row1["role"]){
                             case "SuperAdmin":
                               //statement
-                              $_SESSION['session_username'] = $myusername;                           
+                              $_SESSION['session_username'] = $myusername;
                               $_SESSION['session_url'] = "super_admin/index?id=".$_SESSION["login_key"]."";
                               if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                   $ip = $_SERVER["HTTP_CLIENT_IP"];
@@ -392,7 +485,7 @@
                                 }else{
                                   $ip = $_SERVER["REMOTE_ADDR"];
                                   $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                  $remarks="account has been logged in";  
+                                  $remarks="account has been logged in";
                                   mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                   //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -401,8 +494,8 @@
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                 header("location: super_admin/index?id=".$_SESSION["login_key"]."");
-                                }                              
-                              break;                                           
+                                }
+                              break;
                           }
                       break;
 
@@ -410,7 +503,7 @@
                       //statement
                       break;
                     case "Health Check Monitoring":
-                      
+
                       switch($row1["role"]){
                         case "Health Check Monitoring Administrator":
                           //statement
@@ -422,7 +515,7 @@
                             }else{
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
+                                $remarks="account has been logged in";
                                 mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -431,9 +524,9 @@
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                 header("location: Health-Check-Monitoring/HCM-Administrator/index.php?id=".$_SESSION["login_key"]."");
-                                
+
                             }
-                          
+
                           break;
                         case "Health Check Monitoring Assistant":
                           //statement
@@ -445,7 +538,7 @@
                             }else{
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
+                                $remarks="account has been logged in";
                                 mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -455,10 +548,10 @@
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                 header("location: Health-Check-Monitoring/HCM-Assistant/index.php?id=".$_SESSION["login_key"]."");
                             }
-                          
+
                           break;
-                      
-                  
+
+
                       }
                       break;
                     case "LMS Moodle":
@@ -476,7 +569,7 @@
                             }else{
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
+                                $remarks="account has been logged in";
                                 mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -485,9 +578,9 @@
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                 header("location: Medical-System/MS-Administrator/index.php?id=".$_SESSION["login_key"]."");
-                                
+
                             }
-                          
+
                           break;
                         case "Medical System Physician":
                           //statement
@@ -499,7 +592,7 @@
                             }else{
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
+                                $remarks="account has been logged in";
                                 mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -509,9 +602,9 @@
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                 header("location: Health-Check-Monitoring/HCM-Assistant/index.php?id=".$_SESSION["login_key"]."");
                             }
-                          
+
                           break;
-                    
+
                       }
                       break;
                     case "Scholarship System":
@@ -531,7 +624,7 @@
                             }else{
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
+                                $remarks="account has been logged in";
                                 mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -540,7 +633,7 @@
                                 //update login key
                                 $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                 header("location: UserManagement/index?id=".$_SESSION["login_key"]."");
-                            }                          
+                            }
                           break;
                       }
                       break;
@@ -570,7 +663,7 @@
                               }else{
                                 $ip = $_SERVER["REMOTE_ADDR"];
                                 $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                                $remarks="account has been logged in";  
+                                $remarks="account has been logged in";
                                 mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id1','$admin1','$remarks','$fname1','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                                 mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -581,7 +674,7 @@
                                 header("location: Student_Portal/index?id=".$_SESSION["login_key"]."");
                               }
 
-                      
+
                     }
                     // Free result set
                     mysqli_free_result($result2);
@@ -599,8 +692,8 @@
 
                           $id2=$row3['id'];
                           $admin2=$row3['id_number'];
-                          $fname2=$row3['firstname'].' '.$row3['lastname'];  
-        
+                          $fname2=$row3['firstname'].' '.$row3['lastname'];
+
                           if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                               $ip = $_SERVER["HTTP_CLIENT_IP"];
                             }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
@@ -608,7 +701,7 @@
                             }else{
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-                              $remarks="account has been logged in";  
+                              $remarks="account has been logged in";
                               mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id2','$admin2','$remarks','$fname2','$ip','$host','$date')")or die(mysqli_error($link));
                                 //used to delete ip address record for login attempts
                               mysqli_query($link,"delete from login_attempts where ip_address='$ip_address'");
@@ -617,7 +710,7 @@
                               //update login key
                               $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
                                 header("location: Teacher_Portal/index?id=".$_SESSION["login_key"]."");
-                            }                         
+                            }
                         }
                         // Free result set
                         mysqli_free_result($result3);
@@ -628,12 +721,12 @@
                         if($rem_attm==0){
                           $error="To many failed login attempts. Please login after 60 sec.";
                         }else{
-                          // $error="Please enter valid login details. $rem_attm attempts remaining";
-                          $error="Your Username or Password is invalid.";
+                          $error="Please enter valid login details. $rem_attm attempts remaining";
+                          // $error="Your Username or Password is invalid.";
                         }
                         $try_time=time();
                         mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
-                      
+
                       }
                     }
                   }
@@ -644,12 +737,12 @@
                     if($rem_attm==0){
                       $error="To many failed login attempts. Please login after 60 sec.";
                     }else{
-                      // $error="Please enter valid login details. $rem_attm attempts remaining";
-                      $error="Your Username or Password is invalid.";
+                      $error="Please enter valid login details. $rem_attm attempts remaining";
+                      // $error="Your Username or Password is invalid.";
                     }
                     $try_time=time();
                     mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
-                  
+
                 }
               }
             }
@@ -661,17 +754,17 @@
                 if($rem_attm==0){
                   $error="To many failed login attempts. Please login after 60 sec.";
                 }else{
-                  // $error="Please enter valid login details. $rem_attm attempts remaining";
-                  $error="Your Username or Password is invalid.";
+                  $error="Please enter valid login details. $rem_attm attempts remaining";
+                  // $error="Your Username or Password is invalid.";
                 }
                 $try_time=time();
                 mysqli_query($link,"insert into login_attempts(ip_address,attempt_time) values('$ip_address','$try_time')");
-              
+
             }
           }//end else
         }
     }
-    
+
       // Getting IP Address
       function getIpAddr(){
         if (!empty($_SERVER['HTTP_CLIENT_IP'])){
@@ -717,7 +810,7 @@
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                     <p class="text-center small">Get access with your subsystem using username & password to login</p>
                   </div>
-                 
+
                   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="row g-3">
 
                     <div class="col-12">
@@ -729,12 +822,12 @@
 
                     <div class="col-12">
                       <div class="form-floating">
-                        <input type="password" class="form-control" name="password" id="password" placeholder="first name" Required >
+                        <input type="password" class="form-control" name="password" id="password"  placeholder="first name" Required >
                         <label for="floatingName">Password</label>
                       </div>
                     </div>
-                    <!-- Error Message -->
-                    <?php 
+                    <!-- Error Message onpaste="return false;"-->
+                    <?php
                       if(!$error==""){
                         echo "<div class='alert alert-danger alert-dismissible fade show' role='alert' id='msg'>";
                         echo  $error;
@@ -755,15 +848,15 @@
                     </div>
                   </form>
 
-                    
+
                 </div>
               </div>
               <footer class="footer">
                 <div class="copyright">
                   <center>
-                    &copy;Copyright <a href="https://bcp.edu.ph/home" target="_blank " data-bs-toggle="tooltip" data-bs-placement="top" 
+                    &copy;Copyright <a href="https://bcp.edu.ph/home" target="_blank " data-bs-toggle="tooltip" data-bs-placement="top"
                     title="Access BCP Website">Bestlink College of the Philippines</a> All Rights Reserved
-                  </center>                 
+                  </center>
                 </div>
               </footer>
             </div>
@@ -784,7 +877,7 @@
     var elem = document.getElementById('some_div');
     var errormsg = document.getElementById('msg');
     var timerId = setInterval(countdown, 900);
-    
+
     function countdown() {
       if (timeLeft == -1) {
         clearTimeout(timerId);

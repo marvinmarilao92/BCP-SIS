@@ -20,7 +20,7 @@ if(isset($_POST["view"]))
   while($row = mysqli_fetch_array($result))
   {
       date_default_timezone_set("asia/manila");
-      $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+      $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
       $d1 = $row["date"];
       $doc_status = $row["subject"];
       $today = date("Y-m-d",strtotime("+0 HOURS"));
@@ -91,9 +91,9 @@ if(isset($_POST["view"]))
         $duration = "2";
       }
 
-      if ($doc_status =='Approved Document'){
+      if ($doc_status =='Approved Document' || $doc_status =='Request Approved'){
         $idenifier='<i class="bi bi-check-circle text-success"></i>';
-       }else if($doc_status =='Rejected Document'){
+       }else if($doc_status =='Rejected Document' || $doc_status =='Request Rejected'){
         $idenifier=' <i class="bi bi-x-circle text-danger"></i>';
        }else if($doc_status =='Received Document'){
         $idenifier=' <i class="bi bi-arrow-down-circle text-primary"></i>';
@@ -104,7 +104,6 @@ if(isset($_POST["view"]))
        }else{
         $idenifier=' <i class="bi bi-info-circle text-primary"></i>';
        }
-
        $query_2 = "SELECT * FROM datms_notification WHERE date = '$d1' AND date LIKE '%$today%'";
        $result_2 = mysqli_query($conn, $query_2);
        $count1 = mysqli_num_rows($result_2);
@@ -115,10 +114,14 @@ if(isset($_POST["view"]))
         $badge='<span style=" color: gray;">●</span>';
        }
        
-       if ($doc_status =='Request Update'){
-        $links='docu_template.php?id='.$_SESSION["login_key"].'';        
+       if ($doc_status =='Request Rejected'){
+        $links='docu_template?id='.$_SESSION["login_key"].'';        
+       }else if ($doc_status =='Request Approved'){
+        $links='docu_template?id='.$_SESSION["login_key"].'';        
+       }else if ($doc_status =='Request Submitted'){
+        $links='docu_template?id='.$_SESSION["login_key"].'';        
        }else{
-        $links='docu_req.php?id='.$_SESSION["login_key"].'';
+        $links='docu_req?id='.$_SESSION["login_key"].'';
        }
        
     $output .= '
@@ -127,7 +130,7 @@ if(isset($_POST["view"]))
         <a href="'.$links.'" style="color: rgb(33, 37, 41);">
         <div>
           <h4>'.$row["subject"].'</h4>
-          <p>'.$row["notif"].' <br>From: '.$row["dept"].' </p>
+          <p>'.$row["notif"].'</p>
           <p>'.$duration.' ago '.$badge.'</p>
         </div>
         </a>

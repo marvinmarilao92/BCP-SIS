@@ -6,7 +6,7 @@ $db = mysqli_select_db($conn, 'sis_db');
     if(isset($_POST['docs_id'])&&isset($_POST['docs_code'])&&isset($_POST['docs_act2']) && isset($_POST['docs_off2'])){
         // Object Connection
              date_default_timezone_set("asia/manila");
-             $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+             $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
              $id = mysqli_real_escape_string($conn,$_POST['docs_id']);
              $doc_code = mysqli_real_escape_string($conn,$_POST['docs_code']);
              $d_act2 = mysqli_real_escape_string($conn,$_POST['docs_act2']);
@@ -17,7 +17,7 @@ $db = mysqli_select_db($conn, 'sis_db');
             if($v_checkcode < 1){
                 echo ('Val30');
             }else {
-                $conn->query("UPDATE datms_documents SET doc_status = 'Pending', doc_actor1 ='$d_act2', doc_off1='$d_off2', doc_date1 ='$date'  doc_actor2 ='', doc_off2 ='', doc_date2 ='', doc_remarks ='' WHERE doc_id='$id'") or die(mysqli_error($conn));
+                $conn->query("UPDATE datms_documents SET doc_status = 'Pending', doc_actor1 ='$d_act2', doc_off1='$d_off2', doc_date1 ='$date',  doc_actor2 ='', doc_off2 ='', doc_date2 ='', doc_remarks ='' WHERE doc_id='$id'") or die(mysqli_error($conn));
                 echo ('success');
             }
         }else{

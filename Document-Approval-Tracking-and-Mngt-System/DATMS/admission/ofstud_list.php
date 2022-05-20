@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!Students html>
 <html lang="en">
-<title>ADMISSION | Offically Enrolled</title>
+<title>ADMISSION | Officially Enrolled</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 <style>
@@ -52,12 +52,12 @@ include('session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Offically Enrolled List</h1>
+      <h1>Officially Enrolled List</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Settings</li>
-          <li class="breadcrumb-item active">Offically Enrolled List</li>
+          <li class="breadcrumb-item active">Officially Enrolled List</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -81,7 +81,7 @@ include('session.php');
           <div class="card">
             <div class="col-lg-12">
               <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                  <h4>Offically Enrolled Students</h4>
+                  <h4>Officially Enrolled Students</h4>
               </div> 
             </div>
             <div class="card-body" >           
@@ -114,7 +114,7 @@ include('session.php');
                   ?>
                   <tr>
                     <td data-label="Student No."><?php echo $adm_no; ?></td>
-                    <td data-label="Name" WIDTH="50%"><?php echo $adm_fname.' '.$adm_mname.'.'.' '.$adm_lname; ?></td>
+                    <td data-label="Name" WIDTH="50%"><?php echo $adm_lname.', '.$adm_fname.' '.$adm_mname.'.'; ?></td>
                     <td data-label="Program"><?php echo $adm_program; ?></td>
                     <td data-label="Status"><?php echo $adm_as?></td>
                     <td data-label="Status" style="display: none;"><?php echo $date?></td>

@@ -82,7 +82,7 @@ include('session.php');
             <a data-bs-toggle="modal" data-bs-target="#DATMSModal"><img src="../assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
             <div class="card-body">
               <h5 class="card-title">Document Approval, Tracking and Management System</h5>
-              <p class="card-text">Subsystem Description insert here...</p>
+              <p class="card-text">Document Approval Tracking Management System is designed and developed as a solution to improve the efficiency of retrieving documents online at any time and tracking the movement of documents in and out of all the departments.</p>
             </div>
           </div>
         </div>
@@ -509,8 +509,8 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <a href="#"> <h5 class="card-title">ASSISTANT REGISTRAR</h5></a>
-                          <p class="card-text">Subsystem Description insert here...</p>
+                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/assistant/index?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">ASSISTANT REGISTRAR</h5></a>
+                          <p class="card-text">Click here to access module</p>
                         </div>
                       </div>
                     </div>
@@ -545,16 +545,6 @@ include('session.php');
                       </div>
                     </div>
                     <!-- End Insert your Module here -->                    
-                    <!-- Insert your Module here -->
-                    <div class="col-lg-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <a href="#"> <h5 class="card-title">REGISTRAR OFFICER</h5></a>
-                          <p class="card-text">Subsystem Description insert here...</p>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End Insert your Module here -->
                   </div>
                 </div>
               <div class="modal-footer">

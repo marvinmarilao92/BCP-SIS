@@ -6,7 +6,7 @@ $db = mysqli_select_db($conn, 'sis_db');
     if(isset($_POST['docs_id'])&&isset($_POST['docs_code'])&&isset($_POST['docs_act2']) && isset($_POST['docs_off2'])){
         // Object Connection
              date_default_timezone_set("asia/manila");
-             $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+             $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
              $id = mysqli_real_escape_string($conn,$_POST['docs_id']);
              $doc_code = mysqli_real_escape_string($conn,$_POST['docs_code']);
              $d_act2 = mysqli_real_escape_string($conn,$_POST['docs_act2']);
@@ -53,15 +53,21 @@ $db = mysqli_select_db($conn, 'sis_db');
                                     // query
                                     $conn->query("INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
                                     VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type','Received','$doc_desc','$d_act2','$d_off2','$date','$d_act1','$d_off1','$d_date1','Document is Recieved by')") or die(mysqli_error($conn));
-        
-                                    $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                    VALUES ('$d_act1', '0' ,'','0','Received Document','You successfully received the document','$d_off2','Active','$date')") or die(mysqli_error($conn));
 
-                                     //notif of students              
-                                     $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-                                     VALUES ('', '0' ,'$doc_title','0','Received Document','Your $doc_type is received by $verified_session_firstname $verified_session_lastname','$d_off1','Active','$date')") or die(mysqli_error($conn));   
-
+                                    $update_notif = $conn->query("UPDATE datms_notification SET act1 = '', act2 = '', date = '$date' WHERE affected = '".$doc_code."'") or die(mysqli_error($conn));
+                                    if($update_notif){
+                                    $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date, affected)
+                                    VALUES ('$d_act1', '0' ,'','0','Received Document','You successfully received the document','$d_off2','Active','$date','$doc_code')") or die(mysqli_error($conn));
+                                    $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date, affected)
+                                    VALUES ('$doc_title', '0' ,'','0','Received Document','Your $doc_type document has been received by $verified_session_firstname $verified_session_lastname','$d_off2','Active','$date','$doc_code')") or die(mysqli_error($conn));
                                     echo ('success');
+                                    }else{
+                                    echo ('failed');
+                                    }       
+                                     //notif of students              
+                                    //  $conn->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+                                    //  VALUES ('', '0' ,'$doc_title','0','Received Document','Your $doc_type is received by $verified_session_firstname $verified_session_lastname','$d_off1','Active','$date')") or die(mysqli_error($conn));   
+
                                 }
                             //end of audit trail
                             }

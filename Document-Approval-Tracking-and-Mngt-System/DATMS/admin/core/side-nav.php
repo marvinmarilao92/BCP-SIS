@@ -39,8 +39,8 @@
 
         <li class="nav-item">
           <a href="request?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='temp'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-            <i class="ri-folder-5-line"></i>
-            <span>Requirements &nbsp;</span>
+            <i class="ri-file-edit-line"></i>
+            <span>Form Requests &nbsp;</span>
           </a>
         </li><!-- All docs Nav -->
 
@@ -261,7 +261,7 @@
         <li class="nav-item">
           <a href="pages-contact?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='contact'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
             <i class="bi bi-envelope"></i>
-            <span>Contact</span>
+            <span>Direct Email</span>
           </a>
         </li><!-- End Contact Page Nav -->
 

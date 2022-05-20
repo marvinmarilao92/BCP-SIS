@@ -73,12 +73,12 @@ include('includes/session.php');
       <main id="main" class="main">
 
         <div class="pagetitle">
-          <h1>Document Request</h1>
+          <h1>Document Form Request</h1>
           <nav>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
               <li class="breadcrumb-item">Module</li>
-              <li class="breadcrumb-item active">Document Request</li>
+              <li class="breadcrumb-item active">Document Form Request</li>
             </ol>
           </nav>
         </div><!-- End Page Title -->
@@ -103,79 +103,160 @@ include('includes/session.php');
                   </div>
                   <div class="form-group col-md-1.5 btn-lg"   data-bs-toggle="modal" data-bs-target="#SendModal" style="float: right; padding:20px;">
                       <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#SendModal" >
-                      Request Document
+                      Request Form 
                       </button>
                   </div> 
                 </div>
                 <div class="card-body" >           
                   <!-- Table for Document List records -->
                   <form method="POST">
+                    
                     <table class="table table-hover datatable" id="ReqTable">
-                    <thead>
-                      <tr>
-                        <th scope="col" WIDTH="12%">Code</th>
-                        <th scope="col" style="display:none" WIDTH="12%">Student No.</th>
-                        <th scope="col" style="display:none" >Porgram</th>  
-                        <th scope="col">Document</th>   
-                        <th scope="col">Date</th>    
-                        <th scope="col">Status</th>                    
-                        <th scope="col" WIDTH="8%">Action</th>          
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                        require_once("includes/conn.php");
-                        $query="SELECT * FROM datms_tempreq WHERE `id_number`='$verified_session_username' ORDER BY date DESC ";
-                        $result=mysqli_query($conn,$query);
-                        while($rs=mysqli_fetch_array($result)){
-                          $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
-                          $doctype =$rs['docu']; $stat = $rs['status']; $remarks = $rs['remarks']; 
-                          $date =$rs['date']; $fname = $rs['file_name'];$docCode =$rs['req_code'];
-                      ?>
-                      <tr>
-                        <td style="display:none"><?php echo $docId?></td> 
-                        <td data-label="Code:">
-                        <?php 
-                        date_default_timezone_set("asia/manila");
-                        $today = date("Y-m-d",strtotime("+0 HOURS"));
-                        $query_2 = "SELECT * FROM datms_tempreq WHERE date = '$date' AND date LIKE '%$today%'";
-                        $result_2 = mysqli_query($conn, $query_2);
-                        $count1 = mysqli_num_rows($result_2);
+                      <thead>
+                        <tr>
+                          <th WIDTH="9%">Duration</th>
+                          <th scope="col" WIDTH="12%">Code</th>
+                          <th scope="col" style="display:none" WIDTH="12%">Student No.</th>
+                          <th scope="col" style="display:none" >Porgram</th>  
+                          <th scope="col">Form</th>   
+                          <th scope="col">Date</th>    
+                          <th scope="col">Status</th>                    
+                          <th scope="col" WIDTH="8%">Action</th>          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                          require_once("includes/conn.php");
+                          $query="SELECT * FROM datms_tempreq WHERE `id_number`='$verified_session_username' ORDER BY date DESC ";
+                          $result=mysqli_query($conn,$query);
+                          while($rs=mysqli_fetch_array($result)){
+                            $docId =$rs['id']; $stud_no = $rs['id_number']; $prog = $rs['program'];      
+                            $doctype =$rs['docu']; $stat = $rs['status']; $remarks = $rs['remarks']; 
+                            $req_date =$rs['date']; $fname = $rs['file_name'];$docCode =$rs['req_code'];
+                            $filename =$rs['file_name'];
+                        ?>
+                        <tr>
+                          <td style="display:none"><?php echo $docId?></td>
+                          <td ><?php
+                          date_default_timezone_set("asia/manila");
+                          $today = date("Y-m-d",strtotime("+0 HOURS"));
+                          $query_2 = "SELECT * FROM datms_tempreq WHERE date = '$req_date' AND date LIKE '%$today%'";
+                          $result_2 = mysqli_query($conn, $query_2);
+                          $count1 = mysqli_num_rows($result_2);
 
-                        if($count1!=0){
-                          $badge='<span style=" color: green;">●</span>';
-                        }else{
-                          $badge='<span style=" color: gray;">●</span>';
-                        }
-                        echo $badge.' '.$docCode;?>
-                        </td>
-                        <td data-label="No:" style="display:none"><?php echo $stud_no; ?></td>
-                        <td data-label="Prog:" style="display:none"><?php echo $prog; ?></td>                    
-                        <td data-label="Docu:"><?php echo $doctype?></td>                        
-                        <td data-label="Date:"><?php echo $date; ?></td>
-                        <td data-label="Status:">
-                        <?php 
-                        if($stat=='Approved'){
-                          echo '<span class="badge bg-success">'.$stat.'</span>';
-                        }else if($stat=='Rejected'){
-                          echo '<span class="badge bg-danger">'.$stat.'</span>';
-                        }else{
-                          echo '<span class="badge bg-primary">'.$stat.'</span>';
-                        }                 
-                        ?>  
-                        <a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>   
-                        <td style="display:none"><?php echo $fname; ?></td>               
-                        <td style="display:none"><?php echo $remarks; ?></td>             
-                        <td WIDTH="8%">
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">                            
-                          <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>                      
-                        </div>
-                        </td>
-                      </tr>
+                          $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+                          $d1 = $req_date;
+                          $today = date("Y-m-d",strtotime("+0 HOURS"));
+                          $d2 = $date;
+                          // Declare and define two dates
+                          $date1 = strtotime("$d1");
+                          $date2 = strtotime("$d2");
 
-                      <?php } ?>
-                      
-                    </tbody>
+                          // Formulate the Difference between two dates
+                          $diff = abs($date2 - $date1);
+                        
+                          // To get the year divide the resultant date into
+                          // total seconds in a year (365*60*60*24)
+                          $years = floor($diff / (365*60*60*24));
+                        
+                          // To get the month, subtract it with years and
+                          // divide the resultant date into
+                          // total seconds in a month (30*60*60*24)
+                          $months = floor(($diff - $years * 365*60*60*24)
+                                                        / (30*60*60*24));
+                        
+                          // To get the day, subtract it with years and
+                          // months and divide the resultant date into
+                          // total seconds in a days (60*60*24)
+                          $days = floor(($diff - $years * 365*60*60*24 -
+                                      $months*30*60*60*24)/ (60*60*24));
+                        
+                          // To get the hour, subtract it with years,
+                          // months & seconds and divide the resultant
+                          // date into total seconds in a hours (60*60)
+                          $hours = floor(($diff - $years * 365*60*60*24
+                                - $months*30*60*60*24 - $days*60*60*24)
+                                                            / (60*60));
+                        
+                          // To get the minutes, subtract it with years,
+                          // months, seconds and hours and divide the
+                          // resultant date into total seconds i.e. 60
+                          $minutes = floor(($diff - $years * 365*60*60*24
+                                  - $months*30*60*60*24 - $days*60*60*24
+                                                    - $hours*60*60)/ 60);
+                        
+                          // To get the minutes, subtract it with years,
+                          // months, seconds, hours and minutes
+                          $seconds = floor(($diff - $years * 365*60*60*24
+                                  - $months*30*60*60*24 - $days*60*60*24
+                                          - $hours*60*60 - $minutes*60));
+                                
+                          if($years !=0 ){
+                            // Print the result
+                            $duration = "$years"." yr,";
+                          }else if($months != 0 ){
+                            $duration = "$months"." mos";
+                          }else if($days > 1 ){
+                            $duration = "$days"." days";
+                          }else if($days == 1 ){
+                            $duration = "$days"." day";
+                          }else if($hours > 1){
+                            $duration = "$hours"." hrs";
+                          }else if($hours == 1){
+                            $duration = "$hours"." hr";
+                          }else if($minutes != 0 ){
+                            $duration = "$minutes"." min";
+                          }else if($seconds != 0 ){
+                            $duration = "$seconds"." sec";
+                          }else if($seconds == 0 ){
+                            $duration = "1"." sec";
+                          }else{
+                            $duration = "2";
+                          }
+
+                          if($count1!=0){
+                            $badge='<span style=" color: green;">●</span>';
+                          }else{
+                            $badge='<span style=" color: gray;">●</span>';
+                          }
+                          echo $duration.' ago '.$badge?></td>
+                          <td data-label="Code:"><?php echo $docCode;?></td>
+                          <td data-label="No:" style="display:none"><?php echo $stud_no; ?></td>
+                          <td data-label="Prog:" style="display:none"><?php echo $prog; ?></td>                    
+                          <td data-label="Docu:"><?php echo $doctype?></td>                        
+                          <td data-label="Date:"><?php echo $req_date; ?></td>
+                          <td data-label="Status:">
+                          <?php 
+                          if($stat=='Approved'){
+                            echo '<span class="badge bg-success">'.$stat.'</span>';
+                          }else if($stat=='Rejected'){
+                            echo '<span class="badge bg-danger">'.$stat.'</span>';
+                          }else if($stat=='Downloaded'){
+                            echo '<span class="badge bg-dark">'.$stat.'</span>';
+                          }else{
+                            echo '<span class="badge bg-primary">'.$stat.'</span>';
+                          }                 
+                          ?>  
+                          <a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>   
+                          <td style="display:none"><?php echo $fname; ?></td>               
+                          <td style="display:none"><?php echo $remarks; ?></td>             
+                          <td WIDTH="8%">
+                                             
+                          <?php 
+                          if($filename!='' && $stat=='Approved'){
+                            ?>
+                            <a class="btn btn-primary " href='function/view_template?id=<?php echo $docId; ?>' target="_blank" title="View"><i class="ri-eye-line"></i></a> 
+                            <?php
+                          }                
+                          ?>  
+                            <a  class="btn btn-secondary viewbtn"><i class="ri ri-barcode-line"></i></a>                      
+             
+                          </td>
+                        </tr>
+
+                        <?php } ?>
+                        
+                      </tbody>
                     </table>
                   
                   </form>
@@ -199,7 +280,7 @@ include('includes/session.php');
                 <div class="modal-dialog  modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">REQUEST FOR TEMPLATE</h5>
+                          <h5 class="modal-title">REQUEST FOR DOCUMENT FORM</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form method="post" enctype="multipart/form-data">
@@ -236,7 +317,7 @@ include('includes/session.php');
                                     </div>
                                   </div>  
                                   <div class="col-12">
-                                      <textarea class="form-control" style="height: 80px" placeholder="Reason of request" name="reason" id="reason" required autofocus></textarea>
+                                      <textarea class="form-control" style="height: 200px" placeholder="Reason of request" name="reason" id="reason" required autofocus></textarea>
                                   </div>        
                                 </div>
                                             
@@ -280,6 +361,43 @@ include('includes/session.php');
             </div>
             <!-- End Desc office Modal-->
 
+            
+            <!-- View Document modal -->
+            <div class="modal fade" id="ViewModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-l">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">DOCUMENT FORM REQUESTED</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" >
+                      <div class="card" style="margin: 10px;">
+                        <form method="post">
+                          <div class="card-body" id="printcode">
+                              <h5 class="card-title">Request Information</h5>
+                              Requested File: <h5 id="view_filename" style="margin-left: 60px;"></h5>
+                              Note: <h5 id="view_creator" style="margin-left: 60px;"></h5>
+                              Date Requested: <h5 id="view_date" style="margin-left: 60px;"></h5>                
+                              <input type="hidden" id="view_code" name="view_code" class="form-control" placeholder="Title" readonly>
+                              <input type="hidden" id="view_title" name="view_title" class="form-control" placeholder="Title" readonly>
+                              <input type="hidden" id="view_filename" name="view_filename" class="form-control" placeholder="Title" readonly>
+                              <!-- Barcode -->
+                              <div class="col-12" style="text-align: center;">
+                                <svg id="barcode"></svg>
+                              </div>
+                          </div>
+                          </form>
+                        </div>   
+                    </div>
+                    <div class="modal-footer">
+                      <!-- <button class="btn btn-primary" name="print" id="print" >Print</button> -->
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- End View office Modal-->
+
           <!-- End of Document List Modals -->
           
          <!-- Vendor JS Files/ Template main js file -->
@@ -307,11 +425,11 @@ include('includes/session.php');
                     document.getElementById("view_code").placeholder = data[1];      
                     document.getElementById("view_title").placeholder = data[8];   
                     document.getElementById("view_filename").placeholder = data[9];   
-                    $('#view_filename').text(data[9]);
-                    $('#view_creator').text(data[3]);
-                    $('#view_date').text(data[4]);
+                    $('#view_filename').text(data[5]);
+                    $('#view_creator').text(data[9]);
+                    $('#view_date').text(data[6]);
                     // JsBarcode("#barcode", data[1]);
-                    JsBarcode("#barcode", data[1], {
+                    JsBarcode("#barcode", data[2], {
                       format: "CODE128",
                       lineColor: "#000",
                       width: 3,
@@ -332,7 +450,7 @@ include('includes/session.php');
                       }).get();
 
                       console.log(data); 
-                      $('#remarks').text(data[8]);                     
+                      $('#remarks').text(data[9]);                     
                       
                     });            
 
@@ -343,7 +461,7 @@ include('includes/session.php');
                         $.post("function/send_req.php", {
                           id_no:$('#acc_no').val(),
                           prog:$('#reqprog').val(),
-                          reason:$('#reason').val(),
+                          reason:$("#hiddenArea").val($("#quillArea").html()),
                           docs:$('#document').val()
                           },function(data){
                           if (data.trim() == "failed"){
