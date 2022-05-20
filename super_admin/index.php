@@ -377,7 +377,7 @@ include('session.php');
                         while($row2 = mysqli_fetch_array($result2)){
                           ?>
                           <!-- Insert your Module here -->
-                          <div class="col-lg-6">
+                          <div class="col-lg-4">
                             <div class="card">
                               <div class="card-body">
                               <a href="../Clearance/clearance-coordinator/role.php?id=<?php echo $_SESSION["login_key"];?>&role=<?php echo $row2["role"];?>"> <h5 class="card-title"><?php echo $row2["role"];?></h5></a>                          
