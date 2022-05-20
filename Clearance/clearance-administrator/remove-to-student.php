@@ -11,10 +11,26 @@ if(isset($_POST["name"]) && !empty($_POST["name"])){
             mysqli_stmt_bind_param($stmt, "s", $param_name);
 
             // Set parameters
-            $param_name = trim($_POST["name"]);;
+            $param_name = trim($_POST["name"]);
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
+                //Create user account
+                $sql = "INSERT INTO clearance_audit_trail (user_id, action, date, department) VALUES (?, ?, ?, ?)";
+
+                if($stmt1 = mysqli_prepare($link, $sql)){
+                // Bind variables to the prepared statement as parameters
+                $action = "Removed " . trim($_POST["name"]) . " to students clearance";
+                $date = date('Y-m-d H:i:s');
+                mysqli_stmt_bind_param($stmt1, "ssss", $verified_session_username, $action, $date, $verified_session_role);
+
+                // Attempt to execute the prepared statement
+                if(mysqli_stmt_execute($stmt1)){
+
+                } else{
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+                }
                 // Records created successfully. Redirect to landing page
                 header("location: clearance-departments.php");
                 exit();

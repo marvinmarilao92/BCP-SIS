@@ -62,7 +62,7 @@
                 while($row1 = mysqli_fetch_array($result1)){
                   $id=$row1['id'];
                   $admin=$row1['id_number'];
-                  $fname=$row1['role'];
+                  $fname=$row1['firstname']." ".$row1['lastname'];
                   switch($row1["department"]){
                     case "Clearance System":
                       //statement
@@ -655,7 +655,7 @@
                       $_SESSION['session_url'] = "Student_Portal/index?id=".$_SESSION["login_key"]."";
                       $id1=$row2['id'];
                       $admin1=$row2['id_number'];
-                      $fname1=$row2['role'];
+                      $fname1=$row2['firstname'].' '.$row2['lastname'];
                             if (!empty($_SERVER["HTTP_CLIENT_IP"])){
                                 $ip = $_SERVER["HTTP_CLIENT_IP"];
                               }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){

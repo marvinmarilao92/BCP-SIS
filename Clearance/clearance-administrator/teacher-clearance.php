@@ -91,9 +91,9 @@ include ("includes/sidebar.php");
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td style='width:20%;'>" . $row['id_number'] . "</td>";
-                                        echo "<td style='width:30%;'>" . $row['firstname'] . " " . $row['lastname'] . "</td>";
-                                        echo "<td style='width:40%;'>" . $row['course'] . "</td>";
+                                        echo "<td>" . $row['id_number'] . "</td>";
+                                        echo "<td>" . $row['firstname'] . " " . $row['lastname'] . "</td>";
+                                        echo "<td>" . $row['course'] . "</td>";
                                         echo "<td>";
                                         echo '<a href="teacher-clearance-status-view.php?id='.$row['id_number'].'&name='.$row['firstname'].' '.$row['lastname'].'" target="" class="m-1 btn btn-primary" title="View Clearance" data-toggle="tooltip"><span class="bi bi-info-lg"></span></a>';
                                         echo "</td>";

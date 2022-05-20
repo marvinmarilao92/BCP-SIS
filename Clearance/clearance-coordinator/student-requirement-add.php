@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           // Bind variables to the prepared statement as parameters
           $action = "Add new clearance requirement named: '" . $clearance_name . "'";
           $date = date('Y-m-d H:i:s');
-          mysqli_stmt_bind_param($stmt1, "isss", $verified_session_username, $action, $date, $department);
+          mysqli_stmt_bind_param($stmt1, "ssss", $verified_session_username, $action, $date, $department);
 
           // Attempt to execute the prepared statement
           if(mysqli_stmt_execute($stmt1)){
