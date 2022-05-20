@@ -6,7 +6,9 @@ include_once 'security/newsource.php';
 <title>Annual Medical Reports</title>
 
 <head>
-  <?php include 'includes/head_ext.php'; ?>
+  <?php include('includes/head_ext.php') ?>
+  </script>
+
   <script>
   function viewContent(viewID, viewresult) {
 
@@ -41,19 +43,6 @@ include_once 'security/newsource.php';
   }
   </script>
 
-  <script>
-  $('#example').dataTable({
-    "processing": true,
-    "serverSide": true,
-    "ajax": {
-      "url": "ajax-examresult.php",
-      "data": function(d) {
-        d.experiments = experiment_list;
-        d.type = $("#type_selector").val();
-      }
-    }
-  });
-  </script>
   <!-- <script>
   $(document).ready(function(){
     $("button").click (function(){
@@ -79,93 +68,59 @@ include_once 'security/newsource.php';
         </ol>
       </nav>
     </div>
-
-
     <section class="section2">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="card border border-primary">
-              <div class="card-body">
-                <div class="d-flex bd-highlight mb-3">
-                  <h1 class="card-title me-auto me-auto p-2 bd-highlight">Recent</h1>
-                  <div class="btn btn-primary p-2 bd-highlight" onclick="addRecord()">Add Record</div>
-                </div>
-                <!-- <div id="ShowTableResult"></div> -->
-                <div class="table-responsive">
-                  <table class="table table-hover datatable">
-                    <?php
-                    require_once 'security/newsource.php';
-                    $query = 'SELECT ms_labtest.*, student_information.email FROM ms_labtest LEFT JOIN student_information ON ms_labtest.id_number = student_information.id_number ORDER BY id ASC LIMIT 10';
-                    $query_run = mysqli_query($conn, $query);
-                    date_default_timezone_set('asia/manila');
-                    $tablename = 'ms_labtest';
-                    ?>
-                    <!-- Table Head -->
-                    <thead style="background-color:whitesmoke;">
-                      <tr>
-                        <th scope="col">ID Number</th>
-                        <th scope="col">Full Name</th>
-                        <th scope="col">Course</th>
-                        <th scope="col">Year Level</th>
-                        <th scope="col">Phone #</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      if (mysqli_num_rows($query_run) > 0) {
-                          while ($row = mysqli_fetch_assoc($query_run)) {
-                              // $date1 = $row['sched_from'];
-                              // $date2 = $row['sched_to'];
-                              // $newDate1 = date("F j, Y", strtotime($date1));
-                              // $newDate2 = date("F j, Y", strtotime($date2));?>
-                      <tr>
-                        <td onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');" id="editID" title="View"
-                          style="cursor:pointer;" value="<?php echo $row['id']; ?>">
-                          <?php echo $row['id_number']; ?>
-                        </td>
-                        <td onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');;" id="editID" title="View"
-                          style="cursor:pointer;" value="<?php echo $row['id']; ?>">
-                          <?php echo $row['full_n']; ?>
-                        </td>
-                        <td onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');;" id="editID" title="View"
-                          style="cursor:pointer;" value="<?php echo $row['id']; ?>">
-                          <?php echo $row['course']; ?>
-                        </td>
-                        <td onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');;" id="editID" title="View"
-                          style="cursor:pointer;" value="<?php echo $row['id']; ?>">
-                          <?php echo $row['yr_lvl']; ?>
-                        </td>
-                        <td onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');;" id="editID" title="View"
-                          style="cursor:pointer;" value="<?php echo $row['id']; ?>">
-                          <?php echo $row['contact']; ?>
-                        </td>
-                        <td id="Send" title="Send" style="cursor:pointer;" value="<?php echo $row['id']; ?>">
-                          <?php echo $row['email']; ?><i class="bx bx-send" onclick="sendNow();"></i>
-                        </td>
-                        <td>
-                          <div class="container">
-                            <a href="#" class="btn btn-warning btn-sm"
-                              onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');" title="View" href="#"
-                              id="veiwID"><i class="bx bxs-bullseye"></i></a>
-                            <a title="view" class="btn btn-secondary btn-sm"
-                              href="resources/viewPDF.php?file=<?php echo $row['file_name']; ?>&tablename=<?php echo $tablename; ?>"><i
-                                class="bx bxs-file-pdf"></i></a>
-                            <a class="btn btn-danger btn-sm" name="id_trash" onclick="deleteID()" title="Delete"
-                              href="#" id="deleteID" value="<?php echo $row['id']; ?>"><i
-                                class="bx bxs-trash-alt"></i></a>
-                          </div>
-                        </td>
-                      </tr>
-                      <?php
-                          }
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card border border-primary">
+            <div class="card-body">
+              <div class="d-flex bd-highlight mb-3">
+                <h1 class="card-title me-auto me-auto p-2 bd-highlight">Recent</h1>
+                <div class="btn btn-primary p-2 bd-highlight" onclick="addRecord()">Add Record</div>
+              </div>
+              <!-- <div id="ShowTableResult"></div> -->
+              <div class="table-responsive">
+                <table class="display" id="example" cellspacing="0">
+
+                  <!-- Table Head -->
+                  <thead>
+                    <tr>
+                      <th scope="col">ID Number</th>
+                      <th scope="col">Full Name</th>
+                      <th scope="col">Course</th>
+                      <th scope="col">Year Level</th>
+                      <th scope="col">Phone #</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                </table>
+                <script type="text/javascript">
+                $(document).ready(function() {
+                  $("#example").DataTable({
+                    "ajax": {
+                      "url": "table.php",
+                      "dataSrc": ""
+                    },
+                    "columns": [{
+                        "data": "id_number"
+                      },
+                      {
+                        "data": "full_n"
+                      },
+                      {
+                        "data": "course"
+                      },
+                      {
+                        "data": "yr_lvl"
+                      },
+                      {
+                        "data": "contact"
                       }
-                      ?>
-                    </tbody>
-                  </table>
-                </div>
+
+                    ]
+                  });
+                });
+                </script>
               </div>
             </div>
           </div>
@@ -269,6 +224,9 @@ setInterval(function(){
 window.onload = loadXMLDoc;
 
 </script> -->
+  <script>
+
+  </script>
   <script>
   function sendNow() {
 
@@ -477,3 +435,14 @@ window.onload = loadXMLDoc;
 </body>
 
 </html>
+// <td>
+  // <div class="container">
+    // <a href="#" class="btn btn-warning btn-sm" onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');" //
+      title="View" href="#" id="veiwID"><i class="bx bxs-bullseye"></i></a>
+    // <a title="view" class="btn btn-secondary btn-sm" //
+      href="resources/viewPDF.php?file=<?php echo $row['file_name']; ?>&tablename=<?php echo $tablename; ?>"><i //
+        class="bx bxs-file-pdf"></i></a>
+    // <a class="btn btn-danger btn-sm" name="id_trash" onclick="deleteID()" title="Delete" href="#" id="deleteID" //
+      value="<?php echo $row['id']; ?>"><i class="bx bxs-trash-alt"></i></a>
+    // </div>
+  // </td>

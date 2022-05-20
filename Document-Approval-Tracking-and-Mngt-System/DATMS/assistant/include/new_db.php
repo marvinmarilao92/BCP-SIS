@@ -13,9 +13,9 @@ class DB{
        $this->conn=new mysqli($this->host,$this->user,$this->password,$this->database);
        if($this->conn->error){
            die('Database error');
-      }
+       }
    }
-}//
+}
 
 // local config
 //  class DB{
