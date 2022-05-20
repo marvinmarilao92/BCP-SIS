@@ -149,6 +149,7 @@ include('session.php');
                                             while($row1 = mysqli_fetch_array($result1)){
                                               $status = $row1['status'];
                                               $location = $row1['location'];
+                                              $file_link = $row1['file_link'];
                                               $clearance_department_id = $row1['clearance_department_id'];
                                               echo "<td>" . $row1['status'] . "</td>";
                                             }
@@ -180,10 +181,10 @@ include('session.php');
                                           }
                                           if($status == "Under Review"){
                                             echo '<a href="teacher-clearance-decline?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'" target="" class="m-1 btn btn-danger" title="Decline Clearance" data-toggle="tooltip"><span class="bi bi-x-lg"></span></a>';
-                                            echo '<a href="?teacher_id='. trim($_GET["id"]).'&req_id='. $row['id'].'" target="_blank" class="m-1 btn btn-primary" title="Download File" data-toggle="tooltip"><span class="bi bi-eye"></span></a>';
+                                            echo '<a href="../../../Teacher_Portal/uploads/'. $file_link.'" target="_blank" class="m-1 btn btn-primary" title="Download File" data-toggle="tooltip"><span class="bi bi-eye"></span></a>';
                                           }
                                           if($status == "Completed" && $location == "Database"){
-                                            echo '<a href="?teacher_id='. trim($_GET["id"]).'&req_id='. $row['id'].'" target="_blank" class="m-1 btn btn-primary" title="Download File" data-toggle="tooltip"><span class="bi bi-eye"></span></a>';
+                                            echo '<a href="../../../Teacher_Portal/uploads/'. $file_link.'" target="_blank" class="m-1 btn btn-primary" title="Download File" data-toggle="tooltip"><span class="bi bi-eye"></span></a>';
                                           }
                                           if($status == "Pending" && $row['clearance_type'] == "Clearance Record (Pending Record)"){
                                             echo '<a href="teacher-clearance-decline?req_id='. $row['id'] .'&req_name='. $row['clearance_name'] .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'&dept_id='. $clearance_department_id .'&loc='. $location.'" target="" class="m-1 btn btn-danger" title="Decline Clearance" data-toggle="tooltip"><span class="bi bi-x-lg"></span></a>';
