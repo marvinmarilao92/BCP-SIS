@@ -30,7 +30,7 @@ include('session.php');
                   <h5>
                      <!-- extract Buttons -->
                       <div style="align-self: center;" class="btn-group" role="group" aria-label="Basic mixed styles example" style=" padding:20px;"> 
-                      <h3>Department Record</h2>
+                      <h3>Admission Record</h2>
                       
                       </div>
                   </h5>  

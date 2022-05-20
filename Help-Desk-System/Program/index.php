@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!faqs html>
 <html lang="en">
-<title>Program Library</title>
+<title>Registrar Library</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 
@@ -30,7 +30,7 @@ include('session.php');
                   <h5>
                      <!-- extract Buttons -->
                       <div style="align-self: center;" class="btn-group" role="group" aria-label="Basic mixed styles example" style=" padding:20px;"> 
-                      <h3>Program Record</h2>
+                      <h3>Registrar Record</h2>
                       
                       </div>
                   </h5>  

@@ -189,6 +189,24 @@ if($recodes->num_rows >0){
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
+  <script>
+function deleteRow(id) {
+            if (confirm('Are you sure you want to delete this?')) {
+                $.ajax({
+                    url: 'function/delete_ticket.php',
+                    method: 'POST',
+                    dataType: 'text',
+                    data: {
+                        key: 'deleteRow',
+                        id: id
+                    },  success:function(response) {
+                        $("#faqs_"+id).parent().remove();
+                        alert(response);
+                    }
+                });
+            }
+        }
+</script>
 
 </body>
 </html>

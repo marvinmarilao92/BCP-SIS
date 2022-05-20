@@ -1,9 +1,9 @@
 <?php
 include('session.php');
 ?>
-<!faqs html>
+
 <html lang="en">
-<title>Department Library</title>
+<title>Accounting Library</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 <?php  include "core/key_checker.php"; ?>
@@ -30,7 +30,7 @@ include('session.php');
                   <h5>
                      <!-- extract Buttons -->
                       <div style="align-self: center;" class="btn-group" role="group" aria-label="Basic mixed styles example" style=" padding:20px;"> 
-                      <h3>Department Record</h2>
+                      <h3>Accounting Record</h2>
                       
                       </div>
                   </h5>  
