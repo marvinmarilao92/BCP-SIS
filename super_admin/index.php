@@ -359,7 +359,7 @@ include('session.php');
                 <div class="modal-body">
                   <div class="row align-items-top">
                   <!-- Insert your Module here -->
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
                         <a href="../Clearance/clearance-administrator/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">Clearance Administrator</h5></a>                          
@@ -380,7 +380,7 @@ include('session.php');
                           
                           ?>
                           <!-- Insert your Module here -->
-                          <div class="col-lg-6">
+                          <div class="col-lg-4">
                             <div class="card">
                               <div class="card-body">
                               <a href="../Clearance/clearance-coordinator/role.php?id=<?php echo $_SESSION["login_key"];?>&role=<?php echo $row2["role"];?>"> <h5 class="card-title"><?php echo $row2["role"];?></h5></a>                          
