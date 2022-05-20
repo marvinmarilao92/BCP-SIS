@@ -125,7 +125,7 @@
                     </div>
                     <div class="modal-body" style="text-align: justify; text-justify: inter-word; overflow-y: scroll;  height:420px; ">
                     
-                    <form class="row g-3 needs-validation" action="../function/ToPay.php" method="POST">
+                    <form class="row g-3 needs-validation" action="function/ToPay.php" method="POST">
                     
                           <div class="col-12">
                             <div class="form-floating">
