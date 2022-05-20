@@ -53,7 +53,7 @@ include('session.php');
 
        <div class="col-md-2">
           <div class="form-floating">
-            <input type="text" class="form-control" style="display:none ;" name="stud_num" id="stud_num" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="Student No." >
+            <input type="text" class="form-control" style="display:none ;" value="" name="stud_num" id="stud_num" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="Student No." >
             <label for="floatingName">Student No.</label>
           </div>
         </div>
@@ -131,7 +131,7 @@ include('session.php');
 
                 <div class="col-md-2">
                   <div class="form-floating">
-                    <input type="text" class="form-control" style="display:none ;" name="stud_num" id="stud_num" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="Student No." >
+                    <input type="text" class="form-control" style="display:none ;" name="stud_num" id="stud_num" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="Student No." value="" >
                     <label for="floatingName">Student No.</label>
                   </div>
                 </div>
