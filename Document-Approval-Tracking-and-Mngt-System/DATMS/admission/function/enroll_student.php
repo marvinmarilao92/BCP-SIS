@@ -30,8 +30,13 @@
     // agon date
     $current_year = date("y");
     // Processing form data when form is submitted
-    if(isset($_POST['Tfname'])&&isset($_POST['Tlname'])&&(isset($_POST['Tmname'])||!isset($_POST['Tmname']))){
-      $std_no = mysqli_real_escape_string($link,trim($_POST["TstudNo"]));
+    if(isset($_POST['Tfname'])&&isset($_POST['Tlname'])&&(isset($_POST['Tmname'])||!isset($_POST['Tmname']))||!isset($_POST['TstudNo'])){
+      if($_POST["TstudNo"]==''){
+        $std_no = mysqli_real_escape_string($link,trim($_POST["TstudNo"]));
+      }else{
+        $std_no = '';
+      }
+      
       //agun implementation for student number
       $sqll = "SELECT id FROM student_information ORDER BY id DESC Limit 1";
       if($resultt = mysqli_query($link, $sqll)){
