@@ -106,14 +106,13 @@ include('includes/session.php');
                 <div class="card-body" >           
                   <!-- Table for Document List records -->
                   <form method="POST">
-                    <table class="table table-hover datatable" id="DocuTable">
+                    <table class="table table-hover datatable" >
                     <thead>
                       <tr>
-                        <th WIDTH="8%">Duration</th>
                         <th scope="col">DocCode</th>
                         <th scope="col" >Requested By</th>
                         <!-- <th scope="col">Filesize</th>    -->
-                        <th scope="col">Document</th>   
+                        <th scope="col">Tracker</th>   
                         <th scope="col">Tracking Date</th>    
                         <th scope="col">Current Actor</th>    
                         <th scope="col">Current Status</th>  
@@ -137,99 +136,16 @@ include('includes/session.php');
                       ?>
                       <tr>
                         <td style="display:none"><?php echo $docId?></td>
-                        <td ><?php
-                        date_default_timezone_set("asia/manila");
-                        $today = date("Y-m-d",strtotime("+0 HOURS"));
-                        $query_2 = "SELECT * FROM datms_documents WHERE doc_date1 = '$docDate1' AND doc_date1 LIKE '%$today%'";
-                        $result_2 = mysqli_query($conn, $query_2);
-                        $count1 = mysqli_num_rows($result_2);
-
-                        $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
-                        $d1 = $docDate1;
-                        $today = date("Y-m-d",strtotime("+0 HOURS"));
-                        $d2 = $date;
-                        // Declare and define two dates
-                        $date1 = strtotime("$d1");
-                        $date2 = strtotime("$d2");
-
-                        // Formulate the Difference between two dates
-                        $diff = abs($date2 - $date1);
-                      
-                        // To get the year divide the resultant date into
-                        // total seconds in a year (365*60*60*24)
-                        $years = floor($diff / (365*60*60*24));
-                      
-                        // To get the month, subtract it with years and
-                        // divide the resultant date into
-                        // total seconds in a month (30*60*60*24)
-                        $months = floor(($diff - $years * 365*60*60*24)
-                                                      / (30*60*60*24));
-                      
-                        // To get the day, subtract it with years and
-                        // months and divide the resultant date into
-                        // total seconds in a days (60*60*24)
-                        $days = floor(($diff - $years * 365*60*60*24 -
-                                    $months*30*60*60*24)/ (60*60*24));
-                      
-                        // To get the hour, subtract it with years,
-                        // months & seconds and divide the resultant
-                        // date into total seconds in a hours (60*60)
-                        $hours = floor(($diff - $years * 365*60*60*24
-                              - $months*30*60*60*24 - $days*60*60*24)
-                                                          / (60*60));
-                      
-                        // To get the minutes, subtract it with years,
-                        // months, seconds and hours and divide the
-                        // resultant date into total seconds i.e. 60
-                        $minutes = floor(($diff - $years * 365*60*60*24
-                                - $months*30*60*60*24 - $days*60*60*24
-                                                  - $hours*60*60)/ 60);
-                      
-                        // To get the minutes, subtract it with years,
-                        // months, seconds, hours and minutes
-                        $seconds = floor(($diff - $years * 365*60*60*24
-                                - $months*30*60*60*24 - $days*60*60*24
-                                        - $hours*60*60 - $minutes*60));
-                              
-                        if($years !=0 ){
-                          // Print the result
-                          $duration = "$years"." yr,";
-                        }else if($months != 0 ){
-                          $duration = "$months"." mos";
-                        }else if($days > 1 ){
-                          $duration = "$days"." days";
-                        }else if($days == 1 ){
-                          $duration = "$days"." day";
-                        }else if($hours > 1){
-                          $duration = "$hours"." hrs";
-                        }else if($hours == 1){
-                          $duration = "$hours"." hr";
-                        }else if($minutes != 0 ){
-                          $duration = "$minutes"." min";
-                        }else if($seconds != 0 ){
-                          $duration = "$seconds"." sec";
-                        }else if($seconds == 0 ){
-                          $duration = "1"." sec";
-                        }else{
-                          $duration = "2";
-                        }
-
-                        if($count1!=0){
-                          $badge='<span style=" color: green;">●</span>';
-                        }else{
-                          $badge='<span style=" color: gray;">●</span>';
-                        }
-                        echo $duration.' ago '.$badge?></td>
-                        <td data-label="Code:"><?php echo $docCode;?></td>
-                        <td data-label="Req By:" ><?php echo $docTitle; ?></td>
-                        <td data-label="Document:"><?php echo $docType; ?></td>
-                        <td data-label="Date:"><?php echo $docDate1; ?></td>
-                        <td data-label="Actor:"><?php echo $docAct2?></td>
+                        <td data-label="Code:"><?php echo $docCode; ?></td>
+                        <td data-label="Requested By:" ><?php echo $docTitle; ?></td>
+                        <td data-label="Tracker:"><?php echo $docAct3; ?></td>
+                        <td data-label="Date:"><?php echo $docDate3; ?></td>
+                        <td data-label="Current Actor:"><?php echo $docAct2?></td>
                         <td data-label="Status:"><?php echo $docStat; ?><a class="fw-bold remarksbtn">&nbsp;&nbsp;<i class="bi bi-info-circle"></i></a></td>
                         <td style="display:none"><?php echo floor($docSize / 1000) . ' KB'; ?></td>
                         <td style="display:none"><?php echo $docDl; ?></td>
                         <td style="display:none"><?php echo $docName?></td>
-                        <td style="display:none"><?php echo $docAct3?></td>
+                        <td style="display:none"><?php echo $docType?></td>
                         <td style="display:none"><?php echo $docDesc?></td>
                         <td style="display:none"><?php echo $docOff1?></td>
                         <td style="display:none"><?php echo $docAct1?></td>
@@ -268,6 +184,75 @@ include('includes/session.php');
         
           <!-- Document List Modals -->
 
+            <!-- Create Document Modal -->
+            <div class="modal fade" id="AddModal" tabindex="-1">
+                <div class="modal-dialog  modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">CREATE TRACKING DOCUMENT</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" enctype="multipart/form-data">
+                          <div class="card" style="margin: 10px;">
+                            <div class="card-body">
+                              <h2 class="card-title">Fill all neccessary info</h2>
+                                <!-- Fill out Form -->
+                                
+                                <div class="row g-3" >
+                                <input type="hidden" id="doccreator" name="doccreator" class="form-control"  value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
+                                <input type="hidden" id="docoffice" name="docoffice" class="form-control"  value="<?php echo $verified_session_office?>" readonly>        
+                                                        
+                                    <div class="col-md-12" >
+                                      <div class="form-floating">
+                                        <input type="text" class="form-control" id="docname" name="docname" onChange="fetchTracking(this.value);" placeholder="Your Name" autofocus>
+                                        <label for="floatingName">Account No.</label>
+                                      </div>
+                                    </div>                                  
+                                  <!-- Account Information -->
+                                    <div class="activity">                                         
+                                    </div>
+                                  <!-- End Account Information --> 
+
+                                  <div class="col-md-12">
+                                    <div class="form-floating">
+                                      <select class="form-select" name="doctype" id="doctype" aria-label="State" Required onchange="oncollapse()">
+                                        <option value="" selected="selected" disabled="disabled">Select DocType</option>
+                                        <?php
+                                            require_once("includes/conn.php");
+                                            $query="SELECT * FROM datms_doctype ORDER BY dt_date DESC ";
+                                            $result=mysqli_query($conn,$query);
+                                            while($rs=mysqli_fetch_array($result)){
+                                              $dtid =$rs['dt_id'];                                    
+                                              $dtName = $rs['dt_name'];       
+                                          ?>
+                                            <option><?php echo $dtName;?></option>
+                                        <?php }?>
+                                      </select>
+                                      <label for="floatingSelect">DocType</label>
+                                    </div>
+                                  </div>  
+                                  <div class="col-md-12">                                    
+                                    <input class="form-control"  type="file" id="docfile" name="docfile" accept="application/pdf" >                                    
+                                  </div>
+
+                                  <div class="col-12">
+                                      <textarea class="form-control" style="height: 80px" placeholder="Description" name="docdesc" id="docdesc" required></textarea>
+                                  </div>        
+                                </div>
+                                            
+                            </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button class="btn btn-primary" name="save">Create Document</button>
+                            </div>
+                        </form>
+                        <!-- End Form -->
+                    </div>
+                </div>     
+            </div>
+            <!-- End Create Document Modal-->
+
             <!-- View Document modal -->
             <div class="modal fade" id="ViewModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered modal-l">
@@ -296,13 +281,47 @@ include('includes/session.php');
                         </div>   
                     </div>
                     <div class="modal-footer">
-                      <!-- <button class="btn btn-primary" name="print" id="print" >Print</button> -->
+                      <button class="btn btn-primary" name="print" id="print" >Print</button>
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                   </div>
                 </div>
             </div>
             <!-- End View office Modal-->
+
+            <!-- History Document modal -->
+            <div class="modal fade" id="HistoryModal" tabindex="-1">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Tracking History &nbsp; <i class="bi bi-clock-history text-primary"></i></h5>
+
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="card" style="margin: 5px;">
+                          <div class="card-body">
+                              <input type="text" id="search_text" name="search_text" class="form-control" placeholder="Title" onfocus="docHistory(this.value);" autofocus>
+                          </div>
+                            <!-- Tracking Activity module -->
+                            
+                              <div class="card-body">
+                                <!-- History tables -->
+                                  <div class="activity">
+                                  </div>
+                                <!-- End History tables -->
+                    
+                            </div>
+                            <!-- End Tracking Activity module -->
+                        </div>   
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- End History office Modal-->
 
             <!-- Desc Document modal -->
             <div class="modal fade" id="RemarksModal" tabindex="-1">
@@ -331,20 +350,374 @@ include('includes/session.php');
             </div>
             <!-- End Desc office Modal-->
 
+            <!-- Edit Document List Modal -->
+            <div class="modal fade" id="EditModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">EDIT OFFICE</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                          <div class="card" style="margin: 10px;">
+                            <div class="card-body">
+                              <h2 class="card-title">Change information</h2>
+                                <!-- Fill out Form -->
+                                <div class="row g-3" >
+                                  <input type="hidden" class="form-control" id="dt_idE" readonly>
+                                  <div class="col-md-4">
+                                      Code: <input type="text" class="form-control" id="dt_codeE" readonly>
+                                  </div>
+                                  <br>
+                                  <div class="col-md-8">
+                                      Name: <input type="text" class="form-control" id="dt_nameE">
+                                  </div>
+                                  <br>
+                                  <div class="col-12">
+                                      Location: <textarea  style="height: 80px" class="form-control" id="dt_descE"></textarea>
+                                  </div>        
+                                </div>
+                              
+                            </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button class="btn btn-primary" name="save" id="edit" >Save changes</button>
+                            </div>
+                        <!-- End Form -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Edit Document List Modal-->
+
+            <!-- Delete Document List Modal -->
+            <div class="modal fade" id="DeleteModal" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">DELETE OFFICE</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                        <div class="card" style="margin: 10px;">
+                          <div class="card-body">                
+                            <br>
+                            <input type="hidden"  name="delete_id" id="delete_id" readonly>
+                            <center>
+                              <h5>Are you sure you want to delete these Document List?</h5>
+                              <h5 class="text-danger">This action cannot be undone.</h5>   
+                            </center>                
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete Document List</button>
+                        </div>
+                      <!-- End Form -->
+                  </div>
+              </div>
+            </div>
+            <!-- End delete Document List Modal -->
+
           <!-- End of Document List Modals -->
           
          <!-- Vendor JS Files/ Template main js file -->
            <?php include ('includes/footer.php');//css connection?>
+           <?php include ("view_ticket.php"); ?>
           <!-- End Footer -->
 
           <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+          <!-- Create Document to Track -->
+          <?php
+              // connect to the database
+              require_once("includes/conn.php");
+              
+              // Uploads files
+              if (isset($_POST['save'])) { // if save button on the form is clicked
+                    // name of the uploaded file
+                    date_default_timezone_set("asia/manila");
+                    $key = $_SESSION["login_key"];
+                    $date = date("Y-m-dh:i:s A",strtotime("+0 HOURS"));
+                    $date1 = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
+                    // $doc_user = $_POST['doccreator'];
+                    // $doc_office = $_POST['docoffice'];
+                    // $doc_title = $_POST['docname'];
+                    // $doc_type = $_POST['doctype'];
+                    // $doc_desc = $_POST['docdesc'];
+                    $doc_user = mysqli_real_escape_string($conn,$_POST['doccreator']);
+                    $doc_office = mysqli_real_escape_string($conn,$_POST['docoffice']);
+                    $doc_title = mysqli_real_escape_string($conn,$_POST['docname']);
+                    $doc_type = mysqli_real_escape_string($conn,$_POST['doctype']);
+                    $doc_desc = mysqli_real_escape_string($conn,$_POST['docdesc']);
+                    
+                    $filename = $_FILES['docfile']['name'];
+
+                    // $Admin = $_FILES['admin']['name'];
+                    // destination of the file on the server
+                    $destination = '../../../assets/uploads/' . $filename;
+
+                    // get the file extension
+                    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+                    // the physical file on a temporary uploads directory on the server
+                    $file = $_FILES['docfile']['tmp_name'];
+                    $size = $_FILES['docfile']['size'];
+
+                    $isExist = true;
+                    //checking if there's a duplicate number because we use random number for id numbers to prevent errors (NOTE PARTILLY TESTED)
+                    date_default_timezone_set("asia/manila");
+                    $year = date("Y",strtotime("+0 HOURS"));
+                    $random_num= rand(1000,9999);
+                    $doc_code =  "doc".$year.$random_num;
+
+                    $query  = "SELECT *,LEFT(middlename,1) as MI FROM student_information WHERE `account_status` NOT IN ('Unofficial') AND id_number = '".$doc_title."'";
+                    $result = mysqli_query($conn, $query);
+                    if(mysqli_num_rows($result) > 0){
+                      if (!in_array($extension, ['pdf'])) {
+                        echo'<script type = "text/javascript">
+                                  //success message
+                                  const Toast = Swal.mixin({
+                                  toast: true,
+                                  position: "top-end",
+                                  showConfirmButton: false,
+                                  timer: 2000,
+                                  timerProsressBar: true,
+                                  didOpen: (toast) => {
+                                  toast.addEventListener("mouseenter", Swal.stopTimer)
+                                  toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                  }
+                                  })
+                                  Toast.fire({
+                                  icon: "error",
+                                  title:"File extension must be: .pdf"
+                                  }).then(function(){
+                                    window.location = "index.php?id='.$key.'";//refresh pages
+                                  });
+                              </script>
+                          ';
+                                      
+                        } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
+                                    echo "File too large!";
+                        }else{
+                          $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
+                          $counter=mysqli_num_rows($query);
+                          
+                          if ($counter == 1) 
+                            { 
+                              echo'<script type = "text/javascript">
+                                      //success message
+                                      const Toast = Swal.mixin({
+                                      toast: true,
+                                      position: "top-end",
+                                      showConfirmButton: false,
+                                      timer: 3000,
+                                      timerProsressBar: true,
+                                      didOpen: (toast) => {
+                                      toast.addEventListener("mouseenter", Swal.stopTimer)
+                                      toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                      }
+                                      })
+                                      Toast.fire({
+                                      icon: "warning",
+                                      title:"File name already taken<br>You have to change the name of file"
+                                      }).then(function(){
+                                        window.location = "index.php?id='.$key.'";//refresh pages
+                                      });
+                                  </script>
+                            ';
+                            }else{
+                            // move the uploaded (temporary) file to the specified destination
+                              if (move_uploaded_file($file, $destination)) {
+                                  $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
+                                  VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
+                                
+                                  if (mysqli_query($conn, $sql)) {
+
+                                    $sql1 = "INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
+                                    VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
+
+                                    if (mysqli_query($conn, $sql1)) {
+                                      echo'<script type = "text/javascript">
+                                        //success message
+                                        const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: "top-end",
+                                        showConfirmButton: false,
+                                        timer: 2000,
+                                        timerProsressBar: true,
+                                        didOpen: (toast) => {
+                                        toast.addEventListener("mouseenter", Swal.stopTimer)
+                                        toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                        }
+                                        })
+                                        Toast.fire({
+                                        icon: "success",
+                                        title:"Document to track Successfully Created"
+                                        }).then(function(){
+                                          window.location = "index.php?id='.$key.'";//refresh pages
+                                        });
+                                    </script>';
+                                    
+                                    }else{
+                                      echo "Failed Upload files!"; 
+                                    }                       
+                                  }
+                              } else {
+                                  echo "Failed Upload files!";
+                              }
+                              }         
+                        }
+                      }else{
+                      $query  = "SELECT *,LEFT(middlename,1) as MI FROM teacher_information WHERE `account_status` NOT IN ('Inactive') AND id_number = '".$doc_title."'";
+                      $result = mysqli_query($conn, $query);
+                      if(mysqli_num_rows($result) > 0){
+                        if (!in_array($extension, ['pdf'])) {
+                          echo'<script type = "text/javascript">
+                                    //success message
+                                    const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: "top-end",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    timerProsressBar: true,
+                                    didOpen: (toast) => {
+                                    toast.addEventListener("mouseenter", Swal.stopTimer)
+                                    toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                    }
+                                    })
+                                    Toast.fire({
+                                    icon: "error",
+                                    title:"File extension must be: .pdf"
+                                    }).then(function(){
+                                      window.location = "index.php?id='.$key.'";//refresh pages
+                                    });
+                                </script>
+                            ';
+                                        
+                          } elseif ($_FILES['docfile']['size'] > 3000000) { // file shouldn't be larger than 3 Megabyte
+                                      echo "File too large!";
+                          }else{
+                            $query=mysqli_query($conn,"SELECT * FROM `datms_documents` WHERE `doc_name` = '$filename'")or die(mysqli_error($conn));
+                            $counter=mysqli_num_rows($query);
+                            
+                            if ($counter == 1) 
+                              { 
+                                echo'<script type = "text/javascript">
+                                        //success message
+                                        const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: "top-end",
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProsressBar: true,
+                                        didOpen: (toast) => {
+                                        toast.addEventListener("mouseenter", Swal.stopTimer)
+                                        toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                        }
+                                        })
+                                        Toast.fire({
+                                        icon: "warning",
+                                        title:"File name already taken<br>You have to change the name of file"
+                                        }).then(function(){
+                                          window.location = "index.php?id='.$key.'";//refresh pages
+                                        });
+                                    </script>
+                              ';
+                              }else{
+                              // move the uploaded (temporary) file to the specified destination
+                                if (move_uploaded_file($file, $destination)) {
+                                    $sql = "INSERT INTO datms_documents (doc_code, doc_title, doc_name, doc_size, doc_dl, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1, doc_actor2, doc_off2, doc_date2,doc_actor3,doc_off3,doc_date3,doc_remarks)
+                                    VALUES ('$doc_code', '$doc_title' ,'$filename','$size',0,'$doc_type', 'Created', '$doc_desc','$doc_user','$doc_office','$date','$doc_user','','','$doc_user','$doc_office','$date','')";
+                                  
+                                    if (mysqli_query($conn, $sql)) {
+
+                                      $sql1 = "INSERT INTO datms_tracking (doc_code, doc_title, doc_name, doc_size, doc_type, doc_status, doc_desc, doc_actor1, doc_off1, doc_date1,doc_actor2,doc_off2, doc_date2,doc_remarks)
+                                      VALUES ('$doc_code', '$doc_title' ,'$filename','$size','$doc_type', 'Created','$doc_desc','$doc_user','$doc_office','$date','','','$date','Tracking Document is Created by')";
+
+                                      if (mysqli_query($conn, $sql1)) {
+                                        echo'<script type = "text/javascript">
+                                          //success message
+                                          const Toast = Swal.mixin({
+                                          toast: true,
+                                          position: "top-end",
+                                          showConfirmButton: false,
+                                          timer: 2000,
+                                          timerProsressBar: true,
+                                          didOpen: (toast) => {
+                                          toast.addEventListener("mouseenter", Swal.stopTimer)
+                                          toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                          }
+                                          })
+                                          Toast.fire({
+                                          icon: "success",
+                                          title:"Document to track Successfully Created"
+                                          }).then(function(){
+                                            window.location = "index.php?id='.$key.'";//refresh pages
+                                          });
+                                      </script>';
+                                      
+                                      }else{
+                                        echo "Failed Upload files!"; 
+                                      }                       
+                                    }
+                                } else {
+                                    echo "Failed Upload files!";
+                                }
+                                }         
+                          }
+                        }else{
+                        echo'<script type = "text/javascript">
+                                //success message
+                                const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProsressBar: true,
+                                didOpen: (toast) => {
+                                toast.addEventListener("mouseenter", Swal.stopTimer)
+                                toast.addEventListener("mouseleave", Swal.resumeTimer)                  
+                                }
+                                })
+                                Toast.fire({
+                                icon: "warning",
+                                title:"No account registered to account number"
+                                }).then(function(){
+                                  window.location = "index.php?id='.$key.'";//refresh pages
+                                });
+                            </script>
+                        ';
+                        }
+                      }
+                  
+            //file uploading
+              }
+          ?>
           <!-- JS Scripts -->
           <script type="text/javascript">
             
               // this script will execute as soon a the website runs
-              $(document).ready(function () {    
-                   // View Function
-                    $('#DocuTable').on('click','.viewbtn', function () {
+              $(document).ready(function () {
+                //print function
+                document.getElementById("print").onclick = function () {
+                    printElement(document.getElementById("printcode"));
+                  }
+
+                function printElement(elem) {
+                    var domClone = elem.cloneNode(true);
+                    
+                    var $printSection = document.getElementById("printSection");
+                    
+                    if (!$printSection) {
+                        var $printSection = document.createElement("div");
+                        $printSection.id = "printSection";
+                        document.body.appendChild($printSection);
+                    }                  
+                    $printSection.innerHTML = "";
+                    $printSection.appendChild(domClone);
+                    window.print();
+                }            
+                    // View Function
+                      $('.viewbtn').on('click', function () {
 
                           $('#ViewModal').modal('show');
 
@@ -358,11 +731,11 @@ include('includes/session.php');
                           document.getElementById("view_code").placeholder = data[1];      
                           document.getElementById("view_title").placeholder = data[8];   
                           document.getElementById("view_filename").placeholder = data[9];   
-                          $('#view_filename').text(data[10]);
-                          $('#view_creator').text(data[4]);
-                          $('#view_date').text(data[5]);
+                          $('#view_filename').text(data[9]);
+                          $('#view_creator').text(data[3]);
+                          $('#view_date').text(data[4]);
                           // JsBarcode("#barcode", data[1]);
-                          JsBarcode("#barcode", data[2], {
+                          JsBarcode("#barcode", data[1], {
                             format: "CODE128",
                             lineColor: "#000",
                             width: 3,
@@ -371,26 +744,27 @@ include('includes/session.php');
                             displayValue: true
                           });
                         });
-                  // Remarks Function
-            $('#DocuTable').on('click','.remarksbtn', function () {
 
-                    $('#RemarksModal').modal('show');
+                  // Remarks view
+                      $('.remarksbtn').on('click', function () {
 
-                    $tr = $(this).closest('tr');
+                          $('#RemarksModal').modal('show');
 
-                    var data = $tr.children("td").map(function () {
-                        return $(this).text();
-                    }).get();
+                          $tr = $(this).closest('tr');
 
-                    console.log(data); 
-                    if(data[19]==""){
-                      $('#remarks').text(data[12]);
-                    }else{
-                        $('#remarks').text(data[19]);
-                    }
-                    
-                  });
-            // End of View function 
+                          var data = $tr.children("td").map(function () {
+                              return $(this).text();
+                          }).get();
+
+                          console.log(data); 
+                          if(data[18] ==""){
+                            $('#remarks').text(data[11]);
+                          }else{
+                            $('#remarks').text(data[18]);
+                          }
+                        
+                        });
+                  // End of Remarks View function 
 
                   // Providing Overall tracking history
                     // load_data();

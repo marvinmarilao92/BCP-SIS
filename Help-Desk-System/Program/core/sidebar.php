@@ -29,22 +29,16 @@
         ?>
 
                 <li class="nav-item">
-                <a href="index.php?id=<?php echo $_SESSION["login_key"];?>"class="<?php if($page=='dashboard'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                        <i class="bi bi-grid"></i>
-                        <span >Dashboard</span>
+                <a href="index.php?id=<?php echo $_SESSION["login_key"];?>"class="<?php if($page=='manage'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" id="sideButton">
+                <i class="bi bi-question-octagon"></i>
+                        <span>F.A.Q.S &nbsp;</span>
                     </a>
                 </li><!-- End Dashboard Nav -->
 
-                <li class="nav-item">
-                        <a href="view-faqs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='manage'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                            <i class="bi bi-question-octagon"></i>
-                            <span>F.A.Q.S &nbsp;</span>
-                        
-                        </a>
-                    </li><!-- All faqs analytics Nav -->
+               
 
                     <li class="nav-item">
-                        <a href="ticket_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='ticket'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+                        <a href="ticket_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='ticket'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" id="sideButton">
                         <i class="bi bi-card-checklist"></i>
                             <span>Ticket &nbsp;</span>
                         
@@ -55,7 +49,7 @@
                 
 
                     <li class="nav-item">
-                        <a href="user_policy.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='UP'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+                        <a href="user_policy.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='UP'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" id="sideButton">
                         <i class="bi bi-shield-check"></i>
                             <span>User Policy &nbsp;</span>
                         </a>
@@ -65,13 +59,7 @@
         
 
                
-                            <li class="nav-item">
-                            <a href="#?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='rep'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                            <i class="bi bi-flag"></i>
-                                <span>Report &nbsp;</span>
-                                
-                            </a>
-                          </li><!-- All faqs analytics Nav -->
+                           
 
                     <li class="nav-heading">Other</li>
 

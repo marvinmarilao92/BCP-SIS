@@ -69,6 +69,7 @@ include ("includes/sidebar.php");
   
   <!-- ======= Footer ======= -->
   <?php include ("includes/footer.php"); ?>
+  <?php include ("view_ticket.php"); ?>
   <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

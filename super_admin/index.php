@@ -25,7 +25,7 @@ include('session.php');
       <h1>School Information System</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index?id=<?php echo $_SESSION["login_key"];?>">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item active">School Information System</li>
         </ol>
       </nav>
@@ -82,7 +82,7 @@ include('session.php');
             <a data-bs-toggle="modal" data-bs-target="#DATMSModal"><img src="../assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
             <div class="card-body">
               <h5 class="card-title">Document Approval, Tracking and Management System</h5>
-              <p class="card-text">Document Approval Tracking Management System is designed and developed as a solution to improve the efficiency of retrieving documents online at any time and tracking the movement of documents in and out of all the departments.</p>
+              <p class="card-text">Subsystem Description insert here...</p>
             </div>
           </div>
         </div>
@@ -204,8 +204,8 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
-                          <p class="card-text">Subsystem Description insert here...</p>
+                       <a href="../Help-Desk-System/Admin/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">Help Desk Administrator</h5></a>    
+                          <p class="card-text">Admin of Help Desk</p>
                         </div>
                       </div>
                     </div>
@@ -214,8 +214,8 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
-                          <p class="card-text">Subsystem Description insert here...</p>
+                        <a href="../Help-Desk-System/Staff/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">Staff</h5></a>    
+                          <p class="card-text">Manages the ticket</p>
                         </div>
                       </div>
                     </div>
@@ -224,8 +224,8 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
-                          <p class="card-text">Subsystem Description insert here...</p>
+                        <a href="../Help-Desk-System/Department/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">Help Desk Accounting</h5></a>    
+                          <p class="card-text">Manages FAQs and also the ticket</p>
                         </div>
                       </div>
                     </div>
@@ -234,31 +234,28 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
-                          <p class="card-text">Subsystem Description insert here...</p>
+                        <a href="../Help-Desk-System/Program/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">Help Desk Registrar</h5></a>    
+                          <p class="card-text">Manages FAQs and also the ticket</p>
                         </div>
                       </div>
                     </div>
-                    <!-- End Insert your Module here -->
-                    <!-- Insert your Module here -->
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
-                          <p class="card-text">Subsystem Description insert here...</p>
+                        <a href="../Help-Desk-System/Admission/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">Help Desk Admission</h5></a>    
+                          <p class="card-text">Manages FAQs and also the ticket</p>
                         </div>
                       </div>
                     </div>
-                    <!-- End Insert your Module here -->
-                    <!-- Insert your Module here -->
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <h5 class="card-title">Insert your Module here</h5>
-                          <p class="card-text">Subsystem Description insert here...</p>
+                        <a href="../Help-Desk-System/Cashier/index.php?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">Help Desk Cashier</h5></a>    
+                          <p class="card-text">Manages FAQs and also the ticket</p>
                         </div>
                       </div>
                     </div>
+                
                     <!-- End Insert your Module here -->
                   </div>
                 </div>
@@ -509,8 +506,8 @@ include('session.php');
                     <div class="col-lg-4">
                       <div class="card">
                         <div class="card-body">
-                          <a href="../Document-Approval-Tracking-and-Mngt-System/DATMS/assistant/index?id=<?php echo $_SESSION["login_key"];?>"> <h5 class="card-title">ASSISTANT REGISTRAR</h5></a>
-                          <p class="card-text">Click here to access module</p>
+                          <a href="#"> <h5 class="card-title">ASSISTANT REGISTRAR</h5></a>
+                          <p class="card-text">Subsystem Description insert here...</p>
                         </div>
                       </div>
                     </div>
@@ -545,6 +542,16 @@ include('session.php');
                       </div>
                     </div>
                     <!-- End Insert your Module here -->                    
+                    <!-- Insert your Module here -->
+                    <div class="col-lg-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <a href="#"> <h5 class="card-title">REGISTRAR OFFICER</h5></a>
+                          <p class="card-text">Subsystem Description insert here...</p>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Insert your Module here -->
                   </div>
                 </div>
               <div class="modal-footer">

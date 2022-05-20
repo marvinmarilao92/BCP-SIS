@@ -31,10 +31,8 @@
               <hr class="dropdown-divider">
             </li>
 
-            <div style="overflow-y: scroll; max-height:370px;">
-              <li class="notification">
-              </li>
-            </div>
+            <li class="notification">
+            </li>
 
             <li class="dropdown-footer">
               <a href="#">Show all notifications</a>

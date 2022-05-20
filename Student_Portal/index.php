@@ -106,27 +106,36 @@ include ("includes/head.php");
 						
             <!-- Department Posts -->
             <div class="col-12">
+         
+   
+
+   
               <div class="card mb-3">
+              
                 <div class="row g-0">
                   <div class="col-md-4">
                     <img src="../images/mvcampus3.jpg" class="img-fluid rounded-start" alt="...">
                   </div>
+                  
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h5 class="card-title">Department Post</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
+                      <h5 class="card-title">Help Desk Announcement</h5> 
+                      <p class="card-text">Announcement and other News will be put here</p>
+                      <a href="view.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-light">Read More <span class="text-danger">&rarr;</span></a>
+                      </div>
                   </div>
+                
                 </div>
+     
               </div>
             </div><!-- End Department Posts -->
+
 
             <!-- Department Posts -->
             <!-- <div class="col-12">
               <div class="card">
                 <div class="card-body pb-0">
                   <h5 class="card-title">Department Post <span>| Today</span></h5>
-
                 </div>
               </div>
             </div> -->
@@ -264,7 +273,7 @@ include ("includes/head.php");
 	<?php
 	include ("includes/footer.php");
 	?>
-
+  <?php include ("view_ticket.php"); ?>
 </body>
 <!-- prevent you for turning back -->
 	<script>
@@ -305,4 +314,4 @@ include ("includes/head.php");
 			}
 		})(window);
 	</script>
-</html>
+  </html>

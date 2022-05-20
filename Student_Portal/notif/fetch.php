@@ -8,10 +8,10 @@ if(isset($_POST["view"]))
  include("../includes/conn.php");
  if($_POST["view"] != '')
  {
-  $update_query = "UPDATE datms_notification SET stat2 = 1 WHERE act2 = '$verified_session_username' AND stat2 = 0";
+  $update_query = "UPDATE datms_notification SET stat2 = 1 WHERE act1 = '$verified_session_username' AND stat2 = 0";
   mysqli_query($conn, $update_query);
  }
- $query = "SELECT * FROM datms_notification WHERE act2 = '$verified_session_username' ORDER BY date DESC LIMIT 10";
+ $query = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_username' ORDER BY date DESC LIMIT 10";
  $result = mysqli_query($conn, $query);
  $output = '';
  
@@ -99,10 +99,10 @@ if(isset($_POST["view"]))
         $idenifier=' <i class="bi bi-arrow-down-circle text-primary"></i>';
        }else if($doc_status =='Submitted Document'){
         $idenifier=' <i class="bi bi-arrow-right-circle text-warning"></i>';       
-       }else if($doc_status =='Created Document'){
-        $idenifier=' <i class="bi bi-plus-circle text-primary"></i>';       
+       }else if($doc_status =='Your ticket has been forwarded'){
+        $idenifier=' <i class="ri-ticket-line text-primary"></i>';       
        }else{
-        $idenifier=' <i class="bi bi-info-circle text-primary"></i>';
+        $idenifier=' <i class="ri-ticket-line text-primary"></i>';
        }
        $query_2 = "SELECT * FROM datms_notification WHERE date = '$d1' AND date LIKE '%$today%'";
        $result_2 = mysqli_query($conn, $query_2);
@@ -118,10 +118,10 @@ if(isset($_POST["view"]))
         $links='docu_template?id='.$_SESSION["login_key"].'';        
        }else if ($doc_status =='Request Approved'){
         $links='docu_template?id='.$_SESSION["login_key"].'';        
-       }else if ($doc_status =='Request Submitted'){
-        $links='docu_template?id='.$_SESSION["login_key"].'';        
+       }else if ($doc_status =='Your ticket has been forwarded'){
+        $links='#';        
        }else{
-        $links='docu_req?id='.$_SESSION["login_key"].'';
+        $links='#';
        }
        
     $output .= '
@@ -130,7 +130,7 @@ if(isset($_POST["view"]))
         <a href="'.$links.'" style="color: rgb(33, 37, 41);">
         <div>
           <h4>'.$row["subject"].'</h4>
-          <p>'.$row["notif"].'</p>
+          <p>'.$row["notif"].'<br>From: '.$row["dept"].' </p>
           <p>'.$duration.' ago '.$badge.'</p>
         </div>
         </a>
@@ -138,7 +138,6 @@ if(isset($_POST["view"]))
       <li>
         <hr class="dropdown-divider">
       </li>
-
     ';
   }
  }
@@ -152,7 +151,6 @@ if(isset($_POST["view"]))
           <p>You have no notification today</p> 
         </div>
       </li>
-
       <li>
         <hr class="dropdown-divider">
       </li>
@@ -160,7 +158,7 @@ if(isset($_POST["view"]))
   ';
  }
  
- $query_1 = "SELECT * FROM datms_notification WHERE act2 = '$verified_session_username' AND stat2 = 0";
+ $query_1 = "SELECT * FROM datms_notification WHERE act1 = '$verified_session_username' AND stat2 = 0";
  $result_1 = mysqli_query($conn, $query_1);
  $count = mysqli_num_rows($result_1);
  $data = array(

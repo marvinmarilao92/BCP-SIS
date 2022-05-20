@@ -1,6 +1,18 @@
 <?php
 
-include('prog-action.php');
+
+	
+$conn = new mysqli("localhost","root","","sis_db");
+// connection for online server
+//$conn = new mysqli("localhost","u692894633_test","+KoB[b#KI2","u692894633_test_db");
+$rowID = $conn->real_escape_string($_POST['rowID']);
+
+		date_default_timezone_set("asia/manila");
+		$date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+		$title = $conn->real_escape_string($_POST['title']);
+		$shortDesc = $conn->real_escape_string($_POST['shortDesc']);
+		$longDesc = $conn->real_escape_string($_POST['longDesc']);
+	
 
 if ($_POST['key'] == 'addNew') {
 			$sql = $conn->query("SELECT id FROM hd_program WHERE title = '$title'");
@@ -21,7 +33,7 @@ if ($_POST['key'] == 'addNew') {
 							$host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 							 $remarks="Faqs has been added";  
 							 //save to the audit trail table
-							 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host) VALUES('$verified_session_username','$remarks','$fname','$title','$ip','$host')")or die(mysqli_error($link));
+							 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$title','$ip','$host','$date')")or die(mysqli_error($link));
 			
 							 //query action
 							 $conn->query("INSERT INTO hd_program (title, shortDesc, longDesc) 

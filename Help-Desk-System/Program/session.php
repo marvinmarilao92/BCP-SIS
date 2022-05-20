@@ -26,7 +26,7 @@
     
     if(isset($verified_session_department) && ($verified_session_username == $_SESSION['session_username'])){
         switch($verified_session_role){
-          case "HDMS Program":
+          case "Registrar":
             //statement
             break;
           case "SuperAdmin":

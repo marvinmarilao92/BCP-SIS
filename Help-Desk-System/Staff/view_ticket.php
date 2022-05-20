@@ -1,46 +1,23 @@
 <?php
-
-include "session.php";
-
+include('session.php');
 ?>
-<meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<!DOCTYPE html>
+<html lang="en">
+<title>View Ticket</title>
+<head>
+<?php include ('core/css-links.php');//css connection?>
+</head>
 
-  <title>Ticket</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="../assets/img/BCPlogo.png" rel="icon">
-  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="../assets/css/style.css" rel="stylesheet">
-  <Link href ="../assets/css/styles.css" rel = "stylesheet">
-  <?php $page = 'tic';include ('core/sidebar.php');//Design for sidebar?>
 
 
 <body>
-  
+<?php $page = 'tic';include ('core/sidebar.php');//Design for sidebar?>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
   
 <div class="d-flex align-items-center justify-content-between">
   <a href="index.php" class="logo d-flex align-items-center">
-    <img src="../assets/img/DATMS_logo.png" alt="">
+  <img src="../images/help.png" alt="">
     <span class="d-none d-lg-block">Help Desk</span>
   </a>
   <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -252,7 +229,7 @@ include "session.php";
                 //statement
                   $output .= '
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="function/logout.php">
+                      <a class="dropdown-item d-flex align-items-center" href="core/logout.php">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>
@@ -274,89 +251,6 @@ include "session.php";
 </nav><!-- End Icons Navigation -->
 
 </header><!-- End Header -->
-<?php?>
-<aside id="sidebar" class="sidebar">
-
-            <ul class="sidebar-nav" id="sidebar-nav">
-                 <!-- Adding return nav item for super admin -->
-        <?php 
-          $output = '';
-          if(isset($verified_session_department) && ($verified_session_username)){
-            switch($verified_session_role){
-              case "SuperAdmin":
-                //statement
-                $output .= '
-                <li class="nav-item" >
-                  <a href="../../../super_admin/index.php" style="color: rgb(83, 107, 148);font-weight: 600; ">
-                    <i class="bi bi-arrow-return-left"></i>
-                    <span>Return to SuperUser</span>
-                  </a>
-                </li><!-- End Return Nav -->    
-                ';
-
-                break;  
-            }
-            echo $output;
-        }else{
-
-        }
-        ?>
-
-                <li class="nav-item">
-                    <a href="index.php?id=<?php echo $_SESSION["login_key"];?>"class="<?php if($page=='PRO'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                        <i class="bi bi-grid"></i>
-                        <span >Dashboard</span>
-                    </a>
-                </li><!-- End Dashboard Nav -->
-
-               
-                <li class="nav-item">
-                    <a href="ticket.php?id=<?php echo $_SESSION["login_key"];?>"class="<?php if($page=='tic'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                        <i class="bi bi-grid"></i>
-                        <span >Ticket</span>
-                    </a>
-                </li><!-- End Dashboard Nav -->
-
-
-                <li class="nav-item">
-                        <a href="user_policy.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='UP'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                        <i class="bi bi-shield-check"></i>
-                            <span>User Policy &nbsp;</span>
-                        </a>
-                        </li><!-- Policy Nav -->
-                    
-
-                        <li class="nav-item">
-                            <a href="#?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='manage'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                            <i class="bi bi-flag"></i>
-                                <span>Report &nbsp;</span>
-                                
-                            </a>
-                          </li><!-- All faqs analytics Nav -->
-
-
-                <li class="nav-heading">Other</li>
-
-                <li class="nav-item">
-                    <a href="user-profile.php?id=<?php echo $_SESSION["login_key"];?>"class="<?php if($page=='profile'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                        <i class="bi bi-person"></i>
-                        <span>Profile</span>
-                    </a>
-                </li><!-- End Profile Page Nav -->
-
-                <li class="nav-item">
-                    <a href="contact.php?id=<?php echo $_SESSION["login_key"];?>"class="<?php if($page=='cont'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                        <i class="bi bi-envelope"></i>
-                        <span>Contact</span>
-                    </a>
-                </li><!-- End Contact Page Nav -->
-
-
-              
-            </ul>
-
-        </aside><!-- End Sidebar-->
-
 
 
  
@@ -441,9 +335,15 @@ error_reporting(E_ALL);
     }
     //Reply Send Method
     if(isset($_POST['submit'])){
+
+        date_default_timezone_set("asia/manila");
+        $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
        
+        $email = $_POST['email'];
+        $email=encryptthis($email, $key);
         $message=$_POST['message'];
         $message=encryptthis($message, $key);
+        
         
         $fname=$verified_session_role; 
         if (!empty($_SERVER["HTTP_CLIENT_IP"])){
@@ -453,11 +353,17 @@ error_reporting(E_ALL);
         }else{
           $ip = $_SERVER["REMOTE_ADDR"];
           $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-           $remarks="reply to a ticket";  
+           $remarks="replied to a ticket to(Student)";  
            //save to the audit trail table
            mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,ip,affected,host,date) VALUES('$verified_session_username','$remarks','$fname','$ip','$message','$host','$date')")or die(mysqli_error($link));
         
-        if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,send_by,message) VALUES('$ticket_id','1','$message')")){
+         
+           $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+           VALUES ('$verified_session_username', '0' ,'$verified_session_role','0','replied to ticket','Reply from help desk','$verified_session_role','Active','$date')") or die(mysqli_error($conn));
+
+
+if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,message) VALUES('$ticket_id','email','$verified_session_role','$message')")){
+          
             $success="Reply has been sent";
             $db->conn->query("UPDATE hdms_tickets  SET status=2 WHERE id=$ticket_id");
             $mail = new PHPMailer;
@@ -471,16 +377,37 @@ error_reporting(E_ALL);
             $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
             //Recipients
-            $mail->setFrom('helpdesksupport@bcp-sis.ga', 'Ticket Reply');
-            //$mail->addAddress($_POST['email'], 'Student');     //Add a recipient
+            $mail->setFrom('helpdesksupport@bcp-sis.ga', 'Help Desk Support');
+            $mail->addAddress($_POST['email'] , 'Student');     //Add a recipient
         
+            $body = 
+            '  <div class="card">
+         
+            <div class="card-body">
+            <h3 class="card-title">######Reply from helpdesk support bcp######</h3>
+            <p class="card-text">Thank you for waiting for our response!<br><br><b>FROM:&nbsp;'.$verified_session_role.'</b><br><br><b>'.nl2br($_POST['message']).'</b><br><br><br><br>
+            
+            Dont Reply to this email just login into the system and make a reply from there<br><br><br>
+  
+            for another inquiries and question just submit another ticket to our help desk system or just send us an email @helpdesksupport@bcp-sis.ga
+            <br>Thank you! Stay safe.</p>
+          </div>
+        </div>
+          
+          
+          <div class="alert alert-light bg-light border-0 alert-dismissible fade show" role="alert">
+          <h3>© Copyright Bestlink College of the Philippines. All Rights Reserved.</h3>
+        </div>
+            
+            ';
+
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'HelpDesksupport';
-            $mail->Body    = $_POST['message'];
+            $mail->Subject = 'Reply from Help Desk Support';
+            $mail->Body  = $body;
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-            $mail->send($_POST['email'], 'Student');
+            $mail->send();
             //echo "Success!";
         }else{
             $error="Can not send reply";
@@ -522,7 +449,7 @@ error_reporting(E_ALL);
                           <div class="card mb-3">
                 <div class="card-header">
                     Ticket ID : <?php  echo $ticket['ticket_id'] ;?>
-                    
+                  
                 </div>
                 <div class="card-body">
                     <?php 
@@ -536,24 +463,32 @@ error_reporting(E_ALL);
                         }
                     ?>
                      <table class="table">
+                    
+                  
                         <?php echo '
-                      
+                     <tr>
+                     <th>Student # :&nbsp;&nbsp;'.$ticket['student_number'].'</th>
+                    
+                    </tr>
                         <tr>
                             <th>Email :&nbsp;&nbsp;'.decryptthis($ticket['email'], $key).'</th>
                            
                         </tr>
                         <tr>
-                            <th>Subject :&nbsp;&nbsp;'.decryptthis($ticket['subject'], $key).'</th>
+                            <th>Subject :&nbsp;&nbsp;'.$ticket['category'].'</th>
                            
                         </tr>
-                        <tr>
-                            <th>Department :&nbsp;&nbsp;'.decryptthis($ticket['ticket_department'], $key).'</th>
-                           
-                        </tr>
+                      
+                      
+                       
+                    </tr>
+                       
                           <th>Message :&nbsp'.decryptthis($ticket['message'], $key).'</th>';?>
+
+                      
                        
                     </table>
-                   
+
                     <div class="reply-area">
                         <ul>
                             <?php if(count($reps) > 0) { ?>
@@ -584,6 +519,7 @@ error_reporting(E_ALL);
                                                 </div>
                                             </div>
                                         </li>
+                                        
                                         <?php
                                     }
                                 }
@@ -592,22 +528,27 @@ error_reporting(E_ALL);
                             <?php } ?>
                         </ul>
                     </div>
-                    <div class="send-area">
+                    <div class="reply" style = "color: #fff"><a href="javascript:void(0)" data-commentID="'.$data['id'].'" onclick="reply(this)"><span class="badge bg-primary"><i class="ri-reply-all-fill"></i>CLICK TO REPLY</span></a></div>
+                    
+                    <div class="send-area replyRow" style="display:none">
                         <form method="POST">
                             <div class="form-group">
-                                <textarea name="message" class="form-control" placeholder="Reply" id="message" cols="30" rows="4"></textarea>
-                            </div>
-                            <div class="form-group text-right">
-                                <input type="hidden" name="submit" value="send">
-                                <button class="btn btn-success" type="submit">Send</button>
-                                <a href="ticket.php?id=<?php echo $_SESSION["login_key"];?> " class="btn btn-secondary ml-2">Back</a>
+                                <input type="hidden" name="submit" value="send"><br>
+                               
+                                <input type="hidden"name = "email" value = <?php echo ''.decryptthis($ticket['email'], $key).'';?> style="display:none">
+                                <textarea name="message" class="form-control" id="replyComment" placeholder="Type your reply" cols="70" rows="4"></textarea><br>
+                                <button class="btn-primary btn" onclick="isReply = true;" id="addReply">Reply</button>
+                                <button style="float:right" class="btn-default btn" onclick="$('.replyRow').hide();"></button>
+                               
                             </div>
                         </form>
+                        
                     </div>
                 </div>
             </div>
+           
                         </div>
-
+                        <a href="ticket.php?id=<?php echo $_SESSION["login_key"];?> " class="btn btn-secondary ml-2" style="float:right">Back</a>
                       </div>
                     </div>
                     
@@ -748,174 +689,7 @@ error_reporting(E_ALL);
 
         </div>
 
-        <div class="col-lg-6">
-
-          <!-- F.A.Q Group 2 -->
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Admission Info</h5>
-
-              <div class="accordion accordion-flush" id="faq-group-2">
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsTwo-1" type="button" data-bs-toggle="collapse">
-                      General Admission Policy?
-                    </button>
-                  </h2>
-                  <div id="faqsTwo-1" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
-                    <div class="accordion-body">
-                      Student shall be admitted to the institution upon proof of presentation of the appropriate and valid credential to the admission committee subject to the rules prescribe therein. the documents required are the following:<br>
-                      1. Original High school report card(Form 138)<br>
-                      2. Certificate of good moral Character<br>
-                      3. NSO/PSA Aunthenticated birth certificate<br>
-                      4. Dully Filled up Admission application
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsTwo-2" type="button" data-bs-toggle="collapse">
-                     Enrollment
-                    </button>
-                  </h2>
-                  <div id="faqsTwo-2" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
-                    <div class="accordion-body">
-                     Upon presentation of the original and photo copies of documents enumerated in the general admission. the coordinator shall assess the authenticity of the papers submitted. A brief interview will be conducted and additional papers if any shall be required from the students. 
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsTwo-3" type="button" data-bs-toggle="collapse">
-                     Failure in 3 units of an academic load of 21 units during a semester<br><br>
-                     18 units
-                    </button>
-                  </h2>
-                  <div id="faqsTwo-3" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
-                    <div class="accordion-body">
-                      Repeat subject failed without a reduction of load
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsTwo-4" type="button" data-bs-toggle="collapse">
-                      Back subject
-                    </button>
-                  </h2>
-                  <div id="faqsTwo-4" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
-                    <div class="accordion-body">
-                      Back subject are those where students either dropped or failed in a particular semester that caused the student of unit enrolling the prescribe units for the present semester.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsTwo-5" type="button" data-bs-toggle="collapse">
-                     Transferees
-                    </button>
-                  </h2>
-                  <div id="faqsTwo-5" class="accordion-collapse collapse" data-bs-parent="#faq-group-2">
-                    <div class="accordion-body">
-                      Student coming from another school intending to transfer in this institution are likewise required to undergo the procedures indicated and shall submit the pertinent papers for entry.<br><br>
-                      1. Honorable dismissal<br> 
-                      2. Certificate of grades signed be the registrar office(TOR)<br>
-                      3. Evaluation of the subject from BCP registrar office<br>
-                      4. NSO/PSA Certificate photocopy; bring the original for authentication<br>
-                      5. Certificate of good moral character<br>
-                      6. Barangay clearance<br>
-                      7. Medical certificate from clinic affliated by BCP clinic<br>
-                      8. Copy of description of the subject/course taken from previous school   
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </div><!-- End F.A.Q Group 2 -->
-
-          <!-- F.A.Q Group 3 -->
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Registrar Info</h5>
-
-              <div class="accordion accordion-flush" id="faq-group-3">
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsThree-1" type="button" data-bs-toggle="collapse">
-                     Practicum/OJT course
-                    </button>
-                  </h2>
-                  <div id="faqsThree-1" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
-                    <div class="accordion-body">
-                      The ojt practicum of the Four-year courses is the inclusive of the maximum thirty (30) units.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsThree-2" type="button" data-bs-toggle="collapse">
-                      Grading system
-                    </button>
-                  </h2>
-                  <div id="faqsThree-2" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
-                    <div class="accordion-body">
-                      In accordance with the college thrust of achieving academic excellence, the school adopts a grading system that is highly objective nad reflective student's scholastic performance. 
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsThree-3" type="button" data-bs-toggle="collapse">
-                      Correction and changing of personal data
-                    </button>
-                  </h2>
-                  <div id="faqsThree-3" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
-                    <div class="accordion-body">
-                      Corrections/changes of the personal data of the students may be made upon the presentation of the documents to the office of the registrar for validity. 
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsThree-4" type="button" data-bs-toggle="collapse">
-                     Adding/changing subject and schedule
-                    </button>
-                  </h2>
-                  <div id="faqsThree-4" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
-                    <div class="accordion-body">
-                      the school allows student to drop, add, and change subjects for valid reasons and within the prescribe period of one week with regular classes.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsThree-5" type="button" data-bs-toggle="collapse">
-                      Crediting, Equivalence and substitute subjects
-                    </button>
-                  </h2>
-                  <div id="faqsThree-5" class="accordion-collapse collapse" data-bs-parent="#faq-group-3">
-                    <div class="accordion-body">
-                      Graduating students with valid reason find difficulty to finish their program requirements due to related curriculum changes.
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </div><!-- End F.A.Q Group 3 -->
+     
 
         </div>
 
@@ -936,7 +710,6 @@ error_reporting(E_ALL);
 
 
   <!-- ======= Footer ======= -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
   <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
   <script>
@@ -944,14 +717,18 @@ if(window.history.replaceState) {
   window.history.replaceState(null,null,window.location.href)
 }
 
-
+function reply(caller) {
+        commentID = $(caller).attr('data-commentID');
+        $(".replyRow").insertAfter($(caller));
+        $('.replyRow').show();
+    }
 
 
  </script>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files/ Template main js file -->
-  
+   <!-- Vendor JS Files/ Template main js file -->
+ <?php include ('core/js.php');//css connection?> 
   </body>
 </html>

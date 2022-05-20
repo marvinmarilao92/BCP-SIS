@@ -10,8 +10,29 @@ include('session.php');
 
 <body>
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'P';include ('core/sidebar.php');//Design for sidebar?>
+<?php $page = 'P'; $col = 'list'; include ('core/sidebar.php');//Design for sidebar?>
 
+<?php
+//THE KEY FOR ENCRYPTION AND DECRYPTION
+$key = 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO';
+
+
+//ENCRYPT FUNCTION
+function encryptthis($data, $key) {
+$encryption_key = base64_decode($key);
+$iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
+$encrypted = openssl_encrypt($data, 'aes-256-cbc', $encryption_key, 0, $iv);
+return base64_encode($encrypted . '::' . $iv);
+}
+
+
+//DECRYPT FUNCTION
+function decryptthis($data, $key) {
+$encryption_key = base64_decode($key);
+list($encrypted_data, $iv) = array_pad(explode('::', base64_decode($data), 2),2,null);
+return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
+}
+?>
 <main id="main" class="main">
 
 <div class="pagetitle">
@@ -137,7 +158,7 @@ include('session.php');
                                   <th scope="col">Username</th>
                                   <th scope="col">Full Name</th>  
                                   <th scope="col">Action</th>    
-                                  <th scope="col">Title</th> 
+                                  <th scope="col">Message</th> 
                                   <th scope="col">IP Address</th> 
                                   <th scope="col">Host</th>   
                                   <th scope="col">Date</th>  
@@ -152,7 +173,7 @@ include('session.php');
                                       $id = $rs['account_no']; 
                                       $host = $rs['host']; 
                                       $action = $rs['action'];                        
-                                      $affected = $rs['affected']; 
+                                      $affected = decryptthis($rs['affected'], $key); 
                                       $ip =$rs['ip'];                                         
                                       $date =$rs['date'];
                                                                 
@@ -212,7 +233,9 @@ include('session.php');
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files/ Template main js file -->
+ 
+<!-- Vendor JS Files/ Template main js file -->
+<?php include ('core/js.php');//css connection?> 
 
 
 </body>

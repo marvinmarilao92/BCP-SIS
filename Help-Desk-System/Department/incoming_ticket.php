@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Incoming Tikcet</title>
+<title>DATMS | Incoming Documents</title>
 <head>
 <?php  include "core/key_checker.php"; ?>
 <?php include ('core/css-links.php');//css connection?>
@@ -48,15 +48,30 @@ include('session.php');
 <body>
 
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'incoming'; include ('core/sidebar.php');//Design for sidebar?>
+<?php $page = 'incoming'; include ('core/side-nav.php');//Design for sidebar?>
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Incoming Ticket</h1>
-     
+      <h1>Incoming Documents</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Module</li>
+          <li class="breadcrumb-item active">Incoming Documents</li>
+        </ol>
+      </nav>
     </div><!-- End Page Title -->
-   
+    <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+      <h4 class="alert-heading">READ CAREFULLY</h4>
+      <p>
+        You may use the service and the contents contained in the Services solely for your own individual non-commercial and informational purpose
+        only. Any other use, including for any commercial purposes, is strictly prohibited without our express prior witten or verbal consent.
+      </p>
+      <hr>
+      <p class="mb-0">© Copyright Bestlink College of the Philippines. All Rights Reserved.</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="">
     <section class="section">
       <div class="row">        

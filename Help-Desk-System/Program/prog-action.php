@@ -52,12 +52,14 @@ $rowID = $conn->real_escape_string($_POST['rowID']);
 
 
 
+		date_default_timezone_set("asia/manila");
+		$date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
 		$title = $conn->real_escape_string($_POST['title']);
 		$shortDesc = $conn->real_escape_string($_POST['shortDesc']);
 		$longDesc = $conn->real_escape_string($_POST['longDesc']);
 
 		if ($_POST['key'] == 'updateRow') {
-			$conn->query("UPDATE hd_program SET title='$title', shortDesc='$shortDesc', longDesc='$longDesc' WHERE id='$rowID'");
+			$conn->query("UPDATE hd_program SET title='$title', shortDesc='$shortDesc', longDesc='$longDesc' date='$date' WHERE id='$rowID'");
 			exit('faqs updated');
 		} else {
 			//add session
@@ -72,7 +74,7 @@ $rowID = $conn->real_escape_string($_POST['rowID']);
 					$host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 					 $remarks="Faqs has been updated";  
 					 //save to the audit trail table
-					 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host) VALUES('$verified_session_username','$remarks','$fname','$title','$ip','$host')")or die(mysqli_error($link));
+					 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','$title','$ip','$host','$date')")or die(mysqli_error($link));
 		}
 	}
 

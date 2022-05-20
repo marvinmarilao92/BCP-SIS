@@ -55,6 +55,7 @@ if(isset($_POST['id'])){
                                <label>Enter Your Ticket ID:</label>
                                <input type="text" name="id" id="id" autocomplete = "off" required class="form-control">
                            </div>
+                           <br>
                            <div class="form-group">
                                <button class="btn btn-primary btn">Submit</button>
       
@@ -62,10 +63,7 @@ if(isset($_POST['id'])){
                            </form>
 
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                     
-                    </div>
+                  
                   </div>
                 </div>
               </div><!-- End Vertically centered Modal-->

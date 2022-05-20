@@ -10,7 +10,7 @@ include('session.php');
 
 <body>
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'S';include ('core/sidebar.php');//Design for sidebar?>
+<?php $page = 'S'; $col = 'list'; include ('core/sidebar.php');//Design for sidebar?>
 
 <?php
 //THE KEY FOR ENCRYPTION AND DECRYPTION
@@ -90,7 +90,7 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
                               <tbody>
                               <?php
                                   require_once("include/conn.php");
-                                  $fname=$verified_session_role;
+                                
                                   $query="SELECT * FROM audit_logs WHERE `action_name` = 'Staff' ORDER BY login_time DESC ";
                                   $result=mysqli_query($conn,$query);
                                   while($rs=mysqli_fetch_array($result)){
@@ -158,7 +158,7 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
                                   <th scope="col">Username</th>
                                   <th scope="col">Full Name</th>  
                                   <th scope="col">Action</th>    
-                                  <th scope="col">Message</th> 
+                                  <th scope="col">Affected</th> 
                                   <th scope="col">IP Address</th> 
                                   <th scope="col">Host</th>   
                                   <th scope="col">Date</th>  
@@ -167,7 +167,7 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
                               <tbody>
                               <?php
                                     require_once("include/conn.php");
-                                    $fname=$verified_session_role; 
+                                  
                                     $query="SELECT * FROM audit_trail WHERE `actor` = 'Staff' ORDER BY date DESC ";
                                     $result=mysqli_query($conn,$query);
                                     while($rs=mysqli_fetch_array($result)){
@@ -233,7 +233,10 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files/ Template main js file -->
+  
+<!-- Vendor JS Files/ Template main js file -->
+<?php include ('core/js.php');//css connection?> 
+
 
 
 </body>

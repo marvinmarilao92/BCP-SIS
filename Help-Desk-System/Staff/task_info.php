@@ -44,14 +44,10 @@
                        
                        </select>
                                   </div>
-                                  <div class="col-md-12">
-                                    <select class="form-select" id="send_off2" name="send_off2" >
-                                      <option selected="selected" disabled="disabled">Select Office</option>
-                                    </select>
-                                  </div>
+                                
                                   <br>
                                   <div class="col-12">
-                                      <textarea class="form-control" style="height: 80px" placeholder="Remarks" name="docremarks" id="docremarks" id="docdesc" required></textarea>
+                                      <textarea class="form-control" style="height: 80px" placeholder="message" name="docremarks" id="docremarks" id="docdesc" required></textarea>
                                   </div> 
                             </div>
                         </div>

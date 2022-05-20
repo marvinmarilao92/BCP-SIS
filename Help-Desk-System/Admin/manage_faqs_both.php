@@ -130,8 +130,9 @@ include('session.php');
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files/ Template main js file -->
-   <!-- Vendor JS Files/ Template main js file -->
+  
+<!-- Vendor JS Files/ Template main js file -->
+<?php include ('core/js.php');//css connection?> 
    <script>
                var ctx = document.getElementById("barChart").getContext('2d');
     var myChart = new Chart(ctx, {
