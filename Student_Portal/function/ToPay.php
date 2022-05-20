@@ -45,7 +45,7 @@ date_default_timezone_set('Asia/Manila');
                     {
                         
                         $get = password_hash($p_desc, PASSWORD_DEFAULT);
-                        header("Location: ../transac-details?success=Payment Done , Thank You !");
+                        header("Location: ../index?success=Payment Done , Thank You !");
       				    die();
 
                     }else
