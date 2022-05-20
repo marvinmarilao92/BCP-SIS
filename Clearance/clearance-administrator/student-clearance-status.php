@@ -75,6 +75,7 @@ include ("includes/sidebar.php");
                     mysqli_close($link);
                     ?>
               <div class="float-end">
+                <a href="previous-clearance-student.php"><button type="button" class="btn btn-info">View Previous Version</button></a>
                 <a href="reset-clearance-student.php"><button type="button" class="btn btn-danger">Reset Clearance of Students</button></a>
               </div>
             </div>

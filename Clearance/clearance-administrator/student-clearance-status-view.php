@@ -1,5 +1,13 @@
 <?php
 include('includes/session.php');
+$sql = "SELECT * FROM clearance_student_semester ORDER BY id DESC LIMIT 1";
+if($result = mysqli_query($link, $sql)){
+  if(mysqli_num_rows($result) > 0){
+    while($row = mysqli_fetch_array($result)){
+      $current_sem = $row['name']." SY: ".$row['school_year'];
+    }
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +31,7 @@ include ("includes/sidebar.php");
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item"><a href="student-clearance-status.php">Student Clearance Status</a></li>
+          <li class="breadcrumb-item"><a href="student-clearance.php">Students Clearance Status for <?php echo $current_sem; ?></a></li>
           <li class="breadcrumb-item">Clearance of <?php echo trim($_GET["name"]); ?></li>
         </ol>
       </nav>
