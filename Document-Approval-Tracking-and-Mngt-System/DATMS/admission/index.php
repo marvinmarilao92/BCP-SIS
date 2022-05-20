@@ -50,6 +50,13 @@ include('session.php');
            <label for="floatingName">Application Code</label>
          </div>
        </div>
+
+       <div class="col-md-2">
+          <div class="form-floating">
+            <input type="text" class="form-control" style="display:none ;" value="" name="stud_num" id="stud_num" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="Student No." >
+            <label for="floatingName">Student No.</label>
+          </div>
+        </div>
       
        <div class="col-md-4">
          <div class="form-floating" >
@@ -119,6 +126,13 @@ include('session.php');
                   <div class="form-floating">
                     <input type="text" class="form-control" name="application_code" id="application_code" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="middle name" onChange="fetchStudInfo(this.value);"  Required autofocus>
                     <label for="floatingName">Application Code</label>
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" style="display:none ;" name="stud_num" id="stud_num" onkeypress="return isNumberKey(event)" maxlength="8"  placeholder="Student No." value="" >
+                    <label for="floatingName">Student No.</label>
                   </div>
                 </div>
 
