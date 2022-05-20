@@ -51,7 +51,8 @@ if ($resultforSEARCH) {  ?>
 
   <div class="col-md-6 col-sm-12 p-2">
     <small>Temperature</small>
-    <input type="text" class="form-control " name="temperation" id="temperation" placeholder="Temperature" required>
+    <input type="number" class="form-control " name="temperature" id="temperature" min="" max="100"
+      placeholder="Insert Temperature" required>
   </div>
 
 </div>

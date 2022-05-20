@@ -1,5 +1,5 @@
 <?php
-include_once('security/newsource.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,17 +46,6 @@ include_once('security/newsource.php');
             <li class="dropdown-header">
               <h6><?php echo $verified_session_firstname . " " . $verified_session_lastname ?></h6>
               <span><?php echo $verified_session_role ?></span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center"
-                href="users-profile.php?id=<?php echo $_SESSION["login_key"]; ?>">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
             </li>
             <li>
               <hr class="dropdown-divider">
