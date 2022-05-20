@@ -375,6 +375,9 @@ include('session.php');
                     if($result2 = mysqli_query($link, $sql2)){
                       if(mysqli_num_rows($result2) > 0){
                         while($row2 = mysqli_fetch_array($result2)){
+                          if($row2["role"]!="Clearance Administrator"){
+
+                          
                           ?>
                           <!-- Insert your Module here -->
                           <div class="col-lg-6">
@@ -387,6 +390,7 @@ include('session.php');
                           </div>
                           <!-- End Insert your Module here -->
                           <?php
+                        }
                         }
                         // Free result set
                         mysqli_free_result($result2);
