@@ -121,6 +121,24 @@ include ("includes/head.php");
               </div>
             </div><!-- End Department Posts -->
 
+             <!-- Department Posts -->
+             <div class="col-12">
+              <div class="card mb-3">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="../images/mvcampus3.jpg" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">Help Desk Announcement</h5> 
+                      <p class="card-text">Announcement and other News will be put here</p>
+                      <a href="view.php?id=<?php echo $_SESSION["login_key"];?>" class="btn btn-light">Read More <span class="text-danger">&rarr;</span></a>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End Department Posts -->
+
             <!-- Department Posts -->
             <!-- <div class="col-12">
               <div class="card">
