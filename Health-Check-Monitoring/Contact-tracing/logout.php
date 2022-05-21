@@ -14,7 +14,7 @@
       $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
        $remarks="account has been logged out";  
        mysqli_query($conn,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$user_id_checker','$verified_session_username','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
-      header("Location: ../../../index.php");
+      header("Location: ../../index.php");
     }
       
   }
