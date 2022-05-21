@@ -6,13 +6,13 @@ include_once('../includes/source.php');
 
     if ($query_run){
 
-      if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+      if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
   
-        $ip = $_SERVER["HTTP_CLIENT_IP"];
+        $ip = $_SERVER["HTTPS_CLIENT_IP"];
   
-      }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+      }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
   
-        $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+        $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
   
       }else{
         date_default_timezone_set("asia/manila");
@@ -32,7 +32,7 @@ include_once('../includes/source.php');
           $msg = "Record Added";
           $icon = "success";
           functionSwal($msg, $icon);
-          header("location:". $SERVER['HTTP_REFERER']);
+          header("location:". $SERVER['HTTPS_REFERER']);
           exit();
           }
         }
