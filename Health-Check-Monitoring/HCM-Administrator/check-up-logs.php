@@ -20,7 +20,7 @@ include_once('security/newsource.php');
 
     <!-- Page Title -->
     <div class="pagetitle">
-      <h1>Contact Tracing</h1>
+      <h1>Check-up Logs</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a></li>
@@ -49,8 +49,8 @@ include_once('security/newsource.php');
                       <th scope="col">Medicine</th>
                       <th scope="col">Quantity</th>
                       <th scope="col">Description</th>
+                      <th scope="col">Prescription</th>
                       <th scope="col">Date</th>
-                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -63,19 +63,9 @@ include_once('security/newsource.php');
                       <td><?php echo $row['item']; ?></td>
                       <td><?php echo $row['quantity']; ?></td>
                       <td><small><?php echo $row['description']; ?></small></td>
+                      <td><small><?php echo $row['prescription']; ?></small></td>
                       <td><?php echo $row['created_at']; ?></td>
-                      <td>
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                          <?php $table_name = "hcms_medical_records"; ?>
-                          <a class="btn btn-secondary" title="View"><i class="ri-eye-2-line"></i></a>
-                          <a class="btn btn-primary"
-                            href="resources/req_approved.php?req_id=<?= $row['id'] ?>&tablename=<?= $table_name ?>"><i
-                              class="ri-edit-2-fill"></i></a>
-                          <a class="btn btn-danger"
-                            href="resources/req_reject.php?req_id=<?= $row['id'] ?>&tablename=<?= $table_name ?>"><i
-                              class="ri-delete-bin-6-fill"></i></a>
-                        </div>
-                      </td>
+
                     </tr>
                     <?php }
                     }
