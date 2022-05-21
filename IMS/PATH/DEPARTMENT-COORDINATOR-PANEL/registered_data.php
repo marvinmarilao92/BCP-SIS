@@ -39,7 +39,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Transaction History</h1>
+      <h1>Account Data</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="CASHIER/..">Home</a></li>
