@@ -136,9 +136,9 @@ include('security/newsource.php')
                   <div class="col-12 d-flex justify-content-center p-5">
                     <button type="button" class="btn btn-primary btn-lg btn-block p-3" data-bs-toggle="modal"
                       data-bs-target="#exampleModal">Student</button>
-                    <button type="button" class="btn btn-primary btn-lg btn-block p-3" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-success btn-lg btn-block p-3" data-bs-toggle="modal"
                       data-bs-target="#exampleModal2">Teacher</button>
-                    <button type="button" class="btn btn-primary btn-lg btn-block p-3" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-warning btn-lg btn-block p-3" data-bs-toggle="modal"
                       data-bs-target="#exampleModal3">Visitor</button>
                   </div>
                 </div>
@@ -195,7 +195,7 @@ include('security/newsource.php')
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content ">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Student Contact Tracing Form</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Teacher Contact Tracing Form</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -207,7 +207,7 @@ include('security/newsource.php')
                 </div>
                 <div class="col-12 col-md-4 input-group mb-3">
                   <div class="input-group-prepend">
-                    <span onclick="searchthis('showResult');" style="cursor:pointer;" class="input-group-text p-3"
+                    <span onclick="searchthis2('showResult2');" style="cursor:pointer;" class="input-group-text p-3"
                       id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path
@@ -215,7 +215,7 @@ include('security/newsource.php')
                       </svg></span>
                   </div>
                   <input type="text" class="form-control text-center" name="id_number" id="id_number"
-                    placeholder="ID Number" style="text-transform:capitalize;" onchange="searchthis('showResult2');"
+                    placeholder="ID Number" style="text-transform:capitalize;" onchange="searchthis2('showResult2');"
                     required>
                 </div>
                 <div id="showResult2"></div>
@@ -225,7 +225,7 @@ include('security/newsource.php')
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" onclick="insertCT();">Submit</button>
+          <button type="button" class="btn btn-primary" onclick="insertCT2();">Submit</button>
         </div>
       </div>
     </div>
@@ -235,7 +235,7 @@ include('security/newsource.php')
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content ">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Student Contact Tracing Form</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Visitor Contact Tracing Form</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -385,7 +385,7 @@ include('security/newsource.php')
     }
   }
 
-  function insertCT() {
+  function insertCT2() {
     var fullname = document.getElementById("fullname").value;
     var role = document.getElementById("role").value;
     var contact = document.getElementById("contact").value;
