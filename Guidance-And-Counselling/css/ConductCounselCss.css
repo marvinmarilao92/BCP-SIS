@@ -1,0 +1,174 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : Mar 3, 2022, 5:39:27 PM
+    Author     : Kim
+*/
+
+#FormTitle
+{
+    color: black;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 17px;
+
+}
+
+#modalTitle
+{
+    background-color: #c7efff;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+
+#CSID
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+#CSID:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#CSname
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+#CSname:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#CName
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+#CName:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+
+#CForm
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+#CForm:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+
+/*NEW*/
+#selectTheme
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+#selectTheme:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#textTheme
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+#textTheme:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#textareaTheme
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+#textareaTheme:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+/*For modal content*/
+#modalcontentTheme
+{
+   border-left: 3px solid #5e5e5e;
+   border-right: 3px solid #5e5e5e;
+   border-radius: 30px;
+}
+
+
+
+#CCmodalcontent
+{
+   border-left: 3px solid #5e5e5e;
+   border-right: 3px solid #5e5e5e;
+   border-radius: 30px;
+}
+
+#InsertForms
+{
+    background-color: hsla(4, 2%, 61%, 0.8);
+}
+
+#AddScore
+{
+    background-color: hsla(4, 2%, 61%, 0.8);
+}

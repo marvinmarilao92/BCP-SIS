@@ -1,0 +1,63 @@
+
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : Mar 16, 2022, 3:54:08 PM
+    Author     : Kim
+*/
+
+
+#Eguls
+{
+    background-image: linear-gradient(to right, #3cc3f0 ,  #17c3fc);
+      box-shadow: 5px 7px 17px grey;
+      border-radius: 50px;
+      width: 50px;
+      height: 50px
+}
+#Eguls:active
+{
+     background-image: linear-gradient(to right, #3cc3f0 ,  #00ffe5);
+}
+#NextNPreview
+{
+    font-size: 20px;   color: #3ebce6;
+}
+#NextNPreview:active
+{
+    color: #003399;
+}
+#changeValue
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    transition: color 2s;
+}
+
+#changeValue:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+
+/*content: "";
+  background: #f1f1f1;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s*/

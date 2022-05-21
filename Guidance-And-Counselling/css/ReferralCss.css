@@ -1,0 +1,189 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : Feb 1, 2022, 11:14:34 PM
+    Author     : Kim
+*/
+
+/*For Inserting Referral Slip*/
+#TitleforSlip
+{
+    color: #2c2e2d;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 17px;
+}
+
+/*#modalTitle
+{
+    background-color: #c7efff;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}*/
+
+#RemployeeName
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+#RemployeeName:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#RStudentName
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+#RStudentName:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#RStudentID
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+#RStudentID:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#RStudentIssue
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+#RStudentIssue:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+
+#NewForm
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    margin-right: 0px;
+
+}
+#NewForm:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+
+
+}
+
+#dtimeL
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    transition: color 2s;
+
+}
+#dtimeL:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+
+}
+
+/* Student_logs */
+
+#search
+{
+  color: black;
+  border-left: 3px solid #5e5e5e;
+  border-right: 3px solid #5e5e5e;
+  border-radius: 10px;
+  font-family: "Lucida Console", "Courier New", monospace;
+  transition: color 2s;
+}
+
+#search:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+
+}
+
+/*Conduct counsel php*/
+
+#SelectData
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    transition: color 2s;
+}
+
+#SelectData:hover
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    transition: color 2s;
+}
+
+/*#AddAppointment #CAmodalcontent
+{
+   border-left: 3px solid #5e5e5e;
+   border-right: 3px solid #5e5e5e;
+   border-radius: 30px;
+}*/
+#AddAppointment
+{
+    background-color: hsla(4, 2%, 61%, 0.8);
+}

@@ -1,0 +1,52 @@
+#filterdate
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    transition: color 2s;
+}
+#filterdate:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+#Jobdate
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    transition: color 2s;
+}
+#Jobdate:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#filterJob
+{
+    color: black;
+    border-left: 3px solid #5e5e5e;
+    border-right: 3px solid #5e5e5e;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    transition: color 2s;
+}
+#filterJob:hover
+{
+    color: black;
+    border-left: 3px solid #34cf77;
+    border-right: 3px solid #34cf77;
+    border-radius: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
