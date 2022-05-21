@@ -65,7 +65,7 @@ include_once('security/newsource.php');
                 <tr>
                   <th scope="col">ID Number</th>
                   <th scope="col">Full Name</th>
-                  <th scope="col">Check UP</th>
+                  <th scope="col">Check-up</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -79,8 +79,6 @@ include_once('security/newsource.php');
                   <td><?php echo $row['full_n']; ?></td>
                   <td><?php echo $row['date']; ?></td>
                   <td>
-
-                    <a class="btn btn-primary" title="Monitor"><i class="ri-eye-2-line"></i>Monitor</a>
                     <a class="btn btn-success" title="Edit"><i class="ri-edit-2-fill"></i></a>
                     <a class="btn btn-warning" title="view"><i class="ri-eye-fill"></i></a>
                     <a class="btn btn-danger" title="Delete"><i class="ri-delete-bin-7-fill"></i></a>
