@@ -51,21 +51,21 @@
           <span>Teachers Clearance</span>
         </a>
       </li><!-- End Teachers Clearance Nav -->
-
-      <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="student-clearance-status.php">
-          <i class="bi bi-person"></i>
-          <span>Students Clearance Status</span>
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="clearance-audit-trail.php">
+          <i class="bi bi-flag"></i>
+          <span>Audit Trail Report</span>
         </a>
-      </li>End Students Clearance Status Nav -->
-
-      <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="teacher-clearance-status.php">
-          <i class="bi bi-person"></i>
-          <span>Teachers Clearance Status</span>
+      </li><!-- End Audit Trail Report Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="clearance-audit-logs.php">
+          <i class="bi bi-flag"></i>
+          <span>Audit Logs Report</span>
         </a>
-      </li>End Teachers Clearance Status Nav -->
-
+      </li><!-- End Audit Logs Report Nav -->
+      
       <li class="nav-item">
         <a class="nav-link collapsed" href="clearance-departments.php">
           <i class="bi bi-menu-button-wide"></i>

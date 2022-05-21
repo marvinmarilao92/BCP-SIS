@@ -1,5 +1,15 @@
 <?php
 include('session.php');
+$sql = "SELECT * FROM clearance_teacher_semester ORDER BY id DESC LIMIT 1";
+if($result = mysqli_query($link, $sql)){
+  if(mysqli_num_rows($result) > 0){
+    while($row = mysqli_fetch_array($result)){
+      $current_sem = "for ".$row['name']." SY: ".$row['school_year'];
+    }
+  }else{
+    $current_sem = "";
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,11 +70,11 @@ include('session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Clearance Status of Teachers</h1>
+      <h1>Clearance Status of Teachers <?php echo $current_sem; ?></h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Clearance Status of Teachers</li>
+          <li class="breadcrumb-item">Clearance Status of Teachers <?php echo $current_sem; ?></li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -73,7 +83,32 @@ include('session.php');
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-
+          <?php 
+          $semester = 0;
+          $sql = "SELECT * FROM clearance_teacher_semester_current LIMIT 1";
+          if($result = mysqli_query($link, $sql)){
+            if(mysqli_num_rows($result) > 0){
+              while($row = mysqli_fetch_array($result)){
+                $semester = $row['semester_id'];
+              }
+            } else{
+                echo '<div class="alert alert-warning"><em>Clearance Completion has not started yet.</em></div>';
+            }
+          } else{
+              echo "Oops! Something went wrong. Please try again later.";
+          }
+          if($semester == 0){ ?>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"></h5>
+            <?php
+            echo '<div class="alert alert-warning"><em>Clearance Completion has not started yet.</em></div>';
+            ?>
+              </div>
+            </div>
+          <?php
+          }else{
+          ?>
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">List of Teachers</h5>
@@ -151,7 +186,7 @@ include('session.php');
 
             </div>
           </div>
-
+          <?php }?>
         </div>
       </div>
     </section>
