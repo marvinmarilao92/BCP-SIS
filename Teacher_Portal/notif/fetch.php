@@ -23,6 +23,7 @@ if(isset($_POST["view"]))
       $date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
       $d1 = $row["date"];
       $doc_status = $row["subject"];
+      $dept = $row["dept"];
       $today = date("Y-m-d",strtotime("+0 HOURS"));
       $d2 = $date;
       // Declare and define two dates
@@ -120,6 +121,8 @@ if(isset($_POST["view"]))
         $links='docu_template?id='.$_SESSION["login_key"].'';        
        }else if ($doc_status =='Request Submitted'){
         $links='docu_template?id='.$_SESSION["login_key"].'';        
+       }else if ($doc_status == "Clearance Declined" || $doc_status == "Clearance Approved"){
+        $links='clearance-status-read.php?id=22&name='.$dept.'&notif=1';        
        }else{
         $links='docu_req?id='.$_SESSION["login_key"].'';
        }
@@ -164,9 +167,9 @@ if(isset($_POST["view"]))
  $result_1 = mysqli_query($conn, $query_1);
  $count = mysqli_num_rows($result_1);
  $data = array(
-  'notification'   => $output,
-  'unseen_notification' => $count
- );
- echo json_encode($data);
+   'notification'   => $output,
+   'unseen_notification' => $count
+  );
+  echo json_encode($data);
 }
 ?>
