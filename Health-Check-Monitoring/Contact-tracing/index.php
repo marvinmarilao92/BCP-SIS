@@ -136,9 +136,9 @@ include('security/newsource.php')
                   <div class="col-12 d-flex justify-content-center p-5">
                     <button type="button" class="btn btn-primary btn-lg btn-block p-3" data-bs-toggle="modal"
                       data-bs-target="#exampleModal">Student</button>
-                    <button type="button" class="btn btn-primary btn-lg btn-block p-3" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-success btn-lg btn-block p-3" data-bs-toggle="modal"
                       data-bs-target="#exampleModal2">Teacher</button>
-                    <button type="button" class="btn btn-primary btn-lg btn-block p-3" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-warning btn-lg btn-block p-3" data-bs-toggle="modal"
                       data-bs-target="#exampleModal3">Visitor</button>
                   </div>
                 </div>
