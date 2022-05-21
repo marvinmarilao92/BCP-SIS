@@ -1,4 +1,4 @@
-<?php?>
+
  <footer id="footer" class="footer">
     <div class="copyright">
     &copy; Copyright <strong><span>Guidance and Counseling</span></strong>. All Rights Reserved

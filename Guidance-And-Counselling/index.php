@@ -3,13 +3,13 @@
 
 <head>
   <?php 
-  require ('external.php');
-  require ('header.php');?>
+  require ('inlude/external.php');
+  require ('inlude/header.php');?>
 </head>
 
 <body>
   <!-- ======= Sidebar ======= -->
-  <?php require ('asideSidebar.php'); ?>
+  <?php require ('inlude/asideSidebar.php'); ?>
 
   <main id="main" class="main">
 
