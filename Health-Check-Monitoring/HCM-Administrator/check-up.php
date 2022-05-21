@@ -206,6 +206,20 @@ include_once('security/newsource.php');
   }
 </script>
 
+<script>
+    function validateCurrentQTY(thisItem, validates)
+    {
+      $.ajax({
+        url: 'ajax/validateQTY.php?thisItem=' + thisItem,
+        success: function(html)
+        {
+          var validate = document.getElementById(validates);
+          validate.innerHTML = html;
+          $("#prod_quantity").keydown(function(event) { return false; });
+        }
+      });
+    }
+</script>
 
   <?php include('includes/footer.php'); ?>
 </body>

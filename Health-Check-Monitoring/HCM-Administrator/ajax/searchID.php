@@ -37,7 +37,7 @@ if ($resultforSEARCH) {  ?>
 
 <div class="row p-2">
   <div class="col-md-6 col-sm-12 p-2 text-center">
-    <select id="prod_name" name="prod_name" class="form-select">
+    <select id="prod_name" name="prod_name" class="form-select" onchange="validateCurrentQTY(this.value, 'validateTY');">
       <option value="" selected="selected" disabled="disabled">Item</option>
       <?php
         $sql2 = 'SELECT * FROM hcms_items ORDER BY prod_id';
@@ -54,10 +54,15 @@ if ($resultforSEARCH) {  ?>
     <small>Optional</small>
   </div>
 
-  <div class="col-md-6 col-sm-12 p-2">
-    <input type="number" min="1" class="form-control" name="prod_quantity" id="prod_quantity" placeholder="Quantity"
-      style="text-transform:capitalize;" required>
-  </div>
+                      <div class="col-md-6 col-sm-12 p-2">
+
+                        <div id="validateTY">
+                        <input type="number" min="1" max="5"
+                        class="form-control" name="prod_quantity" id="prod_quantity" placeholder="Quantity"
+                          style="text-transform:capitalize;" required>
+                        </div>
+
+                      </div>
 
   <div class="col-md-12 col-sm-12 p-2">
     <div class="form-group">
@@ -134,7 +139,8 @@ if ($resultforSEARCH) {  ?>
   </div>
 
   <div class="col-md-6 col-sm-12 p-2">
-    <input type="number" min="0"
+    <input type="number" min="1"
+
     class="form-control" name="prod_quantity" id="prod_quantity" placeholder="Quantity"
       style="text-transform:capitalize;" required>
   </div>
