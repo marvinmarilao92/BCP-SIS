@@ -3,8 +3,7 @@ include_once('security/newsource.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Contact Tracing
-</title>
+<title>G & C</title>
 
 <head>
   <?php include('includes/head_ext.php'); ?>
@@ -12,8 +11,7 @@ include_once('security/newsource.php');
 </head>
 
 <body>
-  <?php $page = "contact-tracing";
-  $nav = "health-monitoring"; ?>
+  <?php $page = "gac" ?>
   <?php include('includes/header.php'); ?>
   <?php include('includes/sidebar.php'); ?>
   <main id="main" class="main">
@@ -34,7 +32,7 @@ include_once('security/newsource.php');
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h1 class="card-title">Today</h1>
+              <h1 class="card-title">Contact Tracing</h1>
               <div class="table-responsive">
                 <table class="table table-hover datatable">
                   <?php
@@ -49,6 +47,9 @@ include_once('security/newsource.php');
                       <th scope="col">Full Name</th>
                       <th scope="col">Contact</th>
                       <th scope="col">Address</th>
+                      <th scope="col">Course</th>
+                      <th scope="col">Year Level</th>
+                      <th scope="col">Section</th>
                       <th scope="col">Temperature</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -63,6 +64,9 @@ include_once('security/newsource.php');
                       <td><?php echo $row['fullname']; ?></td>
                       <td><?php echo $row['contact']; ?></td>
                       <td><?php echo $row['address']; ?></td>
+                      <td><?php echo $row['course']; ?></td>
+                      <td><?php echo $row['y_lvl']; ?></td>
+                      <td><?php echo $row['section']; ?></td>
                       <td><?php echo $row['temp']; ?></td>
                       <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">

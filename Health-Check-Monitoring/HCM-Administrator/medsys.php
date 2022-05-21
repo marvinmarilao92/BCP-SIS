@@ -3,8 +3,7 @@ include_once('security/newsource.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Contact Tracing
-</title>
+<title>Incident Reports</title>
 
 <head>
   <?php include('includes/head_ext.php'); ?>
@@ -12,8 +11,7 @@ include_once('security/newsource.php');
 </head>
 
 <body>
-  <?php $page = "contact-tracing";
-  $nav = "health-monitoring"; ?>
+  <?php $page = "medsys" ?>
   <?php include('includes/header.php'); ?>
   <?php include('includes/sidebar.php'); ?>
   <main id="main" class="main">
@@ -34,12 +32,12 @@ include_once('security/newsource.php');
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h1 class="card-title">Today</h1>
+              <h1 class="card-title">Contact Tracing</h1>
               <div class="table-responsive">
                 <table class="table table-hover datatable">
                   <?php
                   require_once "timezone.php";
-                  $query = "SELECT * FROM hcms_ctracing where created_at = '$time' ORDER BY id ASC";
+                  $query = "SELECT * FROM ms_labtest ORDER BY id ASC";
                   $query_run = mysqli_query($conn, $query);
                   ?>
                   <!-- Table Head -->
@@ -47,10 +45,12 @@ include_once('security/newsource.php');
                     <tr>
                       <th scope="col">ID Number</th>
                       <th scope="col">Full Name</th>
-                      <th scope="col">Contact</th>
-                      <th scope="col">Address</th>
-                      <th scope="col">Temperature</th>
+                      <th scope="col">Course</th>
+                      <th scope="col">Year-Level</th>
+                      <th scope="col">Contact#</th>
+                      <th scope="col">Status</th>
                       <th scope="col">Action</th>
+
                     </tr>
                   </thead>
                   <tbody>
@@ -60,10 +60,11 @@ include_once('security/newsource.php');
                     ?>
                     <tr>
                       <td><?php echo $row['id_number']; ?></td>
-                      <td><?php echo $row['fullname']; ?></td>
+                      <td><?php echo $row['full_n']; ?></td>
+                      <td><?php echo $row['course']; ?></td>
+                      <td><?php echo $row['yr_lvl']; ?></td>
                       <td><?php echo $row['contact']; ?></td>
-                      <td><?php echo $row['address']; ?></td>
-                      <td><?php echo $row['temp']; ?></td>
+                      <td><?php echo $row['status']; ?></td>
                       <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                           <?php $table_name = "hcms_medical_records"; ?>
