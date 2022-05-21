@@ -38,7 +38,7 @@
 
      <li class="nav-item">
        <a class="nav-link collapsed" data-bs-target="#hs-nav" data-bs-toggle="collapse" href="#">
-         <i class="bi bi-shield-plus"></i><span>Health Monitoring</span><i class="bi bi-chevron-down ms-auto"></i>
+         <i class="bi bi-thermometer-half"></i><span>Health Monitoring</span><i class="bi bi-chevron-down ms-auto"></i>
        </a>
        <ul id="hs-nav" class="
        
@@ -71,50 +71,27 @@
        </ul>
      </li>
 
-
      <li class="nav-item">
-       <a class="nav-link collapsed" data-bs-target="#inventory-nav" data-bs-toggle="collapse" href="#">
-         <i class="bi bi-list-check"></i><span>Inventory</span><i class="bi bi-chevron-down ms-auto"></i>
-       </a>
-       <ul id="inventory-nav" class="
-       
-       <?php if ('inventory' == $nav) {
-          echo 'nav-content collapse show';
-        } else {
-          echo 'nav-content collapse';
-        } ?> " data-bs-parent="#sidebar-nav">
-         <li>
-           <a href="medical-medicines.php?id=<?php echo $_SESSION['login_key']; ?>" class="
-           
-           <?php if ('medicines' == $page) {
-              echo 'active';
-            } ?>">
-             <i class="bi bi-circle"></i><span>Medicines</span>
-           </a>
-         </li>
-         <li>
-           <a href="medical-equipments.php?id=<?php echo $_SESSION['login_key']; ?>" class="
-           
-           <?php if ('equipments' == $page) {
-              echo 'active';
-            } ?>">
-             <i class="bi bi-circle"></i><span>Medical Equipments</span>
-           </a>
-         </li>
-       </ul>
-     </li>
-
-     <li class="nav-heading text-primary">Records</li>
-
-
-     <li class="nav-item">
-       <a href="annua-examination.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('Records-list' == $page) {
+       <a href="medical-medicines.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('medicines' == $page) {
                                                                                           echo 'nav-link';
                                                                                         } else {
                                                                                           echo 'nav-link collapsed';
                                                                                         } ?>">
-         <i class="ri-health-book-line"></i>
-         <span>Annual Medical Examination</span>
+         <i class="bi bi-list-check"></i>
+         <span>Inventory</span>
+       </a>
+     </li>
+
+     <li class="nav-heading text-primary">Medical System</li>
+
+     <li class="nav-item">
+       <a href="medsys.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('medsys' == $page) {
+                                                                              echo 'nav-link';
+                                                                            } else {
+                                                                              echo 'nav-link collapsed';
+                                                                            } ?>">
+         <i class="bi bi-file-earmark-medical"></i>
+         <span>Medical Examination</span>
        </a>
      </li>
 
