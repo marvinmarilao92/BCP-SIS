@@ -9,9 +9,9 @@ $course = $_POST['course'];
 $y_lvl = $_POST['year_level'];
 $section = $_POST['section'];
 $temp = $_POST['temperature'];
-echo $new_time = date("Y-m-d", strtotime($time));
+$new_time = date("Y-m-d", strtotime($time));
 $insert = $db->query('INSERT INTO hcms_ctracing (id_number, fullname, contact, `address`, course, y_lvl, section, temp, created_at)  
-VALUES (?, ?, ?, ?,  ?, ?, ?, ?,  ?)', $id_number, $fullname, $contact, $address, $course, $y_lvl, $section, $temp, $time);
+VALUES (?, ?, ?, ?,  ?, ?, ?, ?,  ?)', $id_number, $fullname, $contact, $address, $course, $y_lvl, $section, $temp, $new_time);
 
 // echo $insert->affectedRows();
 

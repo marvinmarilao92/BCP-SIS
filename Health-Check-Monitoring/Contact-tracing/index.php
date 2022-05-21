@@ -261,7 +261,6 @@ include('security/newsource/Config.php')
         confirmButtonColor: '#f93154',
         cancelButtonColor: '#B23CFD',
         showCancelButton: true,
-        backdrop: `rgba(0,0,0,0.2)`,
 
       }).then((result) => {
         if (result.isConfirmed) {

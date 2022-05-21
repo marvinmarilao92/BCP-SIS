@@ -58,11 +58,36 @@
            </a>
          </li>
 
+       </ul>
+     </li>
+
+     <li class="nav-item">
+       <a class="nav-link collapsed" data-bs-target="#Mlogs-nav" data-bs-toggle="collapse" href="#">
+         <i class="bi bi-thermometer-half"></i><span>Manage Logs</span><i class="bi bi-chevron-down ms-auto"></i>
+       </a>
+       <ul id="Mlogs-nav" class="
+       
+       <?php if ('Mlogs' == $nav) {
+          echo 'nav-content collapse show';
+        } else {
+          echo 'nav-content collapse';
+        } ?> " data-bs-parent="#sidebar-nav">
 
          <li>
-           <a href="contact-tracing.php?id=<?php echo $_SESSION['login_key']; ?>" class="
+           <a href="check-up-logs.php?id=<?php echo $_SESSION['login_key']; ?>" class="
            
-           <?php if ('contact-tracing' == $page) {
+           <?php if ('check-up-logs' == $page) {
+              echo 'active';
+            } ?>">
+             <i class="bi bi-circle"></i><span>Check-up</span>
+           </a>
+         </li>
+
+
+         <li>
+           <a href="contact-tracing-logs.php?id=<?php echo $_SESSION['login_key']; ?>" class="
+           
+           <?php if ('contact-tracing-logs' == $page) {
               echo 'active';
             } ?>">
              <i class="bi bi-circle"></i><span>Contact Tracing</span>
@@ -100,26 +125,19 @@
 
 
      <li class="nav-item">
-       <a class="nav-link collapsed" data-bs-target="#logs-nav" data-bs-toggle="collapse" href="#">
+       <a class="nav-link collapsed" data-bs-target="#emplogs-nav" data-bs-toggle="collapse" href="#">
          <i class="bi bi-person-lines-fill"></i><span>Employee Logs</span><i class="bi bi-chevron-down ms-auto"></i>
        </a>
-       <ul id="logs-nav" class="<?php if ('logs' == $nav) {
-                                  echo 'nav-content collapse show';
-                                } else {
-                                  echo 'nav-content collapse';
-                                } ?> " data-bs-parent="#sidebar-nav">
+       <ul id="emplogs-nav" class="<?php if ('emplogs' == $nav) {
+                                      echo 'nav-content collapse show';
+                                    } else {
+                                      echo 'nav-content collapse';
+                                    } ?> " data-bs-parent="#sidebar-nav">
          <li>
            <a href="logs-admin.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('logs-admin' == $page) {
                                                                                       echo 'active';
                                                                                     } ?>">
              <i class="bi bi-circle"></i><span>Admin-Logs</span>
-           </a>
-         </li>
-         <li>
-           <a href="logs-staff.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('logs-staffs' == $page) {
-                                                                                      echo 'active';
-                                                                                    } ?>">
-             <i class="bi bi-circle"></i><span>Staff-Logs</span>
            </a>
          </li>
          <li>

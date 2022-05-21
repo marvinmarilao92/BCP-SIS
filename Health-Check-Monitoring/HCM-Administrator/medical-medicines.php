@@ -111,34 +111,37 @@ include_once('security/newsource.php');
           </div>
         </div>
       </div>
-
-      <?php require_once "timezone.php";
-      if (isset($_POST['submit'])) {
-        $medname = $_POST['drug_name'];
-        $sci = $_POST['sci_name'];
-        $quan = $_POST['quantity'];
-        $query = $db->query('SELECT * FROM hcms where medname =?', $medname)->fetchAll();
-        if ($query) {
-      ?>
-      <script>
-      Swal.fire({
-        allowOutsideClick: true,
-        icon: 'error',
-        title: 'Temp!',
-        text: 'You should not forget about the temperature check',
-        confirmButtonText: 'Thankyou',
-        confirmButtonColor: '#f93154',
-
-      })
-      </script>
-      <?php
-        }
-        $sql = $db->query('INSERT INTO hcms_items (med_name, med_sci, quantity)  VALUES (?, ?, ?)', $medname, $sci, $quan);
-      }
-      ?>
+      <?php include('includes/footer.php'); ?>
     </section>
   </main>
-  <?php include('includes/footer.php'); ?>
+
+  <?php require_once "timezone.php";
+  if (isset($_POST['submit'])) {
+    $medname = $_POST['drug_name'];
+    $sci = $_POST['sci_name'];
+    $quan = $_POST['quantity'];
+    $query = "SELECT * FROM hcms_items WHERE med_name = '{$medname}'";
+    if ($query != 1) {
+  ?>
+  <script>
+  Swal.fire({
+    allowOutsideClick: true,
+    icon: 'error',
+    title: 'Temp!',
+    text: 'You should not forget about the temperature check',
+    confirmButtonText: 'Thankyou',
+    confirmButtonColor: '#f93154',
+
+  })
+  </script>
+  <?php
+    } else {
+      $sql = $db->query('INSERT INTO hcms_items (med_name, med_sci, quantity)  VALUES (?, ?, ?)', $medname, $sci, $quan);
+    }
+  }
+  ?>
+
+
 </body>
 
 </html>
