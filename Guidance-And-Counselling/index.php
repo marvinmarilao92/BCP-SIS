@@ -3,13 +3,13 @@
 
 <head>
   <?php 
-  include ("inlude/external.php");
-  include ("inlude/header.php");?>
+  include ("include/external.php");
+  include ("include/header.php");?>
 </head>
 
 <body>
   <!-- ======= Sidebar ======= -->
-  <?php include ("inlude/asideSidebar.php"); ?>
+  <?php include ("include/asideSidebar.php"); ?>
 
   <main id="main" class="main">
 
