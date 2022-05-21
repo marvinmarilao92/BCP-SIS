@@ -175,8 +175,9 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
 
 
 
-               <!-- Reports -->
-               <div class="col-12">
+                        
+  <!-- Reports -->
+  <div class="col-12">
               <div class="card">
 
                 <div class="filter">
@@ -190,23 +191,15 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Ticket <span> | Reports</span></h5>
+                  <h5 class="card-title">FAQs <span> | Reports</span></h5>
 
                   <!-- Bar Chart -->
-                  <canvas id="barChart" style="max-height: 400px;"></canvas>
+                  <div id="piechart" style="width: 900px; height: 500px;"></div>  
                  <?php
-                       require_once("include/conn.php");
-
-                             $sql ="SELECT *,count(subject) as count FROM hdms_tickets group by subject limit 5;";
-                             $result = mysqli_query($conn,$sql);
-                             $chart_data="";
-                             while ($row = mysqli_fetch_array($result)) { 
-
-                                $name[]  = decryptthis($row['subject'], $key)  ;
-                                $counts[] = $row['count'];
-                            }
-                     
-                    ?>
+                 include "include/conn.php";
+                  $query = "SELECT shortDesc, count(*) as number FROM hd_department GROUP BY shortDesc";  
+ $result = mysqli_query($conn, $query);  
+ ?> 
               
               <!-- End Bar CHart -->
 
@@ -214,9 +207,6 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
 
               </div>
             </div><!-- End Reports -->
-
-                        
-
 
 
             
@@ -262,51 +252,9 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files/ Template main js file -->
-  <script>
-      var ctx = document.getElementById("barChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-     data: {
-        labels:<?php echo json_encode($name); ?>,
-            datasets: [{
-                 label: 'Tickets',
-                  backgroundColor: [
-                          'rgb(255, 99, 132, 0.2)',
-                          'rgb(255, 159, 64, 0.2)',
-                          'rgb(255, 205, 86, 0.2)',
-                          'rgb(75, 192, 192, 0.2)',
-                          'rgb(54, 162, 235, 0.2)',
-                          'rgb(153, 102, 255, 0.2)',
-                          'rgb(201, 203, 207, 0.2)'
-                        ],
-                        borderColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(255, 159, 64)',
-                          'rgb(255, 205, 86)',
-                          'rgb(75, 192, 192)',
-                          'rgb(54, 162, 235)',
-                          'rgb(153, 102, 255)',
-                          'rgb(201, 203, 207)'
-                        ],
-                        borderWidth: 1,
-                data:<?php echo json_encode($counts); ?>,
-            }]
-        },
-      options: {
-          legend: {
-            display: false
-          },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
+  <?php include ('core/js.php');//css connection?>
 
-        }
-      }
-    });
-    
+  <script>
     //pie
     var ctxP = document.getElementById("accountChart").getContext('2d');
     var myPieChart = new Chart(ctxP, {
@@ -348,9 +296,37 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
       
     });
 
-              </script>
+         </script>
 
-
+  
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+           <script type="text/javascript">  
+           google.charts.load('current', {'packages':['corechart']});  
+           google.charts.setOnLoadCallback(drawChart);  
+           function drawChart() 
+            
+           {  
+                var data = google.visualization.arrayToDataTable([  
+                          ['shortDesc', 'Number'],  
+                          <?php  
+                          while($row = mysqli_fetch_array($result))  
+                          {  
+                               echo "['".$row["shortDesc"]."', ".$row["number"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title: 'Percentage of every department on how many faqs have been inserted',  
+                      //is3D:true,  
+                      pieHole: 0.4  
+                     };  
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
+                chart.draw(data, options);  
+           }
+           
+           
+         
+           </script> 
 
 
 

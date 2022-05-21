@@ -10,12 +10,13 @@ include('includes/session.php');
 
     <body>
     <?php include ('includes/nav.php');//Design for  Header?>
-    <?php $page = 'faqs';include ('includes/sidebar.php');//Design for sidebar?>
+    <?php $page = 'contact';include ('includes/sidebar.php');//Design for sidebar?>
         
 
 
 <body>
 <?php
+
 
 
 //Import PHPMailer classes into the global namespace
@@ -67,11 +68,15 @@ list($encrypted_data, $iv) = array_pad(explode('::', base64_decode($data), 2),2,
 return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
 }
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if(isset($_POST['submit'])){
+  
+  date_default_timezone_set("asia/manila");
+  $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+
     $email=$_POST['email'];
     $email=encryptthis($email, $key);
-    $subject=$_POST['subject'];
-    $subject=encryptthis($subject, $key);
+    $category=$_POST['category'];
+   
     $message=$_POST['message'];
     $message=encryptthis($message, $key);
   
@@ -80,26 +85,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $unid=bin2hex($unid);
 
     $db=new DB();
-        
+
         	//create audit trail record
     $fname= $_SESSION['session_department'] = "Student";
-    if (!empty($_SERVER["HTTP_CLIENT_IP"])){
-      $ip = $_SERVER["HTTP_CLIENT_IP"];
-    }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
-      $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+    if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
+      $ip = $_SERVER["HTTPS_CLIENT_IP"];
+    }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
+      $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
     }else{
       $ip = $_SERVER["REMOTE_ADDR"];
       $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
        $remarks="submitted a ticket";  
        //save to the audit trail table
-       mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,ip,affected,host,date) VALUES('$verified_session_username','$remarks','$fname','$ip','$subject','$host','$date')")or die(mysqli_error($link));
+       mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,ip,affected,host,date) VALUES('$verified_session_username','$remarks','$fname','$ip','$category','$host','$date')")or die(mysqli_error($link));
 
-    $sql="INSERT INTO hdms_tickets (ticket_id,status,email,subject,message) 
-    VALUES ('$unid','0','$email','$subject','$message')" or die("<script>alert('Error');</script>");
+       
+      $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+      VALUES ('2', '0' ,'$verified_session_username','0','Submitted ticket','Incoming ticket','Student','Active','$date')") or die(mysqli_error($conn));
+
+
+      $sql="INSERT INTO hdms_tickets (student_number,ticket_id,status,email,category,message, date)
+      VALUES ('$verified_session_username','$unid','0','$email','$category','$message','$date')" or die("<script>alert('Error');</script>");
     
+
     $inset=$db->conn->query($sql);
    if($inset){
-        $success='Your ticket has been created. Make sure to check your email inbox for ticket ID';
+        $success='Your ticket has been created. check your email inbox';
         $mail = new PHPMailer;
         $mail->isSMTP();
         $mail->SMTPDebug = 0;                                           //Send using SMTP
@@ -113,13 +124,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          //Recipients
         $mail->setFrom('helpdesksupport@bcp-sis.ga', 'Help Desk Support');
         $mail->addAddress($_POST['email'], 'Student');     //Add a recipient
+        
        
        $body = 
        '  <div class="card">
     
        <div class="card-body">
-         <h5 class="card-title">######Please dont share your ticket ID######</h5>
-         <p class="card-text">Dear Student your ticket has been sent to our help desk support team and we will back to you shortly<br>
+         <h3 class="card-title">######Please dont share your ticket ID######</h3>
+         <p class="card-text">Dear <b>'.$verified_session_firstname.'</b> your ticket has been sent to our help desk support team and we will back to you shortly<br>
          for inquiries and question just submit another ticket to our help desk system or just send us an email @helpdesksupport@bcp-sis.ga
          <br>Thank you! Stay safe.</p>
        </div>
@@ -128,7 +140,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
        <h3>Ticket ID: '.$unid.'</h3>
        
        <div class="alert alert-light bg-light border-0 alert-dismissible fade show" role="alert">
-       © Copyright Bestlink College of the Philippines. All Rights Reserved.
+       <h4>© Copyright Bestlink College of the Philippines. All Rights Reserved.</h4>
      </div>
        
        
@@ -147,7 +159,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      else {
        $error = "Ticket did not send!";
     } 
-    //echo '<script>showAlert();window.setTimeout(function () {HideAlert();},3000);</script>';  echo "<meta http-equiv='refresh' content='0;url=view_ticket.php'>";
+      	
 
     }		
 							
@@ -156,7 +168,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 ?>
- 
  <main id="main" class="main">
  <div class="pagetitle">
       <h1>Contact Us</h1>
@@ -194,14 +205,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               <div class="info-box card">
                 <i class="bi bi-envelope"></i>
                 <h3>Email Us</h3>
-                <p>bcphelpdesksupport@gmail.com<br></p>
+                <p>bcphelpdesksupport@gmail.com</p>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="info-box card">
                 <i class="bi bi-clock"></i>
                 <h3>Open Hours</h3>
-                <p>Monday - Friday<br>8:00AM - 05:00PM</p>
+                <p>Monday - Friday &nbsp;8:00AM - 05:00PM</p>
               </div>
             </div>
           </div>
@@ -222,15 +233,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 echo '<div class="alert alert-success">'.$success.'</div>';
                             }
                         ?>
-      <div class="col-md-6">
-        <input type="email" name="email" class="form-control" placeholder="Your email" autocomplete = "off" required>
-      </div>
-      <div class="col-md-6">
-        <input type="text" class="form-control" name="subject" placeholder="Subject" required>
-      </div>
+                        <div class="col-md-12">
+                          <input type="email" name="email" class="form-control" placeholder="Please input your real email" autocomplete = "off" required>
+                        </div>
+                        <div class="col-md-12">
+                     
+                        <select id="category" name="category" class="form-select" required>
+                          <option value="" selected="selected" disabled="disabled">Select concern *</option>
+                          <?php
+                          require_once("includes/conn.php");
+                          $query="SELECT * FROM hdms_category ORDER BY category asc limit 8";
+                          $result=mysqli_query($conn,$query);
+                          while($rs=mysqli_fetch_array($result)){
+                          $id =$rs['id'];                                    
+                          $Name = $rs['category'];       
+                          ?>
+                        <option><?php echo $Name;?></option>
+                          <?php }?>
+                        </select>
+                       
+                     
+                    </div>
      
                           <div class="col-md-12">
-                            <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                            <textarea class="form-control" name="message" rows="6" placeholder="Please let us know and explain further your concern" required></textarea>
                         </div>
                         <div class="col-md-12 text-center">
        
@@ -256,8 +282,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 
-
  <?php include 'includes/footer.php'?>
+
 
  <script>
 if(window.history.replaceState) {
@@ -265,7 +291,7 @@ if(window.history.replaceState) {
 }
 
 
-
+</script>
 
  </script>
     </body>

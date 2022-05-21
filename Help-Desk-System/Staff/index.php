@@ -8,6 +8,7 @@ include('session.php');
 <?php include ('core/css-links.php');//css connection?>
 </head>
 
+
 <body>
 <?php include ('core/header.php');//Design for  Header?>
 <?php $page = 'PRO';include ('core/sidebar.php');//Design for sidebar?>
@@ -34,11 +35,20 @@ include('session.php');
           
 
             <!-- User Accounts Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
+            <div class="col-xxl-6">
+            <div data-bs-toggle="modal" data-bs-target="#largeModal" class="card info-card sales-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Incoming <span>| Ticket</span></h5>
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+                    <li><a class="dropdown-item" href="ticket.php?id=<?php echo $_SESSION["login_key"];?>">Show</a></li>
+                  </ul>
+                </div>
+                  <h5 class="card-title">Total <span>| Ticket</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -46,32 +56,22 @@ include('session.php');
                     </div>
                     <div class="ps-3">
                     <?php 
-                    include "new_db.php";
-                          
-                      $new_status=0;
-                      $waiting_reply_status=1;
-                      $closed_status=2;
-
-                      $new_count=0;
-                      $reply_count=0;
-                      $closed_count=0;
-                        $db=new DB();
-
-                       $new_tickets_query="SELECT COUNT(*) AS new_tickets FROM hdms_tickets WHERE status=$new_status";
-                       $ntr=$db->conn->query($new_tickets_query); 
-                       if($ntr->num_rows > 0){
-                           while ($row = $ntr->fetch_assoc()) {
-                               $new_count=$row['new_tickets'];
-                           }
-                       } ?>
-                       
-                      
-                       <?php echo" <h6>$new_count</h6>"?>
+                     
+                      require_once("include/conn.php");
+                     
+                      $query="SELECT * FROM hdms_tickets";
+                      $result=mysqli_query($conn,$query);
+                      if($result){
+                        echo" <h6>".mysqli_num_rows($result)."</h6>";
+                        }
+                  ?> 
+    
+               
                        
                       
 
                      
-                      <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">New Ticket</span>
+                      <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">Tickets</span>
 
                     </div>
                   </div>
@@ -80,80 +80,51 @@ include('session.php');
               </div>
             </div><!-- End User Accounts Card -->
 
-            <div class="col-xxl-4 col-md-6">
+            <div class="col-xxl-6">
               <div class="card info-card revenue-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Program <span>| Ticket</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-journals"></i>
-                    </div>
-                    <div class="ps-3">
-                    <?php 
-                        require_once("include/conn.php");
-                        $query="SELECT * FROM hd_program";
-                        $result=mysqli_query($conn,$query);
-                        if($result){
-                          echo "<h6>". mysqli_num_rows($result)."</h6>";
-                        }
-                      ?> 
-
-                     
-                      <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">Forwarded ticket</span>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End User Accounts Card -->
-
-            <!-- Faculty account -->
-            <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-
                 <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
-                    <h6>Reports</h6>
+                      <h6>Filter</h6>
                     </li>
-                    <li><a class="dropdown-item" href="#">Show</a></li>
+                    <li><a class="dropdown-item" href="task.php?id=<?php echo $_SESSION["login_key"];?>">Show</a></li>
                   </ul>
                 </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Department<span> | Ticket</span></h5>
+                  <h5 class="card-title">Category <span>| Total</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-journals"></i>
+                    <i class="bi bi-card-checklist"></i>
                     </div>
                     <div class="ps-3">
                     <?php 
-                        require_once("include/conn.php");
-                        $query="SELECT * FROM hd_department";
-                        $result=mysqli_query($conn,$query);
-                        if($result){
-                          echo "<h6>". mysqli_num_rows($result)."</h6>";
-                        }
-                      ?> 
-                      <span class="text-danger small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">Forwarded ticket</span>
+                  require_once("include/conn.php");
+                 
+                  $query="SELECT * FROM hdms_category";
+                  $result=mysqli_query($conn,$query);
+                  if($result){
+                    echo" <h6>".mysqli_num_rows($result)."</h6>";
+                    }
+              ?> 
+
+                     
+                      <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">Category</span>
 
                     </div>
                   </div>
-
                 </div>
-              </div>
 
-            </div><!-- End Customers Card -->
+              </div>
+            </div><!-- End User Accounts Card -->
+
+           
             
 
-             <!-- Reports -->
-             <div class="col-12">
+          <!-- Reports -->
+  <div class="col-12">
               <div class="card">
 
                 <div class="filter">
@@ -162,29 +133,20 @@ include('session.php');
                     <li class="dropdown-header text-start">
                       <h6>Filter</h6>
                     </li>
-
-                    <li><a class="dropdown-item" href="view-faqs-dept.php?id=<?php echo $_SESSION["login_key"];?>">Show</a></li>
+                    <li><a class="dropdown-item" href="ticket.php?id=<?php echo $_SESSION["login_key"];?>">Show</a></li>
                   </ul>
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Ticket <span> | Dashboard</span></h5>
+                  <h5 class="card-title">Ticket <span> | Reports</span></h5>
 
                   <!-- Bar Chart -->
-                  <canvas id="barChart" style="max-height: 400px;"></canvas>
+                  <div id="piechart" style="width: 900px; height: 500px;"></div>  
                  <?php
-                       require_once("include/conn.php");
-
-                             $sql ="SELECT *,count(title) as count FROM hd_department group by title limit 5;";
-                             $result = mysqli_query($conn,$sql);
-                             $chart_data="";
-                             while ($row = mysqli_fetch_array($result)) { 
-
-                                $name[]  = $row['title']  ;
-                                $counts[] = $row['count'];
-                            }
-                     
-                    ?>
+                 include "include/conn.php";
+                  $query = "SELECT category, count(*) as number FROM hdms_tickets GROUP BY category";  
+ $result = mysqli_query($conn, $query);  
+ ?> 
               
               <!-- End Bar CHart -->
 
@@ -192,6 +154,7 @@ include('session.php');
 
               </div>
             </div><!-- End Reports -->
+
             
           
 
@@ -204,25 +167,65 @@ include('session.php');
          <div class="col-lg-4">
 
 <!-- Website Traffic -->
-<div class="card">
-  <div class="card-body pb-0">
-    <h5 class="card-title">User Accounts <span>| Graph</span></h5>
+<div class="card">      
 
-    <canvas id="accountChart" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
-        <?php
-             require_once("include/conn.php");
-                   $sql1 ="SELECT *,count(role) as count FROM user_information WHERE office='HDMS Staff' group by role;";
-                   $result1 = mysqli_query($conn,$sql1);
-                   $chart_data="";
-                   while ($row1 = mysqli_fetch_array($result1)) { 
-           
-                      $name2[]  = $row1['role']  ;
-                      $counts1[] = $row1['count'];
-                  }
-          ?>
+<div class="card-body">
+  <h5 class="card-title">Recent <span>| Activity</span></h5>
+
+  <div class="activity">
+
+    <div class="activity-item d-flex">
+      <div class="activite-label">32 min</div>
+      <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+      <div class="activity-content">
+        Recent activity must be put here <a href="#" class="fw-bold text-dark">(Highlight of the Recent activity)</a>
+      </div>
+    </div><!-- End activity item-->
+
+    <div class="activity-item d-flex">
+      <div class="activite-label">56 min</div>
+      <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+      <div class="activity-content">
+        Recent activity must be put here <a href="#" class="fw-bold text-dark">(Highlight of the Recent activity)</a>
+      </div>
+    </div><!-- End activity item-->
+
+    <div class="activity-item d-flex">
+      <div class="activite-label">2 hrs</div>
+      <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+      <div class="activity-content">
+        Recent activity must be put here <a href="#" class="fw-bold text-dark">(Highlight of the Recent activity)</a>
+      </div>
+    </div><!-- End activity item-->
+
+    <div class="activity-item d-flex">
+      <div class="activite-label">1 day</div>
+      <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+      <div class="activity-content">
+        Recent activity must be put here <a href="#" class="fw-bold text-dark">(Highlight of the Recent activity)</a>
+      </div>
+    </div><!-- End activity item-->
+
+    <div class="activity-item d-flex">
+      <div class="activite-label">2 days</div>
+      <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+      <div class="activity-content">
+        Recent activity must be put here <a href="#" class="fw-bold text-dark">(Highlight of the Recent activity)</a>
+      </div>
+    </div><!-- End activity item-->
+
+    <div class="activity-item d-flex">
+      <div class="activite-label">4 weeks</div>
+      <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+      <div class="activity-content">
+        Recent activity must be put here <a href="#" class="fw-bold text-dark">(Highlight of the Recent activity)</a>
+      </div>
+    </div><!-- End activity item-->
 
   </div>
-</div><!-- End Website Traffic -->
+
+</div>
+</div><!-- End Recent Activity -->
 </div><!-- End Right side columns -->
 
 
@@ -232,13 +235,15 @@ include('session.php');
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <?php include ('core/footer.php');//css connection?>
+  <?php include ('core/footer.php');//footer?>
+
   <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files/ Template main js file -->
-   <!-- Vendor JS Files/ Template main js file -->
+
+ <!-- Vendor JS Files/ Template main js file -->
+ <?php include ('core/js.php');//css connection?> 
    <script>
                var ctx = document.getElementById("barChart").getContext('2d');
     var myChart = new Chart(ctx, {
@@ -369,6 +374,32 @@ include('session.php');
     });
 
               </script>
+              
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+           <script type="text/javascript">  
+           google.charts.load('current', {'packages':['corechart']});  
+           google.charts.setOnLoadCallback(drawChart);  
+           function drawChart()  
+           {  
+                var data = google.visualization.arrayToDataTable([  
+                          ['category', 'Number'],  
+                          <?php  
+                          while($row = mysqli_fetch_array($result))  
+                          {  
+                               echo "['".$row["category"]."', ".$row["number"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title: 'Percentage of every category',  
+                      //is3D:true,  
+                      pieHole: 0.4  
+                     };  
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
+                chart.draw(data, options);  
+           }  
+           </script> 
+
 
 
   

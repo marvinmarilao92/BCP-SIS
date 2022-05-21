@@ -74,6 +74,9 @@ error_reporting(E_ALL);
     }
     //Reply Send Method
     if(isset($_POST['submit'])){
+        
+        date_default_timezone_set("asia/manila");
+        $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
         $message=$_POST['message'];
         $message=encryptthis($message, $key);
         
@@ -90,7 +93,7 @@ error_reporting(E_ALL);
             $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
              $remarks="reply to a ticket";  
              //save to the audit trail table
-             mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,ip,affected,host) VALUES('$verified_session_username','$remarks','$fname','$ip','$message','$host')")or die(mysqli_error($link));
+             mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,ip,affected,host,date) VALUES('$verified_session_username','$remarks','$fname','$ip','$message','$host','$date')")or die(mysqli_error($link));
 
         if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,send_by,message) VALUES('$ticket_id','0','$message')")){
             $success="Reply has been sent";
@@ -105,15 +108,15 @@ error_reporting(E_ALL);
     
   <main id="main" class="main">
 
-<div class="container mt-4">
+<div class="container mt-4" id = "delticket">
     <div class="row justify-content-center">
         <div class="col-12 col-md-12">
             <div class="card mb-3">
                 <div class="card-header">
                     Ticket ID : <?php  echo $ticket['ticket_id'] ;?>
-                    
+                        
                 </div>
-                <div class="card-body">
+                <div class="card-body" >
                     <?php 
                         if(isset($error) && $error != false){
                             echo '<div class="alert alert-danger">'.$error.'</div>';
@@ -132,11 +135,12 @@ error_reporting(E_ALL);
                            
                         </tr>
                         <tr>
-                            <th>Subject:&nbsp;&nbsp;'.decryptthis($ticket['subject'], $key).'</th>
+                            <th>Subject:&nbsp;&nbsp;'.$ticket['category'].'</th>
                            
                         </tr>
                           <th>Message :&nbsp'.decryptthis($ticket['message'], $key).'</th>';?>
-                       
+                          
+                
                     </table>
                  
 
@@ -197,17 +201,42 @@ error_reporting(E_ALL);
 
                             </main>
 
+                              <!-- Delete DocType Modal -->
+      <div class="modal fade" id="DeleteModal" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">DELETE DOCTYPE</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                        <div class="card" style="margin: 10px;">
+                          <div class="card-body">                
+                            <br>
+                            <input type="hidden"  name="delete_id" id="delete_id" readonly>
+                            <center>
+                              <h5>Are you sure you want to delete these DocType?</h5>
+                              <h5 class="text-danger">This action cannot be undone.</h5>   
+                            </center>                
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary" name="deletedata" id="dtdel" >Delete DocType</button>
+                        </div>
+                      <!-- End Form -->
+                  </div>
+              </div>
+        </div>
+
  <!-- ======= Footer ======= -->
 
    <?php include 'includes/footer.php'?>
+
    <script>
 if(window.history.replaceState) {
   window.history.replaceState(null,null,window.location.href)
 }
-
-
-
-
  </script>
+
     </body>
 </html>
