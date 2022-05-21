@@ -1,12 +1,11 @@
 <?php
 require_once "../security/newsource.php";
-require_once "../timezone.php";
 $resultforSEARCH = $db->query('SELECT * FROM student_information WHERE id_number = ?', $_GET['id_number'])->fetchArray();
 
 if ($resultforSEARCH) {  ?>
 <div class="row p-2">
 
-  <input type="hidden" id="id_number" value="<?php echo $resultforSEARCH['id_number'] ?>">
+
   <div class="col-md-6 col-sm-12 p-2">
     <small>Full Name</small>
     <input type="text" class="form-control " disabled name="fullname" id="fullname"
