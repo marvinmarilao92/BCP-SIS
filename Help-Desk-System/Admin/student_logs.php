@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Help Desk | Dashboard</title>
+<title>Student logs</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 </head>

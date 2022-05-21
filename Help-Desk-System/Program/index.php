@@ -1,7 +1,7 @@
 <?php
 include('session.php');
 ?>
-<!faqs html>
+<!DOCTYPE html>
 <html lang="en">
 <title>Registrar Library</title>
 <head>

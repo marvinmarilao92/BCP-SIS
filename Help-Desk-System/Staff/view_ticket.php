@@ -12,12 +12,13 @@ include('session.php');
 
 <body>
 <?php $page = 'tic';include ('core/sidebar.php');//Design for sidebar?>
+  
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
   
 <div class="d-flex align-items-center justify-content-between">
-  <a href="index.php" class="logo d-flex align-items-center">
-  <img src="../images/help.png" alt="">
+  <a href="#" class="logo d-flex align-items-center">
+    <img src="../images/help.png" alt="">
     <span class="d-none d-lg-block">Help Desk</span>
   </a>
   <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -28,11 +29,11 @@ include('session.php');
     <li class="nav-item dropdown">
 
       <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-        <i class="bi bi-bell"></i>
+       
         <span class="badge bg-primary badge-number"></span>
       </a><!-- End Notification Icon -->
 
-      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+      <!--ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
         <li class="dropdown-header">
           You have 4 new notifications
           <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
@@ -97,7 +98,7 @@ include('session.php');
           <a href="#">Show all notifications</a>
         </li>
 
-      </ul><!-- End Notification Dropdown Items -->
+      </!--ul><End Notification Dropdown Items -->
 
     </li><!-- End Notification Nav -->
 
@@ -170,7 +171,7 @@ include('session.php');
     <li class="nav-item dropdown pe-3">
    
       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-        <img src="../assets/img/BCPlogo.png" alt="Profile" class="rounded-circle">
+        <img src="../assets/img/BCPLogo.png" alt="Profile" class="rounded-circle">
         <!-- class="rounded-circle" -->
         <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $verified_session_firstname . " " . $verified_session_lastname ?></span>
       </a><!-- End Profile Iamge Icon -->
@@ -229,7 +230,7 @@ include('session.php');
                 //statement
                   $output .= '
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="core/logout.php">
+                      <a class="dropdown-item d-flex align-items-center" href="function/logout.php">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>
@@ -251,6 +252,7 @@ include('session.php');
 </nav><!-- End Icons Navigation -->
 
 </header><!-- End Header -->
+
 
 
  
@@ -358,8 +360,8 @@ error_reporting(E_ALL);
            mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,ip,affected,host,date) VALUES('$verified_session_username','$remarks','$fname','$ip','$message','$host','$date')")or die(mysqli_error($link));
         
          
-           $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-           VALUES ('$verified_session_username', '0' ,'$verified_session_role','0','replied to ticket','Reply from help desk','$verified_session_role','Active','$date')") or die(mysqli_error($conn));
+           //$link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+           //VALUES ('$verified_session_username', '0' ,'$verified_session_role','0','replied to ticket','Reply from help desk','$verified_session_role','Active','$date')") or die(mysqli_error($conn));
 
 
 if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,message) VALUES('$ticket_id','email','$verified_session_role','$message')")){

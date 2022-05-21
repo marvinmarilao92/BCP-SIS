@@ -135,7 +135,7 @@ include('session.php');
       <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">Category Information</h5>
+                        <h5 class="modal-title">Post Information</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
@@ -162,7 +162,7 @@ include('session.php');
       <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">EDIT post</h5>
+                          <h5 class="modal-title">EDIT POST</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           <div class="card" style="margin: 10px;">
@@ -199,7 +199,7 @@ include('session.php');
               <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">DELETE CATEGORY</h5>
+                        <h5 class="modal-title">DELETE POST</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                         <div class="card" style="margin: 10px;">

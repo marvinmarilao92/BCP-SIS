@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Help Desk | Dashboard</title>
+<title>Registrar Logs</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 </head>
@@ -36,7 +36,7 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
 <main id="main" class="main">
 
 <div class="pagetitle">
-  <h1>Program Logs</h1>
+  <h1>Registrar Logs</h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -71,7 +71,7 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
                         <div class="card">
                           <div class="col-lg-12">
                             <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                <h4>Program Logs</h4>
+                                <h4>Registrar Logs</h4>
                             </div>
                           </div>
                           <div class="card-body" >           

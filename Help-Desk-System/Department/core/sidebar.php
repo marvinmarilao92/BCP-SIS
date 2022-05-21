@@ -31,7 +31,7 @@
                 <li class="nav-item">
                 <a href="index.php?id=<?php echo $_SESSION["login_key"];?>"class="<?php if($page=='manage'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" id="sideButton">
                 <i class="bi bi-question-octagon"></i>
-                        <span>F.A.Q.S &nbsp;</span>
+                        <span>Library &nbsp;</span>
                     </a>
                 </li><!-- End Dashboard Nav -->
 

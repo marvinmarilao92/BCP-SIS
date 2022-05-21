@@ -17,7 +17,7 @@ include('session.php');
 <header id="header" class="header fixed-top d-flex align-items-center">
   
 <div class="d-flex align-items-center justify-content-between">
-  <a href="index.php" class="logo d-flex align-items-center">
+  <a href="#" class="logo d-flex align-items-center">
     <img src="../images/help.png" alt="">
     <span class="d-none d-lg-block">Help Desk</span>
   </a>
@@ -29,11 +29,11 @@ include('session.php');
     <li class="nav-item dropdown">
 
       <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-        <i class="bi bi-bell"></i>
+       
         <span class="badge bg-primary badge-number"></span>
       </a><!-- End Notification Icon -->
 
-      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+      <!--ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
         <li class="dropdown-header">
           You have 4 new notifications
           <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
@@ -98,7 +98,7 @@ include('session.php');
           <a href="#">Show all notifications</a>
         </li>
 
-      </ul><!-- End Notification Dropdown Items -->
+      </!--ul><End Notification Dropdown Items -->
 
     </li><!-- End Notification Nav -->
 

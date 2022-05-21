@@ -1,7 +1,7 @@
 <?php
 include('session.php');
 ?>
-
+<!DOCTYPE html>
 <html lang="en">
 <title>Admission Library</title>
 <head>
