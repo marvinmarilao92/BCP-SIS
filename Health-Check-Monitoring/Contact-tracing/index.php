@@ -1,5 +1,5 @@
 <?php
-include('security/newsource/Config.php')
+include('security/newsource.php')
 ?>
 <!DOCTYPE html>
 <html lang="en">
