@@ -81,7 +81,7 @@ include_once('security/newsource.php');
                 <span aria-hidden="true">&times;</span>
               </a>
             </div>
-            <form method="dsads">
+            <form method="POST">
               <div class="modal-body">
                 <div class="row">
                   <div class="col">
@@ -94,11 +94,6 @@ include_once('security/newsource.php');
                     <input type="text" class="form-control" name="sci_name" id="sci_name"
                       style="text-transform:capitalize;" required>
                   </div>
-                </div>
-                <div class="col">
-                  <small class="p-2">Description</small>
-                  <textarea rows="4" class="form-control" style="text-transform:capitalize;" name="descr"
-                    required></textarea>
                 </div>
                 <div class="col py-3">
                   <small>Quantity</small>
@@ -117,7 +112,30 @@ include_once('security/newsource.php');
         </div>
       </div>
 
+      <?php require_once "timezone.php";
+      if (isset($_POST['submit'])) {
+        $medname = $_POST['drug_name'];
+        $sci = $_POST['sci_name'];
+        $quan = $_POST['quantity'];
+        $query = $db->query('SELECT * FROM hcms where medname =?', $medname)->fetchAll();
+        if ($query) {
+      ?>
+      <script>
+      Swal.fire({
+        allowOutsideClick: true,
+        icon: 'error',
+        title: 'Temp!',
+        text: 'You should not forget about the temperature check',
+        confirmButtonText: 'Thankyou',
+        confirmButtonColor: '#f93154',
 
+      })
+      </script>
+      <?php
+        }
+        $sql = $db->query('INSERT INTO hcms_items (med_name, med_sci, quantity)  VALUES (?, ?, ?)', $medname, $sci, $quan);
+      }
+      ?>
     </section>
   </main>
   <?php include('includes/footer.php'); ?>

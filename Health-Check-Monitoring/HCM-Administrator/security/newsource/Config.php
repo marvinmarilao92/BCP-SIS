@@ -34,7 +34,7 @@ $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
 //Fetchall data inside of database table...
 //Fetch multiple records from a database:
-//$accounts = $db->query('SELECT * FROM images')->fetchAll();
+// $accounts = $db->query('SELECT * FROM images')->fetchAll();
 //foreach ($accounts as $account) {
 //	echo $account['img_name'] . ".) " . $account['img_data']. '<br>';
 //}
