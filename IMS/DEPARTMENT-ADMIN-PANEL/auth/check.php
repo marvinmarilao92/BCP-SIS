@@ -41,7 +41,7 @@ function validate($data){
                                                 $_SESSION['mname'] = $row['mname'];
                                                 $_SESSION['lname'] = $row['lname'];
                                                 $_SESSION['dp'] = $row['myavatar'];
-                                                header("location: ../");
+                                                header("location: ../index.php");
                                                 die();
                                           }
                                           else{
