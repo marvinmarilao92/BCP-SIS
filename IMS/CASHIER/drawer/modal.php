@@ -53,7 +53,7 @@
                           <br>
                           <div class="col-12">
                             <div class="form-floating">
-                              <input type="number" class="form-control" name="amount" id="amount"  pattern="[a-zA-Z0-9]+" placeholder="Amount" required autofocus>
+                              <input type="text" class="form-control" name="amount" id="amount"   placeholder="Amount" required autofocus>
                               <label for="floatingName">Amount</label>
                             </div>
                           </div>
