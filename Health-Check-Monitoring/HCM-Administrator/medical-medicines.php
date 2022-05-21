@@ -81,7 +81,7 @@ include_once('security/newsource.php');
                 <span aria-hidden="true">&times;</span>
               </a>
             </div>
-            <form>
+            <form method="dsads">
               <div class="modal-body">
                 <div class="row">
                   <div class="col">
