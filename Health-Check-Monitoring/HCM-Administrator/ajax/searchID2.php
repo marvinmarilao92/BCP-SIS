@@ -18,20 +18,8 @@ if ($resultforSEARCH) {  ?>
 
 
     <div class="col-md-6 col-sm-12 p-2">
-      <select class="form-select form-select" name="treatment" id="treatment" required>
-        <option selected="selected" disabled="disabled">Select Check-up type</option>
-        <?php
-          $sql = 'SELECT * FROM hcms_checkup ORDER BY id';
-          $result = mysqli_query($conn, $sql);
-          if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_array($result)) {
-              echo '<option value = "' . $row['checkup_name'] . '">' . $row['checkup_name'] . '</option>';
-            }
-            // Free result set
-            mysqli_free_result($result);
-          }
-          ?>
-      </select>
+      <input class="form-select form-select" type="hidden" name="treatment" id="treatment" required>
+      </input>
     </div>
 
     <div class="col-md-6 col-sm-12 p-2 text-center">

@@ -67,14 +67,9 @@ include_once('security/newsource.php');
                       <td><?php echo $row['status']; ?></td>
                       <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                          <?php $table_name = "hcms_medical_records"; ?>
-                          <a class="btn btn-secondary" title="View"><i class="ri-eye-2-line"></i></a>
                           <a class="btn btn-primary"
-                            href="resources/req_approved.php?req_id=<?= $row['id'] ?>&tablename=<?= $table_name ?>"><i
-                              class="ri-edit-2-fill"></i></a>
-                          <a class="btn btn-danger"
-                            href="resources/req_reject.php?req_id=<?= $row['id'] ?>&tablename=<?= $table_name ?>"><i
-                              class="ri-delete-bin-6-fill"></i></a>
+                            href="../../Medical-System/assets/uploads/<?php echo $row['file_name']; ?>"
+                            download>Download</a>
                         </div>
                       </td>
                     </tr>

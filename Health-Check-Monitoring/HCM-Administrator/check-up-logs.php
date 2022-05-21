@@ -39,17 +39,17 @@ include_once('security/newsource.php');
                 <table class="table table-hover datatable">
                   <?php
                   require_once "timezone.php";
-                  $query = "SELECT * FROM hcms_ctracing ORDER BY id ASC";
+                  $query = "SELECT * FROM hcms_checkup ORDER BY id ASC";
                   $query_run = mysqli_query($conn, $query);
                   ?>
                   <!-- Table Head -->
                   <thead style="background-color:whitesmoke;">
                     <tr>
-                      <th scope="col">ID Number</th>
                       <th scope="col">Full Name</th>
-                      <th scope="col">Contact</th>
-                      <th scope="col">Address</th>
-                      <th scope="col">Temperature</th>
+                      <th scope="col">Medicine</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Date</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -59,11 +59,11 @@ include_once('security/newsource.php');
                       while ($row = mysqli_fetch_assoc($query_run)) {
                     ?>
                     <tr>
-                      <td><?php echo $row['id_number']; ?></td>
                       <td><?php echo $row['fullname']; ?></td>
-                      <td><?php echo $row['contact']; ?></td>
-                      <td><?php echo $row['address']; ?></td>
-                      <td><?php echo $row['temp']; ?></td>
+                      <td><?php echo $row['item']; ?></td>
+                      <td><?php echo $row['quantity']; ?></td>
+                      <td><small><?php echo $row['description']; ?></small></td>
+                      <td><?php echo $row['created_at']; ?></td>
                       <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                           <?php $table_name = "hcms_medical_records"; ?>

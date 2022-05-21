@@ -132,10 +132,8 @@ include_once('security/newsource.php');
   </script>
 
 
-<script>
-
-  function insertCheckUP(error)
-  {
+  <script>
+  function insertCheckUP(error) {
 
     // var file = document.getElementById("file").value;
     // var treatment = document.getElementById("treatment").value;
@@ -155,46 +153,42 @@ include_once('security/newsource.php');
 
     var intoArray =
 
-    'fullname='       + fullname +
-    '&treatment='      + treatment +
-    '&prod_name='      + prod_name +
-    '&prod_quantity='      + prod_quantity +
-    '&prescription='      + prescription +
-    '&aid='      + aid ;
+      'fullname=' + fullname +
+      '&treatment=' + treatment +
+      '&prod_name=' + prod_name +
+      '&prod_quantity=' + prod_quantity +
+      '&prescription=' + prescription +
+      '&aid=' + aid;
 
 
-    if (fullname == '' || treatment == '' || prod_name == '' ||
-       prod_quantity == '' || prescription == '' || aid == '')
-    {
+    if (fullname == '' || prod_name == '' ||
+      prod_quantity == '' || prescription == '' || aid == '') {
       Swal.fire(
-      'Invalid!',
-      'Please complete fieldset!',
-      'warning'
+        'Invalid!',
+        'Please complete fieldset!',
+        'warning'
       )
-    }
-    else
-    {
+    } else {
       Swal.fire({
-      title: 'Are you sure?',
-      text: "some info here!",
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+        title: 'Are you sure?',
+        text: "some info here!",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
-      if (result.isConfirmed) {
-        $.ajax({
-          type: "POST",
-          url: 'ajax/insertCheckUp.php',
-          data: intoArray,
-          cache: false,
-          success: function (html)
-          {
-            Swal.fire(
-              'Add!',
-              'Some info here.',
-              'success'
+        if (result.isConfirmed) {
+          $.ajax({
+            type: "POST",
+            url: 'ajax/insertCheckUp.php',
+            data: intoArray,
+            cache: false,
+            success: function(html) {
+              Swal.fire(
+                'Add!',
+                'Some info here.',
+                'success'
               )
               var error = document.getElementById(error);
               error.innerHTML = html;
@@ -204,22 +198,22 @@ include_once('security/newsource.php');
       })
     }
   }
-</script>
+  </script>
 
-<script>
-    function validateCurrentQTY(thisItem, validates)
-    {
-      $.ajax({
-        url: 'ajax/validateQTY.php?thisItem=' + thisItem,
-        success: function(html)
-        {
-          var validate = document.getElementById(validates);
-          validate.innerHTML = html;
-          $("#prod_quantity").keydown(function(event) { return false; });
-        }
-      });
-    }
-</script>
+  <script>
+  function validateCurrentQTY(thisItem, validates) {
+    $.ajax({
+      url: 'ajax/validateQTY.php?thisItem=' + thisItem,
+      success: function(html) {
+        var validate = document.getElementById(validates);
+        validate.innerHTML = html;
+        $("#prod_quantity").keydown(function(event) {
+          return false;
+        });
+      }
+    });
+  }
+  </script>
 
   <?php include('includes/footer.php'); ?>
 </body>

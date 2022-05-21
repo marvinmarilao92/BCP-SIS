@@ -116,12 +116,17 @@ include_once('security/newsource.php');
   </main>
 
   <?php require_once "timezone.php";
+  require_once "security/newsource.php";
   if (isset($_POST['submit'])) {
     $medname = $_POST['drug_name'];
     $sci = $_POST['sci_name'];
     $quan = $_POST['quantity'];
-    $query = "SELECT * FROM hcms_items WHERE med_name = '{$medname}'";
-    if ($query != 1) {
+    // $query = "SELECT count(med_name) as notVAlid FROM hcms_items WHERE med_name =" . $medname . "";
+
+    $query = $db->query('SELECT count(med_name) as notVAlid FROM hcms_items WHERE med_name=?', $medname)->fetchArray();
+
+
+    if ($query["notVAlid"] >= 1) {
   ?>
   <script>
   Swal.fire({
@@ -131,6 +136,7 @@ include_once('security/newsource.php');
     text: 'You should not forget about the temperature check',
     confirmButtonText: 'Thankyou',
     confirmButtonColor: '#f93154',
+
 
   })
   </script>
