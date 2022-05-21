@@ -3,13 +3,13 @@
 
 <head>
   <?php 
-  include ('inlude/external.php');
-  include ('inlude/header.php');?>
+  include ("inlude/external.php");
+  include ("inlude/header.php");?>
 </head>
 
 <body>
   <!-- ======= Sidebar ======= -->
-  <?php include ('inlude/asideSidebar.php'); ?>
+  <?php include ("inlude/asideSidebar.php"); ?>
 
   <main id="main" class="main">
 
@@ -814,7 +814,7 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <?php include ('include/footer.php'); ?>
+  <?php include ("include/footer.php"); ?>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
