@@ -52,7 +52,7 @@ include_once('security/newsource.php');
               </div>
               <div id="showResult"></div>
               <div class="text-center">
-                <button type="submit" onclick="insertCheckUP();" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
               </div>
             </div>
@@ -126,73 +126,9 @@ include_once('security/newsource.php');
       }
     });
   }
-
-
   var form = document.getElementById('frmBox').reset();
   return false;
   </script>
-
-
-<script>
-
-  function insertCheckUP()
-  {
-
-    // var file = document.getElementById("file").value;
-    // var treatment = document.getElementById("treatment").value;
-    // var prod_quantity = document.getElementById("prod_quantityprod_quantity").value;
-    // var prod_quantity = document.getElementById("prod_quantity").value;
-    // var prescription = document.getElementById("prescription").value;
-    var aid = document.getElementById("role").value;
-    var fullname = document.getElementById("fullnames").value;
-
-
-
-    var intoArray =
-
-    'fullname='      + fullname +
-    '&aid='      + aid ;
-
-    if (fullname == '' aid == '')
-    {
-      Swal.fire(
-      'Invalid!',
-      'Please complete fieldset!',
-      'warning'
-      )
-    }
-    else
-    {
-      Swal.fire({
-      title: 'Are you sure?',
-      text: "some info here!",
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-      if (result.isConfirmed) {
-        $.ajax({
-          type: "POST",
-          url: 'ajax/insertCheckUp.php',
-          data: intoArray,
-          cache: false,
-          success: function (html)
-          {
-            Swal.fire(
-              'Add!',
-              'Some info here.',
-              'success'
-              )
-            }
-          });
-        }
-      })
-    }
-  }
-</script>
-
   <?php include('includes/footer.php'); ?>
 </body>
 
