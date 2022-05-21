@@ -2,7 +2,7 @@
 <!-- ======= Header ======= -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <header id="header" class="header fixed-top d-flex align-items-center">
-  <?php
+  <?php 
   // include "key_checker.php";
   ?>
 <div class="d-flex align-items-center justify-content-between">
@@ -15,7 +15,7 @@
 
 <nav class="header-nav ms-auto">
   <ul class="d-flex align-items-center">
-
+   
     <li class="nav-item dropdown">
 
       <a class="nav-link nav-icon" id="viewnotif" data-bs-toggle="dropdown">
@@ -36,8 +36,8 @@
           <li class="notification">
           </li>
         </div>
-
-
+        
+        
         <li class="dropdown-footer">
           <a data-bs-toggle="modal" data-bs-target="#modalDialogScrollable">Show all notifications</a>
         </li>
@@ -114,7 +114,7 @@
     <!-- End Messages Nav -->
 
     <li class="nav-item dropdown pe-3">
-
+   
       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
         <img src="../assets/img/BCPlogo.png" alt="Profile" class="rounded-circle">
         <!-- class="rounded-circle" -->
@@ -157,7 +157,7 @@
         </li>
 
         <!-- Adding return nav item for super admin -->
-          <?php
+          <?php 
             $output = '';
             $key = $_SESSION["login_key"];
             if(isset($verified_session_department) && ($verified_session_username)){
@@ -170,9 +170,9 @@
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>
-                    </li>
+                    </li>    
                   ';
-                break;
+                break;  
 
                 default:
                 //statement
@@ -182,7 +182,7 @@
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>
-                    </li>
+                    </li>    
                   ';
               }
               echo $output;
@@ -191,7 +191,7 @@
           }
           ?>
 
-
+        
 
       </ul><!-- End Profile Dropdown Items -->
     </li><!-- End Profile Nav -->
@@ -207,8 +207,8 @@
           <h5 class="modal-title">Notifications</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-            <div class="card-body">
+        <div class="modal-body">        
+            <div class="card-body">        
               <?php
                 require_once("./include/conn.php");
                 $query="SELECT * FROM datms_notification WHERE act1 = '$verified_session_firstname $verified_session_lastname' ORDER BY date DESC";
@@ -226,43 +226,43 @@
 
                   // Formulate the Difference between two dates
                   $diff = abs($date2 - $date1);
-
+                
                   // To get the year divide the resultant date into
                   // total seconds in a year (365*60*60*24)
                   $years = floor($diff / (365*60*60*24));
-
+                
                   // To get the month, subtract it with years and
                   // divide the resultant date into
                   // total seconds in a month (30*60*60*24)
                   $months = floor(($diff - $years * 365*60*60*24)
                                                 / (30*60*60*24));
-
+                
                   // To get the day, subtract it with years and
                   // months and divide the resultant date into
                   // total seconds in a days (60*60*24)
                   $days = floor(($diff - $years * 365*60*60*24 -
                               $months*30*60*60*24)/ (60*60*24));
-
+                
                   // To get the hour, subtract it with years,
                   // months & seconds and divide the resultant
                   // date into total seconds in a hours (60*60)
                   $hours = floor(($diff - $years * 365*60*60*24
                         - $months*30*60*60*24 - $days*60*60*24)
                                                     / (60*60));
-
+                
                   // To get the minutes, subtract it with years,
                   // months, seconds and hours and divide the
                   // resultant date into total seconds i.e. 60
                   $minutes = floor(($diff - $years * 365*60*60*24
                           - $months*30*60*60*24 - $days*60*60*24
                                             - $hours*60*60)/ 60);
-
+                
                   // To get the minutes, subtract it with years,
                   // months, seconds, hours and minutes
                   $seconds = floor(($diff - $years * 365*60*60*24
                           - $months*30*60*60*24 - $days*60*60*24
                                   - $hours*60*60 - $minutes*60));
-
+                        
                   if($years !=0 ){
                     // Print the result
                     $duration = "$years"." yr,";
@@ -293,13 +293,13 @@
                   }else if($doc_status =='Received Document'){
                     $idenifier=' <i class="bi bi-arrow-down-circle text-primary"></i>';
                   }else if($doc_status =='Submitted Document'){
-                    $idenifier=' <i class="bi bi-arrow-right-circle text-warning"></i>';
+                    $idenifier=' <i class="bi bi-arrow-right-circle text-warning"></i>';       
                   }else if($doc_status =='Created Document'){
-                    $idenifier=' <i class="bi bi-plus-circle text-primary"></i>';
+                    $idenifier=' <i class="bi bi-plus-circle text-primary"></i>';       
                   }else{
                     $idenifier=' <i class="bi bi-info-circle text-primary"></i>';
                   }
-
+                  
                   $query_2 = "SELECT * FROM datms_notification WHERE date = '$d1' AND date LIKE '%$today%'";
                   $result_2 = mysqli_query($conn, $query_2);
                   $count1 = mysqli_num_rows($result_2);
@@ -317,20 +317,20 @@
                   }else if($doc_status =='Received Document'){
                     $links='received_docs?id='.$_SESSION["login_key"].'';
                   }else if($doc_status =='Submitted Document'){
-                    $links='incoming_docs?id='.$_SESSION["login_key"].'';
+                    $links='incoming_docs?id='.$_SESSION["login_key"].'';       
                   }else if($doc_status =='Incoming Request'){
-                    $links='request?id='.$_SESSION["login_key"].'';
+                    $links='request?id='.$_SESSION["login_key"].'';       
                   }else{
                     $links='index?id='.$_SESSION["login_key"].'';
                   }
-              ?>
+              ?>                       
               <div class="card" style="padding:20px" >
                 <h6 style="font-weight: bold;"><a href="<?php echo $links;?>" style="color: black;"><?php echo $rs["subject"]; ?></a></h6>
                 <h8><?php echo $rs["notif"]; ?></h8>
                 <small><?php echo $duration.' ago '.$badge; ?></small>
-              </div>
+              </div>                     
               <?php } ?>
-            </div><!-- End sidebar recent posts-->
+            </div><!-- End sidebar recent posts-->                   
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -341,7 +341,7 @@
   <!-- for notification -->
   <script>
     $(document).ready(function(){
-
+    
     function load_unseen_notification(view = '')
     {
       $.ajax({
@@ -361,17 +361,17 @@
       }
       });
     }
-
+    
     load_unseen_notification();
-
+    
     $(document).on('click', '#viewnotif', function(){
       $('.count').html('');
       load_unseen_notification('yes');
     });
-
-    setInterval(function(){
+    
+    setInterval(function(){ 
       load_unseen_notification();
     }, 5000);
-
+    
     });
   </script>
