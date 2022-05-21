@@ -103,7 +103,7 @@ include('includes/session.php');
                       <h4>Document List</h4>
                   </div>
                 </div>
-                <div class="card-body" >           
+                <div class="card-body">           
                   <!-- Table for Document List records -->
                   <form method="POST">
                     <table class="table table-hover datatable" id="DocuTable">
