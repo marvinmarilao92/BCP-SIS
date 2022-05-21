@@ -3,9 +3,10 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>User Profile</title>
+<title>Admin | Profile</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
+
 </head>
 
 <body>
@@ -20,7 +21,7 @@ include('session.php');
       <h1>Profile</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Users</li>
           <li class="breadcrumb-item active">Profile</li>
         </ol>
@@ -78,7 +79,7 @@ include('session.php');
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_firstname . " " . $verified_session_lastname ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_firstname . ", " . $verified_session_lastname ?></div>
                   </div>
 
                   <div class="row">
@@ -87,12 +88,12 @@ include('session.php');
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Department</div>
+                    <div class="col-lg-3 col-md-4 label">Office</div>
                     <div class="col-lg-9 col-md-8"><?php echo $verified_session_office?></div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Subsystem</div>
+                    <div class="col-lg-3 col-md-4 label">Department</div>
                     <div class="col-lg-9 col-md-8"><?php echo $verified_session_department?></div>
                   </div>
 
@@ -125,7 +126,7 @@ include('session.php');
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
-                        <img src="../assets/img/BCPlogo.png" alt="Profile" class="rounded-circle">
+                        <img src="../assets/img/BCPlogo.png" alt="Profile">
                         <div class="pt-2">
                           <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
                           <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
@@ -134,51 +135,86 @@ include('session.php');
                     </div>
 
                     <div class="row mb-3">
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="about" class="form-control" id="about" style="height: 100px"><?php echo $verified_session_about?>.</textarea>
+                        <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Department</label>
+                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="company" type="text" class="form-control" id="company" value="<?php echo $verified_session_office?>">
+                        <input name="company" type="text" class="form-control" id="company" value="Lueilwitz, Wisoky and Leuschke">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Job" class="col-md-4 col-lg-3 col-form-label">Subsystem</label>
+                      <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="job" type="text" class="form-control" id="Job" value="<?php echo $verified_session_department?>">
+                        <input name="job" type="text" class="form-control" id="Job" value="Web Designer">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">Position</label>
+                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control" id="Country" value="<?php echo $verified_session_role?>">
+                        <input name="country" type="text" class="form-control" id="Country" value="USA">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="<?php echo $verified_session_address?>">
+                        <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
+                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="<?php echo $verified_session_contact?>">
+                        <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="<?php echo $verified_session_email?>">
+                        <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
                       </div>
                     </div>
 
@@ -189,40 +225,46 @@ include('session.php');
 
                 </div>
 
-                <div class="tab-pane fade pt-3" id="profile-settings">
-
-                </div>
-
                 <div class="tab-pane fade pt-3" id="profile-change-password">
-                  <!-- Change Password Form -->
-                  <form>
 
                     <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label" id="">Current Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
+                        <div id="disabled">
+                          <input name="password" type="password" oninput="verifyOldPassword(this.value, 'messCurrentPassword', 'cp', 'disabled');" class="form-control" id="currentPassword" onkeypress="if (event.key.replace(/[#&]/g,'')=='') event.preventDefault();"  onpaste="return false;" ondrop="return false;" autocomplete="off" required>
+                        </div>
+                        <small id="messCurrentPassword" class="form-text text-muted"></small>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                          <input name="newpassword" type="password" class="form-control" oninput="validateNewPassword(this.value, 'showValidate', 'cp', 'ConfirmedPassword');" id="newPassword" onkeypress="if (event.key.replace(/[#&]/g,'')=='') event.preventDefault();" onpaste="return false;" ondrop="return false;" autocomplete="off" required>
+                        <div id="showValidate">
+                          <small  class="form-text text-muted"><i class="bi bi-exclamation-circle"></i> Lowercase & Uppercase</small><br>
+                          <small  class="form-text text-muted"><i class="bi bi-exclamation-circle"></i> Number (0-9)</small><br>
+                          <small  class="form-text text-muted"><i class="bi bi-exclamation-circle"></i> Special Character (!@$%^*)</small><br>
+                          <small  class="form-text text-muted"><i class="bi bi-exclamation-circle"></i> Atleast 8 Character</small>
+                        </div>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                        <input name="renewpassword" type="password" oninput="NewPassswordConfirmed(this.value,'ConfirmedPassword', 'cp');" class="form-control" id="confirmPass" onkeypress="if (event.key.replace(/[#&]/g,'')=='') event.preventDefault();" onpaste="return false;" ondrop="return false;" autocomplete="off" required>
+                        <div id="ConfirmedPassword">
+                          <small  class="form-text text-muted"></small><br>
+                        </div>
                       </div>
                     </div>
 
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
-                    </div>
-                  </form><!-- End Change Password Form -->
-
+                    <div  class="text-center" ><div id="cp">
+                      <button type="submit" id="save" class="btn btn-primary">Change Password</button>
+                    </div></div>
+                
                 </div>
 
               </div><!-- End Bordered Tabs -->
@@ -242,5 +284,63 @@ include('session.php');
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-    </body>
+  <!-- Vendor JS Files/ Template main js file -->
+  <?php include ('core/js.php');//css connection?>
+  <!-- JS Scripts -->
+  <script>
+    // this script will execute as soon a the website runs
+    $(document).ready(function () {
+      // Save function
+        $('#submit').click(function(a){ 
+          a.preventDefault();
+          if($('#currentPassword').val()!="" && $('#newPassword').val()!=""&& $('#confirmPass').val()!=""){
+            $.post("changePassword/update_pass.php", {
+              currPass:$('#currentPassword').val(),
+              newPass:$('#newPassword').val(),
+              conPass:$('#confirmPass').val()
+              },function(data){
+              if (data.trim() == "failed"){
+                //response message
+                Swal.fire("Your password is already used by this account, enter another one","","error");                          
+                // Empty test field
+                // $('#currentPassword').val("")
+                $('#newPassword').val("")
+                $('#confirmPass').val("")
+              }else if(data.trim() == "success"){
+                      //success message
+                      const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 1500,
+                      timerProsressBar: true,
+                      didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)                  
+                      }
+                      })
+                    Toast.fire({
+                    icon: 'success',
+                    title:'You password is changed successfully'
+                    }).then(function(){
+                      document.location.reload(true)//refresh pages
+                    });
+                    // $('#currentPassword').val("")
+                    $('#newPassword').val("")
+                    $('#confirmPass').val("")
+                }else{
+                  Swal.fire(data);
+              }
+            })
+          }else{
+            Swal.fire("You must fill out every field","","warning");
+            // Swal.fire(data);
+          }
+        })
+      // End Save function
+    });
+
+  </script>
+</body>
+
 </html>

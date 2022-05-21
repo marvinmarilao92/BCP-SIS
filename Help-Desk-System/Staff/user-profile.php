@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>HDMS | Profile</title>
+<title>User Profile</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 </head>
@@ -20,7 +20,7 @@ include('session.php');
       <h1>Profile</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Users</li>
           <li class="breadcrumb-item active">Profile</li>
         </ol>
@@ -121,7 +121,7 @@ include('session.php');
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
+                  <div>
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
@@ -185,7 +185,7 @@ include('session.php');
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
-                  </form><!-- End Profile Edit Form -->
+                  </div><!-- End Profile Edit Form -->
 
                 </div>
 
@@ -195,7 +195,7 @@ include('session.php');
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
-                  <form>
+                  <div>
 
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
@@ -219,9 +219,9 @@ include('session.php');
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
+                      <button type="" class="btn btn-primary">Change Password</button>
                     </div>
-                  </form><!-- End Change Password Form -->
+                  </div><!-- End Change Password Form -->
 
                 </div>
 
@@ -240,6 +240,10 @@ include('session.php');
   <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
 
-     
-    </body>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files/ Template main js file -->
+  <?php include ('core/js.php');//css connection?>
+</body>
+
 </html>

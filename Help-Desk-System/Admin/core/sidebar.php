@@ -29,69 +29,103 @@
         ?>
 
                 <li class="nav-item">
-                    <a href="index.php?id=<?php echo $_SESSION["login_key"];?>"class="<?php if($page=='dashboard'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+                    <a href="index.php?id=<?php echo $_SESSION["login_key"];?>"class="<?php if($page=='dashboard'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" id="sideButton">
                         <i class="bi bi-grid"></i>
                         <span >Dashboard</span>
                     </a>
                 </li><!-- End Dashboard Nav -->
 
-                <li class="nav-item">
-          <a href="manage_faqs_both.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='manage'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-          <i class="bi bi-collection"></i>
-            <span>Manage F.A.Q.S &nbsp;</span>
+       
+       
+          <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#faqs-nav" data-bs-toggle="collapse" href="#" id="sideButton">
+          <i class="bi bi-collection"></i><span>Department F.A.Q.S</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="faqs-nav" class="<?php if($col=='managef'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
+            <li>
+            <a href="view-faqs-reg.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='P'){echo 'active';}?>">
+            <i class="bi bi-caret-right-fill" style="font-size: 14px;"></i><span>Registrar</span>
+              </a>
+            </li>
+            <li>
+            <a href="view-faqs-acc.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='D'){echo 'active';}?>">
+            <i class="bi bi-caret-right-fill" style="font-size: 14px;"></i><span>Accounting</span>
+              </a>
+            </li>
+            <li>
+            <a href="view-faqs-ad.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='A'){echo 'active';}?>">
+            <i class="bi bi-caret-right-fill" style="font-size: 14px;"></i><span>Admission</span>
+              </a>
+            </li>
+            <li>
+            <a href="view-faqs-cas.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='C'){echo 'active';}?>">
+            <i class="bi bi-caret-right-fill" style="font-size: 14px;"></i><span>Cashier</span>
+              </a>
+            </li>
+           
+          </ul>
+        </li><!-- End Reports Nav -->
+       
+        <li class="nav-item">
+          <a href="admin-ticket-view.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='tic'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" id="sideButton">
+          <i class="ri-ticket-line"></i>
+            <span>Tickets &nbsp;</span>
             
           </a>
-        </li><!-- All faqs analytics Nav -->
+        </li><!-- All ticket analytics Nav -->
 
         <li class="nav-item">
-          <a href="student_logs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='student'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+          <a href="student_logs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='student'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" id="sideButton">
           <i class="bi bi-layout-text-window-reverse"></i>
             <span>Student logs &nbsp;</span>
             
           </a>
         </li><!-- student log Nav -->
 
-
-       <li class="nav-item">
-          <a href="user_policy.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='UP'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-          <i class="bi bi-shield-check"></i>
-            <span>User Policy &nbsp;</span>
-          </a>
-        </li><!-- Policy Nav -->
             
     <!-- Audit Trail -->
     <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#list-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-person-lines-fill"></i><span>Audit trail</span><i class="bi bi-chevron-down ms-auto"></i>
+          <a class="nav-link collapsed" data-bs-target="#audit-nav" data-bs-toggle="collapse" href="#" id="sideButton">
+          <i class="bi bi-people"></i><span>Audit trail</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
-          <ul id="list-nav" class="<?php if($col=='list'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
+          <ul id="audit-nav" class="<?php if($col=='list'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
             <li>
             <a href="logs_staff.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='S'){echo 'active';}?>">
-              <i class="bi bi-circle"></i><span>Staff</span>
+            <i class="bi bi-caret-right-fill" style="font-size: 14px;"></i><span>Staff</span>
               </a>
             </li>
             <li>
-            <a href="logs_department.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='D'){echo 'active';}?>">
-              <i class="bi bi-circle"></i><span>Department</span>
+            <a href="logs_accounting.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='D'){echo 'active';}?>">
+            <i class="bi bi-caret-right-fill" style="font-size: 14px;"></i><span>Accounting</span>
               </a>
             </li>
             <li>
-            <a href="logs_program.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='P'){echo 'active';}?>">
-              <i class="bi bi-circle"></i><span>Program</span>
+            <a href="logs_registrar.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='P'){echo 'active';}?>">
+            <i class="bi bi-caret-right-fill" style="font-size: 14px;"></i><span>Registrar</span>
+              </a>
+            </li>
+            <li>
+            <a href="logs_cashier.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='C'){echo 'active';}?>">
+            <i class="bi bi-caret-right-fill" style="font-size: 14px;"></i><span>Cashier</span>
+              </a>
+            </li>
+            <li>
+            <a href="logs_admission.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='A'){echo 'active';}?>">
+            <i class="bi bi-caret-right-fill" style="font-size: 14px;"></i><span>Admission</span>
               </a>
             </li>
           </ul>
         </li><!-- End Reports Nav -->
+        <li class="nav-item">
+          <a href="user_policy.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='UP'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" id="sideButton">
+          <i class="bi bi-shield-check"></i>
+            <span>User Policy &nbsp;</span>
+          </a>
+        </li><!-- Policy Nav -->
     
         
       
-        <li class="nav-item">
-          <a href="#?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='R'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-          <i class="bi bi-flag"></i>
-            <span>Report &nbsp;</span>
-            
-          </a>
-        </li><!-- All faqs analytics Nav -->
+       
 
                 <li class="nav-heading">Settings</li>
 

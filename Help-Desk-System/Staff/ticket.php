@@ -86,7 +86,7 @@ if($ctr->num_rows > 0){
     }
 }
 $latest=[];
-$recodes=$db->conn->query("SELECT * FROM hdms_tickets WHERE ticket_department = '' ORDER BY 'date' ");
+$recodes=$db->conn->query("SELECT * FROM hdms_tickets WHERE ticket_department = ''ORDER BY date DESC");
 if($recodes->num_rows >0){
     while ($row = $recodes->fetch_assoc()) {
         $latest[]=$row;
@@ -126,7 +126,7 @@ if($recodes->num_rows >0){
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
-                            <div class="card bg-success" style = "top: 22px">
+                            <div  data-bs-toggle="modal" data-bs-target="#largeModal" class="card bg-success" style = "top: 22px">
                                 <div class="card-body text-white">
                                     <h3>Done</h3>
                                     <h2><?php echo $closed_count;?></h2>
@@ -146,10 +146,10 @@ if($recodes->num_rows >0){
                         <thead>
                         <tr>
                                 
-                              
+                                <th>Std.#</th>
                                 <th>Email</th>
                                 <th>Subject</th>
-                                <th>Message</th>
+                                <th scope="col" WIDTH="20%">Message</th>
                                 <th>Status</th>
                                 <th>Date</th>
                                 <th>Actions</th>
@@ -162,8 +162,9 @@ if($recodes->num_rows >0){
                                     <tr>
                                        
                                         <td style="display:none;">'.$v['id'].'</td>
+                                        <td>'.$v['student_number'].'</td>
                                         <td>'.decryptthis($v['email'],$key).'</td>
-                                        <td>'.decryptthis($v['subject'],$key).'</td>
+                                        <td>'.$v['category'].'</td>
                                         <td>'.decryptthis($v['message'],$key).'</td> ';?>
 
 
@@ -184,7 +185,9 @@ if($recodes->num_rows >0){
                                       echo ' 
                                         <td>'.$v['date'].'</td>
                                         <td><a class="btn btn-outline-info " href="view_ticket.php?id='.$v['id'].'" title="View"><i class="bi bi-eye-fill"></i></a>   
-                                       <a class="btn btn-outline-primary forward" title="Forward"> <i class="ri-send-plane-fill"></i></a>
+                                       <a class="btn btn-outline-primary forward" title="Forward within the department"> <i class="ri-send-plane-fill"></i></a>
+                                      
+                                       </a>
                                        <a onclick="deleteRow('.$v["id"].')" class="btn btn-outline-danger" title="Delete"><i class="bi bi-trash"></i></a></td>
                                         
                                     </tr>
@@ -205,7 +208,7 @@ if($recodes->num_rows >0){
                   </section>
               <!-- End Table with stripped rows -->
 </main>
-  <!-- Send Docs Modal -->
+  <!-- Send ticket Modal within the department-->
   <div div class="modal fade" id="SendModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -215,24 +218,26 @@ if($recodes->num_rows >0){
             </div>
                 <div class="card" style="margin: 10px;">
                 <div class="card-body">
-                    <h2 class="card-title">Forward this ticket?<h5 id="doc_fileN1" style="text-align: end; color:black;"></h5></h2>
+                    <h2 class="card-title">Forward this ticket within your department?<h5 id="doc_fileN1" style="text-align: end; color:black;"></h5></h2>
                     
                     <!-- Fill out Form -->
                     <div class="row g-3" style="margin-top: 10px;">
                     
-                            <input type="" class="form-control" id="id" readonly>
+                            <input type="hidden" class="form-control" id="id" readonly>
+                            <input type="hidden" class="form-control" id="student_num" readonly>
+                            
                             
                                             
                             <div class="col-md-12">
                             <select class="form-select select receiver" id="receiver" name="receiver" onChange="fetchOffice(this.value);">
                                 <option value="" selected="selected" disabled="disabled">Select Receiver</option>
-                                    <?php
+                                     <?php
                                     require_once("include/conn.php");
                                     $query="SELECT * FROM user_information WHERE  (department = 'Help Desk System') AND `id_number` NOT IN ('$verified_session_username') AND role NOT LIKE '%staff%' AND role NOT LIKE '%Help Desk Administrator%' ORDER BY firstname DESC ";
                                     $result=mysqli_query($conn,$query);
                                     while($rs=mysqli_fetch_array($result)){
                                         $dtid =$rs['id'];    
-                                        $dtno =$rs['id_number'];                                  
+                                        $dtno =$rs['role'];                                  
                                         $dtFName = $rs['firstname'];    
                                         $dtLName = $rs['lastname'];    
                                     
@@ -260,16 +265,18 @@ if($recodes->num_rows >0){
         </div>
     </div>
 </div>
-<!-- End Send Docs Modal-->
+<!-- End Send ticket Modal within the department-->
 
-
-
+ 
 
 
 
 <!-- ======= Footer ======= -->
 <?php include ('core/footer.php');//css connection?>
-<?php include ('modal.php');//css connection?>
+<?php include ('done_modal.php');//connection
+include ('function/pending_modal.php');//connection
+
+?>
 
 <!-- End Footer -->
 
@@ -296,7 +303,8 @@ if($recodes->num_rows >0){
         }).get();
 
         console.log(data);        
-        $('#id').val(data[0]);       
+        $('#id').val(data[0]);   
+        $('#student_num').val(data[1]);  
         // document.getElementById("prog_nameE").placeholder = data[2]; 
     });
     // Submit Edit Program modal calling
@@ -307,10 +315,11 @@ if($recodes->num_rows >0){
         if($('#id').val()!="" && $('#receiver').val()!=""){
         $.post("function/send_ticket.php", {
             ticketid:$('#id').val(),
+            stud_num:$('#student_num').val(),
             ticketact:$('#receiver').val(),        
             },function(data){
             if (data.trim() == "failed"){
-            Swal.fire("Program Code is currently in use","","error");//response message
+            Swal.fire("Ticket in use","","error");//response message
             // Empty test field
             $('#id').val("")
             }else if(data.trim() == "success"){
@@ -330,11 +339,12 @@ if($recodes->num_rows >0){
                 })
                 Toast.fire({
                 icon: 'success',
-                title:'Program successfully edited'
+                title:'Ticket successfully forwarded'
                 }).then(function(){
                 document.location.reload(true)//refresh pages
                 });
                 $('#id').val("")
+                $('#student_num').val("")
                 $('#receiver').val("")
             }else{
                 Swal.fire(data);
@@ -344,7 +354,7 @@ if($recodes->num_rows >0){
         Swal.fire("You must fill out every field","","warning");
         }
     })
-    // End Edit Program function
+
 
         function deleteRow(id) {
             if (confirm('Are you sure you want to delete this?')) {
@@ -362,5 +372,8 @@ if($recodes->num_rows >0){
                 });
             }
         }
+if(window.history.replaceState) {
+  window.history.replaceState(null,null,window.location.href)
+}
 </script>
 </html>

@@ -1,45 +1,24 @@
 <?php
-
-include "session.php";
-
+include('session.php');
 ?>
-<meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<!DOCTYPE html>
+<html lang="en">
+<title>View Ticket</title>
+<head>
+<?php include ('core/css-links.php');//css connection?>
+</head>
 
-  <title>BCP - Login</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="../assets/img/BCPlogo.png" rel="icon">
-  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="../assets/css/style.css" rel="stylesheet">
-  <Link href ="../assets/css/styles.css" rel = "stylesheet">
 
 
 <body>
+<?php $page = 'tic';include ('core/sidebar.php');//Design for sidebar?>
   
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
   
 <div class="d-flex align-items-center justify-content-between">
-  <a href="index.php" class="logo d-flex align-items-center">
-    <img src="../assets/img/DATMS_logo.png" alt="">
+  <a href="#" class="logo d-flex align-items-center">
+    <img src="../images/help.png" alt="">
     <span class="d-none d-lg-block">Help Desk</span>
   </a>
   <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -50,11 +29,11 @@ include "session.php";
     <li class="nav-item dropdown">
 
       <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-        <i class="bi bi-bell"></i>
+       
         <span class="badge bg-primary badge-number"></span>
       </a><!-- End Notification Icon -->
 
-      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+      <!--ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
         <li class="dropdown-header">
           You have 4 new notifications
           <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
@@ -119,7 +98,7 @@ include "session.php";
           <a href="#">Show all notifications</a>
         </li>
 
-      </ul><!-- End Notification Dropdown Items -->
+      </!--ul><End Notification Dropdown Items -->
 
     </li><!-- End Notification Nav -->
 
@@ -192,7 +171,7 @@ include "session.php";
     <li class="nav-item dropdown pe-3">
    
       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-        <img src="../assets/img/BCPlogo.png" alt="Profile" class="rounded-circle">
+        <img src="../assets/img/BCPLogo.png" alt="Profile" class="rounded-circle">
         <!-- class="rounded-circle" -->
         <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $verified_session_firstname . " " . $verified_session_lastname ?></span>
       </a><!-- End Profile Iamge Icon -->
@@ -273,99 +252,8 @@ include "session.php";
 </nav><!-- End Icons Navigation -->
 
 </header><!-- End Header -->
-<!-- ======= Sidebar ======= -->
-
-<aside id="sidebar" class="sidebar">
-  <!-- Side Nav -->
-    <ul class="sidebar-nav" id="sidebar-nav">
-      <!-- Adding return nav item for super admin -->
-        <?php 
-          $output = '';
-          $key = $_SESSION["login_key"];
-          if(isset($verified_session_department) && ($verified_session_username)){
-            switch($verified_session_role){
-              case "SuperAdmin":
-                //statement
-                $output .= '
-                <li class="nav-item" >
-                  <a href="../../../super_admin/index.php?id='.$key.'"style="color: rgb(83, 107, 148);font-weight:600;">
-                    <i class="bi bi-arrow-return-left"></i>
-                    <span>Return to SuperUser</span>
-                  </a>
-                </li><!-- End Return Nav -->    
-                ';
-
-                break;  
-            }
-            echo $output;
-        }else{
-
-        }
-        ?>
-
-                <li class="nav-item">
-                <a class="nav-link " id="sideButton" href="index.php?id=<?php echo $_SESSION["login_key"];?>"class="<?php if($page=='PRO'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                        <i class="bi bi-grid"></i>
-                        <span >Dashboard</span>
-                    </a>
-                </li><!-- End Dashboard Nav -->
-
-                <li class="nav-item">
-                        <a href="view-faqs.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='manage'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                            <i class="bi bi-question-octagon"></i>
-                            <span>F.A.Q.S &nbsp;</span>
-                        
-                        </a>
-                    </li><!-- All faqs analytics Nav -->
-
-                    <li class="nav-item">
-                        <a href="ticket_list.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='manage'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                        <i class="bi bi-card-checklist"></i>
-                            <span>Ticket &nbsp;</span>
-                        
-                        </a>
-                    </li><!-- All faqs analytics Nav -->
-
-            
-                
-
-                    <li class="nav-item">
-                        <a href="user_policy.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='UL'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                        <i class="bi bi-shield-check"></i>
-                            <span>User Policy &nbsp;</span>
-                        </a>
-                        </li><!-- Policy Nav -->
-                    
-
-        
-
-               
-                            <li class="nav-item">
-                            <a href="#?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='manage'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                            <i class="bi bi-flag"></i>
-                                <span>Report &nbsp;</span>
-                                
-                            </a>
-                          </li><!-- All faqs analytics Nav -->
-
-                    <li class="nav-heading">Other</li>
-
-                    <li class="nav-item">
-                    <a class="nav-link collapsed" href="user-profile.php?id=<?php echo $_SESSION["login_key"];?>"class="<?php if($page=='PRO'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                        <i class="bi bi-person"></i>
-                        <span>Profile</span>
-                    </a>
-                </li><!-- End Profile Page Nav -->
 
 
-                    <li class="nav-item">
-                        <a class="nav-link " href="contact.php?id=<?php echo $_SESSION["login_key"];?>"class="<?php if($page=='PRO'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-                        <i class="bi bi-envelope"></i>
-                        <span>Contact</span>
-                        </a>
-                    </li><!-- End Contact Page Nav -->
-
-        </aside><!-- End Sidebar-->
 
 
  
@@ -450,48 +338,89 @@ error_reporting(E_ALL);
     }
     //Reply Send Method
     if(isset($_POST['submit'])){
-        $message=$_POST['message'];
-        $message=encryptthis($message, $key);
-        
-        if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,send_by,message) VALUES('$ticket_id','1','$message')")){
-            $success="Reply has been sent";
-            $mail = new PHPMailer;
-            $mail->isSMTP();
-            $mail->SMTPDebug = 0;                                           //Send using SMTP
-            $mail->Host       = 'smtp.hostinger.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'helpdesksupport@bcp-sis.ga';                     //SMTP username
-            $mail->Password   = '#ChangeMe01!';                               //SMTP password
-            $mail->SMTPSecure = 'TLS';                                  //Enable implicit TLS encryption
-            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-    
-            //Recipients
-            $mail->setFrom('helpdesksupport@bcp-sis.ga', 'Ticket Reply');
-            $mail->addAddress($_POST['email'], 'Student');     //Add a recipient
-        
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'HelpDesksupport';
-            $mail->Body    = $_POST['message'];
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-            $mail->send();
-            echo "Success!";
-        }else{
-            $error="Can not send reply";
-        }
+      date_default_timezone_set("asia/manila");
+      $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
+      $email = $_POST['email'];
+      $email=encryptthis($email, $key);
+      $message=$_POST['message'];
+      $message=encryptthis($message, $key);
+      
+      
+      $fname=$verified_session_role; 
+      if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+        $ip = $_SERVER["HTTP_CLIENT_IP"];
+      }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+        $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+      }else{
+        $ip = $_SERVER["REMOTE_ADDR"];
+        $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+         $remarks="replied to a ticket to(Student)";  
+         //save to the audit trail table
+         mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,ip,affected,host,date) VALUES('$verified_session_username','$remarks','$fname','$ip','$message','$host','$date')")or die(mysqli_error($link));
+      
+       
+         $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+         VALUES ('$verified_session_username', '0' ,'$verified_session_role','0','replied to ticket','Reply from help desk','$verified_session_role','Active','$date')") or die(mysqli_error($conn));
+
+if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,message) VALUES('$ticket_id','email','$verified_session_role','$message')")){
+        
+          $success="Reply has been sent";
+          $db->conn->query("UPDATE hdms_tickets  SET status=2 WHERE id=$ticket_id");
+          $mail = new PHPMailer;
+          $mail->isSMTP();
+          $mail->SMTPDebug = 0;                                           //Send using SMTP
+          $mail->Host       = 'smtp.hostinger.com';                     //Set the SMTP server to send through
+          $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+          $mail->Username   = 'helpdesksupport@bcp-sis.ga';                     //SMTP username
+          $mail->Password   = '#ChangeMe01!';                               //SMTP password
+          $mail->SMTPSecure = 'TLS';                                  //Enable implicit TLS encryption
+          $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+  
+          //Recipients
+          $mail->setFrom('helpdesksupport@bcp-sis.ga', 'Help Desk Support');
+          $mail->addAddress($_POST['email'] , 'Student');     //Add a recipient
+      
+          $body = 
+          '  <div class="card">
+       
+          <div class="card-body">
+            <h3 class="card-title">######Reply from helpdesk support bcp######</h3>
+            <p class="card-text">Thank you for waiting for our response!<br> <br><b>'.$_POST['message'].'</b><br><br><br>
+            for inquiries and question just submit another ticket to our help desk system or just send us an email @helpdesksupport@bcp-sis.ga
+            <br>Thank you! Stay safe.</p>
+          </div>
+        </div>
+          
+          
+          <div class="alert alert-light bg-light border-0 alert-dismissible fade show" role="alert">
+          <h3>© Copyright Bestlink College of the Philippines. All Rights Reserved.</h3>
+        </div>
+          
+          
+          ';
+
+          //Content
+          $mail->isHTML(true);                                  //Set email format to HTML
+          $mail->Subject = 'Reply from helpdesk';
+          $mail->Body  = $body;
+          $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+          $mail->send();
+          //echo "Success!";
+      }else{
+          $error="Can not send reply";
+      }
     }
+      
+  }
 ?>
 <main id="main" class="main">
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-12 col-md-12">
             <div class="card mb-3">
-                <div class="card-body">
-                    <div class="list-inline admn_ul">
-                    
-                    </div>
-                </div>
+                
             </div>
             <div class="card mb-3">
                 <div class="card-header">
@@ -517,13 +446,10 @@ error_reporting(E_ALL);
                            
                         </tr>
                         <tr>
-                            <th>Subject :&nbsp;&nbsp;'.decryptthis($ticket['subject'], $key).'</th>
+                            <th>Subject :&nbsp;&nbsp;'.$ticket['category'].'</th>
                            
                         </tr>
-                        <tr>
-                            <th>Department :&nbsp;&nbsp;'.decryptthis($ticket['ticket_department'], $key).'</th>
-                           
-                        </tr>
+                       
                           <th>Message :&nbsp'.decryptthis($ticket['message'], $key).'</th>';?>
                        
                     </table>
@@ -553,7 +479,7 @@ error_reporting(E_ALL);
                                                 <div class="card-body">
                                                     <p><?php echo decryptthis($v['message'], $key); ?></p>
                                                     <div class="text-right">
-                                                        <small>Send by help desk support team at <?php echo $v['date'];?></small>
+                                                        <small>Send by help desk<?php $verified_session_role?><?php echo $v['date'];?></small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -566,31 +492,47 @@ error_reporting(E_ALL);
                             <?php } ?>
                         </ul>
                     </div>
-                    <div class="send-area">
+                    <div class="reply" style = "color: #fff"><a href="javascript:void(0)" data-commentID="'.$data['id'].'" onclick="reply(this)"><span class="badge bg-primary"><i class="ri-reply-all-fill"></i>CLICK TO REPLY</span></a></div>
+                    
+                    <div class="send-area replyRow" style="display:none">
                         <form method="POST">
                             <div class="form-group">
-                                <textarea name="message" class="form-control" placeholder="Reply" id="message" cols="30" rows="4"></textarea>
-                            </div>
-                            <div class="form-group text-right">
-                                <input type="hidden" name="submit" value="send">
-                                <button class="btn btn-success" type="submit">Send</button>
-                                <a href="admin-ticket-view.php?id=<?php echo $_SESSION["login_key"];?> " class="btn btn-secondary ml-2">Back</a>
+                                <input type="hidden" name="submit" value="send"><br>
+                                <input type="hidden"name = "email" value = <?php echo ''.decryptthis($ticket['email'], $key).'';?> style="display:none">
+                                <textarea name="message" class="form-control" id="replyComment" placeholder="Type your reply" cols="70" rows="4"></textarea><br>
+                                <button class="btn-primary btn" onclick="isReply = true;" id="addReply">Reply</button>
+                                <button style="float:right" class="btn-default btn" onclick="$('.replyRow').hide();"></button>
+                               
                             </div>
                         </form>
+                        
                     </div>
+                    <a href="admin-ticket-view.php?id=<?php echo $_SESSION["login_key"];?> " class="btn btn-secondary ml-2" style="float:right">Back</a>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+           
+                        </div>
+                        
+                      </div>
+                    </div>
 </main>
-
 
 
   <!-- ======= Footer ======= -->
   <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
+  <?php include ('core/js.php');//css connection?>
+  <script>
+if(window.history.replaceState) {
+  window.history.replaceState(null,null,window.location.href)
+}
+function reply(caller) {
+        commentID = $(caller).attr('data-commentID');
+        $(".replyRow").insertAfter($(caller));
+        $('.replyRow').show();
+    }
 
+ </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files/ Template main js file -->
