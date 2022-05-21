@@ -31,7 +31,7 @@
         <!-- Insert your Module here -->
         <div class="col-lg-2">
           <div class="card">
-            <a href="CASHIER/login.php"><img src="/assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
+            <a href="CASHIER/login.php"><img src="assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
             <div class="card-body">
               <h5 class="card-title">Cashier Panel</h5>
               <p class="card-text">Subsystem Description insert here...</p>
@@ -42,7 +42,7 @@
         <!-- Insert your Module here -->
         <div class="col-lg-2">
           <div class="card">
-            <a href="REGISTRAR/login.php"><img src="/assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
+            <a href="REGISTRAR/login.php"><img src="assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
             <div class="card-body">
               <h5 class="card-title">Registrar Panel</h5>
               <p class="card-text">Subsystem Description insert here...</p>
@@ -53,7 +53,7 @@
         <!-- Insert your Module here -->
         <div class="col-lg-2">
           <div class="card">
-            <a href="PATH/STUDENT-INTERN-PANEL/login.php"><img src="/assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
+            <a href="PATH/STUDENT-INTERN-PANEL/login.php"><img src="assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
             <div class="card-body">
               <h5 class="card-title">Intern Panel</h5>
               <p class="card-text">Subsystem Description insert here...</p>
@@ -64,7 +64,7 @@
         <!-- Insert your Module here -->
         <div class="col-lg-2">
           <div class="card">
-            <a href="PATH/DEPARTMENT-COORDINATOR-PANEL/login.php"><img src="/assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
+            <a href="PATH/DEPARTMENT-COORDINATOR-PANEL/login.php"><img src="assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
             <div class="card-body">
               <h5 class="card-title">Coordinator Panel</h5>
               <p class="card-text">Subsystem Description insert here...</p>
@@ -75,7 +75,7 @@
         <!-- Insert your Module here -->
         <div class="col-lg-2">
           <div class="card">
-            <a href="DEPARTMENT-ADMIN-PANEL/login.php"><img src="/assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
+            <a href="DEPARTMENT-ADMIN-PANEL/login.php"><img src="assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
             <div class="card-body">
               <h5 class="card-title">Admin Panel</h5>
               <p class="card-text">Subsystem Description insert here...</p>
@@ -86,7 +86,7 @@
         <!-- Insert your Module here -->
         <div class="col-lg-2">
           <div class="card">
-            <a href="SECTION/LOGIN/LOGIN/login.php"><img src="/assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
+            <a href="SECTION/LOGIN/LOGIN/login.php"><img src="assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
             <div class="card-body">
               <h5 class="card-title">Company Panel</h5>
               <p class="card-text">Subsystem Description insert here...</p>
