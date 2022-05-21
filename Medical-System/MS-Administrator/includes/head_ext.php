@@ -17,18 +17,24 @@
 <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
 <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
 <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-<link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script src="../assets/vendor/bootstrap/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+<!-- <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" /> -->
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="../mdb5-free-standard/css/mdb.min.css" />
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" />
+
 <!-- <link rel="stylesheet" href="../../assets/css/dropzone.css" />
 	<link href="../../assets/css/cropper.css" rel="stylesheet"/> -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.css">
-<!-- Selector search -->m
+<!-- Selector search -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link href="cropperjs/cropper.min.css" rel="stylesheet" type="text/css" />
+
 <style>
 @media(max-width: 500px) {
   .table thead {
