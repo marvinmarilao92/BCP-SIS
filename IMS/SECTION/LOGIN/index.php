@@ -81,7 +81,7 @@
                       <div class="form-floating">
                         <input type="password" class="form-control" name="password" id="password"  placeholder="first name" autofocus>
                         <label for="floatingName">Password</label>
-                      </div>
+                      </div>  
                     </div>
 
                     <div class="col-12">
@@ -92,7 +92,7 @@
                     </div>
 
                     <div class="col-12">  
-                      <button class="btn btn-primary w-100" type="submit" name="submit"><a href ="company/..">Login</a></button>
+                      <button class="btn btn-primary w-100" type="submit" name="submit">Login</button>
                     </div>
 
                     

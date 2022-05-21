@@ -127,9 +127,9 @@ include('includes/session.php');
                                 echo "<th>Payee</th>";
                                 echo "<th>Payment For</th>";
                                 echo "<th>Amount</th>";
-                                echo "<th>Date | Time</th>";
+                                echo "<th colspan='3'>Date | Time</th>";
                               
-                                echo "<th colspan='3'><center>Action</center></th>";
+                                
                               echo "</tr>";
                             echo "</thead>";
                             echo "<tbody>";
@@ -144,7 +144,7 @@ include('includes/session.php');
                                   
                                   echo "<td>";
                                 
-                              echo '<i type = button class="ri-user-fill viewbtn" data-bs-toggle="modal" data-bs-target="#paymentModal"> </i>';
+                              
                                 echo "<td>";                 
                               echo "</td>";
                               echo "</tr>";}

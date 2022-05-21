@@ -86,7 +86,7 @@
         <!-- Insert your Module here -->
         <div class="col-lg-2">
           <div class="card">
-            <a href="SECTION/LOGIN/LOGIN/login.php"><img src="/assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
+            <a href="SECTION/LOGIN/PAGE/index.php"><img src="/assets/img/mvcampus.jpg" class="card-img-top" alt="..."></a>
             <div class="card-body">
               <h5 class="card-title">Company Panel</h5>
               <p class="card-text">Subsystem Description insert here...</p>
