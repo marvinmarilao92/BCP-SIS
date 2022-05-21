@@ -36,7 +36,7 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="approved-details-accounts.php">
+        <a class="nav-link collapsed" href="">
           <i class="bi bi-person"></i>
           <span>Qualified Students</span>
         </a>
