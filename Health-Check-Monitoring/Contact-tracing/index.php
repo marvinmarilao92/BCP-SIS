@@ -463,7 +463,7 @@ include('security/newsource.php')
   }
   </script>
   <script>
-  function searchthis(showResult2) {
+  function searchthis2(showResult2) {
     var id_number = document.getElementById("id_number").value;
     var takeDataintoArray =
       'id_number=' + id_number;
