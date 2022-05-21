@@ -3,7 +3,7 @@ include_once('security/newsource.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Activities</title>
+<title>Incident Reports</title>
 
 <head>
   <?php include('includes/head_ext.php'); ?>
@@ -11,19 +11,18 @@ include_once('security/newsource.php');
 </head>
 
 <body>
-  <?php $page = "logs-admin";
-  $nav = "emplogs"; ?>
+  <?php $page = "medsys" ?>
   <?php include('includes/header.php'); ?>
   <?php include('includes/sidebar.php'); ?>
   <main id="main" class="main">
 
     <!-- Page Title -->
     <div class="pagetitle">
-      <h1>Admin Logs</h1>
+      <h1>Contact Tracing</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a></li>
-          <li class="breadcrumb-item active">Admin Logs</li>
+          <li class="breadcrumb-item active">Logs</li>
         </ol>
       </nav>
     </div>
@@ -32,25 +31,26 @@ include_once('security/newsource.php');
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
-            <div class="card-body pt-4">
-
-              <!-- Table Starts -->
+            <div class="card-body">
+              <h1 class="card-title">Contact Tracing</h1>
               <div class="table-responsive">
                 <table class="table table-hover datatable">
                   <?php
-                  $actor = "Health Check Monitoring Administrator";
-                  $query = "SELECT * FROM audit_logs WHERE action_name = '$actor' ORDER BY id ASC";
+                  require_once "timezone.php";
+                  $query = "SELECT * FROM ms_labtest ORDER BY id ASC";
                   $query_run = mysqli_query($conn, $query);
                   ?>
                   <!-- Table Head -->
                   <thead style="background-color:whitesmoke;">
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Account Number</th>
+                      <th scope="col">ID Number</th>
+                      <th scope="col">Full Name</th>
+                      <th scope="col">Course</th>
+                      <th scope="col">Year-Level</th>
+                      <th scope="col">Contact#</th>
+                      <th scope="col">Status</th>
                       <th scope="col">Action</th>
-                      <th scope="col">Actor</th>
-                      <th scope="col">Host</th>
-                      <th scope="col">Log</th>
+
                     </tr>
                   </thead>
                   <tbody>
@@ -59,12 +59,19 @@ include_once('security/newsource.php');
                       while ($row = mysqli_fetch_assoc($query_run)) {
                     ?>
                     <tr>
-                      <td>#<?php echo $row['id']; ?></td>
-                      <td><?php echo $row['account_no']; ?></td>
-                      <td><?php echo $row['action']; ?></td>
-                      <td><?php echo $row['action_name']; ?></td>
-                      <td><?php echo $row['host']; ?></td>
-                      <td><?php echo $row['login_time']; ?></td>
+                      <td><?php echo $row['id_number']; ?></td>
+                      <td><?php echo $row['full_n']; ?></td>
+                      <td><?php echo $row['course']; ?></td>
+                      <td><?php echo $row['yr_lvl']; ?></td>
+                      <td><?php echo $row['contact']; ?></td>
+                      <td><?php echo $row['status']; ?></td>
+                      <td>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                          <a class="btn btn-primary"
+                            href="../../Medical-System/assets/uploads/<?php echo $row['file_name']; ?>"
+                            download>Download</a>
+                        </div>
+                      </td>
                     </tr>
                     <?php }
                     }
@@ -78,7 +85,6 @@ include_once('security/newsource.php');
             </div>
           </div>
         </div>
-      </div>
       </div>
     </section> <!-- End -->
 
