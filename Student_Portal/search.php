@@ -254,7 +254,7 @@ include "includes/session.php";
          }else {
              echo "<section class='section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center'>
              <h2>Opps we can't find your search!<br>try searching common question. </h2>
-             <img src='includes/hd-image/not-found.svg' class='img-fluid py-5' alt='Page Not Found'></section> ";
+             <img src='../assets/img/not-found.svg' class='img-fluid py-5' alt='Page Not Found'></section> ";
             
              
          }
