@@ -18,8 +18,8 @@
 
 
     //include the new connection
-    include "../include/new_db.php";
-    include '../include/conn.php';
+    include "../includes/new_db.php";
+    include '../includes/conn.php';
     include '../session.php';
 
     ini_set('display_errors', 1);
