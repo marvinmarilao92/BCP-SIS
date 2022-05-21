@@ -39,7 +39,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Transaction History</h1>
+      <h1>Account Data</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="DEPARTMENT-COORDINATOR-PANEL/..">Home</a></li>
@@ -65,7 +65,7 @@
                     $s = 'Approved';
                     // Attempt select query execution
                     $sql = "SELECT * FROM ims_company_account
-                            where status = 's' ";
+                            where status = '$s' ";
                     if($result = mysqli_query($conn, $sql)){
                         if(mysqli_num_rows($result) > 0){
                 echo'<table class="table datatable">';
