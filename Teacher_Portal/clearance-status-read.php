@@ -1,5 +1,10 @@
 <?php
 include('includes/session.php');
+// Check existence of id parameter before processing further
+if(isset($_GET["notif"]) && !empty(trim($_GET["notif"])) && trim($_GET["notif"])==1){
+    $delete_query = "DELETE FROM datms_notification WHERE act2 = '$verified_session_username' AND stat2 = 1";
+    mysqli_query($link, $delete_query);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
