@@ -17,26 +17,23 @@ include('session.php');
     <div class="pagetitle">
       <h1>User Policy</h1>
       <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-         
-        </ol>
+        
       </nav>
     </div><!-- End Page Title -->
 
         <!-- Card with an image on top -->
         <!-- Card with header and footer -->
-        <div class="card">
-            <div class="card-header">Policy</div>
-            <div class="card-body">
-              <h5 class="card-title">Reminder!</h5>
-              &nbsp&nbsp Please read this acceptable user User Policy carefully before using the Help Desk Management System operated by the Institution.
+         
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+      <h4 class="alert-heading">Reminder!</h4>
+      <p>
+      &nbsp&nbsp Please read this acceptable user User Policy carefully before using the Help Desk Management System operated by the Institution.
 Services provided by us may be/or used for lawful purposes. You agree to comply with all applicable laws, rules and regulations in connection with your use of the services. Any material or conduct that in our judgement violates this policy in any manner may result in suspension or termination of the services or removal of user's account with or without notice.
-            </div>
-            <div class="card-footer">
-            © Copyright Bestlink College of the Philippines. All Rights Reserved.
-            </div>
-          </div><!-- End Card with header and footer -->
+      </p>
+      <hr>
+      <p class="mb-0">  © Copyright Bestlink College of the Philippines. All Rights Reserved.</p>
+     
+      
 
  
     </main><!-- End #main -->

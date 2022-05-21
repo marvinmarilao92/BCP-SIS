@@ -68,18 +68,23 @@
     <li class="nav-heading">Help Desk</li>
 
     <li class="nav-item">
-  <a href="pages-faq?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='faqs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-    <i class="bi bi-question-circle"></i>
-      <span>F.A.Q.S</span>
-    </a>
-  </li><!-- End F.A.Q Page Nav -->
-  <li class="nav-item">
-<a data-bs-toggle="modal" data-bs-target="#verticalycentered" class="<?php if($page=='ticket'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
-    <i class="bi bi-envelope"></i>
-      <span>Inbox</span>
- </a>
-
-  </li>
+      <a href="pages-faq?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='faqs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+        <i class="bi bi-question-circle"></i>
+        <span>F.A.Q.S</span>
+      </a>
+    </li><!-- End F.A.Q Page Nav -->
+    <li class="nav-item">
+      <a href="new_ticket.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='contact'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+        <i class="bi bi-chat-right-dots"></i>
+        <span>Contact Us</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a data-bs-toggle="modal" data-bs-target="#verticalycentered" class="<?php if($page=='ticket'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+        <i class="bi bi-envelope"></i>
+        <span>Inbox</span>
+      </a>
+    </li>
 
   <li class="nav-heading">Internship</li>
 

@@ -3,14 +3,14 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>View tickets</title>
+<title>Ticket List</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 </head>
 
 <body>
 <?php include ('core/header.php');//Design for  Header?>
-<?php $page = 'dashboard';include ('core/sidebar.php');//Design for sidebar?>
+<?php $page = 'tic';include ('core/sidebar.php');//Design for sidebar?>
 
 
 
@@ -19,9 +19,7 @@ include('session.php');
   <?php
 
 
-//include the new connection
 include "new_db.php";
-
 
 //THE KEY FOR ENCRYPTION AND DECRYPTION
 $key = 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO';
@@ -59,8 +57,8 @@ $waiting_reply_status=1;
 $closed_status=2;
 
 $new_count=0;
-$reply_count=0;
-$closed_count=0;
+$reply_count=1;
+$closed_count=2;
 
 $db=new DB();
 
@@ -80,7 +78,7 @@ if($rtc->num_rows > 0){
     }
 }
 
-$closed_tickets_query="SELECT COUNT(*) AS new_tickets FROM hdms_tickets WHERE status=$closed_status";
+$closed_tickets_query="SELECT COUNT(*) AS new_tickets FROM hdms_tickets WHERE status=$closed_status ";
 $ctr=$db->conn->query($closed_tickets_query);
 if($ctr->num_rows > 0){
     while ($row = $ctr->fetch_assoc()) {
@@ -88,7 +86,7 @@ if($ctr->num_rows > 0){
     }
 }
 $latest=[];
-$recodes=$db->conn->query("SELECT * FROM hdms_tickets ORDER BY 'date' DESC LIMIT 10 ");
+$recodes=$db->conn->query("SELECT * FROM hdms_tickets ORDER BY date DESC");
 if($recodes->num_rows >0){
     while ($row = $recodes->fetch_assoc()) {
         $latest[]=$row;
@@ -99,14 +97,15 @@ if($recodes->num_rows >0){
  <main id="main" class="main">
 <div class="container mt-4">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-12">
+        <div class="col-12 col-md-12" >
             <div class="card mb-3">
-                <div class="card-body">
+                <div class="card-body" >
                     <h3>Help desk Support team</h3>
             
                 </div>
             </div>
-           
+            
+  
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="row" >
@@ -119,6 +118,7 @@ if($recodes->num_rows >0){
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
+                          
                             <div data-bs-toggle="modal" data-bs-target="#ExtralargeModal"class="card bg-warning" style = "top: 22px" >
                                 <div class="card-body text-white">
                                     <h3>Pending Tickets</h3>
@@ -127,7 +127,8 @@ if($recodes->num_rows >0){
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
-                            <div class="card bg-success" style = "top: 22px">
+                        <div data-bs-toggle="modal" data-bs-target="#largeModal" class="card bg-success" style = "top: 22px" >
+                        
                                 <div class="card-body text-white">
                                     <h3>Done</h3>
                                     <h2><?php echo $closed_count;?></h2>
@@ -140,17 +141,19 @@ if($recodes->num_rows >0){
             <div class="card">
                 <div class="card-header">
                     Latest Tickets
-                </div>
+                       
+</div>
                 <div class="card-body">
                     <?php if(count($latest) > 0){?>
                         <table class="table table-hover datatable" id="receivedTable">
                         <thead>
                         <tr>
                                 
-                              
+                               
                                 <th>Email</th>
                                 <th>Subject</th>
-                                <th>Message</th>
+                                <th scope="col" WIDTH="20%">Message</th>
+                                <th>Department</th>
                                 <th>Status</th>
                                 <th>Date</th>
                                 <th>Actions</th>
@@ -162,11 +165,26 @@ if($recodes->num_rows >0){
                                     echo '
                                     <tr>
                                        
-                                    
+                                        <td style="display:none;">'.$v['id'].'</td>
+                                     
                                         <td>'.decryptthis($v['email'],$key).'</td>
-                                        <td>'.decryptthis($v['subject'],$key).'</td>
+                                        <td>'.$v['category'].'</td>
                                         <td>'.decryptthis($v['message'],$key).'</td> ';?>
-
+                                         <td data-title = "Department ">
+                                        <?php if($v['ticket_department'] == "Accounting"): ?>
+                                          <span class="badge bg-primary">Accounting</span>
+                                        <?php elseif($v['ticket_department'] == "Registrar"): ?>
+                                          <span class="badge bg-warning text-dark">Registrar</span>
+                                          <?php elseif($v['ticket_department'] == "hdms Admission"): ?>
+                                          <span class="badge bg-secondary">Admission</span>
+                                          <?php elseif($v['ticket_department'] == "hdms Cashier"): ?>
+                                          <span class="badge bg-info">Cashier</span>
+                                        <?php elseif($v['ticket_department'] == ""): ?>
+                                          <span class="badge bg-success">Staff</span>
+                                        <?php else: ?>
+                                          <span class="badge badge-secondary">Closed</span>
+                                        <?php endif; ?>
+                                      </td>
 
                                           <td data-title = "Status ">
                                           <?php if($v['status'] == 0): ?>
@@ -178,15 +196,15 @@ if($recodes->num_rows >0){
                                           <?php else: ?>
                                             <span class="badge badge-secondary">Closed</span>
                                           <?php endif; ?>
-                                        </td>
+                                         </td>
 
 
                                       <?php   
                                       echo ' 
                                         <td>'.$v['date'].'</td>
-                                        <td><a class="btn btn-primary " href="view_ticket.php?id='.$v['id'].'" title="View"><i class="bi bi-eye-fill"></i></a>   
-                                       <a class="btn btn-secondary sendbtn" title="Forward"><i class="bi bi-cursor-fill"></i></a></td>
-                                       
+                                        <td><a class="btn btn-outline-info " href="view_ticket.php?id='.$v['id'].'" title="View"><i class="bi bi-eye-fill"></i></a>   
+                                     
+                                       <a onclick="deleteRow('.$v["id"].')" class="btn btn-outline-danger" title="Delete"><i class="bi bi-trash"></i></a></td>
                                         
                                     </tr>
                                     ';
@@ -202,15 +220,114 @@ if($recodes->num_rows >0){
         </div>
     </div>
 </div>
+
+                  </section>
+              <!-- End Table with stripped rows -->
 </main>
+  <!-- Send Docs Modal -->
+  <div div class="modal fade" id="SendModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ticket forward</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="card" style="margin: 10px;">
+                <div class="card-body">
+                    <h2 class="card-title">Forward this ticket?<h5 id="doc_fileN1" style="text-align: end; color:black;"></h5></h2>
+                    
+                    <!-- Fill out Form -->
+                    <div class="row g-3" style="margin-top: 10px;">
+                    
+                            <input type="hidden" style="display:none;" class="form-control" id="id" readonly>
+                            <input type="hidden" style="display:none;" class="form-control" id="student_num"readonly>
+                          
+                            
+                                            
+                            <div class="col-md-12">
+                            <select class="form-select select receiver" id="receiver" name="receiver" onChange="fetchOffice(this.value);" required>
+                                <option value="" selected="selected" disabled="disabled">Select Receiver</option>
+                                    <?php
+                                    require_once("include/conn.php");
+                                    $query="SELECT * FROM department";
+                                    $result=mysqli_query($conn,$query);
+                                    while($rs=mysqli_fetch_array($result)){
+                                        $dtid =$rs['id'];    
+    
+                                        $dtLName = $rs['department'];    
+                                    
+                                        echo '<option value = "' . $dtid . '">' . $rs["department"] .'</option>';
+                                    
+                                       
+                                    }
+                                    
+                                    
+
+                                ?>
+                            </select>
+                            </div>
+                            <!--div class="col-md-12">
+                            <select class="form-select" id="send_off2" name="send_off2" >
+                                <option selected="selected" disabled="disabled">Select Office</option>
+                            </select>
+                            </div-->
+                            <!-- <div class="col-12">
+                                <textarea class="form-control" style="height: 80px" placeholder="message" name="docremarks" id="docremarks" id="docdesc" required></textarea>
+                            </div>  -->
+                    </div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" name="send" id="send" >forward</button>
+                </div>
+            <!-- End Form -->
+        </div>
+    </div>
+</div>
+<!-- End Send ticket Modal-->
+
 
 <!-- ======= Footer ======= -->
-<?php include ('core/footer.php');//css connection?>
+<?php include ('core/footer.php');//connection?>
+
+<?php include ('done_modal.php');//connection
+include ('function/pending_modal.php');//connection
+
+?>
 <!-- End Footer -->
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files/ Template main js file -->
 
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+ <!-- Vendor JS Files/ Template main js file -->
+ <?php include ('core/js.php');//css connection?> 
+ <script>
+
+function deleteRow(id) {
+            if (confirm('Are you sure you want to delete this?')) {
+                $.ajax({
+                    url: 'function/delete_ticket.php',
+                    method: 'POST',
+                    dataType: 'text',
+                    data: {
+                        key: 'deleteRow',
+                        id: id
+                    },  success:function(response) {
+                        $("#faqs_"+id).parent().remove();
+                        alert(response);
+                    }
+                });
+            }
+        }
+if(window.history.replaceState) {
+  window.history.replaceState(null,null,window.location.href)
+}
+
+
+ </script>
 </body>
+
 </html>

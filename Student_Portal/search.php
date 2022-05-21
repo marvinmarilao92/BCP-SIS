@@ -7,7 +7,7 @@ include "includes/session.php";
    <html lang="en">
    <title>Search result</title>
    <head>
-   <?php include ('includes/head.php');//css connection?>
+   <?php $page = 'faqs'; include ('includes/head.php');//css connection?>
    </head>
    
    <body>
@@ -154,13 +154,20 @@ include "includes/session.php";
     <li class="nav-heading">Help Desk</li>
 
     <li class="nav-item">
-  <a href="pages-faq.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='page'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+  <a href="pages-faq.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='faqs'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
     <i class="bi bi-question-circle"></i>
       <span>F.A.Q.S</span>
     </a>
   </li><!-- End F.A.Q Page Nav -->
   <li class="nav-item">
-<a href="view_ticket.php?id=<?php echo $_SESSION["login_key"];?> "class="<?php if($page=='ticket'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+<a href="new_ticket.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='ticket'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
+    <i class="bi bi-envelope"></i>
+      <span>Contact Us</span>
+ </a>
+
+  </li>
+  <li class="nav-item">
+<a data-bs-toggle="modal" data-bs-target="#verticalycentered" class="<?php if($page=='ticket'){echo 'nav-link';}else{echo 'nav-link collapsed';}?>" >
     <i class="bi bi-envelope"></i>
       <span>Inbox</span>
  </a>
@@ -168,7 +175,7 @@ include "includes/session.php";
   </li>
 
 
-
+ 
 
 </ul>
 
@@ -196,7 +203,6 @@ include "includes/session.php";
 
         $k = mysqli_real_escape_string($link, $_GET['k']);
         $sql = "SELECT * FROM hd_department WHERE title LIKE '%$k%' OR shortDesc LIKE '%$k%'
-         OR longDesc LIKE '%$k%' UNION SELECT * FROM hd_program WHERE title LIKE '%$k%' OR shortDesc LIKE '%$k%'
          OR longDesc LIKE '%$k%'";
          
          $result = mysqli_query($link, $sql);
@@ -211,20 +217,21 @@ include "includes/session.php";
                 $longDesc = $row['longDesc'];
                 $shortDesc = $row['shortDesc'];
                 echo "
-                <div class = 'style'>
+                <a href = 'article.php?title=".$row['title']."&shortDesc=".$row['shortDesc']."'>
+                <div class='style'>
                 <h2>".$row['title']."</h2>
-                <h3>".$row['longDesc']."</h3>
-                <p>".$row['shortDesc']."</p>
+                <h6>Read More <span class='text-danger'>&rarr;</span></h6>
                 </div>";
                 ?>
- <style>
+
+<style>
  .style{
-    background-color: #FFF;
+   
     margin-bottom: 1rem;
     padding: 1.5rem 1rem;
     color: #555;
    
-    box-shadow: 0 10px 35px -10px rgba(0, 0, 0, .3);
+   
   }
   h2 {
     font-size: 30px;
@@ -241,6 +248,7 @@ include "includes/session.php";
   
 
      </style>
+ 
                     <?php
             }
          }else {
@@ -253,9 +261,10 @@ include "includes/session.php";
          
     }
     ?>
-     <p> <a href="pages-faq.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='page'){echo 'btn';}else{echo 'btn btn-outline-primary';}?>" >Back</a></p>
+     <p> <a href="pages-faq.php?id=<?php echo $_SESSION["login_key"];?>"><span class="badge bg-primary"><i class="ri-reply-all-fill"></i>Back</span></a></p>
     
 
+    
     
     
 
