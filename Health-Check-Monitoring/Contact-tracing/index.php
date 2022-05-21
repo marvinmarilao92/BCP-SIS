@@ -87,7 +87,7 @@ include('security/newsource.php')
                   //statement
                   $output .= '
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="resources/logout.php">
+                      <a class="dropdown-item d-flex align-items-center" href="logout.php">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>
@@ -136,8 +136,10 @@ include('security/newsource.php')
                   <div class="col-12 d-flex justify-content-center p-5">
                     <button type="button" class="btn btn-primary btn-lg btn-block p-3" data-bs-toggle="modal"
                       data-bs-target="#exampleModal">Student</button>
-                    <button type="button" class="btn btn-info btn-lg btn-block p-3">Faculty</button>
-                    <button type="button" class="btn btn-warning btn-lg btn-block p-3">Visitor</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block p-3" data-bs-toggle="modal"
+                      data-bs-target="#exampleModal2">Teacher</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block p-3" data-bs-toggle="modal"
+                      data-bs-target="#exampleModal3">Visitor</button>
                   </div>
                 </div>
               </div>
@@ -189,6 +191,92 @@ include('security/newsource.php')
     </div>
   </div>
 
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Student Contact Tracing Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="col-xxl-12 col-md-12">
+            <div class="card p-4">
+              <div class="col-lg-12">
+                <div class="alert alert-info text-center" role="alert">
+                  <h4 class="alert-heading">Contact-Tracing Form</h4>
+                </div>
+                <div class="col-12 col-md-4 input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span onclick="searchthis('showResult');" style="cursor:pointer;" class="input-group-text p-3"
+                      id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                      </svg></span>
+                  </div>
+                  <input type="text" class="form-control text-center" name="id_number" id="id_number"
+                    placeholder="ID Number" style="text-transform:capitalize;" onchange="searchthis('showResult2');"
+                    required>
+                </div>
+                <div id="showResult2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="insertCT();">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Student Contact Tracing Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="#" method="POST">
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="name" name="name">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="contact" name="contact">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="address" name="address">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control" placeholder="temperature" name="temperature">
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="submit">Submit</button></form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php
+  require_once "security/newsource.php";
+  require_once "timezone.php";
+
+  if (isset($_POST['submit'])) {
+
+    $name = $_POST['name'];
+    $contact = $_POST['contact'];
+    $address = $_POST['address'];
+    $temperature = $_POST['temperature'];
+
+    $insert = $db->query('INSERT INTO hcms_ctracingv (vis_name, vis_contact, vis_address, vis_temperature, created_at)  VALUES 
+    (?, ?, ?, ?, ?)', $name, $contact, $address, $temperature, $time);
+  }
+  ?>
 
   <!-- ======= Footer ======= -->
   <!-- ======= Footer ======= -->
@@ -296,6 +384,62 @@ include('security/newsource.php')
       })
     }
   }
+
+  function insertCT() {
+    var fullname = document.getElementById("fullname").value;
+    var role = document.getElementById("role").value;
+    var contact = document.getElementById("contact").value;
+    var address = document.getElementById("address").value;
+    var course = document.getElementById("course").value;
+    var temperature = document.getElementById("temperature").value;
+    var takeDataintoArray = 'fullname=' + fullname + '&role=' + role +
+      '&contact=' + contact + '&address=' + address +
+      '&course=' + course + '&temperature=' + temperature;
+    if (temperature != "") {
+      Swal.fire({
+        allowOutsideClick: false,
+        icon: 'question',
+        title: 'Are you Sure?',
+        text: 'Please double check your Temperature',
+        confirmButtonText: 'Proceed',
+        confirmButtonColor: '#f93154',
+        cancelButtonColor: '#B23CFD',
+        showCancelButton: true,
+
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            type: "POST",
+            url: 'ajax/ajaxContact-tracing.php',
+            data: takeDataintoArray,
+            cache: false,
+            success: function(html) {
+              Swal.fire({
+                allowOutsideClick: true,
+                icon: 'success',
+                title: 'You Have inserted A Data',
+                text: 'Thankyou For your Cooperation',
+                confirmButtonText: 'Thankyou',
+                confirmButtonColor: '#f93154',
+
+              })
+            }
+          });
+        }
+
+      })
+    } else {
+      Swal.fire({
+        allowOutsideClick: true,
+        icon: 'error',
+        title: 'Temp!',
+        text: 'You should not forget about the temperature check',
+        confirmButtonText: 'Thankyou',
+        confirmButtonColor: '#f93154',
+
+      })
+    }
+  }
   </script>
   <script>
   function searchthis(showResult) {
@@ -310,6 +454,27 @@ include('security/newsource.php')
         cache: false,
         success: function(html) {
           var ajaxDisplay = document.getElementById(showResult);
+          ajaxDisplay.innerHTML = html;
+        }
+      });
+    } else {
+      alert('Asd')
+    }
+  }
+  </script>
+  <script>
+  function searchthis(showResult2) {
+    var id_number = document.getElementById("id_number").value;
+    var takeDataintoArray =
+      'id_number=' + id_number;
+    if (id_number != '') {
+      $.ajax({
+        type: "GET",
+        url: 'ajax/CTid2.php',
+        data: takeDataintoArray,
+        cache: false,
+        success: function(html) {
+          var ajaxDisplay = document.getElementById(showResult2);
           ajaxDisplay.innerHTML = html;
         }
       });
