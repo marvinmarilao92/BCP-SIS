@@ -214,7 +214,7 @@ include('security/newsource.php')
                           d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                       </svg></span>
                   </div>
-                  <input type="text" class="form-control text-center" name="id_number" id="id_number"
+                  <input type="text" class="form-control text-center" name="id_number" id="id_number2"
                     placeholder="ID Number" style="text-transform:capitalize;" onchange="searchthis2('showResult2');"
                     required>
                 </div>
@@ -464,10 +464,10 @@ include('security/newsource.php')
   </script>
   <script>
   function searchthis2(showResult2) {
-    var id_number = document.getElementById("id_number").value;
+    var id_number2 = document.getElementById("id_number2").value;
     var takeDataintoArray =
       'id_number=' + id_number;
-    if (id_number != '') {
+    if (id_number2 != '') {
       $.ajax({
         type: "GET",
         url: 'ajax/CTid2.php',
