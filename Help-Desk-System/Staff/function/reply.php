@@ -1,6 +1,30 @@
 
 <?php
+ //Import PHPMailer classes into the global namespace
+    //These must be at the top of your script, not inside a function
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
 
+    //Load Composer's autoloader
+    require '../vendor/autoload.php';
+
+    //set the correct timezone
+    date_default_timezone_set('Asia/Manila');
+		$date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
+
+    $success=false;
+    $error=false;
+
+
+    //include the new connection
+    include "../include/new_db.php";
+    include '../include/conn.php';
+    include '../session.php';
+
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 //THE KEY FOR ENCRYPTION AND DECRYPTION
 $key = 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO';
 
