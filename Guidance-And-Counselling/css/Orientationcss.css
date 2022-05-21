@@ -1,0 +1,23 @@
+#JPosting
+{
+  color: black;
+  border-left: 3px solid #5e5e5e;
+  border-right: 3px solid #5e5e5e;
+  border-radius: 10px;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+#JPosting:hover
+{
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid #34cf77;
+  border-radius: 15px;
+}
+#JPosting:focus
+{
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid #34cf77;
+  border-radius: 15px;
+  text-align: center;
+}
