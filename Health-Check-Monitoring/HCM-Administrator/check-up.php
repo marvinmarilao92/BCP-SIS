@@ -52,7 +52,7 @@ include_once('security/newsource.php');
               </div>
               <div id="showResult"></div>
               <div class="text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" onclick="insertCheckUP();" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
               </div>
             </div>
@@ -129,8 +129,7 @@ include_once('security/newsource.php');
   var form = document.getElementById('frmBox').reset();
   return false;
   </script>
-<<<<<<< Updated upstream
-=======
+
 
 
 <script>
@@ -142,18 +141,30 @@ include_once('security/newsource.php');
     // var treatment = document.getElementById("treatment").value;
     // var prod_quantity = document.getElementById("prod_quantityprod_quantity").value;
     // var prod_quantity = document.getElementById("prod_quantity").value;
-    // var prescription = document.getElementById("prescription").value;
+
+
+    var prod_name = document.getElementById("prod_name").value;
     var treatment = document.getElementById("treatment").value;
-    var fullname = document.getElementById("fullnames").value;
+    var fullname = document.getElementById("fullname").value;
+
+    var prod_quantity = document.getElementById("prod_quantity").value;
+    var prescription = document.getElementById("prescription").value;
+    var aid = document.getElementById("aid").value;
 
 
 
     var intoArray =
 
-    'fullname='      + fullname +
-    '&treatment='      + treatment ;
+    'fullname='       + fullname +
+    '&treatment='      + treatment +
+    '&prod_name='      + prod_name +
+    '&prod_quantity='      + prod_quantity +
+    '&prescription='      + prescription +
+    '&aid='      + aid ;
 
-    if (fullname == '' || treatment == '')
+
+    if (fullname == '' || treatment == '' || prod_name == '' ||
+       prod_quantity == '' || prescription == '' || aid == '')
     {
       Swal.fire(
       'Invalid!',
@@ -193,7 +204,7 @@ include_once('security/newsource.php');
   }
 </script>
 
->>>>>>> Stashed changes
+
   <?php include('includes/footer.php'); ?>
 </body>
 

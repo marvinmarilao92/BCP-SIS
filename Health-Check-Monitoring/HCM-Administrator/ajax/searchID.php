@@ -96,7 +96,7 @@ if ($resultforSEARCH) {  ?>
 
   <div class="col-md-6 col-sm-12 p-2">
     <select class="form-select form-select" name="treatment" id="treatment" required>
-      <option selected="selected" disabled="disabled">Select Check-up type</option>
+      <option selected="selected" >Select Check-up type</option>
       <?php
           $sql = 'SELECT * FROM hcms_checkup_type ORDER BY id';
           $result = mysqli_query($conn, $sql);
@@ -117,7 +117,7 @@ if ($resultforSEARCH) {  ?>
 <div class="row p-2">
   <div class="col-md-6 col-sm-12 p-2 text-center">
     <select id="prod_name" name="prod_name" class="form-select">
-      <option value="" selected="selected" disabled="disabled">Item</option>
+      <option value="" selected="selected" disabled>Item</option>
       <?php
           $sql2 = 'SELECT * FROM hcms_items ORDER BY prod_id';
           $result2 = mysqli_query($conn, $sql2);
