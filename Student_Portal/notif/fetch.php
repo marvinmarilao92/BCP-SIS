@@ -101,6 +101,8 @@ if(isset($_POST["view"]))
         $idenifier=' <i class="bi bi-arrow-right-circle text-warning"></i>';       
        }else if($doc_status =='Created Document'){
         $idenifier=' <i class="bi bi-plus-circle text-primary"></i>';       
+       }else if($doc_status =='Your ticket has been forwarded'){
+        $idenifier=' <i class="ri-ticket-line text-primary"></i>';       
        }else{
         $idenifier=' <i class="bi bi-info-circle text-primary"></i>';
        }
@@ -120,6 +122,8 @@ if(isset($_POST["view"]))
         $links='docu_template?id='.$_SESSION["login_key"].'';        
        }else if ($doc_status =='Request Submitted'){
         $links='docu_template?id='.$_SESSION["login_key"].'';        
+       }else if ($doc_status =='Your ticket has been forwarded'){
+        $links='#';        
        }else{
         $links='docu_req?id='.$_SESSION["login_key"].'';
        }
