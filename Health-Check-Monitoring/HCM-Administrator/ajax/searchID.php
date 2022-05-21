@@ -134,7 +134,8 @@ if ($resultforSEARCH) {  ?>
   </div>
 
   <div class="col-md-6 col-sm-12 p-2">
-    <input type="number" min="1" class="form-control" name="prod_quantity" id="prod_quantity" placeholder="Quantity"
+    <input type="number" min="0"
+    class="form-control" name="prod_quantity" id="prod_quantity" placeholder="Quantity"
       style="text-transform:capitalize;" required>
   </div>
 

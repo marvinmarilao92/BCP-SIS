@@ -52,7 +52,7 @@ include_once('security/newsource.php');
               </div>
               <div id="showResult"></div>
               <div class="text-center">
-                <button type="submit" onclick="insertCheckUP();" class="btn btn-primary">Submit</button>
+                <button type="submit" onclick="insertCheckUP('errorMessage');" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
               </div>
             </div>
@@ -81,6 +81,7 @@ include_once('security/newsource.php');
       </div>
     </div>
 
+    <div id="errorMessage"></div>
   </main>
   <script>
   function checkupNOW(schedResult) {
@@ -131,10 +132,9 @@ include_once('security/newsource.php');
   </script>
 
 
-
 <script>
 
-  function insertCheckUP()
+  function insertCheckUP(error)
   {
 
     // var file = document.getElementById("file").value;
@@ -196,6 +196,8 @@ include_once('security/newsource.php');
               'Some info here.',
               'success'
               )
+              var error = document.getElementById(error);
+              error.innerHTML = html;
             }
           });
         }
