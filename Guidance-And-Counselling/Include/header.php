@@ -1,6 +1,6 @@
 
  <!-- ======= Header ======= -->
-        <header id="header" class="header fixed-top d-flex align-items-center shadow-sm p-3 mb-5 bg-white rounded" style= " height: 50px; marigin: 0px; ">
+        <header id="header" class="header fixed-top d-flex align-items-center shadow-sm p-3 mb-5 bg-white rounded" style= " height: 50px; margin: 0px; ">
           <!-- background-color: rgba(245, 254, 255, 1); -->
 
             <div class="d-flex align-items-center justify-content-between">
