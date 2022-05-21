@@ -461,7 +461,7 @@ include('includes/session.php');
                         $.post("function/send_req.php", {
                           id_no:$('#acc_no').val(),
                           prog:$('#reqprog').val(),
-                          reason:$("#hiddenArea").val($("#quillArea").html()),
+                          reason:$('#reason').val(),
                           docs:$('#document').val()
                           },function(data){
                           if (data.trim() == "failed"){
