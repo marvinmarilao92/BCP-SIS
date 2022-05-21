@@ -129,6 +129,71 @@ include_once('security/newsource.php');
   var form = document.getElementById('frmBox').reset();
   return false;
   </script>
+<<<<<<< Updated upstream
+=======
+
+
+<script>
+
+  function insertCheckUP()
+  {
+
+    // var file = document.getElementById("file").value;
+    // var treatment = document.getElementById("treatment").value;
+    // var prod_quantity = document.getElementById("prod_quantityprod_quantity").value;
+    // var prod_quantity = document.getElementById("prod_quantity").value;
+    // var prescription = document.getElementById("prescription").value;
+    var treatment = document.getElementById("treatment").value;
+    var fullname = document.getElementById("fullnames").value;
+
+
+
+    var intoArray =
+
+    'fullname='      + fullname +
+    '&treatment='      + treatment ;
+
+    if (fullname == '' || treatment == '')
+    {
+      Swal.fire(
+      'Invalid!',
+      'Please complete fieldset!',
+      'warning'
+      )
+    }
+    else
+    {
+      Swal.fire({
+      title: 'Are you sure?',
+      text: "some info here!",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "POST",
+          url: 'ajax/insertCheckUp.php',
+          data: intoArray,
+          cache: false,
+          success: function (html)
+          {
+            Swal.fire(
+              'Add!',
+              'Some info here.',
+              'success'
+              )
+            }
+          });
+        }
+      })
+    }
+  }
+</script>
+
+>>>>>>> Stashed changes
   <?php include('includes/footer.php'); ?>
 </body>
 
