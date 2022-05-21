@@ -23,7 +23,7 @@ if(isset($_POST['up_img'])) {
       $icon = "error";
       functionSwal($msg, $icon);
       $_SESSION['alert'] = "<strong>ERROR:</strong> Please kindly upload images <hr> <strong>FILE TYPES:</strong> JPEG, PNG, JPG";
-      header("location:". $SERVER['HTTP_REFERER']);
+      header("location:". $SERVER['HTTPS_REFERER']);
       exit();
   }else{
 
@@ -39,13 +39,13 @@ if(isset($_POST['up_img'])) {
     }
       if ($query_run){
         $fname= $verified_session_role;    
-        if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+        if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
     
-          $ip = $_SERVER["HTTP_CLIENT_IP"];
+          $ip = $_SERVER["HTTPS_CLIENT_IP"];
     
-        }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+        }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
     
-          $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+          $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
     
         }else{
           date_default_timezone_set("asia/manila");
@@ -61,7 +61,7 @@ if(isset($_POST['up_img'])) {
             $msg = "Record Added";
             $icon = "success";
             functionSwal($msg, $icon);
-            header("location:". $SERVER['HTTP_REFERER']);
+            header("location:". $SERVER['HTTPS_REFERER']);
             exit();
             }
           }
@@ -71,7 +71,7 @@ if(isset($_POST['up_img'])) {
         $icon = "error";
         functionSwal($msg, $icon);
         $_SESSION['alert'] = "Action Failed";
-        header("location:". $SERVER['HTTP_REFERER']);
+        header("location:". $SERVER['HTTPS_REFERER']);
         exit();
       }
   }
