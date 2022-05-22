@@ -33,7 +33,7 @@ $page = 'TCA' ; $col = 'clr1'; include ("includes/sidebar.php");
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Teachers' Clearance Appointments</h5>
+              <h5 class="card-title">Teachers' Clearance Appointments For Today</h5>
               <?php
                     $temp_name = "";
                     // Attempt select query execution
@@ -87,7 +87,10 @@ $page = 'TCA' ; $col = 'clr1'; include ("includes/sidebar.php");
                     // Close connection
                     mysqli_close($link);
                     ?>
-
+                    <div class="float-end">
+                        <a href="teacher-clearance-appointment-calendar.php"><button type="button" class="btn btn-primary">View Calendar of Appointments</button></a>
+                        <a href="teacher-clearance-appointment-all.php"><button type="button" class="btn btn-info">View All Appointments</button></a>
+                    </div>
             </div>
             <!-- <div class="container-fluid">
               <div class="float-end mb-4">
