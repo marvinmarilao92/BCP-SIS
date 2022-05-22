@@ -55,9 +55,6 @@
        </a>
      </li>
 
-
-     <li class="nav-heading text-primary">Records</li>
-
      <li class="nav-item">
        <a href="request_list.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('Request' == $page) {
                                                                                     echo 'nav-link';
@@ -65,7 +62,7 @@
                                                                                     echo 'nav-link collapsed';
                                                                                   } ?>">
          <i class="bi bi-clipboard-check"></i>
-         <span>Request&nbsp;</span>
+         <span>Student Validation</span>
          <span class="badge bg-danger badge-number">
            <?php require_once 'security/sec-conn.php';
             $query = "SELECT * FROM hcms_request WHERE `status` = 'Pending'";
@@ -100,16 +97,6 @@
        </a>
      </li>
 
-     <li class="nav-item">
-       <a href="for-ticket.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('help' == $page) {
-                                                                                  echo 'nav-link';
-                                                                                } else {
-                                                                                  echo 'nav-link collapsed';
-                                                                                } ?>">
-         <i class="bi bi-chat-square-dots"></i>
-         <span>Help Desk&nbsp;</span>
-       </a>
-     </li>
 
 
 
