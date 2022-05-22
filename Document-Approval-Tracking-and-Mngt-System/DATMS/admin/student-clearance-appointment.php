@@ -1,5 +1,6 @@
 <?php
 include('session.php');
+$today = date('Y-m-j');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +70,7 @@ include('session.php');
               <?php
                     $temp_name = "";
                     // Attempt select query execution
-                    $sql = "SELECT * FROM clearance_student_appointment where department = 'Registrar Coordinator'";
+                    $sql = "SELECT * FROM clearance_student_appointment where department = 'Registrar Coordinator' and appointment_date = '$today'";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table id="example" class="table datatable">';
