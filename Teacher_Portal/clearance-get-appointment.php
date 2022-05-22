@@ -110,12 +110,12 @@ for($day = 1; $day <= $day_count; $day++, $str++){
           $statement = '<p style="margin-top: 10px;">Today</p style="margin-top: 2px;">';
         }else if($month_timestamp == $day_month && $day_today < $day){
           $statement = '
-          <p style="margin-top: 10px; "><a href="clearance-set-appointment.php?date='. $date .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'" class="btn btn-primary rounded-pill btn-sm">' . $appointment_limit - $appointment_value .' Slots</a></p style="margin-top: 2px;">';
+          <p style="margin-top: 10px; "><a href="clearance-set-appointment.php?date='. $date .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'" class="btn btn-primary rounded-pill btn-sm">' . $appointment_limit - $appointment_value .' Slots 8am-4pm</a></p style="margin-top: 2px;">';
         }else if($month_timestamp != $day_month){
-          $statement = '<p style="margin-top: 10px;"><a href="clearance-set-appointment.php?date='. $date .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'" class="btn btn-primary rounded-pill btn-sm">' . $appointment_limit - $appointment_value .' Slots</a></p style="margin-top: 2px;">';
+          $statement = '<p style="margin-top: 10px;"><a href="clearance-set-appointment.php?date='. $date .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'" class="btn btn-primary rounded-pill btn-sm">' . $appointment_limit - $appointment_value .' Slots 8am-4pm</a></p style="margin-top: 2px;">';
         }
       }else if($year_timestamp > $day_year){
-          $statement = '<p style="margin-top: 10px;"><a href="clearance-set-appointment.php?date='. $date .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'" class="btn btn-primary rounded-pill btn-sm">' . $appointment_limit - $appointment_value .' Slots</a></p style="margin-top: 2px;">';
+          $statement = '<p style="margin-top: 10px;"><a href="clearance-set-appointment.php?date='. $date .'&id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'" class="btn btn-primary rounded-pill btn-sm">' . $appointment_limit - $appointment_value .' Slots 8am-4pm</a></p style="margin-top: 2px;">';
       }
     }
     else{
