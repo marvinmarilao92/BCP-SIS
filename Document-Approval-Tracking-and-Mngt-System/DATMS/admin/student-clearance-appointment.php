@@ -65,7 +65,7 @@ include('session.php');
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Students' Registrar Appointments </h5>
+              <h5 class="card-title">Students' Registrar Appointments For Today</h5>
               <?php
                     $temp_name = "";
                     // Attempt select query execution
@@ -121,7 +121,10 @@ include('session.php');
                     // Close connection
                     mysqli_close($link);
                     ?>
-
+              <div class="float-end">
+                  <a href="student-clearance-appointment-calendar.php"><button type="button" class="btn btn-primary">View Calendar of Appointments</button></a>
+                  <a href="student-clearance-appointment-all.php"><button type="button" class="btn btn-info">View All Appointments</button></a>
+              </div>
             </div>
             <!-- <div class="container-fluid">
               <div class="float-end mb-4">
