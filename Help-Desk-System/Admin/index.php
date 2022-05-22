@@ -151,7 +151,7 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
                     <div class="ps-3">
                     <?php 
                         require_once("include/conn.php");
-                        $query="SELECT * FROM hd_department UNION SELECT * FROM hd_program";
+                        $query="SELECT * FROM hd_department";
                         $result=mysqli_query($conn,$query);
                         if($result){
                           echo "<h6>". mysqli_num_rows($result)."</h6>";
