@@ -73,6 +73,29 @@ for($day = 1; $day <= $day_count; $day++, $str++){
   }else{
     $week .= '<td>';
   }
+  $sql = "SELECT * FROM clearance_student_appointment_specific where date = '$date' LIMIT 1";
+  if($result = mysqli_query($link, $sql)){
+    if(mysqli_num_rows($result) > 0){
+      while($row = mysqli_fetch_array($result)){
+        $appointment_limit = $row['appointment'];
+      }
+    }else{
+      $sql = "SELECT * FROM clearance_student_appointment_limit where department = '" . trim($_GET["name"]) . "' and department_id = " . trim($_GET["id"]) . " LIMIT 1";
+      if($resultt = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($resultt) > 0){
+          while($roww = mysqli_fetch_array($resultt)){
+            $appointment_limit = $roww['appointment'];
+          }
+        } else{
+            $appointment_limit = 100;
+        }
+      } else{
+          echo "Oops! Something went wrong. Please try again later.";
+      }
+    }
+  } else{
+      echo "Oops! Something went wrong. Please try again later.";
+  }
   if($str != 6 && $str != 7 && $str != 13 && $str != 14 && $str != 20 && $str != 21 && $str != 27 && $str != 28 && $str != 34 && $str != 35){
     
     $sql1 = "SELECT * FROM clearance_student_appointment where department = '" . trim($_GET["name"]) . "' and department_id = '" . trim($_GET["id"]) . "' and appointment_date = '" . $date . "'";

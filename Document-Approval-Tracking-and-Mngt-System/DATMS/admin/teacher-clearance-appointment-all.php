@@ -51,11 +51,11 @@ include('session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Clearance Appointments for Teachers</h1>
+      <h1>Clearance Appointments for Teacherss</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Clearance Appointments for Teachers</li>
+          <li class="breadcrumb-item">Clearance Appointments for Teacherss</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -65,7 +65,7 @@ include('session.php');
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Teachers' Clearance Appointments For Today</h5>
+              <h5 class="card-title">Teacherss' Clearance Appointments</h5>
               <?php
                     $temp_name = "";
                     // Attempt select query execution
@@ -78,6 +78,7 @@ include('session.php');
                                         echo "<th scope='col'>Teacher ID</th>";
                                         echo "<th scope='col'>Name</th>";
                                         echo "<th scope='col'>Course</th>";
+                                        echo "<th scope='col'>Year Level</th>";
                                         echo "<th scope='col'>Appointment Date</th>";
                                         echo "<th scope='col'>Action</th>";
                                     echo "</tr>";
@@ -93,6 +94,7 @@ include('session.php');
                                           echo "<td>" . $row1['id_number'] . "</td>";
                                           echo "<td>" . $row1['firstname'] . " " . $row1['lastname'] . "</td>";
                                           echo "<td>" . $row1['course'] . "</td>";
+                                          echo "<td>" . $row1['year_level'] . "</td>";
                                         }
                                       } else{
                                           echo '<div class="alert alert-warning"><em>No Clearance Appointments Yet.</em></div>';
@@ -102,7 +104,7 @@ include('session.php');
                                       }
                                         echo "<td>" . $row['appointment_date'] . "</td>";
                                         echo "<td>";
-                                            echo '<a href="teacher-clearance-view?id='. $row['teacher_id'] .'&name='. $temp_name .'" class="m-1 btn btn-primary" title="View Clearance" data-toggle="tooltip"><span class="bi bi-eye-fill"></span></a>';
+                                            echo '<a href="teacher-clearance-view.php?id='. $row['teacher_id'] .'&name='. $temp_name .'" class="m-1 btn btn-primary" title="View Clearance" data-toggle="tooltip"><span class="bi bi-eye-fill"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }
@@ -119,9 +121,10 @@ include('session.php');
                     // Close connection
                     mysqli_close($link);
                     ?>
+
               <div class="float-end">
-                  <a href="teacher-clearance-appointment-calendar.php"><button type="button" class="btn btn-primary">View Calendar of Appointments</button></a>
-                  <a href="teacher-clearance-appointment-all.php"><button type="button" class="btn btn-info">View All Appointments</button></a>
+                  <!-- <a href="teacher-clearance-appointment-all.php"><button type="button" class="btn btn-info">View All Appointments</button></a> -->
+                  <a href="teacher-clearance-appointment.php"><button type="button" class="btn btn-primary">Back</button></a>
               </div>
             </div>
             <!-- <div class="container-fluid">
@@ -137,6 +140,7 @@ include('session.php');
 
   </main><!-- End #main -->
 
+ 
   <!-- ======= Footer ======= -->
   <?php include ('core/footer.php');//css connection?>
   <!-- End Footer -->
