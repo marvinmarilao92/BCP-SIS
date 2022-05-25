@@ -125,13 +125,13 @@ include_once 'security/newsource.php';
           </div>
         </div>
       </div>
-      <div class="modal fade" id="viewModal" data-mdb-backdrop="static" aria-hidden="true"
+      <div class="modal fade" id="viewModal" data-bs-backdrop="static" aria-hidden="true"
         aria-labelledby="viewModalLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="viewModalLabel">Student Information</h5>
-              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div id="viewresult"></div>
@@ -143,32 +143,32 @@ include_once 'security/newsource.php';
           </div>
         </div>
       </div>
-      <div class="modal fade" id="editModal" data-mdb-backdrop="static" aria-hidden="true"
+      <div class="modal fade" id="editModal" data-bs-backdrop="static" aria-hidden="true"
         aria-labelledby="editModalLabel2" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="editModalLabel2">Modal 2</h5>
-              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div id="editresult"></div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-danger" data-mdb-target="#viewModal" data-mdb-toggle="modal"
-                data-mdb-dismiss="modal">Cancel Editing</button>
-              <button class="btn btn-danger" onclick="saveChanges()" data-mdb-dismiss="modal">Save Changes</button>
+              <button class="btn btn-danger" data-bs-target="#viewModal" data-bs-toggle="modal"
+                data-bs-dismiss="modal">Cancel Editing</button>
+              <button class="btn btn-danger" onclick="saveChanges()" data-bs-dismiss="modal">Save Changes</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="addModal" data-mdb-backdrop="static" aria-hidden="true"
+      <div class="modal fade" id="addModal" data-bs-backdrop="static" aria-hidden="true"
         aria-labelledby="addModalLabel2" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header bg-primary text-light">
               <h5 class="modal-title" id="addModalLabel2">Add Record</h5>
-              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="row g-4">
@@ -190,19 +190,19 @@ include_once 'security/newsource.php';
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-secondary" data-mdb-toggle="close" data-mdb-dismiss="modal">Cancel</button>
+              <button class="btn btn-secondary" data-bs-toggle="close" data-bs-dismiss="modal">Cancel</button>
               <button class="btn btn-danger" onclick="addNow();">Add Now</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="manageModal" data-mdb-backdrop="static" aria-hidden="true"
+      <div class="modal fade" id="manageModal" data-bs-backdrop="static" aria-hidden="true"
         aria-labelledby="addModalLabel2" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header bg-primary text-light">
               <h5 class="modal-title" id="addModalLabel2">Add Record</h5>
-              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="row">
@@ -223,7 +223,7 @@ include_once 'security/newsource.php';
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-secondary" data-mdb-toggle="close" data-mdb-dismiss="modal">Cancel</button>
+              <button class="btn btn-secondary" data-bs-toggle="close" data-bs-dismiss="modal">Cancel</button>
               <button class="btn btn-danger" type="submit" name="submit">Add Now</button></form>
             </div>
           </div>
