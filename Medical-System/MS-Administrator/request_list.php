@@ -17,12 +17,12 @@ include_once 'security/newsource.php';
 
     <!-- Page Title -->
     <div class="pagetitle">
-      <h1>Student Validation</h1>
+      <h1>Student Completion Management</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a>
           </li>
-          <li class="breadcrumb-item active">Proccess 1</li>
+          <li class="breadcrumb-item active">Stub Completion</li>
         </ol>
       </nav>
     </div>
@@ -44,11 +44,11 @@ include_once 'security/newsource.php';
           ?>
           <div class="card border border-primary">
             <div class="card-body">
-              <h1 class="card-title">Student Validation</h1>
+              <h1 class="card-title">Stub Completion List</h1>
               <div class="table-responsive">
                 <table class="display table table-hover" id="proccess1">
-                  <?php
-                  $query = "SELECT * FROM ms_valid ORDER BY id ASC";
+                  <?php require_once "timezone.php";
+                  $query = "SELECT * FROM ms_labtest ORDER BY id ASC";
                   $query_run = mysqli_query($conn, $query);
                   ?>
                   <!-- Table Head -->
@@ -57,7 +57,6 @@ include_once 'security/newsource.php';
                       <th scope="col">Full Name</th>
                       <th scope="col">Course</th>
                       <th scope="col">Year Level</th>
-                      <th scope="col">School Year</th>
                       <th scope="col">Payment Date</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -66,24 +65,24 @@ include_once 'security/newsource.php';
                     <?php
                     if (mysqli_num_rows($query_run) > 0) {
                       while ($row = mysqli_fetch_assoc($query_run)) {
+                        $newdate = date("F j, Y, g:i a", strtotime($row['date_paid']));
                     ?>
                     <tr>
-                      <td><?php echo $row['name']; ?>
+                      <td onclick="view();" style="cursor:pointer;"><?php echo $row['full_n']; ?>
                       </td>
-                      <td class="bg-primary text-light"><?php echo $row['course']; ?>
+                      <td class="bg-primary text-light" onclick="view();" style="cursor:pointer;">
+                        <?php echo $row['course']; ?>
                       </td>
-                      <td><?php echo $row['yr_lvl']; ?>
+                      <td onclick="view();" style="cursor:pointer;"><?php echo $row['yr_lvl']; ?>
                       </td>
-                      <td><?php echo $row['sy']; ?>
-                      </td>
-                      <td><?php echo $row['payment_date']; ?>
+                      <td onclick="view();" style="cursor:pointer;"><?php echo $newdate ?>
                       </td>
                       <td>
                         <div class="input-group">
-                          <?php $table_name = 'hcms_request'; ?>
-                          <a class="btn btn-danger" title="Reject"
-                            href="resources/req_reject.php?req_id=<?php echo $row['id']; ?>&tablename=<?php echo $table_name; ?>"><i
-                              class="ri-close-circle-fill"></i> Delete</a>
+                          <a href="#" id="edit" onclick="edit('<?php echo $row['id']; ?>', 'editField');"
+                            class="btn btn-success"><i class="bi bi-box"></i>&nbspEdit</a>
+                          <a href="#" id="delete" onclick="edit('<?php echo $row['id']; ?>', 'editField');"
+                            class="btn btn-danger"><i class="bi bi-box"></i>&nbspDelete</a>
                         </div>
                       </td>
                     </tr>
@@ -108,7 +107,7 @@ include_once 'security/newsource.php';
                 <div class="activity">
                   <?php
                   require_once('timezone.php');
-                  $result = $db->query('SELECT * FROM ms_valid ORDER BY id ASC LIMIT 10')->fetchAll();
+                  $result = $db->query('SELECT * FROM ms_labtest ORDER BY id ASC LIMIT 10')->fetchAll();
 
                   foreach ($result as $sql) {
                     $newdate = date("F j,Y", strtotime($sql['created_at'])); ?>
@@ -117,7 +116,7 @@ include_once 'security/newsource.php';
                     <div class="activite-label"><?php echo $newdate; ?></div>
                     <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
                     <div class="activity-content">
-                      <strong><?php echo $sql['name'] . '&nbsp' . $sql['course']; ?></strong><br><a href="#"
+                      <strong><?php echo $sql['full_n'] . '&nbsp' . $sql['course']; ?></strong><br><a href="#"
                         class="fw-bold text-primary">Click
                         Here To View</a>
                     </div>
@@ -140,6 +139,21 @@ include_once 'security/newsource.php';
   $(document).ready(function() {
     $('#proccess1').DataTable();
   });
+
+  function view() {
+    alert("viewNow")
+  }
+
+  function edit(editID, editField) {
+    $.ajax({
+      url: 'resources/ajax/manageame.php?id=' + editID,
+      success: function(html) {
+        var ajaxDisplay = document.getElementById(editField);
+        ajaxDisplay.innerHTML = html;
+        $("#manageModal").modal("show");
+      }
+    });
+  }
   </script>
 </body>
 

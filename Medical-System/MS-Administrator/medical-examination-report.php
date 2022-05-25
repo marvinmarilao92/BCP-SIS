@@ -53,7 +53,8 @@ include_once 'security/newsource.php';
 </head>
 
 <body>
-  <?php $page = 'daily-logs'; ?>
+  <?php $page = 'daily-logs';
+  $nav = "manage" ?>
   <?php include 'includes/header.php'; ?>
   <?php include 'includes/sidebar.php'; ?>
   <main id="main" class="main">
@@ -68,59 +69,59 @@ include_once 'security/newsource.php';
         </ol>
       </nav>
     </div>
+
     <section class="section2">
       <div class="row">
         <div class="col-lg-12">
+          <?php if (isset($_SESSION['alert'])) { ?>
+          <div class="alert alert-info" role="alert"><strong><?php echo $_SESSION['alert'] ?></strong></div>
+          <?php } else if (isset($_SESSION['alert2'])) { ?>
+          <div class="alert alert-danger " role="alert"><strong><?php echo $_SESSION['alert2'] ?></strong></div>
+          <?php } ?>
           <div class="card border border-primary">
             <div class="card-body">
               <div class="d-flex bd-highlight mb-3">
                 <h1 class="card-title me-auto me-auto p-2 bd-highlight">Recent</h1>
                 <div class="btn btn-primary p-2 bd-highlight" onclick="addRecord()">Add Record</div>
               </div>
-              <!-- <div id="ShowTableResult"></div> -->
+              <?php require_once "timezone.php";
+              $sql = $db->query('SELECT * FROM ms_labtest')->fetchAll();
+              ?>
               <div class="table-responsive">
-                <table class="display" id="example" cellspacing="0">
-
-                  <!-- Table Head -->
+                <table class="display table" id="medtable" cellspacing="0">
                   <thead>
                     <tr>
                       <th scope="col">ID Number</th>
                       <th scope="col">Full Name</th>
-                      <th scope="col">Course</th>
+                      <th scope="col">Program</th>
+                      <th scope="col">Section</th>
                       <th scope="col">Year Level</th>
-                      <th scope="col">Phone #</th>
-                      <th scope="col">Email</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
-                </table>
-                <script type="text/javascript">
-                $(document).ready(function() {
-                  $("#example").DataTable({
-                    "ajax": {
-                      "url": "table.php",
-                      "dataSrc": ""
-                    },
-                    "columns": [{
-                        "data": "id_number"
-                      },
-                      {
-                        "data": "full_n"
-                      },
-                      {
-                        "data": "course"
-                      },
-                      {
-                        "data": "yr_lvl"
-                      },
-                      {
-                        "data": "contact"
-                      }
+                  <?php foreach ($sql as $data) { ?>
+                  <tbody>
 
-                    ]
-                  });
-                });
-                </script>
+                    <tr>
+                      <td><?php echo $data['id_number']; ?></td>
+                      <td><?php echo $data['full_n']; ?></td>
+                      <td><?php echo $data['course']; ?></td>
+                      <td><?php echo $data['section']; ?></td>
+                      <td><?php echo $data['yr_lvl']; ?></td>
+                      <td>
+                        <a href="#" id="manage" onclick="manage('<?php echo $data['id']; ?>', 'manageField');"
+                          class="btn btn-outline-primary text-dark"><i class="bi bi-box"></i>&nbspUpload Files</a>
+                        <a href="resources/viewPDF.php?id=<?php echo $data['id'] ?>"
+                          class="btn btn-outline-success text-dark"><i class="bi bi-file-pdf"></i>&nbspView
+                          Recommendation</a>
+                        <a href="resources/viewPDF2.php?id=<?php echo $data['id'] ?>"
+                          class="btn btn-outline-info text-dark"><i class="bi bi-file-pdf"></i>&nbspView
+                          Result</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <?php } ?>
+                </table>
               </div>
             </div>
           </div>
@@ -197,6 +198,39 @@ include_once 'security/newsource.php';
           </div>
         </div>
       </div>
+      <div class="modal fade" id="manageModal" data-mdb-backdrop="static" aria-hidden="true"
+        aria-labelledby="addModalLabel2" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-light">
+              <h5 class="modal-title" id="addModalLabel2">Add Record</h5>
+              <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="container">
+                  <form action="resources/meduploads.php" method="POST" enctype="multipart/form-data">
+                    <div id="manageField"></div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 border p-4">
+                      <div class="row">
+                        <div class="card-title">Upload Files</div>
+                        <label for="" class="p-2">Recommendation Letter</label>
+                        <input type="file" name="file1" id="file1" accept="application/pdf, application/msword"
+                          class="form-control">
+                        <label for="" class="p-2">Annual Medical Examination Result</label>
+                        <input type="file" name="file2" id="file2" accept="application/pdf" class="form-control">
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-mdb-toggle="close" data-mdb-dismiss="modal">Cancel</button>
+              <button class="btn btn-danger" type="submit" name="submit">Add Now</button></form>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -222,15 +256,26 @@ setInterval(function(){
 },100)
 
 window.onload = loadXMLDoc;
-
 </script> -->
-  <script>
 
-  </script>
   <script>
-  function sendNow() {
-
+  function manage(manage, manageField) {
+    $.ajax({
+      url: 'resources/ajax/manageame.php?id=' + manage,
+      success: function(html) {
+        var ajaxDisplay = document.getElementById(manageField);
+        ajaxDisplay.innerHTML = html;
+        $("#manageModal").modal("show");
+      }
+    });
   }
+  </script>
+
+
+  <script>
+  $(document).ready(function() {
+    $('#medtable').DataTable();
+  });
   </script>
   <script>
   function addNow() {
@@ -435,14 +480,3 @@ window.onload = loadXMLDoc;
 </body>
 
 </html>
-// <td>
-  // <div class="container">
-    // <a href="#" class="btn btn-warning btn-sm" onclick="viewContent(<?php echo $row['id']; ?>, 'viewresult');" //
-      title="View" href="#" id="veiwID"><i class="bx bxs-bullseye"></i></a>
-    // <a title="view" class="btn btn-secondary btn-sm" //
-      href="resources/viewPDF.php?file=<?php echo $row['file_name']; ?>&tablename=<?php echo $tablename; ?>"><i //
-        class="bx bxs-file-pdf"></i></a>
-    // <a class="btn btn-danger btn-sm" name="id_trash" onclick="deleteID()" title="Delete" href="#" id="deleteID" //
-      value="<?php echo $row['id']; ?>"><i class="bx bxs-trash-alt"></i></a>
-    // </div>
-  // </td>
