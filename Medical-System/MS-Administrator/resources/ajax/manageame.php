@@ -15,12 +15,14 @@ $newDate = date("F j, Y, g:i a", strtotime($mResult['created_at']));
         <input type="text" class="form-control " value="<?php echo $newpaidDate ?>" disabled>
         <label for="" class="p-2">Completion Date : </label>
         <input type="text" class="form-control " value="<?php echo $newDate ?>" disabled>
+        <input type="hidden" id="id" name="id" value="<?php echo $mResult['id'] ?>">
       </div>
     </div>
     <?php if ($mResult['urin'] == 1) { ?>
     <div class="row p-4">
       <div class="col">
         <div class="form-check">
+
           <input class="form-check-input" id="urin" type="checkbox" checked disabled>
           <label class="form-check-label" for="urin">
             Urinalysis
