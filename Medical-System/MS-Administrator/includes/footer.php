@@ -11,6 +11,7 @@
 
 <!-- ======= Scripts ======= -->
 
+
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
   <i class="bi bi-arrow-up-short"></i></a>
 <!-- vendor -->
@@ -27,6 +28,8 @@
 <script src="../assets/vendor/bootstrap/js/JsBarcode.all.min.js"></script>
 <script src="../assets/js/main.js"></script>
 </script>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
 <!-- extras -->
 <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 <script type="text/javascript" src="../mdb5-free-standard/js/mdb.min.js"></script>
