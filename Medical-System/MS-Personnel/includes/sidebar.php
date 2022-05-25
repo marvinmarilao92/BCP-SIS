@@ -190,13 +190,13 @@
 
 
 
- <div class="modal fade" id="myModal" data-mdb-backdrop="static" data-mdb-keyboard="false" aria-hidden="true"
+ <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true"
    aria-labelledby="exampleModalToggleLabel" tabindex="-1">
    <div class="modal-dialog modal-dialog-centered modal-lg">
      <div class="modal-content">
        <div class="modal-header bg-primary">
          <h5 class="modal-title text-light" id="exampleModalToggleLabel">Stub Completion Form</h5>
-         <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
        </div>
        <div class="modal-body">
          <div class="row g-4">
@@ -216,7 +216,7 @@
          </div>
        </div>
        <div class="modal-footer">
-         <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
          <button class="btn btn-danger" onclick="validate();" name="confirm">confirm</button>
        </div>
      </div>
@@ -226,7 +226,7 @@
  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
    <div class="offcanvas-header">
      <h5 id="offcanvasRightLabel">Offcanvas right</h5>
-     <button type="button" class="btn-close text-reset" data-mdb-dismiss="offcanvas" aria-label="Close"></button>
+     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
    </div>
    <div class="offcanvas-body">...</div>
  </div>
