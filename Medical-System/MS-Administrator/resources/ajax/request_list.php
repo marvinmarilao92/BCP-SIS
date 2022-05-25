@@ -30,31 +30,20 @@ include_once 'security/newsource.php';
     <section class="section2">
       <div class="row">
         <div class="col-lg-9">
+          <?php
+          if (isset($_SESSION['alert'])) {
+          ?>
+          <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            <strong><?php echo $_SESSION['alert']; ?></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <?php
 
+            unset($_SESSION['alert']);
+          }
+          ?>
           <div class="card border border-primary">
             <div class="card-body">
-              <?php
-              if (isset($_SESSION['alertEdit'])) {
-              ?>
-              <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                <strong><?php echo $_SESSION['alertEdit']; ?></strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-              <?php
-
-                unset($_SESSION['alertEdit']);
-              }
-              if (isset($_SESSION['alertEdit2'])) {
-              ?>
-              <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                <strong><?php echo $_SESSION['alertEdit2']; ?></strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-              <?php
-
-                unset($_SESSION['alertEdit2']);
-              }
-              ?>
               <h1 class="card-title">Stub Completion List</h1>
               <div class="table-responsive">
                 <table class="display table table-hover" id="proccess1">
@@ -92,6 +81,7 @@ include_once 'security/newsource.php';
                         <div class="input-group">
                           <a href="#" id="edit" onclick="edit('<?php echo $row['id']; ?>', 'editField');"
                             class="btn btn-success"><i class="bi bi-box"></i>&nbspEdit</a>
+                          <a href="#" id="delete" class="btn btn-danger"><i class="bi bi-box"></i>&nbspDelete</a>
                         </div>
                       </td>
                     </tr>
@@ -186,7 +176,6 @@ include_once 'security/newsource.php';
   }
 
   function editNow() {
-    var editID = document.getElementById("editID").value;
     var urin = document.getElementById("urin")
     var cbc = document.getElementById("cbc")
     var c_xray = document.getElementById("c_xray")
@@ -209,13 +198,13 @@ include_once 'security/newsource.php';
       var c_xray = "0";
     }
 
-    var takeDataintoArray = 'editID=' + editID + '&urin=' + urin + '&cbc=' + cbc + '&c_xray=' + c_xray;
+    var takeDataintoArray = 'urin=' + urin + '&cbc=' + cbc + '&c_xray=' + c_xray;
 
     Swal.fire({
       allowOutsideClick: false,
       icon: 'question',
-      title: 'Do you want to Save Changes?',
-      text: 'Note: This wiil edit your data in the database',
+      title: 'Do you want to Assess this even if Not in Schedule?',
+      text: 'Note: This wiil write the record in advance',
       confirmButtonText: 'Overwrite',
       confirmButtonColor: '#f93154',
       cancelButtonColor: '#B23CFD',
@@ -224,7 +213,7 @@ include_once 'security/newsource.php';
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         $.ajax({
-          type: "GET",
+          type: "POST",
           url: 'resources/ajax/updateame.php',
           data: takeDataintoArray,
           cache: false,
@@ -234,8 +223,6 @@ include_once 'security/newsource.php';
               icon: 'success',
               title: 'Successfully Inserted',
               showConfirmButton: true,
-            }).then(() => {
-              window.location.reload(true);
             })
 
           }

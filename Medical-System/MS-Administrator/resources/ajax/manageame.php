@@ -7,7 +7,6 @@ $newpaidDate = date("F j, Y, g:i a", strtotime($mResult['date_paid']));
 $newDate = date("F j, Y, g:i a", strtotime($mResult['created_at']));
 ?>
 <div class="row p-4">
-  <input type="hidden" name="id" id="id" value="<?php echo $mResult['id']; ?>">
   <div class="col-lg-6 col-md-12 col-sm-12">
     <div class="row">
       <div class="col-12">
