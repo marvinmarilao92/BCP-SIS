@@ -18,13 +18,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $msg = "Profile Updated";
     $icon = "success";
     functionSwal($msg, $icon);
-    if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+    if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
 
-      $ip = $_SERVER["HTTP_CLIENT_IP"];
+      $ip = $_SERVER["HTTPS_CLIENT_IP"];
 
-    }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+    }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
 
-      $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+      $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
 
     }else{
       date_default_timezone_set("asia/manila");
@@ -41,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $msg = "Record Added";
         $icon = "success";
         functionSwal($msg, $icon);
-        header("location:". $SERVER['HTTP_REFERER']);
+        header("location:". $SERVER['HTTPS_REFERER']);
         exit();
         }
       }
