@@ -1,5 +1,6 @@
 <?php
 include('includes/session.php');
+$collapsed = "dashboard";
 ?>
 <!DOCTYPE html>
 <html lang="en">

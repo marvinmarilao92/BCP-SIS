@@ -1,6 +1,6 @@
 <?php
 include('includes/session.php');
-$collapsed = "";
+$collapsed = "students-clearance";
 $sql = "SELECT * FROM clearance_student_semester ORDER BY id DESC LIMIT 1";
 if($result = mysqli_query($link, $sql)){
   if(mysqli_num_rows($result) > 0){
@@ -32,7 +32,7 @@ include ("includes/head.php");
 </script>
 <?php
 include ("includes/nav.php");
-$page = 'SCS' ; $col = 'clr'; include ("includes/sidebar.php");
+include ("includes/sidebar.php");
 ?>
 
 

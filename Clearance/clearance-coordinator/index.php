@@ -1,5 +1,6 @@
 <?php
 include('includes/session.php');
+$collapsed = "dashboard";
 $sql = "SELECT * FROM clearance_department_students where department_name = '$verified_session_role'";
       if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){

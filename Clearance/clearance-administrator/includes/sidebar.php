@@ -31,18 +31,39 @@
       <li class="nav-heading">Module</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
+        <a class="nav-link <?php if($collapsed != 'dashboard'){echo 'collapsed';} ?>" href="index.php">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
+        <a class="nav-link <?php if($collapsed != 'students-record'){echo 'collapsed';} ?>" href="students-record.php">
+          <i class="bi bi-card-list"></i>
+          <span>Students Record</span>
+        </a>
+      </li><!-- End Students Record Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link <?php if($collapsed != 'teachers-record'){echo 'collapsed';} ?>" href="teachers-record.php">
+          <i class="bi bi-card-list"></i>
+          <span>Teachers Record</span>
+        </a>
+      </li><!-- End Teachers Record Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link <?php if($collapsed != 'semestral-clearance'){echo 'collapsed';} ?>" href="semestral-clearance.php">
+          <i class="bi bi-list-check"></i>
+          <span>Semestral Clearance</span>
+        </a>
+      </li><!-- End Semestral Clearance Nav -->
+
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="student-clearance.php">
           <i class="bi bi-person"></i>
           <span>Students Clearance</span>
         </a>
-      </li><!-- End Students Clearance Nav -->
+      </li>
 
       
       <li class="nav-item">
@@ -50,7 +71,7 @@
           <i class="bi bi-person"></i>
           <span>Teachers Clearance</span>
         </a>
-      </li><!-- End Teachers Clearance Nav -->
+      </li> -->
       
       <li class="nav-item">
         <a class="nav-link collapsed" href="clearance-audit-trail.php">
