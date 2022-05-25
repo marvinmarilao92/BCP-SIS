@@ -3,7 +3,7 @@ include_once 'security/newsource.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>POST</title>
+
 
 <head>
   <?php include 'includes/head_ext.php'; ?>
@@ -39,14 +39,15 @@ include_once 'security/newsource.php';
                 <div class="card">
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-3">
+                      <div class="col-lg-3 col-md-6 col-md-12">
                         <div class="card-title">Medical Administrator</div>
                       </div>
-                      <div class="col-3 d-flex align-items-center">
-                        <select class="form-select" name="" id="">
-                          <option value="">Announcement</option>
-                          <option value="">News & Updates</option>
-                        </select>
+                      <div class="col-lg-3 col-md-6 col-md-12 d-flex align-items-center">
+                        <form action="">
+                          <select class="form-select" name="" id="">
+                            <option value="">Announcement</option>
+                            <option value="">News & Updates</option>
+                          </select>
                       </div>
                     </div>
                     <div class="row">
@@ -55,9 +56,47 @@ include_once 'security/newsource.php';
                           placeholder="Write Something.."></textarea>
                       </div>
                     </div>
+                    <div class="row pt-2">
+                      <div class="col text-end">
+                        <button class="btn btn-primary">POST</button>
+                      </div>
+                    </div>
+                    </form>
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div class="col-12">
+              <?php require_once "timezone.php";
+              $sql = $db->query("SELECT * FROM ms_schedule")->fetchAll();
+              ?>
+              <div class="card p-4">
+                <div class="card-title">Schedule to POST</div>
+                <table class="display nowrap" id="medtable" cellspacing="0">
+                  <thead>
+                    <th>Course</th>
+                    <th>Year Level</th>
+                    <th>Schedule Start</th>
+                    <th>Schedule End</th>
+                  </thead>
+
+                  <?php foreach ($sql as $data) {
+                    $newdatefrom = date("F j, Y, g:i a", strtotime($data['sched_from']));
+                    $newdateto = date("F j, Y, g:i a", strtotime($data['sched_to']));
+                  ?>
+                  <tbody>
+                    <tr>
+                      <td><?php echo $data['course'] ?></td>
+                      <td><?php echo $data['yr_lvl'] ?></td>
+                      <td><?php echo $newdatefrom ?></td>
+                      <td><?php echo $newdateto ?></td>
+                    </tr>
+                  </tbody>
+                  <?php } ?>
+                </table>
+              </div>
+
             </div><!-- End banners -->
 
             <!-- Department Posts -->
@@ -228,6 +267,17 @@ include_once 'security/newsource.php';
   </main>
   <?php include 'includes/footer.php';
   ?>
+  <script>
+  $(document).ready(function() {
+    $('#medtable').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
+
+    });
+  });
+  </script>
 </body>
 
 </html>

@@ -4,7 +4,7 @@
 <meta content="" name="description">
 <meta content="" name="keywords">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<title>Medical System</title>
 <!-- Favicons -->
 <link href="../assets/img/pulse-svgrepo-com.svg" rel="icon">
 <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -17,12 +17,9 @@
 <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
 <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
 <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 <script src="../assets/vendor/bootstrap/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
 <!-- <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" /> -->
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="../mdb5-free-standard/css/mdb.min.css" />

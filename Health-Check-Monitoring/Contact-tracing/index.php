@@ -328,6 +328,7 @@ include('security/newsource.php')
   <script type="text/javascript"></script>
   <script>
   function insertCT() {
+    var id_number = document.getElementById("id_number").value;
     var fullname = document.getElementById("fullname").value;
     var role = document.getElementById("role").value;
     var contact = document.getElementById("contact").value;
@@ -386,6 +387,7 @@ include('security/newsource.php')
   }
 
   function insertCT2() {
+    var id_number = document.getElementById("id_number").value;
     var fullname = document.getElementById("fullname").value;
     var role = document.getElementById("role").value;
     var contact = document.getElementById("contact").value;

@@ -51,12 +51,9 @@
      <li class="nav-item">
        <a onclick="Annual()" href="#" class="nav-link collapsed">
          <i class="bi bi-journal-medical"></i>
-         <span>Validate Medical Examination Payment</span>
+         <span>Stub Completion</span>
        </a>
      </li>
-
-
-     <li class="nav-heading text-primary">Records</li>
 
      <li class="nav-item">
        <a href="request_list.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('Request' == $page) {
@@ -65,7 +62,7 @@
                                                                                     echo 'nav-link collapsed';
                                                                                   } ?>">
          <i class="bi bi-clipboard-check"></i>
-         <span>Request&nbsp;</span>
+         <span>Student Stub Completion Record</span>
          <span class="badge bg-danger badge-number">
            <?php require_once 'security/sec-conn.php';
             $query = "SELECT * FROM hcms_request WHERE `status` = 'Pending'";
@@ -76,41 +73,35 @@
             ?>
          </span>
        </a>
-
-     <li class="nav-item">
-       <a href="schedule-management.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('schedule' == $page) {
-                                                                                            echo 'nav-link';
-                                                                                          } else {
-                                                                                            echo 'nav-link collapsed';
-                                                                                          } ?>">
-         <i class="bi bi-calendar-plus"></i>
-         <span>Schedule Management</span>
-       </a>
      </li>
 
 
      <li class="nav-item">
-       <a href="medical-examination-report.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('Records-Validation' == $page) {
-                                                                                                  echo 'nav-link';
-                                                                                                } else {
-                                                                                                  echo 'nav-link collapsed';
-                                                                                                } ?>">
-         <i class="bi bi-folder-plus"></i>
-         <span>Medical Examination Results&nbsp;</span>
+       <a class="nav-link collapsed" data-bs-target="#manage-nav" data-bs-toggle="collapse" href="#">
+         <i class="bi bi-person-lines-fill"></i><span>(AME) Management&nbsp;</span><i
+           class="bi bi-chevron-down ms-auto"></i>
        </a>
+       <ul id="manage-nav" class="<?php if ('manage' == $nav) {
+                                    echo 'nav-content collapse show';
+                                  } else {
+                                    echo 'nav-content collapse';
+                                  } ?> " data-bs-parent="#sidebar-nav">
+         <li>
+           <a href="schedule-management.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('schedule' == $page) {
+                                                                                                echo 'active';
+                                                                                              } ?>">
+             <i class="bi bi-circle"></i><span>Schedule</span>
+           </a>
+         </li>
+         <li>
+           <a href="medical-examination-report.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('daily-logs' == $page) {
+                                                                                                      echo 'active';
+                                                                                                    } ?>">
+             <i class="bi bi-circle"></i><span>Manage (AME) Result</span>
+           </a>
+         </li>
+       </ul>
      </li>
-
-     <li class="nav-item">
-       <a href="for-ticket.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('help' == $page) {
-                                                                                  echo 'nav-link';
-                                                                                } else {
-                                                                                  echo 'nav-link collapsed';
-                                                                                } ?>">
-         <i class="bi bi-chat-square-dots"></i>
-         <span>Help Desk&nbsp;</span>
-       </a>
-     </li>
-
 
 
      <li class="nav-heading text-primary">Monitor</li>
@@ -148,34 +139,6 @@
          </li>
        </ul>
      </li>
-
-     <li class="nav-item">
-       <a class="nav-link collapsed" data-bs-target="#enrolled-nav" data-bs-toggle="collapse" href="#">
-         <i class="bi bi-layout-text-sidebar-reverse"></i><span>Over All Records</span><i
-           class="bi bi-chevron-down ms-auto"></i>
-       </a>
-       <ul id="enrolled-nav" class="<?php if ('OAR' == $nav) {
-                                      echo 'nav-content collapse show';
-                                    } else {
-                                      echo 'nav-content collapse';
-                                    } ?> " data-bs-parent="#sidebar-nav">
-         <li>
-           <a href="overall-records-students.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('student-list' == $page) {
-                                                                                                    echo 'active';
-                                                                                                  } ?>">
-             <i class="bi bi-circle"></i><span>Student List</span>
-           </a>
-         </li>
-         <li>
-           <a href="overall-records-teacher.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('teacher-list' == $page) {
-                                                                                                    echo 'active';
-                                                                                                  } ?>">
-             <i class="bi bi-circle"></i><span>Faculty List</span>
-           </a>
-         </li>
-       </ul>
-     </li>
-
 
      <li class="nav-heading text-primary">Settings</li>
 
@@ -232,7 +195,7 @@
    <div class="modal-dialog modal-dialog-centered modal-lg">
      <div class="modal-content">
        <div class="modal-header bg-primary">
-         <h5 class="modal-title text-light" id="exampleModalToggleLabel">ID Number</h5>
+         <h5 class="modal-title text-light" id="exampleModalToggleLabel">Stub Completion Form</h5>
          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
        </div>
        <div class="modal-body">
@@ -292,93 +255,137 @@ function searchstdID(showStudentInformation) {
         ajaxDisplay.innerHTML = html;
       }
     });
-  } else {
-    alert('Asd')
+  } else if (searchID == '') {
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      title: 'Please Enter (AME) Reference Number',
+      text: 'important!',
+      confirmButtonText: 'Okay',
+      confirmButtonColor: '#f93154',
+    })
   }
 }
  </script>
- <script>
+ <script type="text/javascript">
 function validate() {
   var status = document.getElementById("status").value;
-  if (status == 'Nval') {
-    var id_number = document.getElementById("id_number").value;
-    var course = document.getElementById("course").value;
-    var name = document.getElementById("name").value;
+  if (status == "Nval") {
+    // cashier
     var pay_date = document.getElementById("pay_date").value;
+    // student information
+    var id_number = document.getElementById("id_number").value;
+    var name = document.getElementById("name").value;
+    var course = document.getElementById("course").value;
+    var yr_lvl = document.getElementById("yr_lvl").value;
+    var section = document.getElementById("section").value;
+    var sy = document.getElementById("sy").value;
+    // med
+    var urin = document.getElementById("urin")
+    var cbc = document.getElementById("cbc")
+    var c_xray = document.getElementById("c_xray")
+
+    if (urin.checked) {
+      var urin = "1";
+    } else {
+      var urin = "0";
+    }
+
+    if (cbc.checked) {
+      var cbc = "1";
+    } else {
+      var cbc = "0";
+    }
+
+    if (c_xray.checked) {
+      var c_xray = "1";
+    } else {
+      var c_xray = "0";
+    }
+
     var power = document.getElementById("power").value;
 
-    var takeDataintoArray = 'id_number=' + id_number + '&course=' + course + '&name=' + name + '&pay_date=' +
-      pay_date + '&power=' + power;
+    var takeDataintoArray = 'pay_date=' + pay_date + '&id_number=' + id_number + '&name=' + name + '&course=' +
+      course + '&yr_lvl=' + yr_lvl + '&section=' + section + '&sy=' + sy + '&urin=' + urin + '&cbc=' + cbc +
+      '&c_xray=' + c_xray;
 
-    if (power == "unable") {
+    if (pay_date != "" || id_number != "" || name != "" || course != "" ||
+      yr_lvl != "" || sy != "") {
 
-      Swal.fire({
-        toast: true,
-        allowOutsideClick: false,
-        icon: 'question',
-        title: 'Do you want to Assess this even if Not in Schedule?',
-        text: 'Note: This wiil write the record in advance',
-        confirmButtonText: 'Overwrite',
-        confirmButtonColor: '#f93154',
-        cancelButtonColor: '#B23CFD',
-        showCancelButton: true,
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Inserting Record',
-            text: 'You have overwrite record',
-            showConfirmButton: false,
-            timer: 4000,
-            timerProgressBar: true,
-          }).then(() => {
-            $.ajax({
-              type: "POST",
-              url: 'resources/ajax/MSvalid.php',
-              data: takeDataintoArray,
-              cache: false,
-              success: function(result) {
-                Swal.fire({
-                  allowOutsideClick: true,
-                  toast: true,
-                  icon: 'success',
-                  title: 'Successfully Inserted',
-                  showConfirmButton: true,
-                })
+      if (power == "unable") {
 
-              }
-            });
-          })
-        }
-      })
-
-    } else if (power == "able") {
-      {
-        $.ajax({
-          type: "POST",
-          url: 'resources/ajax/MSvalid.php',
-          data: takeDataintoArray,
-          cache: false,
-          success: function(result) {
+        Swal.fire({
+          allowOutsideClick: false,
+          icon: 'question',
+          title: 'Do you want to Assess this even if Not in Schedule?',
+          text: 'Note: This wiil write the record in advance',
+          confirmButtonText: 'Overwrite',
+          confirmButtonColor: '#f93154',
+          cancelButtonColor: '#B23CFD',
+          showCancelButton: true,
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
             Swal.fire({
-              allowOutsideClick: true,
-              toast: true,
               icon: 'success',
-              title: 'Successfully Inserted',
-              showConfirmButton: true,
-            })
+              title: 'Inserting Record',
+              text: 'You have overwrite record',
+              showConfirmButton: false,
+              timer: 4000,
+              timerProgressBar: true,
+            }).then(() => {
+              $.ajax({
+                type: "POST",
+                url: 'resources/ajax/MSvalid.php',
+                data: takeDataintoArray,
+                cache: false,
+                success: function(result) {
+                  Swal.fire({
+                    allowOutsideClick: true,
+                    icon: 'success',
+                    title: 'Successfully Inserted',
+                    showConfirmButton: true,
+                  })
 
+                }
+              });
+            })
           }
-        });
+        })
+
+      } else if (power == "able") {
+        {
+          $.ajax({
+            type: "POST",
+            url: 'resources/ajax/MSvalid.php',
+            data: takeDataintoArray,
+            cache: false,
+            success: function(result) {
+              Swal.fire({
+                allowOutsideClick: true,
+                icon: 'success',
+                title: 'Successfully Inserted',
+                showConfirmButton: true,
+              })
+
+            }
+          });
+        }
       }
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Please Complete',
+        text: "Sorry cannot validate this record",
+      })
     }
   } else {
     Swal.fire({
       icon: 'error',
-      title: 'Already Validated',
-      text: "Sorry cannot validate this record",
+      title: 'Already Done with the Process',
+      text: "Sorry cannot insert Record",
     })
   }
+
 }
  </script>
