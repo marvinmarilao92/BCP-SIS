@@ -63,15 +63,6 @@
                                                                                   } ?>">
          <i class="bi bi-clipboard-check"></i>
          <span>Student Stub Completion Record</span>
-         <span class="badge bg-danger badge-number">
-           <?php require_once 'security/sec-conn.php';
-            $query = "SELECT * FROM hcms_request WHERE `status` = 'Pending'";
-            $result = mysqli_query($conn2, $query);
-            if ($result) {
-              echo mysqli_num_rows($result);
-            }
-            ?>
-         </span>
        </a>
      </li>
 
