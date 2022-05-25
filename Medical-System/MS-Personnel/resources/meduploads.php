@@ -36,5 +36,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $_SESSION['alert2'] = "Error ! not Inserted";
   }
 
-  header("Location: " . $_SERVER["HTTP_REFERER"]);
+  header("Location: " . $_SERVER["HTTPS_REFERER"]);
 }

@@ -51,13 +51,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if ($query_run){
 
-      if (!empty($_SERVER["HTTP_CLIENT_IP"])){
+      if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
   
-        $ip = $_SERVER["HTTP_CLIENT_IP"];
+        $ip = $_SERVER["HTTPS_CLIENT_IP"];
   
-      }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+      }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
   
-        $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+        $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
   
       }else{
 
@@ -76,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $msg = "Record Added";
           $icon = "success";
           functionSwal($msg, $icon);
-          header("location:". $SERVER['HTTP_REFERER']);
+          header("location:". $SERVER['HTTPS_REFERER']);
           exit();
           }
         }
@@ -86,7 +86,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $icon = "error";
         functionSwal($msg, $icon);
         $_SESSION['alert'] = "Action Failed";
-        header("location:". $SERVER['HTTP_REFERER']);
+        header("location:". $SERVER['HTTPS_REFERER']);
         exit();
       }
 
