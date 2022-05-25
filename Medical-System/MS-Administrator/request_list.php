@@ -30,20 +30,31 @@ include_once 'security/newsource.php';
     <section class="section2">
       <div class="row">
         <div class="col-lg-9">
-          <?php
-          if (isset($_SESSION['alert'])) {
-          ?>
-          <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            <strong><?php echo $_SESSION['alert']; ?></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          <?php
 
-            unset($_SESSION['alert']);
-          }
-          ?>
           <div class="card border border-primary">
             <div class="card-body">
+              <?php
+              if (isset($_SESSION['alertEdit'])) {
+              ?>
+              <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                <strong><?php echo $_SESSION['alertEdit']; ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <?php
+
+                unset($_SESSION['alertEdit']);
+              }
+              if (isset($_SESSION['alertEdit2'])) {
+              ?>
+              <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                <strong><?php echo $_SESSION['alertEdit2']; ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <?php
+
+                unset($_SESSION['alertEdit2']);
+              }
+              ?>
               <h1 class="card-title">Stub Completion List</h1>
               <div class="table-responsive">
                 <table class="display table table-hover" id="proccess1">
@@ -81,8 +92,6 @@ include_once 'security/newsource.php';
                         <div class="input-group">
                           <a href="#" id="edit" onclick="edit('<?php echo $row['id']; ?>', 'editField');"
                             class="btn btn-success"><i class="bi bi-box"></i>&nbspEdit</a>
-                          <a href="#" id="delete" onclick="edit('<?php echo $row['id']; ?>', 'editField');"
-                            class="btn btn-danger"><i class="bi bi-box"></i>&nbspDelete</a>
                         </div>
                       </td>
                     </tr>
@@ -125,6 +134,27 @@ include_once 'security/newsource.php';
                 </div>
 
               </div>
+            </div>
+
+            <div class="modal fade" id="editModal" data-mdb-backdrop="static" aria-hidden="true"
+              aria-labelledby="addModalLabel2" tabindex="-1">
+              <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header bg-primary text-light">
+                    <h5 class="modal-title" id="addModalLabel2">Manage Stub Record</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div id="editField"></div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" data-mdb-toggle="close" data-mdb-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" onclick="editNow();" name="submit">Edit Now</button>
+                  </div>
+                </div>
+              </div>
             </div><!-- End Recent Activity -->
           </section>
         </div>
@@ -146,13 +176,75 @@ include_once 'security/newsource.php';
 
   function edit(editID, editField) {
     $.ajax({
-      url: 'resources/ajax/manageame.php?id=' + editID,
+      url: 'resources/ajax/editame.php?id=' + editID,
       success: function(html) {
         var ajaxDisplay = document.getElementById(editField);
         ajaxDisplay.innerHTML = html;
-        $("#manageModal").modal("show");
+        $("#editModal").modal("show");
       }
     });
+  }
+
+  function editNow() {
+    var editID = document.getElementById("editID").value;
+    var urin = document.getElementById("urin")
+    var cbc = document.getElementById("cbc")
+    var c_xray = document.getElementById("c_xray")
+
+    if (urin.checked) {
+      var urin = "1";
+    } else {
+      var urin = "0";
+    }
+
+    if (cbc.checked) {
+      var cbc = "1";
+    } else {
+      var cbc = "0";
+    }
+
+    if (c_xray.checked) {
+      var c_xray = "1";
+    } else {
+      var c_xray = "0";
+    }
+
+    var takeDataintoArray = 'editID=' + editID + '&urin=' + urin + '&cbc=' + cbc + '&c_xray=' + c_xray;
+
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'question',
+      title: 'Do you want to Save Changes?',
+      text: 'Note: This wiil edit your data in the database',
+      confirmButtonText: 'Overwrite',
+      confirmButtonColor: '#f93154',
+      cancelButtonColor: '#B23CFD',
+      showCancelButton: true,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "GET",
+          url: 'resources/ajax/updateame.php',
+          data: takeDataintoArray,
+          cache: false,
+          success: function(result) {
+            Swal.fire({
+              allowOutsideClick: true,
+              icon: 'success',
+              title: 'Successfully Inserted',
+              showConfirmButton: true,
+            }).then(() => {
+              window.location.reload(true);
+            })
+
+          }
+        });
+
+      }
+    })
+
+
   }
   </script>
 </body>

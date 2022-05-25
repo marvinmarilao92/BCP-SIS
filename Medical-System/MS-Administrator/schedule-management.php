@@ -146,7 +146,8 @@ include_once 'security/newsource.php';
                               $date1 = $row['sched_from'];
                               $date2 = $row['sched_to'];
                               $newDate1 = date('F j, Y', strtotime($date1));
-                              $newDate2 = date('F j, Y', strtotime($date2)); ?>
+                              $newDate2 = date('F j, Y', strtotime($date2));
+                              $tablename = "ms_schedule"; ?>
                           <tr>
                             <td title="edit" style="cursor:pointer;" value="<?php echo $row['id']; ?>">
                               <?php echo $row['course']; ?>
@@ -161,13 +162,14 @@ include_once 'security/newsource.php';
                               <?php echo $newDate2; ?>
                             </td>
                             <td>
-                              <button class="btn btn-warning" name="id_view" onclick="view()" title="View" href="#"
+                              <!-- <button class="btn btn-warning" name="id_view" onclick="view()" title="View" href="#"
                                 id="veiw" value="<?php echo $row['id']; ?>"><i class="bx bxs-bullseye"></i></button>
                               <button class="btn btn-secondary" name="id_edit" onclick="edit(<?php echo $row['id']; ?>)"
-                                title="Edit" href="#" id="editID"><i class="bx bxs-calendar-edit"></i></button>
+                                title="Edit" href="#" id="editID"><i class="bx bxs-calendar-edit"></i></button> -->
+                              <input type="hidden" id="table" value="<?php echo $tablename ?>">
                               <button class="btn btn-danger" name="id_trash"
                                 onclick="deleteID(<?php echo $row['id']; ?>)" title="Delete" href="#" id="deleteID"><i
-                                  class="bx bxs-trash-alt"></i></button>
+                                  class="bx bxs-trash-alt"></i>Delete</button>
                             </td>
                           </tr>
                           <?php
@@ -191,8 +193,7 @@ include_once 'security/newsource.php';
     });
 
     function deleteID(deleteID) {
-      var table = "ms_schedule";
-      var takeDataintoArray = '&table=' + table;
+      var table = document.getElementById("table").value;
       Swal.fire({
         allowOutsideClick: false,
         icon: 'question',
@@ -215,6 +216,7 @@ include_once 'security/newsource.php';
             timerProgressBar: true,
           }).then(() => {
             location.href = 'resources/trash.php?id=' + deleteID + '&table=' + table;
+
           })
         }
       })

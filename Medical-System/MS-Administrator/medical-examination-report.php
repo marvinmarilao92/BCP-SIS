@@ -82,7 +82,7 @@ include_once 'security/newsource.php';
             <div class="card-body">
               <div class="d-flex bd-highlight mb-3">
                 <h1 class="card-title me-auto me-auto p-2 bd-highlight">Recent</h1>
-                <div class="btn btn-primary p-2 bd-highlight" onclick="addRecord()">Add Record</div>
+                <!-- <div class="btn btn-primary p-2 bd-highlight" onclick="addRecord()">Add Record</div> -->
               </div>
               <?php require_once "timezone.php";
               $sql = $db->query('SELECT * FROM ms_labtest')->fetchAll();
