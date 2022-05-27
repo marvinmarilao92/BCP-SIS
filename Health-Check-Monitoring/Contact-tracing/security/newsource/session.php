@@ -31,6 +31,10 @@ if (isset($_SESSION['session_username'])) {
         //statement
         break;
 
+      case "SuperAdmin":
+        //statement
+        break;
+
       default:
         session_destroy();
         // header("location:index.php");

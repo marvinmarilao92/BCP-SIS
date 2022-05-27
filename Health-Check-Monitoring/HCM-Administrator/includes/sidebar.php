@@ -9,7 +9,7 @@
           case 'SuperAdmin':
             $output = '
               <li class="nav-item" >
-                <a href="../../../super_admin/index.php?id=' . $key . '"style="color: rgb(83, 107, 148);font-weight:600;">
+                <a href="../../super_admin/index.php?id=' . $key . '"style="color: rgb(83, 107, 148);font-weight:600;">
                   <i class="bi bi-arrow-return-left"></i>
                   <span>Return to SuperUser</span>
                 </a>
@@ -32,7 +32,6 @@
          <span>Dashboard</span>
        </a>
      </li><!-- End Dashboard Nav -->
-
 
      <li class="nav-heading text-primary">Module</li>
 
@@ -63,7 +62,7 @@
 
      <li class="nav-item">
        <a class="nav-link collapsed" data-bs-target="#Mlogs-nav" data-bs-toggle="collapse" href="#">
-         <i class="bi bi-thermometer-half"></i><span>Manage Logs</span><i class="bi bi-chevron-down ms-auto"></i>
+         <i class="bi bi-person-lines-fill"></i><span>Manage Logs</span><i class="bi bi-chevron-down ms-auto"></i>
        </a>
        <ul id="Mlogs-nav" class="
        
@@ -106,20 +105,6 @@
          <span>Inventory</span>
        </a>
      </li>
-
-     <li class="nav-heading text-primary">Medical System</li>
-
-     <li class="nav-item">
-       <a href="medsys.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('medsys' == $page) {
-                                                                              echo 'nav-link';
-                                                                            } else {
-                                                                              echo 'nav-link collapsed';
-                                                                            } ?>">
-         <i class="bi bi-file-earmark-medical"></i>
-         <span>Medical Examination</span>
-       </a>
-     </li>
-
 
      <li class="nav-heading text-primary">Monitor</li>
 
