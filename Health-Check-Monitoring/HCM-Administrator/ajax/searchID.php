@@ -3,116 +3,23 @@ require_once "../security/newsource.php";
 $resultforSEARCH = $db->query('SELECT * FROM student_information WHERE id_number = ?', $_GET['id_number'])->fetchArray();
 
 if ($resultforSEARCH) {  ?>
-<div class="row p-2">
-  <div class="col-md-6 col-sm-12 p-2">
-    <input type="text" class="form-control text-primary" disabled name="fullname" id="fullname"
-      value="<?php echo $resultforSEARCH['lastname'] . ', ' . $resultforSEARCH['firstname'] . ' ' . $resultforSEARCH['middlename'] ?>"
-      required>
-  </div>
-
-  <div class="col-md-6 col-sm-12 p-2">
-    <input type="text" class="form-control text-primary" disabled name="BCPROLE" id="BCPROLE" value="Student" required>
-  </div>
-
-
-  <div class="col-md-6 col-sm-12 p-2">
-    <input class="form-select form-select" type="hidden" name="treatment" id="treatment" required>
-    </input>
-  </div>
-
-
-
-</div>
-
-<div class="row p-2">
-  <div class="col-md-6 col-sm-12 p-2 text-center">
-    <select id="prod_name" name="prod_name" class="form-select"
-      onchange="validateCurrentQTY(this.value, 'validateTY');">
-      <option value="" selected="selected" disabled="disabled">Item</option>
-      <?php
-        $sql2 = 'SELECT * FROM hcms_items ORDER BY prod_id';
-        $result2 = mysqli_query($conn, $sql2);
-        if (mysqli_num_rows($result2) > 0) {
-          while ($row2 = mysqli_fetch_array($result2)) {
-            echo '<option value = "' . $row2['med_name'] . '">' . $row2['med_name'] . '</option>';
-          }
-          // Free result set
-          mysqli_free_result($result2);
-        }
-        ?>
-    </select>
-    <small>Optional</small>
-  </div>
-
-  <div class="col-md-6 col-sm-12 p-2">
-
-    <div id="validateTY">
-      <input type="number" min="1" max="5" class="form-control" name="prod_quantity" id="prod_quantity"
-        placeholder="Quantity" style="text-transform:capitalize;" required>
-    </div>
-
-  </div>
-
-  <div class="col-md-12 col-sm-12 p-2">
-    <div class="form-group">
-      <textarea class="form-control" name="prescription" id="prescription" rows="3"
-        style="resize: none; height: 100px; font-size: 1.3rem;" placeholder="Prescription"></textarea>
+<div class="container">
+  <div class="row p-2 d-flex justify-content-center">
+    <div class="col-lg-6 col-md-12 col-sm-12 text-center">
+      <h5> Full Name</h5>
+      <input type="text" class="form-control text-center" disabled name="fullname" id="fullname"
+        value="<?php echo $resultforSEARCH['lastname'] . ', ' . $resultforSEARCH['firstname'] . ' ' . $resultforSEARCH['middlename'] ?>"
+        required>
     </div>
   </div>
 
-  <div class="col-md-12 col-sm-12 p-2">
-    <div class="form-group">
-      <textarea class="form-control" name="aid" id="aid" rows="3"
-        style="resize: none; height: 100px; font-size: 1.3rem;" placeholder="Description"></textarea>
-    </div>
-  </div>
-
-
-
-
-</div>
-
-<?php } else if (!$resultforSEARCH) {
-  $resultforSEARCH2 = $db->query('SELECT * FROM teacher_information WHERE id_number = ?', $_GET['id_number'])->fetchArray();
-  if ($resultforSEARCH2) {
-  ?>
-<div class="row p-2">
-  <div class="col-md-6 col-sm-12 p-2">
-    <input type="text" class="form-control text-primary" disabled name="fullname" id="fullname"
-      value="<?php echo $resultforSEARCH['lastname'] . ', ' . $resultforSEARCH['firstname'] . ' ' . $resultforSEARCH['middlename'] ?>"
-      required>
-  </div>
-
-  <div class="col-md-6 col-sm-12 p-2">
-    <input type="text" class="form-control text-primary" disabled name="BCPROLE" id="BCPROLE" value="Student" required>
-  </div>
-
-
-  <div class="col-md-6 col-sm-12 p-2">
-    <select class="form-select form-select" name="treatment" id="treatment" required>
-      <option selected="selected">Select Check-up type</option>
-      <?php
-          $sql = 'SELECT * FROM hcms_checkup_type ORDER BY id';
-          $result = mysqli_query($conn, $sql);
-          if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_array($result)) {
-              echo '<option value = "' . $row['checkup_name'] . '">' . $row['checkup_name'] . '</option>';
-            }
-            // Free result set
-            mysqli_free_result($result);
-          }
-          ?>
-    </select>
-  </div>
-
-
-</div>
-
-<div class="row p-2">
-  <div class="col-md-6 col-sm-12 p-2 text-center">
-    <select id="prod_name" name="prod_name" class="form-select">
-      <option value="" selected="selected" disabled>Item</option>
-      <?php
+  <div class="row p-2">
+    <div class="col-lg-6 col-sm-12 p-2">
+      <h5> Brand Name : </h5>
+      <select id="prod_name" name="prod_name" class="form-select"
+        onchange="validateCurrentQTY(this.value, 'validateTY');">
+        <option value="" selected="selected" disabled="disabled">Select Available Medicines</option>
+        <?php
           $sql2 = 'SELECT * FROM hcms_items ORDER BY prod_id';
           $result2 = mysqli_query($conn, $sql2);
           if (mysqli_num_rows($result2) > 0) {
@@ -123,32 +30,95 @@ if ($resultforSEARCH) {  ?>
             mysqli_free_result($result2);
           }
           ?>
-    </select>
-    <small>Optional</small>
-  </div>
+      </select>
+    </div>
 
-  <div class="col-md-6 col-sm-12 p-2">
-    <input type="number" min="1" class="form-control" name="prod_quantity" id="prod_quantity" placeholder="Quantity"
-      style="text-transform:capitalize;" required>
-  </div>
+    <div class="col-lg-6 col-sm-12 p-2">
+      <h5> Miligrams : </h5>
+      <div id="validateTY">
+        <input type="number" min="1" max="5" class="form-control" name="prod_quantity" id="prod_quantity"
+          placeholder="Milligram" style="text-transform:capitalize;" required>
+      </div>
 
-  <div class="col-md-12 col-sm-12 p-2">
-    <div class="form-group">
-      <textarea class="form-control" name="prescription" id="prescription" rows="3"
-        style="resize: none; height: 100px; font-size: 1.3rem;" placeholder="Prescription"></textarea>
+    </div>
+
+    <div class="col-lg-12 col-sm-12 pt-3">
+      <div class="form-group">
+        <h5>Any Prescription ? : </h5>
+        <textarea class="form-control" name="prescription" id="prescription" rows="2"
+          style="resize: none; height: 100px; font-size: 1.3rem;" placeholder="Prescribe"></textarea>
+      </div>
+    </div>
+
+    <div class="col-lg-12 col-sm-12 pt-3">
+      <div class="form-group">
+        <h5>What Happened Today ? : </h5>
+        <textarea class="form-control" name="aid" id="aid" rows="2"
+          style="resize: none; height: 100px; font-size: 1.3rem;" placeholder="Describe"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php } else if (!$resultforSEARCH) {
+  $resultforSEARCH2 = $db->query('SELECT * FROM teacher_information WHERE id_number = ?', $_GET['id_number'])->fetchArray();
+  if ($resultforSEARCH2) {
+  ?>
+<div class="container">
+  <div class="row p-2 d-flex justify-content-center">
+    <div class="col-lg-6 col-md-12 col-sm-12 text-center">
+      <h5> Full Name</h5>
+      <input type="text" class="form-control text-center" disabled name="fullname" id="fullname"
+        value="<?php echo $resultforSEARCH2['lastname'] . ', ' . $resultforSEARCH2['firstname'] . ' ' . $resultforSEARCH2['middlename'] ?>"
+        required>
     </div>
   </div>
 
-  <div class="col-md-12 col-sm-12 p-2">
-    <div class="form-group">
-      <textarea class="form-control" name="aid" id="aid" rows="3"
-        style="resize: none; height: 100px; font-size: 1.3rem;" placeholder="Description"></textarea>
+  <div class="row p-2">
+    <div class="col-lg-6 col-sm-12 p-2">
+      <h5> Brand Name : </h5>
+      <select id="prod_name" name="prod_name" class="form-select"
+        onchange="validateCurrentQTY(this.value, 'validateTY');">
+        <option value="" selected="selected" disabled="disabled">Select Available Medicines</option>
+        <?php
+            $sql2 = 'SELECT * FROM hcms_items ORDER BY prod_id';
+            $result2 = mysqli_query($conn, $sql2);
+            if (mysqli_num_rows($result2) > 0) {
+              while ($row2 = mysqli_fetch_array($result2)) {
+                echo '<option value = "' . $row2['med_name'] . '">' . $row2['med_name'] . '</option>';
+              }
+              // Free result set
+              mysqli_free_result($result2);
+            }
+            ?>
+      </select>
+    </div>
+
+    <div class="col-lg-6 col-sm-12 p-2">
+      <h5> Miligrams : </h5>
+      <div id="validateTY">
+        <input type="number" min="1" max="5" class="form-control" name="prod_quantity" id="prod_quantity"
+          placeholder="Milligram" style="text-transform:capitalize;" required>
+      </div>
+
+    </div>
+
+    <div class="col-lg-12 col-sm-12 pt-3">
+      <div class="form-group">
+        <h5>Any Prescription ? : </h5>
+        <textarea class="form-control" name="prescription" id="prescription" rows="2"
+          style="resize: none; height: 100px; font-size: 1.3rem;" placeholder="Prescribe"></textarea>
+      </div>
+    </div>
+
+    <div class="col-lg-12 col-sm-12 pt-3">
+      <div class="form-group">
+        <h5>What Happened Today ? : </h5>
+        <textarea class="form-control" name="aid" id="aid" rows="2"
+          style="resize: none; height: 100px; font-size: 1.3rem;" placeholder="Describe"></textarea>
+      </div>
     </div>
   </div>
-
-
-
-
 </div>
 <?php
   } else { ?>
