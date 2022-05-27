@@ -131,7 +131,7 @@
           <div class="col-md-6">
             <form action="ctracingfunction.php" method="post" class="form-horizontal">
               <label>SCAN QR CODE</label>
-              <input type="text" name="text" id="text" readonyy="" placeholder="scan qrcode" class="form-control">
+              <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
             </form>
           </div>
         </div>
