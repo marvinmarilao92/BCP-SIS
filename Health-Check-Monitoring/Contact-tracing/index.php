@@ -1,5 +1,5 @@
 <?php
-include('security/newsource.php')
+// include('security/newsource.php')
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,29 +121,18 @@ include('security/newsource.php')
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section dashboard">
-      <div class="container pt-5">
-        <div class="row justify-content-center">
-          <div class="col-lg-8 d-flex flex-column align-items-center justify-content-center">
-            <div class="d-flex justify-content-center py-4">
-              <a href="dynamic-login.php" class="logo d-flex align-items-center w-auto">
-                <span class="d-none d-lg-block">Contact Tracing</span>
-              </a>
-            </div>
-            <div class="card w-75 h-75">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-12 d-flex justify-content-center p-5">
-                    <button type="button" class="btn btn-primary btn-lg btn-block p-3" data-bs-toggle="modal"
-                      data-bs-target="#exampleModal">Student</button>
-                    <button type="button" class="btn btn-success btn-lg btn-block p-3" data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2">Teacher</button>
-                    <button type="button" class="btn btn-warning btn-lg btn-block p-3" data-bs-toggle="modal"
-                      data-bs-target="#exampleModal3">Visitor</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <section class="section">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <video id="preview" width="100%"></video>
+          </div>
+          <div class="col-md-6">
+            <form action="ctracingfunction.php" method="post" class="form-horizontal">
+              <label>SCAN QR CODE</label>
+              <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
+            </form>
           </div>
         </div>
       </div>
@@ -151,135 +140,6 @@ include('security/newsource.php')
 
   </main>
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content ">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Student Contact Tracing Form</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="col-xxl-12 col-md-12">
-            <div class="card p-4">
-              <div class="col-lg-12">
-                <div class="alert alert-info text-center" role="alert">
-                  <h4 class="alert-heading">Contact-Tracing Form</h4>
-                </div>
-                <div class="col-12 col-md-4 input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span onclick="searchthis('showResult');" style="cursor:pointer;" class="input-group-text p-3"
-                      id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path
-                          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                      </svg></span>
-                  </div>
-                  <input type="text" class="form-control text-center" name="id_number" id="id_number"
-                    placeholder="ID Number" style="text-transform:capitalize;" onchange="searchthis('showResult');"
-                    required>
-                </div>
-                <div id="showResult"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" onclick="insertCT();">Submit</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content ">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Teacher Contact Tracing Form</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="col-xxl-12 col-md-12">
-            <div class="card p-4">
-              <div class="col-lg-12">
-                <div class="alert alert-info text-center" role="alert">
-                  <h4 class="alert-heading">Contact-Tracing Form</h4>
-                </div>
-                <div class="col-12 col-md-4 input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span onclick="searchthis2('showResult2');" style="cursor:pointer;" class="input-group-text p-3"
-                      id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path
-                          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                      </svg></span>
-                  </div>
-                  <input type="text" class="form-control text-center" name="id_number" id="id_number2"
-                    placeholder="ID Number" style="text-transform:capitalize;" onchange="searchthis2('showResult2');"
-                    required>
-                </div>
-                <div id="showResult2"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" onclick="insertCT2();">Submit</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content ">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Visitor Contact Tracing Form</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="#" method="POST">
-            <div class="row">
-              <div class="col">
-                <input type="text" class="form-control" placeholder="name" name="name">
-              </div>
-              <div class="col">
-                <input type="text" class="form-control" placeholder="contact" name="contact">
-              </div>
-              <div class="col">
-                <input type="text" class="form-control" placeholder="address" name="address">
-              </div>
-              <div class="col">
-                <input type="number" class="form-control" placeholder="temperature" name="temperature">
-              </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary" name="submit">Submit</button></form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <?php
-  require_once "security/newsource.php";
-  require_once "timezone.php";
-
-  if (isset($_POST['submit'])) {
-
-    $name = $_POST['name'];
-    $contact = $_POST['contact'];
-    $address = $_POST['address'];
-    $temperature = $_POST['temperature'];
-
-    $insert = $db->query('INSERT INTO hcms_ctracingv (vis_name, vis_contact, vis_address, vis_temperature, created_at)  VALUES 
-    (?, ?, ?, ?, ?)', $name, $contact, $address, $temperature, $time);
-  }
-  ?>
-
-  <!-- ======= Footer ======= -->
-  <!-- ======= Footer ======= -->
   <footer class="footer" style="border: none; margin-top: auto;">
     <div class="copyright">
       &copy; Copyright <strong><span>School System</span></strong>. All Rights Reserved
@@ -326,164 +186,24 @@ include('security/newsource.php')
 
   <!-- Custom scripts -->
   <script type="text/javascript"></script>
+
   <script>
-  function insertCT() {
-    var id_number = document.getElementById("id_number").value;
-    var fullname = document.getElementById("fullname").value;
-    var role = document.getElementById("role").value;
-    var contact = document.getElementById("contact").value;
-    var address = document.getElementById("address").value;
-    var course = document.getElementById("course").value;
-    var year_level = document.getElementById("year_level").value;
-    var section = document.getElementById("section").value;
-    var temperature = document.getElementById("temperature").value;
-    var takeDataintoArray = 'fullname=' + fullname + '&role=' + role +
-      '&contact=' + contact + '&address=' + address +
-      '&course=' + course + '&year_level=' + year_level + '&section=' + section + '&temperature=' + temperature;
-    if (temperature != "") {
-      Swal.fire({
-        allowOutsideClick: false,
-        icon: 'question',
-        title: 'Are you Sure?',
-        text: 'Please double check your Temperature',
-        confirmButtonText: 'Proceed',
-        confirmButtonColor: '#f93154',
-        cancelButtonColor: '#B23CFD',
-        showCancelButton: true,
-
-      }).then((result) => {
-        if (result.isConfirmed) {
-          $.ajax({
-            type: "POST",
-            url: 'ajax/ajaxContact-tracing.php',
-            data: takeDataintoArray,
-            cache: false,
-            success: function(html) {
-              Swal.fire({
-                allowOutsideClick: true,
-                icon: 'success',
-                title: 'You Have inserted A Data',
-                text: 'Thankyou For your Cooperation',
-                confirmButtonText: 'Thankyou',
-                confirmButtonColor: '#f93154',
-
-              })
-            }
-          });
-        }
-
-      })
+  let scanner = new Instascan.Scanner({
+    video: document.getElementById('preview')
+  });
+  Instascan.Camera.getCameras().then(function(cameras) {
+    if (cameras.length > 0) {
+      scanner.start(cameras[0]);
     } else {
-      Swal.fire({
-        allowOutsideClick: true,
-        icon: 'error',
-        title: 'Temp!',
-        text: 'You should not forget about the temperature check',
-        confirmButtonText: 'Thankyou',
-        confirmButtonColor: '#f93154',
-
-      })
+      alert('No cameras found');
     }
-  }
-
-  function insertCT2() {
-    var id_number = document.getElementById("id_number").value;
-    var fullname = document.getElementById("fullname").value;
-    var role = document.getElementById("role").value;
-    var contact = document.getElementById("contact").value;
-    var address = document.getElementById("address").value;
-    var course = document.getElementById("course").value;
-    var temperature = document.getElementById("temperature").value;
-    var takeDataintoArray = 'fullname=' + fullname + '&role=' + role +
-      '&contact=' + contact + '&address=' + address +
-      '&course=' + course + '&temperature=' + temperature;
-    if (temperature != "") {
-      Swal.fire({
-        allowOutsideClick: false,
-        icon: 'question',
-        title: 'Are you Sure?',
-        text: 'Please double check your Temperature',
-        confirmButtonText: 'Proceed',
-        confirmButtonColor: '#f93154',
-        cancelButtonColor: '#B23CFD',
-        showCancelButton: true,
-
-      }).then((result) => {
-        if (result.isConfirmed) {
-          $.ajax({
-            type: "POST",
-            url: 'ajax/ajaxContact-tracing.php',
-            data: takeDataintoArray,
-            cache: false,
-            success: function(html) {
-              Swal.fire({
-                allowOutsideClick: true,
-                icon: 'success',
-                title: 'You Have inserted A Data',
-                text: 'Thankyou For your Cooperation',
-                confirmButtonText: 'Thankyou',
-                confirmButtonColor: '#f93154',
-
-              })
-            }
-          });
-        }
-
-      })
-    } else {
-      Swal.fire({
-        allowOutsideClick: true,
-        icon: 'error',
-        title: 'Temp!',
-        text: 'You should not forget about the temperature check',
-        confirmButtonText: 'Thankyou',
-        confirmButtonColor: '#f93154',
-
-      })
-    }
-  }
-  </script>
-  <script>
-  function searchthis(showResult) {
-    var id_number = document.getElementById("id_number").value;
-    var takeDataintoArray =
-      'id_number=' + id_number;
-    if (id_number != '') {
-      $.ajax({
-        type: "GET",
-        url: 'ajax/CTid.php',
-        data: takeDataintoArray,
-        cache: false,
-        success: function(html) {
-          var ajaxDisplay = document.getElementById(showResult);
-          ajaxDisplay.innerHTML = html;
-        }
-      });
-    } else {
-      alert('Asd')
-    }
-  }
-  </script>
-  <script>
-  function searchthis2(showResult2) {
-    var id_number2 = document.getElementById("id_number2").value;
-    var takeDataintoArray =
-      'id_number=' + id_number;
-    if (id_number2 != '') {
-      $.ajax({
-        type: "GET",
-        url: 'ajax/CTid2.php',
-        data: takeDataintoArray,
-        cache: false,
-        success: function(html) {
-          var ajaxDisplay = document.getElementById(showResult2);
-          ajaxDisplay.innerHTML = html;
-        }
-      });
-    } else {
-      alert('Asd')
-    }
-  }
+  }).catch(function(e) {
+    console.error(e);
+  });
+  scanner.addListener('scan', function(c) {
+    document.getElementById('text').value = c;
+    document.forms[0].submit();
+  });
   </script>
 </body>
 
