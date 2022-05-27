@@ -15,7 +15,8 @@ include_once 'security/newsource.php';
 </head>
 
 <body>
-  <?php $page = 'schedule'; ?>
+  <?php $page = 'schedule';
+  $nav = 'manage'; ?>
   <?php include 'includes/header.php'; ?>
   <?php include 'includes/sidebar.php'; ?>
   <main id="main" class="main">
@@ -37,17 +38,17 @@ include_once 'security/newsource.php';
         <div class="row">
           <div class="col-lg-12">
             <?php
-      if (isset($_SESSION['alert'])) {
-          ?>
+            if (isset($_SESSION['alert'])) {
+            ?>
             <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
               <strong><?php echo $_SESSION['alert']; ?></strong>
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php
 
-        unset($_SESSION['alert']);
-      }
-      ?>
+              unset($_SESSION['alert']);
+            }
+            ?>
             <form action="" method="POST">
               <div class="card border border-primary">
                 <div class="card-body">
@@ -56,13 +57,14 @@ include_once 'security/newsource.php';
                     <div class="col">
                       <div class="form-group">
                         <div class="form-outline">
-                          <?php $sql = $db->query('SELECT * FROM datms_program')->fetchAll();
-                ?>
-                          <select class="form-select" aria-label="Default select example" id="course" name="course">
-                            <option selected disabled hidden>Select Course</option>
+                          <?php $sql = $db->query('SELECT * FROM ms_dummy_course')->fetchAll();
+                          ?>
+                          <select class="form-select" aria-label="Default select example" id="course" name="course"
+                            onchange="changeThis(this.id,'yr_lvl')">
+                            <option selected disabled hidden>--Select Course--</option>
                             <?php foreach ($sql as $row) { ?>
-                            <option value="<?php echo $row['p_code']; ?>">
-                              <?php echo $row['p_name']; ?>
+                            <option value="<?php echo $row['prog_code']; ?>">
+                              <?php echo $row['progs']; ?>
                             </option>
                             <?php } ?>
                           </select>
@@ -72,16 +74,31 @@ include_once 'security/newsource.php';
                     <div class="col">
                       <div class="form-group">
                         <select class="form-select" aria-label="Default select example" id="yr_lvl" name="yr_lvl">
-                          <option selected disabled hidden>Select Grade/Year Level</option>
-                          <option value="G-11">G-11</option>
-                          <option value="G-12">G-12</option>
-                          <option value="1st Year">1st Year</option>
-                          <option value="2nd Year">2nd Year</option>
-                          <option value="3rd Year">3rd Year</option>
-                          <option value="4th Year">4th Year</option>
+                          <option selected disabled>--Select Course--</option>
                         </select>
                       </div>
                     </div>
+                    <script>
+                    function changeThis(s1, s2) {
+                      var s1 = document.getElementById(s1);
+                      var s2 = document.getElementById(s2);
+                      s2.innerHTML = "";
+                      if (s1.value == "ABM" || s1.value == "HUMSS" || s1.value == "GAS" || s1.value == "STEM") {
+                        var optionArray = ["G-11|G-11", "G-12|G12"];
+                      } else {
+                        var optionArray = ["1st Year|1st Year", "2nd Year|2nd Year", "3rd Year|3rd Year",
+                          "4th Year|4th Year"
+                        ];
+                      }
+                      for (var option in optionArray) {
+                        var pair = optionArray[option].split("|");
+                        var newoption = document.createElement("option");
+                        newoption.value = pair[0];
+                        newoption.innerHTML = pair[1];
+                        s2.options.add(newoption);
+                      }
+                    }
+                    </script>
                     <div class="col">
                       <div class="form-group">
                         <input type="datetime-local" class="form-control" id="start">
@@ -95,7 +112,7 @@ include_once 'security/newsource.php';
                       </div>
                     </div>
                     <div class="col">
-                      <button type="button" onclick="insertSched()" class="btn btn-danger">Go</button>
+                      <button type="button" onclick="insertSched('insertNow')" class="btn btn-danger">Go</button>
                     </div>
                   </div>
                 </div>
@@ -107,12 +124,8 @@ include_once 'security/newsource.php';
                 <div class="row">
                   <div class="col">
                     <div class="table-responsive">
-                      <table class="table table-hover datatable">
-                        <?php
-                    $query = 'SELECT * FROM ms_schedule ORDER BY id ASC';
-                    $query_run = mysqli_query($conn, $query);
-                    date_default_timezone_set('asia/manila');
-                  ?>
+                      <table class="table table-hover" id="schedtable">
+
                         <!-- Table Head -->
                         <thead style="background-color:whitesmoke;">
                           <tr>
@@ -125,43 +138,44 @@ include_once 'security/newsource.php';
                         </thead>
                         <tbody>
                           <?php
-                      if (mysqli_num_rows($query_run) > 0) {
-                          while ($row = mysqli_fetch_assoc($query_run)) {
+                          $query = 'SELECT * FROM ms_schedule ORDER BY id ASC';
+                          $query_run = mysqli_query($conn, $query);
+                          date_default_timezone_set('asia/manila');
+                          if (mysqli_num_rows($query_run) > 0) {
+                            while ($row = mysqli_fetch_assoc($query_run)) {
                               $date1 = $row['sched_from'];
                               $date2 = $row['sched_to'];
                               $newDate1 = date('F j, Y', strtotime($date1));
-                              $newDate2 = date('F j, Y', strtotime($date2)); ?>
+                              $newDate2 = date('F j, Y', strtotime($date2));
+                              $tablename = "ms_schedule"; ?>
                           <tr>
-                            <td onclick="edit();" id="editID" title="edit" style="cursor:pointer;"
-                              value="<?php echo $row['id']; ?>">
+                            <td title="edit" style="cursor:pointer;" value="<?php echo $row['id']; ?>">
                               <?php echo $row['course']; ?>
                             </td>
-                            <td onclick="edit();" id="editID" title="edit" style="cursor:pointer;"
-                              value="<?php echo $row['id']; ?>">
+                            <td title="edit" style="cursor:pointer;" value="<?php echo $row['id']; ?>">
                               <?php echo $row['yr_lvl']; ?>
                             </td>
-                            <td onclick="edit();" id="editID" title="edit" style="cursor:pointer;"
-                              value="<?php echo $row['id']; ?>">
+                            <td title="edit" style="cursor:pointer;" value="<?php echo $row['id']; ?>">
                               <?php echo $newDate1; ?>
                             </td>
-                            <td onclick="edit();" id="editID" title="edit" style="cursor:pointer;"
-                              value="<?php echo $row['id']; ?>">
+                            <td title="edit" style="cursor:pointer;" value="<?php echo $row['id']; ?>">
                               <?php echo $newDate2; ?>
                             </td>
                             <td>
-                              <button class="btn btn-warning" name="id_view" onclick="view()" title="View" href="#"
+                              <!-- <button class="btn btn-warning" name="id_view" onclick="view()" title="View" href="#"
                                 id="veiw" value="<?php echo $row['id']; ?>"><i class="bx bxs-bullseye"></i></button>
                               <button class="btn btn-secondary" name="id_edit" onclick="edit(<?php echo $row['id']; ?>)"
-                                title="Edit" href="#" id="editID"><i class="bx bxs-calendar-edit"></i></button>
+                                title="Edit" href="#" id="editID"><i class="bx bxs-calendar-edit"></i></button> -->
+                              <input type="hidden" id="table" value="<?php echo $tablename ?>">
                               <button class="btn btn-danger" name="id_trash"
                                 onclick="deleteID(<?php echo $row['id']; ?>)" title="Delete" href="#" id="deleteID"><i
-                                  class="bx bxs-trash-alt"></i></button>
+                                  class="bx bxs-trash-alt"></i>Delete</button>
                             </td>
                           </tr>
                           <?php
+                            }
                           }
-                      }
-                    ?>
+                          ?>
                         </tbody>
                       </table>
                     </div>
@@ -174,9 +188,12 @@ include_once 'security/newsource.php';
       </div>
     </section> <!-- End -->
     <script>
+    $(document).ready(function() {
+      $('#schedtable').DataTable();
+    });
+
     function deleteID(deleteID) {
-      var table = "ms_schedule";
-      var takeDataintoArray = '&table=' + table;
+      var table = document.getElementById("table").value;
       Swal.fire({
         allowOutsideClick: false,
         icon: 'question',
@@ -199,6 +216,7 @@ include_once 'security/newsource.php';
             timerProgressBar: true,
           }).then(() => {
             location.href = 'resources/trash.php?id=' + deleteID + '&table=' + table;
+
           })
         }
       })
@@ -238,7 +256,8 @@ include_once 'security/newsource.php';
     }
     </script>
     <script>
-    function insertSched() {
+    function insertSched(insertNow) {
+
       var course = document.getElementById("course").value;
       var yr_lvl = document.getElementById("yr_lvl").value;
       var start = document.getElementById("start").value;
@@ -284,7 +303,8 @@ include_once 'security/newsource.php';
                   data: takeDataintoArray,
                   cache: false,
                   success: function(html) {
-                    location.reload();
+                    var ajaxDisplay = document.getElementById(insertNow);
+                    ajaxDisplay.innerHTML = html;
                   }
                 });
               })

@@ -90,7 +90,7 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
                               <tbody>
                               <?php
                                   require_once("include/conn.php");
-                                  $query="SELECT * FROM audit_logs WHERE `action_name` = 'Registrar' ORDER BY login_time DESC ";
+                                  $query="SELECT * FROM audit_logs WHERE `action_name` = 'hdms Registrar' ORDER BY login_time DESC ";
                                   $result=mysqli_query($conn,$query);
                                   while($rs=mysqli_fetch_array($result)){
                                     $id = $rs['account_no']; 
@@ -167,7 +167,7 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
                               <tbody>
                               <?php
                                     require_once("include/conn.php");
-                                    $query="SELECT * FROM audit_trail WHERE `actor` = 'Registrar' ORDER BY date DESC ";
+                                    $query="SELECT * FROM audit_trail WHERE `actor` = 'hdms Registrar' ORDER BY date DESC ";
                                     $result=mysqli_query($conn,$query);
                                     while($rs=mysqli_fetch_array($result)){
                                       $id = $rs['account_no']; 

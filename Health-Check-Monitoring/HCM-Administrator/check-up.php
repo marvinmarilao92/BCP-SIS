@@ -52,8 +52,8 @@ include_once('security/newsource.php');
               </div>
               <div id="showResult"></div>
               <div class="text-center">
-                <button type="submit" onclick="insertCheckUP('errorMessage');" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
+                <button type="submit" onclick="insertCheckUP('errorMessage');" class="btn btn-primary">Submit</button>
               </div>
             </div>
           </div>
@@ -142,9 +142,7 @@ include_once('security/newsource.php');
 
 
     var prod_name = document.getElementById("prod_name").value;
-    var treatment = document.getElementById("treatment").value;
     var fullname = document.getElementById("fullname").value;
-
     var prod_quantity = document.getElementById("prod_quantity").value;
     var prescription = document.getElementById("prescription").value;
     var aid = document.getElementById("aid").value;
@@ -154,15 +152,13 @@ include_once('security/newsource.php');
     var intoArray =
 
       'fullname=' + fullname +
-      '&treatment=' + treatment +
       '&prod_name=' + prod_name +
       '&prod_quantity=' + prod_quantity +
       '&prescription=' + prescription +
       '&aid=' + aid;
 
 
-    if (fullname == '' || prod_name == '' ||
-      prod_quantity == '' || prescription == '' || aid == '') {
+    if (prod_name == '' || prod_quantity == '' || prescription == '' || aid == '') {
       Swal.fire(
         'Invalid!',
         'Please complete fieldset!',
@@ -171,12 +167,12 @@ include_once('security/newsource.php');
     } else {
       Swal.fire({
         title: 'Are you sure?',
-        text: "some info here!",
+        text: "Insert Data",
         icon: 'info',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.isConfirmed) {
           $.ajax({

@@ -3,7 +3,7 @@ include_once 'security/newsource.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>List of Requests</title>
+
 
 <head>
   <?php include 'includes/head_ext.php'; ?>
@@ -17,212 +17,236 @@ include_once 'security/newsource.php';
 
     <!-- Page Title -->
     <div class="pagetitle">
-      <h1>Request</h1>
+      <h1>Student Completion Management</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a>
           </li>
-          <li class="breadcrumb-item active">Request</li>
+          <li class="breadcrumb-item active">Stub Completion</li>
         </ol>
       </nav>
     </div>
 
     <section class="section2">
       <div class="row">
-        <div class="col-lg-12">
-          <?php
-      if (isset($_SESSION['alert'])) {
-          ?>
-          <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            <strong><?php echo $_SESSION['alert']; ?></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          <?php
+        <div class="col-lg-9">
 
-        unset($_SESSION['alert']);
-      }
-      ?>
           <div class="card border border-primary">
             <div class="card-body">
-              <h1 class="card-title">List of Requests</h1>
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button"
-                    role="tab" aria-controls="home" aria-selected="true">Pending </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="approved-tab" data-bs-toggle="tab" data-bs-target="#approved"
-                    type="button" role="tab" aria-controls="profile" aria-selected="false">Approved</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="rejected-tab" data-bs-toggle="tab" data-bs-target="#rejected"
-                    type="button" role="tab" aria-controls="profile" aria-selected="false">Rejected</button>
-                </li>
-              </ul>
-              <div class="tab-content pt-2" id="myTabContent">
-                <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
-                  <!-- Table Starts -->
-                  <div class="table-responsive">
-                    <table class="table table-hover datatable">
-                      <?php
-                      $isPending = 'Pending';
-                      $query = "SELECT * FROM hcms_request WHERE `status` = '$isPending' ORDER BY id ASC";
-                      $query_run = mysqli_query($conn, $query);
+              <?php
+              if (isset($_SESSION['alertEdit'])) {
+              ?>
+              <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                <strong><?php echo $_SESSION['alertEdit']; ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <?php
+
+                unset($_SESSION['alertEdit']);
+              }
+              if (isset($_SESSION['alertEdit2'])) {
+              ?>
+              <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                <strong><?php echo $_SESSION['alertEdit2']; ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <?php
+
+                unset($_SESSION['alertEdit2']);
+              }
+              ?>
+              <h1 class="card-title">Stub Completion List</h1>
+              <div class="table-responsive">
+                <table class="display table table-hover" id="proccess1">
+                  <?php require_once "timezone.php";
+                  $query = "SELECT * FROM ms_labtest ORDER BY id ASC";
+                  $query_run = mysqli_query($conn, $query);
+                  ?>
+                  <!-- Table Head -->
+                  <thead style="background-color:whitesmoke;">
+                    <tr>
+                      <th scope="col">Full Name</th>
+                      <th scope="col">Course</th>
+                      <th scope="col">Year Level</th>
+                      <th scope="col">Payment Date</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    if (mysqli_num_rows($query_run) > 0) {
+                      while ($row = mysqli_fetch_assoc($query_run)) {
+                        $newdate = date("F j, Y, g:i a", strtotime($row['date_paid']));
                     ?>
-                      <!-- Table Head -->
-                      <thead style="background-color:whitesmoke;">
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Sender</th>
-                          <th scope="col">Requests</th>
-                          <th scope="col">Description</th>
-                          <th scope="col">Status</th>
-                          <th scope="col">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        if (mysqli_num_rows($query_run) > 0) {
-                            while ($row = mysqli_fetch_assoc($query_run)) {
-                                ?>
-                        <tr>
-                          <td>#<?php echo $row['id']; ?>
-                          </td>
-                          <td><?php echo $row['sender']; ?>
-                          </td>
-                          <td><?php echo $row['req_id']; ?>
-                          </td>
-                          <td><?php echo $row['req_desc']; ?>
-                          </td>
-                          <td><?php echo $row['status']; ?>
-                          </td>
-                          <td>
-                            <div class="input-group">
-                              <?php $table_name = 'hcms_request'; ?>
-                              <a class="btn btn-success" title="Approve"
-                                href="resources/req_approved.php?req_id=<?php echo $row['id']; ?>&tablename=<?php echo $table_name; ?>"><i
-                                  class="ri-checkbox-fill"></i></a>
-                              <a class="btn btn-danger" title="Reject"
-                                href="resources/req_reject.php?req_id=<?php echo $row['id']; ?>&tablename=<?php echo $table_name; ?>"><i
-                                  class="ri-close-circle-fill"></i></a>
-                            </div>
-                          </td>
-                        </tr>
-                        <?php
-                            }
-                        }
-                      ?>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="approved" role="tabpanel" aria-labelledby="approved-tab">
-                  <!-- Table Starts -->
-                  <div class="table-responsive">
-                    <table class="table table-hover datatable">
-                      <?php
-                      $isApproved = 'Approved';
-                      $query = "SELECT * FROM hcms_request WHERE `status` = '$isApproved' ORDER BY id ASC";
-                      $query_run = mysqli_query($conn, $query);
+                    <tr>
+                      <td onclick="view();" style="cursor:pointer;"><?php echo $row['full_n']; ?>
+                      </td>
+                      <td class="bg-primary text-light" onclick="view();" style="cursor:pointer;">
+                        <?php echo $row['course']; ?>
+                      </td>
+                      <td onclick="view();" style="cursor:pointer;"><?php echo $row['yr_lvl']; ?>
+                      </td>
+                      <td onclick="view();" style="cursor:pointer;"><?php echo $newdate ?>
+                      </td>
+                      <td>
+                        <div class="input-group">
+                          <a href="#" id="edit" onclick="edit('<?php echo $row['id']; ?>', 'editField');"
+                            class="btn btn-success"><i class="bi bi-box"></i>&nbspEdit</a>
+                        </div>
+                      </td>
+                    </tr>
+                    <?php
+                      }
+                    }
                     ?>
-                      <!-- Table Head -->
-                      <thead style="background-color:whitesmoke;">
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Sender</th>
-                          <th scope="col">Requests</th>
-                          <th scope="col">Description</th>
-                          <th scope="col">Date Assessed</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        if (mysqli_num_rows($query_run) > 0) {
-                            while ($row = mysqli_fetch_assoc($query_run)) {
-                                ?>
-                        <tr>
-                          <td>#<?php echo $row['id']; ?>
-                          </td>
-                          <td><?php echo $row['sender']; ?>
-                          </td>
-                          <td><?php echo $row['req_id']; ?>
-                          </td>
-                          <td><?php echo $row['req_desc']; ?>
-                          </td>
-                          <td><?php echo $row['assess_date']; ?>
-                          </td>
-                        </tr>
-                        <?php
-                            }
-                        }
-                      ?>
-                      </tbody>
-                    </table>
-                    <?php if (isset($_GET['dlt'])) { ?>
-                    <div class="flash-data" data-flashdata="<?php echo $_GET['dlt']; ?>">
-                    </div>
-                    <?php } ?>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
-                  <!-- Table Starts -->
-                  <div class="table-responsive">
-                    <table class="table table-hover datatable">
-                      <?php
-                      $isRejected = 'Rejected';
-                      $query = "SELECT * FROM hcms_request WHERE `status` = '$isRejected' ORDER BY id ASC";
-                      $query_run = mysqli_query($conn, $query);
-                    ?>
-                      <!-- Table Head -->
-                      <thead style="background-color:whitesmoke;">
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Sender</th>
-                          <th scope="col">Requests</th>
-                          <th scope="col">Description</th>
-                          <th scope="col">Date Assessed</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        if (mysqli_num_rows($query_run) > 0) {
-                            while ($row = mysqli_fetch_assoc($query_run)) {
-                                ?>
-                        <tr>
-                          <td>#<?php echo $row['id']; ?>
-                          </td>
-                          <td><?php echo $row['sender']; ?>
-                          </td>
-                          <td><?php echo $row['req_id']; ?>
-                          </td>
-                          <td><?php echo $row['req_desc']; ?>
-                          </td>
-                          <td><?php echo $row['assess_date']; ?>
-                          </td>
-                        </tr>
-                        <?php
-                            }
-                        }
-                      ?>
-                      </tbody>
-                    </table>
-                    <?php if (isset($_GET['dlt'])) { ?>
-                    <div class="flash-data" data-flashdata="<?php echo $_GET['dlt']; ?>">
-                    </div>
-                    <?php } ?>
-                  </div>
-                </div>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
-      </div>
+        <div class="col-lg-3">
+          <section class="dashboard">
+            <!-- Recent Announcement -->
+            <div class="card">
+
+              <div class="card-body">
+                <h5 class="card-title"><small>Validated Student </small></h5>
+
+                <div class="activity">
+                  <?php
+                  require_once('timezone.php');
+                  $result = $db->query('SELECT * FROM ms_labtest ORDER BY id ASC LIMIT 10')->fetchAll();
+
+                  foreach ($result as $sql) {
+                    $newdate = date("F j,Y", strtotime($sql['created_at'])); ?>
+
+                  <div class="activity-item d-flex">
+                    <div class="activite-label"><?php echo $newdate; ?></div>
+                    <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                    <div class="activity-content">
+                      <strong><?php echo $sql['full_n'] . '&nbsp' . $sql['course']; ?></strong><br><a href="#"
+                        class="fw-bold text-primary">Click
+                        Here To View</a>
+                    </div>
+                  </div>
+                  <?php } ?>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="modal fade" id="editModal" data-bs-backdrop="static" aria-hidden="true"
+              aria-labelledby="addModalLabel2" tabindex="-1">
+              <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header bg-primary text-light">
+                    <h5 class="modal-title" id="addModalLabel2">Manage Stub Record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div id="editField"></div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-toggle="close" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" onclick="editNow();" name="submit">Edit Now</button>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End Recent Activity -->
+          </section>
+        </div>
+
       </div>
     </section> <!-- End -->
 
 
   </main>
   <?php include 'includes/footer.php'; ?>
+  <script>
+  $(document).ready(function() {
+    $('#proccess1').DataTable();
+  });
+
+  function view() {
+    alert("viewNow")
+  }
+
+  function edit(editID, editField) {
+    $.ajax({
+      url: 'resources/ajax/editame.php?id=' + editID,
+      success: function(html) {
+        var ajaxDisplay = document.getElementById(editField);
+        ajaxDisplay.innerHTML = html;
+        $("#editModal").modal("show");
+      }
+    });
+  }
+
+  function editNow() {
+    var editID = document.getElementById("editID").value;
+    var urin = document.getElementById("urin")
+    var cbc = document.getElementById("cbc")
+    var c_xray = document.getElementById("c_xray")
+
+    if (urin.checked) {
+      var urin = "1";
+    } else {
+      var urin = "0";
+    }
+
+    if (cbc.checked) {
+      var cbc = "1";
+    } else {
+      var cbc = "0";
+    }
+
+    if (c_xray.checked) {
+      var c_xray = "1";
+    } else {
+      var c_xray = "0";
+    }
+
+    var takeDataintoArray = 'editID=' + editID + '&urin=' + urin + '&cbc=' + cbc + '&c_xray=' + c_xray;
+
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'question',
+      title: 'Do you want to Save Changes?',
+      text: 'Note: This wiil edit your data in the database',
+      confirmButtonText: 'Overwrite',
+      confirmButtonColor: '#f93154',
+      cancelButtonColor: '#B23CFD',
+      showCancelButton: true,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "GET",
+          url: 'resources/ajax/updateame.php',
+          data: takeDataintoArray,
+          cache: false,
+          success: function(result) {
+            Swal.fire({
+              allowOutsideClick: true,
+              icon: 'success',
+              title: 'Successfully Inserted',
+              showConfirmButton: true,
+            }).then(() => {
+              window.location.reload(true);
+            })
+
+          }
+        });
+
+      }
+    })
+
+
+  }
+  </script>
 </body>
 
 </html>
