@@ -255,7 +255,6 @@ include('session.php');
 
 
 
-
  
 <?php 
 
@@ -276,7 +275,6 @@ date_default_timezone_set('Asia/Manila');
 
     $success=false;
     $error=false;
-
 //include the new connection
 include "new_db.php";
 
@@ -339,49 +337,54 @@ error_reporting(E_ALL);
     //Reply Send Method
     if(isset($_POST['submit'])){
 
-      date_default_timezone_set("asia/manila");
-      $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
-      $email = $_POST['email'];
-      $email=encryptthis($email, $key);
-      $message=$_POST['message'];
-      $message=encryptthis($message, $key);
-      
-      
-      $fname=$verified_session_role; 
-      if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
-        $ip = $_SERVER["HTTPS_CLIENT_IP"];
-      }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
-        $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
-      }else{
-        $ip = $_SERVER["REMOTE_ADDR"];
-        $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-         $remarks="replied to a ticket to(Student)";  
-         //save to the audit trail table
-         mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,ip,affected,host,date) VALUES('$verified_session_username','$remarks','$fname','$ip','$message','$host','$date')")or die(mysqli_error($link));
-      
-
-if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,message) VALUES('$ticket_id','email','$verified_session_role','$message')")){
-        
-          $success="Reply has been sent";
-          $db->conn->query("UPDATE hdms_tickets  SET status=2 WHERE id=$ticket_id");
-          $mail = new PHPMailer;
-          $mail->isSMTP();
-          $mail->SMTPDebug = 0;                                           //Send using SMTP
-          $mail->Host       = 'smtp.hostinger.com';                     //Set the SMTP server to send through
-          $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-          $mail->Username   = 'helpdesksupport@bcp-sis.ga';                     //SMTP username
-          $mail->Password   = '#ChangeMe01!';                               //SMTP password
-          $mail->SMTPSecure = 'TLS';                                  //Enable implicit TLS encryption
-          $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-  
-          //Recipients
-          $mail->setFrom('helpdesksupport@bcp-sis.ga', 'Help Desk Support');
-          $mail->addAddress($_POST['email'] , 'Student');     //Add a recipient
-      
-          $body = 
-          '  <div class="card">
+        date_default_timezone_set("asia/manila");
+        $date = date("Y-m-d h:i:s A",strtotime("+0 HOURS"));
        
-          <div class="card-body">
+        $email = $_POST['email'];
+        $email=encryptthis($email, $key);
+        $message=$_POST['message'];
+        $message=encryptthis($message, $key);
+        
+        
+        $fname=$verified_session_role; 
+        if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
+          $ip = $_SERVER["HTTPS_CLIENT_IP"];
+        }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
+          $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
+        }else{
+          $ip = $_SERVER["REMOTE_ADDR"];
+          $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+           $remarks="replied to a ticket to(Student)";  
+           //save to the audit trail table
+           mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,ip,affected,host,date) VALUES('$verified_session_username','$remarks','$fname','$ip','$message','$host','$date')")or die(mysqli_error($link));
+        
+         
+           //$link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
+           //VALUES ('$verified_session_username', '0' ,'$verified_session_role','0','replied to ticket','Reply from help desk','$verified_session_role','Active','$date')") or die(mysqli_error($conn));
+
+
+if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,message) VALUES('$ticket_id','$email','$verified_session_role','$message')")){
+          
+            $success="Reply has been sent";
+           
+            $mail = new PHPMailer;
+            $mail->isSMTP();
+            $mail->SMTPDebug = 0;                                           //Send using SMTP
+            $mail->Host       = 'smtp.hostinger.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'helpdesksupport@bcp-sis.ga';                     //SMTP username
+            $mail->Password   = '#ChangeMe01!';                               //SMTP password
+            $mail->SMTPSecure = 'TLS';                                  //Enable implicit TLS encryption
+            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+            //Recipients
+            $mail->setFrom('helpdesksupport@bcp-sis.ga', 'Help Desk Support');
+            $mail->addAddress($_POST['email'] , 'Student');     //Add a recipient
+        
+            $body = 
+            '  <div class="card">
+         
+            <div class="card-body">
             <h3 class="card-title">######Reply from helpdesk support bcp######</h3>
             <p class="card-text">Thank you for waiting for our response!<br><br><b>FROM:&nbsp;'.$verified_session_role.'</b><br><br><b>'.nl2br($_POST['message']).'</b><br><br><br><br>
             
@@ -396,39 +399,33 @@ if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,mess
           <div class="alert alert-light bg-light border-0 alert-dismissible fade show" role="alert">
           <h3>© Copyright Bestlink College of the Philippines. All Rights Reserved.</h3>
         </div>
-          
-          
-          ';
+            
+            ';
 
-          //Content
-          $mail->isHTML(true);                                  //Set email format to HTML
-          $mail->Subject = 'Reply from helpdesk';
-          $mail->Body  = $body;
-          $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Reply from Help Desk Support';
+            $mail->Body  = $body;
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-          $mail->send();
-          //echo "Success!";
-      }else{
-          $error="Can not send reply";
+            $mail->send();
+            //echo "Success!";
+        }else{
+            $error="Can not send reply";
+        }
       }
+        
     }
-      
-  }
 ?>
 <main id="main" class="main">
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-12">
-            <div class="card mb-3">
-                
-            </div>
-            <div class="card mb-3">
-                <div class="card-header">
-                    Ticket ID : <?php  echo $ticket['ticket_id'] ;?>
-                    
-                </div>
-                <div class="card-body">
-                    <?php 
+
+
+<div class="col-lg-12">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-outline card-success">
+				<div class="card-header">
+        <?php 
                         if(isset($error) && $error != false){
                             echo '<div class="alert alert-danger">'.$error.'</div>';
                         }
@@ -438,37 +435,71 @@ if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,mess
                             echo '<div class="alert alert-success">'.$success.'</div>';
                         }
                     ?>
-                     <table class="table">
-                        <?php echo '
-                      
-                        <tr>
-                            <th>Email :&nbsp;&nbsp;'.decryptthis($ticket['email'], $key).'</th>
-                           
-                        </tr>
-                        <tr>
-                            <th>Subject :&nbsp;&nbsp;'.$ticket['category'].'</th>
-                           
-                        </tr>
-                        <tr>
-                            <th>Department :&nbsp;&nbsp;'.$verified_session_role.'</th>
-                           
-                        </tr>
-                          <th>Message :&nbsp'.decryptthis($ticket['message'], $key).'</th>';?>
-                       
-                    </table>
-                   
-                    <div class="reply-area">
+					<h3 class="card-title" id="receivedTable">Ticket</h3>
+				</div>
+				<div class="card-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-6">
+              <label for="" class="control-label border-bottom border-primary">Ticket ID</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['ticket_id'] ?></b></p>
+                <label for="" class="control-label border-bottom border-primary">Student Number</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['student_number'] ?></b></p>
+                <label for="" class="control-label border-bottom border-primary">Student</label>
+                <p class="ml-2 d-list"><b><?php echo $ticket['firstname'].'&nbsp;'.$ticket['lastname']?></b></p>
+                <label for="" class="control-label border-bottom border-primary">Course</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['course'] ?></b></p>
+							
+								
+               
+							</div>
+							<div class="col-md-6">
+              <label for="" class="control-label border-bottom border-primary">Email</label>
+								<p class="ml-2 d-list"><b><?php echo decryptthis($ticket['email'], $key) ?></b></p>
+								<label for="" class="control-label border-bottom border-primary">Subject</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['category'] ?></b></p>
+            
+                <p class="ml-2 d-list">
+    
+    
+                <label for="" class="control-label border-bottom border-primary">Status</label>
+                <p class="ml-2 d-list">
+                <td data-title = "Status ">
+                <?php if($ticket['status'] == 0): ?>
+                  <span class="badge bg-primary">New</span>
+                <?php elseif($ticket['status'] == 1): ?>
+                  <span class="badge bg-warning text-dark">Pending/processing</span>
+                <?php elseif($ticket['status'] == 2): ?>
+                  <span class="badge bg-success">Done</span>
+                <?php else: ?>
+                  <span class="badge badge-secondary">Closed</span>
+                <?php endif; ?>
+                </td>      
+								</p>
+					
+						</div>
+						<hr class="border-primary">
+						<div>
+						<b>Message:</b>&nbsp;<?php echo decryptthis($ticket['message'], $key) ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+
+    <div class="reply-area">
                         <ul>
                             <?php if(count($reps) > 0) { ?>
                                 <?php foreach ($reps as $k => $v) {
                                     if($v['send_by'] == 0){
                                         ?>
-                                        <li class="reply-user"><span class="badge bg-info text-dark"><i class="bi bi-person-circle"></i>Student</span>
+                                         <li class="reply-user">
                                             <div class="card bg-gray text-dark">
                                                 <div class="card-body">
                                                     <p><?php echo decryptthis($v['message'], $key); ?></p>
                                                     <div class="text-right">
-                                                        <span><?php echo $v['date'];?></span>
+                                                    <span><?php echo $v['date'];?></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -477,16 +508,18 @@ if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,mess
                                     }else{
                                         ?>
                                     
-                                    <li class="reply-me"><span class="badge bg-warning text-dark"> <i class="bi bi-people-fill"></i>Support</span>
-                                            <div class="card bg-gray text-dark">
+                                    <li class="reply-me">
+                                      
+                                            <div class="card">
                                                 <div class="card-body">
                                                     <p><?php echo decryptthis($v['message'], $key); ?></p>
                                                     <div class="text-right">
-                                                        <small>Send by help desk<?php $verified_session_role?><?php echo $v['date'];?></small>
+                                                        <small>Send by <?php echo $ticket['ticket_department'] ?> at <?php echo $v['date'];?></small>
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
+                                        
                                         <?php
                                     }
                                 }
@@ -495,50 +528,80 @@ if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,mess
                             <?php } ?>
                         </ul>
                     </div>
-                    <div class="reply" style = "color: #fff"><a href="javascript:void(0)" data-commentID="'.$data['id'].'" onclick="reply(this)"><span class="badge bg-primary"><i class="ri-reply-all-fill"></i>CLICK TO REPLY</span></a></div>
+
+                 
                     
-                    <div class="send-area replyRow" style="display:none">
+                    <div class="send-area">
                         <form method="POST">
                             <div class="form-group">
                                 <input type="hidden" name="submit" value="send"><br>
+                               
                                 <input type="hidden"name = "email" value = <?php echo ''.decryptthis($ticket['email'], $key).'';?> style="display:none">
-                                <textarea name="message" class="form-control" id="replyComment" placeholder="Type your reply" cols="70" rows="4"></textarea><br>
-                                <button class="btn-primary btn" onclick="isReply = true;" id="addReply">Reply</button>
-                                <button style="float:right" class="btn-default btn" onclick="$('.replyRow').hide();"></button>
+                                <textarea name="message" class="form-control" id="message" placeholder="Type your reply" cols="70" rows="4" required></textarea><br>
+                                <button class="btn btn-success" type="submit">Send</button>
+                                <a href="ticket_list.php?id=<?php echo $_SESSION["login_key"];?> " class="btn btn-secondary ml-2" >Back</a>
                                
                             </div>
                         </form>
                         
                     </div>
-                    <a href="ticket_list.php?id=<?php echo $_SESSION["login_key"];?> " class="btn btn-secondary ml-2" style="float:right">Back</a>
                 </div>
             </div>
            
                         </div>
-                        
                       </div>
                     </div>
+                    
+                  </section>
+              <!-- End Table with stripped rows -->
+
+            </div>
+            <div class="tab-pane fade" id="ReceivedDocs" role="tabpanel" aria-labelledby="received-tab">
+              <!-- ReceivedDocs Docs -->
+              <!-- IncomingDocs Docs -->
+           
+        </div>
+
+     
+
+        </div>
+
+      </div>
+    </section>
+              <!-- End Table with stripped rows -->
+            </div>
+          </div><!-- End Default Tabs -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 </main>
 
+ 
 
-  <!-- ======= Footer ======= -->
-  <?php include ('core/footer.php');//css connection?>
-  <!-- End Footer -->
-  <?php include ('core/js.php');//css connection?>
-  <script>
+
+<!-- ======= Footer ======= -->
+<?php include ('core/footer.php');//css connection?>
+
+
+<!-- End Footer -->
+
+
+<!-- Vendor JS Files/ Template main js file -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files/ Template main js file -->
+ <!-- Vendor JS Files/ Template main js file -->
+ <?php include ('core/js.php');//css connection?> 
+</body>
+<script>
+
 if(window.history.replaceState) {
   window.history.replaceState(null,null,window.location.href)
 }
-function reply(caller) {
-        commentID = $(caller).attr('data-commentID');
-        $(".replyRow").insertAfter($(caller));
-        $('.replyRow').show();
-    }
-
- </script>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files/ Template main js file -->
-  
-  </body>
+</script>
 </html>

@@ -76,7 +76,7 @@ if(isset($_POST['submit'])){
     $email=$_POST['email'];
     $email=encryptthis($email, $key);
     $category=$_POST['category'];
-   
+    $ticket_department=$_POST['ticket_department'];
     $message=$_POST['message'];
     $message=encryptthis($message, $key);
   
@@ -101,11 +101,11 @@ if(isset($_POST['submit'])){
 
        
       $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date)
-      VALUES ('2', '0' ,'$verified_session_username','0','Submitted ticket','Incoming ticket','Student','Active','$date')") or die(mysqli_error($conn));
+      VALUES ('$ticket_department', '0' ,'$verified_session_username','0','Submitted ticket','Incoming ticket','Student','Active','$date')") or die(mysqli_error($conn));
 
 
-      $sql="INSERT INTO hdms_tickets (student_number,ticket_id,status,email,category,message, date)
-      VALUES ('$verified_session_username','$unid','0','$email','$category','$message','$date')" or die("<script>alert('Error');</script>");
+      $sql="INSERT INTO hdms_tickets (student_number,firstname,lastname,course,ticket_id,status,email,category,ticket_department,message, date)
+      VALUES ('$verified_session_username','$verified_session_firstname','$verified_session_lastname','$verified_session_course','$unid','0','$email','$category','$ticket_department','$message','$date')" or die("<script>alert('Error');</script>");
     
 
     $inset=$db->conn->query($sql);
@@ -131,12 +131,17 @@ if(isset($_POST['submit'])){
     
        <div class="card-body">
          <h3 class="card-title">######Please dont share your ticket ID######</h3>
-         <p class="card-text">Dear <b>'.$verified_session_firstname.'</b> your ticket has been sent to our help desk support team and we will back to you shortly<br>
+         <p class="card-text">Dear <b>'.$verified_session_firstname.''.$verified_session_lastname.'</b> your ticket has been sent to <b>'.$ticket_department.'</b> please wait for their response to your ticket<br><br>
+         heres your ticket.<br>
+         Course:<b>'.$verified_session_course.'</b><br>
+         Subject:<b>'.$category.'</b><br>
+         Message:<b>'.decryptthis($message, $key).'</b><br>
+
          for inquiries and question just submit another ticket to our help desk system or just send us an email @helpdesksupport@bcp-sis.ga
          <br>Thank you! Stay safe.</p>
        </div>
      </div>
-       
+       Your ticket id will server as your password or gateway in order to open your ticket just click the inbox button in the sidebar<br>
        <h3>Ticket ID: '.$unid.'</h3>
        
        <div class="alert alert-light bg-light border-0 alert-dismissible fade show" role="alert">
@@ -236,6 +241,7 @@ if(isset($_POST['submit'])){
                         <div class="col-md-12">
                           <input type="email" name="email" class="form-control" placeholder="Please input your real email" autocomplete = "off" required>
                         </div>
+                       
                         <div class="col-md-12">
                      
                         <select id="category" name="category" class="form-select" required>
@@ -254,6 +260,23 @@ if(isset($_POST['submit'])){
                        
                      
                     </div>
+                    <div class="col-md-12">
+                    <select id="ticket_department" name="ticket_department" class="form-select" required>
+                                <option value="" selected="selected" disabled="disabled">Select Which department you want to send</option>
+                                  
+                                    <?php
+
+                                    require_once("includes/conn.php");
+                                    $query="SELECT * FROM user_information WHERE  (department = 'Help Desk System') AND `id_number` NOT IN ('$verified_session_username') AND role NOT LIKE '%Help Desk Administrator%' ORDER BY role DESC ";
+                                    $result=mysqli_query($conn,$query);
+                                    while($rs=mysqli_fetch_array($result)){
+                                        $dtid =$rs['id'];    
+                                        $dtno =$rs['role'];                                  
+                                        ?>
+                                      <option><?php echo $dtno;?></option>
+                               <?php } ?>
+                            </select>
+                            </div>
      
                           <div class="col-md-12">
                             <textarea class="form-control" name="message" rows="6" placeholder="Please let us know and explain further your concern" required></textarea>
