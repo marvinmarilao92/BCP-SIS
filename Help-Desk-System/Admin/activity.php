@@ -107,7 +107,7 @@ include('session.php');
                                     return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
                                     }
                                    
-                                        $sql = "SELECT * FROM audit_trail where account_no = '".$verified_session_username."' ORDER BY id DESC LIMIT 10";
+                                        $sql = "SELECT * FROM audit_trail where actor = 'Help Desk Administrator' ORDER BY id DESC LIMIT 10";
                                           if($result = mysqli_query($link, $sql)){
                                             if(mysqli_num_rows($result) > 0){
                                               while($row = mysqli_fetch_array($result)){
@@ -187,7 +187,7 @@ include('session.php');
                                         <?php 
                                     
                                    
-                                        $sql = "SELECT * FROM audit_logs where account_no = '".$verified_session_username."' ORDER BY id DESC LIMIT 10";
+                                        $sql = "SELECT * FROM audit_logs where action_name = 'Help Desk Administrator' ORDER BY id DESC LIMIT 10";
                                           if($result = mysqli_query($link, $sql)){
                                             if(mysqli_num_rows($result) > 0){
                                               while($row = mysqli_fetch_array($result)){
