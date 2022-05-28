@@ -270,8 +270,8 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
       
           <div class="card">
               <div class="card-body pb-0">
-                <!-- <h5 class="card-title">Status <span>| Ticket<br><br><b>0 = New&nbsp;&nbsp;&nbsp;1 = Pending&nbsp;&nbsp;&nbsp;2 = Done</b>
-              </span></h5> -->
+                <h5 class="card-title">Status <span>| Ticket</b>
+              </span></h5>
                 <canvas id="status" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
                     <?php
                       require_once("include/conn.php");

@@ -137,6 +137,11 @@
                 <i class="bi bi-circle"></i><span>Ticket Reports</span>
                  </a>
                 </li>
+                <li>
+            <a href="activity.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='AC'){echo 'active';}?>">
+                <i class="bi bi-circle"></i><span>Your Activity</span>
+                 </a>
+                </li>
       </ul>
            </li><!-- End Reports Nav -->
         
