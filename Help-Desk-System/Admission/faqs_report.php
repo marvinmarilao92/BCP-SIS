@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Staff | Category Reports</title>
+<title>Admission | FAQS Reports</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 
@@ -78,7 +78,7 @@ include('session.php');
               <!-- Report Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="myTabjustified" role="tablist" style="margin-top: 10px;">
                 <li class="nav-item flex-fill" role="presentation">
-                  <button class="nav-link w-100 active" id=" incoming-tab" data-bs-toggle="tab" data-bs-target="#IncomingDocs" type="button" role="tab" aria-controls="incoming" aria-selected="true">Category Reports</button>
+                  <button class="nav-link w-100 active" id=" incoming-tab" data-bs-toggle="tab" data-bs-target="#IncomingDocs" type="button" role="tab" aria-controls="incoming" aria-selected="true">FAQs Reports</button>
                 </li>
                 <li class="nav-item flex-fill" role="presentation">
                   <button class="nav-link w-100" id="received-tab" data-bs-toggle="tab" data-bs-target="#ReceivedDocs" type="button" role="tab" aria-controls="profile" aria-selected="false">Activity</button>
@@ -95,7 +95,7 @@ include('session.php');
                             <div class="card">
                               <div class="col-lg-12">
                                 <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                    <h4>Category reports</h4>
+                                    <h4>FAQs reports</h4>
 
                                 </div>
                                
@@ -106,7 +106,7 @@ include('session.php');
                                   <thead>
                                     <tr>
                                    
-                                      <th scope="col">Category</th>
+                                      <th scope="col">Quesiton</th>
                                       
                                       <th scope="col" >Answer/Instruction</th>
                               
@@ -120,20 +120,20 @@ include('session.php');
                                   <tbody>
                                     <?php
                                       require_once("include/conn.php");
-                                      $query="SELECT * FROM hdms_category ORDER BY date DESC ";
+                                      $query="SELECT * FROM hd_department WHERE shortDesc = 'Admission' ORDER BY date DESC ";
                                       $result=mysqli_query($conn,$query);
                                       while($rs=mysqli_fetch_array($result)){
                                         $id =$rs['id']; 
-                                      
-                                        $category = $rs['category'];
-                                        $description = $rs['description'];
+                          
+                                        $title = $rs['title'];
+                                        $longDesc = $rs['longDesc'];
                                         
                                         $date = $rs['date'];                   
                                     ?>
                                     <tr>
                                       <td style="display:none"><?php echo $id?></td>
-                                      <td data-label="Category:"><?php echo $category; ?></td>
-                                      <td data-label="Description:"><?php echo $description;?></td>
+                                      <td data-label="Quesiton:"><?php echo $title; ?></td>
+                                      <td data-label="Answer/Instruction:"><?php echo $longDesc;?></td>
                                   
                                       <td data-label="Date:"><?php echo $date?></td>                                        
                                     </tr>
@@ -197,7 +197,7 @@ include('session.php');
                                     return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
                                     }
                                    
-                                        $sql = "SELECT * FROM audit_trail where actor = 'Staff' ORDER BY id DESC LIMIT 10";
+                                        $sql = "SELECT * FROM audit_trail where actor = 'hdms Admission' ORDER BY id DESC LIMIT 10";
                                           if($result = mysqli_query($link, $sql)){
                                             if(mysqli_num_rows($result) > 0){
                                               while($row = mysqli_fetch_array($result)){
@@ -256,7 +256,7 @@ include('session.php');
                                         <?php 
                                     
                                    
-                                        $sql = "SELECT * FROM audit_logs where action_name = 'Staff' ORDER BY id DESC LIMIT 5";
+                                        $sql = "SELECT * FROM audit_logs where action_name = 'hdms Admission' ORDER BY id DESC LIMIT 5";
                                           if($result = mysqli_query($link, $sql)){
                                             if(mysqli_num_rows($result) > 0){
                                               while($row = mysqli_fetch_array($result)){
@@ -315,169 +315,12 @@ include('session.php');
                         
                       </section>
                   <!-- End Table with stripped rows -->
+                  
                 </div>
-                <div class="tab-pane fade" id="ApprovedDocs" role="tabpanel" aria-labelledby="approved-tab">
-                  <!-- ApprovedDocs Docs -->
-                    <!-- IncomingDocs Docs -->
-                  <section class="section">
-                        <div class="row">        
-                          <div class="col-lg-12">
-                            <div class="card">
-                              <div class="col-lg-12">
-                                <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                    <h4>Resolved Ticket</h4>
-                                </div>
-                               
-                              </div>
-                              <div class="card-body" >           
-                                <!-- Table for Office records -->
-                                <table class="table table-hover datatable" >
-                                  <thead>
-                                    <tr>
-                                    <th scope="col">Student No.</th>
-                                      <th scope="col" >Fullname</th>
-                                      <th scope="col" >Subject</th>
-                                      <th scope="col">Course</th>  
-                                      <th scope="col" >Status</th>
-                                      <!-- <th scope="col">Filesize</th>    -->
-                                     
-                                      <th scope="col">Date&Time</th>     
-                                      <!-- <th scope="col">Downloads</th>    -->
-                                      <!-- <th scope="col">Action</th>           -->    
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <?php
-                                      require_once("include/conn.php");
-                                      $query="SELECT * FROM hdms_tickets WHERE status=2 AND ticket_department = 'Staff' ORDER BY date DESC ";
-                                      $result=mysqli_query($conn,$query);
-                                      while($rs=mysqli_fetch_array($result)){
-                                        $id =$rs['id']; 
-                                        $student_number = $rs['student_number']; 
-                                        $firstname = $rs['firstname']; 
-                                        $lastname = $rs['lastname']; 
-                                        $category = $rs['category'];
-                                        $status = $rs['status'];
-                                        
-                                        $course = $rs['course']; 
-                                        $date = $rs['date'];                   
-                                    ?>
-                                    <tr>
-                                    <td style="display:none"><?php echo $id?></td>
-                                      <td data-label="ticket ID:"><?php echo $student_number; ?></td>
-                                      <td data-label="Fullname:"><?php echo $firstname.' '.$lastname; ?></td>
-                                      <td data-label="Subject:"><?php echo  $category; ?></td>
-                                      <td data-label="Course:"><?php echo $course?></td> 
-                                      <td data-title = "Status ">
-                                          <?php if($rs['status'] == 0): ?>
-                                            <span class="badge bg-primary">New</span>
-                                          <?php elseif($rs['status'] == 1): ?>
-                                            <span class="badge bg-warning text-dark">Pending/processing</span>
-                                          <?php elseif($rs['status'] == 2): ?>
-                                            <span class="badge bg-success">Done</span>
-                                          <?php else: ?>
-                                            <span class="badge badge-secondary">Closed</span>
-                                          <?php endif; ?>
-                                         </td>
-                                      <td data-label="Date:"><?php echo $date?></td>                                 
-                                    </tr>
-
-                                    <?php 
-                                    } ?>
-                                  </tbody>
-                                </table>
-                                <!-- End of Table -->
-
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                        
-                      </section>
-                  <!-- End Table with stripped rows -->
+               
 
                 </div>
-                <div class="tab-pane fade" id="Total" role="tabpanel" aria-labelledby="approved-tab">
-                  <!-- ApprovedDocs Docs -->
-                    <!-- IncomingDocs Docs -->
-                  <section class="section">
-                        <div class="row">        
-                          <div class="col-lg-12">
-                            <div class="card">
-                              <div class="col-lg-12">
-                                <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                    <h4>Total Ticket</h4>
-                                </div>
-                               
-                              </div>
-                              <div class="card-body" >           
-                                <!-- Table for Office records -->
-                                <table class="table table-hover datatable" >
-                                  <thead>
-                                    <tr>
-                                    <th scope="col">Student No.</th>
-                                      <th scope="col" >Fullname</th>
-                                      <th scope="col">Subject</th>  
-                                      <th scope="col">Course</th>  
-                                      <th scope="col">Status</th>  
-                                      
-                                      <!-- <th scope="col">Filesize</th>    -->
-                                     
-                                      <th scope="col">Date&Time</th>     
-                                      <!-- <th scope="col">Downloads</th>    -->
-                                      <!-- <th scope="col">Action</th>           --> 
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <?php
-                                      require_once("include/conn.php");
-                                      $query="SELECT * FROM hdms_tickets WHERE ticket_department = 'Staff' ORDER BY date DESC ";
-                                      $result=mysqli_query($conn,$query);
-                                      while($rs=mysqli_fetch_array($result)){
-                                        $id =$rs['id']; 
-                                        $student_number = $rs['student_number']; 
-                                        $firstname = $rs['firstname']; 
-                                        $lastname = $rs['lastname']; 
-                                        $category = $rs['category'];
-                                        $course = $rs['course'];
-                                        $status = $rs['status'];
-                                        $date = $rs['date'];                   
-                                    ?>
-                                    <tr>
-                                    <td style="display:none"><?php echo $id?></td>
-                                      <td data-label="ticket ID:"><?php echo $student_number; ?></td>
-                                      <td data-label="Fullname:"><?php echo $firstname.' '.$lastname; ?></td>
-                                      <td data-label="Subject:"><?php echo $category?></td> 
-                                      <td data-label="Course:"><?php echo $course?></td> 
-                                      <td data-title = "Status ">
-                                          <?php if($rs['status'] == 0): ?>
-                                            <span class="badge bg-primary">New</span>
-                                          <?php elseif($rs['status'] == 1): ?>
-                                            <span class="badge bg-warning text-dark">Pending/processing</span>
-                                          <?php elseif($rs['status'] == 2): ?>
-                                            <span class="badge bg-success">Done</span>
-                                          <?php else: ?>
-                                            <span class="badge badge-secondary">Closed</span>
-                                          <?php endif; ?>
-                                         </td>
-                                      <td data-label="Date:"><?php echo $date?></td>                                  
-                                    </tr>
-
-                                    <?php 
-                                    } ?>
-                                  </tbody>
-                                </table>
-                                <!-- End of Table -->
-
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                        
-                      </section>
-                  <!-- End Table with stripped rows -->
+               
 
                 </div>
                 
