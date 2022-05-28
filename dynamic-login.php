@@ -213,10 +213,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       //statement
                       $_SESSION['session_username'] = $myusername;
                       $_SESSION['session_url'] = "Help-Desk-System/Staff/index?id=".$_SESSION["login_key"]."";
-                      if (!empty($_SERVER["HTTP_CLIENT_IP"])){
-                          $ip = $_SERVER["HTTP_CLIENT_IP"];
-                        }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
-                          $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                      if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
+                          $ip = $_SERVER["HTTPS_CLIENT_IP"];
+                        }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
+                          $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
                         }else{
                           $ip = $_SERVER["REMOTE_ADDR"];
                           $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
@@ -236,10 +236,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         //statement
                         $_SESSION['session_username'] = $myusername;
                       $_SESSION['session_url'] = "Help-Desk-System/Cashier/index?id=".$_SESSION["login_key"]."";
-                        if (!empty($_SERVER["HTTP_CLIENT_IP"])){
-                            $ip = $_SERVER["HTTP_CLIENT_IP"];
-                          }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
-                            $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                        if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
+                            $ip = $_SERVER["HTTPS_CLIENT_IP"];
+                          }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
+                            $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
                           }else{
                             $ip = $_SERVER["REMOTE_ADDR"];
                             $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
@@ -259,10 +259,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                           //statement
                           $_SESSION['session_username'] = $myusername;
                           $_SESSION['session_url'] = "Help-Desk-System/Admission/index?id=".$_SESSION["login_key"]."";
-                          if (!empty($_SERVER["HTTP_CLIENT_IP"])){
-                              $ip = $_SERVER["HTTP_CLIENT_IP"];
-                            }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
-                              $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                          if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
+                              $ip = $_SERVER["HTTPS_CLIENT_IP"];
+                            }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
+                              $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
                             }else{
                               $ip = $_SERVER["REMOTE_ADDR"];
                               $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
@@ -334,10 +334,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         //statement
                         $_SESSION['session_username'] = $myusername;
                         $_SESSION['session_url'] = "super_admin/index?id=" . $_SESSION["login_key"] . "";
-                        if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
-                          $ip = $_SERVER["HTTP_CLIENT_IP"];
-                        } elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
-                          $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                        if (!empty($_SERVER["HTTPS_CLIENT_IP"])) {
+                          $ip = $_SERVER["HTTPS_CLIENT_IP"];
+                        } elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])) {
+                          $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
                         } else {
                           $ip = $_SERVER["REMOTE_ADDR"];
                           $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
