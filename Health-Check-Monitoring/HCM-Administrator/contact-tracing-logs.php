@@ -40,11 +40,6 @@ include_once('security/newsource.php');
                   aria-selected="true">Student</button>
               </li>
               <li class="nav-item flex-fill" role="presentation">
-                <button class="nav-link w-100" id="teacher-tab" data-bs-toggle="tab"
-                  data-bs-target="#bordered-justified-teacher" type="button" role="tab" aria-controls="teacher"
-                  aria-selected="false">Teacher</button>
-              </li>
-              <li class="nav-item flex-fill" role="presentation">
                 <button class="nav-link w-100" id="visitor-tab" data-bs-toggle="tab"
                   data-bs-target="#bordered-justified-visitor" type="button" role="tab" aria-controls="visitor"
                   aria-selected="false">Visitor</button>
@@ -65,12 +60,8 @@ include_once('security/newsource.php');
                       <!-- Table Head -->
                       <thead style="background-color:whitesmoke;">
                         <tr>
-                          <th scope="col">ID Number</th>
-                          <th scope="col">Full Name</th>
-                          <th scope="col">Contact</th>
-                          <th scope="col">Address</th>
+                          <th scope="col">Qr Code</th>
                           <th scope="col">Date</th>
-                          <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -78,63 +69,11 @@ include_once('security/newsource.php');
                         require_once "timezone.php";
                         if (mysqli_num_rows($query_run) > 0) {
                           while ($row = mysqli_fetch_assoc($query_run)) {
-                            $new_date = date("F j,Y", strtotime($time));
+                            $new_date = date("F j,Y", strtotime($row['created_at']));
                         ?>
                         <tr>
-                          <td><?php echo $row['id_number']; ?></td>
-                          <td><?php echo $row['fullname']; ?></td>
-                          <td><?php echo $row['contact']; ?></td>
-                          <td><?php echo $row['address']; ?></td>
+                          <td><?php echo $row['qrcode']; ?></td>
                           <td><?php echo $new_date ?></td>
-                          <td>
-                            <a href="#" class="btn btn-primary"><i class="bi bi-cursor"></i>View Details</a>
-                          </td>
-                        </tr>
-                        <?php }
-                        }
-                        ?>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="bordered-justified-teacher" role="tabpanel" aria-labelledby="teacher-tab">
-                <div class="card-body">
-                  <h1 class="card-title">Teachers Daily Contact Tracing</h1>
-                  <div class="table-responsive">
-                    <table class="table table-hover datatable">
-                      <?php
-                      require_once "timezone.php";
-                      $query = "SELECT * FROM hcms_ctracing ORDER BY id ASC";
-                      $query_run = mysqli_query($conn, $query);
-                      ?>
-                      <!-- Table Head -->
-                      <thead style="background-color:whitesmoke;">
-                        <tr>
-                          <th scope="col">ID Number</th>
-                          <th scope="col">Full Name</th>
-                          <th scope="col">Contact</th>
-                          <th scope="col">Address</th>
-                          <th scope="col">Date</th>
-                          <th scope="col">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        require_once "timezone.php";
-                        if (mysqli_num_rows($query_run) > 0) {
-                          while ($row = mysqli_fetch_assoc($query_run)) {
-                            $new_date = date("F j,Y", strtotime($time));
-                        ?>
-                        <tr>
-                          <td><?php echo $row['id_number']; ?></td>
-                          <td><?php echo $row['fullname']; ?></td>
-                          <td><?php echo $row['contact']; ?></td>
-                          <td><?php echo $row['address']; ?></td>
-                          <td><?php echo $new_date ?></td>
-                          <td>
-                            <a href="#" class="btn btn-primary"><i class="bi bi-cursor"></i>View Details</a>
-                          </td>
                         </tr>
                         <?php }
                         }
@@ -157,12 +96,8 @@ include_once('security/newsource.php');
                       <!-- Table Head -->
                       <thead style="background-color:whitesmoke;">
                         <tr>
-                          <th scope="col">ID Number</th>
-                          <th scope="col">Full Name</th>
-                          <th scope="col">Contact</th>
-                          <th scope="col">Address</th>
+                          <th scope="col">Qr Code</th>
                           <th scope="col">Date</th>
-                          <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -170,17 +105,11 @@ include_once('security/newsource.php');
                         require_once "timezone.php";
                         if (mysqli_num_rows($query_run) > 0) {
                           while ($row = mysqli_fetch_assoc($query_run)) {
-                            $new_date = date("F j,Y", strtotime($time));
+                            $new_date = date("F j,Y", strtotime($row['created_at']));
                         ?>
                         <tr>
-                          <td><?php echo $row['id_number']; ?></td>
-                          <td><?php echo $row['fullname']; ?></td>
-                          <td><?php echo $row['contact']; ?></td>
-                          <td><?php echo $row['address']; ?></td>
+                          <td><?php echo $row['qrcode']; ?></td>
                           <td><?php echo $new_date ?></td>
-                          <td>
-                            <a href="#" class="btn btn-primary"><i class="bi bi-cursor"></i>View Details</a>
-                          </td>
                         </tr>
                         <?php }
                         }
