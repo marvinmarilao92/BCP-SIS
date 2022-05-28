@@ -81,7 +81,10 @@ include ("includes/head.php");
                   <div class="col-md-8">
                     <div class="card-body">
                       <h5 class="card-title"><?php echo''.$row['title'].'&nbsp;|&nbsp;'.$row['date'].' '?></h5>
-					  <span class="badge border-info border-1 text-info" style ="font-size:14px">Author : Staff of help Desk</span><br><br> 
+					  <span class="badge border-info border-1 text-info" style ="font-size:14px">Author : Staff of help Desk</span>
+        			
+					  
+					  <br><br> 
                       <p class="card-text"><?php echo''.nl2br($row['content']).''?></p>
                      
                       </div>
@@ -123,7 +126,6 @@ include ("includes/head.php");
 	<?php
 	include ("includes/footer.php");
 	?>
-  <?php include ("view_ticket.php"); ?>
 </body>
 <!-- prevent you for turning back -->
 	<script>

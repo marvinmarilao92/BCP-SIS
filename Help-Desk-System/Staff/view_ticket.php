@@ -534,7 +534,7 @@ if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,mess
                                 <input type="hidden"name = "email" value = <?php echo ''.decryptthis($ticket['email'], $key).'';?> style="display:none">
                                 <textarea name="message" class="form-control" id="message" placeholder="Type your reply" cols="70" rows="4" required></textarea><br>
                                 <button class="btn btn-success" type="submit">Send</button>
-                                <a href="ticket_list.php?id=<?php echo $_SESSION["login_key"];?> " class="btn btn-secondary ml-2" >Back</a>
+                                <a href="ticket.php?id=<?php echo $_SESSION["login_key"];?> " class="btn btn-secondary ml-2" >Back</a>
                                
                             </div>
                         </form>

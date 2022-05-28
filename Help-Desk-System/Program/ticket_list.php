@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Ticket</title>
+<title>Ticket List</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 </head>
@@ -19,9 +19,7 @@ include('session.php');
   <?php
 
 
-//include the new connection
 include "new_db.php";
-
 
 //THE KEY FOR ENCRYPTION AND DECRYPTION
 $key = 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO';
@@ -80,7 +78,7 @@ if($rtc->num_rows > 0){
     }
 }
 
-$closed_tickets_query="SELECT COUNT(*) AS new_tickets FROM hdms_tickets WHERE status=$closed_status";
+$closed_tickets_query="SELECT COUNT(*) AS new_tickets FROM hdms_tickets WHERE status=$closed_status ";
 $ctr=$db->conn->query($closed_tickets_query);
 if($ctr->num_rows > 0){
     while ($row = $ctr->fetch_assoc()) {
@@ -88,7 +86,7 @@ if($ctr->num_rows > 0){
     }
 }
 $latest=[];
-$recodes=$db->conn->query("SELECT * FROM hdms_tickets WHERE ticket_department = '$verified_session_role' ORDER BY id DESC");
+$recodes=$db->conn->query("SELECT * FROM hdms_tickets WHERE ticket_department = 'hdms Registrar' ORDER BY date DESC");
 if($recodes->num_rows >0){
     while ($row = $recodes->fetch_assoc()) {
         $latest[]=$row;
@@ -99,16 +97,23 @@ if($recodes->num_rows >0){
  <main id="main" class="main">
 <div class="container mt-4">
     <div class="row justify-content-center">
-       
-          
-          
+        <div class="col-12 col-md-12" >
+            <div class="card mb-3">
+                <div class="card-header" >
+                    <h3>Help desk Support team</h3>
+            
+                </div>
+            </div>
+            
+  
             <div class="alert alert-info alert-dismissible fade show" role="alert">
-      <h4 class="alert-heading">Help Desk Support Team</h4>
+      <h4 class="alert-heading">Reminder!</h4>
       <p>
-       This ticket are forwarded by the staff you can directly reply to students and interact without sending back to staff 
+      &nbsp&nbsp Please read this acceptable user User Policy carefully before using the Help Desk Management System operated by the Institution.
+Services provided by us may be/or used for lawful purposes. You agree to comply with all applicable laws, rules and regulations in connection with your use of the services. Any material or conduct that in our judgement violates this policy in any manner may result in suspension or termination of the services or removal of user's account with or without notice.
       </p>
       <hr>
-      <p class="mb-0"></p>
+      <p class="mb-0">© Copyright Bestlink College of the Philippines. All Rights Reserved.</p>
      
     </div>
             <div class="card">
@@ -117,21 +122,21 @@ if($recodes->num_rows >0){
                 </div>
                 <div class="card-body">
                     <?php if(count($latest) > 0){?>
-                        <table class="table datatable">
+                        <table class="table table-hover datatable" id="DocTypeTable">
                         <thead>
                         <tr>
                                 
                                 <th>Std.#</th>
                                 <th>Email</th>
                                 <th>Subject</th>
-                                <th>Message</th>
+                                <th scope="col" WIDTH="20%">Message</th>
                                 <th>Status</th>
                                 <th>Date</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php 
+                                <?php 
                                 foreach ($latest as $k => $v) {
                                     echo '
                                     <tr>
@@ -160,7 +165,9 @@ if($recodes->num_rows >0){
                                       echo ' 
                                         <td>'.$v['date'].'</td>
                                         <td><a class="btn btn-outline-info " href="view_ticket.php?id='.$v['id'].'" title="View"><i class="bi bi-eye-fill"></i></a>   
-                                     
+                                       <a class="btn btn-outline-primary editbtn" title="update status"> <i class="bi bi-three-dots"></i></a>
+                                      
+                                       </a>
                                        <a onclick="deleteRow('.$v["id"].')" class="btn btn-outline-danger" title="Delete"><i class="bi bi-trash"></i></a></td>
                                         
                                     </tr>
@@ -177,15 +184,132 @@ if($recodes->num_rows >0){
         </div>
     </div>
 </div>
+
+                  </section>
+              <!-- End Table with stripped rows -->
 </main>
+ <!-- Edit DocType Modal -->
+<div class="modal fade" id="EditModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">UPDATE</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                          <div class="card" style="margin: 10px;">
+                            <div class="card-body">
+                              <h2 class="card-title">Status Update</h2>
+                                <!-- Fill out Form -->
+                                <div class="row g-3" >
+                                  <input type="" class="form-control" id="id" style="display: none;" readonly>
+                                
+                                  <div class="col-12">                                
+                                    <div class="form-floating">
+                                      <select class="form-select" name="status" id="status" aria-label="State" required>
+                                        <option value="" selected disabled>Update Status</option>
+                                        <option value="0" <?php echo $v['status'] == 0 ? 'selected' : ''; ?>>New</option>
+                                        <option value="1" <?php echo $v['status']  == 1 ? 'selected' : ''; ?>>Pending/Processing</option>
+                                        <option value="2" <?php echo $v['status']  == 2 ? 'selected' : ''; ?>>Solved</option>                               
+                                      </select>
+                                      <label for="floatingSelect">Status</label>
+                                    </div>                                   
+                                  </div>   
+                            </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button class="btn btn-primary" name="save" id="edit" >Update Status</button>
+                            </div>
+                        <!-- End Form -->
+                    </div>
+                </div>
+        </div>
+      <!-- End Edit DocType Modal-->
+
+
+ 
+
+
 
 <!-- ======= Footer ======= -->
 <?php include ('core/footer.php');//css connection?>
+
 <!-- End Footer -->
 
-  <!-- Vendor JS Files/ Template main js file -->
-  <?php include ('core/js.php');//css connection?>
+
+<!-- Vendor JS Files/ Template main js file -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files/ Template main js file -->
+ <!-- Vendor JS Files/ Template main js file -->
+ <?php include ('core/js.php');//css connection?> 
+</body>
 <script>
+  // Edit modal calling
+  $('#DocTypeTable').on('click','.editbtn', function () {
+
+$('#EditModal').modal('show');
+
+$tr = $(this).closest('tr');
+
+var data = $tr.children("td").map(function () {
+    return $(this).text();
+}).get();
+
+console.log(data);        
+    $('#id').val(data[0]);
+    $('#status').val(data[0]);
+   
+    // document.getElementById("dt_accE").placeholder = data[3];  
+});
+// End of edit modal calling 
+
+// Edit function
+$('#edit').click(function(d){ 
+d.preventDefault();
+  if($('#id').val()!=""&& $('#status').val()!=""){
+    $.post("function/update_ticket.php", {
+      id:$('#id').val(),
+      status:$('#status').val(),
+  
+      },function(data){
+        if (data.trim() == "failed"){
+        $('#EditModal').modal('hide');
+        Swal.fire("Status Title is currently in use","","error");//response message
+        // Empty test field
+        $('#status').val("")
+        
+      }else if(data.trim() == "success"){
+        $('#EditModal').modal('hide');
+              //success message                                    
+                  const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 1500,
+                  timerProsressBar: true,
+                  didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)                  
+                  }
+                  })
+                Toast.fire({
+                icon: 'success',
+                title:'Status updated Successfully'
+                }).then(function(){
+                  document.location.reload(true)//refresh pages
+                }); 
+                $('#status').val("")
+             
+        }else{
+          Swal.fire(data);
+      }
+    })
+  }else{
+    Swal.fire("You must fill out every field","","warning");
+  }
+})
 function deleteRow(id) {
             if (confirm('Are you sure you want to delete this?')) {
                 $.ajax({
@@ -202,10 +326,8 @@ function deleteRow(id) {
                 });
             }
         }
+if(window.history.replaceState) {
+  window.history.replaceState(null,null,window.location.href)
+}
 </script>
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-
-
-</body>
 </html>
