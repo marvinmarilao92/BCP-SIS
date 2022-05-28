@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     case "Internship Admin":
                       //statement
                       $_SESSION['session_username'] = $myusername;
-                      $_SESSION['session_url'] = "Internship/coordinator/index?id=" . $_SESSION["login_key"] . "";
+                      $_SESSION['session_url'] = "IMNGMTSYS/z/index?id=" . $_SESSION["login_key"] . "";
                       if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
                         $ip = $_SERVER["HTTP_CLIENT_IP"];
                       } elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
@@ -152,14 +152,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         require_once "core/update_key.php";
                         //update login key
                         $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                        header("location: Internship/coordinator/index?id=" . $_SESSION["login_key"] . "");
+                        header("location: IMNGMTSYS/z/index?id=" . $_SESSION["login_key"] . "");
                       }
 
                       break;
                     case "Internship Secretary":
                       //statement
                       $_SESSION['session_username'] = $myusername;
-                      $_SESSION['session_url'] = "Internship/coordinator/index?id=" . $_SESSION["login_key"] . "";
+                      $_SESSION['session_url'] = "IMNGMTSYS/y/index?id=" . $_SESSION["login_key"] . "";
                       if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
                         $ip = $_SERVER["HTTP_CLIENT_IP"];
                       } elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
@@ -175,10 +175,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         require_once "core/update_key.php";
                         //update login key
                         $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                        header("location: Internship/coordinator/index?id=" . $_SESSION["login_key"] . "");
+                        header("location: IMNGMTSYS/y/index?id=" . $_SESSION["login_key"] . "");
                       }
 
                       break;
+                      case "Internship Company":
+                        //statement
+                        $_SESSION['session_username'] = $myusername;
+                        $_SESSION['session_url'] = "IMNGMTSYS/w/login/index?id=" . $_SESSION["login_key"] . "";
+                        if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
+                          $ip = $_SERVER["HTTP_CLIENT_IP"];
+                        } elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+                          $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                        } else {
+                          $ip = $_SERVER["REMOTE_ADDR"];
+                          $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+                          $remarks = "account has been logged in";
+                          mysqli_query($link, "INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')") or die(mysqli_error($link));
+                          //used to delete ip address record for login attempts
+                          mysqli_query($link, "delete from login_attempts where ip_address='$ip_address'");
+                          //calling php file for new login_key
+                          require_once "core/update_key.php";
+                          //update login key
+                          $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
+                          header("location: IMNGMTSYS/w/login/index?id=" . $_SESSION["login_key"] . "");
+                        }
+  
+                        break;
                   }
                   break;
 
