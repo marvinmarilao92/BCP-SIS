@@ -61,8 +61,8 @@
                       </a>
                       <ul id="reports-nav" class="<?php if($col=='reports'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
                         <li>
-                    <a href="department_reports?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='DR'){echo 'active';}?>">
-                        <i class="bi bi-circle"></i><span>Department FAQs Reports</span>
+                    <a href="faqs_reports?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='DR'){echo 'active';}?>">
+                        <i class="bi bi-circle"></i><span>FAQs Reports</span>
                         </a>
                         </li>
                       <li>
