@@ -46,11 +46,9 @@ include_once('security/newsource.php');
                   <thead style="background-color:whitesmoke;">
                     <tr>
                       <th scope="col">Full Name</th>
-                      <th scope="col">Medicine</th>
-                      <th scope="col">Quantity</th>
                       <th scope="col">Description</th>
-                      <th scope="col">Prescription</th>
                       <th scope="col">Date</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -60,12 +58,11 @@ include_once('security/newsource.php');
                     ?>
                     <tr>
                       <td><?php echo $row['fullname']; ?></td>
-                      <td><?php echo $row['item']; ?></td>
-                      <td><?php echo $row['quantity']; ?></td>
-                      <td><small><?php echo $row['description']; ?></small></td>
-                      <td><small><?php echo $row['prescription']; ?></small></td>
+                      <td><?php echo $row['description']; ?></td>
                       <td><?php echo $row['created_at']; ?></td>
-
+                      <td>
+                        <a href=""><i><u>View full details</i></u></a>
+                      </td>
                     </tr>
                     <?php }
                     }

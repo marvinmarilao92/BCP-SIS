@@ -1,5 +1,6 @@
 <?php
 include('session.php');
+$today = date('Y-m-j');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,11 +66,11 @@ include('session.php');
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Students' Registrar Appointments </h5>
+              <h5 class="card-title">Students' Registrar Appointments For Today</h5>
               <?php
                     $temp_name = "";
                     // Attempt select query execution
-                    $sql = "SELECT * FROM clearance_student_appointment where department = 'Registrar Coordinator'";
+                    $sql = "SELECT * FROM clearance_student_appointment where department = 'Registrar Coordinator' and appointment_date = '$today'";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table id="example" class="table datatable">';
@@ -121,7 +122,10 @@ include('session.php');
                     // Close connection
                     mysqli_close($link);
                     ?>
-
+              <div class="float-end">
+                  <a href="student-clearance-appointment-calendar.php"><button type="button" class="btn btn-primary">View Calendar of Appointments</button></a>
+                  <a href="student-clearance-appointment-all.php"><button type="button" class="btn btn-info">View All Appointments</button></a>
+              </div>
             </div>
             <!-- <div class="container-fluid">
               <div class="float-end mb-4">

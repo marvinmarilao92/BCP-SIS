@@ -67,9 +67,9 @@ if($recodes->num_rows >0){
                                         <td>'.$v['category'].'</td>
                                         <td>'.decryptthis($v['message'], $key).'</td> ';?>
                                          <td data-title = "Department ">
-                                        <?php if($v['ticket_department'] == "Accounting"): ?>
+                                        <?php if($v['ticket_department'] == "hdms Accounting"): ?>
                                           <span class="badge bg-primary">Accounting</span>
-                                        <?php elseif($v['ticket_department'] == "Registrar"): ?>
+                                        <?php elseif($v['ticket_department'] == "hdms Registrar"): ?>
                                           <span class="badge bg-warning text-dark">Registrar</span>
                                           <?php elseif($v['ticket_department'] == "hdms Admission"): ?>
                                           <span class="badge bg-secondary">Admission</span>

@@ -12,7 +12,7 @@
     <div class="modal-body" id="notifTable">
       <table  class="table table-hover" style="width:100%; font-size: 14px; text-align:center;" id="showNOF">
         <thead style="background: rgba(161, 213, 255, 0.1);">
-          <tr style="">
+          <tr>
             <th>Status</th>
             <th>Request</th>
             <th>Course</th>
