@@ -3,7 +3,7 @@ include('session.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Accounting | FAQs Reports</title>
+<title>Accounting | FAQS Reports</title>
 <head>
 <?php include ('core/css-links.php');//css connection?>
 
@@ -50,6 +50,7 @@ include('session.php');
 
 
 
+
 <?php include ('core/header.php');//Design for  Header?>
 <?php $page = 'FR'; $col = 'reports';include ('core/sidebar.php');//Design for sidebar?>
 
@@ -77,10 +78,12 @@ include('session.php');
               <!-- Report Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="myTabjustified" role="tablist" style="margin-top: 10px;">
                 <li class="nav-item flex-fill" role="presentation">
-                  <button class="nav-link w-100 active" id=" incoming-tab" data-bs-toggle="tab" data-bs-target="#IncomingDocs" type="button" role="tab" aria-controls="incoming" aria-selected="true">FAQS Records</button>
+                  <button class="nav-link w-100 active" id=" incoming-tab" data-bs-toggle="tab" data-bs-target="#IncomingDocs" type="button" role="tab" aria-controls="incoming" aria-selected="true">FAQs Reports</button>
                 </li>
-                
-            
+                <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100" id="received-tab" data-bs-toggle="tab" data-bs-target="#ReceivedDocs" type="button" role="tab" aria-controls="profile" aria-selected="false">Activity</button>
+                </li>
+               
               </ul>
               <div class="tab-content pt-2" id="myTabjustifiedContent">
                 <div class="tab-pane fade show active" id="IncomingDocs" role="tabpanel" aria-labelledby=" incoming-tab">
@@ -92,7 +95,7 @@ include('session.php');
                             <div class="card">
                               <div class="col-lg-12">
                                 <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                    <h4>Horray!! you did a great job today</h4>
+                                    <h4>FAQs reports</h4>
 
                                 </div>
                                
@@ -103,8 +106,11 @@ include('session.php');
                                   <thead>
                                     <tr>
                                    
-                                      <th scope="col">Question</th>
+                                      <th scope="col">Quesiton</th>
+                                      
                                       <th scope="col" >Answer/Instruction</th>
+                              
+                                      <!-- <th scope="col">Filesize</th>    -->
                                      
                                       <th scope="col">Date&Time</th>     
                                       <!-- <th scope="col">Downloads</th>    -->
@@ -114,20 +120,21 @@ include('session.php');
                                   <tbody>
                                     <?php
                                       require_once("include/conn.php");
-                                      $query="SELECT * FROM hd_department WHERE shortDesc = 'Accounting' ORDER BY date DESC";
+                                      $query="SELECT * FROM hd_department WHERE shortDesc = 'Accounting' ORDER BY date DESC ";
                                       $result=mysqli_query($conn,$query);
                                       while($rs=mysqli_fetch_array($result)){
                                         $id =$rs['id']; 
-                                        $title = $rs['title']; 
-                                       
-                                        $longDesc = $rs['longDesc'];  
+                          
+                                        $title = $rs['title'];
+                                        $longDesc = $rs['longDesc'];
+                                        
                                         $date = $rs['date'];                   
                                     ?>
                                     <tr>
                                       <td style="display:none"><?php echo $id?></td>
-                                      <td data-label="Question:"><?php echo $title; ?></td>
-                                     
-                                      <td data-label="Answer/Instruction:"><?php echo $longDesc?></td> 
+                                      <td data-label="Quesiton:"><?php echo $title; ?></td>
+                                      <td data-label="Answer/Instruction:"><?php echo $longDesc;?></td>
+                                  
                                       <td data-label="Date:"><?php echo $date?></td>                                        
                                     </tr>
 
@@ -157,29 +164,148 @@ include('session.php');
                             <div class="card">
                               <div class="col-lg-12">
                                 <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                                    <h4>Record of your Information</h4>
+                                    <h4>You have done a great job today!!</h4>
                                 </div>
                                
                               </div>
-                              <div class="card-body" >           
-                                <!-- Table for Office records -->
-                                <div class="col-12">
-                                    <h5 class="card-title">Ticket <span> | Reports</span></h5>
+                              
+                                <!-- Recent Activity -->
+                         
+                                    <div class="card-body">
+                                      <h5 class="card-title">Activity</span></h5>
 
-                                    <!-- Bar Chart -->
-                                    <div id="piechart" style="width: 900px; height: 500px;"></div>  
-                                    <?php
-                                    include "include/conn.php";
-                                    $query = "SELECT category, count(*) as number FROM hdms_tickets GROUP BY category";  
-                                        $result = mysqli_query($conn, $query);  
-                                        ?> 
+                                      <div class="activity">
+
+                                        <?php 
+                                      //THE KEY FOR ENCRYPTION AND DECRYPTION
+                                    $key = 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO';
+
+
+                                    //ENCRYPT FUNCTION
+                                    function encryptthis($data, $key) {
+                                    $encryption_key = base64_decode($key);
+                                    $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
+                                    $encrypted = openssl_encrypt($data, 'aes-256-cbc', $encryption_key, 0, $iv);
+                                    return base64_encode($encrypted . '::' . $iv);
+                                    }
+
+
+                                    //DECRYPT FUNCTION
+                                    function decryptthis($data, $key) {
+                                    $encryption_key = base64_decode($key);
+                                    list($encrypted_data, $iv) = array_pad(explode('::', base64_decode($data), 2),2,null);
+                                    return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
+                                    }
+                                   
+                                        $sql = "SELECT * FROM audit_trail where actor = 'hdms Accounting' ORDER BY id DESC LIMIT 10";
+                                          if($result = mysqli_query($link, $sql)){
+                                            if(mysqli_num_rows($result) > 0){
+                                              while($row = mysqli_fetch_array($result)){
+                                                $current_date = strtotime(date('Y-m-d H:i:s'));
+                                                $action_date = strtotime($row['date']);
+                                                $seconds = $current_date - $action_date;
+                                                if($seconds < 60){
+                                                  $count = round($seconds, 0);
+                                                  $time = $count." secs";
+                                                }else if($seconds < 3600){
+                                                  $count = round($seconds/60, 0);
+                                                  $time = $count." mins";
+                                                }else if($seconds < 86400){
+                                                  $count = round($seconds/3600, 0);
+                                                  $time = $count." hours";
+                                                }else if($seconds < 604800){
+                                                  $count = round($seconds/86400, 0);
+                                                  $time = $count." days";
+                                                }
+                                                ?>
+                                                <div class="activity-item d-flex">
+                                                  <div class="activite-label"><?php echo $time; ?></div>&nbsp;&nbsp;
+                                                  <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>&nbsp;&nbsp;
+                                                  <div class="activity-content">
+                                                    <?php echo $row['action']; ?><?php echo decryptthis($row['affected'], $key); ?>
+                                                  </div>
+                                                </div><!-- End activity item-->
+                                                <?php
+                                              }
+                                            } else{
+                                                ?>
+                                                <div class="activity-item d-flex">
+                                                  <div class="activity-content">
+                                                    No Recent Activity
+                                                  </div>
+                                                </div><!-- End activity item-->
+                                                <?php
+                                            }
+                                          } else{
+                                              echo "Oops! Something went wrong. Please try again later.";
+                                          }
+                                        ?>
+
+
+                                    
+                                        </div>
+                           
+                                    </div><!-- End Recent Activity -->
+                                     <!-- Recent Activity -->
+                         
+                                     <div class="card-body">
+                                      <h5 class="card-title">Login Activity</span></h5>
+
+                                      <div class="activity">
+
+                                        <?php 
+                                    
+                                   
+                                        $sql = "SELECT * FROM audit_logs where action_name = 'hdms Accounting' ORDER BY id DESC LIMIT 5";
+                                          if($result = mysqli_query($link, $sql)){
+                                            if(mysqli_num_rows($result) > 0){
+                                              while($row = mysqli_fetch_array($result)){
+                                                $current_date = strtotime(date('Y-m-d H:i:s'));
+                                                $action_date = strtotime($row['login_time']);
+                                                $seconds = $current_date - $action_date;
+                                                if($seconds < 60){
+                                                  $count = round($seconds, 0);
+                                                  $time = $count." secs";
+                                                }else if($seconds < 3600){
+                                                  $count = round($seconds/60, 0);
+                                                  $time = $count." mins";
+                                                }else if($seconds < 86400){
+                                                  $count = round($seconds/3600, 0);
+                                                  $time = $count." hours";
+                                                }else if($seconds < 604800){
+                                                  $count = round($seconds/86400, 0);
+                                                  $time = $count." days";
+                                                }
+                                                ?>
+                                                <div class="activity-item d-flex">
+                                                  <div class="activite-label"><?php echo $time; ?></div>&nbsp;&nbsp;
+                                                  <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>&nbsp;&nbsp;
+                                                  <div class="activity-content">
+                                                 <b>Activity:&nbsp;</b><?php echo $row['action']; ?><br><b>Time:</b>&nbsp;<?php echo $row['login_time']; ?><br><b>host:</b>&nbsp;<?php echo $row['host']; ?>
+                                                  </div>
+                                                </div><!-- End activity item-->
+                                                <?php
+                                              }
+                                            } else{
+                                                ?>
+                                                <div class="activity-item d-flex">
+                                                  <div class="activity-content">
+                                                    No Recent Activity
+                                                  </div>
+                                                </div><!-- End activity item-->
+                                                <?php
+                                            }
+                                          } else{
+                                              echo "Oops! Something went wrong. Please try again later.";
+                                          }
+                                        ?>
+
+
+                                    
+                                        </div>
+                           
+                                    </div><!-- End Recent Activity -->
                                 
-                                <!-- End Bar CHart -->
-
-                                    </div>
-
-                                </div>
-                                </div><!-- End Reports -->
 
                               </div>
                             </div>
@@ -189,6 +315,10 @@ include('session.php');
                         
                       </section>
                   <!-- End Table with stripped rows -->
+                  
+                </div>
+               
+
                 </div>
                
 
@@ -216,31 +346,7 @@ include('session.php');
 
   <!-- Vendor JS Files/ Template main js file -->
   <?php include ('core/js.php');//css connection?>
-  
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
-           <script type="text/javascript">  
-           google.charts.load('current', {'packages':['corechart']});  
-           google.charts.setOnLoadCallback(drawChart);  
-           function drawChart()  
-           {  
-                var data = google.visualization.arrayToDataTable([  
-                          ['category', 'Number'],  
-                          <?php  
-                          while($row = mysqli_fetch_array($result))  
-                          {  
-                               echo "['".$row["category"]."', ".$row["number"]."],";  
-                          }  
-                          ?>  
-                     ]);  
-                var options = {  
-                      title: 'Percentage of every category',  
-                      //is3D:true,  
-                      pieHole: 0.4  
-                     };  
-                var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
-                chart.draw(data, options);  
-           }  
-           </script> 
+
 </body>
 
 </html>

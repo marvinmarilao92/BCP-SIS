@@ -123,38 +123,33 @@ include('session.php');
            
             
 
-          <!-- Reports -->
-          <div class="col-12">
+     <!-- Reports -->
+     <div class="col-12">
               <div class="card">
 
                 <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
+                      <h6>Tables</h6>
                     </li>
-                    <li><a class="dropdown-item" href="ticket.php?id=<?php echo $_SESSION["login_key"];?>">Show</a></li>
+
+                    <li><a class="dropdown-item" href="#">Show</a></li>
                   </ul>
                 </div>
-
+                <!-- Bar Chart -->
                 <div class="card-body">
-                  <h5 class="card-title">Ticket <span> | Reports</span></h5>
-
-                  <!-- Bar Chart -->
-                  <div id="piechart" style="width: 900px; height: 500px;"></div>  
+                <h5 class="card-title">Ticket <span>| Reports</span></h5>
+                <div id="piechart" style="width: 900px; height: 500px;"></div>  
                  <?php
                  include "include/conn.php";
                   $query = "SELECT category, count(*) as number FROM hdms_tickets GROUP BY category";  
  $result = mysqli_query($conn, $query);  
  ?> 
-              
-              <!-- End Bar CHart -->
-
                 </div>
-
+              <!-- End Bar CHart -->
               </div>
             </div><!-- End Reports -->
-
             
           
 
@@ -169,8 +164,8 @@ include('session.php');
 <!-- status tickets -->
 <div class="card">
               <div class="card-body pb-0">
-                <!-- <h5 class="card-title">Status <span>| Ticket<br><br><b>0 = New&nbsp;&nbsp;&nbsp;1 = Pending&nbsp;&nbsp;&nbsp;2 = Done</b>
-              </span></h5> -->
+                <h5 class="card-title">Status <span>| Ticket</b>
+              </span></h5>
                 <canvas id="status" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
                     <?php
                       require_once("include/conn.php");
@@ -196,6 +191,8 @@ include('session.php');
                       ?>
               </div>
             </div>
+      
+           
 
 
 </div><!-- End Right side columns -->
@@ -217,6 +214,7 @@ include('session.php');
  <!-- Vendor JS Files/ Template main js file -->
  <?php include ('core/js.php');//css connection?> 
    <script>
+            //status
      var data = [{
               data: <?php echo json_encode($counts2); ?>,
               backgroundColor: [
@@ -266,7 +264,8 @@ include('session.php');
             });
               </script>
               
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+    
+              <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
            <script type="text/javascript">  
            google.charts.load('current', {'packages':['corechart']});  
            google.charts.setOnLoadCallback(drawChart);  
