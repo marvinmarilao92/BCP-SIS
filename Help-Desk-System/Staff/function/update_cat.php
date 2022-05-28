@@ -14,9 +14,8 @@ $db = mysqli_select_db($conn, 'sis_db');
              
         $q_checkcode = $conn->query("SELECT * FROM `hdms_category` WHERE `category` = '$category'") or die(mysqli_error($conn));
             $v_checkcode = $q_checkcode->num_rows;
-            if($v_checkcode == 1){
-                echo ('failed');
-            }else {
+          
+          
                   	//create audit trail record
 			//add session conncetion
  			include('../session.php');
@@ -37,5 +36,5 @@ $db = mysqli_select_db($conn, 'sis_db');
             }
             //end of audit trail
         } 
-        }
+        
 ?>

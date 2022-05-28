@@ -175,39 +175,69 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
 
 
 
-                        
-  <!-- Reports -->
-  <div class="col-12">
+    <!-- Reports -->
+    <div class="col-12">
               <div class="card">
 
                 <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
+                      <h6>Tables</h6>
                     </li>
-                    <li><a class="dropdown-item" href="admin-ticket-view.php?id=<?php echo $_SESSION["login_key"];?>">Show</a></li>
+
+                    <li><a class="dropdown-item" href="#">Show</a></li>
                   </ul>
                 </div>
-
+                <!-- Bar Chart -->
                 <div class="card-body">
-                  <h5 class="card-title">FAQs <span> | Reports</span></h5>
-
-                  <!-- Bar Chart -->
-                  <div id="piechart" style="width: 900px; height: 500px;"></div>  
+                  <h5 class="card-title">Department <span>| FAQs</span></h5>
+                <canvas id="barChart" style="max-height: 400px;"></canvas>
                  <?php
-                 include "include/conn.php";
-                  $query = "SELECT shortDesc, count(*) as number FROM hd_department GROUP BY shortDesc";  
- $result = mysqli_query($conn, $query);  
- ?> 
-              
-              <!-- End Bar CHart -->
+                       require_once("include/conn.php");
 
+                             $sql ="SELECT *,count(shortDesc) as count FROM hd_department group by shortDesc;";
+                             $result = mysqli_query($conn,$sql);
+                             $chart_data="";
+                             while ($row = mysqli_fetch_array($result)) { 
+                     
+                                $name[]  = $row['shortDesc']  ;
+                                $counts[] = $row['count'];
+                            }
+                     
+                    ?>
                 </div>
-
+              <!-- End Bar CHart -->
               </div>
             </div><!-- End Reports -->
+ <!-- Reports -->
+     <div class="col-12">
+              <div class="card">
 
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Tables</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Show</a></li>
+                  </ul>
+                </div>
+                <!-- Bar Chart -->
+                <div class="card-body">
+                <h5 class="card-title">Ticket <span>| Reports</span></h5>
+                <div id="piechart" style="width: 900px; height: 500px;"></div>  
+                 <?php
+                 include "include/conn.php";
+                  $query = "SELECT category, count(*) as number FROM hdms_tickets GROUP BY category";  
+ $result = mysqli_query($conn, $query);  
+ ?> 
+                </div>
+              <!-- End Bar CHart -->
+              </div>
+            </div><!-- End Reports -->
+     
 
             
 
@@ -237,6 +267,30 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
 
             </div>
           </div><!-- End Website Traffic -->
+      
+          <div class="card">
+              <div class="card-body pb-0">
+                <h5 class="card-title">Status <span>| Ticket<br><br><b>0 = New&nbsp;&nbsp;&nbsp;1 = Pending&nbsp;&nbsp;&nbsp;2 = Done</b>
+              </span></h5>
+                <canvas id="status" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
+                    <?php
+                      require_once("include/conn.php");
+                        $sql2 ="SELECT status,count(status) as count2 FROM hdms_tickets group by status;";
+                        $result2 = mysqli_query($conn,$sql2);
+                        $chart_data="";
+                        while ($row2 = mysqli_fetch_array($result2)) { 
+                
+                          $name3[]  = $row2['status'];
+                          $counts3[] = $row2['count2'];
+                        }
+                        $sql22 ="SELECT status FROM hdms_tickets";
+                        $result22 = mysqli_query($conn,$sql22);
+                        $total2 = mysqli_num_rows($result22);
+                        $overall3[] = $total2;
+                      ?>
+              </div>
+            </div>
+
         </div><!-- End Right side columns -->
 
 
@@ -255,6 +309,51 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
   <?php include ('core/js.php');//css connection?>
 
   <script>
+      // BAR
+      var ctx = document.getElementById("barChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+     data: {
+        labels:<?php echo json_encode($name); ?>,
+            datasets: [{
+                 label: 'FAQs Per Department',
+                  backgroundColor: [
+                          'rgb(255, 99, 132, 0.2)',
+                          'rgb(255, 159, 64, 0.2)',
+                          'rgb(255, 205, 86, 0.2)',
+                          'rgb(75, 192, 192, 0.2)',
+                          'rgb(54, 162, 235, 0.2)',
+                          'rgb(153, 102, 255, 0.2)',
+                          'rgb(201, 203, 207, 0.2)'
+                        ],
+                        borderColor: [
+                          'rgb(255, 99, 132)',
+                          'rgb(255, 159, 64)',
+                          'rgb(255, 205, 86)',
+                          'rgb(75, 192, 192)',
+                          'rgb(54, 162, 235)',
+                          'rgb(153, 102, 255)',
+                          'rgb(201, 203, 207)'
+                        ],
+                        borderWidth: 1,
+                data:<?php echo json_encode($counts); ?>,
+            }]
+        },
+      options: {
+          legend: {
+            display: false
+          },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+
+        }
+      }
+    });
+
     //pie
     var ctxP = document.getElementById("accountChart").getContext('2d');
     var myPieChart = new Chart(ctxP, {
@@ -262,7 +361,6 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
       data: {
         labels:<?php echo json_encode($name1); ?>,
             datasets: [{
-                 label: 'Pie Chart',
                   backgroundColor: [
                           'rgba(255, 99, 132, 0.5)',
                           'rgba(255, 159, 64, 0.5)',
@@ -296,36 +394,80 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
       
     });
 
-         </script>
 
-  
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+          //status
+            var data = [{
+              data: <?php echo json_encode($counts3); ?>,
+              backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)'
+                
+              ],
+              borderColor: [
+                'rgb(255, 255, 255)'
+              ],
+              hoverOffset: 15,
+              borderWidth: 4,
+            }];
+
+            var options = {
+              tooltips: {
+                enabled: true
+              },
+              plugins: {
+                datalabels: {
+                  formatter: (value, ctx) => {
+                    const datapoints = ctx.chart.data.datasets[0].data
+                    const total = datapoints.reduce((total, datapoint) => total + datapoint, 0)
+                    const percentage = value / <?php echo json_encode($overall3);?> * 100
+                    return percentage.toFixed(2) + "%";
+                  },
+                  color: 'rgb(255, 255, 255)',
+                  font: {
+                    size: 13,
+                    weight: '500'
+                  }
+                }
+              }
+            };
+
+            var ctx = document.getElementById("status").getContext('2d');
+            var myAreaChart = new Chart(ctx, {
+              type: 'pie',
+              data: {
+              labels: <?php echo json_encode($name3); ?>,
+                datasets: data
+              },
+              
+              options: options,
+              plugins: [ChartDataLabels],
+            });
+         </script>
+             
+             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
            <script type="text/javascript">  
            google.charts.load('current', {'packages':['corechart']});  
            google.charts.setOnLoadCallback(drawChart);  
-           function drawChart() 
-            
+           function drawChart()  
            {  
                 var data = google.visualization.arrayToDataTable([  
-                          ['shortDesc', 'Number'],  
+                          ['category', 'Number'],  
                           <?php  
                           while($row = mysqli_fetch_array($result))  
                           {  
-                               echo "['".$row["shortDesc"]."', ".$row["number"]."],";  
+                               echo "['".$row["category"]."', ".$row["number"]."],";  
                           }  
                           ?>  
                      ]);  
                 var options = {  
-                      title: 'Percentage of every department on how many faqs have been inserted',  
+                      title: 'Percentage of every category',  
                       //is3D:true,  
                       pieHole: 0.4  
                      };  
                 var chart = new google.visualization.PieChart(document.getElementById('piechart'));  
                 chart.draw(data, options);  
-           }
-           
-           
-         
+           }  
            </script> 
 
 

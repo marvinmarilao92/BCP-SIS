@@ -86,7 +86,7 @@ if($ctr->num_rows > 0){
     }
 }
 $latest=[];
-$recodes=$db->conn->query("SELECT * FROM hdms_tickets WHERE ticket_department = ''ORDER BY date DESC");
+$recodes=$db->conn->query("SELECT * FROM hdms_tickets WHERE ticket_department = 'Staff' ORDER BY id DESC");
 if($recodes->num_rows >0){
     while ($row = $recodes->fetch_assoc()) {
         $latest[]=$row;
@@ -99,50 +99,30 @@ if($recodes->num_rows >0){
     <div class="row justify-content-center">
         <div class="col-12 col-md-12" >
             <div class="card mb-3">
-                <div class="card-body" >
+                <div class="card-header" >
                     <h3>Help desk Support team</h3>
             
                 </div>
             </div>
             
   
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="row" >
-                        <div class="col-12 col-md-4">
-                            <div class="card bg-primary" style = "top: 22px">
-                                <div class="card-body text-white">
-                                    <h3>New Tickets</h3>
-                                    <h2><?php echo $new_count;?></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div data-bs-toggle="modal" data-bs-target="#ExtralargeModal"class="card bg-warning" style = "top: 22px" >
-                                <div class="card-body text-white">
-                                    <h3>Pending Tickets</h3>
-                                    <h2><?php echo $reply_count;?></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div  data-bs-toggle="modal" data-bs-target="#largeModal" class="card bg-success" style = "top: 22px">
-                                <div class="card-body text-white">
-                                    <h3>Done</h3>
-                                    <h2><?php echo $closed_count;?></h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+      <h4 class="alert-heading">Reminder!</h4>
+      <p>
+      &nbsp&nbsp Please read this acceptable user User Policy carefully before using the Help Desk Management System operated by the Institution.
+Services provided by us may be/or used for lawful purposes. You agree to comply with all applicable laws, rules and regulations in connection with your use of the services. Any material or conduct that in our judgement violates this policy in any manner may result in suspension or termination of the services or removal of user's account with or without notice.
+      </p>
+      <hr>
+      <p class="mb-0">© Copyright Bestlink College of the Philippines. All Rights Reserved.</p>
+     
+    </div>
             <div class="card">
                 <div class="card-header">
                     Latest Tickets
                 </div>
                 <div class="card-body">
                     <?php if(count($latest) > 0){?>
-                        <table class="table table-hover datatable" id="receivedTable">
+                        <table class="table table-hover datatable" id="DocTypeTable">
                         <thead>
                         <tr>
                                 
@@ -185,7 +165,7 @@ if($recodes->num_rows >0){
                                       echo ' 
                                         <td>'.$v['date'].'</td>
                                         <td><a class="btn btn-outline-info " href="view_ticket.php?id='.$v['id'].'" title="View"><i class="bi bi-eye-fill"></i></a>   
-                                       <a class="btn btn-outline-primary forward" title="Forward within the department"> <i class="ri-send-plane-fill"></i></a>
+                                       <a class="btn btn-outline-primary editbtn"  title="update status"> <i class="bi bi-three-dots"></i></a>
                                       
                                        </a>
                                        <a onclick="deleteRow('.$v["id"].')" class="btn btn-outline-danger" title="Delete"><i class="bi bi-trash"></i></a></td>
@@ -208,64 +188,44 @@ if($recodes->num_rows >0){
                   </section>
               <!-- End Table with stripped rows -->
 </main>
-  <!-- Send ticket Modal within the department-->
-  <div div class="modal fade" id="SendModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Ticket forward</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-                <div class="card" style="margin: 10px;">
-                <div class="card-body">
-                    <h2 class="card-title">Forward this ticket within your department?<h5 id="doc_fileN1" style="text-align: end; color:black;"></h5></h2>
-                    
-                    <!-- Fill out Form -->
-                    <div class="row g-3" style="margin-top: 10px;">
-                    
-                            <input type="hidden" class="form-control" id="id" readonly>
-                            <input type="hidden" class="form-control" id="student_num" readonly>
-                            
-                            
-                                            
-                            <div class="col-md-12">
-                            <select class="form-select select receiver" id="receiver" name="receiver" onChange="fetchOffice(this.value);">
-                                <option value="" selected="selected" disabled="disabled">Select Receiver</option>
-                                     <?php
-                                    require_once("include/conn.php");
-                                    $query="SELECT * FROM user_information WHERE  (department = 'Help Desk System') AND `id_number` NOT IN ('$verified_session_username') AND role NOT LIKE '%staff%' AND role NOT LIKE '%Help Desk Administrator%' ORDER BY firstname DESC ";
-                                    $result=mysqli_query($conn,$query);
-                                    while($rs=mysqli_fetch_array($result)){
-                                        $dtid =$rs['id'];    
-                                        $dtno =$rs['role'];                                  
-                                        $dtFName = $rs['firstname'];    
-                                        $dtLName = $rs['lastname'];    
-                                    
-                                        echo '<option value = "' . $dtno . '">' . $rs["firstname"] . " " . $rs["lastname"] ." (".$rs["role"].")".'</option>';
-                                    }
-                                ?>
-                            </select>
+ <!-- Edit DocType Modal -->
+<div class="modal fade" id="EditModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">UPDATE</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                          <div class="card" style="margin: 10px;">
+                            <div class="card-body">
+                              <h2 class="card-title">Status Update</h2>
+                                <!-- Fill out Form -->
+                                <div class="row g-3" >
+                                  <input type="" class="form-control" id="id" style="display: none;" readonly>
+                                
+                                  <div class="col-12">                                
+                                    <div class="form-floating">
+                                      <select class="form-select" name="status" id="status" aria-label="State" required>
+                                        <option value="" selected disabled>Update Status</option>
+                                        <option value="0" <?php echo $v['status'] == 0 ? 'selected' : ''; ?>>New</option>
+                                        <option value="1" <?php echo $v['status']  == 1 ? 'selected' : ''; ?>>Pending/Processing</option>
+                                        <option value="2" <?php echo $v['status']  == 2 ? 'selected' : ''; ?>>Solved</option>                               
+                                      </select>
+                                      <label for="floatingSelect">Status</label>
+                                    </div>                                   
+                                  </div>   
                             </div>
-                            <!--div class="col-md-12">
-                            <select class="form-select" id="send_off2" name="send_off2" >
-                                <option selected="selected" disabled="disabled">Select Office</option>
-                            </select>
-                            </div-->
-                            <!-- <div class="col-12">
-                                <textarea class="form-control" style="height: 80px" placeholder="message" name="docremarks" id="docremarks" id="docdesc" required></textarea>
-                            </div>  -->
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button class="btn btn-primary" name="save" id="edit" >Update Status</button>
+                            </div>
+                        <!-- End Form -->
                     </div>
                 </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button class="btn btn-success" name="send" id="send" >forward</button>
-                </div>
-            <!-- End Form -->
         </div>
-    </div>
-</div>
-<!-- End Send ticket Modal within the department-->
+      <!-- End Edit DocType Modal-->
+
 
  
 
@@ -289,74 +249,72 @@ include ('function/pending_modal.php');//connection
  <!-- Vendor JS Files/ Template main js file -->
  <?php include ('core/js.php');//css connection?> 
 </body>
-<script type="text/javascript">
-    
-    // Submit Program modal calling
-    $('#receivedTable').on('click', '.forward',function () {
+<script>
+  // Edit modal calling
+  $('#DocTypeTable').on('click','.editbtn', function () {
 
-        $('#SendModal').modal('show');
+$('#EditModal').modal('show');
 
-        $tr = $(this).closest('tr');
+$tr = $(this).closest('tr');
 
-        var data = $tr.children("td").map(function () {
-            return $(this).text();
-        }).get();
+var data = $tr.children("td").map(function () {
+    return $(this).text();
+}).get();
 
-        console.log(data);        
-        $('#id').val(data[0]);   
-        $('#student_num').val(data[1]);  
-        // document.getElementById("prog_nameE").placeholder = data[2]; 
-    });
-    // Submit Edit Program modal calling
+console.log(data);        
+    $('#id').val(data[0]);
+    $('#status').val(data[0]);
+   
+    // document.getElementById("dt_accE").placeholder = data[3];  
+});
+// End of edit modal calling 
 
-     // Edit Program function
-     $('#send').click(function(d){ 
-        d.preventDefault();
-        if($('#id').val()!="" && $('#receiver').val()!=""){
-        $.post("function/send_ticket.php", {
-            ticketid:$('#id').val(),
-            stud_num:$('#student_num').val(),
-            ticketact:$('#receiver').val(),        
-            },function(data){
-            if (data.trim() == "failed"){
-            Swal.fire("Ticket in use","","error");//response message
-            // Empty test field
-            $('#id').val("")
-            }else if(data.trim() == "success"){
-            $('#SendModal').modal('hide');
-                //success message
-                const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 1100,
-                timerProsressBar: true,
-                didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                
-                }
-                })
+// Edit function
+$('#edit').click(function(d){ 
+d.preventDefault();
+  if($('#id').val()!=""&& $('#status').val()!=""){
+    $.post("function/update_ticket.php", {
+      id:$('#id').val(),
+      status:$('#status').val(),
+  
+      },function(data){
+        if (data.trim() == "failed"){
+        $('#EditModal').modal('hide');
+        Swal.fire("DocType Title is currently in use","","error");//response message
+        // Empty test field
+        $('#status').val("")
+        
+      }else if(data.trim() == "success"){
+        $('#EditModal').modal('hide');
+              //success message                                    
+                  const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 1500,
+                  timerProsressBar: true,
+                  didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)                  
+                  }
+                  })
                 Toast.fire({
                 icon: 'success',
-                title:'Ticket successfully forwarded'
+                title:'Status updated Successfully'
                 }).then(function(){
-                document.location.reload(true)//refresh pages
-                });
-                $('#id').val("")
-                $('#student_num').val("")
-                $('#receiver').val("")
-            }else{
-                Swal.fire(data);
-            }
-        })
+                  document.location.reload(true)//refresh pages
+                }); 
+                $('#status').val("")
+             
         }else{
-        Swal.fire("You must fill out every field","","warning");
-        }
+          Swal.fire(data);
+      }
     })
-
-
-        function deleteRow(id) {
+  }else{
+    Swal.fire("You must fill out every field","","warning");
+  }
+})
+function deleteRow(id) {
             if (confirm('Are you sure you want to delete this?')) {
                 $.ajax({
                     url: 'function/delete_ticket.php',

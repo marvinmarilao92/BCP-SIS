@@ -34,10 +34,10 @@
 				$host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 				 $remarks="add post";  
 				 //save to the audit trail table
-				 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$fname','','$ip','$host','$date')")or die(mysqli_error($link));
+				 mysqli_query($link,"INSERT INTO audit_trail(account_no,action,actor,affected,ip,host,date) VALUES('$verified_session_username','$remarks','$title','','$ip','$host','$date')")or die(mysqli_error($link));
 
 				 //save doctype to the database
-				 $conn->query("INSERT INTO `hdms_post` VALUES('','$title', '$content','$date')") or die(mysqli_error($conn));
+				 $conn->query("INSERT INTO `hdms_post` VALUES('','$title', '$content','$verified_session_role','$date')") or die(mysqli_error($conn));
 				 echo ('success');
 			}
 		//end of audit trail

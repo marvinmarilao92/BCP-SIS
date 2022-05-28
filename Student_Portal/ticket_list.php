@@ -97,7 +97,7 @@ error_reporting(E_ALL);
 
         if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,send_by,message) VALUES('$ticket_id','0','$message')")){
             $success="Reply has been sent";
-            $db->conn->query("UPDATE hdms_tickets  SET status=1 WHERE id=$ticket_id");
+           
         }else{
             $error="Can not send reply";
         }
@@ -108,16 +108,12 @@ error_reporting(E_ALL);
     
   <main id="main" class="main">
 
-<div class="container mt-4" id = "delticket">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-12">
-            <div class="card mb-3">
-                <div class="card-header">
-                    Ticket ID : <?php  echo $ticket['ticket_id'] ;?>
-                        
-                </div>
-                <div class="card-body" >
-                    <?php 
+  <div class="col-lg-12">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-outline card-success">
+				<div class="card-header">
+        <?php 
                         if(isset($error) && $error != false){
                             echo '<div class="alert alert-danger">'.$error.'</div>';
                         }
@@ -127,22 +123,57 @@ error_reporting(E_ALL);
                             echo '<div class="alert alert-success">'.$success.'</div>';
                         }
                     ?>
-                    <table class="table">
-                        <?php echo '
-                      
-                        <tr>
-                            <th>Email:&nbsp;&nbsp;'.decryptthis($ticket['email'], $key).'</th>
-                           
-                        </tr>
-                        <tr>
-                            <th>Subject:&nbsp;&nbsp;'.$ticket['category'].'</th>
-                           
-                        </tr>
-                          <th>Message :&nbsp'.decryptthis($ticket['message'], $key).'</th>';?>
-                          
-                
-                    </table>
-                 
+					<h3 class="card-title" id="DocTypeTable">Ticket</h3>
+				</div>
+				<div class="card-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-6">
+              <label for="" class="control-label border-bottom border-primary">Ticket ID</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['ticket_id'] ?></b></p>
+                <label for="" class="control-label border-bottom border-primary">Student Number</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['student_number'] ?></b></p>
+                <label for="" class="control-label border-bottom border-primary">Student</label>
+                <p class="ml-2 d-list"><b><?php echo $ticket['firstname'].'&nbsp;'.$ticket['lastname']?></b></p>
+                <label for="" class="control-label border-bottom border-primary">Course</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['course'] ?></b></p>
+							
+								
+               
+							</div>
+							<div class="col-md-6">
+                            <label for="" class="control-label border-bottom border-primary">Department</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['ticket_department']?></b></p>
+                                <label for="" class="control-label border-bottom border-primary">Email</label>
+								<p class="ml-2 d-list"><b><?php echo decryptthis($ticket['email'], $key) ?></b></p>
+								<label for="" class="control-label border-bottom border-primary">Subject</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['category'] ?></b></p>
+            
+                                <label for="" class="control-label border-bottom border-primary">Status</label>
+                                <p class="ml-2 d-list">
+                                <td data-title = "Status ">
+                                <?php if($ticket['status'] == 0): ?>
+                                <span class="badge bg-primary">New</span>
+                                <?php elseif($ticket['status'] == 1): ?>
+                                <span class="badge bg-warning text-dark">Pending/processing</span>
+                                <?php elseif($ticket['status'] == 2): ?>
+                                <span class="badge bg-success">Done</span>
+                                <?php else: ?>
+                                <span class="badge badge-secondary">Closed</span>
+                                <?php endif; ?>
+                                </td>      
+								</p>
+					
+						</div>
+						<hr class="border-primary">
+						<div>
+						<b>Message:</b>&nbsp;<?php echo decryptthis($ticket['message'], $key) ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
 
                     <div class="reply-area">
                         <ul>
@@ -150,7 +181,7 @@ error_reporting(E_ALL);
                                 <?php foreach ($reps as $k => $v) {
                                     if($v['send_by'] == 0){
                                         ?>
-                                         <li class="reply-user"><span class="badge bg-info text-dark"><i class="bi bi-person-circle"></i>Student</span>
+                                         <li class="reply-user">
                                             <div class="card bg-gray text-dark">
                                                 <div class="card-body">
                                                     <p><?php echo decryptthis($v['message'], $key); ?></p>
@@ -163,12 +194,12 @@ error_reporting(E_ALL);
                                         <?php
                                     }else{
                                         ?>
-                                        <li class="reply-me"><span class="badge bg-warning text-dark"> <i class="bi bi-people-fill"></i>Support</span>
+
                                             <div class="card bg-gray text-dark">
                                                 <div class="card-body">
                                                     <p><?php echo decryptthis($v['message'], $key); ?></p>
                                                     <div class="text-right">
-                                                        <small>Send by help desk support team at <?php echo $v['date'];?></small>
+                                                        <small>Send by <?php echo $ticket['ticket_department'] ?> at <?php echo $v['date'];?></small>
                                                     </div>
                                                 </div>
                                             </div>
