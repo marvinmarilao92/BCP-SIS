@@ -169,8 +169,8 @@ include('session.php');
 <!-- status tickets -->
 <div class="card">
               <div class="card-body pb-0">
-                <h5 class="card-title">Status <span>| Ticket<br><br><b>0 = New&nbsp;&nbsp;&nbsp;1 = Pending&nbsp;&nbsp;&nbsp;2 = Done</b>
-              </span></h5>
+                <!-- <h5 class="card-title">Status <span>| Ticket<br><br><b>0 = New&nbsp;&nbsp;&nbsp;1 = Pending&nbsp;&nbsp;&nbsp;2 = Done</b>
+              </span></h5> -->
                 <canvas id="status" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
                     <?php
                       require_once("include/conn.php");
@@ -179,7 +179,14 @@ include('session.php');
                         $chart_data="";
                         while ($row2 = mysqli_fetch_array($result2)) { 
                 
-                          $name2[]  = $row2['status'];
+                          $nameid  = $row2['status'];
+                          if($nameid==0){
+                            $name2[]='New';
+                          }else if($nameid==1){
+                            $name2[]='Pending';
+                          }else if($nameid==2){
+                            $name2[]='Done';
+                          }
                           $counts2[] = $row2['count2'];
                         }
                         $sql22 ="SELECT status FROM hdms_tickets";
