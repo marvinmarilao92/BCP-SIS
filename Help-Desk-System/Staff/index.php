@@ -124,7 +124,7 @@ include('session.php');
             
 
           <!-- Reports -->
-  <div class="col-12">
+          <div class="col-12">
               <div class="card">
 
                 <div class="filter">
@@ -166,66 +166,31 @@ include('session.php');
          <!-- Right side columns -->
          <div class="col-lg-4">
 
-<!-- Website Traffic -->
-<div class="card">      
+<!-- status tickets -->
+<div class="card">
+              <div class="card-body pb-0">
+                <h5 class="card-title">Status <span>| Ticket<br><br><b>0 = New&nbsp;&nbsp;&nbsp;1 = Pending&nbsp;&nbsp;&nbsp;2 = Done</b>
+              </span></h5>
+                <canvas id="status" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
+                    <?php
+                      require_once("include/conn.php");
+                        $sql2 ="SELECT status,count(status) as count2 FROM hdms_tickets group by status;";
+                        $result2 = mysqli_query($conn,$sql2);
+                        $chart_data="";
+                        while ($row2 = mysqli_fetch_array($result2)) { 
+                
+                          $name2[]  = $row2['status'];
+                          $counts2[] = $row2['count2'];
+                        }
+                        $sql22 ="SELECT status FROM hdms_tickets";
+                        $result22 = mysqli_query($conn,$sql22);
+                        $total2 = mysqli_num_rows($result22);
+                        $overall2[] = $total2;
+                      ?>
+              </div>
+            </div>
 
-<div class="card-body">
-  <h5 class="card-title">Recent <span>| Activity</span></h5>
 
-  <div class="activity">
-
-    <div class="activity-item d-flex">
-      <div class="activite-label">32 min</div>
-      <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-      <div class="activity-content">
-        Recent activity must be put here <a href="#" class="fw-bold text-dark">(Highlight of the Recent activity)</a>
-      </div>
-    </div><!-- End activity item-->
-
-    <div class="activity-item d-flex">
-      <div class="activite-label">56 min</div>
-      <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-      <div class="activity-content">
-        Recent activity must be put here <a href="#" class="fw-bold text-dark">(Highlight of the Recent activity)</a>
-      </div>
-    </div><!-- End activity item-->
-
-    <div class="activity-item d-flex">
-      <div class="activite-label">2 hrs</div>
-      <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-      <div class="activity-content">
-        Recent activity must be put here <a href="#" class="fw-bold text-dark">(Highlight of the Recent activity)</a>
-      </div>
-    </div><!-- End activity item-->
-
-    <div class="activity-item d-flex">
-      <div class="activite-label">1 day</div>
-      <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-      <div class="activity-content">
-        Recent activity must be put here <a href="#" class="fw-bold text-dark">(Highlight of the Recent activity)</a>
-      </div>
-    </div><!-- End activity item-->
-
-    <div class="activity-item d-flex">
-      <div class="activite-label">2 days</div>
-      <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-      <div class="activity-content">
-        Recent activity must be put here <a href="#" class="fw-bold text-dark">(Highlight of the Recent activity)</a>
-      </div>
-    </div><!-- End activity item-->
-
-    <div class="activity-item d-flex">
-      <div class="activite-label">4 weeks</div>
-      <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-      <div class="activity-content">
-        Recent activity must be put here <a href="#" class="fw-bold text-dark">(Highlight of the Recent activity)</a>
-      </div>
-    </div><!-- End activity item-->
-
-  </div>
-
-</div>
-</div><!-- End Recent Activity -->
 </div><!-- End Right side columns -->
 
 
@@ -245,134 +210,53 @@ include('session.php');
  <!-- Vendor JS Files/ Template main js file -->
  <?php include ('core/js.php');//css connection?> 
    <script>
-               var ctx = document.getElementById("barChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-     data: {
-        labels:<?php echo json_encode($name); ?>,
-            datasets: [{
-                 label: 'F.A.Q.S',
-                  backgroundColor: [
-                          'rgb(255, 99, 132, 0.2)',
-                          'rgb(255, 159, 64, 0.2)',
-                          'rgb(255, 205, 86, 0.2)',
-                          'rgb(75, 192, 192, 0.2)',
-                          'rgb(54, 162, 235, 0.2)',
-                          'rgb(153, 102, 255, 0.2)',
-                          'rgb(201, 203, 207, 0.2)'
-                        ],
-                        borderColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(255, 159, 64)',
-                          'rgb(255, 205, 86)',
-                          'rgb(75, 192, 192)',
-                          'rgb(54, 162, 235)',
-                          'rgb(153, 102, 255)',
-                          'rgb(201, 203, 207)'
-                        ],
-                        borderWidth: 1,
-                data:<?php echo json_encode($counts); ?>,
-            }]
-        },
-      options: {
-          legend: {
-            display: false
-          },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
+     var data = [{
+              data: <?php echo json_encode($counts2); ?>,
+              backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)'
+                
+              ],
+              borderColor: [
+                'rgb(255, 255, 255)'
+              ],
+              hoverOffset: 15,
+              borderWidth: 4,
+            }];
 
-        }
-      }
-    });
+            var options = {
+              tooltips: {
+                enabled: true
+              },
+              plugins: {
+                datalabels: {
+                  formatter: (value, ctx) => {
+                    const datapoints = ctx.chart.data.datasets[0].data
+                    const total = datapoints.reduce((total, datapoint) => total + datapoint, 0)
+                    const percentage = value / <?php echo json_encode($overall2);?> * 100
+                    return percentage.toFixed(2) + "%";
+                  },
+                  color: 'rgb(255, 255, 255)',
+                  font: {
+                    size: 13,
+                    weight: '500'
+                  }
+                }
+              }
+            };
 
-     var ctx = document.getElementById("barChart1").getContext('2d');
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-     data: {
-        labels:<?php echo json_encode($name1); ?>,
-            datasets: [{
-                 label: 'F.A.Q.S',
-                  backgroundColor: [
-                          'rgb(255, 99, 132, 0.2)',
-                          'rgb(255, 159, 64, 0.2)',
-                          'rgb(255, 205, 86, 0.2)',
-                          'rgb(75, 192, 192, 0.2)',
-                          'rgb(54, 162, 235, 0.2)',
-                          'rgb(153, 102, 255, 0.2)',
-                          'rgb(201, 203, 207, 0.2)'
-                        ],
-                        borderColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(255, 159, 64)',
-                          'rgb(255, 205, 86)',
-                          'rgb(75, 192, 192)',
-                          'rgb(54, 162, 235)',
-                          'rgb(153, 102, 255)',
-                          'rgb(201, 203, 207)'
-                        ],
-                        borderWidth: 1,
-                data:<?php echo json_encode($counts); ?>,
-            }]
-        },
-      options: {
-          legend: {
-            display: false
-          },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-
-        }
-      }
-    });
-     //pie
-     var ctxP = document.getElementById("accountChart").getContext('2d');
-    var myPieChart = new Chart(ctxP, {
-      type: 'doughnut',      
-      data: {
-        labels:<?php echo json_encode($name2); ?>,
-            datasets: [{
-                 label: 'Pie Chart',
-                  backgroundColor: [
-                          'rgba(255, 99, 132, 0.5)',
-                          'rgba(255, 159, 64, 0.5)',
-                          'rgba(255, 205, 86, 0.5)',
-                          'rgba(75, 192, 192, 0.5)',
-                          'rgba(54, 162, 235, 0.5)',
-                          'rgba(153, 102, 255, 0.5)',
-                          'rgba(201, 203, 207, 0.5)'
-                        ],
-                        borderColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(255, 159, 64)',
-                          'rgb(255, 205, 86)',
-                          'rgb(75, 192, 192)',
-                          'rgb(54, 162, 235)',
-                          'rgb(153, 102, 255)',
-                          'rgb(201, 203, 207)'
-                        ],
-                        
-                        borderWidth: 1,
-                data:<?php echo json_encode($counts1); ?>,
-            }]
-      },
-      options: {
-        responsive: true,
-        legend: false
-      }, 
-      labelLine: {
-        show: false
-      },
-      
-    });
-
+            var ctx = document.getElementById("status").getContext('2d');
+            var myAreaChart = new Chart(ctx, {
+              type: 'pie',
+              data: {
+              labels: <?php echo json_encode($name2); ?>,
+                datasets: data
+              },
+              
+              options: options,
+              plugins: [ChartDataLabels],
+            });
               </script>
               
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  

@@ -43,7 +43,7 @@
             <i class="bi bi-caret-right-fill" style="font-size: 14px;"></i><span>Add Post</span>
               </a>
             </li>
-           
+          
             
           </ul>
         </li><!-- End Reports Nav -->
@@ -73,7 +73,24 @@
                         </li><!-- Policy Nav -->
                     
 
-                      
+                        <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#reports-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-bookmark"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="reports-nav" class="<?php if($col=='reports'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
+                      <li>
+                      <a href="category_report.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='FR'){echo 'active';}?>">
+                        <i class="bi bi-circle"></i><span>Category Reports</span>
+                        </a>
+                      </li>
+                      <li>
+                      <a href="reports_ticket.php?id=<?php echo $_SESSION["login_key"];?>" class="<?php if($page=='TR'){echo 'active';}?>">
+                        <i class="bi bi-circle"></i><span>Ticket Reports</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </li><!-- End Reports Nav -->
+        
 
 
                 <li class="nav-heading">Other</li>

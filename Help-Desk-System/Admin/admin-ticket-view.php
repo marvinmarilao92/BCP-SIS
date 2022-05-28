@@ -99,45 +99,24 @@ if($recodes->num_rows >0){
     <div class="row justify-content-center">
         <div class="col-12 col-md-12" >
             <div class="card mb-3">
-                <div class="card-body" >
+                <div class="card-header" >
                     <h3>Help desk Support team</h3>
             
                 </div>
             </div>
             
   
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="row" >
-                        <div class="col-12 col-md-4">
-                            <div class="card bg-primary" style = "top: 22px">
-                                <div class="card-body text-white">
-                                    <h3>New Tickets</h3>
-                                    <h2><?php echo $new_count;?></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                          
-                            <div data-bs-toggle="modal" data-bs-target="#ExtralargeModal"class="card bg-warning" style = "top: 22px" >
-                                <div class="card-body text-white">
-                                    <h3>Pending Tickets</h3>
-                                    <h2><?php echo $reply_count;?></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                        <div data-bs-toggle="modal" data-bs-target="#largeModal" class="card bg-success" style = "top: 22px" >
-                        
-                                <div class="card-body text-white">
-                                    <h3>Done</h3>
-                                    <h2><?php echo $closed_count;?></h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+      <h4 class="alert-heading">Reminder!</h4>
+      <p>
+      &nbsp&nbsp Please read this acceptable user User Policy carefully before using the Help Desk Management System operated by the Institution.
+Services provided by us may be/or used for lawful purposes. You agree to comply with all applicable laws, rules and regulations in connection with your use of the services. Any material or conduct that in our judgement violates this policy in any manner may result in suspension or termination of the services or removal of user's account with or without notice.
+      </p>
+      <hr>
+      <p class="mb-0">© Copyright Bestlink College of the Philippines. All Rights Reserved.</p>
+     
+    </div>
+           
             <div class="card">
                 <div class="card-header">
                     Latest Tickets
@@ -171,15 +150,15 @@ if($recodes->num_rows >0){
                                         <td>'.$v['category'].'</td>
                                         <td>'.decryptthis($v['message'],$key).'</td> ';?>
                                          <td data-title = "Department ">
-                                        <?php if($v['ticket_department'] == "Accounting"): ?>
+                                        <?php if($v['ticket_department'] == "hdms Accounting"): ?>
                                           <span class="badge bg-primary">Accounting</span>
-                                        <?php elseif($v['ticket_department'] == "Registrar"): ?>
+                                        <?php elseif($v['ticket_department'] == "hdms Registrar"): ?>
                                           <span class="badge bg-warning text-dark">Registrar</span>
                                           <?php elseif($v['ticket_department'] == "hdms Admission"): ?>
                                           <span class="badge bg-secondary">Admission</span>
                                           <?php elseif($v['ticket_department'] == "hdms Cashier"): ?>
                                           <span class="badge bg-info">Cashier</span>
-                                        <?php elseif($v['ticket_department'] == ""): ?>
+                                        <?php elseif($v['ticket_department'] == "Staff"): ?>
                                           <span class="badge bg-success">Staff</span>
                                         <?php else: ?>
                                           <span class="badge badge-secondary">Closed</span>
@@ -188,7 +167,7 @@ if($recodes->num_rows >0){
 
                                           <td data-title = "Status ">
                                           <?php if($v['status'] == 0): ?>
-                                            <span class="badge bg-primary">New</span>
+                                            <span class="badge bg-primary">New/processing</span>
                                           <?php elseif($v['status'] == 1): ?>
                                             <span class="badge bg-warning text-dark">Pending</span>
                                           <?php elseif($v['status'] == 2): ?>

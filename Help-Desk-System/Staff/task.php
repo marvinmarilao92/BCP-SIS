@@ -57,6 +57,7 @@ include('session.php');
                         $id =$rs['id'];
                         $Name = $rs['category'];
                         $Desc = $rs['description'];
+                       
                         $Date = $rs['date'];        
                      
                         
@@ -66,6 +67,7 @@ include('session.php');
                     
                       <td data-label="Category"><?php echo $Name; ?></td>
                       <td data-label="Description"><?php echo $Desc; ?></td>
+                      
                       <td data-label="Date"><?php echo $Date?></td>
                       <td data-label="">
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">                     

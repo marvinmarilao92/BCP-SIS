@@ -275,7 +275,6 @@ date_default_timezone_set('Asia/Manila');
 
     $success=false;
     $error=false;
-
 //include the new connection
 include "new_db.php";
 
@@ -364,10 +363,9 @@ error_reporting(E_ALL);
            //VALUES ('$verified_session_username', '0' ,'$verified_session_role','0','replied to ticket','Reply from help desk','$verified_session_role','Active','$date')") or die(mysqli_error($conn));
 
 
-if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,message) VALUES('$ticket_id','email','$verified_session_role','$message')")){
+if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,message) VALUES('$ticket_id','$email','$verified_session_role','$message')")){
           
             $success="Reply has been sent";
-            $db->conn->query("UPDATE hdms_tickets  SET status=2 WHERE id=$ticket_id");
             $mail = new PHPMailer;
             $mail->isSMTP();
             $mail->SMTPDebug = 0;                                           //Send using SMTP
@@ -419,42 +417,14 @@ if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,mess
     }
 ?>
 <main id="main" class="main">
-<section class="section">
-  <div class="row">
-    <div class="col-lg-12">
 
-      <div class="card">
-        <div class="card-body">
 
-          <!-- Report Tabs -->
-          <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="myTabjustified" role="tablist" style="margin-top: 10px;">
-            <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100 active" id=" incoming-tab" data-bs-toggle="tab" data-bs-target="#IncomingDocs" type="button" role="tab" aria-controls="incoming" aria-selected="true">Ticket</button>
-            </li>
-            <li class="nav-item flex-fill" role="presentation">
-              <button class="nav-link w-100" id="received-tab" data-bs-toggle="tab" data-bs-target="#ReceivedDocs" type="button" role="tab" aria-controls="profile" aria-selected="false">Information</button>
-            </li>
-          </ul>
-          <div class="tab-content pt-2" id="myTabjustifiedContent">
-            <div class="tab-pane fade show active" id="IncomingDocs" role="tabpanel" aria-labelledby=" incoming-tab">
-
-              <!-- tickets -->
-              <section class="section">
-                    <div class="row">        
-                      <div class="col-lg-12">
-                        <div class="card">
-                          <div class="col-lg-12">
-                            <div class="form-group col-md-3 btn-lg"  style="float: left; padding:20px;">
-                              
-                            </div>
-                          </div>
-                          <div class="card mb-3">
-                <div class="card-header">
-                    Ticket ID : <?php  echo $ticket['ticket_id'] ;?>
-                  
-                </div>
-                <div class="card-body">
-                    <?php 
+<div class="col-lg-12">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-outline card-success">
+				<div class="card-header">
+        <?php 
                         if(isset($error) && $error != false){
                             echo '<div class="alert alert-danger">'.$error.'</div>';
                         }
@@ -464,40 +434,63 @@ if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,mess
                             echo '<div class="alert alert-success">'.$success.'</div>';
                         }
                     ?>
-                     <table class="table">
-                    
-                  
-                        <?php echo '
-                     <tr>
-                     <th>Student # :&nbsp;&nbsp;'.$ticket['student_number'].'</th>
-                    
-                    </tr>
-                        <tr>
-                            <th>Email :&nbsp;&nbsp;'.decryptthis($ticket['email'], $key).'</th>
-                           
-                        </tr>
-                        <tr>
-                            <th>Subject :&nbsp;&nbsp;'.$ticket['category'].'</th>
-                           
-                        </tr>
-                      
-                      
-                       
-                    </tr>
-                       
-                          <th>Message :&nbsp'.decryptthis($ticket['message'], $key).'</th>';?>
+					<h3 class="card-title" id="DocTypeTable">Ticket</h3>
+				</div>
+				<div class="card-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-6">
+              <label for="" class="control-label border-bottom border-primary">Ticket ID</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['ticket_id'] ?></b></p>
+                <label for="" class="control-label border-bottom border-primary">Student Number</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['student_number'] ?></b></p>
+                <label for="" class="control-label border-bottom border-primary">Student</label>
+                <p class="ml-2 d-list"><b><?php echo $ticket['firstname'].'&nbsp;'.$ticket['lastname']?></b></p>
+                <label for="" class="control-label border-bottom border-primary">Course</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['course'] ?></b></p>
+							
+								
+               
+							</div>
+							<div class="col-md-6">
+              <label for="" class="control-label border-bottom border-primary">Email</label>
+								<p class="ml-2 d-list"><b><?php echo decryptthis($ticket['email'], $key) ?></b></p>
+								<label for="" class="control-label border-bottom border-primary">Subject</label>
+								<p class="ml-2 d-list"><b><?php echo $ticket['category'] ?></b></p>
+                
+                <label for="" class="control-label border-bottom border-primary">Status</label>
+                <p class="ml-2 d-list">
+                <td data-title = "Status ">
+                <?php if($ticket['status'] == 0): ?>
+                  <span class="badge bg-primary">New</span>
+                <?php elseif($ticket['status'] == 1): ?>
+                  <span class="badge bg-warning text-dark">Pending/processing</span>
+                <?php elseif($ticket['status'] == 2): ?>
+                  <span class="badge bg-success">Done</span>
+                <?php else: ?>
+                  <span class="badge badge-secondary">Closed</span>
+                <?php endif; ?>
+                </td>      
+								</p>
+					
+						</div>
+						<hr class="border-primary">
+						<div>
+						<b>Message:</b>&nbsp;<?php echo decryptthis($ticket['message'], $key) ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
 
-                      
-                       
-                    </table>
-
-                    <div class="reply-area">
+    <div class="reply-area">
                         <ul>
                             <?php if(count($reps) > 0) { ?>
                                 <?php foreach ($reps as $k => $v) {
                                     if($v['send_by'] == 0){
                                         ?>
-                                        <li class="reply-user"><span class="badge bg-info text-dark"><i class="bi bi-person-circle"></i>Student</span>
+                                        <li class="reply-user">
                                             <div class="card bg-gray text-dark">
                                                 <div class="card-body">
                                                     <p><?php echo decryptthis($v['message'], $key); ?></p>
@@ -511,12 +504,13 @@ if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,mess
                                     }else{
                                         ?>
                                     
-                                    <li class="reply-me"><span class="badge bg-warning text-dark"> <i class="bi bi-people-fill"></i>Support</span>
-                                            <div class="card bg-gray text-dark">
+                                    <li class="reply-me">
+                                      
+                                            <div class="card">
                                                 <div class="card-body">
                                                     <p><?php echo decryptthis($v['message'], $key); ?></p>
                                                     <div class="text-right">
-                                                        <small>Send by help desk support team at <?php echo $v['date'];?></small>
+                                                        <small>Send by <?php echo $ticket['ticket_department'] ?> at <?php echo $v['date'];?></small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -530,17 +524,18 @@ if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,mess
                             <?php } ?>
                         </ul>
                     </div>
-                    <div class="reply" style = "color: #fff"><a href="javascript:void(0)" data-commentID="'.$data['id'].'" onclick="reply(this)"><span class="badge bg-primary"><i class="ri-reply-all-fill"></i>CLICK TO REPLY</span></a></div>
+
+                 
                     
-                    <div class="send-area replyRow" style="display:none">
+                    <div class="send-area">
                         <form method="POST">
                             <div class="form-group">
                                 <input type="hidden" name="submit" value="send"><br>
                                
                                 <input type="hidden"name = "email" value = <?php echo ''.decryptthis($ticket['email'], $key).'';?> style="display:none">
-                                <textarea name="message" class="form-control" id="replyComment" placeholder="Type your reply" cols="70" rows="4"></textarea><br>
-                                <button class="btn-primary btn" onclick="isReply = true;" id="addReply">Reply</button>
-                                <button style="float:right" class="btn-default btn" onclick="$('.replyRow').hide();"></button>
+                                <textarea name="message" class="form-control" id="message" placeholder="Type your reply" cols="70" rows="4" required></textarea><br>
+                                <button class="btn btn-success" type="submit">Send</button>
+                                <a href="ticket.php?id=<?php echo $_SESSION["login_key"];?> " class="btn btn-secondary ml-2" >Back</a>
                                
                             </div>
                         </form>
@@ -550,7 +545,6 @@ if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,mess
             </div>
            
                         </div>
-                        <a href="ticket.php?id=<?php echo $_SESSION["login_key"];?> " class="btn btn-secondary ml-2" style="float:right">Back</a>
                       </div>
                     </div>
                     
@@ -561,134 +555,7 @@ if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,mess
             <div class="tab-pane fade" id="ReceivedDocs" role="tabpanel" aria-labelledby="received-tab">
               <!-- ReceivedDocs Docs -->
               <!-- IncomingDocs Docs -->
-              <section class="section faq">
-      <div class="row">
-        <div class="col-lg-6">
-
-          <div class="card basic">
-            <div class="card-body">
-              <h5 class="card-title">Basic Questions</h5>
-
-              <div>
-                <h6>Where i can get my diploma?</h6>
-                <p>You can get that in the registrar office in bestlink.</p>
-              </div>
-
-              <div class="pt-2">
-                <h6>What to do if i can't access my lms?</h6>
-                <p>You can contact your adviser for that matter student.</p>
-              </div>
-
-              <div class="pt-2">
-                <h6>What is the use of this system?</h6>
-                <p>The purpose of this system is to help the student with their question and inquiries in school.</p>
-              </div>
-
-            </div>
-          </div>
-           <div class="card basic">
-            <div class="card-body">
-              <h5 class="card-title">Basic Trouble shooting</h5>
-
-              <div>
-                <h6>How to reset password?</h6>
-                <p>Try the forgot password and it will send you a new password to your email.</p>
-              </div>
-
-              <div class="pt-2">
-                <h6>How can i access other module?</h6>
-                <p>You can access that by clicking the module tabs in the nav bar.</p>
-              </div>
-
-              <div class="pt-2">
-                <h6>How can i edit my info in my profile?</h6>
-                <p>In the nav bar you can see your profile info and click the profile.</p>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- F.A.Q Group 1 -->
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Cashier Info</h5>
-
-              <div class="accordion accordion-flush" id="faq-group-1">
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsOne-1" type="button" data-bs-toggle="collapse">
-                      Graduation fee
-                    </button>
-                  </h2>
-                  <div id="faqsOne-1" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
-                    <div class="accordion-body">
-                      All graduating students are required to pay for graduation fee. it is a one-time, non-transferable fee that is added to the students account when he/she intends to participate in the commencement ceremony. the stuents diploma, TOR, Certificate of graduation an other pertent documents shall not be released to graduates with outstanding balances. 
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsOne-2" type="button" data-bs-toggle="collapse">
-                      School Event 
-                    </button>
-                  </h2>
-                  <div id="faqsOne-2" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
-                    <div class="accordion-body">
-                      Since the students are free from tuition, all approved school activities that need funding. they should pay directly to the cashier required fees.  
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsOne-3" type="button" data-bs-toggle="collapse">
-                      Assesment fees
-                    </button>
-                  </h2>
-                  <div id="faqsOne-3" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
-                    <div class="accordion-body">
-                      Students who will undergo National competency Examination under TESDA program shall pay an assessment and review fee directly to the cashier.<br>
-                      Official reciept(O.R) must be secured and presented to the assessment office for the assessment form. Candidates shall bring the following requirements.<br>
-                      - 3pcs. Passport-size picture with white background<br>
-                      - Long brown enveloped    
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsOne-4" type="button" data-bs-toggle="collapse">
-                     Retured checks
-                    </button>
-                  </h2>
-                  <div id="faqsOne-4" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
-                    <div class="accordion-body">
-                      For clearing purposes, check payments should be made at least a week before the examination<br><br>
-                      check payment by students with a record of bouncing/dishonored checks will no longer be accepted.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" data-bs-target="#faqsOne-5" type="button" data-bs-toggle="collapse">
-                      Personal Check of sponsor 
-                    </button>
-                  </h2>
-                  <div id="faqsOne-5" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
-                    <div class="accordion-body">
-                      The school will not accept the personal check sponsor in behalf of their student beneficiary.
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </div><!-- End F.A.Q Group 1 -->
-
+           
         </div>
 
      
@@ -710,27 +577,29 @@ if($db->conn->query("INSERT INTO hdms_ticket_reply (ticket_id,email,send_by,mess
 </main>
 
 
+ 
 
-  <!-- ======= Footer ======= -->
-  <?php include ('core/footer.php');//css connection?>
-  <!-- End Footer -->
-  <script>
+
+
+<!-- ======= Footer ======= -->
+<?php include ('core/footer.php');//css connection?>
+
+
+<!-- End Footer -->
+
+
+<!-- Vendor JS Files/ Template main js file -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files/ Template main js file -->
+ <!-- Vendor JS Files/ Template main js file -->
+ <?php include ('core/js.php');//css connection?> 
+</body>
+<script>
+ 
 if(window.history.replaceState) {
   window.history.replaceState(null,null,window.location.href)
 }
-
-function reply(caller) {
-        commentID = $(caller).attr('data-commentID');
-        $(".replyRow").insertAfter($(caller));
-        $('.replyRow').show();
-    }
-
-
- </script>
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-   <!-- Vendor JS Files/ Template main js file -->
- <?php include ('core/js.php');//css connection?> 
-  </body>
+</script>
 </html>
