@@ -106,7 +106,7 @@
       $role = mysqli_real_escape_string($link,trim($_POST["role"]));
       $about = mysqli_real_escape_string($link,trim($_POST["about"]));
       $account_status = "Active";
-      $password = password_hash("@ChangeMe01!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
+      $password = password_hash("@ChangeMe01".substr($last_name,0,2)."!", PASSWORD_BCRYPT, array('cost' => 12));  //PASSWORD_ARGON2I//PASSWORD_ARGON2ID
       //Get department name
       $department = mysqli_real_escape_string($link,trim($_POST["department"]));
       // Attempt select query execution

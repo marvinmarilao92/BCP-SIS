@@ -270,8 +270,8 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
       
           <div class="card">
               <div class="card-body pb-0">
-                <h5 class="card-title">Status <span>| Ticket<br><br><b>0 = New&nbsp;&nbsp;&nbsp;1 = Pending&nbsp;&nbsp;&nbsp;2 = Done</b>
-              </span></h5>
+                <!-- <h5 class="card-title">Status <span>| Ticket<br><br><b>0 = New&nbsp;&nbsp;&nbsp;1 = Pending&nbsp;&nbsp;&nbsp;2 = Done</b>
+              </span></h5> -->
                 <canvas id="status" style="height: 400px; margin-bottom: 30px;" class="echart"></canvas>
                     <?php
                       require_once("include/conn.php");
@@ -280,13 +280,20 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
                         $chart_data="";
                         while ($row2 = mysqli_fetch_array($result2)) { 
                 
-                          $name3[]  = $row2['status'];
-                          $counts3[] = $row2['count2'];
+                          $nameid  = $row2['status'];
+                          if($nameid==0){
+                            $name2[]='New';
+                          }else if($nameid==1){
+                            $name2[]='Pending';
+                          }else if($nameid==2){
+                            $name2[]='Done';
+                          }
+                          $counts2[] = $row2['count2'];
                         }
                         $sql22 ="SELECT status FROM hdms_tickets";
                         $result22 = mysqli_query($conn,$sql22);
                         $total2 = mysqli_num_rows($result22);
-                        $overall3[] = $total2;
+                        $overall2[] = $total2;
                       ?>
               </div>
             </div>
@@ -396,8 +403,8 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
 
 
           //status
-            var data = [{
-              data: <?php echo json_encode($counts3); ?>,
+          var data = [{
+              data: <?php echo json_encode($counts2); ?>,
               backgroundColor: [
                 'rgb(255, 99, 132)',
                 'rgb(54, 162, 235)',
@@ -420,7 +427,7 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
                   formatter: (value, ctx) => {
                     const datapoints = ctx.chart.data.datasets[0].data
                     const total = datapoints.reduce((total, datapoint) => total + datapoint, 0)
-                    const percentage = value / <?php echo json_encode($overall3);?> * 100
+                    const percentage = value / <?php echo json_encode($overall2);?> * 100
                     return percentage.toFixed(2) + "%";
                   },
                   color: 'rgb(255, 255, 255)',
@@ -436,7 +443,7 @@ return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
             var myAreaChart = new Chart(ctx, {
               type: 'pie',
               data: {
-              labels: <?php echo json_encode($name3); ?>,
+              labels: <?php echo json_encode($name2); ?>,
                 datasets: data
               },
               
