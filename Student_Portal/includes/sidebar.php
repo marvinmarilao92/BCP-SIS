@@ -167,6 +167,19 @@
       </a>
     </li>
 
+    <li class="nav-heading">Health Check Monitoring</li>
+
+    <li class="nav-item">
+      <a class="<?php if ($page == 'qr') {
+                  echo 'nav-link';
+                } else {
+                  echo 'nav-link collapsed';
+                } ?>" href="qr-code.php">
+        <i class="bx bx-qr"></i>
+        <span>QR Code</span>
+      </a>
+    </li>
+
 
     <!-- End Forms Nav -->
     <li class="nav-heading">Bills</li>

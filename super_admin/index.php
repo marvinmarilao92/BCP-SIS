@@ -697,19 +697,7 @@ include('session.php');
             <div class="card">
               <div class="card-body">
                 <a href="../Health-Check-Monitoring/HCM-Administrator/index?id=<?php echo $_SESSION["login_key"]; ?>">
-                  <h5 class="card-title">Health Check Monitoring System Administrator</h5>
-                </a>
-                <p class="card-text">Subsystem Description insert here...</p>
-              </div>
-            </div>
-          </div>
-          <!-- End Insert your Module here -->
-          <!-- Insert your Module here -->
-          <div class="col-lg-4">
-            <div class="card">
-              <div class="card-body">
-                <a href="../Health-Check-Monitoring/Contact-Tracing/index?id=<?php echo $_SESSION["login_key"]; ?>">
-                  <h5 class="card-title">Health Check Monitoring System Contact Tracing</h5>
+                  <h5 class="card-title">Health Check Monitoring Medical Practitioner</h5>
                 </a>
                 <p class="card-text">Subsystem Description insert here...</p>
               </div>
@@ -721,7 +709,7 @@ include('session.php');
             <div class="card">
               <div class="card-body">
                 <a href="../Health-Check-Monitoring/HCM-Nurse/index?id=<?php echo $_SESSION["login_key"]; ?>">
-                  <h5 class="card-title">Health Check Monitoring System Nurse</h5>
+                  <h5 class="card-title">Health Check Monitoring Nurse</h5>
                 </a>
                 <p class="card-text">Subsystem Description insert here...</p>
               </div>
@@ -732,31 +720,16 @@ include('session.php');
           <div class="col-lg-4">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Insert your Module here</h5>
+                <a href="../Health-Check-Monitoring/Contact-tracing/index?id=<?php echo $_SESSION["login_key"]; ?>">
+                  <h5 class="card-title">Contact Tracing</h5>
+                </a>
                 <p class="card-text">Subsystem Description insert here...</p>
               </div>
             </div>
           </div>
           <!-- End Insert your Module here -->
           <!-- Insert your Module here -->
-          <div class="col-lg-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Insert your Module here</h5>
-                <p class="card-text">Subsystem Description insert here...</p>
-              </div>
-            </div>
-          </div>
-          <!-- End Insert your Module here -->
-          <!-- Insert your Module here -->
-          <div class="col-lg-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Insert your Module here</h5>
-                <p class="card-text">Subsystem Description insert here...</p>
-              </div>
-            </div>
-          </div>
+
           <!-- End Insert your Module here -->
         </div>
       </div>

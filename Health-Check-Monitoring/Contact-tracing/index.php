@@ -1,5 +1,5 @@
 <?php
-// include('security/newsource.php')
+include('security/newsource.php')
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +75,7 @@
                   //statement
                   $output .= '
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php?id=' . $key . '">
+                      <a class="dropdown-item d-flex align-items-center" href="../../super_admin/index.php?id=' . $key . '">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                       </a>
@@ -121,18 +121,35 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section">
+    <section class="dashboard">
+      <div class="container p-5">
+        <?php if (isset($_SESSION['alert'])) { ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong><?php echo $_SESSION['alert']; ?></strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
 
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <video id="preview" width="100%"></video>
-          </div>
-          <div class="col-md-6">
-            <form action="ctracingfunction.php" method="post" class="form-horizontal">
-              <label>SCAN QR CODE</label>
-              <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
-            </form>
+        <?php  } else if (isset($_SESSION['alerterror'])) { ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong><?php echo $_SESSION['alerterror']; ?></strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php  }  ?>
+        <div class="card p-5">
+          <div class="row p-5">
+            <div class="col-md-6">
+              <video id="preview" width="100%"></video>
+            </div>
+            <div class="col-md-6">
+              <form class="d-flex align-items-center justify-content-center flex-column" action="tracing.php"
+                method="post">
+                <label class="p-2">SCAN QR CODE</label>
+                <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
+                <label class="p-2">Insert Code</label>
+                <input type="text" name="idnum" id="idnum" placeholder="Insert Qr Code no." class="form-control ">
+                <button type=" submit" name="submit" class="btn btn-primary mt-5">Submit</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -186,7 +203,9 @@
 
   <!-- Custom scripts -->
   <script type="text/javascript"></script>
-
+  <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
   <script>
   let scanner = new Instascan.Scanner({
     video: document.getElementById('preview')
@@ -205,6 +224,8 @@
     document.forms[0].submit();
   });
   </script>
+
+
 </body>
 
 </html>
