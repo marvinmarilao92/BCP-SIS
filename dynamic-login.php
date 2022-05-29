@@ -159,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     case "Internship Coordinator":
                       //statement
                       
-                      $encr = md5($verified_session_role);
+                  $encr = md5($verified_session_role);
                   $encri = sha1($encrr);
                   $f = sha1($encri);
                   $jk = sha1($verified_session_role);

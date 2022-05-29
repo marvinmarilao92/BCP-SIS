@@ -58,7 +58,7 @@ include('session.php');
             </div>
           </div>
         </div>
-        <!-- End Insert your Module here -->
+        <!-- End Insert your Module here -->        
         <!-- Insert your Module here -->
         <div class="col-lg-3">
           <div class="card">
@@ -308,7 +308,31 @@ include('session.php');
       <div class="modal-body">
         <div class="row align-items-top">
           <!-- Insert your Module here -->
-          <div class="col-lg-4">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+              <a href="../img/Admission/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
+                  <h5 class="card-title">Internship Administrator</h5>
+                </a>
+                <p class="card-text">Subsystem Description insert here...</p>
+              </div>
+            </div>
+          </div>
+          <!-- End Insert your Module here -->
+          <!-- Insert your Module here -->
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+              <a href="../IMNGMTSYS/system/y/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
+                  <h5 class="card-title">Internship Coordinator</h5>
+                </a>
+                <p class="card-text">Subsystem Description insert here...</p>
+              </div>
+            </div>
+          </div>
+          <!-- End Insert your Module here -->
+          <!-- Insert your Module here -->
+          <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Insert your Module here</h5>
@@ -318,7 +342,7 @@ include('session.php');
           </div>
           <!-- End Insert your Module here -->
           <!-- Insert your Module here -->
-          <div class="col-lg-4">
+          <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Insert your Module here</h5>
@@ -327,46 +351,7 @@ include('session.php');
             </div>
           </div>
           <!-- End Insert your Module here -->
-          <!-- Insert your Module here -->
-          <div class="col-lg-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Insert your Module here</h5>
-                <p class="card-text">Subsystem Description insert here...</p>
-              </div>
-            </div>
-          </div>
-          <!-- End Insert your Module here -->
-          <!-- Insert your Module here -->
-          <div class="col-lg-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Insert your Module here</h5>
-                <p class="card-text">Subsystem Description insert here...</p>
-              </div>
-            </div>
-          </div>
-          <!-- End Insert your Module here -->
-          <!-- Insert your Module here -->
-          <div class="col-lg-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Insert your Module here</h5>
-                <p class="card-text">Subsystem Description insert here...</p>
-              </div>
-            </div>
-          </div>
-          <!-- End Insert your Module here -->
-          <!-- Insert your Module here -->
-          <div class="col-lg-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Insert your Module here</h5>
-                <p class="card-text">Subsystem Description insert here...</p>
-              </div>
-            </div>
-          </div>
-          <!-- End Insert your Module here -->
+          
         </div>
       </div>
       <div class="modal-footer">
