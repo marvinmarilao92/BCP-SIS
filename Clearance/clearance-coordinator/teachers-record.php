@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
   $course = trim($_POST["course"]);
   $description = trim($_POST["description"]);
   $dept_name = $verified_session_role;
-  
+
   // Attempt select query execution
   $sql = "SELECT * FROM clearance_teachers_record where teacher_id = '".$teacher_id."' and department_name = '".$verified_session_role."'";
   if($result = mysqli_query($link, $sql)){
@@ -40,6 +40,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
         mysqli_stmt_bind_param($stmt, "ssssss", $teacher_id, $firstname, $lastname, $course, $description, $dept_name);
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
+          $semester = 0;
+          $sql = "SELECT * FROM clearance_semester_current LIMIT 1";
+          if($result = mysqli_query($link, $sql)){
+            if(mysqli_num_rows($result) > 0){
+              while($row = mysqli_fetch_array($result)){
+                $semester = $row['semester_id'];
+                $date_started = null;
+                $status = "Pending";
+                // Prepare an update statement
+                $sql1 = "UPDATE clearance_semestral_clearance_list SET status=?, date=?, description=? WHERE id_number=? and department_name=? and semester_id=?";
+                if($stmt1 = mysqli_prepare($link, $sql1)){
+                  // Bind variables to the prepared statement as parameters
+                  mysqli_stmt_bind_param($stmt1, "sssssi", $status, $date_started, $description, $teacher_id, $verified_session_role, $semester);
+                  // Attempt to execute the prepared statement
+                  if(mysqli_stmt_execute($stmt1)){
+                      unset($_POST['id']);
+                      unset($_COOKIE['id_number']);
+                      // Records deleted successfully. Redirect to landing page
+                      header("location: teachers-record.php?notif=delete_success");
+                      exit();
+                  } else{
+                      echo "Oops! Something went wrong. Please try again later.";
+                  }
+                }
+              }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+          } else{
+              echo "Oops! Something went wrong. Please try again later.";
+          }
           unset($_POST['action']);
           unset($_POST['id']);
           unset($_POST['firstname']);
@@ -68,11 +99,40 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
     mysqli_stmt_bind_param($stmt, "s", $teacher_id);
     // Attempt to execute the prepared statement
     if(mysqli_stmt_execute($stmt)){
-      unset($_POST['id']);
-      unset($_COOKIE['id_number']);
-      // Records deleted successfully. Redirect to landing page
-      header("location: teachers-record.php?notif=delete_success");
-      exit();
+      $semester = 0;
+      $sql = "SELECT * FROM clearance_semester_current LIMIT 1";
+      if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+          while($row = mysqli_fetch_array($result)){
+            $semester = $row['semester_id'];
+            // Set the new timezone
+            date_default_timezone_set('Asia/Manila');
+            $date_started = date('Y-m-d H:i:s');
+            $status = "Cleared";
+            $description = "";
+            // Prepare an update statement
+            $sql1 = "UPDATE clearance_semestral_clearance_list SET status=?, date=?, description=? WHERE id_number=? and department_name=? and semester_id=?";
+            if($stmt1 = mysqli_prepare($link, $sql1)){
+              // Bind variables to the prepared statement as parameters
+              mysqli_stmt_bind_param($stmt1, "sssssi", $status, $date_started, $description, $teacher_id, $verified_session_role, $semester);
+              // Attempt to execute the prepared statement
+              if(mysqli_stmt_execute($stmt1)){
+                  unset($_POST['id']);
+                  unset($_COOKIE['id_number']);
+                  // Records deleted successfully. Redirect to landing page
+                  header("location: teachers-record.php?notif=delete_success");
+                  exit();
+              } else{
+                  echo "Oops! Something went wrong. Please try again later.";
+              }
+            }
+          }
+        } else{
+            echo "Oops! Something went wrong. Please try again later.";
+        }
+      } else{
+          echo "Oops! Something went wrong. Please try again later.";
+      }
     } else{
         echo "Oops! Something went wrong. Please try again later.";
     }
@@ -88,12 +148,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
     mysqli_stmt_bind_param($stmt, "ss", $description, $teacher_id);
     // Attempt to execute the prepared statement
     if(mysqli_stmt_execute($stmt)){
-      unset($_POST['id']);
-      unset($_POST['description']);
-      unset($_COOKIE['id_number']);
-      // Records updated successfully. Redirect to landing page
-      header("location: teachers-record.php?notif=update_success");
-      exit();
+      $semester = 0;
+      $sql = "SELECT * FROM clearance_semester_current LIMIT 1";
+      if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+          while($row = mysqli_fetch_array($result)){
+            $semester = $row['semester_id'];
+            $status = "Pending";
+            // Prepare an update statement
+            $sql1 = "UPDATE clearance_semestral_clearance_list SET status=?, description=? WHERE id_number=? and department_name=? and semester_id=?";
+            if($stmt1 = mysqli_prepare($link, $sql1)){
+              // Bind variables to the prepared statement as parameters
+              mysqli_stmt_bind_param($stmt1, "ssssi", $status, $description, $teacher_id, $verified_session_role, $semester);
+              // Attempt to execute the prepared statement
+              if(mysqli_stmt_execute($stmt1)){
+                  unset($_POST['id']);
+                  unset($_POST['description']);
+                  unset($_COOKIE['id_number']);
+                  // Records updated successfully. Redirect to landing page
+                  header("location: teachers-record.php?notif=update_success");
+                  exit();
+              } else{
+                  echo "Oops! Something went wrong. Please try again later.";
+              }
+            }
+          }
+        } else{
+            echo "Oops! Something went wrong. Please try again later.";
+        }
+      } else{
+          echo "Oops! Something went wrong. Please try again later.";
+      }
     } else{
         echo "Oops! Something went wrong. Please try again later.";
     }
@@ -198,44 +283,44 @@ include ("includes/sidebar.php");
               }
               ?>
               <?php
-                    // Attempt select query execution
-                    $sql = "SELECT * FROM clearance_teachers_record where department_name = '".$verified_session_role."' ORDER BY teacher_id";
-                    if($result = mysqli_query($link, $sql)){
-                        if(mysqli_num_rows($result) > 0){
-                            echo '<table id="example" class="table datatable">';
-                                echo "<thead>";
-                                    echo "<tr>";
-                                        echo "<th scope='col'>ID Number</th>";
-                                        echo "<th scope='col'>First Name</th>";
-                                        echo "<th scope='col'>Last Name</th>";
-                                        echo "<th scope='col'>Course</th>";
-                                        echo "<th scope='col'>Description</th>";
-                                        echo "<th scope='col'>Action</th>";
-                                    echo "</tr>";
-                                echo "</thead>";
-                                echo "<tbody>";
-                                while($row = mysqli_fetch_array($result)){
-                                    echo "<tr>";
-                                        echo "<td style='width:10%;'>" . $row['teacher_id'] . "</td>";
-                                        echo "<td>" . $row['firstname'] . "</td>";
-                                        echo "<td>" . $row['lastname'] . "</td>";
-                                        echo "<td style='width:10%;'>" . $row['course'] . "</td>";
-                                        echo "<td style='width:40%;'>" . $row['description'] . "</td>";
-                                        echo "<td style='width:10%;'>";
-                                          echo'
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                              <button id="'.$row['teacher_id'].'" type="button" class="btn btn-warning" title="Update Description" data-toggle="tooltip" onclick="updateFunction(this.id)"><span class="bi bi-pencil"></span></button>
-                                              <button id="'.$row['teacher_id'].'" type="button" class="btn btn-danger" title="Remove Record" data-toggle="tooltip" onclick="deleteFunction(this.id)"><span class="bi bi-x"></span></button>
-                                            </div>
-                                          ';
-                                        echo "</td>";
-                                    echo "</tr>";
-                                }
-                                echo "</tbody>";                            
-                            echo "</table>";
-                        } else{
-                            echo '<div class="alert alert-warning"><em>No teachers Record Added Yet.</em></div>';
-                        }
+                  // Attempt select query execution
+                  $sql = "SELECT * FROM clearance_teachers_record where department_name = '".$verified_session_role."' ORDER BY teacher_id";
+                  if($result = mysqli_query($link, $sql)){
+                      if(mysqli_num_rows($result) > 0){
+                        echo '<table id="example" class="table datatable">';
+                          echo "<thead>";
+                              echo "<tr>";
+                                  echo "<th scope='col'>ID Number</th>";
+                                  echo "<th scope='col'>First Name</th>";
+                                  echo "<th scope='col'>Last Name</th>";
+                                  echo "<th scope='col'>Course</th>";
+                                  echo "<th scope='col'>Description</th>";
+                                  echo "<th scope='col'>Action</th>";
+                              echo "</tr>";
+                          echo "</thead>";
+                          echo "<tbody>";
+                          while($row = mysqli_fetch_array($result)){
+                              echo "<tr>";
+                                  echo "<td style='width:10%;'>" . $row['teacher_id'] . "</td>";
+                                  echo "<td>" . $row['firstname'] . "</td>";
+                                  echo "<td>" . $row['lastname'] . "</td>";
+                                  echo "<td style='width:10%;'>" . $row['course'] . "</td>";
+                                  echo "<td style='width:40%;'>" . $row['description'] . "</td>";
+                                  echo "<td style='width:10%;'>";
+                                    echo'
+                                      <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button id="'.$row['teacher_id'].'" type="button" class="btn btn-warning" title="Update Description" data-toggle="tooltip" onclick="updateFunction(this.id)"><span class="bi bi-pencil"></span></button>
+                                        <button id="'.$row['teacher_id'].'" type="button" class="btn btn-danger" title="Remove Record" data-toggle="tooltip" onclick="deleteFunction(this.id)"><span class="bi bi-x"></span></button>
+                                      </div>
+                                    ';
+                                  echo "</td>";
+                              echo "</tr>";
+                          }
+                          echo "</tbody>";                            
+                        echo "</table>";
+                      } else{
+                          echo '<div class="alert alert-warning"><em>No Teachers Record Added Yet.</em></div>';
+                      }
                     } else{
                         echo "Oops! Something went wrong. Please try again later.";
                     }
@@ -251,7 +336,7 @@ include ("includes/sidebar.php");
 
   </main><!-- End #main -->
 
-  <!-- teachers Record Modal -->
+  <!-- Teachers Record Modal -->
   <div class="modal fade" id="teachers-record-modal" tabindex="-1">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
@@ -268,7 +353,7 @@ include ("includes/sidebar.php");
                   echo '<table id="example" class="table datatable">';
                       echo "<thead>";
                           echo "<tr>";
-                              echo "<th scope='col'>ID Number</th>";
+                              echo "<th scope='col'>Teacher Number</th>";
                               echo "<th scope='col'>First Name</th>";
                               echo "<th scope='col'>Last Name</th>";
                               echo "<th scope='col'>Course</th>";
@@ -298,7 +383,7 @@ include ("includes/sidebar.php");
                       echo "</tbody>";                            
                   echo "</table>";
               } else{
-                  echo '<div class="alert alert-warning"><em>No teachers Record Added Yet.</em></div>';
+                  echo '<div class="alert alert-warning"><em>No Teacher Record Added Yet.</em></div>';
               }
           } else{
               echo "Oops! Something went wrong. Please try again later.";
@@ -307,9 +392,9 @@ include ("includes/sidebar.php");
         </div>
       </div>
     </div>
-  </div><!-- End teachers Record Modal-->
+  </div><!-- End Teachers Record Modal-->
 
-  <!-- teachers Record Modal -->
+  <!-- Teachers Record Modal -->
   <div class="modal fade" id="teachers-record-modal-add" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -348,9 +433,9 @@ include ("includes/sidebar.php");
         </div>
       </div>
     </div>
-  </div><!-- End teachers Record Modal-->
+  </div><!-- End Teachers Record Modal-->
 
-  <!-- Delete teachers Record Modal -->
+  <!-- Delete Teachers Record Modal -->
   <div class="modal fade" id="teachers-record-modal-delete" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -373,9 +458,9 @@ include ("includes/sidebar.php");
         </div>
       </div>
     </div>
-  </div><!-- End Delete teachers Record Modal-->
+  </div><!-- End Delete Teachers Record Modal-->
 
-  <!-- Update teachers Record Modal -->
+  <!-- Update Teachers Record Modal -->
   <div class="modal fade" id="teachers-record-modal-update" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -399,7 +484,7 @@ include ("includes/sidebar.php");
         </div>
       </div>
     </div>
-  </div><!-- End Update teachers Record Modal-->
+  </div><!-- End Update Teachers Record Modal-->
   
 
 <?php
@@ -413,7 +498,7 @@ include ("includes/footer.php");
     date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
     expires = "; expires=" + date.toGMTString();
     document.cookie = escape(name) + "=" + escape(id_number) + expires + ";";
-    document.getElementById('delete-div').innerHTML = 'Delete Teacher Record of Teacher ID: ' + escape(getCookie("id_number"));
+    document.getElementById('delete-div').innerHTML = 'Delete teacher Record of teacher ID: ' + escape(getCookie("id_number"));
     var Myelement = document.getElementById("delete-id");
     Myelement.value = escape(getCookie("id_number"));
     $("#teachers-record-modal-delete").modal('show');
@@ -425,7 +510,7 @@ include ("includes/footer.php");
     date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
     expires = "; expires=" + date.toGMTString();
     document.cookie = escape(name) + "=" + escape(id_number) + expires + ";";
-    document.getElementById('update-div').innerHTML = 'Update Teacher Record of Teacher ID: ' + escape(getCookie("id_number"));
+    document.getElementById('update-div').innerHTML = 'Update teacher Record of teacher ID: ' + escape(getCookie("id_number"));
     var Myelement = document.getElementById("update-id");
     Myelement.value = escape(getCookie("id_number"));
     $("#teachers-record-modal-update").modal('show');

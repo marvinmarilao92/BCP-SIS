@@ -40,6 +40,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
         mysqli_stmt_bind_param($stmt, "ssssss", $student_id, $firstname, $lastname, $course, $description, $dept_name);
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
+          $semester = 0;
+          $sql = "SELECT * FROM clearance_semester_current LIMIT 1";
+          if($result = mysqli_query($link, $sql)){
+            if(mysqli_num_rows($result) > 0){
+              while($row = mysqli_fetch_array($result)){
+                $semester = $row['semester_id'];
+                $date_started = null;
+                $status = "Pending";
+                // Prepare an update statement
+                $sql1 = "UPDATE clearance_semestral_clearance_list SET status=?, date=?, description=? WHERE id_number=? and department_name=? and semester_id=?";
+                if($stmt1 = mysqli_prepare($link, $sql1)){
+                  // Bind variables to the prepared statement as parameters
+                  mysqli_stmt_bind_param($stmt1, "sssssi", $status, $date_started, $description, $student_id, $verified_session_role, $semester);
+                  // Attempt to execute the prepared statement
+                  if(mysqli_stmt_execute($stmt1)){
+                      unset($_POST['id']);
+                      unset($_COOKIE['id_number']);
+                      // Records deleted successfully. Redirect to landing page
+                      header("location: students-record.php?notif=delete_success");
+                      exit();
+                  } else{
+                      echo "Oops! Something went wrong. Please try again later.";
+                  }
+                }
+              }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+          } else{
+              echo "Oops! Something went wrong. Please try again later.";
+          }
           unset($_POST['action']);
           unset($_POST['id']);
           unset($_POST['firstname']);
@@ -68,11 +99,40 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
     mysqli_stmt_bind_param($stmt, "s", $student_id);
     // Attempt to execute the prepared statement
     if(mysqli_stmt_execute($stmt)){
-      unset($_POST['id']);
-      unset($_COOKIE['id_number']);
-      // Records deleted successfully. Redirect to landing page
-      header("location: students-record.php?notif=delete_success");
-      exit();
+      $semester = 0;
+      $sql = "SELECT * FROM clearance_semester_current LIMIT 1";
+      if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+          while($row = mysqli_fetch_array($result)){
+            $semester = $row['semester_id'];
+            // Set the new timezone
+            date_default_timezone_set('Asia/Manila');
+            $date_started = date('Y-m-d H:i:s');
+            $status = "Cleared";
+            $description = "";
+            // Prepare an update statement
+            $sql1 = "UPDATE clearance_semestral_clearance_list SET status=?, date=?, description=? WHERE id_number=? and department_name=? and semester_id=?";
+            if($stmt1 = mysqli_prepare($link, $sql1)){
+              // Bind variables to the prepared statement as parameters
+              mysqli_stmt_bind_param($stmt1, "sssssi", $status, $date_started, $description, $student_id, $verified_session_role, $semester);
+              // Attempt to execute the prepared statement
+              if(mysqli_stmt_execute($stmt1)){
+                  unset($_POST['id']);
+                  unset($_COOKIE['id_number']);
+                  // Records deleted successfully. Redirect to landing page
+                  header("location: students-record.php?notif=delete_success");
+                  exit();
+              } else{
+                  echo "Oops! Something went wrong. Please try again later.";
+              }
+            }
+          }
+        } else{
+            echo "Oops! Something went wrong. Please try again later.";
+        }
+      } else{
+          echo "Oops! Something went wrong. Please try again later.";
+      }
     } else{
         echo "Oops! Something went wrong. Please try again later.";
     }
@@ -88,12 +148,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
     mysqli_stmt_bind_param($stmt, "ss", $description, $student_id);
     // Attempt to execute the prepared statement
     if(mysqli_stmt_execute($stmt)){
-      unset($_POST['id']);
-      unset($_POST['description']);
-      unset($_COOKIE['id_number']);
-      // Records updated successfully. Redirect to landing page
-      header("location: students-record.php?notif=update_success");
-      exit();
+      $semester = 0;
+      $sql = "SELECT * FROM clearance_semester_current LIMIT 1";
+      if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+          while($row = mysqli_fetch_array($result)){
+            $semester = $row['semester_id'];
+            $status = "Pending";
+            // Prepare an update statement
+            $sql1 = "UPDATE clearance_semestral_clearance_list SET status=?, description=? WHERE id_number=? and department_name=? and semester_id=?";
+            if($stmt1 = mysqli_prepare($link, $sql1)){
+              // Bind variables to the prepared statement as parameters
+              mysqli_stmt_bind_param($stmt1, "ssssi", $status, $description, $student_id, $verified_session_role, $semester);
+              // Attempt to execute the prepared statement
+              if(mysqli_stmt_execute($stmt1)){
+                  unset($_POST['id']);
+                  unset($_POST['description']);
+                  unset($_COOKIE['id_number']);
+                  // Records updated successfully. Redirect to landing page
+                  header("location: students-record.php?notif=update_success");
+                  exit();
+              } else{
+                  echo "Oops! Something went wrong. Please try again later.";
+              }
+            }
+          }
+        } else{
+            echo "Oops! Something went wrong. Please try again later.";
+        }
+      } else{
+          echo "Oops! Something went wrong. Please try again later.";
+      }
     } else{
         echo "Oops! Something went wrong. Please try again later.";
     }
@@ -198,44 +283,44 @@ include ("includes/sidebar.php");
               }
               ?>
               <?php
-                    // Attempt select query execution
-                    $sql = "SELECT * FROM clearance_students_record where department_name = '".$verified_session_role."' ORDER BY student_id";
-                    if($result = mysqli_query($link, $sql)){
-                        if(mysqli_num_rows($result) > 0){
-                            echo '<table id="example" class="table datatable">';
-                                echo "<thead>";
-                                    echo "<tr>";
-                                        echo "<th scope='col'>ID Number</th>";
-                                        echo "<th scope='col'>First Name</th>";
-                                        echo "<th scope='col'>Last Name</th>";
-                                        echo "<th scope='col'>Course</th>";
-                                        echo "<th scope='col'>Description</th>";
-                                        echo "<th scope='col'>Action</th>";
-                                    echo "</tr>";
-                                echo "</thead>";
-                                echo "<tbody>";
-                                while($row = mysqli_fetch_array($result)){
-                                    echo "<tr>";
-                                        echo "<td style='width:10%;'>" . $row['student_id'] . "</td>";
-                                        echo "<td>" . $row['firstname'] . "</td>";
-                                        echo "<td>" . $row['lastname'] . "</td>";
-                                        echo "<td style='width:10%;'>" . $row['course'] . "</td>";
-                                        echo "<td style='width:40%;'>" . $row['description'] . "</td>";
-                                        echo "<td style='width:10%;'>";
-                                          echo'
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                              <button id="'.$row['student_id'].'" type="button" class="btn btn-warning" title="Update Description" data-toggle="tooltip" onclick="updateFunction(this.id)"><span class="bi bi-pencil"></span></button>
-                                              <button id="'.$row['student_id'].'" type="button" class="btn btn-danger" title="Remove Record" data-toggle="tooltip" onclick="deleteFunction(this.id)"><span class="bi bi-x"></span></button>
-                                            </div>
-                                          ';
-                                        echo "</td>";
-                                    echo "</tr>";
-                                }
-                                echo "</tbody>";                            
-                            echo "</table>";
-                        } else{
-                            echo '<div class="alert alert-warning"><em>No Students Record Added Yet.</em></div>';
-                        }
+                  // Attempt select query execution
+                  $sql = "SELECT * FROM clearance_students_record where department_name = '".$verified_session_role."' ORDER BY student_id";
+                  if($result = mysqli_query($link, $sql)){
+                      if(mysqli_num_rows($result) > 0){
+                        echo '<table id="example" class="table datatable">';
+                          echo "<thead>";
+                              echo "<tr>";
+                                  echo "<th scope='col'>ID Number</th>";
+                                  echo "<th scope='col'>First Name</th>";
+                                  echo "<th scope='col'>Last Name</th>";
+                                  echo "<th scope='col'>Course</th>";
+                                  echo "<th scope='col'>Description</th>";
+                                  echo "<th scope='col'>Action</th>";
+                              echo "</tr>";
+                          echo "</thead>";
+                          echo "<tbody>";
+                          while($row = mysqli_fetch_array($result)){
+                              echo "<tr>";
+                                  echo "<td style='width:10%;'>" . $row['student_id'] . "</td>";
+                                  echo "<td>" . $row['firstname'] . "</td>";
+                                  echo "<td>" . $row['lastname'] . "</td>";
+                                  echo "<td style='width:10%;'>" . $row['course'] . "</td>";
+                                  echo "<td style='width:40%;'>" . $row['description'] . "</td>";
+                                  echo "<td style='width:10%;'>";
+                                    echo'
+                                      <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button id="'.$row['student_id'].'" type="button" class="btn btn-warning" title="Update Description" data-toggle="tooltip" onclick="updateFunction(this.id)"><span class="bi bi-pencil"></span></button>
+                                        <button id="'.$row['student_id'].'" type="button" class="btn btn-danger" title="Remove Record" data-toggle="tooltip" onclick="deleteFunction(this.id)"><span class="bi bi-x"></span></button>
+                                      </div>
+                                    ';
+                                  echo "</td>";
+                              echo "</tr>";
+                          }
+                          echo "</tbody>";                            
+                        echo "</table>";
+                      } else{
+                          echo '<div class="alert alert-warning"><em>No Students Record Added Yet.</em></div>';
+                      }
                     } else{
                         echo "Oops! Something went wrong. Please try again later.";
                     }
