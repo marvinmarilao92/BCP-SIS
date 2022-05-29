@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require 'control/check-session-login.php';
+<?php require 'control/session.php';
     if ($user_online == "true") {
 if ($role == "Student") {
 }else{

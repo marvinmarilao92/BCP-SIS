@@ -19,7 +19,7 @@
 
 // local config
  class DB{
-   protected $host='localhost';
+   protected $host='localhost:3307';
    protected $user='root';
 protected $password='';
     protected $database='sis_db';

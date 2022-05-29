@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require 'control/check-session-login.php';
+<?php require 'control/session.php';
 if ($user_online == "true") {
-if ($rolee == "Coordinator") {
+if ($verified_session_role == "Internship Coordinator") {
 }else{
 header("location:../");   
 }

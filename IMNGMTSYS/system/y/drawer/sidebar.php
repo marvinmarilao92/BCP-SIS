@@ -1,7 +1,7 @@
 <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " <?php echo 'href=index.php?'.$url
+        <a class="nav-link " <?php echo 'href=index.php?'.$url;
           ?>
           >
           <i class="bi bi-house"></i>

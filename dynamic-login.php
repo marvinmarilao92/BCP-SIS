@@ -152,12 +152,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         require_once "core/update_key.php";
                         //update login key
                         $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                        header("location: IMNGMTSYS/z/index?id=" . $_SESSION["login_key"] . "");
+                        header("location: IMNGMTSYS/system/z/index?id=" . $_SESSION["login_key"] . "");
                       }
 
                       break;
-                    case "Internship Secretary":
+                    case "Internship Coordinator":
                       //statement
+                      
+                      $encr = md5($verified_session_role);
+                  $encri = sha1($encrr);
+                  $f = sha1($encri);
+                  $jk = sha1($verified_session_role);
+                  $d = password_hash($encr, PASSWORD_DEFAULT);
+                  $url = $d."key".$encr.""."".$encri."".$f."".$jk;
+                  $_SESSION['hehe'] = $url;
                       $_SESSION['session_username'] = $myusername;
                       $_SESSION['session_url'] = "IMNGMTSYS/y/index?id=" . $_SESSION["login_key"] . "";
                       if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
@@ -175,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         require_once "core/update_key.php";
                         //update login key
                         $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                        header("location: IMNGMTSYS/y/index?id=" . $_SESSION["login_key"] . "");
+                        header("location: IMNGMTSYS/system/y/index?id=" . $_SESSION["hehe"] . "");
                       }
 
                       break;
