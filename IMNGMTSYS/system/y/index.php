@@ -2,7 +2,8 @@
 <html lang="en">
 <?php require 'control/session.php';
 if ($user_online == "true") {
-if ($verified_session_role == "Internship Coordinator") {
+if ($verified_session_role == "Internship Coordinator" || $verified_session_role == "SuperAdmin") {
+
 }else{
 header("location:../");   
 }

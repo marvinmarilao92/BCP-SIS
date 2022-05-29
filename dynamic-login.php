@@ -156,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       }
 
                       break;
-                    case "Internship Coordinator":
+                    case "Internship Coordinator":  
                       //statement
                       
                   $encr = md5($verified_session_role);
