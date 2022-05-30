@@ -12,7 +12,7 @@
                 //statement
                 ?>
                  <li class="nav-item">
-                  <a href="../../../super_admin/index?id=<?php echo $_SESSION["login_key"];?>" class="<?php echo 'nav-link collapsed';?>" >
+                  <a class="btn btn-primary form-control" data-toggle="modal" data-target="#ApplyModal">
                     <i class="bi bi-arrow-return-left"></i>
                     <span>Apply for OJT</span>
                   </a>
@@ -24,7 +24,7 @@
                   //statement
                   ?>
                    <li class="nav-item">
-                    <a href="../../../super_admin/index?id=<?php echo $_SESSION["login_key"];?>" class="<?php echo 'nav-link collapsed';?>" >
+                    <a class="btn btn-primary form-control" data-toggle="modal" data-target="#ApplyModal" >
                       <i class="bi bi-arrow-return-left"></i>
                       <span>Apply for OJT</span>
                     </a>
@@ -257,7 +257,7 @@
 
 </aside><!-- End Sidebar-->
   <!-- Create Document Modal -->
-  <div class="modal fade" id="AddModal" tabindex="-1">
+  <div class="modal fade" id="ApplyModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
