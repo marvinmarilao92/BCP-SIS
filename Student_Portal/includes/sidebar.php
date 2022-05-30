@@ -101,7 +101,7 @@
 
     <li class="nav-item">
       <a href="pages-faq?id=<?php echo $_SESSION["login_key"]; ?>" class="<?php if ($page == 'faqs') { echo 'nav-link';} else {echo 'nav-link collapsed';} ?>">
-        <i class="bi bi-clipboard2-plus"></i>
+        <i class="bi bi-clipboard-plus"></i>
         <span>Counseling Request</span>
       </a>
     </li><!-- End F.A.Q Page Nav -->
