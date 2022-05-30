@@ -2,7 +2,7 @@
 <html lang="en">
 <?php require 'control/check-session-login.php';
 if ($user_online == "true") {
-if ($ad_rolee == "Admin") {
+if ($ad_rolee == "Internship Administrator" || $ad_rolee == "SuperAdmin") {
 }else{
 header("location:../");   
 }
@@ -52,14 +52,14 @@ header("location:../");
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"></h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
+              <p></p>
               <?php
                     // Include config file
-                    require '../dbCon/config.php';
+                    require '../dbCon/bonak.php';
                     
                     // Attempt select query execution
                     $sql = "SELECT * FROM internship_audit_trail ORDER BY date DESC";
-                    if($result = mysqli_query($conn, $sql)){
+                    if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
               
              echo '<table class="table datatable">';
