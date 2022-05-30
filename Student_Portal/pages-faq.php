@@ -11,14 +11,59 @@ include('includes/session.php');
    <body>
    <?php include ('includes/nav.php');//Design for  Header?>
    <?php $page = 'faqs';include ('includes/sidebar.php');//Design for sidebar?>
-       
 
 
-
- 
-
-
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   
+    
+  
+       
+<style type="text/css">
+  
+
+/*ChatBot*/
+.chat_icon{
+  position: fixed;
+  bottom: 50px;
+  
+  right: 30px;
+  z-index: 1000;
+  padding: 0;
+  font-size: 50px;
+  color: yellowgreen;
+  cursor: pointer;
+}
+.chat_box{
+  width: 400px;
+  height: 79vh;
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  background:#dedede;
+  z-index: 1000;
+  transition: all 0.3s ease-out;
+  transform: scaleY(0);
+}
+.chat_box.active{
+  transform: scaleY(1);
+}
+#messages{
+  padding: 20px;
+}
+.my-conv-form-wrapper textarea{
+  height: 30px;
+  overflow: hidden;
+  resize: none;
+}
+.hidden{
+  display: none !important;
+}
+.scroll {
+  overflow-x: auto;
+}
+
+</style>
+ 
 
   <main id="main" class="main col-lg-offset-4">
   <div class="search-bar">
@@ -36,6 +81,46 @@ include('includes/session.php');
     
   </nav>
 </div><!-- End Page Title -->
+<!-- ChatBot -->
+<div class="chat_icon">
+  <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
+</div>
+<div class="chat_box">
+  <div class="my-conv-form-wrapper">
+    <form action="" method="GET" class="hidden">
+      <select data-conv-question="Hi! How can I help you?" name="category">
+        <option value="WebDevelopment">i want to know my balance
+        <option value="DigitalMarketing">Where can i get my diploma?
+        </option>
+       
+      </select>
+      <div data-conv-fork="category">
+        <div data-conv-case="WebDevelopment">
+          <input type="text" name="domainName" data-conv-question="Sorry, Student i can't help you with that">    
+        </div>
+        <div data-conv-case="WebDevelopment">
+          <input type="text" name="domainName" data-conv-question="you can ask it in the MIS department in the main campus">    
+        </div>
+        <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="You can get your diploma in bestlink registrar in the main building or in MV campus"> 
+        </div>
+        <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="Sorry can't understand"> 
+        </div>
+      </div>
+
+      <input type="text" name="name" data-conv-question="This system is only for your concern">
+       <input type="text" name="name" data-conv-question="This system do not give personal infomation">
+
+     
+      <select data-conv-question="Please Confirm">
+        <option value="Yes">end of conversation</option>
+      </select>
+
+    </form>
+  </div>
+</div>
+<!-- ChatBot end -->
 <div class="card-body">
              
 
@@ -168,5 +253,12 @@ include('includes/session.php');
   <?php include ("view_ticket.php"); ?>
 
 
+
+   <!-- ChatBot -->
+    <link rel="stylesheet" type="text/css" href="chat_bot/css/jquery.convform.css">
+    <script type="text/javascript" src="chat_bot/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="chat_bot/js/jquery.convform.js"></script>
+    <script type="text/javascript" src="chat_bot/js/custom.js"></script>
+ 
   </body>
 </html>
