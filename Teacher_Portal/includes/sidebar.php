@@ -12,19 +12,19 @@
 
       <li class="nav-heading">Clearance</li>
 
-        <!-- Audit Trail -->
-        <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-people"></i><span>Clearance For Teachers</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="components-nav" class="<?php if($col=='Clearance'){echo 'nav-content collapse show';}else{echo 'nav-content collapse';}?> " data-bs-parent="#sidebar-nav">
-          <li>
-              <a href="clearance-status.php" class="<?php if($page=='clr'){echo 'active';}?>">
-                <i class="bi bi-circle"></i><span>Clearance Status</span>
-              </a>
-            </li>
-          </ul>
-        </li><!-- End Account Management Nav -->
+      <li class="nav-item">
+        <a class="nav-link <?php if($collapsed != 'semestral-clearance'){echo 'collapsed';} ?>" href="semestral-clearance.php">
+          <i class="bi bi-list-check"></i>
+          <span>Semestral Clearance</span>
+        </a>
+      </li><!-- End Semestral Clearance Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link <?php if($collapsed != 'clearance-appointment'){echo 'collapsed';} ?>" href="clearance-appointment.php">
+          <i class="bi bi-calendar-check"></i>
+          <span>Clearance Appointment</span>
+        </a>
+      </li><!-- End Semestral Clearance Nav -->
 
       <li class="nav-heading">Document Tracking</li>
       

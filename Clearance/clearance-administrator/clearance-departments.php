@@ -1,5 +1,6 @@
 <?php
 include('includes/session.php');
+$collapsed = "clearance-departments";
 ?>
 <!DOCTYPE html>
 <html lang="en">
