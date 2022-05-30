@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require 'control/session.php';
+<?php require 'control/check-session-login.php';
 if ($user_online == "true") {
-if ($verified_session_role == "Internship Coordinator") {
+if ($rolee == "Internship Coordinator" || $rolee == "SuperAdmin") {
 }else{
 header("location:../");   
 }
@@ -43,7 +43,8 @@ header("location:../");
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="y/..">Home</a></li>
+          <li class="breadcrumb-item"><a href=<?php echo 'index.php?'.$url;
+          ?>>Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
@@ -108,7 +109,7 @@ header("location:../");
                       ?>
                       
 
-                       <span class="text-muted small pt-2 ps-1">Total of Enrolled Student</span>
+                       <span class="text-muted small pt-2 ps-1">No. of Enrolled Student</span>
 
                     </div>
                   </div>
@@ -128,7 +129,7 @@ header("location:../");
                       <h6>Filter</h6>
                     </li>
 
-                    <li><a class="dropdown-item" <?php echo 'href=college-data.php?'.$url;
+                    <li><a class="dropdown-item" <?php echo 'href=qualified.php?'.$url;
         ?>>Today</a></li>
                     
                   </ul>
@@ -143,13 +144,18 @@ header("location:../");
                     </div>
                     <div class="ps-3">
                        <?php 
-                       require '../dbCon/config.php';
+                       require '../dbCon/bonak.php';
                         try{  
-                          $total = "SELECT * FROM student_information 
-                            WHERE intern_status = 'Qualified' 
-                            AND course = 'BSIT'
-                            ORDER BY id_number ASC";
-                           $get_row = mysqli_query($conn, $total);
+                          $total = "SELECT
+                          *FROM student_information
+                                                              INNER JOIN ims_studcreen_status
+                                                              ON 
+                                                              ims_studcreen_status.sid = student_information.id
+                                                              WHERE 
+                                                              student_information.course = 'BSIT'
+                                                              AND
+                                                              ims_studcreen_status.s_status ='Qualified'";
+                           $get_row = mysqli_query($link, $total);
 
 
                          if($get_total = mysqli_num_rows($get_row))
@@ -168,7 +174,7 @@ header("location:../");
                       ?>
                       
 
-                       <span class="text-muted small pt-2 ps-1">No. of Approved Student</span>
+                       <span class="text-muted small pt-2 ps-1">No. of Qualified Student</span>
 
                     </div>
                   </div>
@@ -177,6 +183,8 @@ header("location:../");
               </div>
             </div>
             <!-- Approved -->
+
+
             <!-- Pending -->
              <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
@@ -189,7 +197,7 @@ header("location:../");
                       <h6>Filter</h6>
                     </li>
 
-                    <li><a class="dropdown-item" <?php echo 'href=college-data.php?'.$url;
+                    <li><a class="dropdown-item" <?php echo 'href=pending.php?'.$url;
         ?>>Today</a></li>
                     
                   </ul>
@@ -204,13 +212,20 @@ header("location:../");
                     </div>
                     <div class="ps-3">
                        <?php 
-                       require '../dbCon/config.php';
+                       require '../dbCon/bonak.php';
                         try{  
-                          $total = "SELECT * FROM student_information 
-                            WHERE intern_status = 'Pending' 
-                            AND course = 'BSIT'
-                            ORDER BY id_number ASC";
-                           $get_row = mysqli_query($conn, $total);
+                          $total = "SELECT
+                          *FROM student_information
+                                                              INNER JOIN ims_studcreen_status
+                                                              ON 
+                                                              ims_studcreen_status.sid = student_information.id
+                                                              WHERE 
+                                                              student_information.course = 'BSIT'
+                                                              AND
+                                                              ims_studcreen_status.s_status ='Pending'
+                                                              ORDER BY `id_number` DESC
+                                                              ";
+                           $get_row = mysqli_query($link, $total);
 
 
                          if($get_total = mysqli_num_rows($get_row))
@@ -219,7 +234,7 @@ header("location:../");
                            }
                          else
                          {
-
+                          echo '<h6> No Data Found </h6>';
                         }
                       }catch(PDOException $e)
                       {
@@ -229,7 +244,7 @@ header("location:../");
                       ?>
                       
 
-                       <span class="text-muted small pt-2 ps-1">Total of Pending Student</span>
+                       <span class="text-muted small pt-2 ps-1">No. of Pending Student</span>
 
                     </div>
                   </div>
@@ -311,42 +326,7 @@ header("location:../");
             </div> End Customers Card -->
 
             <!-- Reports -->
-            <div class="col-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-
-              <!-- Pie Chart -->
-              <canvas id="pieChart" style="max-height: 400px;"></canvas>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#pieChart'), {
-                    type: 'pie',
-                    data: {
-                      labels: [
-                        'Red',
-                        'Blue',
-                        'Yellow'
-                      ],
-                      datasets: [{
-                        label: 'My First Dataset',
-                        data: [300, 50, 100],
-                        backgroundColor: [
-                          'rgb(255, 99, 132)',
-                          'rgb(54, 162, 235)',
-                          'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 4
-                      }]
-                    }
-                  });
-                });
-              </script>
-              <!-- End Pie CHart -->
-
-            </div>
-          </div>
-        </div>
+            
 <!-- End Reports -->
 
             <!-- Recent Sales -->
@@ -594,68 +574,7 @@ header("location:../");
               </ul>
             </div>
 
-            <div class="card-body pb-0">
-              <h5 class="card-title">Website Traffic <span>| Today</span></h5>
-
-              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '5%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: 'Access From',
-                      type: 'pie',
-                      radius: ['40%', '70%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: 1048,
-                          name: 'Search Engine'
-                        },
-                        {
-                          value: 735,
-                          name: 'Direct'
-                        },
-                        {
-                          value: 580,
-                          name: 'Email'
-                        },
-                        {
-                          value: 484,
-                          name: 'Union Ads'
-                        },
-                        {
-                          value: 300,
-                          name: 'Video Ads'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-
-            </div>
-          </div><!-- End Website Traffic -->
+            <!-- End Website Traffic -->
 
           <!-- News & Updates Traffic -->
           <div class="card">
@@ -677,31 +596,31 @@ header("location:../");
 
               <div class="news">
                 <div class="post-item clearfix">
-                  <img src="assets/img/news-1.jpg" alt="">
+                  <img src="../assets/img/news-1.jpg" alt="">
                   <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
                   <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
                 </div>
 
                 <div class="post-item clearfix">
-                  <img src="assets/img/news-2.jpg" alt="">
+                  <img src="../assets/img/news-2.jpg" alt="">
                   <h4><a href="#">Quidem autem et impedit</a></h4>
                   <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
                 </div>
 
                 <div class="post-item clearfix">
-                  <img src="assets/img/news-3.jpg" alt="">
+                  <img src="../assets/img/news-3.jpg" alt="">
                   <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
                   <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
                 </div>
 
                 <div class="post-item clearfix">
-                  <img src="assets/img/news-4.jpg" alt="">
+                  <img src="../assets/img/news-4.jpg" alt="">
                   <h4><a href="#">Laborum corporis quo dara net para</a></h4>
                   <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
                 </div>
 
                 <div class="post-item clearfix">
-                  <img src="assets/img/news-5.jpg" alt="">
+                  <img src="../assets/img/news-5.jpg" alt="">
                   <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
                   <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
                 </div>

@@ -182,7 +182,7 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?php echo $ad_fname; ?></h6>
+              <h6><?php echo $ad_fname ?>&nbsp;<?php echo $ad_lname?></h6>
               <span><?php echo $ad_rolee; ?></span>
             </li>
             <li>

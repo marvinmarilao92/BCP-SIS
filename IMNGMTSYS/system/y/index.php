@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require 'control/session.php';
-if ($user_online == "true") {
-if ($verified_session_role == "Internship Coordinator" || $verified_session_role == "SuperAdmin") {
+<?php 
+require 'control/check-session-login.php';
 
-}else{
-header("location:../");   
-}
-}else{
-header("location:../"); 
-}   
-?>
+if ($user_online == "true") {
+  if ($rolee == "Internship Coordinator" || $rolee == "SuperAdmin") {
+  }else{
+  header("location:../");   
+  }
+  }else{
+  header("location:../"); 
+  }   
+  ?>
 <head>
   
 
@@ -46,7 +47,9 @@ header("location:../");
     <hr class="my-4">
     <section class="section dashboard">
       <div class="row">
-    
+
+
+        
         <!-- Left side columns -->
         <div class="col-lg-8">
           <div class="row">
@@ -57,53 +60,7 @@ header("location:../");
                          
                         
                       
-            <?php
-                     require '../dbCon/config.php';
-                       try {
-                                             $conn = new PDO("mysql:host=$servername;dbname=$db_name", $db_user, $db_pass);
-                                             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-      
-                                             $stmt = $conn->prepare("SELECT * FROM ims_department_post ORDER BY rand() limit 1");
-                                             $stmt->execute();
-                                             $result = $stmt->fetchAll();
-
-                                             foreach($result as $row)
-                                             {
-                                            ?>
             
-                         
-
-                          <div class="alert alert-info" role="alert" style="text-align:left;">
-
-                         <aria-label class="display-5" style="font-size: 2em;">Announcement ! </aria-label>
-                         <br>
-                         <br>
-                          <div class = "container" style="text-align: left;">
-                                <b> <?php  echo $row['p_role']?></b>
-                                <br>
-                                <br>
-                        
-
-                                <p><?php echo $row['post']; ?></p>
-                                <br>
-                                <br>
-                                <p style="text-align: right;">Date Posted: <?php echo $row['pdate']?></p>
-                                <br>
-
-
-                            </div>
-                        </div>
-                        <?php
-                                       }
-                                         $stmt->execute();
-            
-                                       }catch(PDOException $e)
-                                         {
-        
-                                         }
-  
-                      ?>
             <!-- End Sales Card -->
 
             <!-- Revenue Card -->
@@ -111,7 +68,51 @@ header("location:../");
             <!-- End Revenue Card -->
 
             <!-- Customers Card -->
+            <?php
+                     require '../dbCon/bonak.php';
+                       try {
+                                             $link = new PDO("mysql:host=$servername;dbname=$db_name", $db_user, $db_pass);
+                                             $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+      
+                                             $stmt = $link->prepare("SELECT * FROM ims_admin_post ");
+                                             $stmt->execute();
+                                             $result = $stmt->fetchAll();
+
+                                             foreach($result as $row)
+                                             {
+                                            ?>  
+            <div class="col-12">
+              <div class="card mb-3">
+                <div class="row g-0">
+                                        
+                  <div class="col-md-4">
+                    <img src="../assets/img/default.jpg" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title"><?php  echo $row['p_role']?></h5>
+                      <p class="card-text"><?php echo $row['post']; ?></p>
+                      <br>
+                      <br>
+                      <p style="text-align: right;">Date Posted: <?php echo $row['pdate']?></p>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            <?php
+                    }
+                    $stmt->execute();
+            
+                      }catch(PDOException $e)
+                          {
+        
+                          }
+  
+                      
+                      ?> 
             <!-- End Customers Card -->
 
             <!-- Reports -->

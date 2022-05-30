@@ -129,7 +129,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                <img src="/assets/img/messages-2.jpg" alt="" class="rounded-circle">
                 <div>
                   <h4>Anna Nelson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -200,7 +200,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+              <a class="dropdown-item d-flex align-items-center" href="FAQS.php">
                 <i class="bi bi-question-circle"></i>
                 <span>Need Help?</span>
               </a>
@@ -209,12 +209,42 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#basicModal">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
+            <!-- Adding return nav item for super admin -->
+          <?php 
+            $output = '';
+            $key = $_SESSION["login_key"];
+            if(isset($verified_session_department) && ($verified_session_username)){
+              switch($rolee){
+                case "SuperAdmin":
+                    //statement
+                    $output .= '
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php?id='.$key.'">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Sign Out</span>
+                      </a>
+                    </li>    
+                  ';
+                break;  
+
+                default:
+                //statement
+                  $output .= '
+                  <li>
+                  <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#basicModal">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Sign Out</span>
+                  </a>
+                </li>    
+                  ';
+              }
+              echo $output;
+          }else{
+              // header("location:index.php");
+          }
+          ?>
+
+          
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->

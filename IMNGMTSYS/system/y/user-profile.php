@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require 'control/session.php';
+<?php 
+require 'control/check-session-login.php';
+
 if ($user_online == "true") {
-if ($verified_session_role == "Internship Coordinator") {
-}else{
-header("location:../");   
-}
-}else{
-header("location:../"); 
-}   
-?>
+  if ($rolee == "Internship Coordinator" || $rolee == "SuperAdmin") {
+  }else{
+  header("location:../");   
+  }
+  }else{
+  header("location:../"); 
+  }   
+  ?>
+
 <head>
   
 
@@ -59,7 +62,7 @@ header("location:../");
 
               <img src="../assets/img/default.jpg" alt="Profile" class="rounded-circle">
               <h2><?php echo $fnamee?> <?php echo $mnamee ?> <?php  echo $lnamee ?></h2>
-              <small><?php echo $rolee?> Account</small>
+              <small><?php echo $rolee ?> Account</small>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -98,7 +101,7 @@ header("location:../");
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $fnamee?> <?php echo $mnamee ?> <?php  echo $lnamee ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $fnamee ?> <?php echo $mnamee ?> <?php  echo $lnamee ?></div>
                   </div>
 
                   <div class="row">
@@ -108,7 +111,7 @@ header("location:../");
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Department</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $dept_name?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_department?></div>
                   </div>
 
                   <div class="row">
@@ -118,12 +121,13 @@ header("location:../");
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Contact Number</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $contact ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_contact ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $emaill?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_email
+                    ?></div>
                   </div>
 
                 </div>
@@ -146,21 +150,21 @@ header("location:../");
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="<?php echo $address ?>">
+                        <input name="address" type="text" class="form-control" id="Address" value="<?php echo $verified_session_address ?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="<?php echo $contact ?>">
+                        <input name="phone" type="text" class="form-control" id="Phone" value="<?php echo $verified_session_contact ?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="<?php echo $emaill ?>">
+                        <input name="email" type="email" class="form-control" id="Email" value="<?php echo $verified_session_email?>">
                       </div>
                     </div>
 

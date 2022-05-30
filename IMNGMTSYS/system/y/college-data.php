@@ -3,7 +3,7 @@
 <?php require 'control/check-session-login.php' ?>
 <head>
 </head>
-  <title>BCP - Enrolled</title>
+  <title>BCP - Officially Enrolled</title>
   <?php require 'drawer/header.php' ?>
 </head>
 
@@ -28,7 +28,8 @@
       <h1>College Students</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item"><a href=<?php echo 'index.php?'.$url;
+          ?>>Home</a></li>
           <li class="breadcrumb-item">College</li>
           <li class="breadcrumb-item active">Students</li>
         </ol>
@@ -59,10 +60,12 @@
              echo '<table class="table datatable">';
                 echo "<thead>";
                   echo "<tr>";
-                    echo'<th scope="col">Student_ID</th>';
-                   echo'<th scope="col">Name</th>';
-                    echo'<th scope="col">Course</th>';
-                    echo'<th scope="col">year_level</th>';
+                    echo'<th>Student_ID</th>';
+                   echo'<th>Name</th>';
+                    echo'<th>Program</th>';
+                    echo'<th>level</th>';
+                    echo'<th>Status</th>';
+                    echo'<th>Action</th>';
                     
                  echo "</tr>";
                 echo "</thead>";
@@ -73,6 +76,12 @@
                                         echo "<td>" . $row['firstname'] ." ". $row['lastname']. "</td>";
                                         echo "<td>" . $row['course'] . "</td>";
                                         echo "<td>" . $row['year_level'] . "</td>";
+                                        echo "<td>" . $row['account_status'] . "</td>";
+                                        echo "<td>";
+                                        
+                                       
+                                        echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal4"><i class="bi bi-eye"></i>';
+                                                                          
                                         
                                         
                                         

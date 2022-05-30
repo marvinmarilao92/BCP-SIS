@@ -1,4 +1,57 @@
 
+
+
+
+
+
+
+<!-- edit button -->
+
+<div class="modal fade" id="editmodal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Change Status</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <form class="row g-3 needs-validation" action="constant/change.php" method="POST">
+                     <div class="col-12">
+
+                     <input type="hidden" name="update_id" id="update_id">
+                   
+                     <label> Student Number</label>
+                            <input type="text" name="number" id="number" class="form-control"
+                                      placeholder="number" readonly>
+                                      <br>
+                     <label> Student Name </label>
+                            <input type="text" name="name" id="name" class="form-control"
+                                      placeholder="name" readonly>
+                                      <br>
+                            <label> Status </label>
+                            
+                                  <input type="text" name="status" id="status" class="form-control"
+                                      placeholder="status">
+                            </div>
+                            
+                      
+
+
+
+                    </div>
+                    
+                      <div class="d-grid gap-2 mt-3">
+               
+                      <button type="update" class="btn btn-primary btn-lg " name="update" >CHANGE</button>
+                    </div>
+                    
+                    </form>
+                  </div>
+                
+                </div>
+              </div>
+
+
 <!-- Create Post -->
 
               <div class="modal fade" id="verticalycentered" tabindex="-1">
@@ -13,7 +66,7 @@
                      <div class="col-12">
                             <div class="form-floating">
                             <textarea type="text" class="form-control" name="posting" id="posting"   placeholder="myf" style="height: 90px;" required autofocus></textarea>
-                              <label for="floatingName">Write a post</label>
+                              <label for="floatingName">Write a something</label>
                             </div>
                           </div>  
                     </div>

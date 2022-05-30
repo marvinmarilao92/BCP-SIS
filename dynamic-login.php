@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 case "OJT System":
                   //statement
                   switch ($row1["role"]) {
-                    case "Internship Admin":
+                    case "Internship Administrator":
                       //statement
                       $_SESSION['session_username'] = $myusername;
                       $_SESSION['session_url'] = "IMNGMTSYS/z/index?id=" . $_SESSION["login_key"] . "";
@@ -159,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     case "Internship Coordinator":  
                       //statement
                       
-                  $encr = md5($verified_session_role);
+                  $encr = md5($rolee);
                   $encri = sha1($encrr);
                   $f = sha1($encri);
                   $jk = sha1($verified_session_role);
@@ -183,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         require_once "core/update_key.php";
                         //update login key
                         $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                        header("location: IMNGMTSYS/system/y/index?id=" . $_SESSION["hehe"] . "");
+                        header("location: IMNGMTSYS/system/y/index?id=" . $_SESSION['hehe'] . "");
                       }
 
                       break;

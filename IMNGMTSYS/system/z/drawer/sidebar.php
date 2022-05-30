@@ -1,5 +1,26 @@
 <ul class="sidebar-nav" id="sidebar-nav">
+<?php 
+          $output = '';
+          $key = $_SESSION["login_key"];
+          if(isset($verified_session_department) && ($verified_session_username)){
+            switch($ad_rolee){
+              case "SuperAdmin":
+                //statement
+                ?>
+                 <li class="nav-item">
+                  <a href="../../../super_admin/index?id=<?php echo $_SESSION["login_key"];?>" class="<?php echo 'nav-link collapsed';?>" >
+                    <i class="bi bi-arrow-return-left"></i>
+                    <span>Return to SuperUser</span>
+                  </a>
+                </li><!-- End Return Nav -->        
+            
+                <?php
+                break;  
+            } 
+        }else{
 
+        }
+        ?>
       <li class="nav-item">
         <a class="nav-link " <?php echo 'href=index.php?'.$url
           ?>
@@ -7,6 +28,12 @@
           <i class="bi bi-grid"></i>
           <span>Dashboard
           </span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#verticalycentered">
+          <i class="bi bi-envelope"></i>
+          <span>Create Post</span>
         </a>
       </li>
       <!-- End Dashboard Nav -->

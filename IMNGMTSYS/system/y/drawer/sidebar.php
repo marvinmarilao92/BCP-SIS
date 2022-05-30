@@ -1,5 +1,27 @@
 <ul class="sidebar-nav" id="sidebar-nav">
+  <!-- Adding return nav item for super admin -->
+  <?php 
+          $output = '';
+          $key = $_SESSION["login_key"];
+          if(isset($verified_session_department) && ($verified_session_username)){
+            switch($rolee){
+              case "SuperAdmin":
+                //statement
+                ?>
+                 <li class="nav-item">
+                  <a href="../../../super_admin/index?id=<?php echo $_SESSION["login_key"];?>" class="<?php echo 'nav-link collapsed';?>" >
+                    <i class="bi bi-arrow-return-left"></i>
+                    <span>Return to SuperUser</span>
+                  </a>
+                </li><!-- End Return Nav -->        
+            
+                <?php
+                break;  
+            } 
+        }else{
 
+        }
+        ?>
       <li class="nav-item">
         <a class="nav-link " <?php echo 'href=index.php?'.$url;
           ?>
@@ -71,12 +93,14 @@
           </li>
           <li>
             <li class="nav-heading">Qualified Students Status</li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Approved</span>
+            <a  <?php echo 'href=qualified.php?'.$url;
+        ?>>
+              <i class="bi bi-circle"></i><span>Qualified</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a <?php echo 'href=pending.php?'.$url;
+        ?>>
               <i class="bi bi-circle"></i><span>Pending</span>
             </a>
           </li>
@@ -103,7 +127,7 @@
       <!-- -->
       <li class="nav-heading">Student Documents</li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="transaction-bills.php">
+        <a class="nav-link collapsed" href="#">
           <i class="bi bi-person-check"></i>
           <span>Files</span>
         </a>
@@ -113,9 +137,7 @@
       <!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=transaction-bills.php?'.$url;
-        ?>
-        >
+        <a class="nav-link collapsed" href="#">
           <i class="bi bi-cash-coin"></i>
           <span>Transaction History</span>
         </a>
@@ -124,7 +146,7 @@
        <li class="nav-heading">Chat Support</li>
 
        <li class="nav-item">
-        <a class="nav-link collapsed" href="contact.php">
+        <a class="nav-link collapsed" href="#">
           <i class="bi bi-envelope"></i>
           <span>Contact</span>
         </a>
@@ -133,7 +155,7 @@
 
         <li class="nav-heading">Concerns</li>
         <li class="nav-item">
-        <a class="nav-link collapsed" href="contact.php">
+        <a class="nav-link collapsed" href="#">
           <i class="bi bi-envelope"></i>
           <span>Reports</span>
         </a>
