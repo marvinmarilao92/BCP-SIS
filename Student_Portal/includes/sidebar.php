@@ -86,7 +86,7 @@
                                         echo 'nav-link collapsed';
                                       } ?>">
         <i class="bi bi-geo"></i>
-        <span>Track Douments</span>
+        <span>Track </span>
       </a>
     </li><!-- tracking item Nav -->
 
