@@ -57,7 +57,7 @@ $page = 'clr' ; $col = 'Clearance'; include ("includes/sidebar.php");
                                         // echo "</td>";
                                     echo "</tr>";
                                 }
-                                echo "</tbody>";                            
+                                echo "</tbody>";
                             echo "</table>";
                             // Free result set
                             mysqli_free_result($result);

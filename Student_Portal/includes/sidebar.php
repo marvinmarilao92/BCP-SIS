@@ -91,6 +91,36 @@
     </li><!-- tracking item Nav -->
 
 
+
+
+
+
+
+
+
+
+    <li class="nav-heading">Guidance Service</li>
+
+    <li class="nav-item">
+      <a href="pages-faq?id=<?php echo $_SESSION["login_key"]; ?>" class="<?php if ($page == 'faqs') {
+                                                                            echo 'nav-link';
+                                                                          } else {
+                                                                            echo 'nav-link collapsed';
+                                                                          } ?>">
+        <i class="bi bi-question-circle"></i>
+        <span>Assessment</span>
+      </a>
+    </li><!-- End Assessment Page Nav -->
+
+
+
+
+
+
+
+
+
+
     <li class="nav-heading">Help Desk</li>
 
     <li class="nav-item">
@@ -103,6 +133,7 @@
         <span>F.A.Q.S</span>
       </a>
     </li><!-- End F.A.Q Page Nav -->
+
     <li class="nav-item">
       <a href="new_ticket.php?id=<?php echo $_SESSION["login_key"]; ?>" class="<?php if ($page == 'contact') {
                                                                                   echo 'nav-link';
