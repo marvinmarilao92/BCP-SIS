@@ -1,5 +1,6 @@
 <?php
 include('includes/session.php');
+$collapsed = "clearance-audit-trail";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,25 +37,25 @@ include ("includes/sidebar.php");
               <h5 class="card-title">List of Audits</h5>
               <?php
                     // Attempt select query execution
-                    $sql = "SELECT * FROM clearance_audit_trail order by id DESC";
+                    $sql = "SELECT * FROM audit_trail where account_no = '$verified_session_username' and actor = 'Clearance Administrator' order by id DESC";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table id="example" class="table datatable">';
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th scope='col'>User ID</th>";
-                                        echo "<th scope='col'>Action Made</th>";
                                         echo "<th scope='col'>Date</th>";
-                                        echo "<th scope='col'>Department</th>";
+                                        echo "<th scope='col'>Action Made</th>";
+                                        echo "<th scope='col'>IP Address</th>";
+                                        echo "<th scope='col'>Host</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . $row['user_id'] . "</td>";
-                                        echo "<td>" . $row['action'] . "</td>";
                                         echo "<td>" . $row['date'] . "</td>";
-                                        echo "<td>" . $row['department'] . "</td>";
+                                        echo "<td>" . $row['action'] . "</td>";
+                                        echo "<td>" . $row['ip'] . "</td>";
+                                        echo "<td>" . $row['host'] . "</td>";
                                     echo "</tr>";
                                 }
                                 echo "</tbody>";                            

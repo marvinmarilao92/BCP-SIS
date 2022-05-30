@@ -121,8 +121,10 @@ if(isset($_POST["view"]))
         $links='docu_template?id='.$_SESSION["login_key"].'';        
        }else if ($doc_status =='Request Submitted'){
         $links='docu_template?id='.$_SESSION["login_key"].'';        
-       }else if ($doc_status == "Clearance Declined" || $doc_status == "Clearance Approved"){
-        $links='clearance-status-read.php?id=22&name='.$dept.'&notif=1';        
+       }else if ($doc_status == "Semestral Clearance Started"){
+        $links='semestral-clearance.php?notif=1&notif_id='.$row["id"].'';        
+       }else if ($doc_status == "Clearance Appointments"){
+        $links='clearance-appointment.php?notif=1&notif_id='.$row["id"].'';        
        }else{
         $links='docu_req?id='.$_SESSION["login_key"].'';
        }
