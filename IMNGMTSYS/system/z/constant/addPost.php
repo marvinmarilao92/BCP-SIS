@@ -1,0 +1,56 @@
+<?php
+
+	
+	require '../../dbCon/bonak.php';
+	
+
+
+
+	if(isset($_POST['post']))
+	{
+			date_default_timezone_set('Asia/Manila');
+		require '../control/check-session-login.php';
+		function validate($data)
+						{
+                        $data = trim($data);
+                        $data = stripslashes($data);
+                        $data = htmlspecialchars($data);
+                        return $data;
+                    	}
+
+
+
+                    	$date = date('d-m-Y h:i A ');
+                    	$post = validate($_POST['posting']);
+
+
+
+                    	$sql =  "INSERT INTO ims_admin_post (post,pdate,user_post,p_role,c_id)
+                    			 values ('$post','$date','$ad_fname,$ad_lname','$ad_rolee','$verified_session_username')";
+						
+                    	$pst = mysqli_query($link,$sql);
+
+                    	if($pst)
+                    	{ header("Location: ../index.php?success=posted succcess");
+          				    die(); }
+                    	else
+                    	{ echo "Error: " . $sql . "<br>" . mysqli_error($link); }
+
+
+
+
+
+
+
+	}
+	else
+	{
+		echo "Error: " . $sql . "<br>" . mysqli_error($link);
+	}
+
+
+
+
+
+
+?>
