@@ -1,5 +1,36 @@
 <?php
 include('session.php');
+if(isset($_GET['logs']) && $_GET['logs'] == 2 && isset($_GET['dept'])){
+  //Audit Trail
+  $role = trim($_GET['dept']);
+  if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
+    $ip = $_SERVER["HTTP_CLIENT_IP"];
+  } elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+    $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+  } else {
+    $ip = $_SERVER["REMOTE_ADDR"];
+    $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+    $action = "Logged Out as ".trim($_GET['dept'])."";
+    date_default_timezone_set("asia/manila");
+    $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
+    mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$role','$ip','$host','$date')") or die(mysqli_error($link));
+  }
+}
+if(isset($_GET['logs']) && $_GET['logs'] == 1){
+  //Audit Trail
+  if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
+    $ip = $_SERVER["HTTP_CLIENT_IP"];
+  } elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+    $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+  } else {
+    $ip = $_SERVER["REMOTE_ADDR"];
+    $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+    $action = "Logged Out as Clearance Administrator";
+    date_default_timezone_set("asia/manila");
+    $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
+    mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','Clearance Administrator','$ip','$host','$date')") or die(mysqli_error($link));
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -375,7 +406,7 @@ include('session.php');
           <div class="col-lg-4">
             <div class="card">
               <div class="card-body">
-                <a href="../Clearance/clearance-administrator/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
+                <a href="../Clearance/clearance-administrator/index.php?id=<?php echo $_SESSION["login_key"]; ?>&logs=1">
                   <h5 class="card-title">Clearance Administrator</h5>
                 </a>
                 <p class="card-text">Click here to access module</p>

@@ -1,5 +1,6 @@
 <?php
 include('includes/session.php');
+$collapsed = "";
 $sql = "SELECT * FROM clearance_student_semester ORDER BY id DESC LIMIT 1";
 if($result = mysqli_query($link, $sql)){
   if(mysqli_num_rows($result) > 0){
