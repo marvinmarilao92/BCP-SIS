@@ -1,6 +1,11 @@
 <?php
 include('includes/session.php');
 $collapsed = "clearance-appointment";
+if(isset($_GET["notif"]) && !empty(trim($_GET["notif"])) && trim($_GET["notif"])==1){
+  $notif_id = trim($_GET["notif_id"]);
+    $delete_query = "DELETE FROM datms_notification WHERE act2 = '$verified_session_username' AND stat2 = 1 and id = '$notif_id'";
+    mysqli_query($link, $delete_query);
+}
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POST["action"])=="new-request" && isset($_POST["department_name"]) && isset($_POST["appointment_date"]) && isset($_POST["appointment_hour"])){
   $department_name = trim($_POST["department_name"]);
   $appointment_date = trim($_POST["appointment_date"]);

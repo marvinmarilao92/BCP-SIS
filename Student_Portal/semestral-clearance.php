@@ -2,6 +2,11 @@
 include('includes/session.php');
   require "vendor/autoload.php";
   use Dompdf\Dompdf;
+if(isset($_GET["notif"]) && !empty(trim($_GET["notif"])) && trim($_GET["notif"])==1){
+  $notif_id = trim($_GET["notif_id"]);
+    $delete_query = "DELETE FROM datms_notification WHERE act2 = '$verified_session_username' AND stat2 = 1 and id = '$notif_id'";
+    mysqli_query($link, $delete_query);
+}
 $collapsed = "semestral-clearance";
 $show_modal = false;
 $show_modal1 = false;

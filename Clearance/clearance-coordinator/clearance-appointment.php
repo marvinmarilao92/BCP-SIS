@@ -3,12 +3,17 @@ include('includes/session.php');
 $collapsed = "clearance-appointment";
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POST["action"])=="accept-appointment" && isset($_POST["id"])){
   $id = trim($_POST["id"]);
+  $id_number = trim($_POST["id_number"]);
   $status="Waiting";
   // Prepare an update statement
   $sql = "UPDATE clearance_appointments SET status=? WHERE id=? and department_name=?";
   if($stmt = mysqli_prepare($link, $sql)){
     mysqli_stmt_bind_param($stmt, "sis", $status, $id, $verified_session_role);
     if(mysqli_stmt_execute($stmt)){
+      // Notification
+      $notif = "Appointment Request for ".$verified_session_role."was Accepted";
+      $date = date('Y-m-d H:i:s');
+      $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date,affected) VALUES ('', '0', '$id_number', '0', 'Clearance Appointments', '$notif', '$verified_session_role', 'Active', '$date', '123')") or die(mysqli_error($link));
       unset($_POST['action']);
       unset($_POST['id']);
       // Records updated successfully. Redirect to landing page
@@ -58,12 +63,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
 }
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POST["action"])=="decline-appointment" && isset($_POST["id"])){
   $id = trim($_POST["id"]);
+  $id_number = trim($_POST["id_number"]);
   $status="Declined";
   // Prepare an update statement
   $sql = "UPDATE clearance_appointments SET status=? WHERE id=? and department_name=?";
   if($stmt = mysqli_prepare($link, $sql)){
     mysqli_stmt_bind_param($stmt, "sis", $status, $id, $verified_session_role);
     if(mysqli_stmt_execute($stmt)){
+      // Notification
+      $notif = "Appointment Request for ".$verified_session_role."was Declined";
+      $date = date('Y-m-d H:i:s');
+      $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date,affected) VALUES ('', '0', '$id_number', '0', 'Clearance Appointments', '$notif', '$verified_session_role', 'Active', '$date', '123')") or die(mysqli_error($link));
       unset($_POST['action']);
       unset($_POST['id']);
       // Records updated successfully. Redirect to landing page
@@ -230,11 +240,13 @@ include ("includes/sidebar.php");
                               <form action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'" method="post">
                                 <input type="hidden" name="action" value="accept-appointment">
                                 <input type="hidden" name="id" value="'. $row['id'] .'">
+                                <input type="hidden" name="id_number" value="'. $row['id_number'] .'">
                                 <button type="submit" class="btn btn-success btn-sm" title="Accept Appointment" data-toggle="tooltip"><span class="bi bi-check"></span></button>
                               </form>
                               <form action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'" method="post">
                                 <input type="hidden" name="action" value="decline-appointment">
                                 <input type="hidden" name="id" value="'. $row['id'] .'">
+                                <input type="hidden" name="id_number" value="'. $row['id_number'] .'">
                                 <button type="submit" class="btn btn-danger btn-sm" title="Decline Appointment" data-toggle="tooltip"><span class="bi bi-x"></span></button>
                               </form>
                             </div>';

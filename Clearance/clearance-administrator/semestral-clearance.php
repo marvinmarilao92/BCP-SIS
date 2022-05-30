@@ -5,6 +5,7 @@ include('includes/session.php');
 $collapsed = "semestral-clearance";
 $show_modal = false;
 $show_modal1 = false;
+$show_modal2 = false;
 $sql = "SELECT * FROM clearance_semester ORDER BY id DESC LIMIT 1";
 if($result = mysqli_query($link, $sql)){
   if(mysqli_num_rows($result) > 0){
@@ -32,6 +33,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
     $param_date_started = $date_started;
     // Attempt to execute the prepared statement
     if(mysqli_stmt_execute($stmt)){
+      if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
+        $ip = $_SERVER["HTTP_CLIENT_IP"];
+      } elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+        $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+      } else {
+        $ip = $_SERVER["REMOTE_ADDR"];
+        $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        $action = "Started New Semestral Clearance for ".$semester." ".$school_year."";
+        date_default_timezone_set("asia/manila");
+        $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
+        mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','Clearance Administrator','$ip','$host','$date')") or die(mysqli_error($link));
+      }
       $sql = "SELECT * FROM clearance_semester ORDER BY id DESC LIMIT 1";
       if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
@@ -65,6 +78,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
                       $firstname = $row1['firstname'];
                       $lastname = $row1['lastname'];
                       $course = $row1['course'];
+                      // Notification
+                      $notif = "Semestral Clearance for ".$semester." ".$school_year." has started";
+                      $date = date('Y-m-d H:i:s');
+                      $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date,affected) VALUES ('', '0', '$id_number', '0', 'Semestral Clearance Started', '$notif', '$verified_session_role', 'Active', '$date', '123')") or die(mysqli_error($link)); 
                       $sql2 = "SELECT * FROM clearance_students_record where student_id = '".$id_number."' and department_name = '".$temp_dept."' LIMIT 1";
                       if($result2 = mysqli_query($link, $sql2)){
                         if(mysqli_num_rows($result2) > 0){
@@ -119,6 +136,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
                       $firstname = $row1['firstname'];
                       $lastname = $row1['lastname'];
                       $course = $row1['course'];
+                      // Notification
+                      $notif = "Semestral Clearance for ".$semester." ".$school_year." has started";
+                      $date = date('Y-m-d H:i:s');
+                      $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date,affected) VALUES ('', '0', '$id_number', '0', 'Semestral Clearance Started', '$notif', '$verified_session_role', 'Active', '$date', '123')") or die(mysqli_error($link)); 
                       $sql2 = "SELECT * FROM clearance_teachers_record where teacher_id = '".$id_number."' and department_name = '".$temp_dept."' LIMIT 1";
                       if($result2 = mysqli_query($link, $sql2)){
                         if(mysqli_num_rows($result2) > 0){

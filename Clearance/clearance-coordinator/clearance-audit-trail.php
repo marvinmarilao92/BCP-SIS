@@ -37,7 +37,7 @@ include ("includes/sidebar.php");
               <h5 class="card-title">List of Audits</h5>
               <?php
                     // Attempt select query execution
-                    $sql = "SELECT * FROM audit_trail where account_no = '$verified_session_username' and actor = 'Clearance Administrator' order by id DESC";
+                    $sql = "SELECT * FROM audit_trail where account_no = '$verified_session_username' and actor = '$verified_session_role' order by id DESC";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table id="example" class="table datatable">';

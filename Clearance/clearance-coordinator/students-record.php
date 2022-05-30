@@ -40,6 +40,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
         mysqli_stmt_bind_param($stmt, "ssssss", $student_id, $firstname, $lastname, $course, $description, $dept_name);
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
+          //Audit Trail
+          if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
+            $ip = $_SERVER["HTTP_CLIENT_IP"];
+          } elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+            $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+          } else {
+            $ip = $_SERVER["REMOTE_ADDR"];
+            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+            $action = "Add New Record: \'".$description."\' to Student ID: \'".$student_id."\'";
+            date_default_timezone_set("asia/manila");
+            $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
+            mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$verified_session_role','$ip','$host','$date')") or die(mysqli_error($link));
+          }
           $semester = 0;
           $sql = "SELECT * FROM clearance_semester_current LIMIT 1";
           if($result = mysqli_query($link, $sql)){
@@ -93,12 +106,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POST["action"])=="delete-record" && isset($_POST["id"])){
   $student_id = trim($_POST["id"]);
   // Prepare a delete statement
-  $sql = "DELETE FROM clearance_students_record WHERE student_id = ?";
+  $sql = "DELETE FROM clearance_students_record WHERE student_id = ? and department_name = ?";
   if($stmt = mysqli_prepare($link, $sql)){
     // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt, "s", $student_id);
+    mysqli_stmt_bind_param($stmt, "ss", $student_id, $verified_session_role);
     // Attempt to execute the prepared statement
     if(mysqli_stmt_execute($stmt)){
+      //Audit Trail
+      if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
+        $ip = $_SERVER["HTTP_CLIENT_IP"];
+      } elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+        $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+      } else {
+        $ip = $_SERVER["REMOTE_ADDR"];
+        $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        $action = "Deleted Record of Student ID: \'".$student_id."\'";
+        date_default_timezone_set("asia/manila");
+        $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
+        mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$verified_session_role','$ip','$host','$date')") or die(mysqli_error($link));
+      }
       $semester = 0;
       $sql = "SELECT * FROM clearance_semester_current LIMIT 1";
       if($result = mysqli_query($link, $sql)){
@@ -148,6 +174,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
     mysqli_stmt_bind_param($stmt, "ss", $description, $student_id);
     // Attempt to execute the prepared statement
     if(mysqli_stmt_execute($stmt)){
+      //Audit Trail
+      if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
+        $ip = $_SERVER["HTTP_CLIENT_IP"];
+      } elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+        $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+      } else {
+        $ip = $_SERVER["REMOTE_ADDR"];
+        $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        $action = "Updated Record: \'".$description."\' of Student ID: \'".$student_id."\'";
+        date_default_timezone_set("asia/manila");
+        $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
+        mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$verified_session_role','$ip','$host','$date')") or die(mysqli_error($link));
+      }
       $semester = 0;
       $sql = "SELECT * FROM clearance_semester_current LIMIT 1";
       if($result = mysqli_query($link, $sql)){
