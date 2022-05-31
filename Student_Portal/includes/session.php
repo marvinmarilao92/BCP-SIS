@@ -1,7 +1,7 @@
 <?php
   include 'config.php';
   session_start();
-  
+
   $user_id_checker = $_SESSION['session_username'];
 
   $sql5 = "SELECT * FROM student_information where id_number = '$user_id_checker'";
@@ -32,7 +32,7 @@
               mysqli_free_result($result5);
             }
           }
-  
+
   if(!(isset($_SESSION['session_department']) && ($_SESSION['session_department'] == "Student") && isset($_SESSION['session_username']) && ($verified_session_username == $_SESSION['session_username']))){
       header("location:../");
       die();

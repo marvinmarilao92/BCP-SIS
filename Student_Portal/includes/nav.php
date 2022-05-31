@@ -32,8 +32,8 @@
             </li>
 
             <div style="overflow-y: scroll; max-height:370px;">
-              <li class="notification">
-              </li>
+              <li class="notification">test</li>
+
             </div>
 
             <li class="dropdown-footer">
@@ -44,7 +44,7 @@
         </li>
         <!-- End Notification Nav -->
 
-    
+
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -82,7 +82,7 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li> 
+            <li>
               <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-question-circle"></i>
                 <span>Need Help?</span>
@@ -109,7 +109,7 @@
   <!-- for notification -->
 <script>
   $(document).ready(function(){
-  
+
   function load_unseen_notification(view = '')
   {
     $.ajax({
@@ -129,17 +129,17 @@
     }
     });
   }
-  
+
   load_unseen_notification();
-  
+
   $(document).on('click', '#viewnotif', function(){
     $('.count').html('');
     load_unseen_notification('yes');
   });
-  
-  setInterval(function(){ 
-    load_unseen_notification();; 
+
+  setInterval(function(){
+    load_unseen_notification();;
   }, 5000);
-  
+
   });
 </script>

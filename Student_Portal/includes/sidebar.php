@@ -3,7 +3,7 @@
 
   <ul class="sidebar-nav" id="sidebar-nav">
       <!-- Adding return nav item for super admin -->
-      <?php 
+      <?php
           $output = '';
           $key = $_SESSION["login_key"];
           if(isset($verified_session_department) && ($verified_session_username)){
@@ -16,10 +16,10 @@
                     <i class="bi bi-arrow-return-left"></i>
                     <span>Apply for OJT</span>
                   </a>
-                </li><!-- End Return Nav -->        
-            
+                </li><!-- End Return Nav -->
+
                 <?php
-                break;  
+                break;
                 case "3rd Year":
                   //statement
                   ?>
@@ -28,11 +28,11 @@
                       <i class="bi bi-arrow-return-left"></i>
                       <span>Apply for OJT</span>
                     </a>
-                  </li><!-- End Return Nav -->        
-              
+                  </li><!-- End Return Nav -->
+
                   <?php
-                  break;  
-            } 
+                  break;
+            }
         }else{
 
         }
@@ -128,18 +128,18 @@
     <li class="nav-heading">Guidance</li>
 
     <li class="nav-item">
-      <a href="pages-faq?id=<?php echo $_SESSION["login_key"]; ?>" class="<?php if ($page == 'faqs') { echo 'nav-link';} else {echo 'nav-link collapsed';} ?>">
+      <a href="guidance_Counseling_Request?id=<?php echo $_SESSION["login_key"]; ?>" class="<?php if ($page == 'cnslngRqst') { echo 'nav-link';} else {echo 'nav-link collapsed';} ?>">
         <i class="bi bi-clipboard-plus"></i>
         <span>Counseling Request</span>
       </a>
-    </li><!-- End F.A.Q Page Nav -->
+    </li><!-- End Counseling Request Page Nav -->
 
     <li class="nav-item">
-      <a href="pages-faq?id=<?php echo $_SESSION["login_key"]; ?>" class="<?php if ($page == 'faqs') { echo 'nav-link';} else {echo 'nav-link collapsed';} ?>">
+      <a href="guidance_Student_Logs.php?id=<?php echo $_SESSION["login_key"]; ?>" class="<?php if ($page == 'stdLgs') { echo 'nav-link';} else {echo 'nav-link collapsed';} ?>">
         <i class="bi bi-box-arrow-in-right"></i>
         <span>Student Logs</span>
       </a>
-    </li><!-- End F.A.Q Page Nav -->
+    </li><!-- End Student Logs Page Nav -->
 
 
 
@@ -294,22 +294,22 @@
                   <div class="card-body">
                     <h2 class="card-title">Provide all information</h2>
                       <!-- Fill out Form -->
-                      
+
                       <div class="row g-3" >
                       <input type="text" id="fname" name="fname" class="form-control"  value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
                       <input type="text" id="course" name="course" class="form-control"  value="<?php echo $verified_session_course?>" readonly>
                       <input type="text" id="yearlvl" name="yearlvl" class="form-control"  value="<?php echo $verified_session_year_level?>" readonly>
                         <br>
 
-                        <div class="col-md-12">                                    
+                        <div class="col-md-12">
                           <input class="form-control"  type="file" id="resume" name="resume" accept="application/pdf" >
                           <label for="resume" style="float: right; margin-right:10px"></label>
                         </div>
                         <div class="col-12">
                             <textarea class="form-control" style="height: 80px" placeholder="Reason" name="reason" id="reason" required></textarea>
-                        </div>        
+                        </div>
                       </div>
-                                  
+
                   </div>
                 </div>
                   <div class="modal-footer">
@@ -319,7 +319,7 @@
               </form>
               <!-- End Form -->
           </div>
-      </div>     
+      </div>
   </div>
   <!-- End Create Document Modal-->
 <?php require 'modal.php' ?>
