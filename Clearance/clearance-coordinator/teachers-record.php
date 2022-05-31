@@ -47,12 +47,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
             $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
           } else {
             $ip = $_SERVER["REMOTE_ADDR"];
-            $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-            $action = "Add New Record: \'".$description."\' to Teacher ID: \'".$teacher_id."\'";
-            date_default_timezone_set("asia/manila");
-            $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
-            mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$verified_session_role','$ip','$host','$date')") or die(mysqli_error($link));
           }
+          $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+          $action = "Add New Record: \'".$description."\' to Teacher ID: \'".$teacher_id."\'";
+          date_default_timezone_set("asia/manila");
+          $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
+          mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$verified_session_role','$ip','$host','$date')") or die(mysqli_error($link));
           $semester = 0;
           $sql = "SELECT * FROM clearance_semester_current LIMIT 1";
           if($result = mysqli_query($link, $sql)){
@@ -119,12 +119,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
         $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
       } else {
         $ip = $_SERVER["REMOTE_ADDR"];
-        $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-        $action = "Deleted Record of Teacher ID: \'".$teacher_id."\'";
-        date_default_timezone_set("asia/manila");
-        $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
-        mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$verified_session_role','$ip','$host','$date')") or die(mysqli_error($link));
       }
+      $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+      $action = "Deleted Record of Teacher ID: \'".$teacher_id."\'";
+      date_default_timezone_set("asia/manila");
+      $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
+      mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$verified_session_role','$ip','$host','$date')") or die(mysqli_error($link));
       $semester = 0;
       $sql = "SELECT * FROM clearance_semester_current LIMIT 1";
       if($result = mysqli_query($link, $sql)){
@@ -181,12 +181,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
         $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
       } else {
         $ip = $_SERVER["REMOTE_ADDR"];
-        $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-        $action = "Updated Record: \'".$description."\' of Teacher ID: \'".$teacher_id."\'";
-        date_default_timezone_set("asia/manila");
-        $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
-        mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$verified_session_role','$ip','$host','$date')") or die(mysqli_error($link));
       }
+      $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+      $action = "Updated Record: \'".$description."\' of Teacher ID: \'".$teacher_id."\'";
+      date_default_timezone_set("asia/manila");
+      $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
+      mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$verified_session_role','$ip','$host','$date')") or die(mysqli_error($link));
       $semester = 0;
       $sql = "SELECT * FROM clearance_semester_current LIMIT 1";
       if($result = mysqli_query($link, $sql)){

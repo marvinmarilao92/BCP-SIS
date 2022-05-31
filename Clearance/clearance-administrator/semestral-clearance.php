@@ -39,12 +39,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
         $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
       } else {
         $ip = $_SERVER["REMOTE_ADDR"];
-        $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-        $action = "Started New Semestral Clearance for ".$semester." ".$school_year."";
-        date_default_timezone_set("asia/manila");
-        $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
-        mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','Clearance Administrator','$ip','$host','$date')") or die(mysqli_error($link));
       }
+      $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+      $action = "Started New Semestral Clearance for ".$semester." ".$school_year."";
+      date_default_timezone_set("asia/manila");
+      $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
+      mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','Clearance Administrator','$ip','$host','$date')") or die(mysqli_error($link));
       $sql = "SELECT * FROM clearance_semester ORDER BY id DESC LIMIT 1";
       if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){

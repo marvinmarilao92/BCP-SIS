@@ -9,12 +9,12 @@ if(isset($_GET['logs']) && $_GET['logs'] == 2 && isset($_GET['dept'])){
     $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
   } else {
     $ip = $_SERVER["REMOTE_ADDR"];
-    $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-    $action = "Logged Out as ".trim($_GET['dept'])."";
-    date_default_timezone_set("asia/manila");
-    $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
-    mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$role','$ip','$host','$date')") or die(mysqli_error($link));
   }
+  $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+  $action = "Logged Out as ".trim($_GET['dept'])."";
+  date_default_timezone_set("asia/manila");
+  $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
+  mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$role','$ip','$host','$date')") or die(mysqli_error($link));
 }
 if(isset($_GET['logs']) && $_GET['logs'] == 1){
   //Audit Trail
@@ -24,12 +24,12 @@ if(isset($_GET['logs']) && $_GET['logs'] == 1){
     $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
   } else {
     $ip = $_SERVER["REMOTE_ADDR"];
-    $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-    $action = "Logged Out as Clearance Administrator";
-    date_default_timezone_set("asia/manila");
-    $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
-    mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','Clearance Administrator','$ip','$host','$date')") or die(mysqli_error($link));
   }
+  $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+  $action = "Logged Out as Clearance Administrator";
+  date_default_timezone_set("asia/manila");
+  $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
+  mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','Clearance Administrator','$ip','$host','$date')") or die(mysqli_error($link));
 }
 ?>
 <!DOCTYPE html>
