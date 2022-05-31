@@ -66,10 +66,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
         if(mysqli_stmt_execute($stmt)){
           //Add Record of Students
           $sql = "SELECT * FROM clearance_department_students";
+          $count = 0;
           if($result = mysqli_query($link, $sql)){
             if(mysqli_num_rows($result) > 0){
               while($row = mysqli_fetch_array($result)){
                 $temp_dept = $row['department_name'];
+                $count++;
                 $sql1 = "SELECT * FROM student_information";
                 if($result1 = mysqli_query($link, $sql1)){
                   if(mysqli_num_rows($result1) > 0){
@@ -78,10 +80,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
                       $firstname = $row1['firstname'];
                       $lastname = $row1['lastname'];
                       $course = $row1['course'];
-                      // Notification
-                      $notif = "Semestral Clearance for ".$semester." ".$school_year." has started";
-                      $date = date('Y-m-d H:i:s');
-                      $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date,affected) VALUES ('', '0', '$id_number', '0', 'Semestral Clearance Started', '$notif', '$verified_session_role', 'Active', '$date', '123')") or die(mysqli_error($link)); 
+                      if($count == mysqli_num_rows($result)){
+                        // Notification
+                        $notif = "Semestral Clearance for ".$semester." ".$school_year." has started";
+                        $date = date('Y-m-d H:i:s');
+                        $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date,affected) VALUES ('', '0', '$id_number', '0', 'Semestral Clearance Started', '$notif', '$verified_session_role', 'Active', '$date', '123')") or die(mysqli_error($link)); 
+                      }
                       $sql2 = "SELECT * FROM clearance_students_record where student_id = '".$id_number."' and department_name = '".$temp_dept."' LIMIT 1";
                       if($result2 = mysqli_query($link, $sql2)){
                         if(mysqli_num_rows($result2) > 0){
@@ -124,10 +128,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
           }
           //Add Record of Teachers
           $sql = "SELECT * FROM clearance_department_teachers";
+          $count = 0;
           if($result = mysqli_query($link, $sql)){
             if(mysqli_num_rows($result) > 0){
               while($row = mysqli_fetch_array($result)){
                 $temp_dept = $row['department_name'];
+                $count++;
                 $sql1 = "SELECT * FROM teacher_information";
                 if($result1 = mysqli_query($link, $sql1)){
                   if(mysqli_num_rows($result1) > 0){
@@ -136,10 +142,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && trim($_POS
                       $firstname = $row1['firstname'];
                       $lastname = $row1['lastname'];
                       $course = $row1['course'];
-                      // Notification
-                      $notif = "Semestral Clearance for ".$semester." ".$school_year." has started";
-                      $date = date('Y-m-d H:i:s');
-                      $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date,affected) VALUES ('', '0', '$id_number', '0', 'Semestral Clearance Started', '$notif', '$verified_session_role', 'Active', '$date', '123')") or die(mysqli_error($link)); 
+                      if($count == mysqli_num_rows($result)){
+                        // Notification
+                        $notif = "Semestral Clearance for ".$semester." ".$school_year." has started";
+                        $date = date('Y-m-d H:i:s');
+                        $link->query("INSERT INTO datms_notification (act1, stat1, act2, stat2, subject, notif, dept, status, date,affected) VALUES ('', '0', '$id_number', '0', 'Semestral Clearance Started', '$notif', '$verified_session_role', 'Active', '$date', '123')") or die(mysqli_error($link)); 
+                      }
                       $sql2 = "SELECT * FROM clearance_teachers_record where teacher_id = '".$id_number."' and department_name = '".$temp_dept."' LIMIT 1";
                       if($result2 = mysqli_query($link, $sql2)){
                         if(mysqli_num_rows($result2) > 0){
