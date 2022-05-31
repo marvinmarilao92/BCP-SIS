@@ -12,8 +12,8 @@ include ("includes/head.php");
 </head>
 <body>
 
-<?php 
-$page = 'track'; 
+<?php
+$page = 'track';
 include ("includes/nav.php");
 include ("includes/sidebar.php");
 ?>
@@ -22,7 +22,7 @@ include ("includes/sidebar.php");
   <main id="main" class="main">
 
     <div class="pagetitle">
-      
+
       <h1>Track Documents</h1>
       <nav>
         <ol class="breadcrumb">
@@ -34,12 +34,12 @@ include ("includes/sidebar.php");
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
-   
+
         <!-- Left side columns -->
           <div class="row">
 
             <!-- Reports -->
-          
+
               <div class="card">
                 <!-- Activity Body -->
                 <div class="card-body">
@@ -50,7 +50,7 @@ include ("includes/sidebar.php");
                         <input type="text" class="form-control" id="search_text" name="search_text" placeholder="Your Name" autofocus>
                         <label for="floatingName">Enter Code</label>
                       </div>
-                    </div>  
+                    </div>
 
                   <!-- End of search Bar -->
                     <!-- Tracking Activity module -->
@@ -62,11 +62,11 @@ include ("includes/sidebar.php");
               <!-- End Activity Body -->
               </div>
             </div>
-      
+
     </section>
   </main><!-- End #main -->
 
-  
+
   <!-- ======= Footer ======= -->
   <?php include ("includes/footer.php"); ?>
   <!-- End Footer -->
@@ -104,7 +104,7 @@ include ("includes/sidebar.php");
       });
       //end of tracking history
       });
-      
+
   </script>
 
 </html>

@@ -77,7 +77,7 @@ include ("includes/head.php");
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
     $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip();   
+        $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
 <?php
@@ -141,7 +141,7 @@ include ("includes/sidebar.php");
                       } else{
                           echo "<td class='text-center' colspan='5'>No Appointments Added Yet</td>";
                       }
-                    echo "</tbody>";                            
+                    echo "</tbody>";
                     echo "</table>";
                   } else{
                       echo "Oops! Something went wrong. Please try again later.";
@@ -204,7 +204,7 @@ include ("includes/sidebar.php");
                 } else{
                     echo "<td class='text-center' colspan='6'>No Appointment Requests Yet</td>";
                 }
-              echo "</tbody>";                            
+              echo "</tbody>";
               echo "</table>";
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -218,7 +218,7 @@ include ("includes/sidebar.php");
       </div>
     </div>
   </div><!-- End Appointment Record Modal-->
-  
+
   <!-- Appointment Record Modal -->
   <div class="modal fade" id="new-appointment-requests-modal" tabindex="-1">
     <div class="modal-dialog">
@@ -233,7 +233,7 @@ include ("includes/sidebar.php");
             <div class="form-floating mb-3">
               <select class="form-select" id="floatingSelect" aria-label="Floating label select example" required name="department_name">
                 <option selected value=""></option>
-                <?php 
+                <?php
                   $sql = "SELECT * FROM clearance_department_students";
                   if($result = mysqli_query($link, $sql)){
                     if(mysqli_num_rows($result) > 0){
