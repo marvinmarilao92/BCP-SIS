@@ -46,18 +46,6 @@
               ?>
               </div>
 
-              <?php
-
-                  // if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["Read"]))
-                  // {
-                  //     require_once 'Config.php';
-                  //     include 'SForms/timezone.php';
-                  //     $udpate = $db->query('UPDATE notification SET Read_Status=?, updated_at=? WHERE ID=? ', "Read", $time, $_GET["Read"]);
-                  // }
-
-                  echo '</ul>
-                  </li>';
-              ?>
 
 
 
