@@ -32,14 +32,7 @@
             </li>
 
             <div style="overflow-y: scroll; max-height:370px;">
-
-            </div>
-
-
-
-
               <li class="notification"></li>
-
             </div>
 
             <li class="dropdown-footer">
