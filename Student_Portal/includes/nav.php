@@ -37,7 +37,7 @@
                   require_once 'gac_Config.php';
                   // include '../timezone.php';
 
-                  $notif = $db->query('SELECT * FROM notification WHERE Student_ID=? AND Notif_Messages=?', "220100023", "Notification")->fetchAll();
+                  $notif = $db->query('SELECT * FROM notification WHERE Student_ID=? AND Notif_Messages=?', $verified_session_username, "Notification")->fetchAll();
                   $titleCount = 0;
                   foreach ($notif as $data)
                   {
@@ -48,12 +48,13 @@
 
               <?php
 
-                  if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["Read"]))
-                  {
-                      require_once 'Config.php';
-                      include 'SForms/timezone.php';
-                      $udpate = $db->query('UPDATE notification SET Read_Status=?, updated_at=? WHERE ID=? ', "Read", $time, $_GET["Read"]);
-                  }
+                  // if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["Read"]))
+                  // {
+                  //     require_once 'Config.php';
+                  //     include 'SForms/timezone.php';
+                  //     $udpate = $db->query('UPDATE notification SET Read_Status=?, updated_at=? WHERE ID=? ', "Read", $time, $_GET["Read"]);
+                  // }
+
                   echo '</ul>
                   </li>';
               ?>
