@@ -35,9 +35,7 @@ include ("includes/sidebar.php");
     </div>
 
     <section class="section dashboard">
-      <?php
-          echo $verified_session_username;
-       ?>
+
     </section>
 
   </main>
