@@ -32,6 +32,9 @@
             </li>
 
             <div style="overflow-y: scroll; max-height:370px;">
+              <?php
+                require_once 'gac_Config.php';
+               ?>
               <li class="notification"></li>
             </div>
 
