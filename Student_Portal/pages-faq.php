@@ -13,56 +13,9 @@ include('includes/session.php');
    <?php $page = 'faqs';include ('includes/sidebar.php');//Design for sidebar?>
 
 
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
   
     
-  
-       
-<style type="text/css">
-  
-
-/*ChatBot*/
-.chat_icon{
-  position: fixed;
-  bottom: 50px;
-  
-  right: 30px;
-  z-index: 1000;
-  padding: 0;
-  font-size: 50px;
-  color: yellowgreen;
-  cursor: pointer;
-}
-.chat_box{
-  width: 400px;
-  height: 79vh;
-  position: fixed;
-  bottom: 100px;
-  right: 30px;
-  background:#dedede;
-  z-index: 1000;
-  transition: all 0.3s ease-out;
-  transform: scaleY(0);
-}
-.chat_box.active{
-  transform: scaleY(1);
-}
-#messages{
-  padding: 20px;
-}
-.my-conv-form-wrapper textarea{
-  height: 30px;
-  overflow: hidden;
-  resize: none;
-}
-.hidden{
-  display: none !important;
-}
-.scroll {
-  overflow-x: auto;
-}
-
-</style>
  
 
   <main id="main" class="main col-lg-offset-4">
@@ -252,13 +205,6 @@ include('includes/session.php');
  <?php include 'includes/footer.php'; ?>
   <?php include ("view_ticket.php"); ?>
 
-
-
-   <!-- ChatBot -->
-    <link rel="stylesheet" type="text/css" href="chat_bot/css/jquery.convform.css">
-    <script type="text/javascript" src="chat_bot/js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="chat_bot/js/jquery.convform.js"></script>
-    <script type="text/javascript" src="chat_bot/js/custom.js"></script>
  
   </body>
 </html>
