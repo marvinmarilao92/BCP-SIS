@@ -34,46 +34,6 @@ include('includes/session.php');
     
   </nav>
 </div><!-- End Page Title -->
-<!-- ChatBot -->
-<div class="chat_icon">
-  <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
-</div>
-<div class="chat_box">
-  <div class="my-conv-form-wrapper">
-    <form action="" method="GET" class="hidden">
-      <select data-conv-question="Hi! How can I help you?" name="category">
-        <option value="WebDevelopment">i want to know my balance
-        <option value="DigitalMarketing">Where can i get my diploma?
-        </option>
-       
-      </select>
-      <div data-conv-fork="category">
-        <div data-conv-case="WebDevelopment">
-          <input type="text" name="domainName" data-conv-question="Sorry, Student i can't help you with that">    
-        </div>
-        <div data-conv-case="WebDevelopment">
-          <input type="text" name="domainName" data-conv-question="you can ask it in the MIS department in the main campus">    
-        </div>
-        <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
-          <input type="text" name="companyName" data-conv-question="You can get your diploma in bestlink registrar in the main building or in MV campus"> 
-        </div>
-        <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
-          <input type="text" name="companyName" data-conv-question="Sorry can't understand"> 
-        </div>
-      </div>
-
-      <input type="text" name="name" data-conv-question="This system is only for your concern">
-       <input type="text" name="name" data-conv-question="This system do not give personal infomation">
-
-     
-      <select data-conv-question="Please Confirm">
-        <option value="Yes">end of conversation</option>
-      </select>
-
-    </form>
-  </div>
-</div>
-<!-- ChatBot end -->
 <div class="card-body">
              
 
