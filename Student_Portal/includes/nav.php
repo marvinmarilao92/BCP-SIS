@@ -34,8 +34,7 @@
             <div style="overflow-y: scroll; max-height:370px;">
               <?php
                 require_once 'gac_Config.php';
-                $notif = $db->query('SELECT * FROM notification')->fetchAll();
-                $titleCount = 0;
+                $notif = $db->query('SELECT * FROM notification')->fetchArray();
                 foreach ($notif as $data)
                 {
 
