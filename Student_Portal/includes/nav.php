@@ -35,7 +35,7 @@
 
               <?php
                   require_once 'gac_Config.php';
-                  include '../timezone.php';
+                  // include '../timezone.php';
 
                   $notif = $db->query('SELECT * FROM notification WHERE Student_ID=? AND Notif_Messages=?', $verified_session_username, "Notification")->fetchAll();
                   $titleCount = 0;
