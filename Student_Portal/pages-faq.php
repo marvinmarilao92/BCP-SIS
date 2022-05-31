@@ -13,8 +13,56 @@ include('includes/session.php');
    <?php $page = 'faqs';include ('includes/sidebar.php');//Design for sidebar?>
 
 
-
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    
+       
   
+       
+<style type="text/css">
+  
+
+  /*ChatBot*/
+  .chat_icon{
+    position: fixed;
+    bottom: 50px;
+    
+    right: 30px;
+    z-index: 1000;
+    padding: 0;
+    font-size: 50px;
+    color: yellowgreen;
+    cursor: pointer;
+  }
+  .chat_box{
+    width: 540px;
+    height: 79vh;
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    background:#dedede;
+    z-index: 1000;
+    transition: all 0.3s ease-out;
+    transform: scaleY(0);
+  }
+  .chat_box.active{
+    transform: scaleY(1);
+  }
+  #messages{
+    padding: 20px;
+  }
+  .my-conv-form-wrapper textarea{
+    height: 30px;
+    overflow: hidden;
+    resize: none;
+  }
+  .hidden{
+    display: none !important;
+  }
+  .scroll {
+    overflow-x: auto;
+  }
+
+  </style>
     
  
 
@@ -35,7 +83,54 @@ include('includes/session.php');
   </nav>
 </div><!-- End Page Title -->
 <div class="card-body">
-             
+    <!-- ChatBot -->
+    <div class="chat_icon">
+  <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
+</div>
+<div class="chat_box">
+  <div class="my-conv-form-wrapper">
+    <form action="" method="GET" class="hidden">
+      
+      <select data-conv-question="Hi! Welcome to chat bot of help desk How can I help you?" name="category">
+        <option value="WebDevelopment">What is the purpose of this system?</option>
+        <option value="DigitalMarketing">How can i sumbit my concern?</option>
+       
+      </select>
+      <div data-conv-fork="category">
+        <div data-conv-case="WebDevelopment">
+          <input type="text" name="domainName" data-conv-question="This system is for you student for your concern and question regarding or your problem in school">    
+        </div>
+        <div data-conv-case="WebDevelopment">
+          <input type="text" name="domainName" data-conv-question="for you to have a platform which you can send your concern">    
+        </div>
+        <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="You can submit your concern in the contact us section and there you can submit your concern">
+        </div>
+        <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="choose which department you want to send your concern">
+        </div>
+        <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="Dont hesitate to ask my dear student we are here to help">
+        </div>
+        <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="Because this system is design for you!">
+        </div>
+      </div>
+      <input type="text" name="companyName" data-conv-question="I'm still learning i'm sorry if i can't answer all of your question">
+      
+
+      <!--input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
+
+      <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?"-->
+
+      <select data-conv-question="This is the end of our conversation i'm sorry">
+        <option value="Yes">Exit</option>
+      </select>
+
+    </form>
+  </div>
+</div>
+<!-- ChatBot end -->         
 
              <div class="accordion accordion-flush" id="faq-group-1">
 
@@ -165,18 +260,10 @@ include('includes/session.php');
  <?php include 'includes/footer.php'; ?>
   <?php include ("view_ticket.php"); ?>
 
- <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/6295e69eb0d10b6f3e74e4fa/1g4copmuv';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-    </script>
-    <!--End of Tawk.to Script-->
+ <!-- ChatBot -->
+ <link rel="stylesheet" type="text/css" href="chat_bot/css/jquery.convform.css">
+    <script type="text/javascript" src="chat_bot/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="chat_bot/js/jquery.convform.js"></script>
+    <script type="text/javascript" src="chat_bot/js/custom.js"></script>
   </body>
 </html>
