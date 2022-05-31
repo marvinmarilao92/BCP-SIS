@@ -32,7 +32,7 @@
             </li>
 
             <div style="overflow-y: scroll; max-height:370px;">
-              <li class="notification">test</li>
+              <li class="notification"></li>
 
             </div>
 
