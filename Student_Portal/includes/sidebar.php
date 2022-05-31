@@ -135,11 +135,11 @@
     </li><!-- End Counseling Request Page Nav -->
 
     <li class="nav-item">
-      <a href="pages-faq?id=<?php echo $_SESSION["login_key"]; ?>" class="<?php if ($page == 'stdLgs') { echo 'nav-link';} else {echo 'nav-link collapsed';} ?>">
+      <a href="guidance_Student_Logs.php?id=<?php echo $_SESSION["login_key"]; ?>" class="<?php if ($page == 'stdLgs') { echo 'nav-link';} else {echo 'nav-link collapsed';} ?>">
         <i class="bi bi-box-arrow-in-right"></i>
         <span>Student Logs</span>
       </a>
-    </li><!-- End F.A.Q Page Nav -->
+    </li><!-- End Student Logs Page Nav -->
 
 
 
