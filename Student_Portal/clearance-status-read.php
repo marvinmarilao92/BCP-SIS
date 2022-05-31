@@ -92,7 +92,7 @@ $page = 'clr' ; $col = 'Clearance'; include ("includes/sidebar.php");
                                           echo "</td>";
                                     echo "</tr>";
                                 }
-                                echo "</tbody>";
+                                echo "</tbody>";                            
                             echo "</table>";
                             // Free result set
                             mysqli_free_result($result);
@@ -107,7 +107,7 @@ $page = 'clr' ; $col = 'Clearance'; include ("includes/sidebar.php");
                     mysqli_close($link);
                     ?>
               <div class="float-end mb-3">
-                  <?php
+                  <?php 
                     if($count == 0){
                       echo '<a href="clearance-get-appointment.php?id='. trim($_GET["id"]) .'&name='. trim($_GET["name"]) .'"><button type="button" class="btn btn-success">Request for Appointment</button></a>';
                     }
