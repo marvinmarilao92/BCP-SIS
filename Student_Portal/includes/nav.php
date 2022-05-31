@@ -34,8 +34,8 @@
             <div style="overflow-y: scroll; max-height:370px;">
               <?php
                 require_once 'gac_Config.php';
-                $notif = $db->query('SELECT * FROM notification WHERE ID=?' , "1")->fetchArray();
                 
+                $account = $db->query('SELECT * FROM notification WHERE ID=? ', "1")->fetchArray();
                ?>
               <li class="notification"></li>
             </div>
