@@ -33,6 +33,97 @@
 
             <div style="overflow-y: scroll; max-height:370px;">
               <li class="notification">
+                <?php
+                              require_once 'includes/guidance_Config.php';
+                              include 'timezone.php';
+
+                              $notif = $db->query('SELECT * FROM notification WHERE Student_ID=? AND Notif_Messages=?', $verified_session_username, "Notification")->fetchAll();
+                              $titleCount = 0;
+                              foreach ($notif as $data)
+                              {
+                                  if (isset($data["Read_Status"]))
+                                  {
+                                    if ($data["notif_purpose"] == "Guidance Survey" && $data["Read_Status"] == "Unread")
+                                    {
+                                        $_SESSION["Notif_ID"] = $data["ID"];
+                                        echo'<a href="#"   onclick="viewSurvey('.$data["survey_ID"].','; echo "'formContent'"; echo'); ">';
+                                        echo '<li class="notification-item" style="background-color:  #edf7fa";  >';
+                                        echo '<i><img src="data:image/jpeg;base64,'.base64_encode($data['User_Img']).'" alt="Profile" class="rounded-circle" width="50px;"></i>';
+
+                                        echo '<div >
+                                                <h4>'.$data['Message_Title'].'</h4>
+                                                <p>'.$data['Message'].'</p>
+                                                <p>Conducted at '.$data['created_at'].'</p>
+                                        </li></a>';
+                                      }
+                                      if ($data["notif_purpose"] == "Guidance Survey" && $data["Read_Status"] == "Read")
+                                      {
+                                        echo '<li class="notification-item"   >';
+                                        echo '<i><img src="data:image/jpeg;base64,'.base64_encode($data['User_Img']).'" alt="Profile" class="rounded-circle" width="50px;"></i>';
+
+                                        echo '<div >
+                                                <h4>'.$data['Message_Title'].'</h4>
+                                                <p>'.$data['Message'].'</p>
+                                                <p>Conducted at '.$data['created_at'].'</p>
+                                        </li>';
+
+                                      }  $titleCount++;
+
+
+                                      if ($data["Read_Status"] == "Unread" && $data["notif_purpose"] !== "Guidance Survey")
+                                      {
+                                            echo'<a href="CounselingRequest.php?id='.$_SESSION['success'].'&Read='.$data['ID'].'" >';
+                                            echo '<li class="notification-item" style="background-color:  #edf7fa";  >';
+                                            echo '<i><img src="data:image/jpeg;base64,'.base64_encode($data['User_Img']).'" alt="Profile" class="rounded-circle" width="50px;"></i>';
+
+                                            echo '<div >
+                                                    <h4>'.$data['Message_Title'].'</h4>
+                                                    <p>'.$data['Message'].'</p>';
+                                                    if ($data["Message_Title"] == "Appointment Approved!")
+                                                    {
+                                                        echo ' <p>Approved at '.$data['created_at'].'</p>';
+                                                    }
+                                                    else
+                                                    {
+                                                        echo ' <p>Rejected at '.$data['created_at'].'</p>';
+                                                    }
+
+                                            echo'
+                                            </li></a>';
+
+                                      }
+
+                                      if ($data["Read_Status"] == "Read" && $data["notif_purpose"] !== "Guidance Survey")
+                                      {
+                                          echo'<a href="?id='.$_SESSION['success'].'&Read='.$data['ID'].'">';
+                                          echo '<li class="notification-item">';
+                                          echo '<i><img src="data:image/jpeg;base64,'.base64_encode($data['User_Img']).'" alt="Profile" class="rounded-circle" width="50px;"></i>';
+
+                                          echo '<div >
+                                                  <h4>'.$data['Message_Title'].'</h4>
+                                                  <p>'.$data['Message'].'</p>';
+                                                  if ($data["Message_Title"] == "Appointment Approved!")
+                                                  {
+                                                      echo ' <p>Approved at '.$data['created_at'].'</p>';
+                                                  }
+                                                  else
+                                                  {
+                                                      echo ' <p>Rejected at '.$data['created_at'].'</p>';
+                                                  }
+
+                                          echo'
+                                          </li></a>';
+                                          unset($_SESSION["Notif_ID"]);
+                                      }
+
+
+                                      echo '<li>
+                                  <hr class="dropdown-divider">
+                              </li>';
+
+                                  }
+                              }
+                          ?>
               </li>
             </div>
 
@@ -44,7 +135,7 @@
         </li>
         <!-- End Notification Nav -->
 
-    
+
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -82,7 +173,7 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li> 
+            <li>
               <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-question-circle"></i>
                 <span>Need Help?</span>
@@ -109,7 +200,7 @@
   <!-- for notification -->
 <script>
   $(document).ready(function(){
-  
+
   function load_unseen_notification(view = '')
   {
     $.ajax({
@@ -129,17 +220,17 @@
     }
     });
   }
-  
+
   load_unseen_notification();
-  
+
   $(document).on('click', '#viewnotif', function(){
     $('.count').html('');
     load_unseen_notification('yes');
   });
-  
-  setInterval(function(){ 
-    load_unseen_notification();; 
+
+  setInterval(function(){
+    load_unseen_notification();;
   }, 5000);
-  
+
   });
 </script>
