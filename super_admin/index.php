@@ -1,6 +1,6 @@
 <?php
 include('session.php');
-if(isset($_GET['logs']) && $_GET['logs'] == 2 && isset($_GET['dept'])){
+if (isset($_GET['logs']) && $_GET['logs'] == 2 && isset($_GET['dept'])) {
   //Audit Trail
   $role = trim($_GET['dept']);
   if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
@@ -10,13 +10,13 @@ if(isset($_GET['logs']) && $_GET['logs'] == 2 && isset($_GET['dept'])){
   } else {
     $ip = $_SERVER["REMOTE_ADDR"];
     $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-    $action = "Logged Out as ".trim($_GET['dept'])."";
+    $action = "Logged Out as " . trim($_GET['dept']) . "";
     date_default_timezone_set("asia/manila");
     $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
     mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','$role','$ip','$host','$date')") or die(mysqli_error($link));
   }
 }
-if(isset($_GET['logs']) && $_GET['logs'] == 1){
+if (isset($_GET['logs']) && $_GET['logs'] == 1) {
   //Audit Trail
   if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
     $ip = $_SERVER["HTTP_CLIENT_IP"];
@@ -89,7 +89,7 @@ if(isset($_GET['logs']) && $_GET['logs'] == 1){
             </div>
           </div>
         </div>
-        <!-- End Insert your Module here -->        
+        <!-- End Insert your Module here -->
         <!-- Insert your Module here -->
         <div class="col-lg-3">
           <div class="card">
@@ -342,7 +342,7 @@ if(isset($_GET['logs']) && $_GET['logs'] == 1){
           <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
-              <a href="../IMNGMTSYS/system/z/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
+                <a href="../IMNGMTSYS/system/z/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
                   <h5 class="card-title">Internship Administrator</h5>
                 </a>
                 <p class="card-text">Subsystem Description insert here...</p>
@@ -354,8 +354,20 @@ if(isset($_GET['logs']) && $_GET['logs'] == 1){
           <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
-              <a href="../IMNGMTSYS/system/y/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
+                <a href="../IMNGMTSYS/system/y/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
                   <h5 class="card-title">Internship Coordinator</h5>
+                </a>
+                <p class="card-text">Subsystem Description insert here...</p>
+              </div>
+            </div>
+          </div>
+          <!-- End Insert your Module here -->
+          <!-- Insert your Module here -->
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <a href="../IMNGMTSYS/system/z/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
+                  <h5 class="card-title">Internship Administrator</h5>
                 </a>
                 <p class="card-text">Subsystem Description insert here...</p>
               </div>
@@ -372,17 +384,7 @@ if(isset($_GET['logs']) && $_GET['logs'] == 1){
             </div>
           </div>
           <!-- End Insert your Module here -->
-          <!-- Insert your Module here -->
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Insert your Module here</h5>
-                <p class="card-text">Subsystem Description insert here...</p>
-              </div>
-            </div>
-          </div>
-          <!-- End Insert your Module here -->
-          
+
         </div>
       </div>
       <div class="modal-footer">
@@ -406,7 +408,8 @@ if(isset($_GET['logs']) && $_GET['logs'] == 1){
           <div class="col-lg-4">
             <div class="card">
               <div class="card-body">
-                <a href="../Clearance/clearance-administrator/index.php?id=<?php echo $_SESSION["login_key"]; ?>&logs=1">
+                <a
+                  href="../Clearance/clearance-administrator/index.php?id=<?php echo $_SESSION["login_key"]; ?>&logs=1">
                   <h5 class="card-title">Clearance Administrator</h5>
                 </a>
                 <p class="card-text">Click here to access module</p>
@@ -940,9 +943,10 @@ if(isset($_GET['logs']) && $_GET['logs'] == 1){
           <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
-                <a href="../Medical-System/MS-personnel/index?id=<?php echo $_SESSION["login_key"]; ?>">
+                <a href="../Medical-System/MS-Personnel/index?id=<?php echo $_SESSION["login_key"]; ?>">
                   <h5 class="card-title">Medical Personnel</h5>
-                  <p class="card-text">Clinic Medical Personnel or Helper</p>
+                </a>
+                <p class="card-text">Clinic Medical Personnel or Helper</p>
               </div>
             </div>
           </div>
