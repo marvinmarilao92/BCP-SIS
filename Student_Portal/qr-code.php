@@ -22,68 +22,62 @@ include('includes/session.php');
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Medical Examination</h1>
+      <h1>Contact Tracing</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php?id=<?= $_SESSION['login_key']; ?> ">Home</a></li>
-          <li class="breadcrumb-item">Medical Examination</li>
+          <li class="breadcrumb-item">QR Code</li>
         </ol>
       </nav>
     </div>
     <section class="section">
       <div class="row">
         <div class="col">
-          <div class="card">
-            <div class="card-body p-4">
-              <div class="alert alert-info">
-                <div class="card-title">
-                  <big>Please Read the Instructions Carefully</big>
-                  <hr>
-                </div>
-              </div>
-              <div class="row d-flex justify-content-center">
-                <div class="card">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12">
-                      <div class="card-body text-center p-5">
-                        <h2>Health Check Monitoring</h2>
-                        <hr>
-                        <h5> Contact Tracing</h5>
-                        <div class="row text-center p-5">
-                          <div class="col-lg-6 col-md-12 col-sm-12 p-3">
-                            <input id="user-fullname" type="text" class="form-control"
-                              value="<?php echo $verified_session_lastname . ', ' . $verified_session_firstname . ' ' . $verified_session_middlename; ?>"
-                              disabled>
-                          </div>
-                          <div class="col-lg-6 col-md-12 col-sm-12 p-3">
-                            <input id="user-contact" type="text" class="form-control"
-                              value="<?php echo $verified_session_contact; ?>" disabled>
-                          </div>
-                          <div class="col-12 p-3">
-                            <input id="user-address" type="text" class="form-control"
-                              value="<?php echo $verified_session_address; ?>" disabled>
-                          </div>
-                          <div class="col-12 p-3">
-                            <input id="user-email" type="text" class="form-control"
-                              value="<?php echo $verified_session_email; ?>" disabled>
-                          </div>
-                          <input type="hidden" id="user-id" value="<?php echo $verified_session_username; ?>">
-                          <input type="hidden" id="user-lname" value="<?php echo $verified_session_lastname; ?>">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-12 col-sm-12">
-                      <div class="row ">
-                        <div class="col d-flex justify-content-center p-5">
-                          <div id="qrcode" class="p-4 border border-2"></div>
-                        </div>
-                      </div>
-                    </div>
+          <div class="container">
+            <div class="card">
+              <div class="card-body p-4">
+                <div class="alert alert-info">
+                  <div class="card-title">
+                    <big>Here's your QR Code</big>
+                    <hr>
                   </div>
-                  <div class="row">
-                    <div class="col p-5 d-flex justify-content-center">
-                      <button class="mt-3 btn btn-primary" name="QR" onClick="generateQR();">Generate Qr Code</button>
+                </div>
+                <div class="row d-flex justify-content-center">
+                  <div class="card">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card-body text-center p-5">
+                          <h2>Health Check Monitoring</h2>
+                          <hr>
+                          <h5> Contact Tracing</h5>
+                          <div class="row text-center p-5">
+                            <div class="col-lg-6 col-md-12 col-sm-12 p-3">
+                              <input id="user-fullname" type="text" class="form-control"
+                                value="<?php echo $verified_session_lastname . ', ' . $verified_session_firstname . ' ' . $verified_session_middlename; ?>"
+                                disabled>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 p-3">
+                              <input id="user-contact" type="text" class="form-control"
+                                value="<?php echo $verified_session_contact; ?>" disabled>
+                            </div>
+                            <div class="col-12 p-3">
+                              <input id="user-address" type="text" class="form-control"
+                                value="<?php echo $verified_session_address; ?>" disabled>
+                            </div>
+                            <div class="col-12 p-3">
+                              <input id="user-email" type="text" class="form-control"
+                                value="<?php echo $verified_session_email; ?>" disabled>
+                            </div>
+                            <input type="hidden" id="user-id" value="<?php echo $verified_session_username; ?>">
+                            <input type="hidden" id="user-lname" value="<?php echo $verified_session_lastname; ?>">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col p-5 d-flex justify-content-center">
+                        <button class="mt-1 btn btn-primary" name="QR" onClick="generateQR();">Show Qr Code</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -92,10 +86,36 @@ include('includes/session.php');
           </div>
         </div>
       </div>
+      <!-- Button trigger modal -->
+
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-primary ">
+              <h5 class="modal-title text-white">QR Code</h5>
+              <a type="button" class="close text-white" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </a>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid justify-content-center d-flex">
+                <div id="qrcode" class="p-4 "></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Print</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
     </section>
-
 
   </main><!-- End #main -->
 
@@ -115,8 +135,9 @@ include('includes/session.php');
   const qrCode = new QRCode(document.getElementById('qrcode'));
 
   function generateQR() {
-    qrCode.makeCode(qrData);
+
     insertToDB(userFullName, userContact, userAddress, userEmail, userId, userlname);
+
   }
 
   // | id                                                                | name  | contact | address  | email             |
@@ -136,7 +157,9 @@ include('includes/session.php');
       data: array,
       cache: false,
       success: function(html) {
-        alert("success");
+        $('#modelId').modal('show');
+        qrCode.makeCode(qrData);
+
       }
     });
     // AJAX post request to qrcode db to insert the user info
