@@ -194,15 +194,15 @@
            <div class="col p-3">
              <div class="input-group">
                <input type="text" placeholder="Search Student Number" id="searchID" class="form-control" name="search"
-                 onchange="searchstdID('showStudentInformation');">
+                 onchange="searchstdID('showInfo');">
                <label for="sub"><a class="btn btn-primary bi bi-search" style="cursor: pointer;">&nbspSearch</a></label>
-               <a href="#" id="sub" onclick="searchstdID('showStudentInformation');" name="submit"
+               <a href="#" id="sub" onclick="searchstdID('showInfo');" name="submit"
                  style="display: none; visibility: none;"></a>
              </div>
            </div>
          </div>
          <div class="row">
-           <div id="showStudentInformation"></div>
+           <div id="showInfo"></div>
          </div>
        </div>
        <div class="modal-footer">
@@ -221,13 +221,13 @@ function Annual() {
  </script>
 
  <script>
-function searchstdID(showStudentInformation) {
+function searchstdID(showInfo) {
   var searchID = document.getElementById("searchID").value;
   if (searchID != "") {
     $.ajax({
-      url: 'ajax/MScashier.php?searchID=' + searchID,
+      url: 'resources/ajax/MScashier.php?searchID=' + searchID,
       success: function(html) {
-        var ajaxDisplay = document.getElementById(showStudentInformation);
+        var ajaxDisplay = document.getElementById(showInfo);
         ajaxDisplay.innerHTML = html;
       }
     });
@@ -312,7 +312,7 @@ function validate() {
             }).then(() => {
               $.ajax({
                 type: "POST",
-                url: 'ajax/MSvalid.php',
+                url: 'resources/ajax/MSvalid.php',
                 data: takeDataintoArray,
                 cache: false,
                 success: function(result) {
@@ -333,7 +333,7 @@ function validate() {
         {
           $.ajax({
             type: "POST",
-            url: 'ajax/MSvalid.php',
+            url: 'resources/ajax/MSvalid.php',
             data: takeDataintoArray,
             cache: false,
             success: function(result) {
