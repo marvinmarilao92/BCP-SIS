@@ -32,7 +32,7 @@ include_once('security/newsource.php');
     <section class="section2">
       <div class="row">
         <div class="col-lg-12">
-          <div class="card">
+          <div class="card p-5">
             <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
               <li class="nav-item flex-fill" role="presentation">
                 <button class="nav-link w-100 active" id="student-tab" data-bs-toggle="tab"
