@@ -120,38 +120,118 @@ include('security/newsource.php')
         </ol>
       </nav>
     </div><!-- End Page Title -->
-
     <section class="dashboard">
       <div class="container p-5">
-        <?php if (isset($_SESSION['alert'])) { ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong><?php echo $_SESSION['alert']; ?></strong>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-        <?php  } else if (isset($_SESSION['alerterror'])) { ?>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          <strong><?php echo $_SESSION['alerterror']; ?></strong>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php  }  ?>
         <div class="card p-5">
-          <div class="row p-5">
-            <div class="col-md-6">
-              <video id="preview" width="100%"></video>
+          <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100 active" id="QR-default-tab" data-bs-toggle="tab"
+                data-bs-target="#bordered-justified-QR-default" type="button" role="tab" aria-controls="QR-default"
+                aria-selected="false">QR-Scanner</button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100 " id="stft-tab" data-bs-toggle="tab"
+                data-bs-target="#bordered-justified-stft" type="button" role="tab" aria-controls="stft"
+                aria-selected="true">Student & Faculty</button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100" id="visitor-tab" data-bs-toggle="tab"
+                data-bs-target="#bordered-justified-visitor" type="button" role="tab" aria-controls="visitor"
+                aria-selected="false">Visitor</button>
+            </li>
+          </ul>
+          <div class="row ">
+            <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+              <div class="tab-pane fade show active" id="bordered-justified-QR-default" role="tabpanel"
+                aria-labelledby="QR-default-tab">
+                <div class="row pt-5">
+                  <div class="col-md-6 ">
+                    <label for="preview"><img width="100%" height="100%^" src="../assets/img/scanner.gif"
+                        alt=""></label>
+                    <video id="preview" width="100%" style="display:none;"></video>
+                  </div>
+                  <div class="col-6">
+                    <div id="valueCheck"></div>
+                    <form class="d-flex align-items-center justify-content-center flex-column" action="tracing.php"
+                      method="post">
+                      <label for="QRtext" class="p-2">
+                        <label class="p-2">QR-CODE</label>
+                      </label>
+                      <div class="input-group">
+                        <input type="password" name="QRtext" id="QRtext" placeholder="scan qrcode" class="form-control">
+                        <a class="input-group-text" onclick="checkNOW('valueCheck');">Check</a>
+                      </div>
+                      <label class="p-2">Temperature</label>
+                      <div class="input-group">
+                        <input type="number" name="idnum" id="idnum" min="35" max="42.3"
+                          placeholder="Insert Body Temperature" class="form-control " required>
+                        <div class="input-group-text">°C</div>
+                      </div>
+                      <div class="col text-end">
+                        <button type=" submit" name="submit" class="btn btn-primary mt-5">Submit</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-md-6">
-              <form class="d-flex align-items-center justify-content-center flex-column" action="tracing.php"
-                method="post">
-                <label class="p-2">SCAN QR CODE</label>
-                <input type="text" name="text" id="text" readonly="" placeholder="scan qrcode" class="form-control">
-                <label class="p-2">Insert Code</label>
-                <input type="text" name="idnum" id="idnum" placeholder="Insert Qr Code no." class="form-control ">
-                <button type=" submit" name="submit" class="btn btn-primary mt-5">Submit</button>
-              </form>
+            <div class="tab-pane fade" id="bordered-justified-stft" role="tabpanel" aria-labelledby="stft-tab">
+              <div class="row pt-5">
+                <div class="col-12">
+                  <form class="d-flex align-items-center justify-content-center flex-column" action="tracing.php"
+                    method="post">
+                    <label for="QRtext" class="p-2">
+                      <div id="valueCheck"></div>
+                    </label>
+                    <div class="input-group">
+                      <input type="password" name="QRtext" id="QRtext" placeholder="scan qrcode" class="form-control">
+                      <a class="input-group-text" onclick="checkNOW('valueCheck');">Check</a>
+                    </div>
+                    <label class=" p-2">Insert Code</label>
+                    <input type="text" name="idnum" id="idnum" placeholder="Insert Qr Code no." class="form-control">
+                </div>
+              </div>
+              <div class="row mt-5">
+                <div class="col-lg-8 col-md-12 ">
+                  <label class="p-2">Temperature</label>
+                  <div class="input-group">
+                    <input type="number" name="idnum" id="idnum" min="35" max="42.3"
+                      placeholder="Insert Body Temperature" class="form-control " required>
+                    <div class="input-group-text">°C</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col text-end">
+                  <button type=" submit" name="submit" class="btn btn-primary mt-5">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="bordered-justified-visitor" role="tabpanel" aria-labelledby="visitor-tab">
+              <div class="container mt-5">
+                <div class="form-group">
+                  <label class="p-2">Name</label>
+                  <input type="text" class="form-control" placeholder="Insert Full Name Format (LN, FN MN.)">
+                  <label class="p-2">Contact #</label>
+                  <input type="text" class="form-control" placeholder="Insert Contact Number ">
+                  <label class="p-2">Address</label>
+                  <input type="text" class="form-control" placeholder="Insert Address ">
+                  <label class="p-2">Temperature</label>
+                  <div class="input-group">
+                    <input type="number" name="idnum" id="idnum" min="35" max="42.3"
+                      placeholder="Insert Body Temperature" class="form-control ">
+                    <div class="input-group-text">°C</div>
+                    </form>
+                  </div>
+                </div>
+                <div class="col text-end">
+                  <button type=" submit" name="submit" class="btn btn-primary mt-5">Submit</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
@@ -207,6 +287,49 @@ include('security/newsource.php')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
   <script>
+  function checkNOW(valueCheck) {
+    var QRtext = document.getElementById("QRtext").value;
+    if (QRtext == "") {
+      $.ajax({
+        url: 'ajax/xvalue.php',
+        success: function(html) {
+          var ajaxDisplay = document.getElementById(valueCheck);
+          ajaxDisplay.innerHTML = html;
+        }
+      });
+    } else {
+      $.ajax({
+        url: 'ajax/cvalue.php?qrID=' + QRtext,
+        success: function(html) {
+          var ajaxDisplay = document.getElementById(valueCheck);
+          ajaxDisplay.innerHTML = html;
+        }
+      });
+    }
+  }
+  // function checkifValueOK() {
+  //   alert("GO")
+  //   var getID = document.getElementById("text").value;
+  //   if (getID == "") {
+  //     $.ajax({
+  //       url: 'ajax/xvalue.php',
+  //       success: function(html) {
+  //         var ajaxDisplay = document.getElementById(valueCheck);
+  //         ajaxDisplay.innerHTML = html;
+  //       }
+  //     });
+  //   } else {
+  //     $.ajax({
+  //       url: 'ajax/cvalue.php',
+  //       success: function(html) {
+  //         var ajaxDisplay = document.getElementById(valueCheck);
+  //         ajaxDisplay.innerHTML = html;
+  //       }
+  //     });
+  //   }
+  // }
+  </script>
+  <script>
   let scanner = new Instascan.Scanner({
     video: document.getElementById('preview')
   });
@@ -220,7 +343,7 @@ include('security/newsource.php')
     console.error(e);
   });
   scanner.addListener('scan', function(c) {
-    document.getElementById('text').value = c;
+    document.getElementById('QRtext').value = c;
     document.forms[0].submit();
   });
   </script>

@@ -135,7 +135,7 @@
        </ul>
      </li>
 
-     <li class="nav-item">
+     <!-- <li class="nav-item">
        <a class="nav-link collapsed" data-bs-target="#enrolled-nav" data-bs-toggle="collapse" href="#">
          <i class="bi bi-layout-text-sidebar-reverse"></i><span>Over All Records</span><i
            class="bi bi-chevron-down ms-auto"></i>
@@ -160,7 +160,7 @@
            </a>
          </li>
        </ul>
-     </li>
+     </li> -->
 
      <li class="nav-heading text-primary">Settings</li>
 
