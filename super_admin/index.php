@@ -1,7 +1,5 @@
 <?php
 include('session.php');
-<<<<<<< Updated upstream
-=======
 if (isset($_GET['logs']) && $_GET['logs'] == 2 && isset($_GET['dept'])) {
   //Audit Trail
   $role = trim($_GET['dept']);
@@ -33,7 +31,6 @@ if (isset($_GET['logs']) && $_GET['logs'] == 1) {
   $date = date("Y-m-d H:i:s", strtotime("+0 HOURS"));
   mysqli_query($link, "INSERT INTO audit_trail(account_no,action,actor,ip,host,date) VALUES('$verified_session_username','$action','Clearance Administrator','$ip','$host','$date')") or die(mysqli_error($link));
 }
->>>>>>> Stashed changes
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -345,13 +342,9 @@ if (isset($_GET['logs']) && $_GET['logs'] == 1) {
           <div class="col-lg-4">
             <div class="card">
               <div class="card-body">
-<<<<<<< Updated upstream
-                <h5 class="card-title">Insert your Module here</h5>
-=======
                 <a href="../IMNGMTSYS/system/z/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
                   <h5 class="card-title">Internship Administrator</h5>
                 </a>
->>>>>>> Stashed changes
                 <p class="card-text">Subsystem Description insert here...</p>
               </div>
             </div>
@@ -361,13 +354,9 @@ if (isset($_GET['logs']) && $_GET['logs'] == 1) {
           <div class="col-lg-4">
             <div class="card">
               <div class="card-body">
-<<<<<<< Updated upstream
-                <h5 class="card-title">Insert your Module here</h5>
-=======
                 <a href="../IMNGMTSYS/system/y/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
                   <h5 class="card-title">Internship Coordinator</h5>
                 </a>
->>>>>>> Stashed changes
                 <p class="card-text">Subsystem Description insert here...</p>
               </div>
             </div>
@@ -413,10 +402,6 @@ if (isset($_GET['logs']) && $_GET['logs'] == 1) {
             </div>
           </div>
           <!-- End Insert your Module here -->
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
         </div>
       </div>
       <div class="modal-footer">
@@ -440,12 +425,8 @@ if (isset($_GET['logs']) && $_GET['logs'] == 1) {
           <div class="col-lg-4">
             <div class="card">
               <div class="card-body">
-<<<<<<< Updated upstream
-                <a href="../Clearance/clearance-administrator/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
-=======
                 <a
                   href="../Clearance/clearance-administrator/index.php?id=<?php echo $_SESSION["login_key"]; ?>&logs=1">
->>>>>>> Stashed changes
                   <h5 class="card-title">Clearance Administrator</h5>
                 </a>
                 <p class="card-text">Click here to access module</p>
