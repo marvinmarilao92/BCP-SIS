@@ -195,8 +195,7 @@
              <div class="input-group">
                <input type="text" placeholder="Search Student Number" id="searchID" class="form-control" name="search"
                  onchange="searchstdID('showStudentInformation');">
-               <label for="sub"><i class="btn btn-danger ri-search-eye-line"
-                   style="cursor: pointer;">&nbspSearch</i></label>
+               <label for="sub"><i class="btn btn-primary bi bi-search" style="cursor: pointer;">&nbspSearch</i></label>
                <a href="#" id="sub" onclick="searchstdID('showStudentInformation');" name="submit"
                  style="display: none; visibility: none;"></a>
              </div>
@@ -208,20 +207,11 @@
        </div>
        <div class="modal-footer">
          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-         <button class="btn btn-danger" onclick="validate();" name="confirm">confirm</button>
+         <button class="btn btn-primary" onclick="validate();" name="confirm">confirm</button>
        </div>
      </div>
    </div>
  </div>
-
- <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-   <div class="offcanvas-header">
-     <h5 id="offcanvasRightLabel">Offcanvas right</h5>
-     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-   </div>
-   <div class="offcanvas-body">...</div>
- </div>
-
  <?php require_once 'security/newsource.php'; ?>
 
  <script>
@@ -233,20 +223,15 @@ function Annual() {
  <script>
 function searchstdID(showStudentInformation) {
   var searchID = document.getElementById("searchID").value;
-  var takeDataintoArray =
-    'searchID=' + searchID;
-  if (searchID != '') {
+  if (searchID != "") {
     $.ajax({
-      type: "GET",
-      url: 'resources/ajax/MScashier.php',
-      data: takeDataintoArray,
-      cache: false,
+      url: 'resources/ajax/MScashier.php?searchID=' + searchID,
       success: function(html) {
         var ajaxDisplay = document.getElementById(showStudentInformation);
         ajaxDisplay.innerHTML = html;
       }
     });
-  } else if (searchID == '') {
+  } else if (searchID == "") {
     Swal.fire({
       allowOutsideClick: false,
       icon: 'info',
