@@ -225,7 +225,7 @@ function searchstdID(showStudentInformation) {
   var searchID = document.getElementById("searchID").value;
   if (searchID != "") {
     $.ajax({
-      url: '../resources/ajax/MScashier.php?searchID=' + searchID,
+      url: 'resources/ajax/MScashier.php?searchID=' + searchID,
       success: function(html) {
         var ajaxDisplay = document.getElementById(showStudentInformation);
         ajaxDisplay.innerHTML = html;
