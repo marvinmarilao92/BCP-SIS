@@ -225,7 +225,7 @@ function searchstdID(showStudentInformation) {
   var searchID = document.getElementById("searchID").value;
   if (searchID != "") {
     $.ajax({
-      url: 'resources/ajax/MScashier.php?searchID=' + searchID,
+      url: 'ajax/MScashier.php?searchID=' + searchID,
       success: function(html) {
         var ajaxDisplay = document.getElementById(showStudentInformation);
         ajaxDisplay.innerHTML = html;
@@ -312,7 +312,7 @@ function validate() {
             }).then(() => {
               $.ajax({
                 type: "POST",
-                url: 'resources/ajax/MSvalid.php',
+                url: 'ajax/MSvalid.php',
                 data: takeDataintoArray,
                 cache: false,
                 success: function(result) {
@@ -333,7 +333,7 @@ function validate() {
         {
           $.ajax({
             type: "POST",
-            url: 'resources/ajax/MSvalid.php',
+            url: 'ajax/MSvalid.php',
             data: takeDataintoArray,
             cache: false,
             success: function(result) {
