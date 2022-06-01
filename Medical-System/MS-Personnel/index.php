@@ -5,54 +5,200 @@ include_once 'security/newsource.php';
 <html lang="en">
 
 <head>
-  <?php include('includes/head_ext.php') ?>
-  </script>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <script>
-  function viewContent(viewID, viewresult) {
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medical System</title>
+  <!-- Favicons -->
+  <link href="../assets/img/pulse-svgrepo-com.svg" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <script src="../assets/vendor/bootstrap/js/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+  <!-- <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+<!-- Template Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="../mdb5-free-standard/css/mdb.min.css" />
 
-    $.ajax({
-      url: 'resources/ajax/Msview.php?viewID=' + viewID,
-      success: function(html) {
-        var ajaxDisplay = document.getElementById(viewresult);
-        ajaxDisplay.innerHTML = html;
-        $("#viewModal").modal("show");
+  <!-- <link rel="stylesheet" href="../../assets/css/dropzone.css" />
+	<link href="../../assets/css/cropper.css" rel="stylesheet"/> -->
 
-      }
-    });
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.css">
+  <!-- Selector search -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link href="cropperjs/cropper.min.css" rel="stylesheet" type="text/css" />
 
+  <style>
+  @media(max-width: 500px) {
+    .table thead {
+      display: none;
+    }
+
+    .table,
+    .table tbody,
+    .table tr,
+    .table td {
+      display: block;
+      width: 100%;
+    }
+
+    .table tr {
+      background: #ffffff;
+      box-shadow: 0 8px 8px -4px lightblue;
+      border-radius: 5%;
+      margin-bottom: 13px;
+      margin-top: 13px;
+    }
+
+    .table td {
+      /* max-width: 20px; */
+      padding-left: 50%;
+      text-align: right;
+      position: relative;
+    }
+
+    .table td::before {
+      margin-top: 10px;
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 50%;
+      padding-left: 15px;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: left;
+    }
   }
-
-  function editContent(editresult) {
-    var editID = document.getElementById("id").value;
-    $.ajax({
-      url: 'resources/ajax/Msedit.php?editID=' + editID,
-      success: function(html) {
-        var ajaxDisplay = document.getElementById(editresult);
-        ajaxDisplay.innerHTML = html;
-        $("#viewModal").modal("hide");
-        $("#editModal").modal("show");
-
-      }
-    });
-  }
-
-  function addRecord() {
-    $("#addModal").modal("show");
-  }
-  </script>
-
-  <!-- <script>
-  $(document).ready(function(){
-    $("button").click (function(){
-       $ ("#ShowTableResult").load("labtest-table.php");
-    });
-});
-</script> -->
+  </style>
 </head>
 
 <body>
-  <?php include 'includes/header.php'; ?>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center bg-primary">
+    <?php include "key_checker.php"; ?>
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.php?id=<?php echo $_SESSION["login_key"]; ?>" class="logo d-flex align-items-center">
+        <img src="../assets/img/pulse-svgrepo-com.svg" alt="">
+        <span class="d-none d-lg-block text-light">Medical System</span>
+      </a>
+
+
+
+    </div><!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+
+
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+
+            <?php
+            // $result = displayProfile($verified_session_img, "imgSmall");
+            // echo $result;
+            if (file_exists('../../assets/users/' . $verified_session_img) && ($verified_session_img > 0)) {
+              echo '<img src="../../assets/users/' . $verified_session_img . '" alt="Profile" class="rounded-circle m-2 w-100 h-100">';
+            } else {
+              echo '<img src="../../assets/users/person-circle.svg" alt="Profile" class="rounded-circle m-2 w-100 h-100">';
+            }
+            ?>
+            <!-- class="rounded-circle" -->
+            <span
+              class="d-none d-md-block dropdown-toggle ps-2 text-light"><?php echo $verified_session_firstname . " " . $verified_session_lastname ?></span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6><?php echo $verified_session_firstname . " " . $verified_session_lastname ?></h6>
+              <span><?php echo $verified_session_role ?></span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center"
+                href="users-profile.php?id=<?php echo $_SESSION["login_key"]; ?>">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center"
+                href="pages-faq.php?id=<?php echo $_SESSION["login_key"]; ?>">
+                <i class="bi bi-question-circle"></i>
+                <span>Need Help?</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <!-- Adding return nav item for super admin -->
+            <?php
+            $output = '';
+            $key = $_SESSION["login_key"];
+            if (isset($verified_session_department) && ($verified_session_username)) {
+              switch ($verified_session_role) {
+                case "SuperAdmin":
+                  //statement
+                  $output .= '
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center" href="resources/logout.php?id=' . $key . '">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Sign Out</span>
+                      </a>
+                    </li>    
+                  ';
+                  break;
+
+                default:
+                  //statement
+                  $output .= '
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center" href="resources/logout.php">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Sign Out</span>
+                      </a>
+                    </li>    
+                  ';
+              }
+              echo $output;
+            } else {
+              // header("location:index.php");
+            }
+            ?>
+
+
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header>
   <main>
     <!-- Page Title -->
     <div class="pagetitle">
@@ -232,31 +378,79 @@ include_once 'security/newsource.php';
     </section>
   </main>
 
+  <!-- ======= Footer ======= -->
+  <footer class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>School System</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://facebook.com/">Medical System Module</a>
+    </div>
+
+  </footer><!-- End Footer -->
+
+  <!-- ======= Scripts ======= -->
 
 
-  <?php
-  include 'includes/footer.php';
-  ?>
-  <!-- Dynamic Table Function -->
-  <!-- <script>
-  function loadXMLDoc(){
-  var xhttp = new XMLHttpRequest();
- xhttp.onreadystatechange = function() {
-    if(this.readyState == 4 && this.status == 200){
-      document.getElementById("ShowTableResult").innerHTML = this.responseText;
-    }
-  };
-  xhttp.open("GET","labtest-table.php", true);
-  xhttp.send();
-}
-setInterval(function(){
-    loadXMLDoc();
-},100)
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i></a>
+  <!-- vendor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../assets/vendor/quill/quill.min.js"></script>
+  <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
+  <!-- <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script> -->
+  <script src="../assets/vendor/chart.js/chart.min.js"></script>
+  <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="../assets/vendor/echarts/echarts.min.js"></script>
+  <script src="../assets/vendor/bootstrap/js/sweetalert2.min.js"></script>
+  <script src="../assets/vendor/bootstrap/js/JsBarcode.all.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+  </script>
 
-window.onload = loadXMLDoc;
-</script> -->
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js">
+  </script>
+  <!-- extras -->
+  <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+  <script type="text/javascript" src="../mdb5-free-standard/js/mdb.min.js"></script>
+  <script type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script type="text/javascript"></script>
 
   <script>
+  function viewContent(viewID, viewresult) {
+
+    $.ajax({
+      url: 'resources/ajax/Msview.php?viewID=' + viewID,
+      success: function(html) {
+        var ajaxDisplay = document.getElementById(viewresult);
+        ajaxDisplay.innerHTML = html;
+        $("#viewModal").modal("show");
+
+      }
+    });
+
+  }
+
+  function editContent(editresult) {
+    var editID = document.getElementById("id").value;
+    $.ajax({
+      url: 'resources/ajax/Msedit.php?editID=' + editID,
+      success: function(html) {
+        var ajaxDisplay = document.getElementById(editresult);
+        ajaxDisplay.innerHTML = html;
+        $("#viewModal").modal("hide");
+        $("#editModal").modal("show");
+
+      }
+    });
+  }
+
+  function addRecord() {
+    $("#addModal").modal("show");
+  }
+
   function manage(manage, manageField) {
     $.ajax({
       url: 'resources/ajax/manageame.php?id=' + manage,
