@@ -195,7 +195,7 @@
              <div class="input-group">
                <input type="text" placeholder="Search Student Number" id="searchID" class="form-control" name="search"
                  onchange="searchstdID('showStudentInformation');">
-               <label for="sub"><i class="btn btn-primary bi bi-search" style="cursor: pointer;">&nbspSearch</i></label>
+               <label for="sub"><a class="btn btn-primary bi bi-search" style="cursor: pointer;">&nbspSearch</a></label>
                <a href="#" id="sub" onclick="searchstdID('showStudentInformation');" name="submit"
                  style="display: none; visibility: none;"></a>
              </div>
@@ -225,7 +225,7 @@ function searchstdID(showStudentInformation) {
   var searchID = document.getElementById("searchID").value;
   if (searchID != "") {
     $.ajax({
-      url: 'resources/ajax/MScashier.php?searchID=' + searchID,
+      url: '../resources/ajax/MScashier.php?searchID=' + searchID,
       success: function(html) {
         var ajaxDisplay = document.getElementById(showStudentInformation);
         ajaxDisplay.innerHTML = html;
