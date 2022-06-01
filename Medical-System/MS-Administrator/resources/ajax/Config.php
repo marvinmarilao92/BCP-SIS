@@ -9,7 +9,7 @@ $dbname = 'u692894633_sis_db';
 
 $db = new databaseFunction($dbhost, $dbuser, $dbpass, $dbname);
 
-//$conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+$conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
 // NOTE::: db class changed to 'databaseFunction'
 
