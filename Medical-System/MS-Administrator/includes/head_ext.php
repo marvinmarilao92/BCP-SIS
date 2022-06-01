@@ -22,7 +22,7 @@
 <!-- <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
 <!-- Template Main CSS File -->
 <link href="../assets/css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="../mdb5-free-standard/css/mdb.min.css" />
+<!-- <link rel="stylesheet" href="../mdb5-free-standard/css/mdb.min.css" /> -->
 
 <!-- <link rel="stylesheet" href="../../assets/css/dropzone.css" />
 	<link href="../../assets/css/cropper.css" rel="stylesheet"/> -->
