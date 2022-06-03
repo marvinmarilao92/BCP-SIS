@@ -110,10 +110,10 @@ include_once 'security/newsource.php';
                       <td><?php echo $data['yr_lvl']; ?></td>
                       <td>
                         <a href="#" id="manage" onclick="manage('<?php echo $data['id']; ?>', 'manageField');"
-                          class="btn btn-outline-primary text-dark"><i class="bi bi-box"></i>&nbspUpload Files</a>
-                        <a href="resources/viewPDF.php?id=<?php echo $data['id'] ?>"
+                          class="btn btn-outline-primary text-dark"><i class="bi bi-box"></i>&nbspUpload Result</a>
+                        <!-- <a href="resources/viewPDF.php?id=<?php echo $data['id'] ?>"
                           class="btn btn-outline-success text-dark"><i class="bi bi-file-pdf"></i>&nbspView
-                          Recommendation</a>
+                          Recommendation</a> -->
                         <a href="resources/viewPDF2.php?id=<?php echo $data['id'] ?>"
                           class="btn btn-outline-info text-dark"><i class="bi bi-file-pdf"></i>&nbspView
                           Result</a>
@@ -214,9 +214,9 @@ include_once 'security/newsource.php';
                     <div class="col-lg-12 col-md-12 col-sm-12 border p-4">
                       <div class="row">
                         <div class="card-title">Upload Files</div>
-                        <label for="" class="p-2">Recommendation Letter</label>
+                        <!-- <label for="" class="p-2">Recommendation Letter</label>
                         <input type="file" name="file1" id="file1" accept="application/pdf, application/msword"
-                          class="form-control">
+                          class="form-control"> -->
                         <label for="" class="p-2">Annual Medical Examination Result</label>
                         <input type="file" name="file2" id="file2" accept="application/pdf" class="form-control">
                       </div>
@@ -226,7 +226,7 @@ include_once 'security/newsource.php';
             </div>
             <div class="modal-footer">
               <button class="btn btn-secondary" data-bs-toggle="close" data-bs-dismiss="modal">Cancel</button>
-              <button class="btn btn-danger" type="submit" name="submit">Add Now</button></form>
+              <button class="btn btn-primary" type="submit" name="submit">Add Now</button></form>
             </div>
           </div>
         </div>
