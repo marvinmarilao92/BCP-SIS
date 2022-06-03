@@ -94,6 +94,27 @@
        </ul>
      </li>
 
+     <li class="nav-item">
+       <a href="medical-history.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('medhis' == $page) {
+                                                                                        echo 'nav-link';
+                                                                                      } else {
+                                                                                        echo 'nav-link collapsed';
+                                                                                      } ?>">
+         <i class="bi bi-file-plus"></i>
+         <span>Medical History</span>
+       </a>
+     </li>
+
+     <li class="nav-item">
+       <a href="stud_req.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('stud-req' == $page) {
+                                                                                echo 'nav-link';
+                                                                              } else {
+                                                                                echo 'nav-link collapsed';
+                                                                              } ?>">
+         <i class="bi bi-folder-check"></i>
+         <span>Student Requests</span>
+       </a>
+     </li>
 
      <li class="nav-heading text-primary">Monitor</li>
 
@@ -194,15 +215,15 @@
            <div class="col p-3">
              <div class="input-group">
                <input type="text" placeholder="Search Student Number" id="searchID" class="form-control" name="search"
-                 onchange="searchstdID('showStudentInformation');">
+                 onchange="searchstdID('showInfo');">
                <label for="sub"><a class="btn btn-primary bi bi-search" style="cursor: pointer;">&nbspSearch</a></label>
-               <a href="#" id="sub" onclick="searchstdID('showStudentInformation');" name="submit"
+               <a href="#" id="sub" onclick="searchstdID('showInfo');" name="submit"
                  style="display: none; visibility: none;"></a>
              </div>
            </div>
          </div>
          <div class="row">
-           <div id="showStudentInformation"></div>
+           <div id="showInfo"></div>
          </div>
        </div>
        <div class="modal-footer">
@@ -221,13 +242,13 @@ function Annual() {
  </script>
 
  <script>
-function searchstdID(showStudentInformation) {
+function searchstdID(showInfo) {
   var searchID = document.getElementById("searchID").value;
   if (searchID != "") {
     $.ajax({
-      url: '../resources/ajax/MScashier.php?searchID=' + searchID,
+      url: 'resources/ajax/MScashier.php?searchID=' + searchID,
       success: function(html) {
-        var ajaxDisplay = document.getElementById(showStudentInformation);
+        var ajaxDisplay = document.getElementById(showInfo);
         ajaxDisplay.innerHTML = html;
       }
     });
@@ -293,9 +314,8 @@ function validate() {
         Swal.fire({
           allowOutsideClick: false,
           icon: 'question',
-          title: 'Do you want to Assess this even if Not in Schedule?',
-          text: 'Note: This wiil write the record in advance',
-          confirmButtonText: 'Overwrite',
+          title: 'Insert Data ?',
+          confirmButtonText: 'Confirm',
           confirmButtonColor: '#f93154',
           cancelButtonColor: '#B23CFD',
           showCancelButton: true,

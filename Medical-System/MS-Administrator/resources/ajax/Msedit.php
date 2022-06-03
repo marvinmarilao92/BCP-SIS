@@ -1,12 +1,12 @@
-<?php require_once 'Config.php';
- require_once 'timezone.php';
+<?php require_once "../../security/newsource.php";
+require_once 'timezone.php';
 
- $fetchLabtest = $db->query('SELECT * FROM ms_labtest WHERE id = ?', $_GET['editID'])->fetchArray();
- date_default_timezone_set('asia/manila');
- $date1 = $fetchLabtest['date_valid'];
- $date2 = $fetchLabtest['date_valid'];
- $newDate = date('F j, Y', strtotime($date1));
- $newTime = date('h:i:s', strtotime($date2));
+$fetchLabtest = $db->query('SELECT * FROM ms_labtest WHERE id = ?', $_GET['editID'])->fetchArray();
+date_default_timezone_set('asia/manila');
+$date1 = $fetchLabtest['date_valid'];
+$date2 = $fetchLabtest['date_valid'];
+$newDate = date('F j, Y', strtotime($date1));
+$newTime = date('h:i:s', strtotime($date2));
 ?>
 <div class="container">
   <div class="form-group">
