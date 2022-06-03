@@ -94,6 +94,27 @@
        </ul>
      </li>
 
+     <li class="nav-item">
+       <a href="medical-history.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('medhis' == $page) {
+                                                                                        echo 'nav-link';
+                                                                                      } else {
+                                                                                        echo 'nav-link collapsed';
+                                                                                      } ?>">
+         <i class="bi bi-file-plus"></i>
+         <span>Medical History</span>
+       </a>
+     </li>
+
+     <li class="nav-item">
+       <a href="stud_req.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('stud-req' == $page) {
+                                                                                echo 'nav-link';
+                                                                              } else {
+                                                                                echo 'nav-link collapsed';
+                                                                              } ?>">
+         <i class="bi bi-folder-check"></i>
+         <span>Student Requests</span>
+       </a>
+     </li>
 
      <li class="nav-heading text-primary">Monitor</li>
 
@@ -293,9 +314,8 @@ function validate() {
         Swal.fire({
           allowOutsideClick: false,
           icon: 'question',
-          title: 'Do you want to Assess this even if Not in Schedule?',
-          text: 'Note: This wiil write the record in advance',
-          confirmButtonText: 'Overwrite',
+          title: 'Insert Data ?',
+          confirmButtonText: 'Confirm',
           confirmButtonColor: '#f93154',
           cancelButtonColor: '#B23CFD',
           showCancelButton: true,

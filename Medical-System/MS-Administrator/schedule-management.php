@@ -112,7 +112,7 @@ include_once 'security/newsource.php';
                       </div>
                     </div>
                     <div class="col">
-                      <button type="button" onclick="insertSched('insertNow')" class="btn btn-danger">Go</button>
+                      <button type="button" onclick="insertSched('insertNow')" class="btn btn-primary">Go</button>
                     </div>
                   </div>
                 </div>

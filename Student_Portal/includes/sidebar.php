@@ -167,6 +167,17 @@
       </a>
     </li>
 
+    <li class="nav-item">
+      <a class="<?php if ($page == 'medres') {
+                  echo 'nav-link';
+                } else {
+                  echo 'nav-link collapsed';
+                } ?>" href="med-request.php">
+        <i class="bi bi-folder"></i>
+        <span>Medical Examination Result</span>
+      </a>
+    </li>
+
     <li class="nav-heading">Health Check Monitoring</li>
 
     <li class="nav-item">
