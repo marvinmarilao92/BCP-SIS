@@ -128,11 +128,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 case "Guidance and Counselling":
                   //statement
                   break;
-
+                    
                 case "OJT System":
                   //statement
                   switch ($row1["role"]) {
-                    case "Internship Administrator":
+                    case "Internship Admin":
                       //statement
                       $_SESSION['session_username'] = $myusername;
                       $_SESSION['session_url'] = "IMNGMTSYS/z/index?id=" . $_SESSION["login_key"] . "";
@@ -141,9 +141,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       } elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])) {
                         $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
                       } else {
-                        $ip = $_SERVER["REMOTE_ADDR"];
+                        
                         $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                         $remarks = "account has been logged in";
+                        $fname=$ad_fname.' '.$ad_lname; 
+                        mysqli_query($link, "INSERT INTO internship_audit_trail(user,action,id,account_no,ip,host) VALUES('$fname','$remarks','$id','$admin','$ip','$host')") or die(mysqli_error($link));
                         mysqli_query($link, "INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')") or die(mysqli_error($link));
                         //used to delete ip address record for login attempts
                         mysqli_query($link, "delete from login_attempts where ip_address='$ip_address'");
@@ -175,6 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $ip = $_SERVER["REMOTE_ADDR"];
                         $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                         $remarks = "account has been logged in";
+                        mysqli_query($link, "INSERT INTO internship_audit_trail(user,action,id,account_no,ip,host) VALUES('$fname','$remarks','$id','$admin','$ip','$host')") or die(mysqli_error($link));
                         mysqli_query($link, "INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')") or die(mysqli_error($link));
                         //used to delete ip address record for login attempts
                         mysqli_query($link, "delete from login_attempts where ip_address='$ip_address'");

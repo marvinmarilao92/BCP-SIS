@@ -190,7 +190,8 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="user-profile.php">
+              <a class="dropdown-item d-flex align-items-center"  <?php echo 'href=user-profile??id='.$url;
+        ?>>
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -200,7 +201,8 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="user-profile.php">
+              <a class="dropdown-item d-flex align-items-center"  <?php echo 'href=user-profile?id='.$url;
+        ?>> 
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>
@@ -210,7 +212,8 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+              <a class="dropdown-item d-flex align-items-center" <?php echo 'href=FAQS?id='.$url;
+        ?>>
                 <i class="bi bi-question-circle"></i>
                 <span>Need Help?</span>
               </a>
@@ -219,12 +222,40 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#basicModal">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
+            <!-- Adding return nav item for super admin -->
+          <?php 
+            $output = '';
+            $key = $_SESSION["login_key"];
+            if(isset($verified_session_department) && ($verified_session_username)){
+              switch($ad_rolee){
+                case "SuperAdmin":
+                    //statement
+                    $output .= '
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php?id='.$key.'">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Sign Out</span>
+                      </a>
+                    </li>    
+                  ';
+                break;  
+
+                default:
+                //statement
+                  $output .= '
+                  <li>
+                  <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#basicModal">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Sign Out</span>
+                  </a>
+                </li>    
+                  ';
+              }
+              echo $output;
+          }else{
+              // header("location:index.php");
+          }
+          ?>
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->

@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
-require 'control/check-session-login.php';
-
+<?php require 'control/check-session-login.php';
 if ($user_online == "true") {
-  if ($rolee == "Internship Coordinator" || $rolee == "SuperAdmin") {
-  }else{
-  header("location:../");   
-  }
-  }else{
-  header("location:../"); 
-  }   
-  ?>
+if ($ad_rolee == "Internship Admin" || $ad_rolee == "SuperAdmin") {
+}else{
+header("location:../");   
+}
+}else{
+header("location:../"); 
+}   
+?>
 <head>
-  
-
-  
-
-  <?php require 'drawer/header.php' ?>
-
+  <?php require 'drawer/header.php' ?> 
 </head>
 
 <body>
-    <?php require 'drawer/modal.php' ?>
+  <?php require 'drawer/modal.php'?>
+  
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-
-    <?php require 'drawer/navbar.php' ?>
-    <!-- End Icons Navigation -->
+    <?php require 'drawer/navbar.php' ?> 
 
   </header><!-- End Header -->
 
@@ -318,24 +310,18 @@ if ($user_online == "true") {
   </div>
 </section>
 
-</main><!-- End #main -->
+</main><!-- End #main --> 
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-      
     <?php require 'drawer/footer.php' ?>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <?php require'drawer/js.php' ?>
+  <?php require 'drawer/js.php' ?> 
   <?php require 'drawer/copy.php' ?>
+
 </body>
 
-</html> 
-
-
-
-
-
+</html>

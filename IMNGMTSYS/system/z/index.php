@@ -2,7 +2,7 @@
 <html lang="en">
 <?php require 'control/check-session-login.php';
 if ($user_online == "true") {
-if ($ad_rolee == "Internship Administrator" || $ad_rolee == "SuperAdmin") {
+if ($ad_rolee == "Internship Admin" || $ad_rolee == "SuperAdmin") {
 }else{
 header("location:../");   
 }
@@ -250,6 +250,7 @@ header("location:../");
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <?php require 'drawer/js.php' ?> 
+  <?php require 'drawer/copy.php' ?>
 
 </body>
 

@@ -8,7 +8,7 @@
 </head>
 
 <body>
-
+    <?php require 'drawer/modal.php'?>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -121,6 +121,7 @@
 
   <!-- Vendor JS Files -->
   <?php require 'drawer/js.php' ?>
+  <?php require 'drawer/copy.php' ?>
 
 </body>
 

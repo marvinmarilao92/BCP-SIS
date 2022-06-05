@@ -180,7 +180,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="../y/user-profile.php">
+              <a class="dropdown-item d-flex align-items-center" <?php echo 'href=../y/user-profile?id='.$url ?>>
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -190,7 +190,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="../y/user-profile.php">
+              <a class="dropdown-item d-flex align-items-center" <?php echo 'href=../y/user-profile?id='.$url ?>>
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>
@@ -200,7 +200,8 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="FAQS.php">
+              <a class="dropdown-item d-flex align-items-center" <?php echo 'href=FAQS?id='.$url;
+        ?>>
                 <i class="bi bi-question-circle"></i>
                 <span>Need Help?</span>
               </a>

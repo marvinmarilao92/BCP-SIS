@@ -1,6 +1,244 @@
+<!--Update Config-->
+              <div class="modal fade" id="Extra" tabindex="-1">
+                <div class="modal-dialog modal-lg" style="background-color: lightblue;" >
+                  <div class="modal-content"style="background-color: whitesmoke;">
+                    <div class="modal-header"style="background-color: lightblue;
+                                                    height: 13vh;
+                                                    ">
+                      <img src="../assets/img/BCPlogo.png" alt="profile" class="rounded-circle">&nbsp;&nbsp;&nbsp;
+                      <h3 class="modal-title" style="font-size: 2.5em;
+                                                     font-style: italic;">Update Information</h3>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <br>
+                      <br>
+                    <form class="row g-3 needs-validation" action="constant/add_info.php" method="POST">
+
+                        <div class="col-4">
+                            <div class="form-floating">
+                              <input type="text" class="form-control" name="co_id" <?php echo 'value='.$verified_session_username;?> id="co_id" placeholder="Coordinator_ID" required autofocus readonly>
+                              <label for="floatingName">Coordinator ID</label>
+                            </div>
+                          </div>
+                          <br>
+
+
+                      <div class="col-8">
+                            <div class="form-floating">
+                              <input type="text" class="form-control" name="co_name" id="co_name" placeholder="Coordinator_Name"    required autofocus>
+                              <label for="floatingName">Coordinator Name / Fullname</label>
+                            </div>
+                          </div>
+                          <br>
+
+
+                       <div class="col-6">
+                            <div class="form-floating">
+                              <select type="text" class="form-select" name="c_deptt" id="c_deptt" Required autofocus>
+                               <option value="" style="color:black" selected="selected" disabled>Select a Department</option>
+                               <option>CCS Department</option>
+                               <option>BSBA Department</option>  
+                              </select>
+                              <label for="floatingName">Department</label>
+                            </div>
+                          </div>
+                          <br>
+
+                      <div class="col-3">
+                            <div class="form-floating">
+                              <select type="text" class="form-select" name="courses" id="courses" Required autofocus>
+                               <option value="" style="color:black" selected="selected" disabled>Select a Course</option>
+                               <option>BSIT</option>
+                               <option>BSBA</option>  
+                              </select>
+                              <label for="floatingName">Course</label>
+                            </div>
+                          </div>
+                          <br>
+
+                      <div class="col-3">
+                            <div class="form-floating">
+                              <select type="text" class="form-select" name="level" id="lvl" required autofocus>
+                              <option value="" style="color:black" selected="selected" disabled>Select a year level</option>
+                              <option>4th Year</option>
+                              <option>3rd Year</option>
+                              </select>
+                              <label for="floatingName">Level</label>
+                            </div>
+                          </div>
+                          <br>
+
+                      <div class="col-8">
+                            <div class="form-floating">
+                              <select type="text" class="form-select" name="position" aria-label="State" id="lvl" onchange="oncollapse()" required autofocus>
+                              <option value="" style="color:black" selected="selected" disabled>Position</option>
+                              <option>Coordinator</option>
+                              <option>--/--/--</option>
+                              </select>
+                              <label for="floatingName">Position At Work</label>
+                            </div>
+                          </div>
+                          <br>
+
+                        
+                        <div class="col-4">
+                            <div class="form-floating">
+                              <input type="date" class="form-control" name="dosw" id="dosw"  required autofocus>
+                              <label for="floatingName">Date of Started Work</label>
+                            </div>
+                          </div>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <h3 class="modal-title" style="font-size: 2.5em;
+                                                     font-style: italic;">Basic Information</h3>
+                          <hr>
+                          <br>
+                          <br>
+                            
+                          
+
+                            <div class="col-8">
+                            <div class="form-floating">
+                              <input type="text" class="form-control" name="POB" id="POB" placeholder="POB"    required autofocus>
+                              <label for="floatingName">Place of Birth</label>
+                            </div>
+                          </div>
+                          <br>
+                          <div class="col-4">
+                            <div class="form-floating">
+                              <input type="date" class="form-control" name="DOB" id="DOB" placeholder="DOB"    required autofocus>
+                              <label for="floatingName">Date of Birth</label>
+                            </div>
+                          </div>
+                          <br>
+                          <div class="col-9">
+                            <div class="form-floating">
+                              <input type="text" class="form-control" name="nationality" id="n" placeholder="n"    required autofocus>
+                              <label for="floatingName">Nationality</label>
+                            </div>
+                          </div>
+                          <br>
+
+                      <div class="col-3">
+                            <div class="form-floating">
+                              <select type="text" class="form-select" name="gender" aria-label="State" id="lvl" onchange="oncollapse()" required autofocus>
+                              <option value="" style="color:black" selected="selected" disabled>Gender</option>
+                              <option>Male</option>
+                              <option>Female</option>
+                              </select>
+                              <label for="floatingName">Gender</label>
+                            </div>
+                          </div>
+                          <br>
+                          <div class="col-12">
+                            <div class="form-floating">
+                              <input type="text" class="form-control" name="pre_address" id="n" placeholder="n"    required autofocus>
+                              <label for="floatingName">Present Address</label>
+                            </div>
+                          </div>
+                          <br>
 
 
 
+
+                                   
+                    </div>
+                    <div class="modal-footer"style="background-color: whitesmoke;">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary" name="submit">Save changes</button>
+                    </div>
+                  </form> 
+                  </div>
+                </div>
+              </div>  
+
+
+
+
+
+<!-- viewing companyside -->
+<div class="modal fade" id="empModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg" style="background-color: lightblue;" >
+                  <div class="modal-content"style="background-color: whitesmoke;">
+                    <div class="modal-header"style="background-color: lightblue;
+                                                    height: 13vh;
+                                                    ">
+                      <img src="../assets/img/BCPlogo.png" alt="profile" class="rounded-circle">&nbsp;&nbsp;&nbsp;
+                      <h3 class="modal-title" style="font-size: 2.5em;
+                                                     font-style: italic;">Representative Profile</h3>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="view" style=" overflow-y: scroll;">
+                    <br>
+                    <br>
+                    </div>
+                    <div class="modal-footer" style="background-color: whitesmoke;">
+                      
+                      <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+<!-- edit button for companyside-->
+<div class="modal fade" id="editcompany" tabindex="-1">
+                <div class="modal-dialog modal-lg"style="background-color: lightblue;">
+                  <div class="modal-content">
+                    <div class="modal-header" style="background-color: lightblue;">
+                      <h5 class="modal-title">Change Status</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                     
+                    <form class="row g-3 needs-validation" action = "constant/com_stats.php" method="POST">
+                     <div class="col-12">
+
+                     <input type="hidden" name="com_id" id="updatee_id">
+                     <input type="hidden" name="companyid" id="companyid">
+                     <label>Company Name</label>
+                            <input type="text" name="company" id="company" class="form-control"
+                                      placeholder="number" readonly>
+                                      <br>
+                     <label> Representative Name </label>
+                            <input type="text" name="rname" id="rname" class="form-control"
+                                      placeholder="name" readonly>
+                                      <br>
+                                      
+
+                                <select id="inputState" name="reason" id="reason" class="form-select" Required autofocus>
+                            <option value="" style="color:black" selected="selected" >Reason</option>
+                            <option>This account is legit.</option>
+                              <option>Fake</option>
+                              <option>%^E#@#.</option>
+                                </select>
+                                <br>
+
+
+
+                            <select id="inputState" name="cstatus" id="cstatus" class="form-select" Required autofocus>
+                                          <option value="" style="color:black" selected="selected" >Change Status</option>
+                                          <option>Approved</option>
+                                          <option>Pending</option>
+                                          <option>Rejected</option>   
+                                      </select>
+                            </div>
+                 
+                    </div>
+                    
+                      <div class="d-grid gap-2 mt-3">
+               
+                      <button type="companyedit" class="btn btn-primary btn-lg " name="companyedit" >CHANGE</button>
+                    </div>
+                    
+                    </form>
+                  </div>
+                
+                </div>
+              </div>
 
 
 
@@ -8,9 +246,9 @@
 <!-- edit button -->
 
 <div class="modal fade" id="editmodal" tabindex="-1">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog modal-lg"style="background-color: lightblue;">
                   <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header" style="background-color: lightblue;">
                       <h5 class="modal-title">Change Status</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -28,21 +266,27 @@
                             <input type="text" name="name" id="name" class="form-control"
                                       placeholder="name" readonly>
                                       <br>
-                            <label> Status </label>
-                            
-                                  <input type="text" name="status" id="status" class="form-control"
-                                      placeholder="status">
+
+                                      <select type="text" name="rname" id="rname" class="form-control"
+                                      placeholder="Reason" >
+                                      <option value="" style="color:black" selected="selected" >Reason for</option>
+                                          <option>Undergoing Screening</option>
+                                          
+                                      </select>
+                                      <br>
+                                      
+                                      <select id="inputState" name="status" class="form-select" Required autofocus>
+                                          <option value="" style="color:black" selected="selected" >Change Status</option>
+                                          <option>Qualified</option>
+                                          <option>Pending</option>   
+                                      </select>
                             </div>
-                            
-                      
-
-
-
+                 
                     </div>
                     
                       <div class="d-grid gap-2 mt-3">
                
-                      <button type="update" class="btn btn-primary btn-lg " name="update" >CHANGE</button>
+                      <button type="updatee" class="btn btn-primary btn-lg " name="updatee" >CHANGE</button>
                     </div>
                     
                     </form>
@@ -193,9 +437,9 @@
 
 <!--LOGOUT MODAL-->
         <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog" > 
                   <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header"style="background-color: #ff7070">
                     
                       <h3 class="modal-title"> Log out ?</h3>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

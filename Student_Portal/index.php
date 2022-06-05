@@ -14,9 +14,10 @@ include("includes/head.php");
   $page = 'dash';
   include("includes/nav.php");
   include("includes/sidebar.php");
+  
   ?>
 
-
+  
   <main id="main" class="main">
 
     <div class="pagetitle">
