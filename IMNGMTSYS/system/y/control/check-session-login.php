@@ -4,15 +4,8 @@
   if(isset($_SESSION['session_username']) == true){
     $user_id_checker = $_SESSION['session_username'];
 
-    $sql5 = "SELECT * FROM user_information 
-                    INNER JOIN ims_basic_coordinator_info
-                    ON 
-                    ims_basic_coordinator_info.c_number = user_information.id_number
-                    where 
-                    user_information.id_number =  '$user_id_checker'";
+    $sql5 = "SELECT * FROM user_information where id_number = '$user_id_checker'";
             
-     
-
             if($result5 = mysqli_query($link, $sql5)){
               if(mysqli_num_rows($result5) > 0){
                 while($row5 = mysqli_fetch_array($result5)){
@@ -26,11 +19,9 @@
                   $verified_session_email = $row5['email'];
                   $verified_session_contact = $row5['contact'];
                   $verified_session_address = $row5['address'];
-                  $verified_session_office = $row5['office'];
+                  $course = $row5['office'];
                   $verified_session_department = $row5['department']; 
                   $rolee = $row5['role'];
-                  $c_course = $row5['c_course'];
-                  $c_level = $row5['c_level'];
                   $verified_session_about = $row5['about'];
                   $verified_session_img = $row5['user_img'];
                   $encr = md5($rolee);

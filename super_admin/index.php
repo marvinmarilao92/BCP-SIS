@@ -363,20 +363,7 @@ if (isset($_GET['logs']) && $_GET['logs'] == 1) {
           </div>
           <!-- End Insert your Module here -->
           <!-- Insert your Module here -->
-<<<<<<< Updated upstream
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <a href="../IMNGMTSYS/system/z/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
-                  <h5 class="card-title">Internship Administrator</h5>
-                </a>
-                <p class="card-text">Subsystem Description insert here...</p>
-              </div>
-            </div>
-          </div>
-=======
           
->>>>>>> Stashed changes
           <!-- End Insert your Module here -->
           <!-- Insert your Module here -->
           

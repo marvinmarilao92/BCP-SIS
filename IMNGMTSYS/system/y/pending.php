@@ -53,12 +53,11 @@
                     $f = 'Pending';
                     // Attempt select query execution
                     $sql = "SELECT *FROM ims_apply_info
-                            INNER JOIN ims_basic_coordinator_info
+                            INNER JOIN user_information
                             ON 
-                            ims_apply_info.s_course = ims_basic_coordinator_info.c_course
-                            WHERE 
-                            ims_apply_info.lvl = '$c_level'AND
-                            ims_apply_info.s_course = '$c_course'
+                            ims_apply_info.s_course = user_information.office
+                            WHERE                          
+                            ims_apply_info.s_course = '$course'
                             AND
                             ims_apply_info.status ='$f'
                             ORDER BY `s_number` ASC";
