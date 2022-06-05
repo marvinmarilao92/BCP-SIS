@@ -22,6 +22,17 @@
 
         }
         ?>
+
+
+    
+    
+      <li class="nav-item"data-bs-toggle="modal" data-bs-target="#Extra">
+        <a class="nav-link" >
+          <i class="bi bi-question-circle"></i>
+          <span >Update Info
+          </span>
+        </a>
+      </li>
       <li class="nav-item">
         <a class="nav-link " <?php echo 'href=index.php?'.$url;
           ?>
@@ -58,18 +69,21 @@
           <li class="nav-heading">Manage Accounts</li>
             
           <li>
-            <a href="components-tooltips.html">
+            <a <?php echo 'href=registered-accounts?id='.$url;
+        ?>>
               <i class="bi bi-person"></i><span>Registered Accounts</span>
             </a>
           </li>
           <li class="nav-heading" >Account Status</li>
           <li>
-            <a href="components-tooltips.html">
+            <a <?php echo 'href=approved-accounts?id='.$url;
+        ?>>
               <i class="bi bi-circle"></i><span>Approved Accounts</span>
             </a>
           </li>
           <li>
-            <a href="components-tooltips.html">
+            <a  <?php echo 'href=rejected?id='.$url;
+        ?>>
               <i class="bi bi-circle"></i><span>Rejected Accounts</span>
             </a>
           </li>
@@ -86,7 +100,7 @@
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <li class="nav-heading">Enrolled Students</li>
-            <a <?php echo 'href=college-data.php?'.$url;
+            <a <?php echo 'href=college-data?id='.$url;
         ?>>
               <i class="bi bi-circle"></i><span>Students</span>
             </a>
@@ -106,7 +120,8 @@
           </li>
           <li class="nav-heading">Screening</li>
           <li>
-            <a href="forms-editors.html">
+            <a <?php echo 'href=screening.php?'.$url;
+        ?>>
               <i class="bi bi-circle"></i><span>Set A Plan By Department Coordinator</span>
             </a>
           </li>
@@ -155,7 +170,8 @@
 
         <li class="nav-heading">Concerns</li>
         <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" <?php echo 'href=concern.php?'.$url;
+          ?>>
           <i class="bi bi-envelope"></i>
           <span>Reports</span>
         </a>

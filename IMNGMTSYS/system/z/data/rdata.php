@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php require 'control/check-session-login.php';
+if ($user_online == "true") {
+if ($ad_rolee == "Internship Admin" || $ad_rolee == "SuperAdmin") {
+}else{
+header("location:../");   
+}
+}else{
+header("location:../"); 
+}   
+?>
 <head>
-  <?php require 'drawer/header.php'  ?>
+  <?php require 'drawer/header.php' ?> 
 </head>
 
 <body>
-
+  <?php require 'drawer/modal.php'?>
+  
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-      <?php require 'drawer/navbar.php' ?>
-    <!-- End Icons Navigation -->
+    <?php require 'drawer/navbar.php' ?> 
 
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
-      <?php require 'drawer/sidebar.php' ?>
+    <?php require 'drawer/sidebar.php' ?>
+
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
@@ -30,15 +40,19 @@
     <section class="section dashboard">
       <div class="row">
 
+
+        
         <!-- Left side columns -->
         <div class="col-lg-8">
           <div class="row">
 
             <!-- Sales Card -->
-          
-            <div class="alert alert-info" role="alert" style="text-align:left;">
-              <b>COVID-19 update:</b>  The safety and well-being of our candidates, our people and their families continues to be a top priority. Until travel restrictions change, interviews will continue to be conducted virtually. 
-            </div>
+
+
+                         
+                        
+                      
+            
             <!-- End Sales Card -->
 
             <!-- Revenue Card -->
@@ -46,7 +60,51 @@
             <!-- End Revenue Card -->
 
             <!-- Customers Card -->
+            <?php
+                     require '../dbCon/bonak.php';
+                       try {
+                                             $link = new PDO("mysql:host=$servername;dbname=$db_name", $db_user, $db_pass);
+                                             $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+      
+                                             $stmt = $link->prepare("SELECT * FROM ims_admin_post ");
+                                             $stmt->execute();
+                                             $result = $stmt->fetchAll();
+
+                                             foreach($result as $row)
+                                             {
+                                            ?>
+            <div class="col-12">
+              <div class="card mb-3">
+                <div class="row g-0">
+                                        
+                  <div class="col-md-4">
+                    <img src="../assets/img/default.jpg" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title"><?php  echo $row['p_role']?></h5>
+                      <p class="card-text"><?php echo $row['post']; ?></p>
+                      <br>
+                      <br>
+                      <p style="text-align: right;">Date Posted: <?php echo $row['pdate']?></p>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            <?php
+                    }
+                    $stmt->execute();
+            
+                      }catch(PDOException $e)
+                          {
+        
+                          }
+  
+                      
+                      ?> 
             <!-- End Customers Card -->
 
             <!-- Reports -->
@@ -55,18 +113,22 @@
               <div class="card">
              
               <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-              <?php require 'drawer/carousel.php' ?>
+              <?php require '../drawer/carousel.php' ?>
                 
                 </div>
               </div>
             </div><!-- End Reports -->
 
-    
+            <!-- Recent Sales -->
+            <!-- End Recent Sales -->
+
+            <!-- Top Selling -->
+            <!-- End Top Selling -->
 
           </div>
         </div><!-- End Left side columns -->
 
-        
+        <!-- Right side columns -->
         <div class="col-lg-4">
 
           <!-- Recent Activity -->
@@ -146,7 +208,9 @@
           <!-- End Budget Report -->
 
           <!-- Website Traffic -->
-          <!-- End Website Traffic -->
+          
+
+            <!-- End Website Traffic -->
 
           <!-- News & Updates Traffic -->
           <div class="card">
@@ -164,40 +228,9 @@
             </div>
 
             <div class="card-body pb-0">
-              <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
-
-              <div class="news">
-                <div class="post-item clearfix">
-                  <img src="../../assets/img/news-1.jpg" alt="">
-                  <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                  <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="../../assets/img/news-2.jpg" alt="">
-                  <h4><a href="#">Quidem autem et impedit</a></h4>
-                  <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="../../assets/img/news-3.jpg" alt="">
-                  <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="../../assets/img/news-4.jpg" alt="">
-                  <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                  <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="../../assets/img/news-5.jpg" alt="">
-                  <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                  <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
-                </div>
-
-              </div><!-- End sidebar recent posts-->
+              
+              <?php require 'drawer/news.php' ?>
+              <!-- End sidebar recent posts-->
 
             </div>
           </div><!-- End News & Updates -->
@@ -207,18 +240,16 @@
       </div>
     </section>
 
-  </main>
-  <!-- End #main -->
+  </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-    <?php  require 'drawer/footer.php' ?>
+    <?php require 'drawer/footer.php' ?>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <?php require 'drawer/js.php' ?>
+  <?php require 'drawer/js.php' ?> 
 
 </body>
 

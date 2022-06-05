@@ -1,5 +1,5 @@
 <?php
-  include '../dbCon/bonak.php';
+  include 'bonak.php';
   session_start();
   if(isset($_SESSION['session_username']) == true){
     $user_id_checker = $_SESSION['session_username'];
@@ -8,6 +8,7 @@
             if($result6 = mysqli_query($link, $sql6)){
               if(mysqli_num_rows($result6) > 0){
                 while($row6 = mysqli_fetch_array($result6)){
+                  $getID= $row6['id'];
                   $verified_session_username= $row6['id_number'];
                   $ad_fname = $row6['firstname'];
                   $ad_lname = $row6['lastname'];
@@ -37,7 +38,7 @@
     
     if(isset($verified_session_department) && ($verified_session_username == $_SESSION['session_username'])){
         switch($ad_rolee){
-          case "Internship Administrator":
+          case "Internship Admin":
             //statement
             break;
           case "SuperAdmin":

@@ -2,7 +2,7 @@
 
 
 
-if(isset($_POST['submit']) && isset($_FILES['submit'])){
+if(isset($_POST['submit'])){
 
 	register_as_company();
 
@@ -22,20 +22,40 @@ function register_as_company()
 
 				 require 'config.php';	
 			  	 require 'uniq.php';
+
 				 $autogen_reg = 'COM120'.get_rand_numbers(4).'';
-				 $type = $_POST['role'];
+				
+				 $status = 'Pending';
+				 date_default_timezone_set("asia/manila");
 				 $date = date('d-m-Y h:i A ');
 				 $i_no = '10'.get_rand_numbers(3).'';
-				 $name = $conn->real_escape_string($_FILES['uploaded_file']['name']);
-				 $mime = $conn->real_escape_string($_FILES['uploaded_file']['type']);
-				 $data = $conn->real_escape_string(file_get_contents($_FILES ['uploaded_file']['tmp_name']));
-				 $size = intval($_FILES['uploaded_file']['size']);
+				
 				 
-				$fname =       	validate($_POST['fname']);
-				$email =       	validate($_POST['email']);
+				$cname =       	validate($_POST['cname']);
+				$rname =       	validate($_POST['rname']);	
+				
+				$caddress =       	validate($_POST['caddress']);
+				
+				$cemail = validate($_POST['cemail']);
+
 				$password_1 =  	validate($_POST['password']);
-				$password_2 = 	validate($_POST['retype']); 
+				$password_2 = 	validate($_POST['re_pass']); 
 				$password = PASSWORD_HASH($password_1, PASSWORD_DEFAULT);
+				$login_key = PASSWORD_HASH($status);
+
+
+				
+
+				$fname =       	validate($_POST['fname']);
+				$mname =       	validate($_POST['midname']);	
+				$lname =       	validate($_POST['lname']);
+				$paddress =       	validate($_POST['presentadd']);
+				$contact =       	validate($_POST['contact']);	
+				$email =       	validate($_POST['r_email']);
+				$gender =       	validate($_POST['gender']);
+				$position =			validate($_POST['position']);
+
+
 				if ($password_1 != $password_2)
 				{
 					header("Location: ../index.php?error=Password did not match, Please try again");
@@ -43,21 +63,16 @@ function register_as_company()
 				}
 				else
 				{
-				$sql = "INSERT INTO ims_user_comp_information(uid,email,com_user,com_pass)
-									   			values('$i_no','$email','$autogen_reg','$password','$type')";
-				$sqld = "
-				INSERT INTO `file` (
-					`id`, `name`, `mime`, `size`, `data`, `created`
-				)
-				VALUES (
-					'{$$_ino}','{$name}', '{$mime}', {$size}, '{$data}', NOW()
-				)";
+				$sql = "INSERT INTO ims_company_regis(c_name,repre_name,c_address,c_email,username,password,status)
+									   			values('$cname','$rname','$caddress','$cemail','$autogen_reg','$password','$status')";
+				
+				$sql1 = "INSERT INTO ims_department_information (id_number,firstname,middlename,lastname,address,contact,email,gender,position)values('$autogen_reg','$fname','$mname','$lname','$paddress','$contact','$email','$gender','$position')";
 
                 $run = mysqli_query($conn,$sql) or die(mysqli_error());
-                $run2 = mysqli_query($conn,$sqld) or die(mysqli_error());
+                $ru2 = mysqli_query($conn,$sql1) or die(mysqli_error());
 					
 				
-				if($run && $run2)
+				if($run && $ru2)
 				{
 					
 					

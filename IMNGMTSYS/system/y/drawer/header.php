@@ -1,7 +1,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Bestlink College of the Philippines</title>
+  <title>BCP - Homepage</title>
   <meta name="description" content="Internship Management / Internship Portal" />
   <meta name="keywords" content="job, work, resume, applicants, application, employee, employer, hire, hiring, human resource management, hr, online job management, company, worker, career, recruiting, recruitment" />
   <meta name="author" content="Bestlink">
