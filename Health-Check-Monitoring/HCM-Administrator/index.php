@@ -95,59 +95,46 @@ include_once 'security/newsource.php';
                   <h5 class="card-title">Current Medicine Stock</h5>
 
                   <!-- Pie Chart -->
-                  <div id="brand-name"></div>
-                  <div id="quantity"></div>
-
                   <canvas id="pieChart" style="max-height: 400px;"></canvas>
                   <script>
-                  const brandName = document.querySelector('#brand-name');
-                  const itemQuantity = document.querySelector('#quantity');
-
                   const fetchData = async () => {
                     const res = await axios('test-config.php');
                     const data = res.data;
-
-                    const name = document.createElement('h4');
-                    const count = document.createElement('h4');
-                    // const quantity = document.createElement('h4');
-
-                    console.log(data);
-                    data.forEach((item) => {
-                      name.innerText = item.brand_name;
-                      brandName.append(name);
-
-                      count.innerText = item.quantity;
-                      itemQuantity.append(count);
-
-                      // console.log(item.full_name);
-
-                    })
-
+                    return data;
                   }
 
-                  fetchData();
-
-                  const label = ['Paracetamol', 'Bioflu', 'BSCRIM', 'BSCRIM', 'CASE', 'TEST 1'];
-                  const quantity = [300, 50, 100, 69, 420];
-
                   document.addEventListener("DOMContentLoaded", () => {
-                    new Chart(document.querySelector('#pieChart'), {
-                      type: 'pie',
-                      data: {
-                        labels: label,
-                        datasets: [{
-                          label: 'My First Dataset',
-                          data: quantity,
-                          backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                          ],
-                          hoverOffset: 4
-                        }]
-                      }
+                    const data = fetchData();
+                    const res = data.then((item) => {
+                      let label = [];
+                      let quantity = [];
+
+                      item.forEach((i) => {
+                        label.push(i.gen_name);
+                        quantity.push(i.quantity);
+                      })
+
+                      new Chart(document.querySelector('#pieChart'), {
+                        type: 'pie',
+                        data: {
+                          labels: label,
+                          datasets: [{
+                            label: 'My First Dataset',
+                            data: quantity,
+                            backgroundColor: [
+                              'rgb(255, 99, 123)',
+                              'rgb(54, 162, 78)',
+                              'rgb(255, 205, 86)',
+                              'rgb(100, 69, 132)',
+                              'rgb(200, 162, 56)',
+                              'rgb(250, 76, 86)'
+                            ],
+                            hoverOffset: 4
+                          }]
+                        }
+                      });
                     });
-                  });
+                  })
                   </script>
 
 
@@ -159,28 +146,69 @@ include_once 'security/newsource.php';
             <div class="col-lg-7">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Bar Chart</h5>
+                  <h5 class="card-title">Daily Total Medicine Quantity</h5>
 
                   <!-- Bar Chart -->
-                  <div id="barChart" style="min-height: 400px;" class="echart"></div>
+                  <canvas id="lineChart" style="max-height: 400px;"></canvas>
 
                   <script>
                   document.addEventListener("DOMContentLoaded", () => {
-                    echarts.init(document.querySelector("#barChart")).setOption({
-                      xAxis: {
-                        type: 'category',
-                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                      },
-                      yAxis: {
-                        type: 'value'
-                      },
-                      series: [{
-                        data: [120, 200, 150, 80, 70, 110, 130],
-                        type: 'bar'
-                      }]
+                    const data = fetchData();
+                    const res = data.then((item) => {
+                      // console.log(item);
+                      let quantity = [];
+                      let timestamp = [];
+                      let arrayItems = [];
+                      item.forEach((i, index) => {
+                        quantity.push(+i.quantity);
+                        timestamp.push(i.received_date);
+                        // console.log(timestamp);
+                        let items = {};
+                        items.x = i.received_date;
+                        items.y = +i.quantity;
+                        arrayItems.push(items);
+                      })
+
+                      console.log(arrayItems);
+                      const data = {
+                        datasets: [{
+                          label: 'Daily Total Medicine',
+                          data: arrayItems,
+                          borderColor: 'rgb(75, 192, 192)',
+                          tension: 0.1
+                        }]
+                      }
+
+                      const config = {
+                        type: 'line',
+                        data,
+                        options: {
+                          scales: {
+                            x: [{
+                              type: 'time',
+                              time: {
+                                unit: 'day'
+                              },
+                            }],
+                            y: [{
+                              beginAtZero: true
+                            }]
+                          }
+                        }
+                      }
+
+                      new Chart(
+                        document.querySelector('#lineChart'),
+                        config
+                      )
                     });
-                  });
+                  })
                   </script>
+
+
+
+
+
                   <!-- End Bar Chart -->
 
                 </div>
