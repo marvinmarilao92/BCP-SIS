@@ -6,13 +6,13 @@
       <?php
           $output = '';
           $key = $_SESSION["login_key"];
-          if(isset($verified_session_department) && ($verified_session_username)){
+          if(isset($verified_session_course) && ($verified_session_username)){
             switch($verified_session_year_level){
               case "4th Year":
                 //statement
                 ?>
                  <li class="nav-item">
-                  <a class="btn btn-primary form-control" data-toggle="modal" data-target="#ApplyModal">
+                  <a class="btn btn-primary form-control" <?php echo 'href=apply?'.$key;?>>
                     <i class="bi bi-arrow-return-left"></i>
                     <span>Apply for OJT</span>
                   </a>
@@ -187,17 +187,17 @@
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-person"></i><span>Task</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-person"></i><span>MyStatus</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="components-tooltips.html">
-            <i class="bi bi-person"></i><span>--/--/--</span>
+          <a <?php echo 'href=overview?'.$key;?>>
+            <i class="bi bi-person"></i><span>Review</span>
           </a>
         </li>
         <li>
           <a href="components-tooltips.html">
-            <i class="bi bi-circle"></i><span>--/--/--</span>
+            <i class="bi bi-circle"></i><span>Screening</span>
           </a>
         </li>
       </ul>
@@ -207,11 +207,11 @@
     <!-- <li class="nav-heading">Fill Up Form</li></li> -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#pq">
-        <i class="bi bi-person"></i>
-        <span>Professional Qualification</span>
-      </a>
-    </li>
+        <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#login">
+          <i class="bi bi-box-arrow-in-right"></i>
+          <span>Login</span>
+        </a>
+      </li>
 
     <li class="nav-heading">Medical System</li>
 
@@ -333,4 +333,44 @@
       </div>
   </div>
   <!-- End Create Document Modal-->
+
+  <div class="modal fade" id="ApplyModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">APPLY OF INTERNSHIP</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form method="post" enctype="multipart/form-data">
+                <div class="card" style="margin: 10px;">
+                  <div class="card-body">
+                    <h2 class="card-title">Provide all information</h2>
+                      <!-- Fill out Form -->
+                      
+                      <div class="row g-3" >
+                      <input type="text" id="fname" name="fname" class="form-control"  value="<?php echo $verified_session_firstname . " " . $verified_session_lastname ?>" readonly>
+                      <input type="text" id="course" name="course" class="form-control"  value="<?php echo $verified_session_course?>" readonly>
+                      <input type="text" id="yearlvl" name="yearlvl" class="form-control"  value="<?php echo $verified_session_year_level?>" readonly>
+                        <br>
+
+                        <div class="col-md-12">                                    
+                          <input class="form-control"  type="file" id="resume" name="resume" accept="application/pdf" >
+                          <label for="resume" style="float: right; margin-right:10px"></label>
+                        </div>
+                        <div class="col-12">
+                            <textarea class="form-control" style="height: 80px" placeholder="Reason" name="reason" id="reason" required></textarea>
+                        </div>        
+                      </div>
+                                  
+                  </div>
+                </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" name="save">Apply</button>
+                  </div>
+              </form>
+              <!-- End Form -->
+          </div>
+      </div>     
+  </div>
 <?php require 'modal.php' ?>

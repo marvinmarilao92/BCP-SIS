@@ -2,15 +2,15 @@
 <html lang="en">
 <?php 
 require 'control/check-session-login.php';
-
-if ($user_online == "true") {
-  if ($rolee == "Internship Coordinator" || $rolee == "SuperAdmin") {
-  }else{
-  header("location:../");   
-  }
-  }else{
+  if ($user_online == "true") {
+    if ($rolee == "Internship Coordinator" || $rolee == "SuperAdmin") {
+    }else{
+   header("location:../");   
+    }
+   }else{
   header("location:../"); 
-  }   
+  }  
+ 
   ?>
 <head>
   
@@ -49,13 +49,29 @@ if ($user_online == "true") {
       <div class="row">
 
 
-        
+          
+
         <!-- Left side columns -->
         <div class="col-lg-8">
           <div class="row">
 
-            <!-- Sales Card -->
+              <div class="alert alert-success" role="alert">
+                 <h4 class="alert-heading">Important Notice for New Users !</h4>
+                  <p>Aww yeah, you successfully read this important alert message.  Everyone required to Fill up the Update Info the purpose of this is to maintain good connection and avoid human error.</p>
+                  <hr>
+                  <p class="mb-0">Thank you for your cooperation have a nice day.</p>
+              </div>
 
+
+        
+            <!-- Sales Card -->
+              <div class="col-lg-8">
+               <div class="row">
+        
+
+                      
+               </div>
+          </div>
 
                          
                         
@@ -68,7 +84,7 @@ if ($user_online == "true") {
             <!-- End Revenue Card -->
 
             <!-- Customers Card -->
-            <?php
+                          <?php
                      require '../dbCon/bonak.php';
                        try {
                                              $link = new PDO("mysql:host=$servername;dbname=$db_name", $db_user, $db_pass);
@@ -83,18 +99,18 @@ if ($user_online == "true") {
                                              {
                                             ?>  
             <div class="col-12">
+               
               <div class="card mb-3">
                 <div class="row g-0">
-                                        
+                         
                   <div class="col-md-4">
                     <img src="../assets/img/default.jpg" class="img-fluid rounded-start" alt="...">
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8" style="font-size: 0.7em;">
                     <div class="card-body">
                       <h5 class="card-title"><?php  echo $row['p_role']?></h5>
                       <p class="card-text"><?php echo $row['post']; ?></p>
-                      <br>
-                      <br>
+                      
                       <p style="text-align: right;">Date Posted: <?php echo $row['pdate']?></p>
                     </div>
                   </div>
@@ -260,6 +276,8 @@ if ($user_online == "true") {
 
   <!-- Vendor JS Files -->
   <?php require'drawer/js.php' ?>
+  <?php require 'drawer/copy.php' ?>
+  
   
 </body>
 

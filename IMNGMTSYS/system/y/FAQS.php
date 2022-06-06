@@ -330,7 +330,7 @@ if ($user_online == "true") {
 
   <!-- Vendor JS Files -->
   <?php require'drawer/js.php' ?>
-  
+  <?php require 'drawer/copy.php' ?>
 </body>
 
 </html> 

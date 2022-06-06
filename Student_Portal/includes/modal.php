@@ -1,95 +1,44 @@
 <!--professional Qualification-->
-<div class="modal fade" id="pq" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title">Student Form</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="modal fade" id="login" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+
+
+        <div class="modal-body">
+
+               <div class="row justify-content-center">
+              <img src="../assets/img/BCPlogo.png "  alt="" style=" width: 200px;">
+               </div>
+                <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Please Login your Account first</h5>
+                    <p class="text-center small">Enter your username & password to login</p>
+                  </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                          <input type="text" class="form-control" name="uname" id="username"   placeholder="first name" autofocus>
+                          <label for="floatingName">Username</label>
+                    </div>
+                </div>
+                
+                <div class="col-12">
+                    <div class="form-floating">
+                          <input type="password" class="form-control" name="password" id="password"  placeholder="first name" autofocus>
+                          <label for="floatingName">Password</label>
+                    </div>
+                </div>  
+                <br>
+                <div class="col-12" style="height: 90px">
+                    <a class="btn btn-primary w-100" type="submit" <?php echo 'href=login/index'?>  name="submit" >Login</a>
+                </div>
+
+        </div>          
       </div>
-      <div class="modal-body"
-        style="text-align: justify; text-justify: inter-word; overflow-y: scroll;  height:420px; ">
-
-        <form class="row g-3 needs-validation" action="constrait/addProf.php" method="POST">
-
-          <div class="col-12">
-            <select id="inputState" name="stud_cat" class="form-select" Required autofocus>
-              <option value="" selected="selected" disabled="disabled">Select Category</option>
-
-              <?php
-              require 'configInt.php';
-              try {
-                $conn = new PDO("mysql:host=$servername;dbname=$db_name", $db_user, $db_pass);
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
-                $stmt = $conn->prepare("SELECT * FROM ims_student_category");
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-                foreach ($result as $row) {
-              ?>
-
-              <option style="color:black" value="<?php echo $row['category']; ?>">
-
-                <?php echo $row['category']; ?></option>
-              <?php
-                }
-                $stmt->execute();
-              } catch (PDOException $e) {
-              }
-
-              ?>
-
-
-
-
-
-            </select>
-          </div>
-          <br>
-          <div class="col-12">
-            <div class="form-floating">
-              <input type="text" class="form-control" name="studnum" id="studnum" pattern="[a-zA-Z0-9]+"
-                placeholder="Student Number" required autofocus>
-              <label for="floatingName">Skills</label>
-            </div>
-          </div>
-          <br>
-          <div class="col-12">
-            <div class="form-floating">
-              <input type="text" class="form-control" name="pyf" id="pyf" placeholder="Payment For"
-                style="height: 90px;" required autofocus>
-              <label for="floatingName">Course</label>
-            </div>
-          </div>
-          <br>
-          <hr>
-          <h5>ADD other files ( Optional )</h5>
-          <div class="col-12">
-            <div class="container">
-              <center>
-                <span><i class="fa fa-cloud-upload text-dark fa-5x" aria-hidden="true"></i></span>
-                <p class="text-dark">Choose your file to Upload</label><br><br>
-                  <input type="file" id="file" class="text-dark" name="doc" required><br>
-                  <small id="passwordHelpBlock" class="form-text text-muted">
-                    Accept Docx, PDF , limit 5mb only.
-                  </small>
-              </center>
-            </div>
-          </div>
-          <br>
-
-
-      </div>
-      <div class="modal-footer">
-
-        <button type="submit" class="btn btn-primary btn-lg  rounded-pill" name="submit">Continue</button>
-
-      </div>
-      </form>
     </div>
   </div>
-</div>
+
+
+
 
 <!--LOGOUT MODAL-->
 <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
@@ -153,7 +102,7 @@
           <br>
           <div class="col-12">
             <div class="form-floating">
-              <input type="number" class="form-control" name="amount" id="amount" pattern="[a-zA-Z0-9]+"
+              <input type="text" class="form-control" name="amount" id="amount" pattern="[a-zA-Z0-9]+"
                 placeholder="Amount" required>
               <label for="floatingName">Amount</label>
             </div>

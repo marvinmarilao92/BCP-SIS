@@ -1,12 +1,24 @@
 <?php
-session_start();
+ 
+  include 'check-session-login.php';
 
-$_SESSION['session_username'] = false;
-session_unset();
-session_destroy();
-require '../../dbCon/config.php';
-require '../control/check-session-login.php';
-$remarks = "account has been logged out";
-mysqli_query($conn, "INSERT INTO internship_audit_trail(user,action,role,id) VALUES('$fnamee','$remarks','$rolee','$num')") or die(mysqli_error($conn));
-header("location:../../../../");
+  if(session_destroy()) {
+    date_default_timezone_set("asia/manila");
+		$date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
+    $fname=$fnamee.' '.$lnamee;  
+    $role = $rolee;
+    if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
+      $ip = $_SERVER["HTTPS_CLIENT_IP"];
+    }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
+      $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
+    }else{
+      $ip = $_SERVER["REMOTE_ADDR"];
+      $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+       $remarks="account has been logged out";  
+       mysqli_query($link, "INSERT INTO internship_audit_trail(user,action,role,id,account_no,ip,host) VALUES('$fname','$remarks','$role','$getID','$verified_session_username','$ip','$host')") or die(mysqli_error($link));
+       mysqli_query($link,"INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$getID','$verified_session_username','$remarks','$fname','$ip','$host','$date')")or die(mysqli_error($link));
+      header("Location: ../../../../");
+    }
+      
+  }
 ?>

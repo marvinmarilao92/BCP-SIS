@@ -46,7 +46,8 @@ if ($user_online == "true") {
       <h1>Profile</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a <?php echo 'href=index.php?id='.$url;
+        ?>>Home</a></li>
           <li class="breadcrumb-item">Users</li>
           <li class="breadcrumb-item active">Profile</li>
         </ol>
@@ -111,7 +112,7 @@ if ($user_online == "true") {
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Department</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_department?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_department ?></div>
                   </div>
 
                   <div class="row">
@@ -225,7 +226,7 @@ if ($user_online == "true") {
 
   <!-- Vendor JS Files -->
   <?php require'drawer/js.php' ?>
-
+    <?php require 'drawer/copy.php' ?>
 </body>
 
 </html> 

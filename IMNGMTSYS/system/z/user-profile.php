@@ -4,7 +4,7 @@
 require 'control/check-session-login.php';
 
 if ($user_online == "true") {
-  if ($ad_rolee == "Internship Administrator" || $ad_rolee== "SuperAdmin") {
+  if ($ad_rolee == "Internship Admin" || $ad_rolee== "SuperAdmin") {
   }else{
   header("location:../");   
   }
@@ -16,7 +16,7 @@ if ($user_online == "true") {
 <head>
   
 
-  <title>BCP - Homepage</title>
+  <title>BCP - Profile</title>
 
   <?php require 'drawer/header.php' ?>
 
@@ -225,7 +225,7 @@ if ($user_online == "true") {
 
   <!-- Vendor JS Files -->
   <?php require'drawer/js.php' ?>
-
+    <?php require 'drawer/copy.php' ?>
 </body>
 
 </html> 

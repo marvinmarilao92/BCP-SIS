@@ -46,46 +46,51 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"></h5>
-              <p>List of IT Students that are Officially Qualified and Ready for Screening.</p>
+              <p>List of Students that are Officially Qualified and Ready for Screening.</p>
               
                <?php
                     // Include config file
                     require '../dbCon/config.php';
 
+
+                    $f = 'Qualified';
                     
                     // Attempt select query execution
-                    $sql = "SELECT
-                    *FROM student_information
-                                                        INNER JOIN ims_studcreen_status
-                                                        ON 
-                                                        ims_studcreen_status.sid = student_information.id
-                                                        WHERE 
-                                                        student_information.course = 'BSIT'
-                                                        AND
-                                                        ims_studcreen_status.s_status ='Qualified'
-                                                        ORDER BY `id_number` DESC";
+                    $sql = "SELECT *FROM ims_apply_info
+                            INNER JOIN user_information
+                            ON 
+                            ims_apply_info.s_course = user_information.office
+                            WHERE                           
+                            ims_apply_info.s_course = '$course'
+                            AND
+                            ims_apply_info.status ='$f'
+                                                        ORDER BY `s_number` ASC";
                     if($result = mysqli_query($conn, $sql)){
                         if(mysqli_num_rows($result) > 0){
               
-             echo '<table class="table datatable">';
+             echo '<table class="table datatable" style=" font-size: 0.7em;
+                                                          ">';
                 echo "<thead>";
                   echo "<tr>";
-                  echo'<th>ID</th>';
+                  echo'<th hidden>ID</th>';
                     echo'<th>Student_ID</th>';
                    echo'<th>Name</th>';
                     echo'<th>Status</th>';
+                    echo'<th>Reason</th>';
                     echo'<th>Action</th>';
                     
-                 echo "</tr>";
+                 echo "</tr>";  
                 echo "</thead>";
                 echo "<tbody>";
                   while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . $row['id'] . "</td>";
-                                        echo "<td>" . $row['id_number'] . "</td>";
-                                        echo "<td>" . $row['firstname'] ." ". $row['lastname']. "</td>";
-                                       
-                                        echo "<td>" . $row['s_status'] . "</td>";
+                                        echo "<td hidden>" . $row['i_id'] . "</td>";
+                                        echo "<td>" . $row['s_number'] . "</td>";
+                                        echo "<td>" . $row['fname'] ." ". $row['sname']. "</td>";
+                                        
+                                        echo "<td>" . $row['status'] . "</td>";
+
+                                        echo "<td>" . $row['reason'] . "</td>";
                                         echo "<td>";
                                         
                                        
@@ -130,7 +135,7 @@
 
   <!-- Vendor JS Files -->
   <?php require 'drawer/js.php' ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script>
@@ -150,11 +155,12 @@
                 $('#number').val(data[1]);
                 $('#name').val(data[2]);
                 $('#status').val(data[3 ]);
-              
+                
+
             });
         });
     </script>
-
+      <?php require 'drawer/copy.php' ?>
 </body>
 
 </html>
