@@ -7,10 +7,10 @@
 		$date = date("Y-m-d H:i:s",strtotime("+0 HOURS"));
     $fname=$fnamee.' '.$lnamee;  
     $role = $rolee;
-    if (!empty($_SERVER["HTTP_CLIENT_IP"])){
-      $ip = $_SERVER["HTTP_CLIENT_IP"];
-    }elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
-      $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+    if (!empty($_SERVER["HTTPS_CLIENT_IP"])){
+      $ip = $_SERVER["HTTPS_CLIENT_IP"];
+    }elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])){
+      $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
     }else{
       $ip = $_SERVER["REMOTE_ADDR"];
       $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
