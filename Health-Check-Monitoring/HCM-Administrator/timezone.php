@@ -8,7 +8,7 @@ $utc = new DateTimeZone('+0800');
 $ph  = new DateTimeZone('+0800');
 
 
-$datetime = new DateTime( $plain_date, $utc ); // UTC timezone
-$datetime->setTimezone( $ph ); // Philippines timezone
+$datetime = new DateTime($plain_date, $utc); // UTC timezone
+$datetime->setTimezone($ph); // Philippines timezone
 
 $time =  $datetime->format('Y-m-d H:i:s');

@@ -136,12 +136,13 @@ include_once('security/newsource.php');
                   </div>
                   <div class="col-6 py-3">
                     <h5>Date Received:</h5>
-                    <input type="date" class="form-control" name="received_date" min="1" max="" id="manufactured-date"
-                      required>
+                    <input type="datetime-local" class="form-control" name="received_date" min="1" max=""
+                      id="manufactured-date" required>
                   </div>
                   <div class="col-6 py-3">
                     <h5>Expiration Date:</h5>
-                    <input type="date" class="form-control" name="exp_date" min="1" max="" id="expiry-date" required>
+                    <input type="datetime-local" class="form-control" name="exp_date" min="1" max="" id="expiry-date"
+                      required>
                   </div>
                 </div>
                 <div class="text-end">

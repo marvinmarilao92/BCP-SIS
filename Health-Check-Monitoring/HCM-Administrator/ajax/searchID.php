@@ -20,11 +20,11 @@ if ($resultforSEARCH) {  ?>
         onchange="validateCurrentQTY(this.value, 'validateTY');">
         <option value="" selected="selected" disabled="disabled">Select Available Medicines</option>
         <?php
-          $sql2 = 'SELECT * FROM hcms_items ORDER BY prod_id';
+          $sql2 = 'SELECT * FROM hcms_stock ORDER BY id';
           $result2 = mysqli_query($conn, $sql2);
           if (mysqli_num_rows($result2) > 0) {
             while ($row2 = mysqli_fetch_array($result2)) {
-              echo '<option value = "' . $row2['med_name'] . '">' . $row2['med_name'] . '</option>';
+              echo '<option value = "' . $row2['brand_name'] . '">' . $row2['brand_name'] . '<sup>(' . $row2['dosage'] . ')</sup></option>';
             }
             // Free result set
             mysqli_free_result($result2);
@@ -34,7 +34,7 @@ if ($resultforSEARCH) {  ?>
     </div>
 
     <div class="col-lg-6 col-sm-12 p-2">
-      <h5> Miligrams : </h5>
+      <h5> QTY : </h5>
       <div id="validateTY">
         <input type="number" min="1" max="5" class="form-control" name="prod_quantity" id="prod_quantity"
           placeholder="Milligram" style="text-transform:capitalize;" required>
@@ -69,7 +69,7 @@ if ($resultforSEARCH) {  ?>
     <div class="col-lg-6 col-md-12 col-sm-12 text-center">
       <h5> Full Name</h5>
       <input type="text" class="form-control text-center" disabled name="fullname" id="fullname"
-        value="<?php echo $resultforSEARCH2['lastname'] . ', ' . $resultforSEARCH2['firstname'] . ' ' . $resultforSEARCH2['middlename'] ?>"
+        value="<?php echo $resultforSEARCH['lastname'] . ', ' . $resultforSEARCH['firstname'] . ' ' . $resultforSEARCH['middlename'] ?>"
         required>
     </div>
   </div>
@@ -81,11 +81,11 @@ if ($resultforSEARCH) {  ?>
         onchange="validateCurrentQTY(this.value, 'validateTY');">
         <option value="" selected="selected" disabled="disabled">Select Available Medicines</option>
         <?php
-            $sql2 = 'SELECT * FROM hcms_items ORDER BY prod_id';
+            $sql2 = 'SELECT * FROM hcms_stock ORDER BY id';
             $result2 = mysqli_query($conn, $sql2);
             if (mysqli_num_rows($result2) > 0) {
               while ($row2 = mysqli_fetch_array($result2)) {
-                echo '<option value = "' . $row2['med_name'] . '">' . $row2['med_name'] . '</option>';
+                echo '<option value = "' . $row2['brand_name'] . '">' . $row2['brand_name'] . '<sup>(' . $row2['dosage'] . ')</sup></option>';
               }
               // Free result set
               mysqli_free_result($result2);
@@ -95,7 +95,7 @@ if ($resultforSEARCH) {  ?>
     </div>
 
     <div class="col-lg-6 col-sm-12 p-2">
-      <h5> Miligrams : </h5>
+      <h5> QTY : </h5>
       <div id="validateTY">
         <input type="number" min="1" max="5" class="form-control" name="prod_quantity" id="prod_quantity"
           placeholder="Milligram" style="text-transform:capitalize;" required>
@@ -120,6 +120,7 @@ if ($resultforSEARCH) {  ?>
     </div>
   </div>
 </div>
+
 <?php
   } else { ?>
 <div class="col p-2 mt-2">

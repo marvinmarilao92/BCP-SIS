@@ -34,7 +34,7 @@ include_once('security/newsource.php');
           <div class="card p-5">
             <div class="table-responsive">
               <?php require_once "timezone.php";
-              $items = "SELECT * FROM hcms_stock WHERE `status` = 'Approved' ORDER BY id ASC";
+              $items = "SELECT * FROM hcms_stock ORDER BY id ASC";
               $itemsResult = mysqli_query($conn, $items);
               ?>
               <table class="table table-hover datatable">
@@ -50,23 +50,18 @@ include_once('security/newsource.php');
                 <tbody>
                   <?php foreach ($itemsResult as $data) { ?>
                   <tr>
-                    <?php if ($data['dosage'] < 50) { ?>
-                    <td class="text-center" class="bg-danger text-white">
-                      <?php echo $data['brand_name']; ?> </td>
-                    <?php } elseif ($data['quantity'] >= 50) { ?>
-                    <td class="text-center" class="bg-info text-white text-center">
-                      <?php echo $data['brand_name']; ?> </td>
-                    <?php } ?>
+                    <td class="text-center">
+                      <?php echo $data['brand_name'] . '<sup>' . $data['dosage'] . 'mg</sup>' ?>
+                    </td>
                     <td class="text-center" class="text-center"><?php echo $data['gen_name']; ?> </td>
-                    <td class="text-center"><?php echo $data['quantity']; ?> </td>
-                    <!-- <td class="text-center"><?php echo $data['quantity']; ?> </td> -->
+                    <td class="text-center"><?php echo $data['available']; ?> </td>
+                    <td class="text-center"><?php echo $data['expired']; ?> </td>
                     <td class="text-center">
                       <a href="#" onclick class="btn btn-primary" type="button"><i class="bi bi-plus"></i>
                         Add</a>
                     </td>
                   </tr>
-                  <?php
-                  } ?>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>

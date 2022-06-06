@@ -72,7 +72,9 @@ include_once('security/newsource.php');
                     </thead>
                     <tbody>
                       <?php foreach ($itemsResult as $data) {
-                        $newdate = date("F j, Y, g:i a", strtotime($data['accepted_date'])) ?>
+                        $newdate = date("F j, Y, g:i a", strtotime($data['accepted_date']));
+                        $newdate2 = date("Y-m-d H:i:s", strtotime($data['accepted_date']));
+                        echo $newdate2 ?>
                       <tr>
                         <td class="text-center">
                           <?php echo $data['brand_name'] . '<sup>' . $data['dosage'] . 'mg</sup>' ?>
@@ -101,6 +103,7 @@ include_once('security/newsource.php');
                 aria-labelledby="rejected-tab">
                 <div class="table-responsive">
                   <?php require_once "timezone.php";
+                  echo $time;
                   $items = "SELECT * FROM hcms_items_transac WHERE `status` = 'Rejected' ORDER BY prod_id ASC";
                   $itemsResult = mysqli_query($conn, $items);
 
@@ -119,7 +122,8 @@ include_once('security/newsource.php');
                     </thead>
                     <tbody>
                       <?php foreach ($itemsResult as $data) {
-                        $newdate = date("F j, Y, g:i a", strtotime($data['accepted_date'])) ?>
+                        $newdate = date("F j, Y, g:i a", strtotime($data['accepted_date']));
+                      ?>
                       <tr>
                         <td class="text-center">
                           <?php echo $data['brand_name'] . '<sup>' . $data['dosage'] . 'mg</sup>' ?>
