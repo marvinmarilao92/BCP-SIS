@@ -35,30 +35,18 @@
 
      <li class="nav-heading text-primary">Module</li>
 
+
      <li class="nav-item">
-       <a class="nav-link collapsed" data-bs-target="#hs-nav" data-bs-toggle="collapse" href="#">
-         <i class="bi bi-thermometer-half"></i><span>Health Monitoring</span><i class="bi bi-chevron-down ms-auto"></i>
+       <a href="check-up.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('check-up' == $page) {
+                                                                                echo 'nav-link';
+                                                                              } else {
+                                                                                echo 'nav-link collapsed';
+                                                                              } ?>">
+         <i class="bi bi-thermometer-half"></i>
+         <span>Check-up</span>
        </a>
-       <ul id="hs-nav" class="
-       
-       <?php if ('health-monitoring' == $nav) {
-          echo 'nav-content collapse show';
-        } else {
-          echo 'nav-content collapse';
-        } ?> " data-bs-parent="#sidebar-nav">
-
-         <li>
-           <a href="check-up.php?id=<?php echo $_SESSION['login_key']; ?>" class="
-           
-           <?php if ('check-up' == $page) {
-              echo 'active';
-            } ?>">
-             <i class="bi bi-circle"></i><span>Check-up</span>
-           </a>
-         </li>
-
-       </ul>
      </li>
+
 
      <li class="nav-item">
        <a class="nav-link collapsed" data-bs-target="#Mlogs-nav" data-bs-toggle="collapse" href="#">
@@ -96,14 +84,48 @@
      </li>
 
      <li class="nav-item">
-       <a href="medical-medicines.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('medicines' == $page) {
-                                                                                          echo 'nav-link';
-                                                                                        } else {
-                                                                                          echo 'nav-link collapsed';
-                                                                                        } ?>">
-         <i class="bi bi-list-check"></i>
-         <span>Inventory</span>
+       <a class="nav-link collapsed" data-bs-target="#inv-nav" data-bs-toggle="collapse" href="#">
+         <i class="bi bi-person-lines-fill"></i><span>Inventory</span><i class="bi bi-chevron-down ms-auto"></i>
        </a>
+       <ul id="inv-nav" class="
+       
+       <?php if ('inv' == $nav) {
+          echo 'nav-content collapse show';
+        } else {
+          echo 'nav-content collapse';
+        } ?> " data-bs-parent="#sidebar-nav">
+
+         <li>
+           <a href="stocks.php?id=<?php echo $_SESSION['login_key']; ?>" class="
+           
+           <?php if ('stocks' == $page) {
+              echo 'active';
+            } ?>">
+             <i class="bi bi-circle"></i><span>Stocks</span>
+           </a>
+         </li>
+
+
+         <li>
+           <a href="receiving.php?id=<?php echo $_SESSION['login_key']; ?>" class="
+           
+           <?php if ('receiving' == $page) {
+              echo 'active';
+            } ?>">
+             <i class="bi bi-circle"></i><span>Receiving</span>
+           </a>
+         </li>
+
+         <li>
+           <a href="stock-his.php?id=<?php echo $_SESSION['login_key']; ?>" class="
+           
+           <?php if ('stock-his' == $page) {
+              echo 'active';
+            } ?>">
+             <i class="bi bi-circle"></i><span>History</span>
+           </a>
+         </li>
+       </ul>
      </li>
 
      <li class="nav-heading text-primary">Monitor</li>
@@ -135,32 +157,6 @@
        </ul>
      </li>
 
-     <!-- <li class="nav-item">
-       <a class="nav-link collapsed" data-bs-target="#enrolled-nav" data-bs-toggle="collapse" href="#">
-         <i class="bi bi-layout-text-sidebar-reverse"></i><span>Over All Records</span><i
-           class="bi bi-chevron-down ms-auto"></i>
-       </a>
-       <ul id="enrolled-nav" class="<?php if ('OAR' == $nav) {
-                                      echo 'nav-content collapse show';
-                                    } else {
-                                      echo 'nav-content collapse';
-                                    } ?> " data-bs-parent="#sidebar-nav">
-         <li>
-           <a href="overall-records-students.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('student-list' == $page) {
-                                                                                                    echo 'active';
-                                                                                                  } ?>">
-             <i class="bi bi-circle"></i><span>Student List</span>
-           </a>
-         </li>
-         <li>
-           <a href="overall-records-teacher.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('teacher-list' == $page) {
-                                                                                                    echo 'active';
-                                                                                                  } ?>">
-             <i class="bi bi-circle"></i><span>Faculty List</span>
-           </a>
-         </li>
-       </ul>
-     </li> -->
 
      <li class="nav-heading text-primary">Settings</li>
 
