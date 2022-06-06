@@ -1,5 +1,4 @@
 <?php
-
 $servername= "localhost";
 $db_user= "u692894633_sis_db";
 $db_pass = "l95o@WMN6~a";

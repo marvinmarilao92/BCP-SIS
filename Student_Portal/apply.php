@@ -37,10 +37,11 @@ include("includes/head.php");
 
           <div class="card">
             <div class="card-body">
-              <br>  
+              <br>
+              <div class="row justify-content-center" >
               <img src="../assets/img/BCPlogo.png" style="width: 10%;
                                                           height: auto;">
-             
+             </div>
               <h5 class="card-title" style="font-size: 1.5em;
                                             font-family: serif;">Please Fill out the following.</h5>
               
@@ -113,8 +114,8 @@ include("includes/head.php");
                           <div class="col-6">
                             <div class="form-floating">
                               <select type="text" class="form-select" name="s_dept" aria-label="State" id="lvl" onchange="oncollapse()" required autofocus>
-                              <option value="" style="color:black" selected="selected" disabled>Position</option>
-                              <option>CCS Department</option>
+                              <option value="" style="color:black" selected="selected" disabled>Department</option>
+                              <option>Department</option>
                               <option>--/--/--</option>
                               </select>
                               <label for="floatingName">Department</label>
@@ -125,12 +126,20 @@ include("includes/head.php");
                           <div class="col-2">
                             <div class="form-floating">
                               <select type="text" class="form-select" name="s_course" aria-label="State" id="lvl" onchange="oncollapse()" required autofocus>
-                              <option value="" style="color:black" selected="selected" disabled>Course</option>
-                              <option>BSIT</option>
+                              <option value="" style="color:black" select ed="selected" disabled>Select a Course</option>
+                              <option>BSAIS</option>
                               <option>BSBA</option>
+                              <option>BSCPE</option>
                               <option>BSCRIM</option>
+                              <option>BSENTREP</option>
+                              <option>BSHM</option>
+                              <option>BSIT</option>
+                              <option>BSOA</option>
+                              <option>BSP</option>
+                              <option>BSTM</option>
+
                               </select>
-                              <label for="floatingName">Position At Work</label>
+                              <label for="floatingName">Course</label>
                             </div>
                           </div>
                           <br>
@@ -152,7 +161,8 @@ include("includes/head.php");
                           </div>
                           <br>
                           <hr>
-                          <h3 class = card-title> Skills </h3>
+                          <h5 class="card-title" style="font-size: 1.5em;
+                                            font-family: serif;">Skills</h5>
                           
                           <div class="col-6">
                             <div class="form-floating">
@@ -164,7 +174,7 @@ include("includes/head.php");
 
                           <div class="col-6">
                             <div class="form-floating">
-                              <input type="text" class="form-control" name="skills"  id="skills" placeholder="s_skills" required autofocus >
+                              <input type="text" class="form-control" name="skills"  id="skills" placeholder="s_skills" required autofocus>
                               <label for="floatingName">Skills</label>
                             </div>
                           </div>

@@ -12,7 +12,7 @@
                 //statement
                 ?>
                  <li class="nav-item">
-                  <a class="btn btn-primary form-control" <?php echo 'href=apply.php?'.$key;?>>
+                  <a class="btn btn-primary form-control" <?php echo 'href=apply?'.$key;?>>
                     <i class="bi bi-arrow-return-left"></i>
                     <span>Apply for OJT</span>
                   </a>
@@ -160,13 +160,13 @@
       </a>
       <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="components-tooltips.html">
-            <i class="bi bi-person"></i><span></span>
+          <a <?php echo 'href=overview?'.$key;?>>
+            <i class="bi bi-person"></i><span>Review</span>
           </a>
         </li>
         <li>
           <a href="components-tooltips.html">
-            <i class="bi bi-circle"></i><span>--/--/--</span>
+            <i class="bi bi-circle"></i><span>Screening</span>
           </a>
         </li>
       </ul>
@@ -176,7 +176,7 @@
     <!-- <li class="nav-heading">Fill Up Form</li></li> -->
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
+        <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#login">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Login</span>
         </a>

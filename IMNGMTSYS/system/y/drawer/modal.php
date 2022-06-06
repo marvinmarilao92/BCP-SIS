@@ -158,6 +158,31 @@
 
 
 
+<!-- Viewing STUDENT-->
+    <div class="modal fade" id="verticalycentereddd" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg" style="background-color: lightblue;" >
+                  <div class="modal-content"style="background-color: whitesmoke;">
+                    <div class="modal-header"style="background-color: lightblue;
+                                                    height: 15vh;
+                                                    ">
+                      <img src="../assets/img/BCPlogo.png" alt="profile" class="rounded-circle">&nbsp;&nbsp;&nbsp;
+                      <h3 class="modal-title" style="font-size: 2.5em;
+                                                     font-family: monospace;">Student Profile</h3>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="viedd">
+                    <br>
+                    <br>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            
+
+<!-- Modal -->
+
+
 
 <!-- viewing companyside -->
 <div class="modal fade" id="empModal" tabindex="-1" aria-hidden="true">
@@ -168,17 +193,14 @@
                                                     ">
                       <img src="../assets/img/BCPlogo.png" alt="profile" class="rounded-circle">&nbsp;&nbsp;&nbsp;
                       <h3 class="modal-title" style="font-size: 2.5em;
-                                                     font-style: italic;">Representative Profile</h3>
+                                                     font-style: monospace;">Representative Profile</h3>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="view" style=" overflow-y: scroll;">
+                    <div class="view">
                     <br>
                     <br>
                     </div>
-                    <div class="modal-footer" style="background-color: whitesmoke;">
-                      
-                      <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Close</button>
-                    </div>
+         
                   </div>
                 </div>
               </div>
@@ -245,7 +267,7 @@
 
 <!-- edit button -->
 
-<div class="modal fade" id="editmodal" tabindex="-1">
+<div class="modal fade" id="editModal" tabindex="-1">
                 <div class="modal-dialog modal-lg"style="background-color: lightblue;">
                   <div class="modal-content">
                     <div class="modal-header" style="background-color: lightblue;">
@@ -266,17 +288,20 @@
                             <input type="text" name="name" id="name" class="form-control"
                                       placeholder="name" readonly>
                                       <br>
-
+                                       <label> Course </label>
+                            <input type="text" name="course" id="course" class="form-control"
+                                      placeholder="name" readonly>
+                                      <br>
                                       <select type="text" name="rname" id="rname" class="form-control"
                                       placeholder="Reason" >
-                                      <option value="" style="color:black" selected="selected" >Reason for</option>
-                                          <option>Undergoing Screening</option>
+                                      <option value="" style="color:black" selected="selected" disabled>Reason for</option>
+                                      <option>Undergoing Screening</option>
                                           
                                       </select>
                                       <br>
                                       
                                       <select id="inputState" name="status" class="form-select" Required autofocus>
-                                          <option value="" style="color:black" selected="selected" >Change Status</option>
+                                          <option value="" style="color:black" selected="selected" disabled>Change Status</option>
                                           <option>Qualified</option>
                                           <option>Pending</option>   
                                       </select>
@@ -286,7 +311,7 @@
                     
                       <div class="d-grid gap-2 mt-3">
                
-                      <button type="updatee" class="btn btn-primary btn-lg " name="updatee" >CHANGE</button>
+                      <button type="updateid" class="btn btn-primary btn-lg " name="updateid" >CHANGE</button>
                     </div>
                     
                     </form>

@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require 'control/check-session-login.php' ?>
-<head>
-</head>
-  <title>BCP - Registered Accounts </title>
-  <?php require 'drawer/header.php';
+<?php require 'control/check-session-login.php' ;
+
 
   if ($user_online == "true") {
   if ($rolee == "Internship Coordinator" || $rolee == "SuperAdmin") {
@@ -15,6 +12,15 @@
   header("location:../"); 
   }  
 
+
+
+
+?>
+
+<head>
+
+  <title>BCP - Registered Accounts </title>
+  <?php require 'drawer/header.php';
   ?>
 </head>
 
@@ -136,8 +142,8 @@
 
                                          echo "<a type='button' class='btn btn-secondary' href='constant/get_file.php?id={$row['id']}'><i class='bi bi-download'></i></a>&nbsp;";  
 
-                                          echo "<a data-id={$row['id_number']} type='button' class='btn btn-info userinfo href='#'><i class='bi bi-eye' data-bs-toggle='#empModal' data-bs-target='#empModal'>
-                                        </i> </a>" 
+                                          echo "<a data-id={$row['id_number']} type='button' class='btn btn-info userinfo'><i class='bi bi-eye' data-bs-toggle='#empModal' data-bs-target='#empModal'>
+                                        </i></a>" 
                                                             ;
 
 
@@ -178,7 +184,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script>
+      <script>
 
         //ediit
         $(document).ready(function () {

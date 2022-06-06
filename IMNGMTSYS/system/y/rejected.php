@@ -15,7 +15,7 @@ require 'control/check-session-login.php';
 <head>
   
 
-  
+  <title> BCP - Rejected Accounts </title>
 
   <?php require 'drawer/header.php' ?>
 
@@ -42,7 +42,8 @@ require 'control/check-session-login.php';
  <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Company Accounts</h1>
+      <h1 style="font-family: monospace;
+                font-size: 2.5em;">Review Accounts</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href=<?php echo'index.php?'.$url;
@@ -59,7 +60,7 @@ require 'control/check-session-login.php';
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title"><p>Manage Accounts</p></h5>
+             
               <p class="card-title">Legends</p>
               <div class = "container" style="font-size:0.8em;">
               <ul>
@@ -104,7 +105,7 @@ require 'control/check-session-login.php';
                     echo'<th>Company_ID</th>';
                     echo'<th>Company</th>';
                    echo'<th colspan=2>Representative Name</th>';
-                   echo'<th>Email Address</th>';
+                   echo'<th>Company Address</th>';
                    echo'<th>Contact</th>';
                    
                    echo'<th>Date Registered</th>';
@@ -130,7 +131,7 @@ require 'control/check-session-login.php';
                                          
                                           
                                         echo "<td>" . $row['c_status']  . "</td>";
-                                        echo "<td>" . $row['reason']  . "</td>"
+                                        echo "<td>" . $row['reason']  . "</td>";
                                         echo "<td>";
                                         
                                        

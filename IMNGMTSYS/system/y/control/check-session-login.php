@@ -1,6 +1,6 @@
 <?php
   include 'bonak.php';
-  session_start();
+ session_start(); 
   if(isset($_SESSION['session_username']) == true){
     $user_id_checker = $_SESSION['session_username'];
 
