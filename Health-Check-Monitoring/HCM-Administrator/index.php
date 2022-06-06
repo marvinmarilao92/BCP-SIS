@@ -1,18 +1,18 @@
 <?php
-include_once('security/newsource.php');
+include_once 'security/newsource.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <title>HCM | Dashboard</title>
 
 <head>
-  <?php include('includes/head_ext.php'); ?>
+  <?php include 'includes/head_ext.php'; ?>
 </head>
 
 <body>
-  <?php $page = "Dashboard" ?>
-  <?php include('includes/header.php'); ?>
-  <?php include('includes/sidebar.php'); ?>
+  <?php $page = 'Dashboard'; ?>
+  <?php include 'includes/header.php'; ?>
+  <?php include 'includes/sidebar.php'; ?>
 
   <main id="main" class="main">
 
@@ -46,8 +46,8 @@ include_once('security/newsource.php');
                     </div>
                     <div class="ps-3">
                       <?php
-                      $dept = "Health Check Monitoring";
-                      $stats = "Active";
+                      $dept = 'Health Check Monitoring';
+                      $stats = 'Active';
                       $query = "SELECT * FROM `user_information` WHERE user_information.department = '{$dept}' AND account_status = '{$stats}'";
                       $query_run = mysqli_query($conn, $query);
                       $total = mysqli_num_rows($query_run);
@@ -74,7 +74,7 @@ include_once('security/newsource.php');
                     <div class="ps-3">
                       <?php
 
-                      $dept = "Health Check Monitoring";
+                      $dept = 'Health Check Monitoring';
                       $query = "SELECT * FROM `user_information` WHERE user_information.department = '{$dept}'";
                       $query_run = mysqli_query($conn, $query);
 
@@ -92,25 +92,52 @@ include_once('security/newsource.php');
             <div class="col-lg-5">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Pie Chart</h5>
+                  <h5 class="card-title">Current Medicine Stock</h5>
 
                   <!-- Pie Chart -->
+                  <div id="brand-name"></div>
+                  <div id="quantity"></div>
+
                   <canvas id="pieChart" style="max-height: 400px;"></canvas>
                   <script>
+                  const brandName = document.querySelector('#brand-name');
+                  const itemQuantity = document.querySelector('#quantity');
+
+                  const fetchData = async () => {
+                    const res = await axios('test-config.php');
+                    const data = res.data;
+
+                    const name = document.createElement('h4');
+                    const count = document.createElement('h4');
+                    // const quantity = document.createElement('h4');
+
+                    console.log(data);
+                    data.forEach((item) => {
+                      name.innerText = item.brand_name;
+                      brandName.append(name);
+
+                      count.innerText = item.quantity;
+                      itemQuantity.append(count);
+
+                      // console.log(item.full_name);
+
+                    })
+
+                  }
+
+                  fetchData();
+
+                  const label = ['Paracetamol', 'Bioflu', 'BSCRIM', 'BSCRIM', 'CASE', 'TEST 1'];
+                  const quantity = [300, 50, 100, 69, 420];
+
                   document.addEventListener("DOMContentLoaded", () => {
                     new Chart(document.querySelector('#pieChart'), {
                       type: 'pie',
                       data: {
-                        labels: [
-                          'BSIT',
-                          'BSED',
-                          'BSCRIM',
-                          'BSCRIM',
-                          'CASE',
-                        ],
+                        labels: label,
                         datasets: [{
                           label: 'My First Dataset',
-                          data: [300, 50, 100],
+                          data: quantity,
                           backgroundColor: [
                             'rgb(255, 99, 132)',
                             'rgb(54, 162, 235)',
@@ -168,7 +195,7 @@ include_once('security/newsource.php');
   </main><!-- End #main -->
 
 
-  <?php include('includes/footer.php'); ?>
+  <?php include 'includes/footer.php'; ?>
 </body>
 
 </html>
