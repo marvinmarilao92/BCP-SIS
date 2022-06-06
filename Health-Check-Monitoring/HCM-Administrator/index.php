@@ -1,18 +1,18 @@
 <?php
-include_once('security/newsource.php');
+include_once 'security/newsource.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <title>HCM | Dashboard</title>
 
 <head>
-  <?php include('includes/head_ext.php'); ?>
+  <?php include 'includes/head_ext.php'; ?>
 </head>
 
 <body>
-  <?php $page = "Dashboard" ?>
-  <?php include('includes/header.php'); ?>
-  <?php include('includes/sidebar.php'); ?>
+  <?php $page = 'Dashboard'; ?>
+  <?php include 'includes/header.php'; ?>
+  <?php include 'includes/sidebar.php'; ?>
 
   <main id="main" class="main">
 
@@ -46,8 +46,8 @@ include_once('security/newsource.php');
                     </div>
                     <div class="ps-3">
                       <?php
-                      $dept = "Health Check Monitoring";
-                      $stats = "Active";
+                      $dept = 'Health Check Monitoring';
+                      $stats = 'Active';
                       $query = "SELECT * FROM `user_information` WHERE user_information.department = '{$dept}' AND account_status = '{$stats}'";
                       $query_run = mysqli_query($conn, $query);
                       $total = mysqli_num_rows($query_run);
@@ -74,7 +74,7 @@ include_once('security/newsource.php');
                     <div class="ps-3">
                       <?php
 
-                      $dept = "Health Check Monitoring";
+                      $dept = 'Health Check Monitoring';
                       $query = "SELECT * FROM `user_information` WHERE user_information.department = '{$dept}'";
                       $query_run = mysqli_query($conn, $query);
 
@@ -92,35 +92,49 @@ include_once('security/newsource.php');
             <div class="col-lg-5">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Pie Chart</h5>
+                  <h5 class="card-title">Current Medicine Stock</h5>
 
                   <!-- Pie Chart -->
                   <canvas id="pieChart" style="max-height: 400px;"></canvas>
                   <script>
+                  const fetchData = async () => {
+                    const res = await axios('test-config.php');
+                    const data = res.data;
+                    return data;
+                  }
+
                   document.addEventListener("DOMContentLoaded", () => {
-                    new Chart(document.querySelector('#pieChart'), {
-                      type: 'pie',
-                      data: {
-                        labels: [
-                          'BSIT',
-                          'BSED',
-                          'BSCRIM',
-                          'BSCRIM',
-                          'CASE',
-                        ],
-                        datasets: [{
-                          label: 'My First Dataset',
-                          data: [300, 50, 100],
-                          backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                          ],
-                          hoverOffset: 4
-                        }]
-                      }
+                    const data = fetchData();
+                    const res = data.then((item) => {
+                      let label = [];
+                      let quantity = [];
+
+                      item.forEach((i) => {
+                        label.push(i.gen_name);
+                        quantity.push(i.quantity);
+                      })
+
+                      new Chart(document.querySelector('#pieChart'), {
+                        type: 'pie',
+                        data: {
+                          labels: label,
+                          datasets: [{
+                            label: 'My First Dataset',
+                            data: quantity,
+                            backgroundColor: [
+                              'rgb(255, 99, 123)',
+                              'rgb(54, 162, 78)',
+                              'rgb(255, 205, 86)',
+                              'rgb(100, 69, 132)',
+                              'rgb(200, 162, 56)',
+                              'rgb(250, 76, 86)'
+                            ],
+                            hoverOffset: 4
+                          }]
+                        }
+                      });
                     });
-                  });
+                  })
                   </script>
 
 
@@ -132,28 +146,69 @@ include_once('security/newsource.php');
             <div class="col-lg-7">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Bar Chart</h5>
+                  <h5 class="card-title">Daily Total Medicine Quantity</h5>
 
                   <!-- Bar Chart -->
-                  <div id="barChart" style="min-height: 400px;" class="echart"></div>
+                  <canvas id="lineChart" style="max-height: 400px;"></canvas>
 
                   <script>
                   document.addEventListener("DOMContentLoaded", () => {
-                    echarts.init(document.querySelector("#barChart")).setOption({
-                      xAxis: {
-                        type: 'category',
-                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                      },
-                      yAxis: {
-                        type: 'value'
-                      },
-                      series: [{
-                        data: [120, 200, 150, 80, 70, 110, 130],
-                        type: 'bar'
-                      }]
+                    const data = fetchData();
+                    const res = data.then((item) => {
+                      // console.log(item);
+                      let quantity = [];
+                      let timestamp = [];
+                      let arrayItems = [];
+                      item.forEach((i, index) => {
+                        quantity.push(+i.quantity);
+                        timestamp.push(i.received_date);
+                        // console.log(timestamp);
+                        let items = {};
+                        items.x = i.received_date;
+                        items.y = +i.quantity;
+                        arrayItems.push(items);
+                      })
+
+                      console.log(arrayItems);
+                      const data = {
+                        datasets: [{
+                          label: 'Daily Total Medicine',
+                          data: arrayItems,
+                          borderColor: 'rgb(75, 192, 192)',
+                          tension: 0.1
+                        }]
+                      }
+
+                      const config = {
+                        type: 'line',
+                        data,
+                        options: {
+                          scales: {
+                            x: [{
+                              type: 'time',
+                              time: {
+                                unit: 'day'
+                              },
+                            }],
+                            y: [{
+                              beginAtZero: true
+                            }]
+                          }
+                        }
+                      }
+
+                      new Chart(
+                        document.querySelector('#lineChart'),
+                        config
+                      )
                     });
-                  });
+                  })
                   </script>
+
+
+
+
+
                   <!-- End Bar Chart -->
 
                 </div>
@@ -168,7 +223,7 @@ include_once('security/newsource.php');
   </main><!-- End #main -->
 
 
-  <?php include('includes/footer.php'); ?>
+  <?php include 'includes/footer.php'; ?>
 </body>
 
 </html>
