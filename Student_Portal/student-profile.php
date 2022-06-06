@@ -85,7 +85,7 @@ include('includes/session.php');
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Year Level</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_course?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_year_level?></div>
                   </div>
 
                   <div class="row">

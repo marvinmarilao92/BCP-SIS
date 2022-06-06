@@ -4,7 +4,7 @@
 // if(!$conn){
 // 	die("Connection error: " . mysqli_connect_error());	
 // }
-$conn = mysqli_connect("localhost","root","","sis_db");
+$conn = mysqli_connect("localhost:3307","root","","sis_db");
 
 if(!$conn){
 	die("Connection error: " . mysqli_connect_error());	

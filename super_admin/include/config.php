@@ -6,7 +6,7 @@ server with default setting (user 'root' with no password) */
 // define('DB_PASSWORD', 'l95o@WMN6~a');
 // define('DB_NAME', 'u692894633_sis_db');
 
-define('DB_SERVER', 'localhost');
+define('DB_SERVER', 'localhost:3307');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'sis_db');

@@ -46,7 +46,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"></h5>
-              <p>List of IT Students that are Officially Qualified and Ready for Screening.</p>
+              <p>List of Students that are Officially Qualified and Ready for Screening.</p>
               
                <?php
                     // Include config file
@@ -56,39 +56,41 @@
                     $f = 'Qualified';
                     
                     // Attempt select query execution
-                    $sql = "SELECT
-                                  *FROM ims_apply_info
-                                                        INNER JOIN ims_basic_coordinator_info
-                                                        ON 
-                                                        ims_apply_info.s_course = ims_basic_coordinator_info.c_course
-                                                        WHERE 
-                                                        ims_apply_info.lvl = '$c_level'AND
-                                                        ims_apply_info.s_course = '$c_course'
-                                                        AND
-                                                        ims_apply_info.status ='$f'
+                    $sql = "SELECT *FROM ims_apply_info
+                            INNER JOIN user_information
+                            ON 
+                            ims_apply_info.s_course = user_information.office
+                            WHERE                           
+                            ims_apply_info.s_course = '$course'
+                            AND
+                            ims_apply_info.status ='$f'
                                                         ORDER BY `s_number` ASC";
                     if($result = mysqli_query($conn, $sql)){
                         if(mysqli_num_rows($result) > 0){
               
-             echo '<table class="table datatable">';
+             echo '<table class="table datatable" style=" font-size: 0.7em;
+                                                          ">';
                 echo "<thead>";
                   echo "<tr>";
-                  echo'<th>ID</th>';
+                  echo'<th hidden>ID</th>';
                     echo'<th>Student_ID</th>';
                    echo'<th>Name</th>';
                     echo'<th>Status</th>';
+                    echo'<th>Reason</th>';
                     echo'<th>Action</th>';
                     
-                 echo "</tr>";
+                 echo "</tr>";  
                 echo "</thead>";
                 echo "<tbody>";
                   while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
-                                        echo "<td>" . $row['id'] . "</td>";
-                                        echo "<td>" . $row['id_number'] . "</td>";
-                                        echo "<td>" . $row['firstname'] ." ". $row['lastname']. "</td>";
-                                       
-                                        echo "<td>" . $row['s_status'] . "</td>";
+                                        echo "<td hidden>" . $row['i_id'] . "</td>";
+                                        echo "<td>" . $row['s_number'] . "</td>";
+                                        echo "<td>" . $row['fname'] ." ". $row['sname']. "</td>";
+                                        
+                                        echo "<td>" . $row['status'] . "</td>";
+
+                                        echo "<td>" . $row['reason'] . "</td>";
                                         echo "<td>";
                                         
                                        

@@ -107,20 +107,20 @@
           </li>
           <li>
             <li class="nav-heading">Qualified Students Status</li>
-            <a  <?php echo 'href=qualified.php?'.$url;
+            <a  <?php echo 'href=qualified?'.$url;
         ?>>
               <i class="bi bi-circle"></i><span>Qualified</span>
             </a>
           </li>
           <li>
-            <a <?php echo 'href=pending.php?'.$url;
+            <a <?php echo 'href=pending?'.$url;
         ?>>
               <i class="bi bi-circle"></i><span>Pending</span>
             </a>
           </li>
           <li class="nav-heading">Screening</li>
           <li>
-            <a <?php echo 'href=screening.php?'.$url;
+            <a <?php echo 'href=screening?'.$url;
         ?>>
               <i class="bi bi-circle"></i><span>Set A Plan By Department Coordinator</span>
             </a>

@@ -1,6 +1,6 @@
 <?php
 
-$servername= "localhost";
+$servername= "localhost:3307";
 $db_user= "root";
 $db_pass = "";
 $db_name = "sis_db";

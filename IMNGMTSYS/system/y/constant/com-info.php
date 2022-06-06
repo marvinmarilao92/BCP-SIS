@@ -18,7 +18,7 @@ while( $row = mysqli_fetch_array($result) ){
 ?>
 <div class="container-fluid" style="text-align: center; background-color:whitesmoke;">
 
-<tr>
+
     <br><br>
     <td width="200" height="400"><img src="../assets/img/profile-img.jpg" alt="profile" class="rounded-circle">
     <br><br>
@@ -37,7 +37,6 @@ while( $row = mysqli_fetch_array($result) ){
     <br><br>
 
 </tr>
-
-</div>    
+   
  
 <?php }  ?>

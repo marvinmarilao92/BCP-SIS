@@ -42,7 +42,8 @@ require 'control/check-session-login.php';
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Screening Section</h1>
+      <h1 style="font-family: monospace;
+                ">Screening</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href=<?php echo'index.php?'.$url;

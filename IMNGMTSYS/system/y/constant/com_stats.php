@@ -14,8 +14,10 @@
 	        $num = $_POST['companyid'];
 	        $fname = $_POST['rname'];
 	        $reason = $_POST['reason'];
+	        date_default_timezone_set("asia/manila");
+			$date = date('d-m-Y h:i A ');
 			$query = "UPDATE ims_company_regis
-					  SET c_status='$statuss'
+					  SET c_status='$statuss',  reason = '$reason' , u_date = '$date'
 					  WHERE username ='$num'";
 			$run = mysqli_query($link,$query);
 			if($run)
