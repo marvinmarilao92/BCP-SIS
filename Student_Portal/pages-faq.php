@@ -14,54 +14,65 @@ include('includes/session.php');
 
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+   
     
        
   
        
 <style type="text/css">
-  
 
-  /*ChatBot*/
-  .chat_icon{
-    position: fixed;
-    bottom: 50px;
-    
-    right: 30px;
-    z-index: 1000;
-    padding: 0;
-    font-size: 50px;
-    color: yellowgreen;
-    cursor: pointer;
-  }
-  .chat_box{
-    width: 540px;
-    height: 79vh;
-    position: fixed;
-    bottom: 100px;
-    right: 30px;
-    background:#dedede;
-    z-index: 1000;
-    transition: all 0.3s ease-out;
-    transform: scaleY(0);
-  }
-  .chat_box.active{
-    transform: scaleY(1);
-  }
-  #messages{
-    padding: 20px;
-  }
-  .my-conv-form-wrapper textarea{
-    height: 30px;
-    overflow: hidden;
-    resize: none;
-  }
-  .hidden{
-    display: none !important;
-  }
-  .scroll {
-    overflow-x: auto;
-  }
+/*ChatBot*/
+.chat_icon{
+  position: absolute;
+	bottom: 5px;
+	right: 25px;
+	z-index: 1000;
+	padding: 0;
+	font-size: 65px;
 
+	cursor: pointer;
+}
+.chat_box{
+  position: absolute;
+  right: 30px;
+  bottom: 50px;
+  width: 400px;
+  border-radius: 15px;
+  background:#dedede;
+	z-index: 1000;
+	transition: all 0.3s ease-out;
+	transform: scaleY(0);
+}
+.chat_box .head-text{
+  line-height: 60px;
+  color: #fff;
+  border-radius: 15px 15px 0 0;
+  padding: 0 20px;
+  font-weight: 500;
+  font-size: 20px;
+  background-color: #0093E9;
+  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+
+}
+
+.chat_box.active{
+	transform: scaleY(1);
+}
+
+#messages{
+	padding: 20px;
+}
+.my-conv-form-wrapper textarea{
+	height: 30px;
+	overflow: hidden;
+	resize: none;
+}
+.hidden{
+	display: none !important;
+}
+.img-responsive {
+  height: 75px;
+}
   </style>
     
  
@@ -85,15 +96,25 @@ include('includes/session.php');
 <div class="card-body">
     <!-- ChatBot -->
     <div class="chat_icon">
-  <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
+    
+    <i class="bx bxs-chat" aria-hidden="true"></i>
+    
+    
 </div>
 <div class="chat_box">
+<div class="head-text">
+            Talk to our bot
+            <img class = "img-responsive" src="../assets/img/chatbot.png" style = "width: 50px; height: 50px;" >
+         </div>
   <div class="my-conv-form-wrapper">
     <form action="" method="GET" class="hidden">
       
       <select data-conv-question="Hi! Welcome to chat bot of help desk How can I help you?" name="category">
         <option value="WebDevelopment">What is the purpose of this system?</option>
         <option value="DigitalMarketing">How can i sumbit my concern?</option>
+        <option value="3">Where i can get my grades</option>
+        <option value="4">Paying in hello money and AUB</option>
+     
        
       </select>
       <div data-conv-fork="category">
@@ -114,6 +135,30 @@ include('includes/session.php');
         </div>
         <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
           <input type="text" name="companyName" data-conv-question="Because this system is design for you!">
+        </div>
+        <div data-conv-case="3" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="Hello students this system is not handling your grades you can ask in to your adviser">
+        </div>
+        <div data-conv-case="3" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="This system is only for giving information not for personal information">
+        </div>
+        <div data-conv-case="3" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="Just contact your adviser for that matter">
+        </div>
+        <div data-conv-case="4" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="After paying in hello money app and aub bank whats next?">
+        </div>
+        <div data-conv-case="4" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="You need to go to school to validate your payment to the accounting department">
+        </div>
+        <div data-conv-case="4" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="The reason for these is that your payment may not be deducted to your balance">
+        </div>
+        <div data-conv-case="4" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="You have to double check it so that it will surely deducted to your balance">
+        </div>
+        <div data-conv-case="4" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="Just ask in the accounting department and they will guide you">
         </div>
       </div>
       <input type="text" name="companyName" data-conv-question="I'm still learning i'm sorry if i can't answer all of your question">
@@ -265,5 +310,6 @@ include('includes/session.php');
     <script type="text/javascript" src="chat_bot/js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="chat_bot/js/jquery.convform.js"></script>
     <script type="text/javascript" src="chat_bot/js/custom.js"></script>
+    
   </body>
 </html>
