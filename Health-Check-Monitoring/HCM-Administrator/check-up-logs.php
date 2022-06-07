@@ -1,5 +1,5 @@
 <?php
-include_once('security/newsource.php');
+include_once 'security/newsource.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,15 +7,15 @@ include_once('security/newsource.php');
 </title>
 
 <head>
-  <?php include('includes/head_ext.php'); ?>
+  <?php include 'includes/head_ext.php'; ?>
 
 </head>
 
 <body>
-  <?php $page = "check-up-logs";
-  $nav = "Mlogs"; ?>
-  <?php include('includes/header.php'); ?>
-  <?php include('includes/sidebar.php'); ?>
+  <?php $page = 'check-up-logs';
+  $nav = 'Mlogs'; ?>
+  <?php include 'includes/header.php'; ?>
+  <?php include 'includes/sidebar.php'; ?>
   <main id="main" class="main">
 
     <!-- Page Title -->
@@ -23,7 +23,8 @@ include_once('security/newsource.php');
       <h1>Check-up Logs</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a>
+          </li>
           <li class="breadcrumb-item active">Logs</li>
         </ol>
       </nav>
@@ -45,8 +46,8 @@ include_once('security/newsource.php');
               <div class="table-responsive">
                 <table class="table table-hover datatable">
                   <?php
-                  require_once "timezone.php";
-                  $query = "SELECT * FROM hcms_checkup ORDER BY id ASC";
+                  require_once 'timezone.php';
+                  $query = 'SELECT * FROM hcms_checkup ORDER BY id ASC';
                   $query_run = mysqli_query($conn, $query);
                   ?>
                   <!-- Table Head -->
@@ -61,26 +62,30 @@ include_once('security/newsource.php');
                   <tbody>
                     <?php
                     if (mysqli_num_rows($query_run) > 0) {
-                      while ($row = mysqli_fetch_assoc($query_run)) {
-                        $newdate = date("F j, Y, g:i:a", strtotime($row['created_at']));
-                    ?>
+                        while ($row = mysqli_fetch_assoc($query_run)) {
+                            $newdate = date('F j, Y, g:i:a', strtotime($row['created_at'])); ?>
                     <tr>
-                      <td><?php echo $row['fullname']; ?></td>
-                      <td><?php echo $row['description']; ?></td>
-                      <td><?php echo $newdate ?></td>
+                      <td><?php echo $row['fullname']; ?>
+                      </td>
+                      <td><?php echo $row['description']; ?>
+                      </td>
+                      <td><?php echo $newdate; ?>
+                      </td>
                       <td>
                         <a href="#" class="btn btn-info bi bi-info-circle-fill"></a>
                         <a href="#" class="btn btn-warning bi bi-pen-fill"></a>
                       </td>
                     </tr>
-                    <?php }
+                    <?php
+                        }
                     }
                     ?>
                   </tbody>
                 </table>
-                <?php if (isset($_GET['dlt'])) : ?>
-                <div class="flash-data" data-flashdata="<?= $_GET['dlt']; ?>"></div>
-                <?php endif; ?>
+                <?php if (isset($_GET['dlt'])) { ?>
+                <div class="flash-data" data-flashdata="<?php echo $_GET['dlt']; ?>">
+                </div>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -102,7 +107,7 @@ include_once('security/newsource.php');
                   <?php
                   $dept = 'Health Check Monitoring';
                   $stats = 'Active';
-                  $query = "SELECT * FROM `hcms_checkup`";
+                  $query = 'SELECT * FROM `hcms_checkup`';
                   $query_run = mysqli_query($conn, $query);
                   $total = mysqli_num_rows($query_run);
 
@@ -120,22 +125,24 @@ include_once('security/newsource.php');
 
               <div class="activity">
                 <?php
-                require_once('timezone.php');
+                require_once 'timezone.php';
                 $checkDate = date('Y-m-d', strtotime($time));
-                $test = $db->query("SELECT * FROM hcms_checkup LIMIT 7")->fetchAll();
+                $test = $db->query('SELECT * FROM hcms_checkup')->fetchAll();
                 foreach ($test as $sql) {
-                  $dateOnly = date('Y-m-d', strtotime($sql['created_at']));
-                  if ($dateOnly == $checkDate) {
-                    $newdate = date("g:i:a", strtotime($sql['created_at'])); ?>
+                    $dateOnly = date('Y-m-d', strtotime($sql['created_at']));
+                    if ($dateOnly == $checkDate) {
+                        $newdate = date('g:i:a', strtotime($sql['created_at'])); ?>
                 <div class="activity-item d-flex">
-                  <div class="activite-label"><?php echo $newdate; ?></div>
+                  <div class="activite-label"><?php echo $newdate; ?>
+                  </div>
                   <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
                   <div class="activity-content">
-                    <strong><?php echo $sql['fullname'] ?></strong><br><a href="#" class="fw-bold text-primary">Click
+                    <strong><?php echo $sql['fullname']; ?></strong><br><a href="#" class="fw-bold text-primary">Click
                       Here To View</a>
                   </div>
                 </div>
-                <?php }
+                <?php
+                    }
                 }
                 ?>
               </div>
@@ -149,7 +156,7 @@ include_once('security/newsource.php');
 
 
   </main>
-  <?php include('includes/footer.php'); ?>
+  <?php include 'includes/footer.php'; ?>
 </body>
 
 </html>
