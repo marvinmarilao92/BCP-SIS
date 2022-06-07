@@ -25,28 +25,33 @@ include_once('security/newsource.php');
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a></li>
-          <li class="breadcrumb-item active">Receiving</li>
+          <li class="breadcrumb-item active">Incoming</li>
         </ol>
       </nav>
     </div>
     <section class="section2">
       <div class="row">
         <div class="col-lg-12">
-          <div class="card p-4">
-            <?php
-            if (isset($_SESSION['alertsuccess'])) { ?>
-            <div class="alert alert-success d-flex align-items-center" role="alert">
-              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-                <use xlink:href="#check-circle-fill" />
-              </svg>
-              <div>
-                <?php echo $_SESSION['alertsuccess'] ?>
-              </div>
+          <?php
+          if (isset($_SESSION['alertsuccess'])) { ?>
+          <div class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+              <use xlink:href="#check-circle-fill" />
+            </svg>
+            <div>
+              <?php echo $_SESSION['alertsuccess'] ?>
             </div>
-            <?php
-              unset($_SESSION['alertsuccess']);
-            }
-            ?>
+          </div>
+          <?php
+            unset($_SESSION['alertsuccess']);
+          }
+          ?>
+          <div class="card p-4">
+            <div class="alert alert-info" role="alert">
+              <h4 class="alert-heading">Incoming Medicines</h4>
+              <p></p>
+              <p class="mb-0">This module is incharge of Accepting and Rejecting the incoming medicines</p>
+            </div>
             <div class="card-title d-flex justify-content-between">ON Pending<button type="button"
                 class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#medForm"><i
                   class="ri-add-circle-line">&nbsp Add

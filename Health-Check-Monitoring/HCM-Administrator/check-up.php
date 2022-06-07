@@ -135,30 +135,27 @@ include_once('security/newsource.php');
   <script>
   function insertCheckUP(error) {
 
-    // var file = document.getElementById("file").value;
-    // var treatment = document.getElementById("treatment").value;
-    // var prod_quantity = document.getElementById("prod_quantityprod_quantity").value;
-    // var prod_quantity = document.getElementById("prod_quantity").value;
 
-
-    var prod_name = document.getElementById("prod_name").value;
+    var id_number = document.getElementById("id_number").value;
+    var prod_code = document.getElementById("prod_code").value;
     var fullname = document.getElementById("fullname").value;
     var prod_quantity = document.getElementById("prod_quantity").value;
     var prescription = document.getElementById("prescription").value;
-    var aid = document.getElementById("aid").value;
+    var description = document.getElementById("description").value;
 
 
 
     var intoArray =
 
-      'fullname=' + fullname +
-      '&prod_name=' + prod_name +
+      'id_number=' + id_number +
+      '&fullname=' + fullname +
+      '&prod_code=' + prod_code +
       '&prod_quantity=' + prod_quantity +
       '&prescription=' + prescription +
-      '&aid=' + aid;
+      '&description=' + description;
 
 
-    if (prod_name == '' || prod_quantity == '' || prescription == '' || aid == '') {
+    if (prod_code == '' || prod_quantity == '' || prescription == '' || description == '') {
       Swal.fire(
         'Invalid!',
         'Please complete fieldset!',

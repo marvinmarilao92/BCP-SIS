@@ -33,7 +33,7 @@
        </a>
      </li><!-- End Dashboard Nav -->
 
-     <li class="nav-heading text-primary">Module</li>
+     <li class="nav-heading text-primary"><i class="bi bi-tools"></i>&nbspModule</li>
 
 
      <li class="nav-item">
@@ -85,7 +85,7 @@
 
      <li class="nav-item">
        <a class="nav-link collapsed" data-bs-target="#inv-nav" data-bs-toggle="collapse" href="#">
-         <i class="bi bi-person-lines-fill"></i><span>Inventory</span><i class="bi bi-chevron-down ms-auto"></i>
+         <i class="bi bi-clipboard-data"></i><span>Inventory</span><i class="bi bi-chevron-down ms-auto"></i>
        </a>
        <ul id="inv-nav" class="
        
@@ -112,7 +112,7 @@
            <?php if ('receiving' == $page) {
               echo 'active';
             } ?>">
-             <i class="bi bi-circle"></i><span>Receiving</span>
+             <i class="bi bi-circle"></i><span>Incoming</span>
            </a>
          </li>
 
@@ -128,12 +128,9 @@
        </ul>
      </li>
 
-     <li class="nav-heading text-primary">Monitor</li>
-
-
      <li class="nav-item">
        <a class="nav-link collapsed" data-bs-target="#emplogs-nav" data-bs-toggle="collapse" href="#">
-         <i class="bi bi-person-lines-fill"></i><span>Employee Logs</span><i class="bi bi-chevron-down ms-auto"></i>
+         <i class="bi bi-person-check-fill"></i><span>Employee Logs</span><i class="bi bi-chevron-down ms-auto"></i>
        </a>
        <ul id="emplogs-nav" class="<?php if ('emplogs' == $nav) {
                                       echo 'nav-content collapse show';
@@ -158,7 +155,7 @@
      </li>
 
 
-     <li class="nav-heading text-primary">Settings</li>
+     <li class="nav-heading text-primary"><i class="bi bi-gear-fill"></i>&nbspSettings</li>
 
      <li class="nav-item">
        <a href="users-profile.php?id=<?php echo $_SESSION['login_key']; ?>" class="<?php if ('Profile' == $page) {
@@ -204,4 +201,14 @@
        </a>
      </li><!-- End Contact Page Nav -->
    </ul>
+
+   <div class="alert alert-info" role="alert">
+     <h4 class="alert-heading">Health Check Monitoring System</h4>
+     <p>Medical Practicioner</p>
+     <p class="mb-0">This system contains clinic logs that is needed to monitor individuals of BESTLINK COLLEGE OF THE
+       PHILIPPINES
+       Health.
+     </p>
+   </div>
+
  </aside><!-- End Sidebar-->

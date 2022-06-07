@@ -1,6 +1,6 @@
 <?php
 require_once '../security/newsource/Config.php';
-$qty = $db->query('SELECT available FROM hcms_stock WHERE brand_name=?', $_GET["thisItem"])->fetchArray();
+$qty = $db->query('SELECT available FROM hcms_stock WHERE prod_code=?', $_GET["thisItem"])->fetchArray();
 
 ?>
 

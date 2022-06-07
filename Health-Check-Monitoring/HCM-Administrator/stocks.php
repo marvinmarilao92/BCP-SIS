@@ -24,7 +24,7 @@ include_once('security/newsource.php');
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a></li>
-          <li class="breadcrumb-item active">Medicine Inventory</li>
+          <li class="breadcrumb-item active">Stocks</li>
         </ol>
       </nav>
     </div>
@@ -32,6 +32,11 @@ include_once('security/newsource.php');
       <div class="row">
         <div class="col-lg-12">
           <div class="card p-5">
+            <div class="alert alert-info" role="alert">
+              <h4 class="alert-heading">Medicine Stocks</h4>
+              <p></p>
+              <p class="mb-0">This module is for monitoring the current stocks</p>
+            </div>
             <div class="table-responsive">
               <?php require_once "timezone.php";
               $items = "SELECT * FROM hcms_stock ORDER BY id ASC";
@@ -48,17 +53,28 @@ include_once('security/newsource.php');
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($itemsResult as $data) { ?>
+                  <?php foreach ($itemsResult as $data) {
+                    $dataprodCode = $data['prod_code'] ?>
                   <tr>
                     <td class="text-center">
                       <?php echo $data['brand_name'] . '<sup>' . $data['dosage'] . 'mg</sup>' ?>
                     </td>
                     <td class="text-center" class="text-center"><?php echo $data['gen_name']; ?> </td>
                     <td class="text-center"><?php echo $data['available']; ?> </td>
-                    <td class="text-center"><?php echo $data['expired']; ?> </td>
+
+                    <?php
+                      $toCheckExpired = $db->query('SELECT * FROM hcms_items_transac WHERE `prod_code` = ?', $dataprodCode)->fetchArray();
+                      $newFormat = date("Y-m-d", strtotime($toCheckExpired['exp_date']));
+                      if ($newFormat == date('Y-m-d')) {
+                        echo   '<td class="text-center bg-danger text-white">' . $toCheckExpired['quantity'] . ' </td>';
+                      } else {
+                        echo  '<td class="text-center bg-primary text-white">0</td>';
+                      }
+                      ?>
+
                     <td class="text-center">
                       <a href="#" onclick class="btn btn-primary" type="button"><i class="bi bi-plus"></i>
-                        Add</a>
+                        Dispose</a>
                     </td>
                   </tr>
                   <?php } ?>

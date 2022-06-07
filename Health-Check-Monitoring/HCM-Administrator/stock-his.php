@@ -32,6 +32,11 @@ include_once('security/newsource.php');
       <div class="row">
         <div class="col-lg-12">
           <div class="card p-5">
+            <div class="alert alert-info" role="alert">
+              <h4 class="alert-heading">Stock History</h4>
+              <p></p>
+              <p class="mb-0">This module Focused on monitoring the Accepted, Rejected, And Disposed Medicines</p>
+            </div>
             <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
               <li class="nav-item flex-fill" role="presentation">
                 <button class="nav-link w-100 active" id="accepted-tab" data-bs-toggle="tab"
@@ -73,8 +78,7 @@ include_once('security/newsource.php');
                     <tbody>
                       <?php foreach ($itemsResult as $data) {
                         $newdate = date("F j, Y, g:i a", strtotime($data['accepted_date']));
-                        $newdate2 = date("Y-m-d H:i:s", strtotime($data['accepted_date']));
-                        echo $newdate2 ?>
+                        $newdate2 = date("Y-m-d H:i:s", strtotime($data['accepted_date'])); ?>
                       <tr>
                         <td class="text-center">
                           <?php echo $data['brand_name'] . '<sup>' . $data['dosage'] . 'mg</sup>' ?>
@@ -103,7 +107,6 @@ include_once('security/newsource.php');
                 aria-labelledby="rejected-tab">
                 <div class="table-responsive">
                   <?php require_once "timezone.php";
-                  echo $time;
                   $items = "SELECT * FROM hcms_items_transac WHERE `status` = 'Rejected' ORDER BY prod_id ASC";
                   $itemsResult = mysqli_query($conn, $items);
 
@@ -152,7 +155,7 @@ include_once('security/newsource.php');
                 aria-labelledby="disposed-tab">
                 <div class="table-responsive">
                   <?php require_once "timezone.php";
-                  $items = "SELECT * FROM hcms_stock ORDER BY id ASC";
+                  $items = "SELECT * FROM hcms_items_transac WHERE `status` = 'Disposed'";
                   $itemsResult = mysqli_query($conn, $items);
                   ?>
                   <table class="table table-hover datatable">
@@ -168,18 +171,17 @@ include_once('security/newsource.php');
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($itemsResult as $data) { ?>
+                      <?php foreach ($itemsResult as $data) {
+                        $newexpDate = date("F j, Y, G:i:a", strtotime($data['exp_date'])) ?>
                       <tr>
-                        <?php if ($data['dosage'] < 50) { ?>
-                        <td class="text-center" class="bg-danger text-white">
-                          <?php echo $data['brand_name']; ?> </td>
-                        <?php } elseif ($data['quantity'] >= 50) { ?>
-                        <td class="text-center" class="bg-info text-white text-center">
-                          <?php echo $data['brand_name']; ?> </td>
-                        <?php } ?>
-                        <td class="text-center" class="text-center"><?php echo $data['gen_name']; ?> </td>
+
+                        <td class="text-center"><?php echo $data['brand_name'];
+                                                  '<sup>' . $data['dosage'] . ' </sup>' ?> </td>
+                        <td class="text-center"><?php echo $data['gen_name']; ?> </td>
                         <td class="text-center"><?php echo $data['quantity']; ?> </td>
-                        <!-- <td class="text-center"><?php echo $data['quantity']; ?> </td> -->
+                        <td class="text-center"><?php echo $data['disposed_by']; ?> </td>
+                        <td class="text-center"><?php echo $data['date_disposed']; ?> </td>
+                        <td class="text-center"><?php echo $newexpDate; ?> </td>
                         <td class="text-center">
                           <a href="#" onclick class="btn btn-primary" type="button"><i class="bi bi-plus"></i>
                             Add</a>

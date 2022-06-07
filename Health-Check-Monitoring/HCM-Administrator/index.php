@@ -34,25 +34,50 @@ include_once 'security/newsource.php';
           <div class="row">
 
             <!-- Sales Card -->
-            <div class="col-xxl-6 col-md-6">
+            <div class="col-xxl-3 col-md-3">
               <div class="card info-card sales-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Total <span>| Active now</span></h5>
+                  <h5 class="card-title">Total <span>| Used Medicines</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
+                      <i class="ri ri-capsule-fill"></i>
                     </div>
                     <div class="ps-3">
                       <?php
-                      $dept = 'Health Check Monitoring';
-                      $stats = 'Active';
-                      $query = "SELECT * FROM `user_information` WHERE user_information.department = '{$dept}' AND account_status = '{$stats}'";
+                      $query = "SELECT SUM(quantity) FROM `hcms_checkup` ";
                       $query_run = mysqli_query($conn, $query);
-                      $total = mysqli_num_rows($query_run);
+                      $row = mysqli_fetch_array($query_run);
 
-                      echo "<h6>$total</h6>";
+                      echo "<h6>$row[0]</h6>";
+                      ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xxl-3 col-md-3">
+              <div class="card info-card sales-card">
+
+                <div class="card-body">
+                  <h5 class="card-title">Total <span>| Approved</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="ri ri-capsule-fill"></i>
+                    </div>
+                    <div class="ps-3">
+                      <?php
+                      $query = "SELECT SUM(quantity) as `sum` FROM `hcms_items_transac` WHERE `status` = 'Accepted'";
+                      $query_run = mysqli_query($conn, $query);
+                      $row = mysqli_fetch_array($query_run);
+                      if ($row['sum'] != 0) {
+                        echo "<h6>$row[0]</h6>";
+                      } else {
+                        echo "<h6>0</h6>";
+                      }
                       ?>
                     </div>
                   </div>
@@ -61,26 +86,54 @@ include_once 'security/newsource.php';
             </div><!-- End Sales Card -->
 
             <!-- Revenue Card -->
-            <div class="col-xxl-6 col-md-6">
-              <div class="card info-card revenue-card">
+            <div class="col-xxl-3 col-md-3">
+              <div class="card info-card customers-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Total <span>| Employee</span></h5>
+                  <h5 class="card-title">Total <span>| Disposed Medicines</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
+                      <i class="ri ri-capsule-fill"></i>
                     </div>
                     <div class="ps-3">
                       <?php
+                      $query2 = "SELECT SUM(quantity) as `sum` FROM `hcms_items_transac` WHERE `status` = 'Disposed'";
+                      $query_run2 = mysqli_query($conn, $query2);
+                      $row2 = mysqli_fetch_array($query_run2);
+                      if ($row2['sum'] != 0) {
+                        echo "<h6>$row2[0]</h6>";
+                      } else {
+                        echo "<h6>0</h6>";
+                      }
 
-                      $dept = 'Health Check Monitoring';
-                      $query = "SELECT * FROM `user_information` WHERE user_information.department = '{$dept}'";
-                      $query_run = mysqli_query($conn, $query);
+                      ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                      $total = mysqli_num_rows($query_run);
+            <div class="col-xxl-3 col-md-3">
+              <div class="card info-card customers-card">
 
-                      echo "<h6>$total</h6>";
+                <div class="card-body">
+                  <h5 class="card-title">Total <span>| Rejected</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="ri ri-capsule-fill"></i>
+                    </div>
+                    <div class="ps-3">
+                      <?php
+                      $query2 = "SELECT SUM(quantity) as `sum` FROM `hcms_items_transac` WHERE `status` = 'Rejected'";
+                      $query_run2 = mysqli_query($conn, $query2);
+                      $row = mysqli_fetch_array($query_run2);
+                      if ($row['sum'] != 0) {
+                        echo "<h6>$row[0]</h6>";
+                      } else {
+                        echo "<h6>0</h6>";
+                      }
                       ?>
                     </div>
                   </div>
@@ -146,7 +199,7 @@ include_once 'security/newsource.php';
             <div class="col-lg-7">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Daily Total Medicine Quantity</h5>
+                  <h5 class="card-title">Daily Total Incoming Medicine Quantity</h5>
 
                   <!-- Bar Chart -->
                   <canvas id="lineChart" style="max-height: 400px;"></canvas>
@@ -172,7 +225,7 @@ include_once 'security/newsource.php';
                       console.log(arrayItems);
                       const data = {
                         datasets: [{
-                          label: 'Daily Total Medicine',
+                          label: 'Daily Total Incoming Medicine',
                           data: arrayItems,
                           borderColor: 'rgb(75, 192, 192)',
                           tension: 0.1
