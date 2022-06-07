@@ -62,7 +62,7 @@ include_once 'security/newsource.php';
               <div class="card info-card sales-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Total <span>| Approved</span></h5>
+                  <h5 class="card-title">Total <span>| Quantity of Approved Medicines</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -118,7 +118,7 @@ include_once 'security/newsource.php';
               <div class="card info-card customers-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Total <span>| Rejected</span></h5>
+                  <h5 class="card-title">Total <span>| Quantity of Rejected Medicines</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -160,11 +160,11 @@ include_once 'security/newsource.php';
                     const data = fetchData();
                     const res = data.then((item) => {
                       let label = [];
-                      let quantity = [];
+                      let available = [];
 
                       item.forEach((i) => {
                         label.push(i.gen_name);
-                        quantity.push(i.quantity);
+                        available.push(i.available);
                       })
 
                       new Chart(document.querySelector('#pieChart'), {
@@ -173,7 +173,7 @@ include_once 'security/newsource.php';
                           labels: label,
                           datasets: [{
                             label: 'My First Dataset',
-                            data: quantity,
+                            data: available,
                             backgroundColor: [
                               'rgb(255, 99, 123)',
                               'rgb(54, 162, 78)',
@@ -208,17 +208,17 @@ include_once 'security/newsource.php';
                   document.addEventListener("DOMContentLoaded", () => {
                     const data = fetchData();
                     const res = data.then((item) => {
-                      // console.log(item);
+                      console.log(item);
                       let quantity = [];
                       let timestamp = [];
                       let arrayItems = [];
                       item.forEach((i, index) => {
-                        quantity.push(+i.quantity);
-                        timestamp.push(i.received_date);
+                        quantity.push(+i.available);
+                        timestamp.push(i.created_at);
                         // console.log(timestamp);
                         let items = {};
-                        items.x = i.received_date;
-                        items.y = +i.quantity;
+                        items.x = i.created_at;
+                        items.y = +i.available;
                         arrayItems.push(items);
                       })
 

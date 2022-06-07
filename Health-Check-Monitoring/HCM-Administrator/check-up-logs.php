@@ -122,7 +122,7 @@ include_once('security/newsource.php');
                 <?php
                 require_once('timezone.php');
                 $checkDate = date('Y-m-d', strtotime($time));
-                $test = $db->query("SELECT * FROM hcms_checkup")->fetchAll();
+                $test = $db->query("SELECT * FROM hcms_checkup LIMIT 7")->fetchAll();
                 foreach ($test as $sql) {
                   $dateOnly = date('Y-m-d', strtotime($sql['created_at']));
                   if ($dateOnly == $checkDate) {

@@ -178,11 +178,8 @@ include_once('security/newsource.php');
             data: intoArray,
             cache: false,
             success: function(html) {
-              Swal.fire(
-                'Add!',
-                'Some info here.',
-                'success'
-              )
+              window.location.reload();
+
               var error = document.getElementById(error);
               error.innerHTML = html;
             }

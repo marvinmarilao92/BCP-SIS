@@ -8,7 +8,7 @@ $dbname = 'sis_db';
 // $db = new databaseFunction($dbhost, $dbuser, $dbpass, $dbname);
 
 $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-$sql = mysqli_query($conn, 'SELECT * FROM hcms_items_transac');
+$sql = mysqli_query($conn, 'SELECT * FROM hcms_stock');
 $result = mysqli_fetch_all($sql, MYSQLI_ASSOC);
 
 exit(json_encode($result));
