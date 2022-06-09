@@ -11,8 +11,6 @@ include('includes/session.php');
    <body>
    <?php include ('includes/nav.php');//Design for  Header?>
    <?php $page = 'faqs';include ('includes/sidebar.php');//Design for sidebar?>
-
-
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
    
     
@@ -21,22 +19,29 @@ include('includes/session.php');
        
 <style type="text/css">
 
+
 /*ChatBot*/
 .chat_icon{
   position: absolute;
-	bottom: 5px;
-	right: 25px;
-	z-index: 1000;
-	padding: 0;
-	font-size: 65px;
-
-	cursor: pointer;
+  right: 35px;
+  bottom: 20px;
+  height: 55px;
+  width: 55px;
+  background: rgb(0,209,253);
+  background: linear-gradient(90deg, rgba(0,209,253,1) 25%, rgba(7,45,144,1) 82%, rgba(9,9,121,1) 97%);
+  text-align: center;
+  line-height: 55px;
+  border-radius: 50px;
+  font-size: 30px;
+  color: #fff;
+  z-index: 1000;
+  cursor: pointer;
 }
 .chat_box{
   position: absolute;
-  right: 30px;
+  right: 35px;
   bottom: 50px;
-  width: 400px;
+  width: 335px;
   border-radius: 15px;
   background:#dedede;
 	z-index: 1000;
@@ -44,7 +49,7 @@ include('includes/session.php');
 	transform: scaleY(0);
 }
 .chat_box .head-text{
-  line-height: 60px;
+  line-height: 50px;
   color: #fff;
   border-radius: 15px 15px 0 0;
   padding: 0 20px;
@@ -62,6 +67,7 @@ include('includes/session.php');
 #messages{
 	padding: 20px;
 }
+
 .my-conv-form-wrapper textarea{
 	height: 30px;
 	overflow: hidden;
@@ -73,6 +79,7 @@ include('includes/session.php');
 .img-responsive {
   height: 75px;
 }
+
   </style>
     
  
@@ -95,17 +102,19 @@ include('includes/session.php');
 </div><!-- End Page Title -->
 <div class="card-body">
     <!-- ChatBot -->
-    <div class="chat_icon">
-    
-    <i class="bx bxs-chat" aria-hidden="true"></i>
-    
+      <div class="chat_icon">
+      <i class="bx bxs-chat" aria-hidden="true"></i>
     
 </div>
-<div class="chat_box">
-<div class="head-text">
+
+
+      <div class="chat_box">
+      <div class="head-text">
             Talk to our bot
             <img class = "img-responsive" src="../assets/img/chatbot.png" style = "width: 50px; height: 50px;" >
+          
          </div>
+         
   <div class="my-conv-form-wrapper">
     <form action="" method="GET" class="hidden">
       
@@ -174,6 +183,7 @@ include('includes/session.php');
 
     </form>
   </div>
+
 </div>
 <!-- ChatBot end -->         
 
