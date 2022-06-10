@@ -271,12 +271,11 @@ include_once 'security/newsource.php';
               </div>
             </div>
 
-            <div class="col-lg-12">
+            <!-- <div class="col-lg-12">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Daily Total Checkups</h5>
 
-                  <!-- Bar Chart -->
                   <canvas id="barChart" style="max-height: 600px;"></canvas>
                   <script>
                   document.addEventListener("DOMContentLoaded", () => {
@@ -338,11 +337,11 @@ include_once 'security/newsource.php';
                     });
                   })
                   </script>
-                  <!-- End Bar CHart -->
+           
 
                 </div>
               </div>
-            </div>
+            </div> -->
 
           </div>
         </div><!-- End Left side columns -->
