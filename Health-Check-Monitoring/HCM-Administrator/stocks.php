@@ -73,7 +73,7 @@ include_once('security/newsource.php');
                       ?>
 
                     <td class="text-center">
-                      <a href="#" onclick class="btn btn-primary" type="button"><i class="bi bi-plus"></i>
+                      <a href="#" onclick class="btn btn-warning" type="button"><i class="bi bi-trash"></i>
                         Dispose</a>
                     </td>
                   </tr>

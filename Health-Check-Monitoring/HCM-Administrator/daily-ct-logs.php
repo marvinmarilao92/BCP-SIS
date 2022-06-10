@@ -3,8 +3,6 @@ include_once('security/newsource.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Contact Tracing
-</title>
 
 <head>
   <?php include('includes/head_ext.php'); ?>
@@ -12,7 +10,7 @@ include_once('security/newsource.php');
 </head>
 
 <body>
-  <?php $page = "contact-tracing-logs";
+  <?php $page = "daily-contact-tracing-logs";
   $nav = "Mlogs"; ?>
   <?php include('includes/header.php'); ?>
   <?php include('includes/sidebar.php'); ?>
@@ -20,11 +18,11 @@ include_once('security/newsource.php');
 
     <!-- Page Title -->
     <div class="pagetitle">
-      <h1>Contact Tracing</h1>
+      <h1>Daily Contact Tracing</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a></li>
-          <li class="breadcrumb-item active">Logs</li>
+          <li class="breadcrumb-item active">Contact Tracing</li>
         </ol>
       </nav>
     </div>
@@ -54,10 +52,8 @@ include_once('security/newsource.php');
                     <table class="table table-hover datatable">
                       <?php
                       require_once "timezone.php";
-                      $query = "SELECT hcms_ctracing.*, hcms_profile.cont_name FROM hcms_ctracing RIGHT JOIN hcms_profile ON hcms_ctracing.qrcode = hcms_profile.qr_code";
+                      $query = "SELECT hcms_ctracing.*, hcms_profile.cont_name FROM hcms_ctracing LEFT JOIN hcms_profile ON hcms_ctracing.qrcode = hcms_profile.qr_code";
                       $query_run = mysqli_query($conn, $query);
-                      $dateCheck = mysqli_fetch_assoc($query_run);
-                      $dateOnly = date('Y-m-d', strtotime($dateCheck['created_at']));
                       // echo $dateOnly;
                       // echo date('Y-m-d');
                       ?>
@@ -74,21 +70,18 @@ include_once('security/newsource.php');
                         <?php
                         require_once "timezone.php";
                         if (mysqli_num_rows($query_run) > 0) {
-                          if ($dateOnly == date('Y-m-d')) {
-                            while ($row = mysqli_fetch_assoc($query_run)) {
+                          while ($row = mysqli_fetch_assoc($query_run)) {
+                            $dateOnly = date('Y-m-d', strtotime($row['created_at']));
+                            if ($dateOnly == date('Y-m-d')) {
                               $new_date = date("F j,Y", strtotime($row['created_at']));
-                              echo '<td width="30%">' . $row['cont_name'] . '</td>';
-                              if ($row['temperature'] <= "37.8" || $row['temperature'] == "36.1") {
-                                echo '<td width="30%" class="bg-success text-white">' . $row['temperature'] . '<sub>°C</sub></td>';
-                              } elseif ($row['temperature'] >= "38" || $row['temperature'] < "36.0") {
-                                echo '<td width="30%" class="bg-danger text-white">' . $row['temperature'] . '<sub>°C</sub></td>';
-                              }
-                              echo '<td width="30%">' . $new_date . '</td>
-                            <td width="10%"> 
-                            <a href = "" class="btn btn-primary"><i class="bi bi-info-circle"></i></a>
-                            <a href = "" class="btn btn-warning"><i class="bi bi-envelope-fill"></i></a>
-                            </td>
-                        </tr>';
+                              echo '<td width="30%">' . $row['cont_name'] . '</td>
+                              <td width="30%">' . $row['temperature'] . '</td>
+                              <td width="30%">' . $new_date . '</td>
+                              <td width="10%"> 
+                                <a href = "" class="btn btn-primary"><i class="bi bi-info-circle"></i></a>
+                                <a href = "" class="btn btn-warning"><i class="bi bi-envelope-fill"></i></a>
+                              </td>
+                            </tr>';
                             }
                           }
                         }
@@ -127,17 +120,13 @@ include_once('security/newsource.php');
                             while ($row = mysqli_fetch_assoc($query_run)) {
                               $new_date = date("F j,Y", strtotime($row['created_at']));
                               echo '<tr>
-                              <td width="30%">' . $row['name'] . '</td>';
-                              if ($row['temp'] <= "37.8" || $row['temp'] == "36.1") {
-                                echo '<td width="30%" class="bg-success text-white">' . $row['temp'] . '<sub>°C</sub></td>';
-                              } elseif ($row['temp'] >= "38.0" || $row['temp'] < "36.0") {
-                                echo '<td width="30%" class="bg-danger text-white">' . $row['temp'] . '<sub>°C</sub></td>';
-                              }
-                              echo '<td>' . $new_date . '</td>
-                            <td width="10%"> 
-                            <a href = "" class="btn btn-primary"><i class="bi bi-info-circle"></i></a>
-                            <a href = "" class="btn btn-warning"><i class="bi bi-envelope-fill"></i></a>
-                            </td>
+                              <td width="30%">' . $row['name'] . '</td>
+                              <td width="30%">' . $row['temp'] . '</td>
+                              <td>' . $new_date . '</td>
+                              <td width="10%"> 
+                                <a href = "" class="btn btn-primary"><i class="bi bi-info-circle"></i></a>
+                                <a href = "" class="btn btn-warning"><i class="bi bi-envelope-fill"></i></a>
+                              </td>
                             </tr>';
                             }
                           }

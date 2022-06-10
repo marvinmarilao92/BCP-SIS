@@ -72,12 +72,22 @@
 
 
          <li>
-           <a href="contact-tracing-logs.php?id=<?php echo $_SESSION['login_key']; ?>" class="
+           <a href="daily-ct-logs.php?id=<?php echo $_SESSION['login_key']; ?>" class="
            
-           <?php if ('contact-tracing-logs' == $page) {
+           <?php if ('daily-contact-tracing-logs' == $page) {
               echo 'active';
             } ?>">
-             <i class="bi bi-circle"></i><span>Contact Tracing</span>
+             <i class="bi bi-circle"></i><span>Daily Contact Tracing</span>
+           </a>
+         </li>
+
+         <li>
+           <a href="overall-ct-logs.php?id=<?php echo $_SESSION['login_key']; ?>" class="
+           
+           <?php if ('overall-contact-tracing-logs' == $page) {
+              echo 'active';
+            } ?>">
+             <i class="bi bi-circle"></i><span>Overall Contact Tracing</span>
            </a>
          </li>
        </ul>

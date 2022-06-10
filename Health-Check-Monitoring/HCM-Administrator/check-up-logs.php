@@ -1,21 +1,19 @@
 <?php
-include_once('security/newsource.php');
+include_once 'security/newsource.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title>Contact Tracing
-</title>
 
 <head>
-  <?php include('includes/head_ext.php'); ?>
+  <?php include 'includes/head_ext.php'; ?>
 
 </head>
 
 <body>
-  <?php $page = "check-up-logs";
-  $nav = "Mlogs"; ?>
-  <?php include('includes/header.php'); ?>
-  <?php include('includes/sidebar.php'); ?>
+  <?php $page = 'check-up-logs';
+  $nav = 'Mlogs'; ?>
+  <?php include 'includes/header.php'; ?>
+  <?php include 'includes/sidebar.php'; ?>
   <main id="main" class="main">
 
     <!-- Page Title -->
@@ -23,7 +21,8 @@ include_once('security/newsource.php');
       <h1>Check-up Logs</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.php?=<?php echo $_SESSION['login_key']; ?>">Home</a>
+          </li>
           <li class="breadcrumb-item active">Logs</li>
         </ol>
       </nav>
@@ -46,7 +45,7 @@ include_once('security/newsource.php');
                 <table class="table table-hover datatable">
                   <?php
                   require_once "timezone.php";
-                  $query = "SELECT * FROM hcms_checkup ORDER BY id ASC";
+                  $query = "SELECT * FROM hcms_checkup ORDER BY id DESC";
                   $query_run = mysqli_query($conn, $query);
                   ?>
                   <!-- Table Head -->
@@ -62,25 +61,31 @@ include_once('security/newsource.php');
                     <?php
                     if (mysqli_num_rows($query_run) > 0) {
                       while ($row = mysqli_fetch_assoc($query_run)) {
-                        $newdate = date("F j, Y, g:i:a", strtotime($row['created_at']));
-                    ?>
+                        $newdate = date('F j, Y, g:i:a', strtotime($row['created_at'])); ?>
                     <tr>
-                      <td><?php echo $row['fullname']; ?></td>
-                      <td><?php echo $row['description']; ?></td>
-                      <td><?php echo $newdate ?></td>
+                      <td><?php echo $row['fullname']; ?>
+                      </td>
+                      <td><?php echo $row['description']; ?>
+                      </td>
+                      <td><?php echo $newdate; ?>
+                      </td>
                       <td>
-                        <a href="#" class="btn btn-info bi bi-info-circle-fill"></a>
-                        <a href="#" class="btn btn-warning bi bi-pen-fill"></a>
+                        <a href="#" onclick="viewInfo('<?php echo $row['id']; ?>', 'viewinfo');"
+                          class="btn btn-info bi bi-info-circle-fill"></a>
+                        <a href="#" onclick="editInfo('<?php echo $row['id']; ?>', 'editinfo');"
+                          class="btn btn-warning bi bi-pen-fill"></a>
                       </td>
                     </tr>
-                    <?php }
+                    <?php
+                      }
                     }
                     ?>
                   </tbody>
                 </table>
-                <?php if (isset($_GET['dlt'])) : ?>
-                <div class="flash-data" data-flashdata="<?= $_GET['dlt']; ?>"></div>
-                <?php endif; ?>
+                <?php if (isset($_GET['dlt'])) { ?>
+                <div class="flash-data" data-flashdata="<?php echo $_GET['dlt']; ?>">
+                </div>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -102,7 +107,7 @@ include_once('security/newsource.php');
                   <?php
                   $dept = 'Health Check Monitoring';
                   $stats = 'Active';
-                  $query = "SELECT * FROM `hcms_checkup`";
+                  $query = 'SELECT * FROM `hcms_checkup`';
                   $query_run = mysqli_query($conn, $query);
                   $total = mysqli_num_rows($query_run);
 
@@ -120,22 +125,27 @@ include_once('security/newsource.php');
 
               <div class="activity">
                 <?php
-                require_once('timezone.php');
+                require_once 'timezone.php';
                 $checkDate = date('Y-m-d', strtotime($time));
-                $test = $db->query("SELECT * FROM hcms_checkup LIMIT 7")->fetchAll();
-                foreach ($test as $sql) {
-                  $dateOnly = date('Y-m-d', strtotime($sql['created_at']));
-                  if ($dateOnly == $checkDate) {
-                    $newdate = date("g:i:a", strtotime($sql['created_at'])); ?>
+                $test = "SELECT * FROM hcms_checkup ORDER BY id DESC LIMIT 5";
+                if ($result = mysqli_query($conn, $test)) {
+                  if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_array($result)) {
+                      $dateOnly = date('Y-m-d', strtotime($row['created_at']));
+                      if ($dateOnly == $checkDate) {
+                        $newdate = date("g:i:a", strtotime($row['created_at'])); ?>
                 <div class="activity-item d-flex">
-                  <div class="activite-label"><?php echo $newdate; ?></div>
+                  <div class="activite-label"><?php echo $newdate; ?>
+                  </div>
                   <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
                   <div class="activity-content">
-                    <strong><?php echo $sql['fullname'] ?></strong><br><a href="#" class="fw-bold text-primary">Click
+                    <strong><?php echo $row['fullname'] ?></strong><br><a href="#" class="fw-bold text-primary">Click
                       Here To View</a>
                   </div>
                 </div>
                 <?php }
+                    }
+                  }
                 }
                 ?>
               </div>
@@ -145,11 +155,88 @@ include_once('security/newsource.php');
         </section>
       </div>
     </div>
+
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="editCheckModal" tabindex="-1" role="dialog" aria-labelledby="viewCheckModal"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-info">
+            <h5 class="modal-title text-white">Check-up Information</h5>
+            <a type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </a>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div id="editinfo"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+            <button type="button" class="btn btn-primary">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="viewCheckModal" tabindex="-1" role="dialog" aria-labelledby="editCheckModal"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-info">
+            <h5 class="modal-title text-white">Check-up Information</h5>
+            <a type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </a>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div id="viewinfo"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+            <button type="button" class="btn btn-primary">Okay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- End -->
 
 
   </main>
-  <?php include('includes/footer.php'); ?>
+  <<<<<<< HEAD <?php include('includes/footer.php'); ?> <script>
+    function viewInfo(viewID, viewinfo) {
+
+    $.ajax({
+    url: 'ajax/viewCheckup.php?viewID=' + viewID,
+    success: function(html) {
+    var ajaxDisplay = document.getElementById(viewinfo);
+    ajaxDisplay.innerHTML = html;
+    $("#viewCheckModal").modal("show");
+    }
+    });
+    }
+
+    function editInfo(editID, editinfo) {
+
+    $.ajax({
+    url: 'ajax/editCheckup.php?editID=' + editID,
+    success: function(html) {
+    var ajaxDisplay = document.getElementById(editinfo);
+    ajaxDisplay.innerHTML = html;
+    $("#editCheckModal").modal("show");
+    }
+    });
+    }
+    </script>
+    =======
+    <?php include 'includes/footer.php'; ?>
+    >>>>>>> d7db77304c18957359a9a0dd5c77b83070889715
 </body>
 
 </html>
