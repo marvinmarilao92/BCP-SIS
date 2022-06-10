@@ -28,10 +28,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.css">
 <!-- Selector search -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<<<<<<< HEAD
+
 <!-- <link href="cropperjs/cropper.min.css" rel="stylesheet" type="text/css" /> -->
-=======
->>>>>>> d7db77304c18957359a9a0dd5c77b83070889715
 
 <<<<<<< Updated upstream <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
