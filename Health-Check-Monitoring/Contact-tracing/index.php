@@ -121,7 +121,29 @@ include('security/newsource.php')
       </nav>
     </div><!-- End Page Title -->
     <section class="dashboard">
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+        </symbol>
+      </svg>
       <div class="container p-5">
+        <?php if (isset($_SESSION['alert'])) {
+          echo '<div class="alert alert-success d-flex align-items-center" role="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+          <div>
+            ' . $_SESSION['alert'] . '
+          </div>
+        </div>';
+        } ?>
         <div class="card p-5">
           <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
             <li class="nav-item flex-fill" role="presentation">
@@ -140,17 +162,17 @@ include('security/newsource.php')
                 aria-selected="false">Visitor</button>
             </li>
           </ul>
-          <div class="row ">
+          <div class="row">
             <div class="tab-content pt-2" id="borderedTabJustifiedContent">
               <div class="tab-pane fade show active" id="bordered-justified-QR-default" role="tabpanel"
                 aria-labelledby="QR-default-tab">
-                <div class="row pt-5">
-                  <div class="col-md-6 ">
+                <div class="row">
+                  <div class="col-lg-6 col-md-12 col-sm-12 ">
                     <label for="preview"><img width="100%" height="100%^" src="../assets/img/scanner.gif"
                         alt=""></label>
                     <video id="preview" width="100%" style="display:none;"></video>
                   </div>
-                  <div class="col-6">
+                  <div class="col-lg-6 col-md-12 col-sm-12 mt-5">
                     <div id="valueCheck"></div>
                     <form class="d-flex align-items-center justify-content-center flex-column" action="tracing.php"
                       method="post">
@@ -163,7 +185,7 @@ include('security/newsource.php')
                       </div>
                       <label class="p-2">Temperature</label>
                       <div class="input-group">
-                        <input type="number" name="idnum" id="idnum" min="35" max="42.3"
+                        <input type="number" name="temp" id="temp" min="35" max="42.3"
                           placeholder="Insert Body Temperature" class="form-control " required>
                         <div class="input-group-text">°C</div>
                       </div>
@@ -175,6 +197,9 @@ include('security/newsource.php')
               </div>
             </div>
             <div class="tab-pane fade" id="bordered-justified-stft" role="tabpanel" aria-labelledby="stft-tab">
+              <div class="alert alert-info">
+                <h5 class="text-center">Incase of you forgot to bring your QRcode</h5>
+              </div>
               <div class="row pt-5">
                 <div class="col-12">
                   <form class="d-flex align-items-center justify-content-center flex-column" action="tracing.php"
@@ -182,10 +207,6 @@ include('security/newsource.php')
                     <label for="QRtext" class="p-2">
                       <div id="valueCheck"></div>
                     </label>
-                    <div class="input-group">
-                      <input type="password" name="QRtext" id="QRtext" placeholder="scan qrcode" class="form-control">
-                      <a class="input-group-text" onclick="checkNOW('valueCheck');">Check</a>
-                    </div>
                     <label class=" p-2">Insert Code</label>
                     <input type="text" name="idnum" id="idnum" placeholder="Insert Qr Code no." class="form-control">
                 </div>
@@ -194,8 +215,8 @@ include('security/newsource.php')
                 <div class="col-lg-8 col-md-12 ">
                   <label class="p-2">Temperature</label>
                   <div class="input-group">
-                    <input type="number" name="idnum" id="idnum" min="35" max="42.3"
-                      placeholder="Insert Body Temperature" class="form-control " required>
+                    <input type="number" name="temp" id="temp" min="35" max="42.3" placeholder="Insert Body Temperature"
+                      class="form-control " required>
                     <div class="input-group-text">°C</div>
                   </div>
                 </div>
@@ -208,30 +229,33 @@ include('security/newsource.php')
               </div>
             </div>
             <div class="tab-pane fade" id="bordered-justified-visitor" role="tabpanel" aria-labelledby="visitor-tab">
-              <div class="container mt-5">
-                <div class="form-group">
+              <div class="alert alert-info mt-5">
+                <h5 class="text-center">For Visitors who doesn't have QRcode</h5>
+              </div>
+              <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                <form action="tracing.php" method="post">
                   <label class="p-2">Name</label>
-                  <input type="text" class="form-control" placeholder="Insert Full Name Format (LN, FN MN.)">
+                  <input type="text" class="form-control" placeholder="Insert Full Name Format (LN, FN MN.)" name="name"
+                    required>
                   <label class="p-2">Contact #</label>
-                  <input type="text" class="form-control" placeholder="Insert Contact Number ">
+                  <input type="text" class="form-control" placeholder="Insert Contact Number " name="contact" required>
                   <label class="p-2">Address</label>
-                  <input type="text" class="form-control" placeholder="Insert Address ">
+                  <input type="text" class="form-control" placeholder="Insert Address " name="address" required>
+                  <label class="p-2">Email</label>
+                  <input type="text" class="form-control" placeholder="Insert email " name="email" required>
                   <label class="p-2">Temperature</label>
                   <div class="input-group">
-                    <input type="number" name="idnum" id="idnum" min="35" max="42.3"
-                      placeholder="Insert Body Temperature" class="form-control ">
+                    <input type="number" name="temp" id="temp" min="35" max="42.3" placeholder="Insert Body Temperature"
+                      class="form-control ">
                     <div class="input-group-text">°C</div>
-                    </form>
                   </div>
-                </div>
-                <div class="col text-end">
-                  <button type=" submit" name="submit" class="btn btn-primary mt-5">Submit</button>
-                </div>
+                  <div class="col text-end">
+                    <button type=" submit" name="submit" class="btn btn-primary mt-5">Submit</button>
+                </form>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     </section>
 
