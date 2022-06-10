@@ -42,130 +42,131 @@ include('includes/session.php');
                   <p>Please wait patiently as you requested for your Medical Examination Result.</p>
                 </div>
               </div>
-              <?php require_once "timezone.php";
-              require_once "includes/config.php";
-              $sql =  "SELECT * FROM ms_labtest WHERE id_number = '$verified_session_username'";
-              $sql_query = mysqli_query($link, $sql);
-              if ($sql > 0) {
+              <div class="table-responsive">
+                <?php require_once "timezone.php";
+                require_once "includes/config.php";
+                $sql =  "SELECT * FROM ms_labtest WHERE id_number = '$verified_session_username'";
+                $sql_query = mysqli_query($link, $sql);
+                if ($sql > 0) {
 
-              ?>
-              <table class="table table-bordered table-hover">
-                <thead style="background-color:whitesmoke;">
-                  <tr>
-                    <th class="text-center">Payment Date</th>
-                    <th class="text-center">School Year</th>
-                    <th class="text-center">Urin</th>
-                    <th class="text-center">CBC</th>
-                    <th class="text-center">Chest X-ray</th>
-                    <th class="text-center">Result</th>
-                    <th class="text-center">Action</th>
-                  </tr>
-                </thead>
-                <?php foreach ($sql_query as $data) {
-                  $newdate = date("F j, Y, g:i a", strtotime($data['date_paid']));
-                  echo ' <tbody>
+                ?>
+                <table class="table table-bordered table-hover">
+                  <thead style="background-color:whitesmoke;">
+                    <tr>
+                      <th class="text-center">Payment Date</th>
+                      <th class="text-center">School Year</th>
+                      <th class="text-center">Urin</th>
+                      <th class="text-center">CBC</th>
+                      <th class="text-center">Chest X-ray</th>
+                      <th class="text-center">Result</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <?php foreach ($sql_query as $data) {
+                    $newdate = date("F j, Y, g:i a", strtotime($data['date_paid']));
+                    echo ' <tbody>
                   <tr>
                     <td class="text-center">' . $newdate . '</td>
                     <td class="text-center">' . $data['sy'] . '</td>';
-                  if ($data['urin'] == 1) {
-                    echo '<td width="5%">
+                    if ($data['urin'] == 1) {
+                      echo '<td width="5%">
                             <div class="form-check">
                               <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked disabled>
                               <label class="form-check-label" for="flexCheckChecked" >
                               </label>
                             </div>
                           </td> ';
-                  } else {
-                    echo '<td width="5%">
+                    } else {
+                      echo '<td width="5%">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" disabled>
                       <label class="form-check-label" for="flexCheckChecked" >
                       </label>
                     </div>
                   </td> ';
-                  }
-                  if ($data['cbc'] == 1) {
-                    echo '<td width="5%">
+                    }
+                    if ($data['cbc'] == 1) {
+                      echo '<td width="5%">
                             <div class="form-check">
                               <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked disabled>
                               <label class="form-check-label" for="flexCheckChecked" >
                               </label>
                             </div>
                           </td> ';
-                  } else {
-                    echo '<td width="5%">
+                    } else {
+                      echo '<td width="5%">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" disabled>
                       <label class="form-check-label" for="flexCheckChecked" >
                       </label>
                     </div>
                   </td> ';
-                  }
-                  if ($data['c_xray'] == 1) {
-                    echo '<td width="5%">
+                    }
+                    if ($data['c_xray'] == 1) {
+                      echo '<td width="5%">
                             <div class="form-check">
                               <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked disabled>
                               <label class="form-check-label" for="flexCheckChecked" >
                               </label>
                             </div>
                           </td> ';
-                  } else {
-                    echo '<td width="5%">
+                    } else {
+                      echo '<td width="5%">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" disabled>
                       <label class="form-check-label" for="flexCheckChecked" >
                       </label>
                     </div>
                   </td> ';
-                  }
+                    }
 
-                  if (!is_null($data['file_name2']) && $data['status'] == "Approved") {
-                    echo '
+                    if (!is_null($data['file_name2']) && $data['status'] == "Approved") {
+                      echo '
                     <td class= "text-center bg-success">
                       <a class="text-white" href="../Medical-System/assets/result/' . $data['file_name2'] . '">Download Now!</a>
                     </td>';
-                  } elseif ($data['status'] == "Pending") {
-                    echo '
+                    } elseif ($data['status'] == "Pending") {
+                      echo '
                     <td class= "text-center bg-info">
                       <div class="text-white">Pending</div>
                     </td>';
-                  } elseif (is_null($data['file_name2']) && is_null($data['status'])) {
-                    echo '
+                    } elseif (is_null($data['file_name2']) && is_null($data['status'])) {
+                      echo '
                     <td class= "text-center bg-secondary">
                       <div class="text-white">No Result Yet</div>
                     </td>';
-                  } elseif (is_null($data['file_name2'])) {
-                    echo '
+                    } elseif (is_null($data['file_name2'])) {
+                      echo '
                     <td class= "text-center bg-secondary">
                       <div class="text-white">No Result Yet</div>
                     </td>';
-                  } elseif (!is_null($data['file_name2'])) {
-                    echo '
+                    } elseif (!is_null($data['file_name2'])) {
+                      echo '
                   <td class= "text-center bg-success">
                     <div class="text-white">Result is Ready</div>
                   </td>';
-                  }
-                  if ($data['status'] == "Approved") {
-                    echo '<td>
+                    }
+                    if ($data['status'] == "Approved") {
+                      echo '<td>
                     <p class="text-center">Thankyou For your Consideration</p>
                     </td>';
-                  } elseif ($data['status'] == "Pending") {
-                    echo '<td>
+                    } elseif ($data['status'] == "Pending") {
+                      echo '<td>
                       <p class="text-center">Please Wait Patiently</p>
                     </td>';
-                  } else {
-                    echo '<td "text-center">
+                    } else {
+                      echo '<td "text-center">
                       <a class="text-white btn btn-primary" href="function/updateInto.php?id=' . $data['id'] . '">Request for Result</a>
                     </td>';
-                  }
-                  echo '</tr>
+                    }
+                    echo '</tr>
                     </tbody>
                   </table>';
-                }
-              } else {
-                echo '<div class= "alert alert danger" role ="alert" > No records Found</div>';
-              } ?>
-
+                  }
+                } else {
+                  echo '<div class= "alert alert danger" role ="alert" > No records Found</div>';
+                } ?>
+              </div>
             </div>
           </div>
         </div>
