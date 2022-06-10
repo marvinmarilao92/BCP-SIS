@@ -74,9 +74,9 @@ include_once 'security/newsource.php';
                       $query_run = mysqli_query($conn, $query);
                       $row = mysqli_fetch_array($query_run);
                       if (0 != $row['sum']) {
-                          echo "<h6>$row[0]</h6>";
+                        echo "<h6>$row[0]</h6>";
                       } else {
-                          echo '<h6>0</h6>';
+                        echo '<h6>0</h6>';
                       }
                       ?>
                     </div>
@@ -102,9 +102,9 @@ include_once 'security/newsource.php';
                       $query_run2 = mysqli_query($conn, $query2);
                       $row2 = mysqli_fetch_array($query_run2);
                       if (0 != $row2['sum']) {
-                          echo "<h6>$row2[0]</h6>";
+                        echo "<h6>$row2[0]</h6>";
                       } else {
-                          echo '<h6>0</h6>';
+                        echo '<h6>0</h6>';
                       }
 
                       ?>
@@ -130,9 +130,9 @@ include_once 'security/newsource.php';
                       $query_run2 = mysqli_query($conn, $query2);
                       $row = mysqli_fetch_array($query_run2);
                       if (0 != $row['sum']) {
-                          echo "<h6>$row[0]</h6>";
+                        echo "<h6>$row[0]</h6>";
                       } else {
-                          echo '<h6>0</h6>';
+                        echo '<h6>0</h6>';
                       }
                       ?>
                     </div>
