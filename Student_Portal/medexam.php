@@ -31,50 +31,38 @@ include('includes/session.php');
       </nav>
     </div>
     <section class="section">
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <div class="card-body p-4">
-              <div class="alert alert-info">
-                <div class="card-title">
-                  <big>Please Read the Instructions Carefully</big>
-                  <hr>
-                </div>
-              </div>
-              <div class="container ">
-                <div class="row d-flex justify-content-center">
-                  <div class="col-lg-6 col-md-12 col-sm-12">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col">
-                            <div class="card-title text-center pt-5">Annual Medical Examination</div>
-                            <div class="row d-flex justify-content-center">
-                              <div class="wrapper p-4">
-                                <h5><strong>Steps</strong></h5>
-                                <hr>
-                                <small>
-                                  <li class="pt-2">Please Pay via Student Module or BCP Main branch Cashier</li>
-                                </small>
-                                <small>
-                                  <li class="pt-2">Wait for the Schedule to be Announced at your News Feed</li>
-                                </small>
-                                <small>
-                                  <li class="pt-2">Generate Your Stub Here at Your Account</li>
-                                </small>
-                                <small>
-                                  <li class="pt-2">Complete the Medical Examination</li>
-                                </small>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="alert alert-info">
+            <div class="card-title">
+              <big>Please Read the Instructions Carefully</big>
+              <hr>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row d-flex justify-content-center">
               <div class="row">
+                <div class="card-title text-center pt-5">Annual Medical Examination</div>
+                <h5 class="text-center"><strong>Steps</strong></h5>
+                <hr>
+              </div>
+              <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 col-md-8 col-sm-12 ">
+                  <h5>
+                    <li class="pt-4">Please Pay via Student Module or BCP Main branch Cashier</li>
+                  </h5>
+                  <h5>
+                    <li class="pt-4">Wait for the Schedule to be Announced at your News Feed</li>
+                  </h5>
+                  <h5>
+                    <li class="pt-4">Generate Your Stub Here at Your Account</li>
+                  </h5>
+                  <h5>
+                    <li class="pt-4">Complete the Medical Examination</li>
+                  </h5>
+                </div>
+              </div>
+              <div class="row p-5">
                 <div class="col d-flex justify-content-center">
                   <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Already Paid ?</button>
