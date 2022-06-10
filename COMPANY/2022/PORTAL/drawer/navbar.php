@@ -2,8 +2,8 @@
               
 <div class="d-flex align-items-center justify-content-between">
       <a href="../PORTAL/login.php" class="logo d-flex align-items-center">
-        <img src="assets/img/BCPlogo.png" alt="">
-        <span class="d-none d-lg-block">Company Coordinator</span>
+        <img src="assets/img/BCPlogo.png" alt="">&nbsp;
+        <span class="d-none d-lg-block" style="font-size: 1.2em;">Company Coordinator</span>
         
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -170,7 +170,7 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
           <?php if($co_avatar == null){
-                          echo'<img src="../assets/img/default.jpg" alt="Profile" class="rounded-circle">';
+                          echo'<img src="assets/img/default.jpg" alt="Profile" class="rounded-circle">';
                         }
                           else{
                             echo'<img src="data:image;base64, '.base64_encode($co_avatar).'" alt="Profile" class="rounded-circle">';

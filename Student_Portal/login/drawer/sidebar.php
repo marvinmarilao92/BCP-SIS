@@ -1,54 +1,48 @@
 <ul class="sidebar-nav" id="sidebar-nav">
-
+    <?php $key = $_SESSION["login_key"];?>
       <li class="nav-item">
-        <a class="nav-link " <?php echo 'href=login?'.$url
-          ?>
-          >
+        <a class="nav-link " <?php echo 'href=index?'.$key;?>>
           <i class="bi bi-house"></i>
           <span>Home
           </span>
         </a>
       </li>
-      
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=dashboard?'.$url;
-        ?>
-        >
+        <a class="nav-link collapsed" <?php echo 'href=dashboard?'.$key;?>>
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=overview?'.$url;
-        ?>
-        >
-          <i class="bi bi-person"></i>
-          <span>Request</span>
-        </a>
-      </li>       
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-          <i class="bi bi-envelope"></i>
-          <span>Create Post</span>
-        </a>
-      </li>
-      <!-- End Dashboard Nav -->
-      
-      <!-- End Components Nav -->
-     
-      <br>
-      <!-- -->
-      
-
-
-        <li class="nav-heading">Concerns</li>
+      </li><!-- End Dashboard Nav -->
         <li class="nav-item">
-        <a class="nav-link collapsed" href="contact.php">
-          <i class="bi bi-envelope"></i>
-          <span>Reports</span>
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person"></i><span>MyTask</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          
+          <li class="nav-heading">Upload Files and Documents</li>
+            
+          <li>
+            <a href="components-tooltips.html">
+              <i class="bi bi-person"></i><span>Upload</span>
+            </a>
+          </li>
+            
+          <li>
+            <a href="components-tooltips.html">
+              <i class="bi bi-person"></i><span>Manage Task</span>
+            </a>
+           </li>
+          <li class="nav-heading" >Optional ( Offsite )</li>
+          <li>
+            <a href="components-tooltips.html">
+              <i class="bi bi-circle"></i><span>WorkFromHome</span>
+            </a>
+          </li>
+        </ul>
+        <br>
       </li>
+      <!-- End Components Nav -->
+          
       <!-- End Profile Page Nav -->
 
      

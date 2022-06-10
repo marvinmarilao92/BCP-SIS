@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center justify-content-between">
-      <a href="y/.." class="logo d-flex align-items-center">
-        <img src="../assets/img/BCPlogo.png" alt="">&nbsp;
-        <span class="d-none d-lg-block" style="font-size: 1.2em;" >Internship Coordinator</span>
+      <a href="x/.." class="logo d-flex align-items-center">
+        <img src="assets/img/graduates.png" alt="">&nbsp;
+        <span class="d-none d-lg-block">Internship</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -26,7 +26,7 @@
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number"></span>
+            <span class="badge bg-primary badge-number">4</span>
           </a><!-- End Notification Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
@@ -129,7 +129,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="/assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                 <div>
                   <h4>Anna Nelson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -166,21 +166,21 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="../assets/img/default.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $fnamee ?></span>
+            <img src="assets/img/default.jpg" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $verified_session_lastname . ", " . $verified_session_firstname ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?php echo $fnamee?>&nbsp;<?php echo $lnamee?></h6>
-              <span><?php echo $rolee ?></span>
+              <h6><?php echo $verified_session_lastname . ", " . $verified_session_firstname ?></h6>
+              <span><?php echo $_SESSION['session_department'] ?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" <?php echo 'href=../y/user-profile?id='.$url ?>>
+              <a class="dropdown-item d-flex align-items-center" href="profile.php">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -190,7 +190,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" <?php echo 'href=../y/user-profile?id='.$url ?>>
+              <a class="dropdown-item d-flex align-items-center" href="../x/user-profile.php">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>
@@ -200,8 +200,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" <?php echo 'href=FAQS?id='.$url;
-        ?>>
+              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
                 <i class="bi bi-question-circle"></i>
                 <span>Need Help?</span>
               </a>
@@ -210,42 +209,12 @@
               <hr class="dropdown-divider">
             </li>
 
-            <!-- Adding return nav item for super admin -->
-          <?php 
-            $output = '';
-            $key = $_SESSION["login_key"];
-            if(isset($verified_session_department) && ($verified_session_username)){
-              switch($rolee){
-                case "SuperAdmin":
-                    //statement
-                    $output .= '
-                    <li>
-                      <a class="dropdown-item d-flex align-items-center" href="../../../super_admin/index.php?id='.$key.'">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Sign Out</span>
-                      </a>
-                    </li>    
-                  ';
-                break;  
-
-                default:
-                //statement
-                  $output .= '
-                  <li>
-                  <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#basicModal">
-                    <i class="bi bi-box-arrow-right"></i>
-                    <span>Sign Out</span>
-                  </a>
-                </li>    
-                  ';
-              }
-              echo $output;
-          }else{
-              // header("location:index.php");
-          }
-          ?>
-
-          
+            <li>
+              <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#basicModal">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->

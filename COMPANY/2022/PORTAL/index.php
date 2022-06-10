@@ -64,12 +64,11 @@
               </div>End logo -->
 
               <div class="col-xl-10">
-        <div class="d-flex justify-content-center py-4">
-                <a href="../p" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/BCPlogo.png" alt="" >
-                  
-                </a>
-              </div>
+        <div class="row justify-content-center" >
+              <img src="../assets/img/BCPlogo.png" style="width: 15%;
+                                                          height: auto; ">
+             </div>
+             <br>
         <div class="card rounded-3 text-black">
           <div class="row g-0">
             <div class="col-lg-6">
