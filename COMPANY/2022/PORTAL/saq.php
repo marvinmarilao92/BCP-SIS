@@ -102,8 +102,7 @@ header("location:../");
                                 </div>
                                
                             </div>
-                          </div>
-                        </section>
+                   
                                 
              
 

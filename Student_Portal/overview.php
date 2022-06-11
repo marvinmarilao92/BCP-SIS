@@ -22,7 +22,7 @@ include("includes/head.php");
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Review</h1>
+      <h1>Preview</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href=<?php echo 'index.php?'.$key;
@@ -57,6 +57,10 @@ include("includes/head.php");
                   <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Screening</button>
                 </li>
 
+                <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#rescreen" type="button" role="tab" aria-controls="contact" aria-selected="false">Re - Screening</button>
+                </li>
+
               </ul>
               <br>
               <!-- Pending msg -->
@@ -86,7 +90,7 @@ include("includes/head.php");
 
 
                                                 ?>
-                                                <h5 class="card-title">From: <?php echo $row5['deptCoor_Name']?></h5>
+                                                <h5 class="card-title">From: User</h5>
 
                               
 
@@ -97,7 +101,7 @@ include("includes/head.php");
                                   <?php
 
 
-                                                  }
+                                                  }   
                                                 // Free result set
                                                 
                                               }else{
@@ -194,7 +198,32 @@ include("includes/head.php");
 
                             <div class="card">
                               <div class="card-body">
-                                
+                                <br><div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </section>
+                </div>
+
+                <div class="tab-pane fade" id="rescreen" role="tabpanel" aria-labelledby="contact-tab">
+                  <section class="section">
+                        <div class="row">
+
+                          <div class="col-lg-12">
+
+                            <div class="card">
+                              <div class="card-body">
+                                <br><div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>
                               </div>
                             </div>
 

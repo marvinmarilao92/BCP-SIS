@@ -125,6 +125,12 @@
               <i class="bi bi-circle"></i><span>Set A Plan By Department Coordinator</span>
             </a>
           </li>
+           <li>
+            <a <?php echo 'href=screening?'.$url;
+        ?>>
+              <i class="bi bi-circle"></i><span>Re - Screeening</span>
+            </a>
+          </li>
           <li class="nav-heading">Students Screening Status</li>
           <li>
             <a href="forms-editors.html">
@@ -136,6 +142,14 @@
               <i class="bi bi-circle"></i><span>Failed</span>
             </a>
           </li>
+          <li class="nav-heading">Intern Grade</li>
+          <li>
+            <a href="intern_eva.php">
+              <i class="bi bi-circle"></i><span>Evaluation</span>
+            </a>
+          </li>
+
+
         </ul>
       </li>
       <br>
