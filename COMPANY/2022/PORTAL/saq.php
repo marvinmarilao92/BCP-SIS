@@ -62,7 +62,7 @@ header("location:../");
                               <div class="card-body">
                                 <h5 class="card-title"><label class="card-title" style="font-size:1.3rem;
                                     font-family: Times-New Roman;
-                                    ">Department Coordinator: Robert Hernandez&nbsp;&nbsp;<i class="bi bi-chat-left-text-fill" data-bs-toggle="modal" data-bs-target="#ITDept_mess"
+                                    ">Department Coordinator: User  &nbsp;&nbsp;<i class="bi bi-chat-left-text-fill" data-bs-toggle="modal" data-bs-target="#ITDept_mess"
 
 
                                     ></i>

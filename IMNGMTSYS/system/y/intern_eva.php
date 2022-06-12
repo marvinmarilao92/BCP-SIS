@@ -77,8 +77,7 @@ if ($user_online == "true") {
 
                                 <!-- Table with stripped rows -->
                                 <div class="table-responsive-lg">
-                                <table class="table datatable" style=" font-size: 0.7em;
-                                                          overflow-x:scroll;" >
+                                <table class="table datatable" style=" font-size: 0.7em;" >
                                   <thead>
                                     <tr>
                                       <th scope="col">Student No</th>

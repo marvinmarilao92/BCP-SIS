@@ -38,7 +38,8 @@ include("includes/head.php");
         <div class="col-lg-12">
 
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" style=" font-size: 1rem;
+                                                          ">
               <br>
               
 
@@ -57,9 +58,7 @@ include("includes/head.php");
                   <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Screening</button>
                 </li>
 
-                <li class="nav-item flex-fill" role="presentation">
-                  <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#rescreen" type="button" role="tab" aria-controls="contact" aria-selected="false">Re - Screening</button>
-                </li>
+                
 
               </ul>
               <br>
@@ -211,6 +210,34 @@ include("includes/head.php");
                       </section>
                 </div>
 
+                
+              </div><!-- End Bordered Tabs Justified -->
+
+            </div>
+          </div>
+
+
+
+                <div class="card">
+            <div class="card-body" style=" font-size: 1rem;
+                                                          ">
+              <br>
+              
+                <h5 class="card-title">Re - Screening</h5>
+              <!-- Bordered Tabs Justified -->
+              <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+
+      
+
+                <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#rescreen" type="button" role="tab" aria-controls="contact" aria-selected="false">Details</button>
+                </li>
+
+              </ul>
+              <br>
+              <!-- Pending msg -->
+              
+
                 <div class="tab-pane fade" id="rescreen" role="tabpanel" aria-labelledby="contact-tab">
                   <section class="section">
                         <div class="row">
@@ -235,6 +262,14 @@ include("includes/head.php");
 
             </div>
           </div>
+
+
+
+
+
+
+
+
         </div>
       </div>
     </section>

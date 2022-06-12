@@ -27,30 +27,126 @@
           <span>Request</span>
         </a>
       </li>       
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#verticalycentered">
-          <i class="bi bi-envelope"></i>
-          <span>Create Post</span>
-        </a>
-      </li>
+      
       <!-- End Dashboard Nav -->
-      
-      <!-- End Components Nav -->
-     
-      <br>
-      <!-- -->
-      
 
-
-        <li class="nav-heading">Concerns</li>
+      
         <li class="nav-item">
-        <a class="nav-link collapsed" href="contact.php">
-          <i class="bi bi-envelope"></i>
-          <span>Reports</span>
-        </a>
-      </li>
-      <!-- End Profile Page Nav -->
 
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person"></i><span>Online Screening</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+
+
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          
+          <li class="nav-heading">Schedule</li>
+            
+          <li>
+            <a <?php echo 'href=registered-accounts?id='.$url;
+        ?>>
+              <i class="bi bi-person"></i><span>Preview</span>
+            </a>
+          </li>
+          <li>
+            <a <?php echo 'href=company-screening?id='.$url;
+        ?>>
+              <i class="bi bi-person"></i><span>Set a Plan</span>
+            </a>
+          </li>
+          <li class="nav-heading" >Optional "Physical"</li>
+          <li>
+            <a <?php echo 'href=approved-accounts?id='.$url;
+        ?>>
+              <i class="bi bi-envelope"></i><span>Create a POST</span>
+            </a>
+          </li>
+          <li class="nav-heading">Screening Result</li>
+          <li>
+            <a <?php echo 'href=result?id='.$url;
+        ?>>
+              <i class="bi bi-envelope"></i><span>Record</span>
+            </a>
+          </li>
+
+
+        </ul>
+
+          
+      </li>      
+      <!-- End Components Nav -->
+      <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#trainee" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-person"></i><span>Trainee Performance</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="trainee" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+               <li class="nav-heading"></li>
+               <li> 
+                <a <?php echo 'href=concern?id='.$url;?>>
+                  <i class="bi bi-circle"></i><span>Evaluation / Grades</span>
+                </a>
+               </li>
+               <li>
+                <a <?php echo 'href=result?id='.$url;?>>
+                  <i class="bi bi-circle"></i><span>Certificate</span>
+                </a>
+               </li>
+               
+               
+            </ul>
+        </li>
+      <!--Trainee Sched-->
+         <li class="nav-item">
+
+        <a class="nav-link collapsed" data-bs-target="#sched" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-calendar-check"></i><span>Schedule</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="sched" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+             <li class="nav-heading">Schedule of Trainee</li>
+             <li>
+                <a <?php echo 'href=DTR?id='.$url;?>>
+                  <i class="bi bi-circle"></i><span>Record</span>
+                </a>
+             </li>
+             <li class="nav-heading" >DTR Record of Trainee</li>
+             <li>
+                <a <?php echo 'href=attendance-report?id='.$url;?>>
+                  <i class="bi bi-envelope"></i><span>Daily Time Record</span>
+                </a>
+            </li>
+
+
+        </ul>
+
+      </li>
+      
+      <!--END OF SCHED -->
+      
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#reports" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-flag"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="reports" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+               <li class="nav-heading">Concern</li>
+               <li>
+                <a <?php echo 'href=concern?id='.$url;?>>
+                  <i class="bi bi-circle"></i><span>Trainee</span>
+                </a>
+               </li>
+               <li class="nav-heading">Trainee</li>
+               <li>
+                <a <?php echo 'href=result?id='.$url;?>>
+                  <i class="bi bi-circle"></i><span>Response</span>
+                </a>
+               </li>
+               
+               
+            </ul>
+        </li>
+      <!-- End of REPORTS -->
+
+        
      
       <!-- End Tables Nav -->
 

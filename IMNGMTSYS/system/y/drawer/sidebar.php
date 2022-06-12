@@ -43,7 +43,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=dashboard.php?'.$url;
+        <a class="nav-link collapsed" <?php echo 'href=dashboard?'.$url;
         ?>
         >
           <i class="bi bi-grid"></i>
