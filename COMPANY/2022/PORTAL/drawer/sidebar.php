@@ -190,6 +190,15 @@
                
             </ul>
         </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=restore.php?'.$url;
+          ?>>
+          <i class="bi bi-recycle"></i>
+          <span>Recycle Bin</span>
+        </a>
+      </li>
       <!-- End of REPORTS -->
 
         
