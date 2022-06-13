@@ -2,7 +2,7 @@
 
       
       <li class="nav-item">
-        <a class="nav-link " <?php echo 'href=dashboard?'.$url
+        <a class="nav-link " <?php echo 'href=dashboard.php?'.$url
           ?>
           >
           <i class="bi bi-grid"></i>
@@ -10,7 +10,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=login?'.$url;
+        <a class="nav-link collapsed" <?php echo 'href=login.php?'.$url;
         ?>
         >
           
@@ -22,7 +22,7 @@
       
       
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=overview?'.$url;
+        <a class="nav-link collapsed" <?php echo 'href=overview.php?'.$url;
         ?>
         >
           <i class="bi bi-person"></i>
@@ -45,27 +45,27 @@
           <li class="nav-heading">Schedule</li>
             
           <li>
-            <a <?php echo 'href=Trainee?id='.$url;
+            <a <?php echo 'href=Trainee.php?id='.$url;
         ?>>
               <i class="bi bi-circle"></i><span>Preview</span>
             </a>
           </li>
           <li>
-            <a <?php echo 'href=company-screening?id='.$url;
+            <a <?php echo 'href=company-screening.php?id='.$url;
         ?>>
               <i class="bi bi-circle"></i><span>Plan</span>
             </a>
           </li>
           <li class="nav-heading" >Optional "Physical"</li>
           <li>
-            <a <?php echo 'href=approved-accounts?id='.$url;
+            <a <?php echo 'href=approved-accounts.php?id='.$url;
         ?>>
               <i class="bi bi-circle"></i><span>Create a POST</span>
             </a>
           </li>
           <li class="nav-heading">Screening Result</li>
           <li>
-            <a <?php echo 'href=result?id='.$url;
+            <a <?php echo 'href=result.php?id='.$url;
         ?>>
               <i class="bi bi-circle"></i><span>Record</span>
             </a>
@@ -84,7 +84,7 @@
           </a>
           <ul id="offsite" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                <li>
-                  <a <?php echo 'href=Trainee?id='.$url;?>>
+                  <a <?php echo 'href=Trainee.php?id='.$url;?>>
                     <i class="bi bi-circle"></i><span >Offsite &nbsp;<i>Work from Home</i></span>
                   </a>
               </li>
@@ -99,12 +99,12 @@
           <ul id="tRecords" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li class="nav-heading"></li>
                <li> 
-                <a <?php echo 'href=form?id='.$url;?>>
+                <a <?php echo 'href=form.php?id='.$url;?>>
                   <i class="bi bi-circle"></i><span>On Site</span>
                 </a>
                </li>
                <li> 
-                <a <?php echo 'href=form?id='.$url;?>>
+                <a <?php echo 'href=form.php?id='.$url;?>>
                   <i class="bi bi-circle"></i><span>Work from Home</span>
                 </a>
                </li>
@@ -118,17 +118,17 @@
             <ul id="trainee" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                <li class="nav-heading"></li>
                <li> 
-                <a <?php echo 'href=form?id='.$url;?>>
+                <a <?php echo 'href=form.php?id='.$url;?>>
                   <i class="bi bi-circle"></i><span style="font-size: 0.7rem;">Fill out by Co. Representative "TRAINOR"</span>
                 </a>
                </li>
                <li> 
-                <a <?php echo 'href=evaluation-grades?id='.$url;?>>
+                <a <?php echo 'href=evaluation-grades.php?id='.$url;?>>
                   <i class="bi bi-circle"></i><span>Evaluation / Grades</span>
                 </a>
                </li>
                <li>
-                <a <?php echo 'href=trainee-certificate?id='.$url;?>>
+                <a <?php echo 'href=trainee-certificate.php?id='.$url;?>>
                   <i class="bi bi-circle"></i><span>Certificate</span>
                 </a>
                </li>
@@ -146,18 +146,18 @@
 
              <li class="nav-heading">Schedule of Trainee</li>
               <li>
-                <a <?php echo 'href=COR?id='.$url;?>>
+                <a <?php echo 'href=COR.php?id='.$url;?>>
                   <i class="bi bi-circle"></i><span>Create a COR</span>
                 </a>
              </li>
              <li>
-                <a <?php echo 'href=DTR?id='.$url;?>>
+                <a <?php echo 'href=DTR.php?id='.$url;?>>
                   <i class="bi bi-circle"></i><span>Record</span>
                 </a>
              </li>
              <li class="nav-heading" >DTR Record of Trainee</li>
              <li>
-                <a <?php echo 'href=attendance-report?id='.$url;?>>
+                <a <?php echo 'href=attendance-report.php?id='.$url;?>>
                   <i class="bi bi-circle"></i><span>Daily Time Record</span>
                 </a>
             </li>
@@ -176,13 +176,13 @@
             <ul id="reports" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                <li class="nav-heading">Concern</li>
                <li>
-                <a <?php echo 'href=concern?id='.$url;?>>
+                <a <?php echo 'href=concern.php?id='.$url;?>>
                   <i class="bi bi-circle"></i><span>Trainee</span>
                 </a>
                </li>
                <li class="nav-heading">Trainee</li>
                <li>
-                <a <?php echo 'href=result?id='.$url;?>>
+                <a <?php echo 'href=result.php?id='.$url;?>>
                   <i class="bi bi-circle"></i><span>Response</span>
                 </a>
                </li>
