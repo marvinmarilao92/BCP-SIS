@@ -43,29 +43,29 @@
           <li class="nav-heading">Schedule</li>
             
           <li>
-            <a <?php echo 'href=registered-accounts?id='.$url;
+            <a <?php echo 'href=Trainee?id='.$url;
         ?>>
-              <i class="bi bi-person"></i><span>Preview</span>
+              <i class="bi bi-circle"></i><span>Preview</span>
             </a>
           </li>
           <li>
             <a <?php echo 'href=company-screening?id='.$url;
         ?>>
-              <i class="bi bi-person"></i><span>Set a Plan</span>
+              <i class="bi bi-circle"></i><span>Plan</span>
             </a>
           </li>
           <li class="nav-heading" >Optional "Physical"</li>
           <li>
             <a <?php echo 'href=approved-accounts?id='.$url;
         ?>>
-              <i class="bi bi-envelope"></i><span>Create a POST</span>
+              <i class="bi bi-circle"></i><span>Create a POST</span>
             </a>
           </li>
           <li class="nav-heading">Screening Result</li>
           <li>
             <a <?php echo 'href=result?id='.$url;
         ?>>
-              <i class="bi bi-envelope"></i><span>Record</span>
+              <i class="bi bi-circle"></i><span>Record</span>
             </a>
           </li>
 

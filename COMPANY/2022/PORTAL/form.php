@@ -32,7 +32,7 @@ header("location:../");
 
   <main id="main" class="main">
 
-    <div class="pagetitle" >
+    <div class="page-title" >
       <aria-label class="display-5" style="font-size: 2rem";><b>Bestlink College of the Philippines</b></aria-label>
     </div><!-- End Page Title -->
     <hr class="my-4">

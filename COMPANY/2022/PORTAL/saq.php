@@ -41,14 +41,68 @@ header("location:../");
                   
                   
                   </div>
-    <hr class="my-4"> <!-- End Page Title -->
+                      <hr class="my-4"> <!-- End Page Title -->
 
-    <section class="section dashboard">
-      <div class="row">
+                      <section class="section">
+                        <div class="row">
+                          <div class="col-lg-12">
 
-        <!-- Left side columns -->
-        <div class="col-lg-12">
-          <div class="row">
+                            <div class="card">
+                              <div class="card-body">
+                                <br>
+                            <div class="card">
+                              <div class="card-body">
+                
+                
+                            <h5 class="card-title"><label class="card-title" style="font-size:1.3rem;
+                                                font-family: Times-New Roman;
+                                                ">Department Coordinator: User  &nbsp;&nbsp;<i class="bi bi-chat-left-text-fill" data-bs-toggle="modal" data-bs-target="#ITDept_mess"
+
+
+                                                ></i>
+                                              </label></h5> 
+                                            
+                                            <form class="row g-3 needs-validation" action="includes/applyy.php" method="POST" enctype="multipart/form-data">
+                                            <!-- Table with stripped rows -->
+                                            <div class="col-lg-6">
+                                                <div class="form-floating">
+                                                  <select type="text" class="form-select" name="s_course" aria-label="State" id="lvl" onchange="oncollapse()" required autofocus  style="background-color: rgba(255, 255, 255, .4);">
+                                                  <option value="" style="color:black" select ed="selected" disabled>Select a Category</option>
+                                                  <option>PROGRAMMING</option>
+                                                  <option>HARDWARE</option>
+                                                  <option>CISCO</option>
+                                                  <option>VPN</option>
+                                                  <option>HACKING</option>
+                                                  </select>
+                                                  <label for="floatingName">Category</label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-lg-6">
+                                                <div class="form-floating">
+                                                  <select type="text" class="form-select" name="s_course" aria-label="State" id="lvl" onchange="oncollapse()" required autofocus style="background-color: rgba(255, 255, 255, .4);">
+                                                  <option value="" style="color:black" select ed="selected" disabled>Select a Skills</option>
+                                                  <option>C++</option>
+                                                  <option>Website Phishing Site</option>
+                                                  <option>Gateway Internet</option>
+                                                  </select>
+                                                  <label for="floatingName">Skills</label>
+                                                </div>
+                                                 <br>
+                                                 <br>
+                                          </div>
+
+                                           </form> 
+                          
+            </div>
+          </div>
+          </div>
+          </div>
+        </div>
+
+        
+      </div>
+    </section>
 
             <!-- Sales Card -->
            
@@ -57,60 +111,6 @@ header("location:../");
                   <!-- End Page Title -->
      
                       
-                          
-                            
-                              <div class="card-body">
-                                <h5 class="card-title"><label class="card-title" style="font-size:1.3rem;
-                                    font-family: Times-New Roman;
-                                    ">Department Coordinator: User  &nbsp;&nbsp;<i class="bi bi-chat-left-text-fill" data-bs-toggle="modal" data-bs-target="#ITDept_mess"
-
-
-                                    ></i>
-                                  </label></h5> 
-                                </div>
-                                
-                                <!-- Table with stripped rows -->
-                                <div class="col-xxl-4 col-md-6">
-                                    <div class="form-floating">
-                                      <select type="text" class="form-select" name="s_course" aria-label="State" id="lvl" onchange="oncollapse()" required autofocus  style="background-color: rgba(255, 255, 255, .4);">
-                                      <option value="" style="color:black" select ed="selected" disabled>Select a Category</option>
-                                      <option>PROGRAMMING</option>
-                                      <option>HARDWARE</option>
-                                      <option>CISCO</option>
-                                      <option>VPN</option>
-                                      <option>HACKING</option>
-                                      </select>
-                                      <label for="floatingName">Category</label>
-                                    </div><br>
-                                </div>
-                                
-                                <div class="col-xxl-4 col-md-6">
-                                    <div class="form-floating">
-                                      <select type="text" class="form-select" name="s_course" aria-label="State" id="lvl" onchange="oncollapse()" required autofocus style="background-color: rgba(255, 255, 255, .4);">
-                                      <option value="" style="color:black" select ed="selected" disabled>Select a Skills</option>
-                                      <option>C++</option>
-                                      <option>Website Phishing Site</option>
-                                      <option>Gateway Internet</option>
-                                      </select>
-                                      <label for="floatingName">Skills</label>
-                                    </div>
-                                     <br>
-
-                                <br>
-                                <br>
-                              </div>
-                                </div>
-                               
-                            </div>
-                   
-                                
-             
-
-        </div>
-        <!-- End Right side columns -->
-
-      </div>
-    </section>
 
   </main><!-- End #main -->
 
