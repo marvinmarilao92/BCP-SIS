@@ -12,7 +12,10 @@ session_start();
       
       $role =  $_SESSION['role'];
       $lnamee = $_SESSION['lname'];
-      $mnamee = $_SESSION['mname'];
+      $fnamee = $_SESSION['fname'];
+      $address = $_SESSION['address'];
+      $contact = $_SESSION['contact'];
+      $email = $_SESSION['email'];
       
       $co_avatar = $_SESSION['co_avatar'];
       

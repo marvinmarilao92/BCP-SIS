@@ -1,35 +1,27 @@
+<?php
+include('../includes/session.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-<?php 
-require 'control/check-session-login.php';
-
-if ($user_online == "true") {
-  if ($ad_rolee == "Internship Admin" || $ad_rolee== "SuperAdmin") {
-  }else{
-  header("location:../");   
-  }
-  }else{
-  header("location:../"); 
-  }   
-  ?>
 
 <head>
-  
-
-  <title>BCP - Profile</title>
-
   <?php require 'drawer/header.php' ?>
 
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.1.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body>
-    <?php require 'drawer/modal.php' ?>
+
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-
-    <?php require 'drawer/navbar.php' ?>
-    <!-- End Icons Navigation -->
+    <?php require 'drawer/navbar.php' ?><!-- End Icons Navigation -->
 
   </header><!-- End Header -->
 
@@ -46,7 +38,7 @@ if ($user_online == "true") {
       <h1>Profile</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Users</li>
           <li class="breadcrumb-item active">Profile</li>
         </ol>
@@ -60,9 +52,9 @@ if ($user_online == "true") {
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="../assets/img/default.jpg" alt="Profile" class="rounded-circle">
-              <h2><?php echo $ad_fname?> <?php echo $ad_mname ?> <?php  echo $ad_lname ?></h2>
-              <small><?php echo $ad_rolee ?> Account</small>
+              <img src="assets/img/BCPlogo.png" alt="Profile" class="">
+              <h2><?php echo $verified_session_lastname . ", " . $verified_session_firstname ?></h2>
+              <small>Student Account</small>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -101,17 +93,42 @@ if ($user_online == "true") {
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $ad_fname ?> <?php echo $ad_mname ?> <?php  echo $ad_lname ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_firstname . " " . $verified_session_lastname ?></div>
                   </div>
 
-                  
-                  
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">School</div>
+                    <div class="col-lg-9 col-md-8">Bestlink College of The Philippines</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Year Level</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_year_level?></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Section</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_section?></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">School Year</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_school_year?></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Address</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_address?></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Contact Number</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_contact?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_email
-                    ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_email?></div>
                   </div>
 
                 </div>
@@ -123,7 +140,7 @@ if ($user_online == "true") {
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
-                        <img src="../assets/img/default.jpg" alt="Profile" class="rounded-circle">
+                        <img src="assets/img/BCPlogo.png" alt="Profile" class="">
                         <div class="pt-2">
                           <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
                           <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
@@ -134,14 +151,14 @@ if ($user_online == "true") {
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="<?php echo $verified_session_address ?>">
+                        <input name="address" type="text" class="form-control" id="Address" value="<?php echo $verified_session_address?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="<?php echo $verified_session_contact ?>">
+                        <input name="phone" type="text" class="form-control" id="Phone" value="<?php echo $verified_session_contact?>">
                       </div>
                     </div>
 
@@ -201,20 +218,24 @@ if ($user_online == "true") {
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-      
-    <?php require 'drawer/footer.php' ?>
+    <?php require 'drawer/footer.php'?>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <?php require'drawer/js.php' ?>
-    <?php require 'drawer/copy.php' ?>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/chart.js/chart.min.js"></script>
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
 
-</html> 
-
-
-
-
-
+</html>

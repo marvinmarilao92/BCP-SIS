@@ -11,6 +11,7 @@ header("location:../");
 }   
 ?>
 <head>
+  <title>BCP | Home</title>
   <?php require 'drawer/header.php'?>
 </head>
 

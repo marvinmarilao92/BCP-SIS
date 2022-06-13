@@ -1,10 +1,7 @@
-              
-              
 <div class="d-flex align-items-center justify-content-between">
-      <a href="../PORTAL/login.php" class="logo d-flex align-items-center">
-        <img src="assets/img/BCPlogo.png" alt="">&nbsp;
-        <span class="d-none d-lg-block" style="font-size: 1.2em;">Company Coordinator</span>
-        
+      <a href="x/.." class="logo d-flex align-items-center">
+        <img src="assets/img/graduates.png" alt="">&nbsp;
+        <span class="d-none d-lg-block">Internship</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -169,28 +166,21 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <?php if($co_avatar == null){
-                          echo'<img src="assets/img/default.jpg" alt="Profile" class="rounded-circle">';
-                        }
-                          else{
-                            echo'<img src="data:image;base64, '.base64_encode($co_avatar).'" alt="Profile" class="rounded-circle">';
-                          }
-
-                          ?>
-            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $fnamee; ?></span>
+            <img src="assets/img/default.jpg" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $verified_session_lastname . ", " . $verified_session_firstname ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?php echo $fnamee ." ".$lnamee;?></h6>
-              <span><?php echo $role; ?></span>
+              <h6><?php echo $verified_session_lastname . ", " . $verified_session_firstname ?></h6>
+              <span><?php echo $_SESSION['session_department'] ?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" <?php echo 'href=user-profile?id='.$url;?>>
+              <a class="dropdown-item d-flex align-items-center" href="profile.php">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -200,7 +190,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" <?php echo 'href=user-profile?id='.$url;?>>
+              <a class="dropdown-item d-flex align-items-center" href="../x/user-profile.php">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>

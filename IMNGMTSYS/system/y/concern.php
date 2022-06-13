@@ -74,11 +74,19 @@ if ($user_online == "true") {
               </ul>
               <div class="tab-content pt-2" id="borderedTabJustifiedContent">
                 <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab">
-                  Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
+                  <div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>
                 </div>
                 
                 <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
-                  Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                  <div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>
                 </div>
               </div><!-- End Bordered Tabs Justified -->
 

@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
-require 'control/check-session-login.php';
+<?php require 'control/check-session-login.php';
+    if ($user_online == "true") {
+if ($role == "Student") {
+}else{
+header("location:../");   
+}
+}else{
+header("location:../"); 
+}   
 
-if ($user_online == "true") {
-  if ($ad_rolee == "Internship Admin" || $ad_rolee== "SuperAdmin") {
-  }else{
-  header("location:../");   
-  }
-  }else{
-  header("location:../"); 
-  }   
-  ?>
-
+?>
 <head>
+   
+
+
+  <title>BCP - User Profile</title>
+ 
+  <?php require'drawer/header.php'?>
+  <!-- Google Fonts -->
   
-
-  <title>BCP - Profile</title>
-
-  <?php require 'drawer/header.php' ?>
-
 </head>
 
 <body>
-    <?php require 'drawer/modal.php' ?>
+
+  <?php require 'drawer/modal.php' ?>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-
     <?php require 'drawer/navbar.php' ?>
-    <!-- End Icons Navigation -->
 
   </header><!-- End Header -->
 
@@ -46,7 +45,7 @@ if ($user_online == "true") {
       <h1>Profile</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Users</li>
           <li class="breadcrumb-item active">Profile</li>
         </ol>
@@ -61,8 +60,8 @@ if ($user_online == "true") {
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
               <img src="../assets/img/default.jpg" alt="Profile" class="rounded-circle">
-              <h2><?php echo $ad_fname?> <?php echo $ad_mname ?> <?php  echo $ad_lname ?></h2>
-              <small><?php echo $ad_rolee ?> Account</small>
+              <h2><?php echo $fname?> <?php echo $mname ?> <?php  echo $lname ?></h2>
+              <small>Student Account</small>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -101,17 +100,42 @@ if ($user_online == "true") {
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $ad_fname ?> <?php echo $ad_mname ?> <?php  echo $ad_lname ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $fname?> <?php echo $mname ?> <?php  echo $lname ?></div>
                   </div>
 
-                  
-                  
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">School</div>
+                    <div class="col-lg-9 col-md-8">Bestlink College of The Philippines</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Year Level</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $level?></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Section</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $sec?></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">School Year</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $yl ?></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Address</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $addr ?></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Contact Number</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $pno ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_email
-                    ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $email?></div>
                   </div>
 
                 </div>
@@ -134,21 +158,21 @@ if ($user_online == "true") {
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="<?php echo $verified_session_address ?>">
+                        <input name="address" type="text" class="form-control" id="Address" value="<?php echo $addr ?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="<?php echo $verified_session_contact ?>">
+                        <input name="phone" type="text" class="form-control" id="Phone" value="<?php echo $pno ?>">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="<?php echo $verified_session_email?>">
+                        <input name="email" type="email" class="form-control" id="Email" value="<?php echo $email ?>">
                       </div>
                     </div>
 
@@ -197,24 +221,19 @@ if ($user_online == "true") {
       </div>
     </section>
 
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-      
     <?php require 'drawer/footer.php' ?>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <?php require'drawer/js.php' ?>
-    <?php require 'drawer/copy.php' ?>
+  <?php require 'drawer/js.php' ?>
+
 </body>
 
-</html> 
-
-
-
-
-
+</html>
