@@ -92,7 +92,7 @@
                 </a>
                </li>
                <li>
-                <a <?php echo 'href=result?id='.$url;?>>
+                <a <?php echo 'href=trainee-certificate?id='.$url;?>>
                   <i class="bi bi-circle"></i><span>Certificate</span>
                 </a>
                </li>
