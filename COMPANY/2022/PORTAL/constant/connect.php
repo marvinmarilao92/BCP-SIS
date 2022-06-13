@@ -102,7 +102,7 @@ require 'connection.php';
                                                 $remarks = "account has been logged in";
                                                  mysqli_query($link, "INSERT INTO internship_audit_trail(user,action,role,id,account_no) VALUES('$fname','$remarks','$role','$id','$num')") or die(mysqli_error($link));
 
-                                                header("location: ../login.php?success=".$encr);
+                                                header("location: ../login.php?success=".$url);
                                                 
 
 

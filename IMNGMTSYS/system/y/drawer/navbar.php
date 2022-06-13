@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center justify-content-between">
       <a href="y/.." class="logo d-flex align-items-center">
         <img src="../assets/img/BCPlogo.png" alt="">&nbsp;
-        <span class="d-none d-lg-block">Internship</span>
+        <span class="d-none d-lg-block" style="font-size: 1.2em;" >Internship Coordinator</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->

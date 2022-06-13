@@ -1,7 +1,7 @@
-<!--professional Qualification-->
+<!--login-->
   <div class="modal fade" id="login" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
+      <div class="modal-content" style = "background-color: whitesmoke;">
 
 
 
@@ -29,7 +29,7 @@
                 </div>  
                 <br>
                 <div class="col-12" style="height: 90px">
-                    <a class="btn btn-primary w-100" type="submit" <?php echo 'href=login/index'?>  name="submit" >Login</a>
+                    <a class="btn btn-primary w-100 h-50" type="button" href="login/index" target="login" name="submit">Login</a>  
                 </div>
 
         </div>          

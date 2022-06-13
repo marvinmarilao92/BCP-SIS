@@ -104,24 +104,8 @@ if ($user_online == "true") {
                     <div class="col-lg-9 col-md-8"><?php echo $ad_fname ?> <?php echo $ad_mname ?> <?php  echo $ad_lname ?></div>
                   </div>
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">School</div>
-                    <div class="col-lg-9 col-md-8">Bestlink College of The Philippines</div>
-                  </div>    
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Department</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_department?></div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Role</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $ad_rolee ?></div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Contact Number</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_contact ?></div>
+                  
+                  
                   </div>
 
                   <div class="row">

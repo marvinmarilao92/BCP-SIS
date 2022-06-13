@@ -65,7 +65,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"><p>Manage Accounts</p></h5>
-              <p class="card-title">Legends</p>
+             <!-- <p class="card-title">Legends</p>
               <div class = "container" style="font-size:0.8em;">
               <ul>    
                   <li>
@@ -78,7 +78,7 @@
                     <button type="button" class="btn btn-info" disabled><i class="bi bi-eye"></i></button>&nbsp;To view company information.
                   </li>
               </ul>
-              </div>
+              </div> -->
               <br><br>
               <div class="table-responsive-lg">
                <?php

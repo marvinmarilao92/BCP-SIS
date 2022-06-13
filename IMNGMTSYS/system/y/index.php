@@ -137,6 +137,8 @@ require 'control/check-session-login.php';
               <div class="card">
              
               <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+
+                
               <?php require 'drawer/carousel.php' ?>
                 
                 </div>

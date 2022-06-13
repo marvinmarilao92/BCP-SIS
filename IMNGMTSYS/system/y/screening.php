@@ -61,18 +61,10 @@ require 'control/check-session-login.php';
           <div class="card">
             <div class="card-body">
               
-              <h5><p class="card-title">Legends</p><h5>
-              <div class = "container" style="font-size:0.8em;">
-              <ul>
-                  <li>
-                    <button type="button" class="btn btn-primary" disabled><i class="bi bi-pencil"></i></button>&nbsp; To change status.
-                  </li>
-                  
-              </ul>
-              </div>
+              
               <br><br>
               <table class="table datatable" style="font-size: 0.7em;
-                                                          overflow-x:scroll;">
+                                                          ">
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
