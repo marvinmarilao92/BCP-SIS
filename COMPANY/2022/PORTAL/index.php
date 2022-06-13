@@ -4,7 +4,7 @@
 
 <head>
   <title>
-    Bestlink College of the Philippines: Internship(BETA)
+    Bestlink College of the Philippines
   </title>
 
       <?php include 'drawer/header.php'?>
