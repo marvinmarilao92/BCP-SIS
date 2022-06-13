@@ -1,24 +1,25 @@
 <ul class="sidebar-nav" id="sidebar-nav">
 
+      
       <li class="nav-item">
-        <a class="nav-link " <?php echo 'href=login?'.$url
+        <a class="nav-link " <?php echo 'href=dashboard?'.$url
           ?>
           >
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=login?'.$url;
+        ?>
+        >
+          
           <i class="bi bi-house"></i>
           <span>Home
           </span>
         </a>
       </li>
       
-      <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=dashboard?'.$url;
-        ?>
-        >
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-
       <li class="nav-item">
         <a class="nav-link collapsed" <?php echo 'href=overview?'.$url;
         ?>
@@ -74,6 +75,27 @@
 
           
       </li>      
+
+
+      <!--Task-->
+      <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#tRecords" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-person"></i><span>Trainee Records</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="tRecords" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li class="nav-heading"></li>
+               <li> 
+                <a <?php echo 'href=form?id='.$url;?>>
+                  <i class="bi bi-circle"></i><span style="font-size: 0.7rem;">On Site</span>
+                </a>
+               </li>
+               <li> 
+                <a <?php echo 'href=form?id='.$url;?>>
+                  <i class="bi bi-circle"></i><span style="font-size: 0.7rem;">Work from Home</span>
+                </a>
+               </li>
+          </ul>
+      </li>
       <!-- End Components Nav -->
       <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#trainee" data-bs-toggle="collapse" href="#">

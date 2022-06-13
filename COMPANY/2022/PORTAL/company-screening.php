@@ -48,9 +48,10 @@ header("location:../");
 
               <div class="card">
             <div class="card-body">
+              <h5 class="card-title"style="font-size: 1.5rem;
+                                          font-family: Times New Roman;">Screening Plan </h5>
               
               
-              <br><br>
               <div class="table-responsive-lg">
               <table class="table datatable" style="font-size: 0.7em;
                                                           ">
