@@ -86,12 +86,12 @@
             <li class="nav-heading"></li>
                <li> 
                 <a <?php echo 'href=form?id='.$url;?>>
-                  <i class="bi bi-circle"></i><span style="font-size: 0.7rem;">On Site</span>
+                  <i class="bi bi-circle"></i><span>On Site</span>
                 </a>
                </li>
                <li> 
                 <a <?php echo 'href=form?id='.$url;?>>
-                  <i class="bi bi-circle"></i><span style="font-size: 0.7rem;">Work from Home</span>
+                  <i class="bi bi-circle"></i><span>Work from Home</span>
                 </a>
                </li>
           </ul>
