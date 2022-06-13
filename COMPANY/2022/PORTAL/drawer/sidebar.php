@@ -82,7 +82,12 @@
             <ul id="trainee" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                <li class="nav-heading"></li>
                <li> 
-                <a <?php echo 'href=concern?id='.$url;?>>
+                <a <?php echo 'href=form?id='.$url;?>>
+                  <i class="bi bi-circle"></i><span style="font-size: 0.7rem;">Fill out by Co. Representative "TRAINOR"</span>
+                </a>
+               </li>
+               <li> 
+                <a <?php echo 'href=evaluation-grades?id='.$url;?>>
                   <i class="bi bi-circle"></i><span>Evaluation / Grades</span>
                 </a>
                </li>

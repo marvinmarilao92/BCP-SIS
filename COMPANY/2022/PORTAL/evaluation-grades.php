@@ -11,7 +11,7 @@ header("location:../");
 }   
 ?>
 <head>
-  <title>BCP | Schedule </title>
+  <title>BCP | Evaluation</title>
   <?php require 'drawer/header.php'?>
 </head>
 
@@ -48,19 +48,22 @@ header("location:../");
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"style="font-size: 1.3rem;
-                                          font-family: Times New Roman;">Schedule of Trainee</h5>
+                                          font-family: Times New Roman;">Evaluation of Trainee</h5>
               
               
               <div class="table-responsive-lg">
               <table class="table datatable" style="font-size: 0.7em;
                                                           ">
+
                 <thead>
+
                   <tr>
                    
-                    <th scope="col">Code</th>
+                    
                     <th scope="col">Trainee</th>
+                    <th scope="col">Trainor</th>
                     <th scope="col">Department</th>
-                    <th scope="colspan=2">Work  Render</th>
+                    <th scope="colspan=2">Rating</th>
                     <th scope="col">Action</th>
 
                   </tr>
@@ -117,6 +120,11 @@ header("location:../");
           </div>
           </div>
           </div>
+
+
+          
+
+
 
         </div>
 
