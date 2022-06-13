@@ -222,7 +222,7 @@
             </a>
           </li>
           <li>
-            <a <?php echo 'href=SWTR.php?id='.$url;
+            <a <?php echo 'href=SDR.php?id='.$url;
         ?>>
               <i class="bi bi-circle"></i><span>Daily Report</span>
             </a>
@@ -284,7 +284,7 @@
       </li>
       <!-- End Charts Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=p-dat.php?'.$url;
+        <a class="nav-link collapsed" <?php echo 'href=restore.php?'.$url;
           ?>>
           <i class="bi bi-recycle"></i>
           <span>Recycle Bin</span>
