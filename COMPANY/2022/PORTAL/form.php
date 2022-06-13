@@ -103,7 +103,7 @@ header("location:../");
                           <div class="col-lg-12">
                             <div class="form-floating">
                               <input type="text" class="form-control" name="address"  value="1071 Brgy. Kaligayahan Quirino Highway, Novaliches Quezon City"id="address" placeholder="address" required autofocus readonly>
-                              <label for="floatingName">City Address</label>
+                              <label for="floatingName"style="font-size: 0.8rem;">City Address</label>
                             </div>
                           </div>
                           <br>
@@ -117,7 +117,7 @@ header("location:../");
                           <div class="col-lg-12">
                             <div class="form-floating">
                               <input type="text" class="form-control" name="zipcode"  id="zipcode" placeholder="zipcode" required autofocus readonly>
-                              <label for="floatingName">NO. OF TRAINING HOURS REQUIRED: MINIMUM OF 486 HRS </label>
+                              <label for="floatingName" style="font-size: 0.8rem;">NO. OF TRAINING HOURS REQUIRED: MINIMUM OF 486 HRS </label>
                             </div>
                             <br>
                           <br>
@@ -173,7 +173,7 @@ header("location:../");
                             <br>
                           </div>
 
-                           <div class="row justify-content-center">
+                           <div class="col-lg-12">
 
                 <table class=".table-borderless" style="font-size: 0.8rem;">
                 <thead>
