@@ -64,19 +64,19 @@
 
                     $f = 'Pending';
                     // Attempt select query execution
-                    $sql = "SELECT * FROM `ims_apply_info`
-                    INNER JOIN user_information
-                    ON
-                    user_information.office = ims_apply_info.s_course
-                    INNER JOIN ims_stud_files
-                    ON 
-                    ims_stud_files.id = ims_apply_info.a_id
-                    WHERE
-                    user_information.department  = '$verified_session_department'
-                    AND
-                    ims_apply_info.s_course = '$course'
-                    AND
-                    ims_apply_info.status = 'Pending'
+                      $sql = "SELECT * FROM `ims_apply_info`
+                      INNER JOIN user_information
+                      ON
+                      user_information.office = ims_apply_info.s_course
+                      INNER JOIN ims_stud_files
+                      ON 
+                      ims_stud_files.id = ims_apply_info.i_id
+                      WHERE
+                      user_information.department  = '$verified_session_department'
+                      AND
+                      ims_apply_info.s_course = '$course'
+                      AND
+                      ims_apply_info.status = 'Pending'
                     ORDER BY `id_number` ASC";
                     if($result = mysqli_query($conn, $sql)){
                         if(mysqli_num_rows($result) > 0){

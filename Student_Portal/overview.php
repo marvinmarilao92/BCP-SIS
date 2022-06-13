@@ -22,7 +22,7 @@ include("includes/head.php");
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Review</h1>
+      <h1>Preview</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href=<?php echo 'index.php?'.$key;
@@ -38,7 +38,8 @@ include("includes/head.php");
         <div class="col-lg-12">
 
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" style=" font-size: 1rem;
+                                                          ">
               <br>
               
 
@@ -56,6 +57,8 @@ include("includes/head.php");
                  <li class="nav-item flex-fill" role="presentation">
                   <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Screening</button>
                 </li>
+
+                
 
               </ul>
               <br>
@@ -86,7 +89,7 @@ include("includes/head.php");
 
 
                                                 ?>
-                                                <h5 class="card-title">From: <?php echo $row5['deptCoor_Name']?></h5>
+                                                <h5 class="card-title">From: User</h5>
 
                               
 
@@ -97,7 +100,7 @@ include("includes/head.php");
                                   <?php
 
 
-                                                  }
+                                                  }   
                                                 // Free result set
                                                 
                                               }else{
@@ -194,7 +197,60 @@ include("includes/head.php");
 
                             <div class="card">
                               <div class="card-body">
-                                
+                                <br><div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </section>
+                </div>
+
+                
+              </div><!-- End Bordered Tabs Justified -->
+
+            </div>
+          </div>
+
+
+
+                <div class="card">
+            <div class="card-body" style=" font-size: 1rem;
+                                                          ">
+              <br>
+              
+                <h5 class="card-title">Re - Screening</h5>
+              <!-- Bordered Tabs Justified -->
+              <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+
+      
+
+                <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#rescreen" type="button" role="tab" aria-controls="contact" aria-selected="false">Details</button>
+                </li>
+
+              </ul>
+              <br>
+              <!-- Pending msg -->
+              
+
+                <div class="tab-pane fade" id="rescreen" role="tabpanel" aria-labelledby="contact-tab">
+                  <section class="section">
+                        <div class="row">
+
+                          <div class="col-lg-12">
+
+                            <div class="card">
+                              <div class="card-body">
+                                <br><div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>
                               </div>
                             </div>
 
@@ -206,6 +262,14 @@ include("includes/head.php");
 
             </div>
           </div>
+
+
+
+
+
+
+
+
         </div>
       </div>
     </section>

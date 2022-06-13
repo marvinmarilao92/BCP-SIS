@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
-require 'control/check-session-login.php';
-  if ($user_online == "true") {
-    if ($rolee == "Internship Coordinator" || $rolee == "SuperAdmin") {
-    }else{
-   header("location:../");   
-    }
-   }else{
-  header("location:../"); 
-  }  
- 
-  ?>
+<?php require 'control/check-session-login.php';
+if ($user_online == "true") {
+if ($role == "coordinator") {
+}else{
+header("location:../");   
+}
+}else{
+header("location:../"); 
+}   
+?>
 <head>
-  
-
-  
-
-  <?php require 'drawer/header.php' ?>
-
+  <title>BCP | Screening plan </title>
+  <?php require 'drawer/header.php'?>
 </head>
 
 <body>
@@ -26,56 +20,52 @@ require 'control/check-session-login.php';
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-
-    <?php require 'drawer/navbar.php' ?>
-    <!-- End Icons Navigation -->
+    <?php require'drawer/navbar.php' ?><!-- End Icons Navigation -->
 
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
-    <?php require 'drawer/sidebar.php' ?>
-
+    <?php require 'drawer/sidebar.php'?>
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1 style="font-family: monospace;
-                ">Screening</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href=<?php echo'index.php?'.$url;
-          ?>>Home</a></li>
-          <li class="breadcrumb-item">Screening</li>
-          <li class="breadcrumb-item active">Section</li>
-        </ol>
-      </nav>
+    <div class="pagetitle" >
+      <aria-label class="display-5" style="font-size: 2rem";><b>Bestlink College of the Philippines</b></aria-label>
     </div><!-- End Page Title -->
-
-    <section class="section">
+    <hr class="my-4">
+    <section class="section dashboard">
       <div class="row">
-        <div class="col-lg-12">
 
-          <div class="card">
+
+          
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+              <div class="card">
             <div class="card-body">
+              <h5 class="card-title"style="font-size: 1.5rem;
+                                          font-family: Times New Roman;">Screening Plan </h5>
               
               
-              <br><br>
+              <div class="table-responsive-lg">
               <table class="table datatable" style="font-size: 0.7em;
                                                           ">
                 <thead>
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">STUDENT NAME</th>
-                    <th scope="col">SLINK</th>
-                    <th scope="col">SCODE</th>
-                    <th scope="col">DATE STARTED</th>
-                    <th scope="col">USERNAME</th>
-                    <th scope="col">PASSWORD</th>
-                    <th scope="col">DESCRIPTION</th>
-                    <th scope="col">ACTION</th>
+                   
+                    <th scope="col">Trainee</th>
+                    <th scope="col">sLINK</th>
+                    <th scope="col">sCODE</th>
+                    <th scope="col">Date Started</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
 
                   </tr>
                 </thead>
@@ -121,7 +111,9 @@ require 'control/check-session-login.php';
             </div>
             </div>
           </div>
+            <!-- End News & Updates -->
 
+        </div><!-- End Right side columns -->
         </div>
       </div>
     </section>
@@ -130,22 +122,15 @@ require 'control/check-session-login.php';
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-      
-    <?php require 'drawer/footer.php' ?>
+    
+    <?php require 'drawer/footer.php'?> 
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <?php require'drawer/js.php' ?>
-  <?php require 'drawer/copy.php' ?>
-  
-  
+  <?php  require 'drawer/js.php' ?>
+
 </body>
 
-</html> 
-
-
-
-
-
+</html>
