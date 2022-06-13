@@ -109,6 +109,11 @@
         <ul id="sched" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
              <li class="nav-heading">Schedule of Trainee</li>
+              <li>
+                <a <?php echo 'href=COR?id='.$url;?>>
+                  <i class="bi bi-circle"></i><span>Create a COR</span>
+                </a>
+             </li>
              <li>
                 <a <?php echo 'href=DTR?id='.$url;?>>
                   <i class="bi bi-circle"></i><span>Record</span>
@@ -117,7 +122,7 @@
              <li class="nav-heading" >DTR Record of Trainee</li>
              <li>
                 <a <?php echo 'href=attendance-report?id='.$url;?>>
-                  <i class="bi bi-envelope"></i><span>Daily Time Record</span>
+                  <i class="bi bi-circle"></i><span>Daily Time Record</span>
                 </a>
             </li>
 

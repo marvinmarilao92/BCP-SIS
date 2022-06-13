@@ -48,7 +48,7 @@ header("location:../");
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"style="font-size: 1.3rem;
-                                          font-family: Times New Roman;">Schedule of Trainee</h5>
+                                          font-family: Times New Roman;">COR of Trainee</h5>
               
               
               <div class="table-responsive-lg">
@@ -57,7 +57,7 @@ header("location:../");
                 <thead>
                   <tr>
                    
-                    <th scope="col">Code</th>
+                    
                     <th scope="col">Trainee</th>
                     <th scope="col">Department</th>
                     <th scope="colspan=2">Work  Render</th>
