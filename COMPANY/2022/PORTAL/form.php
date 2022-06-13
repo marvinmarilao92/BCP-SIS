@@ -152,14 +152,14 @@ header("location:../");
                           </div>
                           <div class="col-lg-3">
                             <div class="form-floating">
-                              <input type="text" class="form-control" name="zipcode"  id="zipcode" placeholder="zipcode" required autofocus >
+                              <input type="date" class="form-control" name="zipcode"  id="zipcode" placeholder="zipcode" required autofocus >
                               <label for="floatingName">FROM:  </label>
                             </div>
                             
                           </div>
                           <div class="col-lg-3">
                             <div class="form-floating">
-                              <input type="text" class="form-control" name="zipcode"  id="zipcode" placeholder="zipcode" required autofocus >
+                              <input type="date" class="form-control" name="zipcode"  id="zipcode" placeholder="zipcode" required autofocus >
                               <label for="floatingName">TO: </label>
                             </div>
                             
