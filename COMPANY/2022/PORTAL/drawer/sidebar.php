@@ -20,6 +20,7 @@
         </a>
       </li>
       
+      
       <li class="nav-item">
         <a class="nav-link collapsed" <?php echo 'href=overview?'.$url;
         ?>
@@ -75,12 +76,25 @@
 
           
       </li>      
+      <!--offsite Task-->
+      <li class="nav-item">
 
+          <a class="nav-link collapsed" data-bs-target="#offsite" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-person"></i></i><span>Task</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="offsite" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+               <li>
+                  <a <?php echo 'href=Trainee?id='.$url;?>>
+                    <i class="bi bi-circle"></i><span >Offsite &nbsp;<i>Work from Home</i></span>
+                  </a>
+              </li>
+          </ul>
+      </li>
 
       <!--Task-->
       <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#tRecords" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-person"></i><span>Trainee Records</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-person"></i><span>Trainee Task Records</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="tRecords" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li class="nav-heading"></li>

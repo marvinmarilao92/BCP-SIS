@@ -283,7 +283,7 @@
                     Are you sure you want to log out?
                     </div>
                     <div class="modal-footer">
-                      <a type="button" class="btn btn-primary" href = "control/logout.php">Yes</a>
+                      <a type="button" class="btn btn-primary" <?php echo 'href=control/logout?id='.$url;?>>Yes</a>
                       <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">No</button>
                     </div>
                   </div>
