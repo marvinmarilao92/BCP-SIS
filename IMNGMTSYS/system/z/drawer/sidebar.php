@@ -112,6 +112,22 @@
         </ul>
       </li>
       <br>
+      <li class="nav-item">
+
+        <a class="nav-link collapsed" data-bs-target="#repo" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person"></i><span>Report</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="repo" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+          <li>
+            <a href="turnover.php">
+              <i class="bi bi-card-text"></i><span>Preview</span>
+            </a>
+          </li>
+        </ul>
+        <br>
+      </li>
+      <br>
       <li class="nav-heading">Audit Logs Reports</li>
         
         <li class="nav-item">
@@ -126,6 +142,45 @@
           <li>
             <a href="logs.php">
               <i class="bi bi-person"></i><span>Logs Report</span>
+            </a>
+          </li>
+        </ul>
+        
+      </li>
+
+
+        
+        <li class="nav-item">
+
+        <a class="nav-link collapsed" data-bs-target="#man" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person"></i><span>Manage Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="man" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+          <li>
+            <a href="mng.php">
+              <i class="bi bi-person"></i><span>Preview</span>
+            </a>
+          </li>
+        </ul>
+        
+      </li>
+
+      <li class="nav-item">
+
+        <a class="nav-link collapsed" data-bs-target="#trainee" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person"></i><span>Trainee</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="trainee" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+          <li>
+            <a href="tskills.php">
+              <i class="bi bi-person"></i><span>Skills & Qualification</span>
+            </a>
+          </li>
+          <li>
+            <a href="placement.php">
+              <i class="bi bi-person"></i><span>Trainee Area</span>
             </a>
           </li>
         </ul>
