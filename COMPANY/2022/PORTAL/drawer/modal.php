@@ -274,7 +274,7 @@
 <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header" style="background-color: #ff7070">
                     
                       <h3 class="modal-title"> Log out ?</h3>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

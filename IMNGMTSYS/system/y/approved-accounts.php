@@ -61,6 +61,7 @@
               </ul>
               </div>-->
               <br><br>
+              <div class="table-responsive-lg">
                <?php
                     // Include config file
                     require '../dbCon/config.php';
@@ -136,7 +137,7 @@
         }
             ?>
               <!-- End Table with stripped rows -->
-
+            </div>
             </div>
           </div>
 

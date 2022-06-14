@@ -47,7 +47,7 @@
             <div class="card-body">
               <h5 class="card-title"></h5>
               <p>List of Students that are Officially Qualified and Ready for Screening.</p>
-              
+                <div class="table-responsive-lg">
                <?php
                     // Include config file
                     require '../dbCon/config.php';
@@ -121,7 +121,7 @@
         }
             ?>
               <!-- End Table with stripped rows -->
-
+            </div>
             </div>
           </div>
 
