@@ -76,6 +76,7 @@ require 'control/check-session-login.php';
               </ul>
               </div>
               <br><br>
+              <div class="table-responsive-lg">
                <?php
                     // Include config file
                     require '../dbCon/config.php';
@@ -153,7 +154,7 @@ require 'control/check-session-login.php';
         }
             ?>
               <!-- End Table with stripped rows -->
-
+            </div>
             </div>
           </div>
 

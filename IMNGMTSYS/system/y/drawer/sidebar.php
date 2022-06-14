@@ -88,7 +88,7 @@
             </a>
           </li>
         </ul>
-        <br>
+        
       </li>
       <!-- End Components Nav -->
       <li class="nav-heading">Master List</li>
@@ -152,17 +152,108 @@
 
         </ul>
       </li>
-      <br>
+      
       <!-- -->
-      <li class="nav-heading">Student Documents</li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="bi bi-person-check"></i>
-          <span>Files</span>
+      <!-- End Forms Nav -->
+      
+      <!-- End Profile Page Nav -->
+
+        <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=addOns.php?'.$url;
+          ?>>
+          <i class="bi bi-archive"></i>
+          <span>Additional Requirements</span>
         </a>
       </li>
-      <!-- End Forms Nav -->
-      <li class="nav-heading">Bills</li>
+
+        <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=studDTR.php?'.$url;
+          ?>>
+          <i class="bi bi-people"></i>
+          <span>Student DTR</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=mWFH.php?'.$url;
+          ?>>
+          <i class="bi bi-people"></i>
+          <span>Student | Work from Home</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=ooo.php?'.$url;
+          ?>>
+          <i class="bi bi-people"></i>
+          <span>Student OnSite</span>
+        </a>
+      </li>
+      
+
+
+       <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=bya.php?'.$url;
+          ?>>
+          <i class="bi bi-people"></i>
+          <span>Student Status</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=p-dat.php?'.$url;
+          ?>>
+          <i class="bi bi-building"></i>
+          <span>Student Area</span>
+        </a>
+      </li>
+        
+        <li class="nav-item">
+
+        <a class="nav-link collapsed" data-bs-target="#SReport" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-people"></i><span>Student Task Report</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="SReport" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          
+          
+            
+          <li>
+            <a <?php echo 'href=SWTR.php?id='.$url;
+        ?>>
+              <i class="bi bi-circle"></i><span>Weekly Report</span>
+            </a>
+          </li>
+          <li>
+            <a <?php echo 'href=SDR.php?id='.$url;
+        ?>>
+              <i class="bi bi-circle"></i><span>Daily Report</span>
+            </a>
+          </li>
+        </ul>
+        </li>
+
+         <li class="nav-item">
+
+        <a class="nav-link collapsed" data-bs-target="#docu" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-file-earmark-pdf"></i><span>Document</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="docu" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          
+          
+            
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Company Document</span>
+            </a>
+          </li>
+          <li>
+            <a <?php echo 'href=sdocument.php?id='.$url;
+        ?>>
+              <i class="bi bi-circle"></i><span>Student Document</span>
+            </a>
+          </li>
+        </ul>
+        </li>
+      <!-- End Tables Nav -->
+        <li class="nav-heading">Bills</li>
       <!-- End Profile Page Nav -->
 
       <li class="nav-item">
@@ -183,6 +274,7 @@
 
 
         <li class="nav-heading">Concerns</li>
+
         <li class="nav-item">
         <a class="nav-link collapsed" <?php echo 'href=concern.php?'.$url;
           ?>>
@@ -190,13 +282,14 @@
           <span>Reports</span>
         </a>
       </li>
-      <!-- End Profile Page Nav -->
-
-     
-      <!-- End Tables Nav -->
-
       <!-- End Charts Nav -->
-
+      <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=restore.php?'.$url;
+          ?>>
+          <i class="bi bi-recycle"></i>
+          <span>Recycle Bin</span>
+        </a>
+      </li>
       <!-- End Icons Nav -->
 
       
