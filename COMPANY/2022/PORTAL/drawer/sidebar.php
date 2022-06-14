@@ -99,13 +99,8 @@
           <ul id="tRecords" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li class="nav-heading"></li>
                <li> 
-                <a <?php echo 'href=form.php?id='.$url;?>>
-                  <i class="bi bi-circle"></i><span>On Site</span>
-                </a>
-               </li>
-               <li> 
-                <a <?php echo 'href=form.php?id='.$url;?>>
-                  <i class="bi bi-circle"></i><span>Work from Home</span>
+                <a <?php echo 'href=dyna.php?id='.$url;?>>
+                  <i class="bi bi-circle"></i><span>Preview</span>
                 </a>
                </li>
           </ul>
