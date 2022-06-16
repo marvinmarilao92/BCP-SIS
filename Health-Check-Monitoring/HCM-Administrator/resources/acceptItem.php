@@ -17,42 +17,46 @@ if (isset($_GET['idAccept'])) {
   $checkprod_dosage = $newStocks['dosage'];
   $checkprod_quantity = $newStocks['quantity'];
 
-  $checkStock = $db->query('SELECT * FROM hcms_stock WHERE prod_code = ? AND brand_name = ? AND dosage= ?', $checkprod_code, $checkprod_brand_name, $checkprod_dosage)->fetchArray();
-  if (mysqli_num_rows($checkStock) > 0) {
-    $imp_prod_code = $checkStock['prod_code'];
-    $addAvailable = $checkStock['available'];
-    $addNewStock = $checkprod_quantity;
+  $sql = "SELECT * FROM hcms_stock WHERE prod_code = '$checkprod_code' AND brand_name = '$checkprod_brand_name' AND dosage= '$checkprod_dosage'";
+  if ($result1 = mysqli_query($conn, $sql)) {
+    if (mysqli_num_rows($result1) > 0) {
 
-    $addedValue = $addAvailable + $addNewStock;
+      while ($checkStock = mysqli_fetch_array($result1)) {
+        $imp_prod_code = $checkStock['prod_code'];
+        $addAvailable = $checkStock['available'];
+        $addNewStock = $checkprod_quantity;
 
-    $updatedStock = $udpatePro = $db->query("UPDATE hcms_stock SET available =? WHERE prod_code = '$imp_prod_code'", $addedValue);
-    if ($updatedStock->affectedRows()) {
-      $udpate = $db->query("UPDATE hcms_items_transac SET accepted_date =?, acc_dec_by =?, `status`=? WHERE prod_id = '$idAccept'", $time, $accby,  $status);
-      $_SESSION['alertsuccess'] = "Item Accepted";
-      header("Location: " . $_SERVER['HTTPS_REFERER']);
+        $addedValue = $addAvailable + $addNewStock;
+
+        $updatedStock = $udpatePro = $db->query("UPDATE hcms_stock SET available =? WHERE prod_code = '$imp_prod_code'", $addedValue);
+        if ($updatedStock->affectedRows()) {
+          $udpate = $db->query("UPDATE hcms_items_transac SET accepted_date =?, acc_dec_by =?, `status`=? WHERE prod_id = '$idAccept'", $time, $accby,  $status);
+          $_SESSION['alertsuccess'] = "Item Accepted";
+          header("Location: " . $_SERVER['HTTPS_REFERER']);
+        } else {
+          $_SESSION['alertsuccess'] = "Item Accepted";
+          header("Location: " . $_SERVER['HTTPS_REFERER']);
+        }
+      }
     } else {
-      $_SESSION['alertsuccess'] = "Item Accepted";
-      // header("Location: " . $_SERVER['HTTPS_REFERER']);
-    }
-  } else {
-    $insert = $db->query(
-      'INSERT INTO hcms_stock (prod_code, brand_name, gen_name, dosage, available, created_at)  VALUES (?, ?, ?, ?, ?, ?)',
-      $checkprod_code,
-      $checkprod_brand_name,
-      $checkprod_gen_name,
-      $checkprod_dosage,
-      $checkprod_quantity,
-      $time
-    );
-    // echo $insert->affectedRows();
+      $insert = $db->query(
+        'INSERT INTO hcms_stock (prod_code, brand_name, gen_name, dosage, available, created_at)  VALUES (?, ?, ?, ?, ?, ?)',
+        $checkprod_code,
+        $checkprod_brand_name,
+        $checkprod_gen_name,
+        $checkprod_dosage,
+        $checkprod_quantity,
+        $time
+      );
 
-    if ($insert->affectedRows() == 1) {
-      $udpate = $db->query("UPDATE hcms_items_transac SET accepted_date =?, acc_dec_by =?, `status`=? WHERE prod_id = '$idAccept'", $time, $accby,  $status);
-      $_SESSION['alertsuccess'] = "Item Accepted";
-      header("Location: " . $_SERVER['HTTPS_REFERER']);
-    } else {
-      $_SESSION['alertError'] = "An Error Occur";
-      header("Location: " . $_SERVER['HTTPS_REFERER']);
+      if ($insert->affectedRows() == 1) {
+        $udpate = $db->query("UPDATE hcms_items_transac SET accepted_date =?, acc_dec_by =?, `status`=? WHERE prod_id = '$idAccept'", $time, $accby,  $status);
+        $_SESSION['alertsuccess'] = "Item Accepted";
+        header("Location: " . $_SERVER['HTTPS_REFERER']);
+      } else {
+        $_SESSION['alertError'] = "An Error Occur";
+        header("Location: " . $_SERVER['HTTPS_REFERER']);
+      }
     }
   }
 }
@@ -69,6 +73,6 @@ if (isset($_GET['idReject'])) {
   if ($udpate->affectedRows()) {
 
     $_SESSION['alertReject'] = "Item Rejected";
-    header("Location: " . $_SERVER['HTTPS_REFERER']);
+    // header("Location: " . $_SERVER['HTTPS_REFERER']
   }
 }
