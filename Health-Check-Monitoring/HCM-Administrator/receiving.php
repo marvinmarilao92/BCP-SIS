@@ -45,6 +45,18 @@ include_once('security/newsource.php');
           <?php
             unset($_SESSION['alertsuccess']);
           }
+          if (isset($_SESSION['alertReject'])) { ?>
+          <div class="alert alert-warning d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+              <use xlink:href="#check-circle-fill" />
+            </svg>
+            <div>
+              <?php echo $_SESSION['alertsuccess'] ?>
+            </div>
+          </div>
+          <?php
+            unset($_SESSION['alertReject']);
+          }
           ?>
           <div class="card p-4">
             <div class="alert alert-info" role="alert">
