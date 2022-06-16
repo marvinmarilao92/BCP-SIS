@@ -29,10 +29,10 @@ if (isset($_GET['idAccept'])) {
     if ($updatedStock->affectedRows()) {
       $udpate = $db->query("UPDATE hcms_items_transac SET accepted_date =?, acc_dec_by =?, `status`=? WHERE prod_id = '$idAccept'", $time, $accby,  $status);
       $_SESSION['alertsuccess'] = "Item Accepted";
-      header("Location: " . $_SERVER['HTTPS_REFERER']);
+      header("Location: " . $_SERVER['HTTP_REFERER']);
     } else {
       $_SESSION['alertsuccess'] = "Item Accepted";
-      // header("Location: " . $_SERVER['HTTPS_REFERER']);
+      // header("Location: " . $_SERVER['HTTP_REFERER']);
     }
   } else {
     $insert = $db->query(
@@ -49,10 +49,10 @@ if (isset($_GET['idAccept'])) {
     if ($insert->affectedRows() == 1) {
       $udpate = $db->query("UPDATE hcms_items_transac SET accepted_date =?, acc_dec_by =?, `status`=? WHERE prod_id = '$idAccept'", $time, $accby,  $status);
       $_SESSION['alertsuccess'] = "Item Accepted";
-      header("Location: " . $_SERVER['HTTPS_REFERER']);
+      header("Location: " . $_SERVER['HTTP_REFERER']);
     } else {
       $_SESSION['alertError'] = "An Error Occur";
-      header("Location: " . $_SERVER['HTTPS_REFERER']);
+      header("Location: " . $_SERVER['HTTP_REFERER']);
     }
   }
 }
@@ -69,6 +69,6 @@ if (isset($_GET['idReject'])) {
   if ($udpate->affectedRows()) {
 
     $_SESSION['alertReject'] = "Item Rejected";
-    header("Location: " . $_SERVER['HTTPS_REFERER']);
+    header("Location: " . $_SERVER['HTTP_REFERER']);
   }
 }
