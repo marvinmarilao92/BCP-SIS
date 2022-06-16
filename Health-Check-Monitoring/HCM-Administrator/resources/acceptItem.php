@@ -18,7 +18,7 @@ if (isset($_GET['idAccept'])) {
   $checkprod_quantity = $newStocks['quantity'];
 
   $checkStock = $db->query('SELECT * FROM hcms_stock WHERE prod_code = ? AND brand_name = ? AND dosage= ?', $checkprod_code, $checkprod_brand_name, $checkprod_dosage)->fetchArray();
-  if (isset($checkStock['prod_code'])) {
+  if (mysqli_num_rows($checkStock) > 0) {
     $imp_prod_code = $checkStock['prod_code'];
     $addAvailable = $checkStock['available'];
     $addNewStock = $checkprod_quantity;
