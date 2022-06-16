@@ -18,12 +18,19 @@ function generateRandomString($length = 25)
 if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
 
   $b_name = $_POST['b_name'];
+  $dosage =  $_POST['dosage'];
+  $g_name = $_POST['g_name'];
+  $quantity =  $_POST['quantity'];
+  $received_date = $_POST['received_date'];
+  $exp_date = $_POST['exp_date'];
+  $fullname = $verified_session_lastname . ', ' . $verified_session_firstname . ' ' . $verified_session_middlename;
+  $status = "Pending";
 
-  $stock = $db->query('SELECT *, count(*) as count FROM hcms_stock WHERE brand_name = ?', $b_name)->fetchArray();
+  $stock = $db->query('SELECT *, count(*) as count FROM hcms_stock WHERE brand_name = ? AND dosage = ?', $b_name, $dosage)->fetchArray();
   if ($stock['count'] > 0) {
     $prod_code = $stock['prod_code'];
   } else {
-    $receivingItem = $db->query('SELECT *, count(*) as count FROM hcms_items_transac WHERE brand_name = ?', $b_name)->fetchArray();
+    $receivingItem = $db->query('SELECT *, count(*) as count FROM hcms_items_transac WHERE brand_name = ? AND dosage = ?', $b_name, $dosage)->fetchArray();
     if ($receivingItem['count'] > 0) {
       $prod_code = $receivingItem['prod_code'];
     } else {
@@ -32,13 +39,7 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
   }
 
   // echo $prod_code;
-  $g_name = $_POST['g_name'];
-  $dosage =  $_POST['dosage'];
-  $quantity =  $_POST['quantity'];
-  $received_date = $_POST['received_date'];
-  $exp_date = $_POST['exp_date'];
-  $fullname = $verified_session_lastname . ', ' . $verified_session_firstname . ' ' . $verified_session_middlename;
-  $status = "Pending";
+
 
   $sql = $db->query(
     'INSERT INTO hcms_items_transac (prod_code, brand_name, gen_name, dosage, quantity, received_date, exp_date, creator, `status`, created_at)  
