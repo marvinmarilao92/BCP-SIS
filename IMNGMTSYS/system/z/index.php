@@ -12,6 +12,14 @@ header("location:../");
 ?>
 <head>
   <?php require 'drawer/header.php' ?> 
+  <style>
+      
+
+      .dark-mode {
+        background-color: black;
+        color: white;
+      }
+  </style>
 </head>
 
 <body>
@@ -32,8 +40,10 @@ header("location:../");
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-
+    
     <div class="pagetitle" >
+      
+     
       <aria-label class="display-5" style="font-size: 2rem";><b>Bestlink College of the Philippines</b></aria-label>
     </div><!-- End Page Title -->
     <hr class="my-4">

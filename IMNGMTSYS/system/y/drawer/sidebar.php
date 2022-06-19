@@ -26,15 +26,15 @@
 
     
     
-      <li class="nav-item"data-bs-toggle="modal" data-bs-target="#Extra">
-        <a class="nav-link" >
+      <li class="nav-item"data-bs-toggle="modal" data-bs-target="#Extra" >
+        <a class="nav-link" style="font-size: 0.8rem;">
           <i class="bi bi-question-circle"></i>
           <span >Update Info
           </span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " <?php echo 'href=index.php?'.$url;
+        <a class="nav-link " style="font-size: 0.8rem;" <?php echo 'href=index.php?'.$url;
           ?>
           >
           <i class="bi bi-house"></i>
@@ -45,23 +45,23 @@
       <li class="nav-item">
         <a class="nav-link collapsed" <?php echo 'href=dashboard?'.$url;
         ?>
-        >
+        style="font-size: 0.8rem;">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#verticalycentered">
+        <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#verticalycentered" style="font-size: 0.8rem;">
           <i class="bi bi-envelope"></i>
           <span>Create Post</span>
         </a>
       </li>
       <!-- End Dashboard Nav -->
-      <li class="nav-heading">Company Accounts</li>
+      <li class="nav-heading" >Company Accounts</li>
         
         <li class="nav-item">
 
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" style="font-size: 0.8rem;">
           <i class="bi bi-person"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -94,7 +94,7 @@
       <li class="nav-heading">Master List</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse"style="font-size: 0.8rem;">
           <i class="bi bi-journal-text"></i><span>College</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -159,7 +159,7 @@
       <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=addOns.php?'.$url;
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=addOns.php?'.$url;
           ?>>
           <i class="bi bi-archive"></i>
           <span>Additional Requirements</span>
@@ -167,21 +167,21 @@
       </li>
 
         <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=studDTR.php?'.$url;
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=studDTR.php?'.$url;
           ?>>
           <i class="bi bi-people"></i>
           <span>Student DTR</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=mWFH.php?'.$url;
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=mWFH.php?'.$url;
           ?>>
           <i class="bi bi-people"></i>
           <span>Student | Work from Home</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=ooo.php?'.$url;
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=ooo.php?'.$url;
           ?>>
           <i class="bi bi-people"></i>
           <span>Student OnSite</span>
@@ -191,7 +191,7 @@
 
 
        <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=bya.php?'.$url;
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=bya.php?'.$url;
           ?>>
           <i class="bi bi-people"></i>
           <span>Student Status</span>
@@ -199,7 +199,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=p-dat.php?'.$url;
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=p-dat.php?'.$url;
           ?>>
           <i class="bi bi-building"></i>
           <span>Student Area</span>
@@ -208,7 +208,7 @@
         
         <li class="nav-item">
 
-        <a class="nav-link collapsed" data-bs-target="#SReport" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed"  data-bs-target="#SReport" data-bs-toggle="collapse" style="font-size: 0.8rem;">
           <i class="bi bi-people"></i><span>Student Task Report</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="SReport" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -232,7 +232,7 @@
 
          <li class="nav-item">
 
-        <a class="nav-link collapsed" data-bs-target="#docu" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#docu" data-bs-toggle="collapse" style="font-size: 0.8rem;">
           <i class="bi bi-file-earmark-pdf"></i><span>Document</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="docu" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -253,20 +253,14 @@
         </ul>
         </li>
       <!-- End Tables Nav -->
-        <li class="nav-heading">Bills</li>
-      <!-- End Profile Page Nav -->
+       
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="bi bi-cash-coin"></i>
-          <span>Transaction History</span>
-        </a>
-      </li>
+      
 
-       <li class="nav-heading">Chat Support</li>
+       
 
        <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" style="font-size: 0.8rem;">
           <i class="bi bi-envelope"></i>
           <span>Contact</span>
         </a>
@@ -276,7 +270,7 @@
         <li class="nav-heading">Concerns</li>
 
         <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=concern.php?'.$url;
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=concern.php?'.$url;
           ?>>
           <i class="bi bi-envelope"></i>
           <span>Reports</span>
@@ -284,13 +278,22 @@
       </li>
       <!-- End Charts Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=restore.php?'.$url;
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=restore.php?'.$url;
           ?>>
           <i class="bi bi-recycle"></i>
           <span>Recycle Bin</span>
         </a>
       </li>
       <!-- End Icons Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=restore.php?'.$url;
+          ?>>
+          <i class="bi bi-sd-card"></i>
+          <span>Backup Data</span>
+        </a>
+      </li>
+
 
       
 

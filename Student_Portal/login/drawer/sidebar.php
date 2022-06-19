@@ -22,27 +22,74 @@
           <li class="nav-heading">Upload Files and Documents</li>
             
           <li>
-            <a href="components-tooltips.html">
+            <a <?php echo 'href=wreport?'.$key;?>>
               <i class="bi bi-person"></i><span>Upload</span>
             </a>
           </li>
             
           <li>
-            <a href="components-tooltips.html">
+            <a <?php echo 'href=kiks?id=
+        '.$key;?>>
               <i class="bi bi-person"></i><span>Manage Task</span>
             </a>
            </li>
           <li class="nav-heading" >Optional ( Offsite )</li>
           <li>
-            <a href="components-tooltips.html">
+            <a href="#">
               <i class="bi bi-circle"></i><span>WorkFromHome</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Addiional Requirements</span>
+            </a>
+          </li>
+        </ul>   
+      </li>
+      <!-- End Components Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#status" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person"></i><span>Trainee</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="status" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          
+         
+            
+          <li>
+              <a <?php echo 'href=placement?id='.$key;?>>
+              <i class="bi bi-circle"></i><span>MyPlace</span>
+            </a>
+          </li>
+            
+          <li>
+            <a <?php echo 'href=MySched?id='.$key;?>>
+              <i class="bi bi-circle"></i><span>Schedule</span>
             </a>
           </li>
         </ul>
         <br>
       </li>
-      <!-- End Components Nav -->
-          
+        <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=dStats?id=
+        '.$key;?>>
+          <i class="bi bi-grid"></i>
+          <span>Daily Status</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=rating?id=
+        '.$key;?>>
+          <i class="bi bi-grid"></i>
+          <span>Grade</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=concern?id=
+        '.$key;?>>
+          <i class="bi bi-grid"></i>
+          <span>Concern</span>
+        </a>
+      </li>
       <!-- End Profile Page Nav -->
 
      
