@@ -22,12 +22,20 @@
         }
         ?>
       <li class="nav-item">
-        <a class="nav-link " <?php echo 'href=index.php?'.$url
+        <a class="nav-link " <?php echo 'href=index.php?'.$url;
           ?>
           >
-          <i class="bi bi-grid"></i>
-          <span>Dashboard
+          <i class="bi bi-house"></i>
+          <span>Home
           </span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=dashboard?'.$url;
+        ?>
+        >
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
         </a>
       </li>
       <li class="nav-item">
@@ -37,97 +45,48 @@
         </a>
       </li>
       <!-- End Dashboard Nav -->
-      <li class="nav-heading">Group Accounts</li>
-        
+      
+        <hr>
+        <li class="nav-heading">Credentials</li>
         <li class="nav-item">
 
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-person"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" >
+          <i class="bi bi-person"></i><span>Company</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           
-          <li class="nav-heading">Manage Accounts</li>
+          
             
           <li>
-            <a href="components-tooltips.html">
-              <i class="bi bi-person"></i><span>Registered Accounts</span>
-            </a>
+            <a <?php echo 'href=prev?'.$url;
+        ?>>
+              <i class="bi bi-circle"></i><span>Preview</span>
+            </a>  
           </li>
-          <li class="nav-heading" >Account Status</li>
-          <li>
-            <a href="components-tooltips.html">
-              <i class="bi bi-circle"></i><span>Approved Accounts</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-tooltips.html">
-              <i class="bi bi-circle"></i><span>Rejected Accounts</span>
-            </a>
-          </li>
+          
         </ul>
-        <br>
+        
       </li>
       <!-- End Components Nav -->
-      <li class="nav-heading">Master List</li>
+      
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>College</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-people"></i><span>Intern | Trainee</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <li class="nav-heading">Enrolled Students</li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Students</span>
+            <a <?php echo 'href=view?'.$url;
+        ?>>
+              <i class="bi bi-circle"></i><span>Preview</span>
             </a>
           </li>
-          <li>
-            <li class="nav-heading">Qualified Students Status</li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Approved</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Pending</span>
-            </a>
-          </li>
-          <li class="nav-heading">Screening</li>
-          <li>
-            <a href="forms-editors.html">
-              <i class="bi bi-circle"></i><span>Set By Department Coordinator</span>
-            </a>
-          </li>
-          <li class="nav-heading">Students Screening Status</li>
-          <li>
-            <a href="forms-editors.html">
-              <i class="bi bi-circle"></i><span>Passed</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-validation.html">
-              <i class="bi bi-circle"></i><span>Failed</span>
-            </a>
-          </li>
+          
         </ul>
       </li>
-      <br>
-      <li class="nav-item">
-
-        <a class="nav-link collapsed" data-bs-target="#repo" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-person"></i><span>Report</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="repo" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-
-          <li>
-            <a href="turnover.php">
-              <i class="bi bi-card-text"></i><span>Preview</span>
-            </a>
-          </li>
-        </ul>
-        <br>
-      </li>
-      <br>
+    
+      <hr>
+    
       <li class="nav-heading">Audit Logs Reports</li>
         
         <li class="nav-item">
@@ -186,6 +145,22 @@
         </ul>
         <br>
       </li>
+      <li class="nav-item">
+
+        <a class="nav-link collapsed" data-bs-target="#repo" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-person"></i><span>Report</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="repo" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+          <li>
+            <a href="turnover.php">
+              <i class="bi bi-card-text"></i><span>Preview</span>
+            </a>
+          </li>
+        </ul>
+        <br>
+      </li>
+      <br>
       <!-- -->
       
       <!-- End Profile Page Nav -->
