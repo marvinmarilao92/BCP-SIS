@@ -24,7 +24,7 @@
       <li class="nav-item">
         <a class="nav-link " <?php echo 'href=index.php?'.$url;
           ?>
-          >
+          style="font-size: 0.8rem;">
           <i class="bi bi-house"></i>
           <span>Home
           </span>
@@ -33,13 +33,13 @@
       <li class="nav-item">
         <a class="nav-link collapsed" <?php echo 'href=dashboard?'.$url;
         ?>
-        >
+        style="font-size: 0.8rem;">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#verticalycentered">
+        <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#verticalycentered" style="font-size: 0.8rem;">
           <i class="bi bi-envelope"></i>
           <span>Create Post</span>
         </a>
@@ -50,7 +50,7 @@
         <li class="nav-heading">Credentials</li>
         <li class="nav-item">
 
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" >
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" style="font-size: 0.8rem;">
           <i class="bi bi-person"></i><span>Company</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -69,12 +69,41 @@
       </li>
       <!-- End Components Nav -->
       
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-navv" data-bs-toggle="collapse" style="font-size: 0.8rem;">
+          <i class="bi bi-people"></i><span>Department | Coordinator  </span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-navv" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a <?php echo 'href=view?'.$url;
+        ?>>
+              <i class="bi bi-circle"></i><span>Preview</span>
+            </a>
+          </li>
+          
+        </ul>
+      </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" style="font-size: 0.8rem;">
           <i class="bi bi-people"></i><span>Intern | Trainee</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a <?php echo 'href=view?'.$url;
+        ?>>
+              <i class="bi bi-circle"></i><span>Preview</span>
+            </a>
+          </li>
+          
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#files" data-bs-toggle="collapse" style="font-size: 0.8rem;">
+          <i class="bi bi-files"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="files" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a <?php echo 'href=view?'.$url;
         ?>>
@@ -91,7 +120,7 @@
         
         <li class="nav-item">
 
-        <a class="nav-link collapsed" data-bs-target="#ccomponents-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#ccomponents-nav" data-bs-toggle="collapse" style="font-size: 0.8rem;" >
           <i class="bi bi-person"></i><span>Audit Trail Logs</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="ccomponents-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -111,7 +140,7 @@
         
         <li class="nav-item">
 
-        <a class="nav-link collapsed" data-bs-target="#man" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#man" data-bs-toggle="collapse"style="font-size: 0.8rem;">
           <i class="bi bi-person"></i><span>Manage Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="man" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -127,7 +156,7 @@
 
       <li class="nav-item">
 
-        <a class="nav-link collapsed" data-bs-target="#trainee" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#trainee" data-bs-toggle="collapse" style="font-size: 0.8rem;">
           <i class="bi bi-person"></i><span>Trainee</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="trainee" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -147,7 +176,7 @@
       </li>
       <li class="nav-item">
 
-        <a class="nav-link collapsed" data-bs-target="#repo" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#repo" data-bs-toggle="collapse" style="font-size: 0.8rem;">
           <i class="bi bi-person"></i><span>Report</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="repo" class="nav-content collapse " data-bs-parent="#sidebar-nav">

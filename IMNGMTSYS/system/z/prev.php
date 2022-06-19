@@ -61,7 +61,7 @@ header("location:../");
                   <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="bi bi-person"></i>&nbsp;Approved</button>
                 </li>
 
-                <li class="nav-item flex-fill" role="presentation">
+                <li class="nav-item flex-fill" role="presentation" id="R4">
                   <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-em" type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="bi bi-trash"></i>&nbsp;Rejected</button>
                 </li>
               </ul>

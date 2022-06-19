@@ -11,6 +11,7 @@ header("location:../");
 }   
 ?>
 <head>
+  <title>BCP | Dashboard</title>
   <?php require 'drawer/header.php' ?> 
 </head>
 
@@ -61,21 +62,46 @@ header("location:../");
                       <h6>Filter</h6>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Accounts</a></li>
+                    <li><a class="dropdown-item"  <?php echo 'href=view.php?'.$url;
+          ?>>Accounts</a></li>
                     <li><a class="dropdown-item" href="#">Reports</a></li>
                   
                   </ul>
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Intern <span>| Trainee</span></h5>
+                  <h5 class="card-title">Enrolled <span>| Student</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-person"></i>
+                      <i class="bi bi-people"></i>
+
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
+                      <?php 
+                       require '../dbCon/config.php';
+                        try{  
+                          $total = "SELECT * FROM student_information
+                                      WHERE account_status = 'Official'";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+
+
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
                       <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -110,8 +136,34 @@ header("location:../");
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>$3,264</h6>
-                      <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                      <?php 
+                       require '../dbCon/config.php';
+                        try{  
+                          $total = "SELECT *From user_information
+                                  WHERE department='OJT System'";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+
+                           ?>
+                           <h6 style="font-size: 1em;
+                                      color: red;">No Records Found</h6>
+                           <?php
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
+                     
 
                     </div>
                   </div>
@@ -132,7 +184,7 @@ header("location:../");
                       <h6>Filter</h6>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Accounts</a></li>
+                    <li><a class="dropdown-item" href="view.php">Accounts</a></li>
                     <li><a class="dropdown-item" href="#">Reports</a></li>
                   
                   </ul>
@@ -143,10 +195,32 @@ header("location:../");
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
+                      <i class="bi bi-building"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>1244</h6>
+                      <?php 
+                       require '../dbCon/config.php';
+                        try{  
+                          $total = "SELECT *From ims_company_regis";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+
+
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
                       <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                     </div>
@@ -155,11 +229,10 @@ header("location:../");
                 </div>
               </div>
 
-            </div><!-- End Customers Card -->
+            </div>
 
-            <!-- Reports -->
-            <div class="col-12">
-              <div class="card">
+             <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
 
                 <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -168,9 +241,134 @@ header("location:../");
                       <h6>Filter</h6>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <li><a class="dropdown-item"  <?php echo 'href=view.php?'.$url;
+          ?>>Accounts</a></li>
+                    <li><a class="dropdown-item" href="#">Reports</a></li>
+                  
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Intern <span>| Trainee</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-person"></i>
+                    </div>
+                    <div class="ps-3">
+                      </div>
+                    <div class="ps-3">
+                      <?php 
+                       require '../dbCon/config.php';
+                        try{  
+                          $total = "SELECT * FROM ims_apply_info";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+
+                          
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
+                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item"  <?php echo 'href=view.php?'.$url;
+          ?>>Accounts</a></li>
+                    <li><a class="dropdown-item" href="#">Reports</a></li>
+                  
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Reports <span>| Overall</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-folder"></i>
+                    </div>
+                    <div class="ps-3">
+                      </div>
+                    <div class="ps-3">
+                      <?php 
+                       require '../dbCon/config.php';
+                        try{  
+                          $total = "SELECT * FROM ims_apply_info";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+
+                            ?>
+                           <h6 style="font-size: 1em;
+                                      color: red;">No Records Found</h6>
+                           <?php
+                          
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
+                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- End Customers Card -->
+
+            <!-- Reports -->
+            <div class="col-12">
+              <div class="card" >
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>     
+
+                    <li><a class="dropdown-item" href="#">Accounts</a></li>
+                    <li><a class="dropdown-item" href="#">Reports</a></li>
                   </ul>
                 </div>
 
@@ -255,7 +453,7 @@ header("location:../");
           <!-- End Recent Activity -->
 
           <!-- Budget Report -->
-          <div class="card">
+          <div class="card" id="C4" >
             <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -270,7 +468,7 @@ header("location:../");
             </div>
 
             <div class="card-body pb-0">
-              <h5 class="card-title">Budget Report <span>| This Month</span></h5>
+              <h5 class="card-title" >Budget Report <span>| This Month</span></h5>
 
               <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
 
