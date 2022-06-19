@@ -84,7 +84,7 @@ function register_as_company()
 
 				$sql2 = "INSERT INTO ims_department_information (id,id_number,firstname,middlename,lastname,address,contact,email,gender,position,role)values('$i_no','$autogen_reg','$fname','$mname','$lname','$paddress','$contact','$email','$gender','$position','$role')";
 				
-
+				
 		        
 	
          $run = mysqli_query($conn,$sql) or die(mysqli_error());
