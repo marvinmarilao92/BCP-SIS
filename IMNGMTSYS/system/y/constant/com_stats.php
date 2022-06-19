@@ -58,20 +58,20 @@
                         <div class='card-body'>
                           <h5 class='card-title'></h5>
                           
-                          <br>Hi ".$fname."<br><br>
+                          <br>Hi ".$fname."<br>
                           <br>
                           <p>
-                         	   After we've checked ,  Technical Support Team decided to change your status account to ACTIVE and Please Keep the latest Details and Congrats you are now part of our project to login your 
-                         	   			proceed to this Link <a href='http://company-login.sis-bcp.com'>http://company-login.sis-bcp.com</a> 
+                         	   After we've checked , Our Technical Support Team decided to change your status account to ACTIVE and Please Keep the latest Details and Congrats you are now part of our project to login your account
+                         	   			proceed to this Link <a href='http://company-login.sis-bcp.com'>company-login.sis-bcp.com</a> 
                           </p>
 
                           		Account Details <br>
 
-                          				Auto-gen Username : " .$idS. "<br>
+                          				Auto-gen Username : " .$num. "<br>
                        
                           						 Reason : " .$reason. " <br>			
                           						 	Status : " .$statuss. "<br>
-                          						 	Date  : " .$date. "<br><br>
+                          						 	Date Changed : " .$date. "<br><br>
 
 
 
