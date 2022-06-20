@@ -73,7 +73,7 @@ function register_as_company()
 				$gender =       	validate($_POST['gender']);
 				$position =			validate($_POST['position']);
 
-				$role = 'coordinator';
+				$role = 'Company Coordinator';
 				if ($password_1 != $password_2)
 				{
 					header("Location: ../index.php?error=Password did not match, Please try again");

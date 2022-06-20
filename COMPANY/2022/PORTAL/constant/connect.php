@@ -18,7 +18,7 @@ require 'connection.php';
             		//input textfield
                    $uname = validate($_POST['uname']);
                    $pass = validate($_POST['password']);		
-                   $role = 'coordinator';
+                   $role = 'Company Coordinator';
 
 
                    	 if(empty($uname) && empty($pass)) {
