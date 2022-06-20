@@ -36,8 +36,11 @@ function register_as_company()
 
 
 
-
-				 $autogen_reg = 'COM120'.get_rand_numbers(4).'';
+		        date_default_timezone_set("asia/manila");
+              $year = date("Y",strtotime("+0 HOURS"));
+              $random_num= get_rand_numbers(3);
+              
+				 $autogen_reg = "COM".$year.$random_num;
 				
 				 $status = 'Pending';
 				 date_default_timezone_set("asia/manila");
@@ -150,7 +153,7 @@ function register_as_company()
                       $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
                       
                      if($mail->send()){
-                        header("Location: verification-email.php?");
+                        header("Location: ../verification-email.php");
       									die();
                       }else{
                         echo ('failed');
