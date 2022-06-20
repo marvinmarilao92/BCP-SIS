@@ -150,7 +150,8 @@ function register_as_company()
                       $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
                       
                      if($mail->send()){
-                        echo ('success');
+                        header("Location: verification-email.php?");
+      									die();
                       }else{
                         echo ('failed');
                       }
