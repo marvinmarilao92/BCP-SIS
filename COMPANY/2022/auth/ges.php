@@ -73,7 +73,16 @@ function register_as_company()
 				$gender =       	validate($_POST['gender']);
 				$position =			validate($_POST['position']);
 
+
 				$role = 'Company Coordinator';
+
+
+				 $encr = md5($rolee);
+                  $encri = sha1($encr);
+                  $f = sha1($encri);
+                  $jk = sha1($role);
+                  $d = password_hash($encr, PASSWORD_DEFAULT);
+                  $url = $d."key".$encr.""."".$encri."".$f."".$jk;
 				if ($password_1 != $password_2)
 				{
 					header("Location: ../index.php?error=Password did not match, Please try again");
@@ -153,7 +162,7 @@ function register_as_company()
                       $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
                       
                      if($mail->send()){
-                        header("Location: ../verification-email.php");
+                        header("Location: ../verification-email.php?id=".$url);
       									die();
                       }else{
                         echo ('failed');

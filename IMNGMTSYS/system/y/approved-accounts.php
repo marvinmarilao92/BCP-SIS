@@ -60,7 +60,7 @@
                   </li>
               </ul>
               </div>-->
-              <br><br>
+              
               <div class="table-responsive-lg">
                <?php
                     // Include config file

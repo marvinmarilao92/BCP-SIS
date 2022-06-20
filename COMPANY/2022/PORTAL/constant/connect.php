@@ -72,6 +72,7 @@ require 'connection.php';
                                                 $_SESSION['username'] = $row2['username'];
                                                 $_SESSION['fname'] = $row['firstname'];
                                                 $id = $_SESSION['id'];
+                                                $role = $_SESSION['role'] ;
                                                 $fname = $_SESSION['fname'];
                                                 $num = $_SESSION['id_number'];
                                                 $_SESSION['mname'] = $row['middlename'];
