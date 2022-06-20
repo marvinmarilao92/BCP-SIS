@@ -86,7 +86,33 @@ header("location:../");
                       <i class="bi bi-cart"><img src="assets/img/BCPlogo.png" alt="">&nbsp;</i>
                     </div>
                     <div class="card-body">
-                      <h6 style="font-size: 1.5em;">No Available</h6>
+                      <?php 
+                       require 'dbCon/config.php';
+                        try{  
+                          $total = "SELECT *FROM ims_apply_info
+                                      WHERE s_course = 'BSIT'";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+                            ?>
+                           <h6 style="font-size: 1em;
+                                      color: red;">No Available</h6>
+                           <?php
+
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
                       
                     </div>
                   </div>
@@ -123,7 +149,33 @@ header("location:../");
                       <img src="assets/img/BCPlogo.png" alt="">&nbsp;
                     </div>
                     <div class="card-body">
-                      <h6 style="font-size: 1.5em;">No Available</h6>
+                     <?php 
+                       require 'dbCon/config.php';
+                        try{  
+                          $total = "SELECT *FROM ims_apply_info
+                                      WHERE s_course = 'BSOA'";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+                            ?>
+                           <h6 style="font-size: 1em;
+                                      color: red;">No Available</h6>
+                           <?php
+
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
                       
                     </div>
                   </div>
@@ -144,7 +196,8 @@ header("location:../");
                       <h5>Filter</h5>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#BSCrim">Preview</a></li>
+                    <li><a class="dropdown-item" href="saq.php">Skills and Qualifications</a></li>
                     
                   </ul>
                 </div>
@@ -158,7 +211,35 @@ header("location:../");
                       <img src="assets/img/BCPlogo.png" alt="">&nbsp;
                     </div>
                     <div class="card-body">
-                      <h6 style="font-size: 1.5em;">1 Available</h6>
+
+
+                      <?php 
+                       require 'dbCon/config.php';
+                        try{  
+                          $total = "SELECT *FROM ims_apply_info
+                                      WHERE s_course = 'BSCrim'";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+                            ?>
+                           <h6 style="font-size: 1em;
+                                      color: red;">No Records Found</h6>
+                           <?php
+
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
                       
                     </div>
                   </div>
@@ -178,9 +259,10 @@ header("location:../");
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
                       <h5>Filter</h5>
-                    </li>
+                    </li> 
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
+                     <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#BSHMinfo">Preview</a></li>
+                    <li><a class="dropdown-item" href="saq.php">Skills and Qualifications</a></li>
                     
                   </ul>
                 </div>
@@ -194,7 +276,33 @@ header("location:../");
                       <i class="bi bi-cart"><img src="assets/img/BCPlogo.png" alt="">&nbsp;</i>
                     </div>
                     <div class="card-body">
-                      <h6 style="font-size: 1.5em;">No Available</h6>
+                      <?php 
+                       require 'dbCon/config.php';
+                        try{  
+                          $total = "SELECT *FROM ims_apply_info
+                                      WHERE s_course = 'BSHM'";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+                            ?>
+                           <h6 style="font-size: 1em;
+                                      color: red;">No Available</h6>
+                           <?php
+
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
                       
                     </div>
                   </div>
@@ -218,7 +326,8 @@ header("location:../");
                       <h5>Filter</h5>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
+                     <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#BAinfo">Preview</a></li>
+                    <li><a class="dropdown-item" href="saq.php">Skills and Qualifications</a></li>
                     
                   </ul>
                 </div>
@@ -232,8 +341,33 @@ header("location:../");
                       <i class="bi bi-cart"><img src="assets/img/BCPlogo.png" alt="">&nbsp;</i>
                     </div>
                     <div class="card-body">
-                      <h6 style="font-size: 1.5em;">No Available</h6>
-                      
+                      <?php 
+                       require 'dbCon/config.php';
+                        try{  
+                          $total = "SELECT *FROM ims_apply_info
+                                      WHERE s_course = 'BSBA'";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+                            ?>
+                           <h6 style="font-size: 1em;
+                                      color: red;">No Available</h6>
+                           <?php
+
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
                     </div>
                   </div>
                 </div>

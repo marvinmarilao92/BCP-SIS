@@ -75,7 +75,7 @@
         </a>
         <ul id="forms-navv" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a <?php echo 'href=view?'.$url;
+            <a <?php echo 'href=DeptView?'.$url;
         ?>>
               <i class="bi bi-circle"></i><span>Preview</span>
             </a>
@@ -172,7 +172,7 @@
             </a>
           </li>
         </ul>
-        <br>
+        
       </li>
       <li class="nav-item">
 
@@ -187,9 +187,26 @@
             </a>
           </li>
         </ul>
-        <br>
+       
       </li>
-      <br>
+      <hr>  
+      <li class="nav-item">
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=restore.php?'.$url;
+          ?>>
+          <i class="bi bi-recycle"></i>
+          <span>Recycle Bin</span>
+        </a>
+      </li>
+      <!-- End Icons Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=restore.php?'.$url;
+          ?>>
+          <i class="bi bi-sd-card"></i>
+          <span>Backup Data</span>
+        </a>
+      </li>
+
       <!-- -->
       
       <!-- End Profile Page Nav -->
