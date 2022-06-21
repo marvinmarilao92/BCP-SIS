@@ -78,7 +78,7 @@ header("location:../");
                 </div>
 
                 <div class="card-body" style="text-align: right;">
-                  <label class="card-title" style="font-size:1.8em;
+                  <label class="card-title" style="font-size:1.8rem;
                   font-family: Times-New Roman;">BS<span> Information Technology </span></label>
 
                   <div class="d-flex align-items-center">
@@ -101,7 +101,7 @@ header("location:../");
                          else
                          {
                             ?>
-                           <h6 style="font-size: 1em;
+                           <h6 style="font-size: 1rem;
                                       color: red;">No Available</h6>
                            <?php
 
@@ -141,7 +141,7 @@ header("location:../");
                 </div>
 
                 <div class="card-body" style="text-align: right;">
-                  <label class="card-title" style="font-size:1.8em;
+                  <label class="card-title" style="font-size:1.8rem;
                   font-family: Times-New Roman;">BS<span> Office Administration</span></label>
 
                   <div class="d-flex align-items-center">
@@ -164,7 +164,7 @@ header("location:../");
                          else
                          {
                             ?>
-                           <h6 style="font-size: 1em;
+                           <h6 style="font-size: 1rem;
                                       color: red;">No Available</h6>
                            <?php
 
@@ -203,7 +203,7 @@ header("location:../");
                 </div>
 
                 <div class="card-body" style="text-align: right;">
-                  <label class="card-title" style="font-size:1.8em;
+                  <label class="card-title" style="font-size:1.8rem;
                   font-family: Times-New Roman;">BS<span> Criminology</span></label>
 
                   <div class="d-flex align-items-center">
@@ -228,7 +228,7 @@ header("location:../");
                          else
                          {
                             ?>
-                           <h6 style="font-size: 1em;
+                           <h6 style="font-size: 1rem;
                                       color: red;">No Records Found</h6>
                            <?php
 
@@ -268,7 +268,7 @@ header("location:../");
                 </div>
 
                 <div class="card-body" style="text-align: right;">
-                  <label class="card-title" style="font-size:1.8em;
+                  <label class="card-title" style="font-size:1.8rem;
                   font-family: Times-New Roman;">BS<span> Hospitality Management</span></label>
 
                   <div class="d-flex align-items-center">
@@ -291,7 +291,7 @@ header("location:../");
                          else
                          {
                             ?>
-                           <h6 style="font-size: 1em;
+                           <h6 style="font-size: 1rem;
                                       color: red;">No Available</h6>
                            <?php
 
@@ -333,7 +333,7 @@ header("location:../");
                 </div>
 
                 <div class="card-body" style="text-align: right;">
-                  <label class="card-title" style="font-size:1.8em;
+                  <label class="card-title" style="font-size:1.8rem;
                   font-family: Times-New Roman;">BS<span> Business Administration</span></label>
 
                   <div class="d-flex align-items-center">
@@ -356,7 +356,7 @@ header("location:../");
                          else
                          {
                             ?>
-                           <h6 style="font-size: 1em;
+                           <h6 style="font-size: 1rem;
                                       color: red;">No Available</h6>
                            <?php
 

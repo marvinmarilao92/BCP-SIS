@@ -3,8 +3,8 @@
 session_start();
 require '../constant/connection.php';
 $id = $_SESSION['id'];
-                                                $fname = $_SESSION['fname'];
-                                                $num = $_SESSION['id_number'];
+$fname = $_SESSION['fname'];
+$num = $_SESSION['id_number'];
 $_SESSION['logged'] = false;
 $remarks = "account has been logged out";
 	$_SESSION['role'] = $row['role'];
@@ -13,6 +13,6 @@ $remarks = "account has been logged out";
                                                 header("location: ../../index.php");
 session_unset();
 session_destroy();
-
+	
 
 ?>

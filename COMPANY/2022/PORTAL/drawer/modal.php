@@ -385,7 +385,7 @@
                               <div class="card-body">
                                 <h5 class="card-title"><label class="card-title" style="font-size:1.3rem;
                                     font-family: Times-New Roman;
-                                    ">Department Coordinator: Robert Hernandez&nbsp;&nbsp;<i class="bi bi-chat-left-text-fill" data-bs-toggle="modal" data-bs-target="#ITDept_mess"
+                                    ">Department Coordinator: &nbsp;&nbsp;<i class="bi bi-chat-left-text-fill" data-bs-toggle="modal" data-bs-target="#ITDept_mess"
 
 
                                     ></i>
@@ -394,21 +394,98 @@
 
                                 <!-- Table with stripped rows -->
                                 <div class="table-responsive-lg">
-                                <table class="table datatable" style="font-size: 0.7em;">
-                                  <thead>
-                                    <tr>
-                                      <th scope="col">#</th>
-                                      <th scope="col">Name</th>
-                                      <th scope="col">Position</th>
-                                      <th scope="col">Age</th>
-                                      <th scope="col">Start Date</th>
-                                      <th scope="col">Action</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    
-                                  </tbody>
-                                </table>
+                                <?php
+                    // Include config file
+                    require 'dbCon/config.php';
+
+                    $h='Official';
+                    // Attempt select query execution
+                    $sql = "SELECT *FROM ims_apply_info
+            inner join student_information
+            ON
+            ims_apply_info.s_number = student_information.id_number
+            WHERE 
+            student_information.account_status='$h'
+            AND
+            ims_apply_info.s_course = 'BSCriM'";
+                    if($result = mysqli_query($conn, $sql)){
+                        if(mysqli_num_rows($result) > 0){
+              
+                echo '<table class="table datatable" style=" font-size: 0.7em;
+                                                          ">';
+                echo "<thead>";
+                echo "<tr>";
+                
+                    echo'<th>Trainee</th>';
+                    echo'<th>Course</th>';
+                    echo'<th>Gender</th>';
+                    echo'<th>Status</th>';
+                    
+                 echo "</tr>";
+                echo "</thead>";
+                echo "<tbody>";
+                  while($row = mysqli_fetch_array($result)){
+                                    echo "<tr>";
+                                        
+                                        
+                                        echo "<td>" . $row['firstname'] ." ". $row['lastname']. "</td>";
+                                        echo "<td>" . $row['course'] . "</td>";
+                                        echo "<td>" . $row['gender'] . "</td>";
+
+                                        ?>
+                                        <?php
+                                          
+                                          if ($row['account_status']==$h)
+                                          {
+
+                                           echo "<td><center><span class='badge bg-primary'> "
+
+                                                     
+                                                   .$row['account_status']. 
+
+
+                                                "</span></center></td>";
+                                          }
+                                          else{
+                                            echo '<td>
+                                            <div class="alert alert-danger" role="alert" >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div></td>';
+                                          }
+
+
+                                          ?>
+
+                                          <?php
+                                        
+                                    echo "</tr>";
+                  }
+                  echo"</tbody>";
+                  echo"</table>";
+                  }
+                  else{
+
+                    echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>";
+
+
+                  }
+                }
+                else{
+                    
+                    echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                           Ops Something went wrong !
+                                </center>
+                          </div>";
+
+                }
+                ?>
                                 <!-- End Table with stripped rows -->
                               </div>
                               </div>
@@ -513,4 +590,76 @@
                 </div>
               </div>
 
-              
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Modal view status request by company-->
+ <div class="modal fade" id="statsReq" tabindex="-1">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    
+                    <div class="modal-body">
+                      
+                  <div class="pagetitle">
+                    <center><label class="card-title" style="font-size:2.8rem;
+                                font-family: Times-New Roman;">
+                                <img src="assets/img/BCPlogo.png" style="width: 10%;
+                                                                        height: auto;">
+                  Status<span> Request</span></label></center>
+                  
+                  
+                  </div><!-- End Page Title -->
+     
+                      <section class="section">
+                        <div class="row">
+                          <div class="col-lg-12">
+
+                            <div class="card">
+                              <div class="card-body">
+                                <br>
+                                <br>
+                               <div class="card">
+                              <div class="card-body">
+                                <br>
+                                <!-- Table with stripped rows -->
+                                <div class="table-responsive-lg">
+                                <table class="table datatable" style="font-size: 0.7em;">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Req_ID</th>
+                                      <th scope="col">Trainee</th>
+                                      <th scope="col">Course</th>
+                                      <th scope="col">Status</th>
+                                      <th scope="col">Date Request</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    
+                                  </tbody>
+                                </table>
+                                <!-- End Table with stripped rows -->
+                              </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                         </div>
+                        </div>
+                      </section>
+
+                    
+                                      </div>
+                                      
+                                    </div>
+                                  </div>
+                                </div>

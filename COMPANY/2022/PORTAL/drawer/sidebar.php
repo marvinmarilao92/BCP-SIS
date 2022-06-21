@@ -28,7 +28,14 @@
           <i class="bi bi-person"></i>
           <span>Request</span>
         </a>
-      </li>       
+      </li>  
+      <li class="nav-item">
+        <a class="nav-link collapsed" style="font-size: 0.8rem;"  data-bs-toggle="modal" data-bs-target="#statsReq"
+        >
+          <i class="bi bi-check-circle"></i>
+          <span>Status</span>
+        </a>
+      </li>     
       <hr>  
       <!-- End Dashboard Nav -->
 
@@ -93,7 +100,7 @@
 
       <!--Task-->
       <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#tRecords" data-bs-toggle="collapse" href="#">
+          <a class="nav-link collapsed" data-bs-target="#tRecords" data-bs-toggle="collapse" style="font-size: 0.8rem;"   >
             <i class="bi bi-person"></i><span>Trainee Task Records</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="tRecords" class="nav-content collapse " data-bs-parent="#sidebar-nav">

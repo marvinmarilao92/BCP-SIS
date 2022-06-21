@@ -133,7 +133,12 @@
                }
         }
         else{
-           echo 'No Data Found !';
+           echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>";
+
         }
             ?>
               <!-- End Table with stripped rows -->
