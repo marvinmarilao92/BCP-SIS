@@ -19,7 +19,7 @@
 
 <head>
 
-  <title>BCP - Registered Accounts </title>
+  <title>BCP - Registered </title>
   <?php require 'drawer/header.php';
   ?>
 </head>
@@ -79,7 +79,7 @@
                   </li>
               </ul>
               </div> -->
-              <br><br>
+              
               <div class="table-responsive-lg">
                <?php
                     // Include config file
@@ -94,9 +94,7 @@
                     INNER JOIN ims_files
                     ON 
                     ims_files.uid = ims_company_regis.id
-                    WHERE
-                    ims_company_regis.c_status = 'Pending'
-                    ORDER BY `id_number` ASC";
+                                        ORDER BY `id_number` ASC";
                     
                     if($result = mysqli_query($conn, $sql)){
                                                

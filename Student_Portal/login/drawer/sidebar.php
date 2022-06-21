@@ -87,6 +87,13 @@
         <a class="nav-link collapsed" <?php echo 'href=concern?id=
         '.$key;?>>
           <i class="bi bi-grid"></i>
+          <span>Certificate</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=concern?id=
+        '.$key;?>>
+          <i class="bi bi-grid"></i>
           <span>Concern</span>
         </a>
       </li>

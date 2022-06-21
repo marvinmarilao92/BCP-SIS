@@ -9,9 +9,9 @@ header("location:../");
 }else{
 header("location:../"); 
 }   
-?>  
+?>
 <head>
-  <title> BCP | Skills  </title>
+  <title>BCP | Search</title>
   <?php require 'drawer/header.php'?>
 </head>
 
@@ -30,39 +30,11 @@ header("location:../");
     <?php require 'drawer/sidebar.php'?>
   </aside><!-- End Sidebar-->
 
- <main id="main" class="main">
+  <main id="main" class="main">
 
-   <div class="pagetitle">
-                    <center><label class="card-title" style="font-size:2rem;
-                                font-family: Times-New Roman;">
-                                <img src="assets/img/BCPlogo.png" style="width: 10%;
-                                                                        height: auto;">
-                  BS<span> Information Technology</span></label></center>
-                  
-                  
-                  </div>
-                      <hr class="my-4"> <!-- End Page Title -->
-
-                      <section class="section">
-                        <div class="row">
-                          <div class="col-lg-12">
-
-                            <div class="card">
-                              <div class="card-body">
-                                <br>
-                            <div class="card">
-                              <div class="card-body">
-                
-                
-                            <h5 class="card-title"><label class="card-title" style="font-size:1.3rem;
-                                                font-family: Times-New Roman;
-                                                ">Department Coordinator: User  &nbsp;&nbsp;<i class="bi bi-chat-left-text-fill" data-bs-toggle="modal" data-bs-target="#ITDept_mess"
-
-
-                                                ></i>
-                                              </label></h5> 
-                                            
-                                            <form class="row g-3 needs-validation" action="search-skill.php" method="POST" >
+    <div class="page-title" >
+      <br>
+      <form class="row g-3 needs-validation" action="includes/applyy.php" method="POST" enctype="multipart/form-data">
                                             <!-- Table with stripped rows -->
                                             <div class="col-lg-5">
                                                 <div class="form-floating">
@@ -93,31 +65,70 @@ header("location:../");
                                           </div>
                                           <div class="col-lg-2">
                                                 <div class="form-floating">
-                                                  <button type ="search"   name ="search" target="search-skill.php" class="btn btn-primary btn-lg rounded-pill" ><i class="bi bi-search"></i>&nbsp; Search</button>
+                                                  <button type ="submit"   name ="submit" class="btn btn-primary btn-lg rounded-pill" ><i class="bi bi-search"></i>&nbsp; Search</button>
                                                 </div>
-                                                 <br>
-                                                 <br>
+                                                
                                           </div>
 
                                            </form> 
-                          
+    </div><!-- End Page Title -->
+    <hr class="my-4">
+    <!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <br>
+          
+              
+
+                 <div class="card">
+                    <div class="card-body">
+             
+              <br>
+
+
+
+
+                                
+
+                                
+
+
+
+
+
+
+
+
+
+
             </div>
           </div>
+
+                
+              
+
+              
+              
+              
+     
+            </div>
           </div>
-          </div>
+          
+
+
         </div>
 
         
       </div>
     </section>
 
-            <!-- Sales Card -->
-           
-               
-                      
-                  <!-- End Page Title -->
-     
-                      
+
+
 
   </main><!-- End #main -->
 

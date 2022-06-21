@@ -3,7 +3,7 @@
 <?php require 'control/check-session-login.php' ?>
 <head>
 </head>
-  <title>BCP - Approved Accounts </title>
+  <title>BCP - Approved  </title>
   <?php require 'drawer/header.php' ?>
 </head>
 

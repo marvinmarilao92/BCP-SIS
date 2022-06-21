@@ -639,7 +639,7 @@
                                       <th scope="col">Trainee</th>
                                       <th scope="col">Course</th>
                                       <th scope="col">Status</th>
-                                      <th scope="col">Date Request</th>
+                                      <th scope="col">Date Requested</th>
                                     </tr>
                                   </thead>
                                   <tbody>
