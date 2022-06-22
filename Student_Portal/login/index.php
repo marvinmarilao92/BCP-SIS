@@ -17,7 +17,7 @@ include('../includes/session.php');
 </head>
 
 <body>
-
+  <?php require 'drawer/modal.php' ?>   
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 

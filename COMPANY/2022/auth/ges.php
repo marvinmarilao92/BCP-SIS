@@ -125,6 +125,46 @@ function register_as_company()
                       $mail->AddReplyTo('internship_system@bcp-sis.ga', "No Reply"); // indicates ReplyTo headers
                     
                     $body = 
+
+                    	"<div class='card'>          
+                             <div class='card-body'>
+                               <h5 class='card-title'></h5>
+                               <p class='card-text'>This is direct message from Internship Technical Support                       
+                               <br><br>
+                               You account is successfully registerd in Bestlink College of the Philipines all the neccessary <br>
+                               information to access your account is listed down below.<br>
+                               Auto-generate Username :" .$autogen_reg. "<br>
+                               Password :" .$password_1. " <br>	
+                               Status : " .$status. "<br><br>
+                               if your Account status is Deactivated you must sumbit first all the necessary <br>
+                               requiremets in order to access your account.<br> 
+                               if you can already access your account we highly suggest to change your default password as soon as you<br>
+                               received this message.
+                               <br><br>
+                               This email is sent from an account we use for sending messages only. So if<br>
+                               you want to contact us, don't reply to this email-we won't get your response.<br>
+                               Instead, Go to Registrar office to inquire.<br>
+                               <br>Thank you! and welcome to Bestlink College of the Philippines.</p>
+                             </div>
+                           </div>
+                           
+                           <div class='alert alert-light bg-light border-0 alert-dismissible fade show' role='alert'>
+                             © Copyright Bestlink College of the Philippines. All Rights Reserved.
+                           </div>             
+                         ";
+
+
+
+
+
+
+
+
+
+
+
+
+
                       "<div class='card'>          
                         <div class='card-body'>
                           <h5 class='card-title'></h5>
@@ -154,15 +194,16 @@ function register_as_company()
                         © Copyright Bestlink College of the Philippines. All Rights Reserved.
                       </div>             
                     ";
-                      $subject = 'Account Successfully Created';
+                     
                       //Content
                       $mail->isHTML(true); //Set email format to HTML
-                      $mail->Subject = $subject;
+                      $mail->Subject = 'Account Successfully Created';
                       $mail->Body    = $body;
                       $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
                       
                      if($mail->send()){
                         header("Location: ../verification-email.php?id=".$url);
+                        
       									die();
                       }else{
                         echo ('failed');

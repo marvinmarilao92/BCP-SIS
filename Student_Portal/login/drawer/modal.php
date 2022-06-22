@@ -14,36 +14,7 @@
                     <div class="col-12">
                     <select id="inputState" name="stud_cat" class="form-select" Required autofocus>
                     <option value="" style="color:black" selected="selected" disabled="disabled">Select Category</option>
-                      
-                    <?php
-                     require '../dbCon/config.php';
-                     try {
-                                         $conn = new PDO("mysql:host=$servername;dbname=$db_name", $db_user, $db_pass);
-                                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-  
-                                         $stmt = $conn->prepare("SELECT * FROM ims_student_category");
-                                         $stmt->execute();
-                                         $result = $stmt->fetchAll();
-
-                                         foreach($result as $row)
-                                         {
-                                        ?>
-                    
-                      <option style="color:black" value="<?php echo $row['category']; ?>">
-
-                      <?php echo $row['category']; ?></option>
-                      <?php
-                                       }
-                                         $stmt->execute();
-            
-                                       }catch(PDOException $e)
-                                         {
-        
-                                         }
-  
-                      ?>
-
+                     
 										
 										
 
@@ -102,9 +73,9 @@
 
 <!--LOGOUT MODAL-->
         <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered" > 
                   <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header"style="background-color: #ff7070">
                     
                       <h3 class="modal-title"> Log out ?</h3>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -113,7 +84,7 @@
                     Are you sure you want to log out?
                     </div>
                     <div class="modal-footer">
-                      <a type="button" class="btn btn-primary" href = "control/logout.php">Yes</a>
+                      <a type="button" class="btn btn-primary" href = "../includes/logout.php">Yes</a>
                       <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">No</button>
                     </div>
                   </div>
