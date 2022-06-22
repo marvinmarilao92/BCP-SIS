@@ -94,14 +94,14 @@
                     INNER JOIN ims_files
                     ON 
                     ims_files.uid = ims_company_regis.id
-                                        ORDER BY `id_number` ASC";
+                                        ORDER BY `datee` DESC";
                     
                     if($result = mysqli_query($conn, $sql)){
                                                
                       if(mysqli_num_rows($result) > 0){
                        
              echo '<table class="table datatable" style=" font-size: 0.7em;
-                                                          overflow-x:scroll;" >';
+                                                          " >';
                 echo "<thead>";
                   echo "<tr>";
                   echo'<th hidden>ID</th>'; 
