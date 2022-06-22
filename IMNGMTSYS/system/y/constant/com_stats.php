@@ -61,7 +61,7 @@
                           <br>Hi ".$fname."<br>
                           <br>
                           <p>
-                         	   After we've checked , Our Technical Support Team decided to change your status account to ACTIVE and Please Keep the latest Details and Congrats you are now part of our project to login your account
+                         	   After we've checked , Our Intrnship Technical Support Team decided to change your status account to ACTIVE and Please keep the latest Details and Congrats you are now part of our project to login your account
                          	   			proceed to this Link <a href='http://company-login.sis-bcp.com'>company-login.sis-bcp.com</a> 
                           </p>
 

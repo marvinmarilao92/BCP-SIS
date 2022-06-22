@@ -130,17 +130,20 @@ function register_as_company()
                              <div class='card-body'>
                                <h5 class='card-title'></h5>
                                <p class='card-text'>This is direct message from Internship Technical Support                       
-                               <br><br>
-                               You account is successfully registerd in Bestlink College of the Philipines all the neccessary <br>
-                               information to access your account is listed down below.<br>
-                               Auto-generate Username :" .$autogen_reg. "<br>
-                               Password :" .$password_1. " <br>	
-                               Status : " .$status. "<br><br>
-                               if your Account status is Deactivated you must sumbit first all the necessary <br>
+                               <br>Magandang Buhay ".$rname."!<br><br>
+                               You account is successfully registerd in Bestlink College of the Philippines all the neccessary <br>
+                               information to access your account is listed down below.<br><br>
+                               Auto-generate Username: " .$autogen_reg. "<br>
+                               Password: " .$password_1. " <br>	
+                               Status: " .$status. "<br><br>
+
+                               if your Account status is Deactivated you must submit first all the necessary <br>
                                requiremets in order to access your account.<br> 
                                if you can already access your account we highly suggest to change your default password as soon as you<br>
                                received this message.
                                <br><br>
+                               To login your account please proceed to this link <a href='http://company-login.sis-bcp.com'>company-login.sis-bcp.com</a><br><br>
+                               
                                This email is sent from an account we use for sending messages only. So if<br>
                                you want to contact us, don't reply to this email-we won't get your response.<br>
                                Instead, Go to Registrar office to inquire.<br>
@@ -165,35 +168,7 @@ function register_as_company()
 
 
 
-                      "<div class='card'>          
-                        <div class='card-body'>
-                          <h5 class='card-title'></h5>
-                          
-                          <br>Hi ".$rname."<br><br>
-                          
-
-                          		Account Details <br>
-
-                          		Auto-gen Username : " .$autogen_reg. "<br>
-                          						 Password : " .$password_1. " <br>		
-                          						 	 Status : " .$status. "<br><br>
-
-
-
-
-
-                          
-                          This email is sent from an account we use for sending messages only. So if<br>
-                          you want to contact us, don't reply to this email-we won't get your<br>
-                          response. Instead, Go to Registrar office to comply.<br>
-                          <br>Thank you! Stay safe.</p>
-                        </div>
-                      </div>
                       
-                      <div class='alert alert-light bg-light border-0 alert-dismissible fade show' role='alert'>
-                        © Copyright Bestlink College of the Philippines. All Rights Reserved.
-                      </div>             
-                    ";
                      
                       //Content
                       $mail->isHTML(true); //Set email format to HTML
