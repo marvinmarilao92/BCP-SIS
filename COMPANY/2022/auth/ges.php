@@ -77,7 +77,7 @@ function register_as_company()
 				$role = 'Company Coordinator';
 
 
-				 $encr = md5($rolee);
+				 $encr = md5($role);
                   $encri = sha1($encr);
                   $f = sha1($encri);
                   $jk = sha1($role);

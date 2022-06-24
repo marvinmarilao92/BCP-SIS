@@ -22,6 +22,7 @@
   <title>BCP - Registered </title>
   <?php require 'drawer/header.php';
   ?>
+  
 </head>
 
 <body>
@@ -64,24 +65,14 @@
 
           <div class="card">
             <div class="card-body">
+              
+              <form action="constant/dlt.php" method="POST">
               <h5 class="card-title"><p>Manage Accounts</p></h5>
-             <!-- <p class="card-title">Legends</p>
-              <div class = "container" style="font-size:0.8em;">
-              <ul>    
-                  <li>
-                    <button type="button" class="btn btn-primary" disabled><i class="bi bi-pencil"></i></button>&nbsp; To change status.
-                  </li>
-                  <li>
-                    <button type="button" class="btn btn-secondary" disabled><i class="bi bi-download"></i></button>&nbsp;To download the background company files.
-                  </li>
-                  <li>
-                    <button type="button" class="btn btn-info" disabled><i class="bi bi-eye"></i></button>&nbsp;To view company information.
-                  </li>
-              </ul>
-              </div> -->
+                 
               
               <div class="table-responsive-lg">
-               <?php
+                 
+                <?php
                     // Include config file
                     require '../dbCon/config.php';
 
@@ -94,7 +85,7 @@
                     INNER JOIN ims_files
                     ON 
                     ims_files.uid = ims_company_regis.id
-                                        ORDER BY `datee` DESC";
+                                        ORDER BY `datee` desc";
                     
                     if($result = mysqli_query($conn, $sql)){
                                                
@@ -105,6 +96,8 @@
                 echo "<thead>";
                   echo "<tr>";
                   echo'<th hidden>ID</th>'; 
+                  echo'<th></th>'; 
+                   echo'<button type="submit" name="delete" class="btn btn-danger"><i class="bi bi-trash-fill"></i>  </button>'; 
                     echo'<th>Company_ID</th>';
                     echo'<th>Company</th>';
                    echo'<th colspan=2>Representative Name</th>';
@@ -124,9 +117,12 @@
                   while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
                                     echo "<td hidden>" . $row['id'] . "</td>";
+                                     echo "<td><input type='checkbox' name='dlt_id[]' value={$row['id']}>
+                                        </td>" ;
+                                                            
                                         echo "<td>" . $row['id_number'] . "</td>";
                                         echo "<td>" . $row['c_name'] . "</td>";
-                                        echo "<td colspan = 2 >" . $row['repre_name'] ."</td>";
+                                        echo "<td colspan = 2 >" . $row['repre_name'    ] ."</td>";
                                         echo "<td>" .$row['c_email'] . "</td>";
                                         echo "<td>" .$row['contact'] . "</td>";;
                                         echo "<td>" . $row['datee']  . "</td>";
@@ -158,8 +154,11 @@
            echo 'No Data Found !';
         }
             ?>
+
+            
               <!-- End Table with stripped rows -->
             </div>
+          </form>
             </div>
           </div>
 
@@ -182,6 +181,23 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    
+    $(document).ready(function(){
+      $("#checkAll").click(function()
+      {
+        if($(this).is(":checked"))
+        {
+          $(".checkItem").prop('checked',true);
+        }
+        else
+        {
+          $(".checkItem").prop('checked',false);
+        }
+      });
+    });
+
+  </script>
       <script>
 
         //ediit
@@ -198,10 +214,10 @@
                 }).get();
                 console.log(data);
                 $('#com_id').val(data[0]);
-                $('#companyid').val(data[1]);
-                $('#company').val(data[2]);
-                $('#rname').val(data[3]);
-                $('#cstatus').val(data[4]);
+                $('#companyid').val(data[2]);
+                $('#company').val(data[3]);
+                $('#rname').val(data[4]);
+                $('#cstatus').val(data[5]);
                 
 
             });
@@ -212,8 +228,7 @@
          
 
           
-    </script>
-    <script>
+    
       $(document).ready(function(){
                 $('.userinfo').click(function(){
                   var userid = $(this).data('id');  

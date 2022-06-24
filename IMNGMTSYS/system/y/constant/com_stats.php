@@ -11,7 +11,7 @@
 
 	if(isset($_POST['companyedit']))
 
-	{
+	{	
 
 
 			$idS = $_POST['com_id'];
@@ -20,8 +20,8 @@
 	        $fname = $_POST['rname'];
 	        $reason = $_POST['reason'];
 	        date_default_timezone_set("asia/manila");
-			$date = date('d-m-Y h:i A ');
-			$query = "UPDATE ims_company_regis
+					$date = date('d-m-Y h:i A ');
+					$query = "UPDATE ims_company_regis
 					  SET c_status='$statuss',  reason = '$reason' , u_date = '$date'
 					  WHERE username ='$num'";
 			$run = mysqli_query($link,$query);
@@ -29,7 +29,8 @@
 			{
 				//
 				
-				$fname=$fnamee.' '.$lnamee;
+				$num = $_POST['companyid'];
+				$fname = $_POST['rname'];
 				$ip = $_SERVER["REMOTE_ADDR"];
 	      		$host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 	      		$role = $rolee;
@@ -61,7 +62,7 @@
                           <br>Hi ".$fname."<br>
                           <br>
                           <p>
-                         	   After we've checked , Our Intrnship Technical Support Team decided to change your status account to ACTIVE and Please keep the latest Details and Congrats you are now part of our project to login your account
+                         	   After we've checked , Our Internship Technical Support Team decided to change your status account to ACTIVE and Please keep the latest Details and Congrats you are now part of our project to login your account
                          	   			proceed to this Link <a href='http://company-login.sis-bcp.com'>company-login.sis-bcp.com</a> 
                           </p>
 

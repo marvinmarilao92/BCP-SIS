@@ -188,6 +188,7 @@
 
             });
         });
+      </script>
 
          //viewing company data
         $(document).ready(function () {
