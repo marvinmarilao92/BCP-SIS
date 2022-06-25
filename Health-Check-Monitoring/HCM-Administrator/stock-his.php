@@ -28,10 +28,10 @@ include_once('security/newsource.php');
         </ol>
       </nav>
     </div>
-    <section class="section2">
+    <section class="dashboard">
       <div class="row">
         <div class="col-lg-12">
-          <div class="card p-5">
+          <div class="card top-selling">
             <div class="alert alert-info" role="alert">
               <h4 class="alert-heading">Stock History</h4>
               <p></p>

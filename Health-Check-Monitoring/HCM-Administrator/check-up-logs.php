@@ -1,19 +1,19 @@
 <?php
-include_once 'security/newsource.php';
+include_once('security/newsource.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <?php include 'includes/head_ext.php'; ?>
+  <?php include('includes/head_ext.php'); ?>
 
 </head>
 
 <body>
-  <?php $page = 'check-up-logs';
-  $nav = 'Mlogs'; ?>
-  <?php include 'includes/header.php'; ?>
-  <?php include 'includes/sidebar.php'; ?>
+  <?php $page = "check-up-logs";
+  $nav = "Mlogs"; ?>
+  <?php include('includes/header.php'); ?>
+  <?php include('includes/sidebar.php'); ?>
   <main id="main" class="main">
 
     <!-- Page Title -->
@@ -147,6 +147,7 @@ include_once 'security/newsource.php';
                     }
                   }
                 }
+                echo '<div class ="alert alert-info" role="alert">This is where you can see all the individual logs</div>';
                 ?>
               </div>
 
