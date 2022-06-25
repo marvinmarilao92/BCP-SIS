@@ -72,7 +72,8 @@
               
               <div class="table-responsive-lg">
                  
-                <?php
+                <!-- Table with stripped rows -->
+            <?php
                     // Include config file
                     require '../dbCon/config.php';
 
@@ -90,71 +91,75 @@
                     if($result = mysqli_query($conn, $sql)){
                                                
                       if(mysqli_num_rows($result) > 0){
-                       
-             echo '<table class="table datatable" style=" font-size: 0.7em;
-                                                          " >';
-                echo "<thead>";
-                  echo "<tr>";
-                  echo'<th hidden>ID</th>'; 
-                  echo'<th></th>'; 
-                   echo'<button type="submit" name="delete" class="btn btn-danger"><i class="bi bi-trash-fill"></i>  </button>'; 
-                    echo'<th>Company_ID</th>';
-                    echo'<th>Company</th>';
-                   echo'<th colspan=2>Representative Name</th>';
-                   echo'<th>Email Address</th>';
-                   echo'<th>Contact</th>';
-                   
-                   echo'<th>Date Registered</th>';
-                   
-                   
-                    echo'<th>Status</th>';  
-                    echo'<th>Action</th>';
+                     ?>
+              
+              <div class="table-responsive-lg">
 
-                    
-                 echo "</tr>";
-                echo "</thead>";
-                echo "<tbody>";
-                  while($row = mysqli_fetch_array($result)){
-                                    echo "<tr>";
-                                    echo "<td hidden>" . $row['id'] . "</td>";
-                                     echo "<td><input type='checkbox' name='dlt_id[]' value={$row['id']}>
-                                        </td>" ;
-                                                            
-                                        echo "<td>" . $row['id_number'] . "</td>";
-                                        echo "<td>" . $row['c_name'] . "</td>";
-                                        echo "<td colspan = 2 >" . $row['repre_name'    ] ."</td>";
-                                        echo "<td>" .$row['c_email'] . "</td>";
-                                        echo "<td>" .$row['contact'] . "</td>";;
-                                        echo "<td>" . $row['datee']  . "</td>";
-                                         
-                                          
-                                        echo "<td>" . $row['c_status']  . "</td>";
-                                        echo "<td>";
-                                        
-                                       
-                                        echo '<button type="button" class="btn btn-primary editt" data-bs-toggle="modal" data-bs-target="#edit"><i class="bi bi-pencil"></i></button>&nbsp;';
+                <!-- Table with stripped rows -->
+              <table class="table-striped datatable " style=" font-size: 0.7em;
+                                                          " >
+                <thead>
+                  <tr colspan="5">
+                    <button type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure want to Delete !')"class="btn btn-danger"><i class="bi bi-trash-fill"></i> </button>
+                  </tr>
+                  <tr>
+                    <th scope="col"><input type="checkbox" id="checkAll"></th>
+                    <th scope="col">Company_ID</th>
+                    <th scope="col">Company</th>
+                    <th colspan="2">Representative Name</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Date Registered</th>
+                    <th scope="col">Status</th>
+                    <th colspan="3">Action</th>
 
-                                         echo "<a type='button' class='btn btn-secondary' href='constant/get_file.php?id={$row['id']}'><i class='bi bi-download'></i></a>&nbsp;";  
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                 while($row = mysqli_fetch_array($result)){
 
-                                          echo "<a data-id={$row['id_number']} type='button' class='btn btn-info userinfo'><i class='bi bi-eye' data-bs-toggle='#empModal' data-bs-target='#empModal'>
-                                        </i></a>" 
-                                                            ;
+                  ?>
+                  <tr>
+                    <td hidden><?= $row['id']; ?></td>
+                    <td><input type="checkbox" class="checkItem" value="<?=$row['uid']?>" name="id[]" ></td>
+                    <td><?= $row['id_number']; ?></td>
+                    <td><?= $row['c_name']; ?></td>
+                    <td colspan="2"><?= $row['repre_name']; ?></td>
+                    <td><?= $row['c_email']; ?></td>
+                    <td><?= $row['contact']; ?></td>
+                    <td><?= $row['datee']; ?></td>
+                    <td><?= $row['c_status']; ?></td>
+                    <td><button type="button" class="btn btn-primary editt" data-bs-toggle="modal" data-bs-target="#edit"><i class="bi bi-pencil"></i></button></td>
+                    <td><a type='button' class='btn btn-secondary' href='constant/get_file.php?id={$row['id']}'><i class='bi bi-download'></i></a></td>
+                    <td><a data-id={$row['id_number']} type='button' class='btn btn-info userinfo'><i class='bi bi-eye' data-bs-toggle='#empModal' data-bs-target='#empModal'>
+                    </i></a></td>
+                  </tr>
+                  <?php
 
-
-
+                }
+                 ?>
+                </tbody>
+              </table>
+              <?php
+                 }
+                  
+                }
+              
              
-                echo "</td>";
-              echo "</tr>";
-            }
-                echo"</tbody>";
-              echo"</table>";
-               }
-        }
-        else{
-           echo 'No Data Found !';
-        }
+              else{
+               echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                          <i class='bi bi-info-circle'></i> No Record Found !
+                                </center>
+                          </div>";
+
+                  }
             ?>
 
+
+              <!-- End Table with stripped rows -->
+               
             
               <!-- End Table with stripped rows -->
             </div>
