@@ -64,10 +64,15 @@
         <div class="col-lg-12">
 
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="font-size: 0.8em;" >
+              <br>
+              <br>
+
+              <div class="card" >
+                <div class="card-body" style="font-size: 0.8em;">
               
               <form action="constant/dlt.php" method="POST">
-              <h5 class="card-title"><p>Manage Accounts</p></h5>
+              <h5 class="card-title" style="font-size: 1.5em;" ><p>Manage Accounts</p></h5>
                  
               
               <div class="table-responsive-lg">
@@ -96,14 +101,13 @@
               <div class="table-responsive-lg">
 
                 <!-- Table with stripped rows -->
-              <table class="table table-striped datatable " style=" font-size: 0.7em;
-                                                          " >
+              <table class="table table-striped datatable ">
                 <thead>
-                  <tr colspan="5">
-                    <button type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure want to Delete !')"class="btn btn-danger"><i class="bi bi-trash-fill"></i> </button>
+                  <tr>
                   </tr>
                   <tr>
-                    <th scope="col"><input type="checkbox" id="checkAll"></th>
+
+                    <th scope="col"><input type="checkbox" id="checkAll"><label></label></th>
                     <th scope="col">Company_ID</th>
                     <th scope="col">Company</th>
                     <th colspan="2">Representative Name</th>
@@ -116,26 +120,36 @@
                   </tr>
                 </thead>
                 <tbody>
+
                   <?php
                  while($row = mysqli_fetch_array($result)){
 
                   ?>
+
                   <tr>
+
                     <td hidden><?= $row['id']; ?></td>
                     <td><input type="checkbox" class="checkItem" value="<?=$row['uid']?>" name="id[]" ></td>
-                    <td><?= $row['id_number']; ?></td>
-                    <td><?= $row['c_name']; ?></td>
+                    <td data-label="Company_ID"> <?= $row['id_number']; ?></td>
+                    <td data-label="Company_Name"><?= $row['c_name']; ?></td>
                     <td colspan="2"><?= $row['repre_name']; ?></td>
                     <td><?= $row['c_email']; ?></td>
                     <td><?= $row['contact']; ?></td>
                     <td><?= $row['datee']; ?></td>
                     <td><?= $row['c_status']; ?></td>
-                    <td><button type="button" class="btn btn-primary editt" data-bs-toggle="modal" data-bs-target="#edit"><i class="bi bi-pencil"></i></button></td>
 
-                    <td><a type='button' class='btn btn-secondary' <?php echo 'href=constant/get_file.php?id='.$row['id']; ?>><i class='bi bi-download'></i></a>
+                    <td WIDTH="7%">      
+                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
+                       
+                        <button type="button" class="btn btn-primary editt" data-bs-toggle="modal" data-bs-target="#edit"><i class="bi bi-pencil"></i></button>&nbsp;  
+                        <a type='button' class='btn btn-secondary' <?php echo 'href=constant/get_file.php?id='.$row['id']; ?>><i class='bi bi-download'></i></a>&nbsp;
+                        <a <?php echo 'data-id='.$row['id_number'];?> type='button' class='btn btn-info userinfo'><i class='bi bi-eye' data-bs-toggle='#empModal' data-bs-target='#empModal'>
+                        
+                    </i></a>&nbsp;           
+                    <button type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure want to Delete !')"class="btn btn-danger"><i class="bi bi-dash-circle"></i></button>        
+                      </div>
                     </td>
-                    <td><a  <?php echo 'data-id='.$row['id_number'];?> type='button' class='btn btn-info userinfo'><i class='bi bi-eye' data-bs-toggle='#empModal' data-bs-target='#empModal'>
-                    </i></a></td>
+                    
                     
                   </tr>
                   <?php
@@ -143,6 +157,7 @@
                 }
                  ?>
                 </tbody>
+
               </table>
               <?php
                  }
@@ -169,6 +184,9 @@
           </form>
             </div>
           </div>
+
+          </div>
+      </div>
 
         </div>
       </div>
