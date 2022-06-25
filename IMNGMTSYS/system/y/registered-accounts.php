@@ -131,9 +131,12 @@
                     <td><?= $row['datee']; ?></td>
                     <td><?= $row['c_status']; ?></td>
                     <td><button type="button" class="btn btn-primary editt" data-bs-toggle="modal" data-bs-target="#edit"><i class="bi bi-pencil"></i></button></td>
-                    <td><a type='button' class='btn btn-secondary' href='constant/get_file.php?id={$row['id']}'><i class='bi bi-download'></i></a></td>
-                    <td><a data-id={$row['id_number']} type='button' class='btn btn-info userinfo'><i class='bi bi-eye' data-bs-toggle='#empModal' data-bs-target='#empModal'>
+
+                    <td><a type='button' class='btn btn-secondary' <?php echo 'href=constant/get_file.php?id='.$row['id']; ?>><i class='bi bi-download'></i></a>
+                    </td>
+                    <td><a  <?php echo 'data-id='.$row['id_number'];?> type='button' class='btn btn-info userinfo'><i class='bi bi-eye' data-bs-toggle='#empModal' data-bs-target='#empModal'>
                     </i></a></td>
+                    
                   </tr>
                   <?php
 
