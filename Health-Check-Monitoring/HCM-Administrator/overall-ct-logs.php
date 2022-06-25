@@ -252,22 +252,7 @@ include_once('security/newsource.php');
       <div id="showClosecontact"></div>
     </div>
 
-    <script>
-    $('#exampleModal').on('show.bs.modal', event => {
-      var button = $(event.relatedTarget);
-      var modal = $(this);
-      // Use above variables to manipulate the DOM
 
-    });
-    </script>
-    <script>
-    $('#exampleModal').on('show.bs.modal', event => {
-      var button = $(event.relatedTarget);
-      var modal = $(this);
-      // Use above variables to manipulate the DOM
-
-    });
-    </script>
   </main>
   <?php include('includes/footer.php'); ?>
   <script>
