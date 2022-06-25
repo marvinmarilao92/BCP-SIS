@@ -53,7 +53,6 @@
          <i class="bi bi-person-lines-fill"></i><span>Manage Logs</span><i class="bi bi-chevron-down ms-auto"></i>
        </a>
        <ul id="Mlogs-nav" class="
-       
        <?php if ('Mlogs' == $nav) {
           echo 'nav-content collapse show';
         } else {
@@ -70,26 +69,16 @@
            </a>
          </li>
 
-
-         <li>
-           <a href="daily-ct-logs.php?id=<?php echo $_SESSION['login_key']; ?>" class="
-           
-           <?php if ('daily-contact-tracing-logs' == $page) {
-              echo 'active';
-            } ?>">
-             <i class="bi bi-circle"></i><span>Daily Contact Tracing</span>
-           </a>
-         </li>
-
          <li>
            <a href="overall-ct-logs.php?id=<?php echo $_SESSION['login_key']; ?>" class="
            
            <?php if ('overall-contact-tracing-logs' == $page) {
               echo 'active';
             } ?>">
-             <i class="bi bi-circle"></i><span>Overall Contact Tracing</span>
+             <i class="bi bi-circle"></i><span>Contact Tracing</span>
            </a>
          </li>
+
        </ul>
      </li>
 

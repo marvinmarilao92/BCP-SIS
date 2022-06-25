@@ -1,19 +1,19 @@
 <?php
-include_once 'security/newsource.php';
+include_once('security/newsource.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <?php include 'includes/head_ext.php'; ?>
+  <?php include('includes/head_ext.php'); ?>
 
 </head>
 
 <body>
-  <?php $page = 'check-up-logs';
-  $nav = 'Mlogs'; ?>
-  <?php include 'includes/header.php'; ?>
-  <?php include 'includes/sidebar.php'; ?>
+  <?php $page = "check-up-logs";
+  $nav = "Mlogs"; ?>
+  <?php include('includes/header.php'); ?>
+  <?php include('includes/sidebar.php'); ?>
   <main id="main" class="main">
 
     <!-- Page Title -->
@@ -145,14 +145,9 @@ include_once 'security/newsource.php';
                 </div>
                 <?php }
                     }
-                  } else {
-                    echo '<div class="alert alert-success" role="alert">
-                      <h4 class="alert-heading">No Records Found</h4>
-                      <p></p>
-                      <p class="mb-0"></p>
-                    </div>';
                   }
                 }
+                echo '<div class ="alert alert-info" role="alert">This is where you can see all the individual logs</div>';
                 ?>
               </div>
 
