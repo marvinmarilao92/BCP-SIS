@@ -210,34 +210,33 @@ include_once('security/newsource.php');
 
 
   </main>
-  <<<<<<< HEAD <?php include('includes/footer.php'); ?> <script>
-    function viewInfo(viewID, viewinfo) {
+  <?php include('includes/footer.php'); ?>
+  <script>
+  function viewInfo(viewID, viewinfo) {
 
     $.ajax({
-    url: 'ajax/viewCheckup.php?viewID=' + viewID,
-    success: function(html) {
-    var ajaxDisplay = document.getElementById(viewinfo);
-    ajaxDisplay.innerHTML = html;
-    $("#viewCheckModal").modal("show");
-    }
+      url: 'ajax/viewCheckup.php?viewID=' + viewID,
+      success: function(html) {
+        var ajaxDisplay = document.getElementById(viewinfo);
+        ajaxDisplay.innerHTML = html;
+        $("#viewCheckModal").modal("show");
+      }
     });
-    }
+  }
 
-    function editInfo(editID, editinfo) {
+  function editInfo(editID, editinfo) {
 
     $.ajax({
-    url: 'ajax/editCheckup.php?editID=' + editID,
-    success: function(html) {
-    var ajaxDisplay = document.getElementById(editinfo);
-    ajaxDisplay.innerHTML = html;
-    $("#editCheckModal").modal("show");
-    }
+      url: 'ajax/editCheckup.php?editID=' + editID,
+      success: function(html) {
+        var ajaxDisplay = document.getElementById(editinfo);
+        ajaxDisplay.innerHTML = html;
+        $("#editCheckModal").modal("show");
+      }
     });
-    }
-    </script>
-    =======
-    <?php include 'includes/footer.php'; ?>
-    >>>>>>> d7db77304c18957359a9a0dd5c77b83070889715
+  }
+  </script>
+
 </body>
 
 </html>
