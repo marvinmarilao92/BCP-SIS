@@ -29,7 +29,7 @@ include_once('security/newsource.php');
         </ol>
       </nav>
     </div>
-    <section class="section2">
+    <section class="dashboard">
       <div class="row">
         <div class="col-lg-12">
           <?php
@@ -58,16 +58,15 @@ include_once('security/newsource.php');
             unset($_SESSION['alertReject']);
           }
           ?>
-          <div class="card p-4">
+          <div class="card top-selling">
             <div class="alert alert-info" role="alert">
               <h4 class="alert-heading">Incoming Medicines</h4>
               <p></p>
               <p class="mb-0">This module is incharge of Accepting and Rejecting the incoming medicines</p>
             </div>
-            <div class="card-title d-flex justify-content-between">ON Pending<button type="button"
-                class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#medForm"><i
-                  class="ri-add-circle-line">&nbsp Add
-                  Medicine</i></button></div>
+            <div class="card-title d-flex justify-content-between mx-4">ON Pending<button type="button"
+                class="btn btn-primary mx-4" data-bs-toggle="modal" data-bs-target="#medForm"><i
+                  class="ri-add-circle-line">&nbsp Add Medicine</i></button></div>
             <div class="table-responsive">
               <?php require_once "timezone.php";
               $items = "SELECT * FROM hcms_items_transac WHERE status = 'Pending' ORDER BY prod_id ASC";
