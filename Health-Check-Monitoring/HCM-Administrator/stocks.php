@@ -28,10 +28,10 @@ include_once('security/newsource.php');
         </ol>
       </nav>
     </div>
-    <section class="section2">
+    <section class="dashboard">
       <div class="row">
         <div class="col-lg-12">
-          <div class="card p-5">
+          <div class="card top-selling">
             <div class="alert alert-info" role="alert">
               <h4 class="alert-heading">Medicine Stocks</h4>
               <p></p>
@@ -60,18 +60,12 @@ include_once('security/newsource.php');
                       <?php echo $data['brand_name'] . '<sup>' . $data['dosage'] . 'mg</sup>' ?>
                     </td>
                     <td class="text-center" class="text-center"><?php echo $data['gen_name']; ?> </td>
-                    <td class="text-center"><?php echo $data['available']; ?> </td>
-
-                    <?php
-                      $toCheckExpired = $db->query('SELECT * FROM hcms_items_transac WHERE `prod_code` = ?', $dataprodCode)->fetchArray();
-                      $newFormat = date("Y-m-d", strtotime($toCheckExpired['exp_date']));
-                      if ($newFormat == date('Y-m-d')) {
-                        echo   '<td class="text-center bg-danger text-white">' . $toCheckExpired['quantity'] . ' </td>';
-                      } else {
-                        echo  '<td class="text-center bg-primary text-white">0</td>';
-                      }
-                      ?>
-
+                    <td class="text-center"><?php echo $data['available']; ?></td>
+                    <?php if ($data['expired'] > 0) { ?>
+                    <td class="text-center"><?php echo $data['expired']; ?></td>
+                    <?php } else { ?>
+                    <td class="text-center">0</td>
+                    <?php } ?>
                     <td class="text-center">
                       <a href="#" onclick class="btn btn-warning" type="button"><i class="bi bi-trash"></i>
                         Dispose</a>
@@ -87,6 +81,11 @@ include_once('security/newsource.php');
     </section>
   </main>
   <?php include('includes/footer.php'); ?>
+  <script>
+  function viewExpired(id, expiredList) {
+    alert(id)
+  }
+  </script>
 </body>
 
 </html>
