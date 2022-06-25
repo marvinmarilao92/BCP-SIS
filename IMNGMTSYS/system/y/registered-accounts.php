@@ -96,7 +96,7 @@
               <div class="table-responsive-lg">
 
                 <!-- Table with stripped rows -->
-              <table class="table-striped datatable " style=" font-size: 0.7em;
+              <table class="table table-striped datatable " style=" font-size: 0.7em;
                                                           " >
                 <thead>
                   <tr colspan="5">
