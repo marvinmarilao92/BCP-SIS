@@ -1,19 +1,19 @@
 <?php
-include_once 'security/newsource.php';
+include_once('security/newsource.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <?php include 'includes/head_ext.php'; ?>
+  <?php include('includes/head_ext.php'); ?>
 
 </head>
 
 <body>
-  <?php $page = 'check-up-logs';
-  $nav = 'Mlogs'; ?>
-  <?php include 'includes/header.php'; ?>
-  <?php include 'includes/sidebar.php'; ?>
+  <?php $page = "check-up-logs";
+  $nav = "Mlogs"; ?>
+  <?php include('includes/header.php'); ?>
+  <?php include('includes/sidebar.php'); ?>
   <main id="main" class="main">
 
     <!-- Page Title -->
@@ -147,6 +147,7 @@ include_once 'security/newsource.php';
                     }
                   }
                 }
+                echo '<div class ="alert alert-info" role="alert">This is where you can see all the individual logs</div>';
                 ?>
               </div>
 
@@ -209,34 +210,33 @@ include_once 'security/newsource.php';
 
 
   </main>
-  <<<<<<< HEAD <?php include('includes/footer.php'); ?> <script>
-    function viewInfo(viewID, viewinfo) {
+  <?php include('includes/footer.php'); ?>
+  <script>
+  function viewInfo(viewID, viewinfo) {
 
     $.ajax({
-    url: 'ajax/viewCheckup.php?viewID=' + viewID,
-    success: function(html) {
-    var ajaxDisplay = document.getElementById(viewinfo);
-    ajaxDisplay.innerHTML = html;
-    $("#viewCheckModal").modal("show");
-    }
+      url: 'ajax/viewCheckup.php?viewID=' + viewID,
+      success: function(html) {
+        var ajaxDisplay = document.getElementById(viewinfo);
+        ajaxDisplay.innerHTML = html;
+        $("#viewCheckModal").modal("show");
+      }
     });
-    }
+  }
 
-    function editInfo(editID, editinfo) {
+  function editInfo(editID, editinfo) {
 
     $.ajax({
-    url: 'ajax/editCheckup.php?editID=' + editID,
-    success: function(html) {
-    var ajaxDisplay = document.getElementById(editinfo);
-    ajaxDisplay.innerHTML = html;
-    $("#editCheckModal").modal("show");
-    }
+      url: 'ajax/editCheckup.php?editID=' + editID,
+      success: function(html) {
+        var ajaxDisplay = document.getElementById(editinfo);
+        ajaxDisplay.innerHTML = html;
+        $("#editCheckModal").modal("show");
+      }
     });
-    }
-    </script>
-    =======
-    <?php include 'includes/footer.php'; ?>
-    >>>>>>> d7db77304c18957359a9a0dd5c77b83070889715
+  }
+  </script>
+
 </body>
 
 </html>
