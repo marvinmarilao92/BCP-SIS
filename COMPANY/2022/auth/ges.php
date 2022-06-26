@@ -177,11 +177,15 @@ function register_as_company()
                       $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
                       
                      if($mail->send()){
+                     		$var = 'Mail Sent';
+                     		mysqli_query($conn,"INSERT INTO ims_mailer(user,states,`dat`,uid) values('$rname','$var',NOW(),'$autogen_reg')")or die(mysqli_error($conn));
                         header("Location: ../verification-email.php?id=".$url);
                         
       									die();
                       }else{
                         echo ('failed');
+                        $var = 'Not Sent';
+                     		mysqli_query($conn,"INSERT INTO ims_mailer(user,states,`dat`,uid) values('$rname','$var',NOW(),'$autogen_reg')")or die(mysqli_error($conn));
                       }
 				}
 				else{

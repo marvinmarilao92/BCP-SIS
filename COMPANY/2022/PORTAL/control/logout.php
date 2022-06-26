@@ -8,7 +8,8 @@ $num = $_SESSION['id_number'];
 $_SESSION['logged'] = false;
 $remarks = "account has been logged out";
 	$_SESSION['role'] = $row['role'];
-	$role = 'Company Coordinator';                                                 mysqli_query($link, "INSERT INTO internship_audit_trail(user,action,role,id,account_no) VALUES('$fname','$remarks','$role','$id','$num')") or die(mysqli_error($link));
+	$role = 'Company Coordinator';                                                
+	 mysqli_query($link, "INSERT INTO internship_audit_trail(user,action,role,id,account_no) VALUES('$fname','$remarks','$role','$id','$num')") or die(mysqli_error($link));
 
                                                 header("location: ../../index.php");
 session_unset();
