@@ -85,7 +85,7 @@
                         
              echo '<table class="table datatable" style=" font-size: 0.7em;
                                                           overflow-x:scroll;" >';
-                echo "<thead>";
+                echo "<thead style='background-color: skyblue;'>";
                   echo "<tr>";
                   echo'<th hidden>ID</th>'; 
                     echo'<th>Company_ID</th>';

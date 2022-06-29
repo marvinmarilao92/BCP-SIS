@@ -194,7 +194,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       }
 
                       break;
-                    case "Internship Company":
+                    case "Program Head":
                       //statement
                       $_SESSION['session_username'] = $myusername;
                       $_SESSION['session_url'] = "IMNGMTSYS/w/login/index?id=" . $_SESSION["login_key"] . "";
@@ -213,7 +213,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         require_once "core/update_key.php";
                         //update login key
                         $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                        header("location: IMNGMTSYS/w/login/index?id=" . $_SESSION["login_key"] . "");
+                        header("location: IMNGMTSYS/system/phead/index?id=" . $_SESSION["login_key"] . "");
                       }
 
                       break;

@@ -70,12 +70,12 @@
 
               <div class="card" >
                 <div class="card-body" style="font-size: 0.8em;">
+              <br>
+             
               
-              <form action="constant/dlt.php" method="POST">
-              <h5 class="card-title" style="font-size: 1.5em;" ><p>Manage Accounts</p></h5>
                  
               
-              <div class="table-responsive-lg">
+              
                  
                 <!-- Table with stripped rows -->
             <?php
@@ -102,7 +102,7 @@
 
                 <!-- Table with stripped rows -->
               <table class="table table-striped datatable ">
-                <thead>
+                <thead style="background-color: skyblue;">
                   <tr>
                   </tr>
                   <tr>
@@ -146,7 +146,7 @@
                         <a <?php echo 'data-id='.$row['id_number'];?> type='button' class='btn btn-info userinfo'><i class='bi bi-eye' data-bs-toggle='#empModal' data-bs-target='#empModal'>
                         
                     </i></a>&nbsp;           
-                    <button type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure want to Delete !')"class="btn btn-danger"><i class="bi bi-dash-circle"></i></button>        
+                    <button type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure want to Delete !')"class="btn btn-danger"><i class="bi bi-dash-circle"></i></button>       
                       </div>
                     </td>
                     
