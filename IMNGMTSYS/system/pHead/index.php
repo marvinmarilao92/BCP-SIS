@@ -13,18 +13,22 @@ require 'control/check-session-login.php';
  
   ?>
 <head>
+  
+
+  
+
   <?php require 'drawer/header.php' ?>
+
 </head>
 
 <body>
-<?php require 'drawer/modal.php' ?>
-  <body>
-  <?php require 'drawer/modal.php'?>
-  
+    <?php require 'drawer/modal.php' ?>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-    <?php require 'drawer/navbar.php' ?> 
+
+    <?php require 'drawer/navbar.php' ?>
+    <!-- End Icons Navigation -->
 
   </header><!-- End Header -->
 
@@ -36,10 +40,8 @@ require 'control/check-session-login.php';
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-    
+
     <div class="pagetitle" >
-      
-     
       <aria-label class="display-5" style="font-size: 2rem";><b>Bestlink College of the Philippines</b></aria-label>
     </div><!-- End Page Title -->
     <hr class="my-4">
@@ -47,13 +49,29 @@ require 'control/check-session-login.php';
       <div class="row">
 
 
-        
+          
+
         <!-- Left side columns -->
         <div class="col-lg-8">
           <div class="row">
 
-            <!-- Sales Card -->
+              <div class="alert alert-success" role="alert">
+                 <h4 class="alert-heading">Important Notice for New Users !</h4>
+                  <p>Aww yeah, you successfully read this important alert message.  Everyone required to Fill up the Update Info the purpose of this is to maintain good connection and avoid human error.</p>
+                  <hr>
+                  <p class="mb-0">Thank you for your cooperation have a nice day.</p>
+              </div>
 
+
+        
+            <!-- Sales Card -->
+              <div class="col-lg-8">
+               <div class="row">
+        
+
+                      
+               </div>
+          </div>
 
                          
                         
@@ -66,7 +84,7 @@ require 'control/check-session-login.php';
             <!-- End Revenue Card -->
 
             <!-- Customers Card -->
-            <?php
+                          <?php
                      require '../dbCon/bonak.php';
                        try {
                                              $link = new PDO("mysql:host=$servername;dbname=$db_name", $db_user, $db_pass);
@@ -79,20 +97,20 @@ require 'control/check-session-login.php';
 
                                              foreach($result as $row)
                                              {
-                                            ?>
+                                            ?>  
             <div class="col-12">
+               
               <div class="card mb-3">
                 <div class="row g-0">
-                                        
+                         
                   <div class="col-md-4">
                     <img src="../assets/img/default.jpg" class="img-fluid rounded-start" alt="...">
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-8" style="font-size: 0.7em;">
                     <div class="card-body">
                       <h5 class="card-title"><?php  echo $row['p_role']?></h5>
                       <p class="card-text"><?php echo $row['post']; ?></p>
-                      <br>
-                      <br>
+                      
                       <p style="text-align: right;">Date Posted: <?php echo $row['pdate']?></p>
                     </div>
                   </div>
@@ -119,7 +137,9 @@ require 'control/check-session-login.php';
               <div class="card">
              
               <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-              <?php require '../drawer/carousel.php' ?>
+
+                
+              <?php require 'drawer/carousel.php' ?>
                 
                 </div>
               </div>
@@ -248,21 +268,19 @@ require 'control/check-session-login.php';
 
   </main><!-- End #main -->
 
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+      
+    <?php require 'drawer/footer.php' ?>
+  </footer><!-- End Footer -->
+
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/quill/quill.min.js"></script>
-  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/vendor/chart.js/chart.min.js"></script>
-  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="assets/vendor/echarts/echarts.min.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
+  <?php require'drawer/js.php' ?>
+  <?php require 'drawer/copy.php' ?>
+  
+  
 </body>
 
 </html>
