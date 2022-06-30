@@ -26,13 +26,7 @@
 
     
     
-      <li class="nav-item"data-bs-toggle="modal" data-bs-target="#Extra" >
-        <a class="nav-link" style="font-size: 0.8rem;">
-          <i class="bi bi-question-circle"></i>
-          <span >Update Info
-          </span>
-        </a>
-      </li>
+     
       <li class="nav-item">
         <a class="nav-link " style="font-size: 0.8rem;" <?php echo 'href=index.php?'.$url;
           ?>
@@ -43,17 +37,35 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=dashboard?'.$url;
+        <a class="nav-link collapsed" <?php echo 'href=announcement?'.$url;
         ?>
         style="font-size: 0.8rem;">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+         <i class="bi bi-flag"></i>
+          <span>Announcements</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#verticalycentered" style="font-size: 0.8rem;">
+        <a class="nav-link collapsed" <?php echo 'href=event?'.$url;
+        ?>
+        style="font-size: 0.8rem;">
+         
+          <i class="bi bi-calendar-event"></i>
+          <span>Events</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" <?php echo 'href=feedback?'.$url;
+        ?>
+        style="font-size: 0.8rem;">
           <i class="bi bi-envelope"></i>
-          <span>Create Post</span>
+          <span>Feedback</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#verticalycentered" style="font-size: 0.8rem;">
+          <i class="bi bi-chat-right-text"></i>
+          <span>Post</span>
         </a>
       </li>
       <!-- End Dashboard Nav -->
@@ -91,168 +103,14 @@
         
       </li>
       <!-- End Components Nav -->
-      <li class="nav-heading">Master List</li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse"style="font-size: 0.8rem;">
-          <i class="bi bi-journal-text"></i><span>College</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <li class="nav-heading">Enrolled Students</li>
-            <a <?php echo 'href=college-data?id='.$url;
-        ?> style="font-size: 0.7rem;">
-              <i class="bi bi-circle"></i><span>Students</span>
-            </a>
-          </li>
-          <li>
-            <li class="nav-heading">Qualified Students Status</li>
-            <a  <?php echo 'href=qualified?'.$url;
-        ?> style="font-size: 0.7rem;">
-              <i class="bi bi-circle"></i><span>Qualified</span>
-            </a>
-          </li>
-          <li>
-            <a <?php echo 'href=pending?'.$url;
-        ?> style="font-size: 0.7rem;">
-              <i class="bi bi-circle"></i><span>Pending</span>
-            </a>
-          </li>
-          <li class="nav-heading">Screening</li>
-          <li>
-            <a <?php echo 'href=screening?'.$url;
-        ?> style="font-size: 0.7rem;">
-              <i class="bi bi-circle"></i><span>Set A Plan By Department Coordinator</span>
-            </a>
-          </li>
-           <li>
-            <a <?php echo 'href=screening?'.$url;
-        ?> style="font-size: 0.7rem;">
-              <i class="bi bi-circle"></i><span>Re - Screeening</span>
-            </a>
-          </li>
-          <li class="nav-heading">Students Screening Status</li>
-          <li>
-            <a href="forms-editors.html" style="font-size: 0.7rem;" >
-              <i class="bi bi-circle"></i><span>Passed</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-validation.html" style="font-size: 0.7rem;">
-              <i class="bi bi-circle"></i><span>Failed</span>
-            </a>
-          </li>
-          <li class="nav-heading">Intern Grade</li>
-          <li>
-            <a  <?php echo 'href=intern_eva?'.$url;
-        ?> style="font-size: 0.7rem;">
-              <i class="bi bi-circle"></i><span>Evaluation</span>
-            </a>
-          </li>
-
-
-        </ul>
-      </li>
+      
       
       <!-- -->
       <!-- End Forms Nav -->
       
       <!-- End Profile Page Nav -->
 
-        <li class="nav-item">
-        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=addOns.php?'.$url;
-          ?>>
-          <i class="bi bi-archive"></i>
-          <span>Additional Requirements</span>
-        </a>
-      </li>
-
-        <li class="nav-item">
-        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=studDTR.php?'.$url;
-          ?>>
-          <i class="bi bi-people"></i>
-          <span>Student DTR</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=mWFH.php?'.$url;
-          ?>>
-          <i class="bi bi-people"></i>
-          <span>Student | Work from Home</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=ooo.php?'.$url;
-          ?>>
-          <i class="bi bi-people"></i>
-          <span>Student OnSite</span>
-        </a>
-      </li>
-      
-
-
-       <li class="nav-item">
-        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=bya.php?'.$url;
-          ?>>
-          <i class="bi bi-people"></i>
-          <span>Student Status</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=p-dat.php?'.$url;
-          ?>>
-          <i class="bi bi-building"></i>
-          <span>Student Area</span>
-        </a>
-      </li>
         
-        <li class="nav-item">
-
-        <a class="nav-link collapsed"  data-bs-target="#SReport" data-bs-toggle="collapse" style="font-size: 0.8rem;">
-          <i class="bi bi-people"></i><span>Student Task Report</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="SReport" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          
-          
-            
-          <li>
-            <a <?php echo 'href=SWTR.php?id='.$url;
-        ?> style="font-size: 0.7rem;">
-              <i class="bi bi-circle"></i><span>Weekly Report</span>
-            </a>
-          </li>
-          <li>
-            <a <?php echo 'href=SDR.php?id='.$url;
-        ?> style="font-size: 0.7rem;">
-              <i class="bi bi-circle"></i><span>Daily Report</span>
-            </a>
-          </li>
-        </ul>
-        </li>
-
-         <li class="nav-item">
-
-        <a class="nav-link collapsed" data-bs-target="#docu" data-bs-toggle="collapse" style="font-size: 0.8rem;">
-          <i class="bi bi-file-earmark-pdf"></i><span>Document</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="docu" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          
-          
-            
-          <li>
-            <a href="#" style="font-size: 0.7rem;">
-              <i class="bi bi-circle"></i><span>Company Document</span>
-            </a>
-          </li>
-          <li>
-            <a <?php echo 'href=sdocument.php?id='.$url;
-        ?> style="font-size: 0.7rem;">
-              <i class="bi bi-circle"></i><span>Student Document</span>
-            </a>
-          </li>
-        </ul>
-        </li>
       <!-- End Tables Nav -->
        
 
@@ -260,41 +118,12 @@
 
        
 
-       <li class="nav-item">
-        <a class="nav-link collapsed" style="font-size: 0.8rem;">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li>
+       
 
 
-        <li class="nav-heading">Concerns</li>
-
-        <li class="nav-item">
-        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=concern.php?'.$url;
-          ?>>
-          <i class="bi bi-envelope"></i>
-          <span>Reports</span>
-        </a>
-      </li>
-      <!-- End Charts Nav -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=restore.php?'.$url;
-          ?>>
-          <i class="bi bi-recycle"></i>
-          <span>Recycle Bin</span>
-        </a>
-      </li>
       <!-- End Icons Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=back_data_ims.php?'.$url;
-          ?>>
-          <i class="bi bi-sd-card"></i>
-          <span>Backup Data</span>
-        </a>
-      </li>
-
+      
 
       
 

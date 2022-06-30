@@ -83,8 +83,8 @@
                                                
                       if(mysqli_num_rows($result) > 0){
                         
-             echo '<table class="table datatable" style=" font-size: 0.7em;
-                                                          overflow-x:scroll;" >';
+             echo '<table class="table datatable" style="font-size: 0.7em;
+                                                          " >';
                 echo "<thead style='background-color: skyblue;'>";
                   echo "<tr>";
                   echo'<th hidden>ID</th>'; 
@@ -189,8 +189,8 @@
             });
         });
       </script>
-
-         //viewing company data
+      <!--<script type="text/javascript">
+         viewing company data
         $(document).ready(function () {
 
             $('.view').on('click', function () {
@@ -209,8 +209,8 @@
           });
         });
        
-        
-    </script>
+ 
+    </script>-->
     <?php require 'drawer/copy.php' ?>
 </body>
 

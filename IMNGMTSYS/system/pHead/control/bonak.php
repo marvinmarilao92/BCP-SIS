@@ -4,7 +4,7 @@ $db_user= "root";
 $db_pass = "";
 $db_name = "sis_db";
 
-$link = mysqli_connect($servername, $db_user, $db_pass, $db_name);
+$link = mysqli_connect($servername, $db_user, $db_pass, $db_name);   
 
 
  if($link === false){

@@ -85,8 +85,8 @@ require 'control/check-session-login.php';
                       if(mysqli_num_rows($result) > 0){
                         
              echo '<table class="table datatable" style=" font-size: 0.7em;
-                                                          overflow-x:scroll;" >';
-                echo "<thead>";
+                                                         " >';
+                echo "<thead style='background-color: skyblue;'>";
                   echo "<tr>";
                   echo'<th hidden>ID</th>'; 
                     echo'<th>Company_ID</th>';
@@ -135,8 +135,13 @@ require 'control/check-session-login.php';
               echo"</table>";
                }
         }
-        else{
-           echo 'No Data Found !';
+       else{
+           echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>";
+
         }
             ?>
               <!-- End Table with stripped rows -->
