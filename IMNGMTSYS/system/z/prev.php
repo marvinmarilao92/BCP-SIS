@@ -77,58 +77,75 @@ header("location:../");
               <br>
               
               <div class="table-responsive-lg">
-              <table class="table datatable" style="font-size: 0.7em;
-                                                          ">
-                <thead>
-                  <tr>
-                   
-                    <th scope="col">Representative | Trainor</th>
-                    <th scope="col">Company</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+              <?php
+                    // Include config file
+                    require '../dbCon/config.php';
 
-                  </tr>
-                </thead>
-                <tbody>
-                  <!--<tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>-->
-                </tbody>
-              </table>
+                    
+                    // Attempt select query execution
+                    $sql = "SELECT * FROM ims_company_regis";
+                    if($result = mysqli_query($conn, $sql)){
+                        if(mysqli_num_rows($result) > 0){
+              
+                echo '<table class="table datatable" style=" font-size: 0.7em;
+                                                          ">';
+                echo "<thead>";
+                echo "<tr>";
+                
+                
+                     echo'<th>Representative | Trainor</th>';
+                     echo'<th>Company</th>';
+                    echo'<th>Location</th>';
+                    echo'<th>Status</th>';
+                    echo'<th>Action</th>';
+                    
+                 echo "</tr>";
+                echo "</thead>";
+                echo "<tbody>";
+                  while($row = mysqli_fetch_array($result)){
+                                    echo "<tr>";
+                                        
+                                        
+                                        echo "<td>" . $row['repre_name']. "</td>";
+                                        echo "<td>" . $row['c_name'] . "</td>";
+                                        echo "<td>" . $row['c_address'] . "</td>";
+                                        
+                                        echo "<td>" . $row['c_status'] . "</td>";
+                                        echo "<td>";
+                                        
+                                       
+                                        echo "<a data-id={$row['id']} type='button' class='btn btn-primary see' data-bs-toggle='modal' data-bs-target='#verticalycentereddd'><i class='bi bi-eye'></i>
+                                         
+                                      </a>";
+            
+                                
+                                        echo "</td>";
+                                    echo "</tr>";
+                  }
+                  echo"</tbody>";
+                  echo"</table>";
+                  }
+                  else{
+
+                    echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>";
+
+
+                  }
+                }
+                else{
+                    
+                    echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                           Ops Something went wrong !
+                                </center>
+                          </div>";
+
+                }
+                ?>
               <!-- End Table with stripped rows -->
             </div>
 
@@ -155,57 +172,76 @@ header("location:../");
               <br>
               
               <div class="table-responsive-lg">
-              <table class="table datatable" style="font-size: 0.7em;
-                                                          ">
-                <thead>
-                  <tr>
-                   
-                    <th scope="col">Fullname |Trainee</th>
-                    <th scope="col">Course</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+             <?php
+                    // Include config file
+                    require '../dbCon/config.php';
 
-                  </tr>
-                </thead>
-                <tbody>
-                  <!--<tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>-->
-                </tbody>
-              </table>
+                    
+                    // Attempt select query execution
+                    $sql = "SELECT * FROM ims_company_regis
+                            WHERE c_status='Approved'";
+                    if($result = mysqli_query($conn, $sql)){
+                        if(mysqli_num_rows($result) > 0){
+              
+                echo '<table class="table datatable" style=" font-size: 0.7em;
+                                                          ">';
+                echo "<thead>";
+                echo "<tr>";
+                
+                
+                     echo'<th>Representative | Trainor</th>';
+                     echo'<th>Company</th>';
+                    echo'<th>Location</th>';
+                    echo'<th>Status</th>';
+                    echo'<th>Action</th>';
+                    
+                 echo "</tr>";
+                echo "</thead>";
+                echo "<tbody>";
+                  while($row = mysqli_fetch_array($result)){
+                                    echo "<tr>";
+                                        
+                                        
+                                        echo "<td>" . $row['repre_name']. "</td>";
+                                        echo "<td>" . $row['c_name'] . "</td>";
+                                        echo "<td>" . $row['c_address'] . "</td>";
+                                        
+                                        echo "<td>" . $row['c_status'] . "</td>";
+                                        echo "<td>";
+                                        
+                                       
+                                        echo "<a data-id={$row['id']} type='button' class='btn btn-primary see' data-bs-toggle='modal' data-bs-target='#verticalycentereddd'><i class='bi bi-eye'></i>
+                                         
+                                      </a>";
+            
+                                
+                                        echo "</td>";
+                                    echo "</tr>";
+                  }
+                  echo"</tbody>";
+                  echo"</table>";
+                  }
+                  else{
+
+                    echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>";
+
+
+                  }
+                }
+                else{
+                    
+                    echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                           Ops Something went wrong !
+                                </center>
+                          </div>";
+
+                }
+                ?>
               <!-- End Table with stripped rows -->
             </div>
 
@@ -230,57 +266,76 @@ header("location:../");
               <br>
               
               <div class="table-responsive-lg">
-              <table class="table datatable" style="font-size: 0.7em;
-                                                          ">
-                <thead>
-                  <tr>
-                   
-                    <th scope="col">Name</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+              <?php
+                    // Include config file
+                    require '../dbCon/config.php';
 
-                  </tr>
-                </thead>
-                <tbody>
-                  <!--<tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>-->
-                </tbody>
-              </table>
+                    
+                    // Attempt select query execution
+                    $sql = "SELECT * FROM ims_company_regis
+                            WHERE c_status='Rejected'";
+                    if($result = mysqli_query($conn, $sql)){
+                        if(mysqli_num_rows($result) > 0){
+              
+                echo '<table class="table datatable" style=" font-size: 0.7em;
+                                                          ">';
+                echo "<thead>";
+                echo "<tr>";
+                
+                
+                     echo'<th>Representative | Trainor</th>';
+                     echo'<th>Company</th>';
+                    echo'<th>Location</th>';
+                    echo'<th>Status</th>';
+                    echo'<th>Action</th>';
+                    
+                 echo "</tr>";
+                echo "</thead>";
+                echo "<tbody>";
+                  while($row = mysqli_fetch_array($result)){
+                                    echo "<tr>";
+                                        
+                                        
+                                        echo "<td>" . $row['repre_name']. "</td>";
+                                        echo "<td>" . $row['c_name'] . "</td>";
+                                        echo "<td>" . $row['c_address'] . "</td>";
+                                        
+                                        echo "<td>" . $row['c_status'] . "</td>";
+                                        echo "<td>";
+                                        
+                                       
+                                        echo "<a data-id={$row['id']} type='button' class='btn btn-primary see' data-bs-toggle='modal' data-bs-target='#verticalycentereddd'><i class='bi bi-eye'></i>
+                                         
+                                      </a>";
+            
+                                
+                                        echo "</td>";
+                                    echo "</tr>";
+                  }
+                  echo"</tbody>";
+                  echo"</table>";
+                  }
+                  else{
+
+                    echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>";
+
+
+                  }
+                }
+                else{
+                    
+                    echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                           Ops Something went wrong !
+                                </center>
+                          </div>";
+
+                }
+                ?>
               <!-- End Table with stripped rows -->
             </div>
 

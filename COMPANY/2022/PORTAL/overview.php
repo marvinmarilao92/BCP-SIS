@@ -2,7 +2,7 @@
 <html lang="en">
 <?php require 'control/check-session-login.php';
 if ($user_online == "true") {
-if ($role == "coordinator") {
+if ($role == "Company Coordinator") {
 }else{
 header("location:../");   
 }
@@ -78,7 +78,7 @@ header("location:../");
                 </div>
 
                 <div class="card-body" style="text-align: right;">
-                  <label class="card-title" style="font-size:1.8em;
+                  <label class="card-title" style="font-size:1.8rem;
                   font-family: Times-New Roman;">BS<span> Information Technology </span></label>
 
                   <div class="d-flex align-items-center">
@@ -86,7 +86,33 @@ header("location:../");
                       <i class="bi bi-cart"><img src="assets/img/BCPlogo.png" alt="">&nbsp;</i>
                     </div>
                     <div class="card-body">
-                      <h6 style="font-size: 1.5em;">No Available</h6>
+                      <?php 
+                       require 'dbCon/config.php';
+                        try{  
+                          $total = "SELECT *FROM ims_apply_info
+                                      WHERE s_course = 'BSIT'";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+                            ?>
+                           <h6 style="font-size: 1rem;
+                                      color: red;">No Available</h6>
+                           <?php
+
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
                       
                     </div>
                   </div>
@@ -115,7 +141,7 @@ header("location:../");
                 </div>
 
                 <div class="card-body" style="text-align: right;">
-                  <label class="card-title" style="font-size:1.8em;
+                  <label class="card-title" style="font-size:1.8rem;
                   font-family: Times-New Roman;">BS<span> Office Administration</span></label>
 
                   <div class="d-flex align-items-center">
@@ -123,7 +149,33 @@ header("location:../");
                       <img src="assets/img/BCPlogo.png" alt="">&nbsp;
                     </div>
                     <div class="card-body">
-                      <h6 style="font-size: 1.5em;">No Available</h6>
+                     <?php 
+                       require 'dbCon/config.php';
+                        try{  
+                          $total = "SELECT *FROM ims_apply_info
+                                      WHERE s_course = 'BSOA'";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+                            ?>
+                           <h6 style="font-size: 1rem;
+                                      color: red;">No Available</h6>
+                           <?php
+
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
                       
                     </div>
                   </div>
@@ -144,13 +196,14 @@ header("location:../");
                       <h5>Filter</h5>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#BSCrim">Preview</a></li>
+                    <li><a class="dropdown-item" href="saq.php">Skills and Qualifications</a></li>
                     
                   </ul>
                 </div>
 
                 <div class="card-body" style="text-align: right;">
-                  <label class="card-title" style="font-size:1.8em;
+                  <label class="card-title" style="font-size:1.8rem;
                   font-family: Times-New Roman;">BS<span> Criminology</span></label>
 
                   <div class="d-flex align-items-center">
@@ -158,7 +211,35 @@ header("location:../");
                       <img src="assets/img/BCPlogo.png" alt="">&nbsp;
                     </div>
                     <div class="card-body">
-                      <h6 style="font-size: 1.5em;">1 Available</h6>
+
+
+                      <?php 
+                       require 'dbCon/config.php';
+                        try{  
+                          $total = "SELECT *FROM ims_apply_info
+                                      WHERE s_course = 'BSCrim'";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+                            ?>
+                           <h6 style="font-size: 1rem;
+                                      color: red;">No Records Found</h6>
+                           <?php
+
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
                       
                     </div>
                   </div>
@@ -178,15 +259,16 @@ header("location:../");
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
                       <h5>Filter</h5>
-                    </li>
+                    </li> 
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
+                     <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#BSHMinfo">Preview</a></li>
+                    <li><a class="dropdown-item" href="saq.php">Skills and Qualifications</a></li>
                     
                   </ul>
                 </div>
 
                 <div class="card-body" style="text-align: right;">
-                  <label class="card-title" style="font-size:1.8em;
+                  <label class="card-title" style="font-size:1.8rem;
                   font-family: Times-New Roman;">BS<span> Hospitality Management</span></label>
 
                   <div class="d-flex align-items-center">
@@ -194,7 +276,33 @@ header("location:../");
                       <i class="bi bi-cart"><img src="assets/img/BCPlogo.png" alt="">&nbsp;</i>
                     </div>
                     <div class="card-body">
-                      <h6 style="font-size: 1.5em;">No Available</h6>
+                      <?php 
+                       require 'dbCon/config.php';
+                        try{  
+                          $total = "SELECT *FROM ims_apply_info
+                                      WHERE s_course = 'BSHM'";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+                            ?>
+                           <h6 style="font-size: 1rem;
+                                      color: red;">No Available</h6>
+                           <?php
+
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
                       
                     </div>
                   </div>
@@ -218,13 +326,14 @@ header("location:../");
                       <h5>Filter</h5>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
+                     <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#BAinfo">Preview</a></li>
+                    <li><a class="dropdown-item" href="saq.php">Skills and Qualifications</a></li>
                     
                   </ul>
                 </div>
 
                 <div class="card-body" style="text-align: right;">
-                  <label class="card-title" style="font-size:1.8em;
+                  <label class="card-title" style="font-size:1.8rem;
                   font-family: Times-New Roman;">BS<span> Business Administration</span></label>
 
                   <div class="d-flex align-items-center">
@@ -232,8 +341,33 @@ header("location:../");
                       <i class="bi bi-cart"><img src="assets/img/BCPlogo.png" alt="">&nbsp;</i>
                     </div>
                     <div class="card-body">
-                      <h6 style="font-size: 1.5em;">No Available</h6>
-                      
+                      <?php 
+                       require 'dbCon/config.php';
+                        try{  
+                          $total = "SELECT *FROM ims_apply_info
+                                      WHERE s_course = 'BSBA'";
+                           $get_row = mysqli_query($conn, $total);
+
+
+                         if($get_total = mysqli_num_rows($get_row))
+                           {
+                           echo '<h6>'.$get_total.'</h6>';
+                           }
+                         else
+                         {
+                            ?>
+                           <h6 style="font-size: 1rem;
+                                      color: red;">No Available</h6>
+                           <?php
+
+
+                        }
+                      }catch(PDOException $e)
+                      {
+
+                     }
+
+                      ?>
                     </div>
                   </div>
                 </div>

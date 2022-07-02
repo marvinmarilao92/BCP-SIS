@@ -2,7 +2,7 @@
 
       
       <li class="nav-item">
-        <a class="nav-link " <?php echo 'href=dashboard.php?'.$url
+        <a class="nav-link " style="font-size: 0.8rem;" <?php echo 'href=dashboard.php?'.$url
           ?>
           >
           <i class="bi bi-grid"></i>
@@ -10,7 +10,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=login.php?'.$url;
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=login.php?'.$url;
         ?>
         >
           
@@ -22,20 +22,27 @@
       
       
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=overview.php?'.$url;
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=overview.php?'.$url;
         ?>
         >
           <i class="bi bi-person"></i>
           <span>Request</span>
         </a>
-      </li>       
-      
+      </li>  
+      <li class="nav-item">
+        <a class="nav-link collapsed" style="font-size: 0.8rem;"  data-bs-toggle="modal" data-bs-target="#statsReq"
+        >
+          <i class="bi bi-check-circle"></i>
+          <span>Status</span>
+        </a>
+      </li>     
+      <hr>  
       <!-- End Dashboard Nav -->
 
       
         <li class="nav-item">
 
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" style="font-size: 0.8rem;">
           <i class="bi bi-person"></i><span>Online Screening</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
 
@@ -79,7 +86,7 @@
       <!--offsite Task-->
       <li class="nav-item">
 
-          <a class="nav-link collapsed" data-bs-target="#offsite" data-bs-toggle="collapse" href="#">
+          <a class="nav-link collapsed" data-bs-target="#offsite" data-bs-toggle="collapse" style="font-size: 0.8rem;">
             <i class="bi bi-person"></i></i><span>Task</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="offsite" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -93,7 +100,7 @@
 
       <!--Task-->
       <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#tRecords" data-bs-toggle="collapse" href="#">
+          <a class="nav-link collapsed" data-bs-target="#tRecords" data-bs-toggle="collapse" style="font-size: 0.8rem;"   >
             <i class="bi bi-person"></i><span>Trainee Task Records</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="tRecords" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -107,7 +114,7 @@
       </li>
       <!-- End Components Nav -->
       <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#trainee" data-bs-toggle="collapse" href="#">
+            <a class="nav-link collapsed" data-bs-target="#trainee" data-bs-toggle="collapse" style="font-size: 0.8rem;">
               <i class="bi bi-person"></i><span>Trainee Performance</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="trainee" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -134,7 +141,7 @@
       <!--Trainee Sched-->
          <li class="nav-item">
 
-        <a class="nav-link collapsed" data-bs-target="#sched" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#sched" data-bs-toggle="collapse" style="font-size: 0.8rem;">
           <i class="bi bi-calendar-check"></i><span>Schedule</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="sched" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -161,11 +168,11 @@
         </ul>
 
       </li>
-      
+      <hr>
       <!--END OF SCHED -->
       
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#reports" data-bs-toggle="collapse" href="#">
+            <a class="nav-link collapsed" data-bs-target="#reports" data-bs-toggle="collapse" style="font-size: 0.8rem;">
               <i class="bi bi-flag"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="reports" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -188,10 +195,19 @@
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=restore.php?'.$url;
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=restore.php?'.$url;
           ?>>
           <i class="bi bi-recycle"></i>
           <span>Recycle Bin</span>
+        </a>
+      </li>
+      <!-- End Icons Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=restore.php?'.$url;
+          ?>>
+          <i class="bi bi-sd-card"></i>
+          <span>Backup Data</span>
         </a>
       </li>
       <!-- End of REPORTS -->

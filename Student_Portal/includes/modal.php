@@ -20,6 +20,7 @@
                           <label for="floatingName">Username</label>
                     </div>
                 </div>
+                <br>
                 
                 <div class="col-12">
                     <div class="form-floating">

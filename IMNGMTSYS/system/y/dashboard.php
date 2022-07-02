@@ -535,9 +535,9 @@ header("location:../");
                   </div>
                 </div><!-- End activity item-->
 
-                <div class="activity-item d-flex">
                   <div class="activite-label">2 days</div>
                   <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+                <div class="activity-item d-flex">
                   <div class="activity-content">
                     Est sit eum reiciendis exercitationem
                   </div>
@@ -577,7 +577,7 @@ header("location:../");
             <!-- End Website Traffic -->
 
           <!-- News & Updates Traffic -->
-          <div class="card">
+          
             <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -628,7 +628,7 @@ header("location:../");
               </div><!-- End sidebar recent posts-->
 
             </div>
-          </div><!-- End News & Updates -->
+          <!-- End News & Updates -->
 
         </div><!-- End Right side columns -->
 

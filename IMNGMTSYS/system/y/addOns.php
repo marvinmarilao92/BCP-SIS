@@ -63,7 +63,7 @@ require 'control/check-session-login.php';
               <div class="table-responsive-lg">
               <table class="table datatable" style="font-size: 0.7em;
                                                           ">
-                <thead>
+                <thead style="background-color: skyblue;">
                   <tr>
                    
                     <th scope="col">Filename</th>
