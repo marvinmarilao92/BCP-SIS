@@ -58,13 +58,17 @@ if ($user_online == "true") {
         <div class="col-lg-12">
 
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="font-size: 0.8em;">
               <br>
+              <div class="card">
+                <div class="card-body" style="font-size: 0.8em;">
+                  <br>
               
 
               <!-- Bordered Tabs Justified -->
               <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
                 <li class="nav-item flex-fill" role="presentation">
+
                   <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true">Intern</button>
                 </li>
                 
@@ -72,6 +76,8 @@ if ($user_online == "true") {
                   <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Company Coordinator  </button>
                 </li>
               </ul>
+              <br>
+
               <div class="tab-content pt-2" id="borderedTabJustifiedContent">
                 <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab">
                   <div class='alert alert-danger' role='alert' >
@@ -91,6 +97,8 @@ if ($user_online == "true") {
               </div><!-- End Bordered Tabs Justified -->
 
             </div>
+          </div>
+          </div>
           </div>
         </div>
       </div>

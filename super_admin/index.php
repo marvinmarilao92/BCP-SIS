@@ -339,7 +339,7 @@ if (isset($_GET['logs']) && $_GET['logs'] == 1) {
       <div class="modal-body">
         <div class="row align-items-top">
           <!-- Insert your Module here -->
-          <div class="col-lg-6">
+          <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
                 <a href="../IMNGMTSYS/system/z/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
@@ -362,6 +362,16 @@ if (isset($_GET['logs']) && $_GET['logs'] == 1) {
             </div>
           </div>
           <!-- End Insert your Module here -->
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <a href="../IMNGMTSYS/system/pHead/index.php?id=<?php echo $_SESSION["login_key"]; ?>">
+                  <h5 class="card-title">Program Head</h5>
+                </a>
+                <p class="card-text">Click Here . . . .</p>
+              </div>
+            </div>
+          </div>
           <!-- Insert your Module here -->
           
           <!-- End Insert your Module here -->

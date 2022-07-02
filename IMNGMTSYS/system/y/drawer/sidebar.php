@@ -70,20 +70,20 @@
             
           <li>
             <a <?php echo 'href=registered-accounts?id='.$url;
-        ?>>
-              <i class="bi bi-person"></i><span>Registered Accounts</span>
+        ?> style="font-size: 0.7rem;">
+              <i class="bi bi-circle"></i><span>Registered Accounts</span>
             </a>
           </li>
           <li class="nav-heading" >Account Status</li>
           <li>
             <a <?php echo 'href=approved-accounts?id='.$url;
-        ?>>
+        ?> style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Approved Accounts</span>
             </a>
           </li>
           <li>
             <a  <?php echo 'href=rejected?id='.$url;
-        ?>>
+        ?> style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Rejected Accounts</span>
             </a>
           </li>
@@ -101,50 +101,51 @@
           <li>
             <li class="nav-heading">Enrolled Students</li>
             <a <?php echo 'href=college-data?id='.$url;
-        ?>>
+        ?> style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Students</span>
             </a>
           </li>
           <li>
             <li class="nav-heading">Qualified Students Status</li>
             <a  <?php echo 'href=qualified?'.$url;
-        ?>>
+        ?> style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Qualified</span>
             </a>
           </li>
           <li>
             <a <?php echo 'href=pending?'.$url;
-        ?>>
+        ?> style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Pending</span>
             </a>
           </li>
           <li class="nav-heading">Screening</li>
           <li>
             <a <?php echo 'href=screening?'.$url;
-        ?>>
+        ?> style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Set A Plan By Department Coordinator</span>
             </a>
           </li>
            <li>
             <a <?php echo 'href=screening?'.$url;
-        ?>>
+        ?> style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Re - Screeening</span>
             </a>
           </li>
           <li class="nav-heading">Students Screening Status</li>
           <li>
-            <a href="forms-editors.html">
+            <a href="forms-editors.html" style="font-size: 0.7rem;" >
               <i class="bi bi-circle"></i><span>Passed</span>
             </a>
           </li>
           <li>
-            <a href="forms-validation.html">
+            <a href="forms-validation.html" style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Failed</span>
             </a>
           </li>
           <li class="nav-heading">Intern Grade</li>
           <li>
-            <a href="intern_eva.php">
+            <a  <?php echo 'href=intern_eva?'.$url;
+        ?> style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Evaluation</span>
             </a>
           </li>
@@ -217,13 +218,13 @@
             
           <li>
             <a <?php echo 'href=SWTR.php?id='.$url;
-        ?>>
+        ?> style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Weekly Report</span>
             </a>
           </li>
           <li>
             <a <?php echo 'href=SDR.php?id='.$url;
-        ?>>
+        ?> style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Daily Report</span>
             </a>
           </li>
@@ -240,13 +241,13 @@
           
             
           <li>
-            <a href="#">
+            <a href="#" style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Company Document</span>
             </a>
           </li>
           <li>
             <a <?php echo 'href=sdocument.php?id='.$url;
-        ?>>
+        ?> style="font-size: 0.7rem;">
               <i class="bi bi-circle"></i><span>Student Document</span>
             </a>
           </li>
@@ -287,7 +288,7 @@
       <!-- End Icons Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=restore.php?'.$url;
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=back_data_ims.php?'.$url;
           ?>>
           <i class="bi bi-sd-card"></i>
           <span>Backup Data</span>
@@ -299,7 +300,7 @@
 
     </ul>
     <br>
-    <div class="card">
+    <div class="card" style="font-size: 0.8rem;">
             <div class="card-body">
               <h5 class="card-title"><i class="bi bi-exclamation-circle-fill" style="width:10px;"></i>&nbsp;Fair Warning</h5>
               <div class="no-overflow"><p><b>PROSECUTION</b>: Under Philippine law (Republic Act No. 8293), copyright infringement is punishable by the following: Imprisonment of between 1 to 3 years and a fine of between 50,000 to 150,000 pesos for the first offense. Imprisonment of 3 years and 1 day to six years plus a fine of between 150,000 to 500,000 pesos for the second offense.</p><p><b>COURSE OF ACTION</b>: Whoever has maliciously uploaded these concerned materials are hereby given an ultimatum to take it down within 24-hours. Beyond the 24-hour grace period, our Legal Department shall initiate the proceedings in coordination with the National Bureau of Investigation for IP Address tracking, account owner identification, and filing of cases for prosecution.</p></div>

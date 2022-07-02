@@ -36,8 +36,11 @@ function register_as_company()
 
 
 
-
-				 $autogen_reg = 'COM120'.get_rand_numbers(4).'';
+		        date_default_timezone_set("asia/manila");
+              $year = date("Y",strtotime("+0 HOURS"));
+              $random_num= get_rand_numbers(3);
+              
+				 $autogen_reg = "COM".$year.$random_num;
 				
 				 $status = 'Pending';
 				 date_default_timezone_set("asia/manila");
@@ -70,7 +73,16 @@ function register_as_company()
 				$gender =       	validate($_POST['gender']);
 				$position =			validate($_POST['position']);
 
-				$role = 'coordinator';
+
+				$role = 'Company Coordinator';
+
+
+				 $encr = md5($role);
+                  $encri = sha1($encr);
+                  $f = sha1($encri);
+                  $jk = sha1($role);
+                  $d = password_hash($encr, PASSWORD_DEFAULT);
+                  $url = $d."key".$encr.""."".$encri."".$f."".$jk;
 				if ($password_1 != $password_2)
 				{
 					header("Location: ../index.php?error=Password did not match, Please try again");
@@ -113,46 +125,67 @@ function register_as_company()
                       $mail->AddReplyTo('internship_system@bcp-sis.ga', "No Reply"); // indicates ReplyTo headers
                     
                     $body = 
-                      "<div class='card'>          
-                        <div class='card-body'>
-                          <h5 class='card-title'></h5>
-                          
-                          <br>Hi ".$rname."<br><br>
-                          
 
-                          		Account Details <br>
+                    	"<div class='card'>          
+                             <div class='card-body'>
+                               <h5 class='card-title'></h5>
+                               <p class='card-text'>This is direct message from Internship Technical Support                       
+                               <br>Magandang Buhay ".$rname."!<br><br>
+                               You account is successfully registerd in Bestlink College of the Philippines all the neccessary <br>
+                               information to access your account is listed down below.<br><br>
+                               Auto-generate Username: " .$autogen_reg. "<br>
+                               Password: " .$password_1. " <br>	
+                               Status: " .$status. "<br><br>
 
-                          		Auto-gen Username : " .$autogen_reg. "<br>
-                          						 Password : " .$password_1. " <br>		
-                          						 	 Status : " .$status. "<br><br>
+                               if your Account status is Deactivated you must submit first all the necessary <br>
+                               requiremets in order to access your account.<br> 
+                               if you can already access your account we highly suggest to change your default password as soon as you<br>
+                               received this message.
+                               <br><br>
+                               To login your account please proceed to this link <a href='http://company-login.sis-bcp.com'>company-login.sis-bcp.com</a><br><br>
+                               
+                               This email is sent from an account we use for sending messages only. So if<br>
+                               you want to contact us, don't reply to this email-we won't get your response.<br>
+                               Instead, Go to Registrar office to inquire.<br>
+                               <br>Thank you! and welcome to Bestlink College of the Philippines.</p>
+                             </div>
+                           </div>
+                           
+                           <div class='alert alert-light bg-light border-0 alert-dismissible fade show' role='alert'>
+                             © Copyright Bestlink College of the Philippines. All Rights Reserved.
+                           </div>             
+                         ";
 
 
 
 
 
-                          
-                          This email is sent from an account we use for sending messages only. So if<br>
-                          you want to contact us, don't reply to this email-we won't get your<br>
-                          response. Instead, Go to Registrar office to comply.<br>
-                          <br>Thank you! Stay safe.</p>
-                        </div>
-                      </div>
+
+
+
+
+
+
+
+
                       
-                      <div class='alert alert-light bg-light border-0 alert-dismissible fade show' role='alert'>
-                        © Copyright Bestlink College of the Philippines. All Rights Reserved.
-                      </div>             
-                    ";
-                      $subject = 'Account Successfully Created';
+                     
                       //Content
                       $mail->isHTML(true); //Set email format to HTML
-                      $mail->Subject = $subject;
+                      $mail->Subject = 'Account Successfully Created';
                       $mail->Body    = $body;
                       $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
                       
                      if($mail->send()){
-                        echo ('success');
+                     		$var = 'Mail Sent';
+                     		mysqli_query($conn,"INSERT INTO ims_mailer(user,states,`dat`,uid) values('$rname','$var',NOW(),'$autogen_reg')")or die(mysqli_error($conn));
+                        header("Location: ../verification-email.php?id=".$url);
+                        
+      									die();
                       }else{
                         echo ('failed');
+                        $var = 'Not Sent';
+                     		mysqli_query($conn,"INSERT INTO ims_mailer(user,states,`dat`,uid) values('$rname','$var',NOW(),'$autogen_reg')")or die(mysqli_error($conn));
                       }
 				}
 				else{

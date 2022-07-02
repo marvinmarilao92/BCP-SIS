@@ -63,7 +63,7 @@ if ($user_online == "true") {
 
               <img src="../assets/img/default.jpg" alt="Profile" class="rounded-circle">
               <h2><?php echo $fnamee?> <?php echo $mnamee ?> <?php  echo $lnamee ?></h2>
-              <small><?php echo $rolee ?> Account</small>
+              <small><?php echo $rolee ?></small>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -112,7 +112,7 @@ if ($user_online == "true") {
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Department</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $verified_session_department ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $course ?></div>
                   </div>
 
                   <div class="row">

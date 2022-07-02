@@ -57,8 +57,15 @@
         <div class="col-lg-12">
 
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="font-size: 0.8em;">
+              <br>
+              <br>
+              <div class="card">
+                
+
+                <div class="card-body" style="font-size: 0.8em;">
               <h5 class="card-title"></h5>
+              
               <p>List of College Students that are Officially Enrolled.</p>
                <?php
                     // Include config file
@@ -72,9 +79,8 @@
                     if($result = mysqli_query($conn, $sql)){
                         if(mysqli_num_rows($result) > 0){
               
-                echo '<table class="table datatable" style=" font-size: 0.7em;
-                                                          ">';
-                echo "<thead>";
+                echo '<table class=" table table-striped datatable">';
+                echo "<thead style='background-color: skyblue'>";
                 echo "<tr>";
                 
                 echo'<th>Student_ID</th>';
@@ -134,7 +140,8 @@
 
             </div>
           </div>
-
+          </div>
+          </div>
         </div>
       </div>
     </section>

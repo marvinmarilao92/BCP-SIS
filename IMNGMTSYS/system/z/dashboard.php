@@ -93,7 +93,10 @@ header("location:../");
                          else
                          {
 
-
+                          ?>
+                           <h6 style="font-size: 1em;
+                                      color: red;">No Records Found</h6>
+                           <?php
 
                         }
                       }catch(PDOException $e)
@@ -122,7 +125,8 @@ header("location:../");
                       <h6>Filter</h6>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Accounts</a></li>
+                    <li><a class="dropdown-item"<?php echo 'href=DeptView?'.$url;
+        ?>>Accounts</a></li>
                     <li><a class="dropdown-item" href="#">Reports</a></li>
                   
                   </ul>
@@ -140,7 +144,7 @@ header("location:../");
                        require '../dbCon/config.php';
                         try{  
                           $total = "SELECT *From user_information
-                                  WHERE department='OJT System'";
+                                   Where role = 'Internship Coordinator'";
                            $get_row = mysqli_query($conn, $total);
 
 

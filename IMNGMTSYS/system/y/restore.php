@@ -58,10 +58,12 @@ if ($user_online == "true") {
         <div class="col-lg-12">
 
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="font-size: 0.8em;">
               <br>
               
-
+              <div class="card">
+                <div class="card-body" style="font-size: 0.8em;">
+                  <br>
               <!-- Bordered Tabs Justified -->
               <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
                 <li class="nav-item flex-fill" role="presentation">
@@ -75,11 +77,117 @@ if ($user_online == "true") {
               <br>
               <div class="tab-content pt-2" id="borderedTabJustifiedContent">
                 <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab">
-                  <div class='alert alert-danger' role='alert' >
+                  <form action="constant/dlt.php" method="POST">
+             
+                 
+              
+              
+                 
+                <!-- Table with stripped rows -->
+            <?php
+                    // Include config file
+                    require '../dbCon/config.php';
+
+                    
+                    // Attempt select query execution
+                    $sql = "SELECT * FROM `ims_company_regis`
+                    INNER JOIN ims_department_information
+                    ON
+                    ims_department_information.id = ims_company_regis.id
+                    INNER JOIN ims_files
+                    ON 
+                    ims_files.uid = ims_company_regis.id
+                                        ORDER BY `datee` desc";
+                    
+                    if($result = mysqli_query($conn, $sql)){
+                                               
+                      if(mysqli_num_rows($result) > 0){
+                     ?>
+              
+              <div class="table-responsive-lg">
+
+                <!-- Table with stripped rows -->
+              <table class="table table-striped datatable ">
+                <thead style="background-color: skyblue;">    
+                  <tr>
+                  </tr>
+                  <tr>
+
+                    <th scope="col"><input type="checkbox" id="checkAll"><label></label></th>
+                    <th scope="col">Company_ID</th>
+                    <th scope="col">Company</th>
+                    <th colspan="2">Representative Name</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Date Registered</th>
+                    <th scope="col">Status</th>
+                    <th colspan="3">Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <?php
+                 while($row = mysqli_fetch_array($result)){
+
+                  ?>
+
+                  <tr>
+
+                    <td hidden><?= $row['id']; ?></td>
+                    <td><input type="checkbox" class="checkItem" value="<?=$row['uid']?>" name="id[]" ></td>
+                    <td data-label="Company_ID"> <?= $row['id_number']; ?></td>
+                    <td data-label="Company_Name"><?= $row['c_name']; ?></td>
+                    <td colspan="2"><?= $row['repre_name']; ?></td>
+                    <td><?= $row['c_email']; ?></td>
+                    <td><?= $row['contact']; ?></td>
+                    <td><?= $row['datee']; ?></td>
+                    <td><?= $row['c_status']; ?></td>
+
+                    <td WIDTH="7%">      
+                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
+                       
+                        <button type="button" class="btn btn-primary editt" data-bs-toggle="modal" data-bs-target="#edit"><i class="bi bi-pencil"></i></button>&nbsp;  
+                        <a type='button' class='btn btn-secondary' <?php echo 'href=constant/get_file.php?id='.$row['id']; ?>><i class='bi bi-download'></i></a>&nbsp;
+                        <a <?php echo 'data-id='.$row['id_number'];?> type='button' class='btn btn-info userinfo'><i class='bi bi-eye' data-bs-toggle='#empModal' data-bs-target='#empModal'>
+                        
+                    </i></a>&nbsp;           
+                    <button type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure want to Delete !')"class="btn btn-danger"><i class="bi bi-dash-circle"></i></button>        
+                      </div>
+                    </td>
+                    
+                    
+                  </tr>
+                  <?php
+
+                }
+                 ?>
+                </tbody>
+
+              </table>
+              <?php
+                 }
+                  
+                }
+              
+             
+              else{
+               echo  "<div class='alert alert-danger' role='alert' >
                                 <center>
-                                           No Data Found !
+                                          <i class='bi bi-info-circle'></i> No Record Found !
                                 </center>
-                          </div>
+                          </div>";
+
+                  }
+            ?>
+
+
+              <!-- End Table with stripped rows -->
+               
+            
+              <!-- End Table with stripped rows -->
+            </div>
+          </form>
 
                 </div>
                 
@@ -92,8 +200,10 @@ if ($user_online == "true") {
                 </div>
               </div><!-- End Bordered Tabs Justified -->
 
-            </div>
-          </div>
+                  </div>
+                 </div>
+               </div>
+           </div>
         </div>
       </div>
     </section>
@@ -115,6 +225,8 @@ if ($user_online == "true") {
 </body>
 
 </html> 
+
+
 
 
 

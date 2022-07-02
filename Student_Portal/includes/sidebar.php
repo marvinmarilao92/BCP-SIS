@@ -178,7 +178,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#login">
           <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
+        <span>Portal</span>
         </a>
       </li>
 

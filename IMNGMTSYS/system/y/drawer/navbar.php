@@ -1,5 +1,6 @@
 <div class="d-flex align-items-center justify-content-between">
-      <a href="y/.." class="logo d-flex align-items-center">
+      <a <?php echo 'href=index.php?'.$url;
+          ?> class="logo d-flex align-items-center">
         <img src="../assets/img/BCPlogo.png" alt="">&nbsp;
         <span class="d-none d-lg-block" style="font-size: 1.2em;" >Internship Coordinator</span>
       </a>

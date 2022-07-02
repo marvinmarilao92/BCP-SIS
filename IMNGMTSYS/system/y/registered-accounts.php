@@ -19,9 +19,10 @@
 
 <head>
 
-  <title>BCP - Registered Accounts </title>
+  <title>BCP - Registered </title>
   <?php require 'drawer/header.php';
   ?>
+  
 </head>
 
 <body>
@@ -63,25 +64,21 @@
         <div class="col-lg-12">
 
           <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><p>Manage Accounts</p></h5>
-             <!-- <p class="card-title">Legends</p>
-              <div class = "container" style="font-size:0.8em;">
-              <ul>    
-                  <li>
-                    <button type="button" class="btn btn-primary" disabled><i class="bi bi-pencil"></i></button>&nbsp; To change status.
-                  </li>
-                  <li>
-                    <button type="button" class="btn btn-secondary" disabled><i class="bi bi-download"></i></button>&nbsp;To download the background company files.
-                  </li>
-                  <li>
-                    <button type="button" class="btn btn-info" disabled><i class="bi bi-eye"></i></button>&nbsp;To view company information.
-                  </li>
-              </ul>
-              </div> -->
-              <br><br>
-              <div class="table-responsive-lg">
-               <?php
+            <div class="card-body" style="font-size: 0.8em;" >
+              <br>
+              <br>
+
+              <div class="card" >
+                <div class="card-body" style="font-size: 0.8em;">
+              <br>
+             
+              
+                 
+              
+              
+                 
+                <!-- Table with stripped rows -->
+            <?php
                     // Include config file
                     require '../dbCon/config.php';
 
@@ -94,76 +91,102 @@
                     INNER JOIN ims_files
                     ON 
                     ims_files.uid = ims_company_regis.id
-                    WHERE
-                    ims_company_regis.c_status = 'Pending'
-                    ORDER BY `id_number` ASC";
+                                        ORDER BY `datee` desc";
                     
                     if($result = mysqli_query($conn, $sql)){
                                                
                       if(mysqli_num_rows($result) > 0){
+                     ?>
+              
+              <div class="table-responsive-lg">
+
+                <!-- Table with stripped rows -->
+              <table class="table table-striped datatable ">
+                <thead style="background-color: skyblue;">
+                  <tr>
+                  </tr>
+                  <tr>
+
+                    <th scope="col"><input type="checkbox" id="checkAll"><label></label></th>
+                    <th scope="col">Company_ID</th>
+                    <th scope="col">Company</th>
+                    <th colspan="2">Representative Name</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Date Registered</th>
+                    <th scope="col">Status</th>
+                    <th colspan="3">Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <?php
+                 while($row = mysqli_fetch_array($result)){
+
+                  ?>
+
+                  <tr>
+
+                    <td hidden><?= $row['id']; ?></td>
+                    <td><input type="checkbox" class="checkItem" value="<?=$row['uid']?>" name="id[]" ></td>
+                    <td data-label="Company_ID"> <?= $row['id_number']; ?></td>
+                    <td data-label="Company_Name"><?= $row['c_name']; ?></td>
+                    <td colspan="2"><?= $row['repre_name']; ?></td>
+                    <td><?= $row['c_email']; ?></td>
+                    <td><?= $row['contact']; ?></td>
+                    <td><?= $row['datee']; ?></td>
+                    <td><?= $row['c_status']; ?></td>
+
+                    <td WIDTH="7%">      
+                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">                
                        
-             echo '<table class="table datatable" style=" font-size: 0.7em;
-                                                          overflow-x:scroll;" >';
-                echo "<thead>";
-                  echo "<tr>";
-                  echo'<th hidden>ID</th>'; 
-                    echo'<th>Company_ID</th>';
-                    echo'<th>Company</th>';
-                   echo'<th colspan=2>Representative Name</th>';
-                   echo'<th>Email Address</th>';
-                   echo'<th>Contact</th>';
-                   
-                   echo'<th>Date Registered</th>';
-                   
-                   
-                    echo'<th>Status</th>';  
-                    echo'<th>Action</th>';
-
+                        <button type="button" class="btn btn-primary editt" data-bs-toggle="modal" data-bs-target="#edit"><i class="bi bi-pencil"></i></button>&nbsp;  
+                        <a type='button' class='btn btn-secondary' <?php echo 'href=constant/get_file.php?id='.$row['id']; ?>><i class='bi bi-download'></i></a>&nbsp;
+                        <a <?php echo 'data-id='.$row['id_number'];?> type='button' class='btn btn-info userinfo'><i class='bi bi-eye' data-bs-toggle='#empModal' data-bs-target='#empModal'>
+                        
+                    </i></a>&nbsp;           
+                    <button type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure want to Delete !')"class="btn btn-danger"><i class="bi bi-dash-circle"></i></button>       
+                      </div>
+                    </td>
                     
-                 echo "</tr>";
-                echo "</thead>";
-                echo "<tbody>";
-                  while($row = mysqli_fetch_array($result)){
-                                    echo "<tr>";
-                                    echo "<td hidden>" . $row['id'] . "</td>";
-                                        echo "<td>" . $row['id_number'] . "</td>";
-                                        echo "<td>" . $row['c_name'] . "</td>";
-                                        echo "<td colspan = 2 >" . $row['repre_name'] ."</td>";
-                                        echo "<td>" .$row['c_email'] . "</td>";
-                                        echo "<td>" .$row['contact'] . "</td>";;
-                                        echo "<td>" . $row['datee']  . "</td>";
-                                         
-                                          
-                                        echo "<td>" . $row['c_status']  . "</td>";
-                                        echo "<td>";
-                                        
-                                       
-                                        echo '<button type="button" class="btn btn-primary editt" data-bs-toggle="modal" data-bs-target="#edit"><i class="bi bi-pencil"></i></button>&nbsp;';
+                    
+                  </tr>
+                  <?php
 
-                                         echo "<a type='button' class='btn btn-secondary' href='constant/get_file.php?id={$row['id']}'><i class='bi bi-download'></i></a>&nbsp;";  
+                }
+                 ?>
+                </tbody>
 
-                                          echo "<a data-id={$row['id_number']} type='button' class='btn btn-info userinfo'><i class='bi bi-eye' data-bs-toggle='#empModal' data-bs-target='#empModal'>
-                                        </i></a>" 
-                                                            ;
-
-
-
+              </table>
+              <?php
+                 }
+                  
+                }
+              
              
-                echo "</td>";
-              echo "</tr>";
-            }
-                echo"</tbody>";
-              echo"</table>";
-               }
-        }
-        else{
-           echo 'No Data Found !';
-        }
+              else{
+               echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                          <i class='bi bi-info-circle'></i> No Record Found !
+                                </center>
+                          </div>";
+
+                  }
             ?>
+
+
+              <!-- End Table with stripped rows -->
+               
+            
               <!-- End Table with stripped rows -->
             </div>
+          </form>
             </div>
           </div>
+
+          </div>
+      </div>
 
         </div>
       </div>
@@ -184,6 +207,23 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    
+    $(document).ready(function(){
+      $("#checkAll").click(function()
+      {
+        if($(this).is(":checked"))
+        {
+          $(".checkItem").prop('checked',true);
+        }
+        else
+        {
+          $(".checkItem").prop('checked',false);
+        }
+      });
+    });
+
+  </script>
       <script>
 
         //ediit
@@ -200,10 +240,10 @@
                 }).get();
                 console.log(data);
                 $('#com_id').val(data[0]);
-                $('#companyid').val(data[1]);
-                $('#company').val(data[2]);
-                $('#rname').val(data[3]);
-                $('#cstatus').val(data[4]);
+                $('#companyid').val(data[2]);
+                $('#company').val(data[3]);
+                $('#rname').val(data[4]);
+                $('#cstatus').val(data[5]);
                 
 
             });
@@ -214,8 +254,7 @@
          
 
           
-    </script>
-    <script>
+    
       $(document).ready(function(){
                 $('.userinfo').click(function(){
                   var userid = $(this).data('id');  
