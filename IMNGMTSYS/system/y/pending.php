@@ -54,7 +54,11 @@
         <div class="col-lg-12">
 
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="font-size: 0.8em;">
+              <br>
+                <div class="card">  
+                  <div class="card-body">
+                     
               <h5 class="card-title"></h5>
               <p>List of Students that Status is Pending.</p>
               
@@ -83,7 +87,7 @@
                 
              echo '<table class="table datatable" style=" font-size: 0.7em;
                                                           ">';
-                echo "<thead>";
+                echo "<thead style='background-color: skyblue;'>";
                   echo "<tr>";
                     echo '<th hidden>ID</th>';
                     echo'<th>Student_ID</th>';
@@ -124,6 +128,8 @@
               <!-- End Table with stripped rows -->
 
             </div>
+          </div>
+          </div>
           </div>
 
         </div>

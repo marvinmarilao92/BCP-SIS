@@ -1,20 +1,20 @@
 <ul class="sidebar-nav" id="sidebar-nav">
     <?php $key = $_SESSION["login_key"];?>
       <li class="nav-item">
-        <a class="nav-link " <?php echo 'href=index?'.$key;?>>
+        <a class="nav-link " style="font-size: 0.8rem;"<?php echo 'href=index?'.$key;?>>
           <i class="bi bi-house"></i>
           <span>Home
           </span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=dashboard?'.$key;?>>
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=dashboard?'.$key;?>>
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
         <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <a style="font-size: 0.8rem;" class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-person"></i><span>MyTask</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -22,7 +22,7 @@
           <li class="nav-heading">Upload Files and Documents</li>
             
           <li>
-            <a <?php echo 'href=wreport?'.$key;?>>
+            <a style="font-size: 0.8rem;" <?php echo 'href=wreport?'.$key;?>>
               <i class="bi bi-person"></i><span>Upload</span>
             </a>
           </li>
@@ -48,7 +48,7 @@
       </li>
       <!-- End Components Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#status" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" data-bs-target="#status" data-bs-toggle="collapse" href="#">
           <i class="bi bi-person"></i><span>Trainee</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="status" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -70,21 +70,28 @@
         <br>
       </li>
         <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=dStats?id=
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=dStats?id=
         '.$key;?>>
           <i class="bi bi-grid"></i>
           <span>Daily Status</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=rating?id=
+        <a class="nav-link collapsed" style="font-size: 0.8rem;"   <?php echo 'href=rating?id=
         '.$key;?>>
           <i class="bi bi-grid"></i>
           <span>Grade</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" <?php echo 'href=concern?id=
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=concern?id=
+        '.$key;?>>
+          <i class="bi bi-grid"></i>
+          <span>Certificate</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" style="font-size: 0.8rem;" <?php echo 'href=concern?id=
         '.$key;?>>
           <i class="bi bi-grid"></i>
           <span>Concern</span>

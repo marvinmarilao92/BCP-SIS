@@ -3,7 +3,7 @@
 <?php require 'control/check-session-login.php' ?>
 <head>
 </head>
-  <title>BCP - Approved Accounts </title>
+  <title>BCP - Approved  </title>
   <?php require 'drawer/header.php' ?>
 </head>
 
@@ -60,7 +60,7 @@
                   </li>
               </ul>
               </div>-->
-              <br><br>
+              
               <div class="table-responsive-lg">
                <?php
                     // Include config file
@@ -83,9 +83,9 @@
                                                
                       if(mysqli_num_rows($result) > 0){
                         
-             echo '<table class="table datatable" style=" font-size: 0.7em;
-                                                          overflow-x:scroll;" >';
-                echo "<thead>";
+             echo '<table class="table datatable" style="font-size: 0.7em;
+                                                          " >';
+                echo "<thead style='background-color: skyblue;'>";
                   echo "<tr>";
                   echo'<th hidden>ID</th>'; 
                     echo'<th>Company_ID</th>';
@@ -133,7 +133,12 @@
                }
         }
         else{
-           echo 'No Data Found !';
+           echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>";
+
         }
             ?>
               <!-- End Table with stripped rows -->
@@ -183,8 +188,9 @@
 
             });
         });
-
-         //viewing company data
+      </script>
+      <!--<script type="text/javascript">
+         viewing company data
         $(document).ready(function () {
 
             $('.view').on('click', function () {
@@ -203,8 +209,8 @@
           });
         });
        
-        
-    </script>
+ 
+    </script>-->
     <?php require 'drawer/copy.php' ?>
 </body>
 

@@ -42,13 +42,12 @@ require 'control/check-session-login.php';
  <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1 style="font-family: monospace;
-                font-size: 2.5em;">Review Accounts</h1>
+      <h1>Rejected Accounts</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href=<?php echo'index.php?'.$url;
           ?>>Home</a></li>
-          <li class="breadcrumb-item">Approved</li>
+          <li class="breadcrumb-item">Rejected</li>
           <li class="breadcrumb-item active">Accounts</li>
         </ol>
       </nav>
@@ -61,21 +60,8 @@ require 'control/check-session-login.php';
           <div class="card">
             <div class="card-body">
              
-              <p class="card-title">Legends</p>
-              <div class = "container" style="font-size:0.8em;">
-              <ul>
-                  <li>
-                    <button type="button" class="btn btn-primary" disabled><i class="bi bi-pencil"></i></button>&nbsp; To change status.
-                  </li>
-                  <li>
-                    <button type="button" class="btn btn-secondary" disabled><i class="bi bi-download"></i></button>&nbsp;To download the background company files.
-                  </li>
-                  <li>
-                    <button type="button" class="btn btn-info" disabled><i class="bi bi-eye"></i></button>&nbsp;To view company information.
-                  </li>
-              </ul>
-              </div>
-              <br><br>
+              <br>
+              <br>
               <div class="table-responsive-lg">
                <?php
                     // Include config file
@@ -92,15 +78,15 @@ require 'control/check-session-login.php';
                     ims_files.uid = ims_company_regis.id
                     WHERE
                     ims_company_regis.c_status = 'Rejected'
-                    ORDER BY `id_number` ASC";
+                    ORDER BY `datee` desc";
                     
                     if($result = mysqli_query($conn, $sql)){
                                                
                       if(mysqli_num_rows($result) > 0){
                         
              echo '<table class="table datatable" style=" font-size: 0.7em;
-                                                          overflow-x:scroll;" >';
-                echo "<thead>";
+                                                         " >';
+                echo "<thead style='background-color: skyblue;'>";
                   echo "<tr>";
                   echo'<th hidden>ID</th>'; 
                     echo'<th>Company_ID</th>';
@@ -149,8 +135,13 @@ require 'control/check-session-login.php';
               echo"</table>";
                }
         }
-        else{
-           echo 'No Data Found !';
+       else{
+           echo  "<div class='alert alert-danger' role='alert' >
+                                <center>
+                                           No Data Found !
+                                </center>
+                          </div>";
+
         }
             ?>
               <!-- End Table with stripped rows -->

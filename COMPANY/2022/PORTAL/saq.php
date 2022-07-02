@@ -2,7 +2,7 @@
 <html lang="en">
 <?php require 'control/check-session-login.php';
 if ($user_online == "true") {
-if ($role == "coordinator") {
+if ($role == "Company Coordinator") {
 }else{
 header("location:../");   
 }
@@ -62,9 +62,9 @@ header("location:../");
                                                 ></i>
                                               </label></h5> 
                                             
-                                            <form class="row g-3 needs-validation" action="includes/applyy.php" method="POST" enctype="multipart/form-data">
+                                            <form class="row g-3 needs-validation" action="search-skill.php" method="POST" >
                                             <!-- Table with stripped rows -->
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-5">
                                                 <div class="form-floating">
                                                   <select type="text" class="form-select" name="s_course" aria-label="State" id="lvl" onchange="oncollapse()" required autofocus  style="background-color: rgba(255, 255, 255, .4);">
                                                   <option value="" style="color:black" select ed="selected" disabled>Select a Category</option>
@@ -78,7 +78,7 @@ header("location:../");
                                                 </div>
                                             </div>
                                             
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-5">
                                                 <div class="form-floating">
                                                   <select type="text" class="form-select" name="s_course" aria-label="State" id="lvl" onchange="oncollapse()" required autofocus style="background-color: rgba(255, 255, 255, .4);">
                                                   <option value="" style="color:black" select ed="selected" disabled>Select a Skills</option>
@@ -87,6 +87,13 @@ header("location:../");
                                                   <option>Gateway Internet</option>
                                                   </select>
                                                   <label for="floatingName">Skills</label>
+                                                </div>
+                                                  
+                                                 
+                                          </div>
+                                          <div class="col-lg-2">
+                                                <div class="form-floating">
+                                                  <button type ="search"   name ="search" target="search-skill.php" class="btn btn-primary btn-lg rounded-pill" ><i class="bi bi-search"></i>&nbsp; Search</button>
                                                 </div>
                                                  <br>
                                                  <br>

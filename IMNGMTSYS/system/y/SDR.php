@@ -73,15 +73,16 @@ require 'control/check-session-login.php';
               </ul>
               <div class="tab-content pt-2" id="borderedTabJustifiedContent">
                 <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab"><br>
+
                  <div class="card">
-            <div class="card-body">
-             
+            <div class="card-body" style="font-size: 0.8em;">
+              <br>
               
               
               <div class="table-responsive-lg">
               <table class="table datatable" style="font-size: 0.7em;
                                                           ">
-                <thead>
+                <thead style="background-color: skyblue;">
                   <tr>
                    
                     <th scope="col">Name</th>
