@@ -144,8 +144,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                         $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                         $remarks = "account has been logged in";
-                        $fname=$ad_fname.' '.$ad_lname; 
-                        mysqli_query($link, "INSERT INTO internship_audit_trail(user,action,id,account_no,ip,host) VALUES('$fname','$remarks','$id','$admin','$ip','$host')") or die(mysqli_error($link));
+                        $fnames=  $ad_fname.' '.$ad_lname; 
+                        mysqli_query($link, "INSERT INTO internship_audit_trail(user,action,role,id,account_no,ip,host) VALUES('$fname','$remarks','$fname','$id','$admin','$ip','$host')") or die(mysqli_error($link));
                         mysqli_query($link, "INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')") or die(mysqli_error($link));
                         //used to delete ip address record for login attempts
                         mysqli_query($link, "delete from login_attempts where ip_address='$ip_address'");
@@ -169,15 +169,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       $_SESSION['hehe'] = $url;
                       $_SESSION['session_username'] = $myusername;
                       $_SESSION['session_url'] = "IMNGMTSYS/y/index?id=" . $_SESSION["login_key"] . "";
+
                       if (!empty($_SERVER["HTTPS_CLIENT_IP"])) {
                         $ip = $_SERVER["HTTPS_CLIENT_IP"];
                       } elseif (!empty($_SERVER["HTTPS_X_FORWARDED_FOR"])) {
                         $ip = $_SERVER["HTTPS_X_FORWARDED_FOR"];
                       } else {
+
                         $ip = $_SERVER["REMOTE_ADDR"];
                         $host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
                         $remarks = "account has been logged in";
-                        mysqli_query($link, "INSERT INTO internship_audit_trail(user,action,id,account_no,ip,host) VALUES('$fname','$remarks','$id','$admin','$ip','$host')") or die(mysqli_error($link));
+                        $fnamewe= $fnamee.' '.$lnamee;  
+                        $role = $rolee;
+
+                        mysqli_query($link, "INSERT INTO internship_audit_trail(user,action,role,id,account_no,ip,host) VALUES('$fnamewe','$remarks','$fname','$id','$admin','$ip','$host')") or die(mysqli_error($link));
                         mysqli_query($link, "INSERT INTO audit_logs(user_id,account_no,action,action_name,ip,host,login_time) VALUES('$id','$admin','$remarks','$fname','$ip','$host','$date')") or die(mysqli_error($link));
                         //used to delete ip address record for login attempts
                         mysqli_query($link, "delete from login_attempts where ip_address='$ip_address'");
@@ -189,7 +194,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       }
 
                       break;
-                    case "Internship Company":
+                    case "Program Head":
                       //statement
                       $_SESSION['session_username'] = $myusername;
                       $_SESSION['session_url'] = "IMNGMTSYS/w/login/index?id=" . $_SESSION["login_key"] . "";
@@ -208,7 +213,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         require_once "core/update_key.php";
                         //update login key
                         $link->query("UPDATE users SET login_key='$getQP' WHERE id_number='$myusername'") or die(mysqli_error($link));
-                        header("location: IMNGMTSYS/w/login/index?id=" . $_SESSION["login_key"] . "");
+                        header("location: IMNGMTSYS/system/phead/index?id=" . $_SESSION["login_key"] . "");
                       }
 
                       break;

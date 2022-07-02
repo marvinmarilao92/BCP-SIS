@@ -26,7 +26,7 @@ function register_as_company()
 				 require 'config.php';	
 			  	 require 'uniq.php';
 				 $autogen_reg = 'COM120'.get_rand_numbers(4).'';
-				 $role = 'coordinator';
+				 $role = 'Company Coordinator';
 				 $status = 'Pending';
 				 $dater = date('d-m-Y h:i A ');
 				 $i_no = '10'.get_rand_numbers(3).'';

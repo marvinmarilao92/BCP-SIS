@@ -2,7 +2,7 @@
 <html lang="en">
 <?php require 'control/check-session-login.php';
 if ($user_online == "true") {
-if ($role == "coordinator") {
+if ($role == "Company Coordinator") {
 }else{
 header("location:../");   
 }
