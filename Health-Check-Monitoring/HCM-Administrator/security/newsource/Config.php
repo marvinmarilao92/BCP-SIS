@@ -2,15 +2,15 @@
 
 include  'db.php';
 
-$dbhost = 'localhost';
-$dbuser = 'u692894633_sis_db';
-$dbpass = 'l95o@WMN6~a';
-$dbname = 'u692894633_sis_db';
-
 // $dbhost = 'localhost';
-// $dbuser = 'root';
-// $dbpass = '';
-// $dbname = 'sis_db';
+// $dbuser = 'u692894633_sis_db';
+// $dbpass = 'l95o@WMN6~a';
+// $dbname = 'u692894633_sis_db';
+
+$dbhost = 'localhost';
+$dbuser = 'root';
+$dbpass = '';
+$dbname = 'sis_db';
 
 $db = new databaseFunction($dbhost, $dbuser, $dbpass, $dbname);
 
